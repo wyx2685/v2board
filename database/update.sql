@@ -728,3 +728,7 @@ ALTER TABLE `v2_plan`
 
 ALTER TABLE `v2_user`
     ADD `device_limit` int(11) NULL AFTER `transfer_enable`;
+
+
+ALTER TABLE `v2_user`
+    ADD `device_count` int(11) NULL AFTER `transfer_enable`;
