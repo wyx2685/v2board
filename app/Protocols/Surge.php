@@ -40,16 +40,19 @@ class Surge
                 $proxies .= self::buildShadowsocks($user['uuid'], $item);
                 // [Proxy Group]
                 $proxyGroup .= $item['name'] . ', ';
-            }
-            if ($item['type'] === 'vmess') {
+            }elseif ($item['type'] === 'vmess') {
                 // [Proxy]
                 $proxies .= self::buildVmess($user['uuid'], $item);
                 // [Proxy Group]
                 $proxyGroup .= $item['name'] . ', ';
-            }
-            if ($item['type'] === 'trojan') {
+            }elseif ($item['type'] === 'trojan') {
                 // [Proxy]
                 $proxies .= self::buildTrojan($user['uuid'], $item);
+                // [Proxy Group]
+                $proxyGroup .= $item['name'] . ', ';
+            }elseif ($item['type'] === 'hysteria' && $item['version'] === 2) { //surge只支持hysteria2
+                // [Proxy]
+                $proxies .= self::buildHysteria($user['uuid'], $item);
                 // [Proxy Group]
                 $proxyGroup .= $item['name'] . ', ';
             }
@@ -148,6 +151,28 @@ class Surge
             "password={$password}",
             $server['server_name'] ? "sni={$server['server_name']}" : "",
             'tfo=true',
+            'udp-relay=true'
+        ];
+        if (!empty($server['allow_insecure'])) {
+            array_push($config, $server['allow_insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
+        }
+        $config = array_filter($config);
+        $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+
+    //参考文档: https://manual.nssurge.com/policy/proxy.html
+    public static function buildHysteria($password, $server)
+    {
+        $config = [
+            "{$server['name']}=hysteria2",
+            "{$server['host']}",
+            "{$server['port']}",
+            "password={$password}",
+            "download-bandwidth={$server['down_mbps']}",
+            $server['server_name'] ? "sni={$server['server_name']}" : "",
+            // 'tfo=true', 
             'udp-relay=true'
         ];
         if (!empty($server['allow_insecure'])) {

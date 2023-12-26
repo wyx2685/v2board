@@ -32,14 +32,14 @@ class Loon
                 ])
             ) {
                 $uri .= self::buildShadowsocks($user['uuid'], $item);
-            }
-            if ($item['type'] === 'vmess') {
+            }elseif ($item['type'] === 'vmess') {
                 $uri .= self::buildVmess($user['uuid'], $item);
-            }elseif ($item['type'] === 'vless') {
+            }elseif ($item['type'] === 'vless' && !$item['flow'] ) { // loon 不支持流控,需要过滤掉
                 $uri .= self::buildVless($user['uuid'], $item);
-            }
-            if ($item['type'] === 'trojan') {
+            }elseif ($item['type'] === 'trojan') {
                 $uri .= self::buildTrojan($user['uuid'], $item);
+            }elseif ($item['type'] === 'hysteria' && $item['version'] === 2) { //loon只支持hysteria2
+                $uri .= self::buildHysteria($user['uuid'], $item);
             }
         }
         return $uri;
@@ -178,6 +178,27 @@ class Loon
             $server['server_name'] ? "tls-name={$server['server_name']}" : "",
             'fast-open=false',
             'udp=true'
+        ];
+        if (!empty($server['allow_insecure'])) {
+            array_push($config, $server['allow_insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
+        }
+        $config = array_filter($config);
+        $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+    
+    public static function buildHysteria($password, $server)
+    {
+        $config = [
+            "{$server['name']}=hysteria2",
+            "{$server['host']}",
+            "{$server['port']}",
+            "password={$password}",
+            "download-bandwidth={$server['down_mbps']}",
+            $server['server_name'] ? "sni={$server['server_name']}" : "",
+            // 'tfo=true', 
+            'udp-relay=true'
         ];
         if (!empty($server['allow_insecure'])) {
             array_push($config, $server['allow_insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
