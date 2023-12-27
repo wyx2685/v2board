@@ -195,7 +195,7 @@ class Loon
             "{$server['host']}",
             "{$server['port']}",
             "password={$password}",
-            "download-bandwidth={$server['down_mbps']}",
+            "download-bandwidth={$server['up_mbps']}",
             $server['server_name'] ? "sni={$server['server_name']}" : "",
             // 'tfo=true', 
             'udp-relay=true'
