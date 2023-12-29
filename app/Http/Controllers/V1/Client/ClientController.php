@@ -19,7 +19,8 @@ class ClientController extends Controller
         $user = $request->user;
         // account not expired and is not banned.
         $userService = new UserService();
-        if ($userService->isAvailable($user)) {
+        if ($userService->isAvailable($user)) 
+		{
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
             $this->setSubscribeInfoToServers($servers, $user);
@@ -35,6 +36,11 @@ class ClientController extends Controller
             $class = new General($user, $servers);
             return $class->handle();
         }
+				else
+		{
+			 //return 'c3M6Ly9ZMmhoWTJoaE1qQXRhV1YwWmkxd2IyeDVNVE13TlRvNU0yRTJNREJpTXkwM1pXTXpMVFF4WkdJdFlUUm1PQzFoWlRKa05tVXlObVV4WkRnQDEyNy4wLjAuMTo4MCMlRTUlQTUlOTclRTklQTQlOTAlRTUlQjclQjIlRTglQkYlODclRTYlOUMlOUYsJUU4JUFGJUI3JUU3JUJCJUFEJUU4JUI0JUI5LiU1Q24lMEFzczovL1kyaGhZMmhoTWpBdGFXVjBaaTF3YjJ4NU1UTXdOVG81TTJFMk1EQmlNeTAzWldNekxUUXhaR0l0WVRSbU9DMWhaVEprTm1VeU5tVXhaRGdAMTI3LjAuMC4xOjgwIyVFNSVBNSU5NyVFOSVBNCU5MCVFNSVCNyVCMiVFOCVCRiU4NyVFNiU5QyU5RiwlRTglQUYlQjclRTclQkIlQUQlRTglQjQlQjkuJTVDbg==';
+			 return 'c3M6Ly9ZMmhoWTJoaE1qQXRhV1YwWmkxd2IyeDVNVE13TlRvNU0yRTJNREJpTXkwM1pXTXpMVFF4WkdJdFlUUm1PQzFoWlRKa05tVXlObVV4WkRnQDEyNy4wLjAuMTo4MCMlRTUlQTUlOTclRTklQTQlOTAlRTUlQjclQjIlRTglQkYlODclRTYlOUMlOUYsJUU4JUFGJUI3JUU3JUJCJUFEJUU4JUI0JUI5Lg==';
+		}
     }
 
     private function setSubscribeInfoToServers(&$servers, $user)
@@ -47,6 +53,9 @@ class ClientController extends Controller
         $expiredDate = $user['expired_at'] ? date('Y-m-d', $user['expired_at']) : '长期有效';
         $userService = new UserService();
         $resetDay = $userService->getResetDay($user);
+		array_unshift($servers, array_merge($servers[0], [
+            'name' => "XLM机场:v2.ixlmo.com",
+        ]));
         array_unshift($servers, array_merge($servers[0], [
             'name' => "套餐到期：{$expiredDate}",
         ]));
