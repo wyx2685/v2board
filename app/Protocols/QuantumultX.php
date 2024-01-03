@@ -108,6 +108,19 @@ class QuantumultX
             'udp-relay=true',
             "tag={$server['name']}"
         ];
+        if ($server['network'] === 'ws') {
+            if ($server['tls'])
+                array_push($config, 'obfs=wss');
+            else
+                array_push($config, 'obfs=ws');
+            if ($server['networkSettings']) {
+                $wsSettings = $server['networkSettings'];
+                if (isset($wsSettings['path']) && !empty($wsSettings['path']))
+                    array_push($config, "obfs-uri={$wsSettings['path']}");
+                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']) && !isset($host))
+                    $host = $wsSettings['headers']['Host'];
+            }
+        }
         $config = array_filter($config);
         $uri = implode(',', $config);
         $uri .= "\r\n";

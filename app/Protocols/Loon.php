@@ -182,6 +182,16 @@ class Loon
         if (!empty($server['allow_insecure'])) {
             array_push($config, $server['allow_insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
         }
+        if (isset($server['network']) && (string)$server['network'] === 'ws') {
+            array_push($config, 'ws=true');
+            if ($server['networkSettings']) {
+                $wsSettings = $server['networkSettings'];
+                if (isset($wsSettings['path']) && !empty($wsSettings['path']))
+                    array_push($config, "ws-path={$wsSettings['path']}");
+                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
+                    array_push($config, "ws-headers=Host:{$wsSettings['headers']['Host']}");
+            }
+        }
         $config = array_filter($config);
         $uri = implode(',', $config);
         $uri .= "\r\n";
