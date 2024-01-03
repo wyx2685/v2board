@@ -16524,7 +16524,7 @@
                         paddingTop: 50
                     }
                 }, o.a.createElement("a", {
-                    href: "https://github.com/v2board/v2board"
+                    href: "https://github.com/wyx2685/v2board"
                 }, "v2board"), " is best.")
             }
         }
@@ -17101,7 +17101,7 @@
           , u = s.host
           , l = document.createElement("link");
         if (l.rel = "stylesheet",
-        l.href = u ? "./theme/".concat(c.color, ".css") : "./theme/v2board/assets/theme/".concat(c.color, ".css"),
+        l.href = u ? "./theme/".concat(c.color, ".css") : "./theme/default/assets/theme/".concat(c.color, ".css"),
         document.getElementsByTagName("head")[0].appendChild(l),
         Object(i["e"])("i18n"))
             Object(o["setLocale"])(Object(i["e"])("i18n"));
