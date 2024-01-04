@@ -201,7 +201,7 @@ class StatController extends Controller
         foreach ($statistics as $k => $v) {
             $id = $statistics[$k]['user_id'];
             $user = User::where('id', $id)->first();
-            $statistics[$k]['email'] = $user['email'];
+            $statistics[$k]['email'] = empty($user) ? "null" : $user['email'];
             $statistics[$k]['total'] = $statistics[$k]['total'] * $statistics[$k]['server_rate'] / 1073741824;
             if (isset($idIndexMap[$id])) {
                 $index = $idIndexMap[$id];
@@ -241,9 +241,10 @@ class StatController extends Controller
         foreach ($statistics as $k => $v) {
             $id = $statistics[$k]['user_id'];
             $user = User::where('id', $id)->first();
-            $statistics[$k]['email'] = $user['email'];
+            $statistics[$k]['email'] = empty($user) ? "null" : $user['email'];
             $statistics[$k]['total'] = $statistics[$k]['total'] * $statistics[$k]['server_rate'] / 1073741824;
             if (isset($idIndexMap[$id])) {
+                
                 $index = $idIndexMap[$id];
                 $data[$index]['total'] += $statistics[$k]['total'];
             } else {
