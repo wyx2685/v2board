@@ -238,8 +238,8 @@ class Passwall
                 'auth' => $password,
                 'insecure' => $server['insecure'],
                 'peer' => $server['server_name'],
-                'upmbps' => $server['down_mbps'],
-                'downmbps' => $server['up_mbps']
+                'upmbps' => $server['up_mbps'],
+                'downmbps' => $server['down_mbps']
             ]);
             $uri .= $query;
             if (isset($server['obfs']) && isset($server['obfs_password'])) {

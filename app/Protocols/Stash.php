@@ -288,8 +288,8 @@ class Stash
                 $array['obfs'] = $server['obfs_password'];
             }
             //Todo:完善客户端上下行
-            $array['up-speed'] = $server['down_mbps'];
-            $array['down-speed'] = $server['up_mbps'];
+            $array['up-speed'] = $server['up_mbps'];
+            $array['down-speed'] = $server['down_mbps'];
             $array['protocol'] = 'udp';
         }
 

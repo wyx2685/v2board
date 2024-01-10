@@ -279,6 +279,8 @@ class ClashVerge
         if ($server['version'] === 2) {
             $array['type'] = 'hysteria2';
             $array['password'] = $password;
+            $array['up'] = $server['up_mbps'];
+            $array['down'] = $server['down_mbps'];
             if (isset($server['obfs'])){
                 $array['obfs'] = $server['obfs'];
                 $array['obfs-password'] = $server['obfs_password'];
@@ -290,8 +292,8 @@ class ClashVerge
                 $array['obfs'] = $server['obfs_password'];
             }
             //Todo:完善客户端上下行
-            $array['up'] = $server['down_mbps'];
-            $array['down'] = $server['up_mbps'];
+            $array['up'] = $server['up_mbps'];
+            $array['down'] = $server['down_mbps'];
             $array['protocol'] = 'udp';
         }
 

@@ -295,8 +295,8 @@ class Singbox
             $array['auth_str'] = $password;
             $array['tag'] = $server['name'];
             $array['type'] = 'hysteria';
-            $array['up_mbps'] = $user->speed_limit ? min($server['down_mbps'], $user->speed_limit) : $server['down_mbps'];
-            $array['down_mbps'] = $user->speed_limit ? min($server['up_mbps'], $user->speed_limit) : $server['up_mbps'];
+            $array['up_mbps'] = $user->speed_limit ? min($server['down_mbps'], $user->speed_limit) : $server['up_mbps'];
+            $array['down_mbps'] = $user->speed_limit ? min($server['up_mbps'], $user->speed_limit) : $server['down_mbps'];
             if (isset($server['obfs']) && isset($server['obfs_password'])) {
                 $array['obfs'] = $server['obfs_password'];
             }
