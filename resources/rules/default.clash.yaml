@@ -580,3 +580,13 @@ rules:
   # 最终规则
   - GEOIP,CN,DIRECT
   - MATCH,$app_name
+
+  #steam
+  - DOMAIN-SUFFIX,steamcontent.com,DIRECT
+  - DOMAIN-SUFFIX,steamstatic.com,DIRECT
+  - DOMAIN-SUFFIX,steamserver.net,DIRECT
+  - DOMAIN-SUFFIX,test.steampowered.com,DIRECT
+  - DOMAIN-SUFFIX,api.steampowered.com,DIRECT
+  - DOMAIN-SUFFIX,rmbgame.net,DIRECT
+  - PROCESS-NAME,EpicWebHelper.exe,DIRECT
+  - PROCESS-NAME,YuanShen.exe,DIRECT
