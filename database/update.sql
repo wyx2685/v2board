@@ -732,3 +732,6 @@ ALTER TABLE `v2_user`
 ALTER TABLE `v2_server_trojan`
     ADD `network` varchar(11) NULL AFTER `server_port`,
     ADD `network_settings` text AFTER `network`;
+
+ALTER TABLE `v2_server_hysteria`
+    MODIFY COLUMN `port` VARCHAR(255) NOT NULL;

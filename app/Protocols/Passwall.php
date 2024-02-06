@@ -203,7 +203,7 @@ class Passwall
         ]);
         $uri = "trojan://{$password}@{$server['host']}:{$server['port']}?{$query}";
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
-            $uri .= "&type={$server['network']}";
+            $uri ="trojan-go://{$password}@{$server['host']}:{$server['port']}?{$query}" . "&type={$server['network']}";
             if($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
                 $uri .= "&serviceName={$server['network_settings']['serviceName']}";
             }
@@ -226,13 +226,22 @@ class Passwall
         $remote = filter_var($server['host'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) ? '[' . $server['host'] . ']' : $server['host'];
      	$name = Helper::encodeURIComponent($server['name']);
 
+        $parts = explode(",",$server['port']);
+        $firstPart = $parts[0];
+        if (strpos($firstPart, '-') !== false) {
+            $range = explode('-', $firstPart);
+            $firstPort = $range[0];
+        } else {
+            $firstPort = $firstPart;
+        }
+
         if ($server['version'] == 2) {
-            $uri = "hysteria2://{$password}@{$remote}:{$server['port']}/?insecure={$server['insecure']}&sni={$server['server_name']}";
+            $uri = "hysteria2://{$password}@{$remote}:{$firstPort}/?insecure={$server['insecure']}&sni={$server['server_name']}";
             if (isset($server['obfs']) && isset($server['obfs_password'])) {
                 $uri .= "&obfs={$server['obfs']}&obfs-password={$server['obfs_password']}";
             }
         } else {
-            $uri = "hysteria://{$remote}:{$server['port']}/?";
+            $uri = "hysteria://{$remote}:{$firstPort}/?";
             $query = http_build_query([
                 'protocol' => 'udp',
                 'auth' => $password,
@@ -245,6 +254,9 @@ class Passwall
             if (isset($server['obfs']) && isset($server['obfs_password'])) {
                 $uri .= "&obfs={$server['obfs']}&obfsParam{$server['obfs_password']}";
             }
+        }
+        if (count($parts) !== 1 || strpos($parts[0], '-') !== false) {
+            $uri .= "&mport={$server['mport']}";
         }
         $uri .= "#{$name}\r\n";
         return $uri;

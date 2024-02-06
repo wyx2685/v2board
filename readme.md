@@ -23,6 +23,7 @@
     php artisan config:cache
     php artisan horizon:terminate
 
+最后进入后台重新保存主题： 主题配置-主题设置-确定
 
 # **V2Board**
 

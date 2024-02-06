@@ -267,7 +267,20 @@ class Stash
         $array = [];
         $array['name'] = $server['name'];
         $array['server'] = $server['host'];
-        $array['port'] = $server['port'];
+
+        $parts = explode(",", $server['port']);
+        $firstPart = $parts[0];
+        if (strpos($firstPart, '-') !== false) {
+            $range = explode('-', $firstPart);
+            $firstPort = $range[0];
+        } else {
+            $firstPort = $firstPart;
+        }
+        $array['port'] = (int)$firstPort;
+        if (count($parts) !== 1 || strpos($parts[0], '-') !== false) {
+            $array['ports'] = $server['port'];
+            $array['mport'] = $server['port'];   
+        }
         $array['udp'] = true;
         $array['skip-cert-verify'] = $server['insecure'] == 1 ? true : false;
 
@@ -275,8 +288,7 @@ class Stash
 
         if ($server['version'] === 2) {
             $array['type'] = 'hysteria2';
-            $array['auth'] = $password;
-            $array['fast-open'] = true;
+            $array['password'] = $password;
             if (isset($server['obfs'])){
                 $array['obfs'] = $server['obfs'];
                 $array['obfs-password'] = $server['obfs_password'];
@@ -288,8 +300,8 @@ class Stash
                 $array['obfs'] = $server['obfs_password'];
             }
             //Todo:完善客户端上下行
-            $array['up-speed'] = $server['down_mbps'];
-            $array['down-speed'] = $server['up_mbps'];
+            $array['up'] = $server['down_mbps'];
+            $array['down'] = $server['up_mbps'];
             $array['protocol'] = 'udp';
         }
 

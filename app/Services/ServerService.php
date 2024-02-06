@@ -101,9 +101,6 @@ class ServerService
             $servers[$key]['type'] = 'hysteria';
             $servers[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_HYSTERIA_LAST_CHECK_AT', $v['id']));
             if (!in_array($user->group_id, $v['group_id'])) continue;
-            if (strpos($v['port'], '-') !== false) {
-                $servers[$key]['port'] = Helper::randomPort($v['port']);
-            }
             if (isset($servers[$v['parent_id']])) {
                 $servers[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_HYSTERIA_LAST_CHECK_AT', $v['parent_id']));
                 $servers[$key]['created_at'] = $servers[$v['parent_id']]['created_at'];
@@ -148,7 +145,11 @@ class ServerService
         $tmp = array_column($servers, 'sort');
         array_multisort($tmp, SORT_ASC, $servers);
         return array_map(function ($server) {
-            $server['port'] = (int)$server['port'];
+            if (strpos($server['port'], '-')) {
+                $server['mport'] = (string)$server['port'];
+            } else {
+                $server['port'] = (int)$server['port'];
+            }
             $server['is_online'] = (time() - 300 > $server['last_check_at']) ? 0 : 1;
             $server['cache_key'] = "{$server['type']}-{$server['id']}-{$server['updated_at']}-{$server['is_online']}";
             return $server;
