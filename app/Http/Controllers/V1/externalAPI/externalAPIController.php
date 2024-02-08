@@ -9,7 +9,7 @@ use App\Models\InviteCode;
 use Illuminate\Http\Request;
 class externalAPIController extends Controller
 {
-        public function Invitationcode(Request $request)
+        /*public function Invitationcode(Request $request)
         {
             $email = $request->query('Email');
             $user = User::where('email', $email)->first();
@@ -30,7 +30,7 @@ class externalAPIController extends Controller
                     ]
                 ]);
             }
-    }
+    }*/
 
     public function Accountbanquery(Request $request)
     {
@@ -39,20 +39,87 @@ class externalAPIController extends Controller
         if (!$user) {
             abort(500, '用户不存在');
         }
-        $Accountbanquery = User::where('email', $user->email)->first();
-        if ($Accountbanquery) {
+        $Accountbanquery = User::where('email', $user->email)->first(); 
+        if ($Accountbanquery->banned==1) 
+        {
+            if(empty($Accountbanquery->remarks))
+            {
+                return response()->json([
+                    'data' => [
+                        'Reasonforaccountsuspension' =>'违规严重,不给予解禁.',
+                    ]
+                ]);
+            }
+            if (empty($Accountbanquery->Unban)) 
+            {
+                if($Accountbanquery->created_at)
+                {
+                    /*$expiredTimestamp = strtotime($Accountbanquery->created_at);
+                    $yearsDifference = date('Y') - date('Y', $expiredTimestamp);*/
+                    /* if ($yearsDifference >= 3) 
+                    {
+                        $Accountbanquery->Unban = 1;
+                        $Accountbanquery->banned = 0;
+                        $Accountbanquery->remarks='';
+                        $Accountbanquery->save();
+                        return response()->json([
+                            'data' => [
+                                'ban' => $Accountbanquery->banned,
+                                'Reasonforaccountsuspension' =>'已解除封禁,请珍惜账号',
+                            ]
+                        ]);
+                    } */
+                    $createdAtDate = date('Y-m-d H:i:s', $Accountbanquery->created_at);
+                    $createdYear = date('Y', strtotime($createdAtDate));
+                    $currentYear = date('Y');
+                    if ($createdYear == ($currentYear - 1)) 
+                    {
+                        return response()->json([
+                            'data' => [
+                                'Reasonforaccountsuspension' =>'上一年封禁账户,不开放',
+                            ]
+                        ]);
+                    } 
+                    else
+                    {
+                        $Accountbanquery->Unban = 1;
+                        $Accountbanquery->banned = 0;
+                        $Accountbanquery->remarks = '';
+                        $Accountbanquery->save();
+                        return response()->json([
+                            'data' => [
+                                'Reasonforaccountsuspension' =>'已解除封禁,请珍惜账户',
+                            ]
+                        ]);
+                    }
+
+                }
+            }
+            else
+            {
+                return response()->json([
+                    'data' => [
+                        'Reasonforaccountsuspension' => $Accountbanquery->remarks,
+                    ]
+                ]);
+            }
+           // $userInvitationcode = InviteCode::where('user_id', $user->id)->first();
+          /*  return response()->json([
+                'data' => [
+                    'ban' => $Accountbanquery->banned,//封禁状态
+                    'Reasonforaccountsuspension' => $Accountbanquery->remarks,//封禁理由
+                    'Invitationcode' => $userInvitationcode ? '邀请码记录: ' . $userInvitationcode->code : '没有邀请码记录',//邀请码
+
+                ]
+            ]);*/
+        } 
+        else {
             return response()->json([
                 'data' => [
-                    '封号原因' => $Accountbanquery->remarks,
+                    'Reasonforaccountsuspension' => '正常',//正常
                 ]
-            ]);
-        } else {
-            return response()->json([
-                'data' => [
-                    '封号原因' => null,
-                ]
-            ]);
-        }
+                 ]);
+  }
 }
  
 }
