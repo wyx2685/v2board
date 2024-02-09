@@ -52,7 +52,7 @@ class externalAPIController extends Controller
             }
             if (empty($Accountbanquery->Unban)) 
             {
-                if($Accountbanquery->created_at)
+                if($Accountbanquery->bantime)
                 {
                     /*$expiredTimestamp = strtotime($Accountbanquery->created_at);
                     $yearsDifference = date('Y') - date('Y', $expiredTimestamp);*/
@@ -69,22 +69,25 @@ class externalAPIController extends Controller
                             ]
                         ]);
                     } */
-                    $createdAtDate = date('Y-m-d H:i:s', $Accountbanquery->created_at);
+                    $createdAtDate = date('Y-m-d H:i:s', $Accountbanquery->bantime);
                     $createdYear = date('Y', strtotime($createdAtDate));
+                    $createdMonth = date('m', strtotime($createdAtDate));
                     $currentYear = date('Y');
-                    if ($createdYear == ($currentYear - 1)) 
+                    $currentMonth = date('m');                  
+                    if ($createdYear < $currentYear || ($createdYear == $currentYear && $createdMonth < $currentMonth)) 
                     {
                         return response()->json([
                             'data' => [
-                                'Reasonforaccountsuspension' =>'上一年封禁账户,不开放',
+                                'Reasonforaccountsuspension' =>'上年12月份前账户，暂时不开放',
                             ]
                         ]);
-                    } 
+                    }
                     else
                     {
                         $Accountbanquery->Unban = 1;
                         $Accountbanquery->banned = 0;
                         $Accountbanquery->remarks = '';
+                        $Accountbanquery->bantime = null;
                         $Accountbanquery->save();
                         return response()->json([
                             'data' => [
@@ -99,7 +102,7 @@ class externalAPIController extends Controller
             {
                 return response()->json([
                     'data' => [
-                        'Reasonforaccountsuspension' => $Accountbanquery->remarks,
+                        'Reasonforaccountsuspension' => $Accountbanquery->remarks . "\n重复违规,无法解禁.",
                     ]
                 ]);
             }
