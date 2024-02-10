@@ -50,25 +50,12 @@ class externalAPIController extends Controller
                     ]
                 ]);
             }
-            if (empty($Accountbanquery->Unban)) 
+            if (!empty($Accountbanquery->Unban) && $Accountbanquery->Unban != 0) 
             {
+                
                 if($Accountbanquery->bantime)
                 {
-                    /*$expiredTimestamp = strtotime($Accountbanquery->created_at);
-                    $yearsDifference = date('Y') - date('Y', $expiredTimestamp);*/
-                    /* if ($yearsDifference >= 3) 
-                    {
-                        $Accountbanquery->Unban = 1;
-                        $Accountbanquery->banned = 0;
-                        $Accountbanquery->remarks='';
-                        $Accountbanquery->save();
-                        return response()->json([
-                            'data' => [
-                                'ban' => $Accountbanquery->banned,
-                                'Reasonforaccountsuspension' =>'已解除封禁,请珍惜账号',
-                            ]
-                        ]);
-                    } */
+
                     $createdAtDate = date('Y-m-d H:i:s', $Accountbanquery->bantime);
                     $createdYear = date('Y', strtotime($createdAtDate));
                     $createdMonth = date('m', strtotime($createdAtDate));
@@ -84,7 +71,7 @@ class externalAPIController extends Controller
                     }
                     else
                     {
-                        $Accountbanquery->Unban = 1;
+                        $Accountbanquery->Unban = $Accountbanquery->Unban - 1;
                         $Accountbanquery->banned = 0;
                         $Accountbanquery->remarks = '';
                         $Accountbanquery->bantime = null;
