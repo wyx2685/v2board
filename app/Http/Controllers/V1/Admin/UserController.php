@@ -142,7 +142,9 @@ class UserController extends Controller
             $authService = new AuthService($user);
             $authService->removeAllSession();
         }
-
+        if (empty($params['Unban'])) {
+            $params['Unban'] = 0;
+        }
         try {
             $user->update($params);
         } catch (\Exception $e) {
