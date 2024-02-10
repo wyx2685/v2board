@@ -56,34 +56,17 @@ class externalAPIController extends Controller
                 if($Accountbanquery->bantime)
                 {
 
-                    $createdAtDate = date('Y-m-d H:i:s', $Accountbanquery->bantime);
-                    $createdYear = date('Y', strtotime($createdAtDate));
-                    $createdMonth = date('m', strtotime($createdAtDate));
-                    $currentYear = date('Y');
-                    $currentMonth = date('m');                  
-                    if ($createdYear < $currentYear || ($createdYear == $currentYear && $createdMonth < $currentMonth)) 
-                    {
-                        return response()->json([
-                            'data' => [
-                                'Reasonforaccountsuspension' =>'上年12月份前账户，暂时不开放',
-                            ]
-                        ]);
-                    }
-                    else
-                    {
-                        $Accountbanquery->Unban = $Accountbanquery->Unban - 1;
-                        $Accountbanquery->banned = 0;
-                        $Accountbanquery->remarks = '';
-                        $Accountbanquery->bantime = null;
-                        $Accountbanquery->save();
+                $Accountbanquery->Unban = $Accountbanquery->Unban - 1;
+                $Accountbanquery->banned = 0;
+                $Accountbanquery->remarks = '';
+                $Accountbanquery->bantime = null;
+                $Accountbanquery->save();
                         return response()->json([
                             'data' => [
                                 'Reasonforaccountsuspension' =>'已解除封禁,请珍惜账户',
                             ]
                         ]);
                     }
-
-                }
             }
             else
             {
