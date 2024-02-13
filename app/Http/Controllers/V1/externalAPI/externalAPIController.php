@@ -53,8 +53,7 @@ class externalAPIController extends Controller
             if (!empty($Accountbanquery->Unban) && $Accountbanquery->Unban != 0) 
             {
                 
-                if($Accountbanquery->bantime)
-                {
+
 
                 $Accountbanquery->Unban = $Accountbanquery->Unban - 1;
                 $Accountbanquery->banned = 0;
@@ -66,7 +65,7 @@ class externalAPIController extends Controller
                                 'Reasonforaccountsuspension' =>'已解除封禁,请珍惜账户',
                             ]
                         ]);
-                    }
+                    
             }
             else
             {
