@@ -292,7 +292,7 @@ class Singbox
 
         $array = [
             'server' => $server['host'],
-            'server_port' => $firstPort,
+            'server_port' => (int)$firstPort,
             'tls' => [
                 'enabled' => true,
                 'insecure' => $server['insecure'] ? true : false,
