@@ -30988,12 +30988,12 @@
                     maskClosable: !0,
                     footer: !1,
                     onCancel: ()=>this.modalVisible()
-                }, this.state.notice.content && this.state.notice.content.split("\n").map(e=>{
-                    return l.a.createElement("p", {
-                        key: Math.random()
-                    }, e)
-                }
-                )))
+                }, this.state.notice.content && l.a.createElement("div", {
+                    className: "notice-content",
+                    dangerouslySetInnerHTML: {
+                        __html: this.state.notice.content
+                    }
+                })))
             }
         }
         t["default"] = Object(y["c"])(e=>{
