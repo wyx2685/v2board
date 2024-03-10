@@ -99,25 +99,37 @@ class UniProxyController extends Controller
             ], 400);
         }
         $updateAt = time();
+    
         foreach ($data as $uid => $ips) {
-            $ips_array = Cache::get('ALIVE_IP_USER_'. $uid) ?? [];
-
+            $cacheKey = 'ALIVE_IP_USER_' . $uid;
+            $ips_array = Cache::get($cacheKey) ?? [];
+    
             // 更新节点数据
-            $ips_array[$this->nodeType . $this->nodeId] = ['aliveips' => $ips, 'lastupdateAt' => $updateAt];
+            $nodeTypeNodeId = $this->nodeType . $this->nodeId;
+            $ips_array[$nodeTypeNodeId] = ['aliveips' => $ips, 'lastupdateAt' => $updateAt];
+    
             // 清理过期数据
-            foreach($ips_array as $nodetypeid => $oldips) { 
-                if (!is_int($oldips) && ($updateAt - $oldips['lastupdateAt'] > 100)) { 
-                    unset($ips_array[$nodetypeid]); 
-                } 
-            } 
-            $count = 0;
-            foreach($ips_array as $nodetypeid => $newdata) {
-                if (!is_int($newdata) && isset($newdata['aliveips'])) {
-                    $count += count($newdata['aliveips']);
+            foreach ($ips_array as $nodetypeid => $oldips) {
+                if (!is_int($oldips) && ($updateAt - $oldips['lastupdateAt'] > 100)) {
+                    unset($ips_array[$nodetypeid]);
                 }
             }
+    
+            // 统计去重后的IP数量
+            $uniqueIps = [];
+    
+            foreach ($ips_array as $nodetypeid => $newdata) {
+                if (!is_int($newdata) && isset($newdata['aliveips'])) {
+                    $uniqueIps = array_merge($uniqueIps, $newdata['aliveips']);
+                }
+            }
+    
+            // 对同一用户的IP进行去重
+            $uniqueIps = array_unique($uniqueIps);
+    
+            $count = count($uniqueIps);
             $ips_array['alive_ip'] = $count;
-            Cache::put('ALIVE_IP_USER_'. $uid, $ips_array, 120);
+            Cache::put($cacheKey, $ips_array, 120);
         }
 
         return response([
