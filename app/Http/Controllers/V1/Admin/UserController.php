@@ -49,6 +49,10 @@ class UserController extends Controller
                     unset($filters[$k]);
                     continue;
                 }
+                if ($filter['key'] === 'plan_id' && $filter['value'] == 'null') {
+                    $builder->whereNull('plan_id');
+                    continue;
+                }
                 $builder->where($filter['key'], $filter['condition'], $filter['value']);
             }
         }
@@ -302,6 +306,27 @@ class UserController extends Controller
 
         return response([
             'data' => true
+        ]);
+    }
+
+    public function allDel(Request $request)
+    {
+        $sortType = in_array($request->input('sort_type'), ['ASC', 'DESC']) ? $request->input('sort_type') : 'DESC';
+        $sort = $request->input('sort') ? $request->input('sort') : 'created_at';
+        $builder = User::orderBy($sort, $sortType);
+        $this->filter($request, $builder);
+
+        try {
+            $builder->each(function ($user){
+                $deletedOrders = Order::where('user_id', $user->id)->delete();
+                $inviteUser = User::where('invite_user_id', $user->id)->update(['invite_user_id' => null]);
+            });
+        } catch (\Exception $e) {
+            abort(500, '批量删除用户信息失败');
+        }  
+
+        return response([
+            'data' => $builder->delete()
         ]);
     }
 
