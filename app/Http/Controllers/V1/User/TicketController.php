@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\TicketSave;
 use App\Http\Requests\User\TicketWithdraw;
 use App\Jobs\SendTelegramJob;
-
 use App\Models\User;
 use App\Models\Plan;
 use App\Services\TelegramService;
@@ -14,9 +13,7 @@ use App\Services\TicketService;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use App\Utils\Dict;
-use Illuminate\Http\Request;
-					  
-							 
+use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
@@ -29,10 +26,7 @@ class TicketController extends Controller
         if ($ticketId) {
             $ticket = Ticket::where('id', $ticketId)
                             ->firstOrFail();
-						  
-						   
-														
-			 
+
             $ticket['message'] = TicketMessage::where('ticket_id', $ticket->id)->get();
             for ($i = 0; $i < count($ticket['message']); $i++) {
                 if ($ticket['message'][$i]['user_id'] !== $ticket->user_id) {
@@ -79,20 +73,6 @@ class TicketController extends Controller
             DB::rollBack();
             abort(500, $e->getMessage());
         }
-												
-											  
-									   
-												   
-		   
-							  
-						   
-													
-		 
-					 
-																					 
-						 
-						  
-		   
     }
 
     public function reply(Request $request)
@@ -224,7 +204,14 @@ class TicketController extends Controller
 				$u = $this->getFlowData($user->u); // 上传
 				$d = $this->getFlowData($user->d); // 下载
 				$expired_at = date("Y-m-d h:m:s", $user->expired_at); // 到期时间
-				$ip_address = $_SERVER['REMOTE_ADDR']; // IP地址
+				if (isset($_SERVER['HTTP_X_REAL_IP'])) {
+				$ip_address = $_SERVER['HTTP_X_REAL_IP'];
+				} elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+					$ip_address = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+				} else {
+					$ip_address = $_SERVER['REMOTE_ADDR'];
+				}
+				
 				$api_url = "http://ip-api.com/json/{$ip_address}?fields=520191&lang=zh-CN";
 				$response = file_get_contents($api_url);
 				$user_location = json_decode($response, true);
