@@ -47,23 +47,35 @@ class TrafficFetchJob implements ShouldQueue
      */
     public function handle()
     {
-        try {
-            DB::beginTransaction();
-            foreach(array_keys($this->data) as $userId){
-                $user = User::lockForUpdate()->find($userId);
-                if (!$user) continue;
+        $attempt = 0;
+        $maxAttempts = 3;
+        while ($attempt < $maxAttempts) {
+            try {
+                DB::beginTransaction();
+                foreach(array_keys($this->data) as $userId){
+                    $user = User::lockForUpdate()->find($userId);
+                    if (!$user) continue;
 
-                $user->t = time();
-                $user->u = $user->u + ($this->data[$userId][0] * $this->server['rate']);
-                $user->d = $user->d + ($this->data[$userId][1] * $this->server['rate']);
-                if (!$user->save()) {
-                    info("流量更新失败\n未记录用户ID:{$userId}\n未记录上行:{$user->u}\n未记录下行:{$user->d}");
+                    $user->t = time();
+                    $user->u = $user->u + ($this->data[$userId][0] * $this->server['rate']);
+                    $user->d = $user->d + ($this->data[$userId][1] * $this->server['rate']);
+                    if (!$user->save()) {
+                        info("流量更新失败\n未记录用户ID:{$userId}\n未记录上行:{$user->u}\n未记录下行:{$user->d}");
+                    }
                 }
+                DB::commit();
+                return;
+            } catch (\Exception $e) {
+                DB::rollback();
+                if (str_contains($e->getMessage(), '40001') || str_contains(strtolower($e->getMessage()), 'deadlock')) {
+                    $attempt++;
+                    if ($attempt < $maxAttempts) {
+                        sleep(5);
+                        continue;
+                    }
+                }
+                abort(500, '用户流量更新失败'. $e->getMessage());
             }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            abort(500, '用户流量更新失败'. $e->getMessage());
         }
     }
 }

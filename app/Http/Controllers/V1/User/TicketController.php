@@ -18,26 +18,23 @@ class TicketController extends Controller
 {
     public function fetch(Request $request)
     {
-        if ($request->input('id')) {
-            $ticket = Ticket::where('id', $request->input('id'))
-                ->where('user_id', $request->user['id'])
-                ->first();
-            if (!$ticket) {
-                abort(500, __('Ticket does not exist'));
-            }
+        $userId = $request->user['id'];
+        $ticketId = $request->input('id');
+    
+        if ($ticketId) {
+            $ticket = Ticket::where('id', $ticketId)
+                            ->firstOrFail();
             $ticket['message'] = TicketMessage::where('ticket_id', $ticket->id)->get();
             for ($i = 0; $i < count($ticket['message']); $i++) {
-                if ($ticket['message'][$i]['user_id'] == $ticket->user_id) {
+                if ($ticket['message'][$i]['user_id'] !== $ticket->user_id) {
                     $ticket['message'][$i]['is_me'] = true;
                 } else {
                     $ticket['message'][$i]['is_me'] = false;
                 }
             }
-            return response([
-                'data' => $ticket
-            ]);
+            return response(['data' => $ticket]);
         }
-        $ticket = Ticket::where('user_id', $request->user['id'])
+        $ticket = Ticket::where('user_id', $userId)
             ->orderBy('created_at', 'DESC')
             ->get();
         return response([
@@ -47,34 +44,29 @@ class TicketController extends Controller
 
     public function save(TicketSave $request)
     {
-        DB::beginTransaction();
-        if ((int)Ticket::where('status', 0)->where('user_id', $request->user['id'])->lockForUpdate()->count()) {
-            abort(500, __('There are other unresolved tickets'));
+        try {
+            DB::beginTransaction();
+            if ((int)Ticket::where('status', 0)->where('user_id', $request->user['id'])->lockForUpdate()->count()) {
+                throw new \Exception(__('There are other unresolved tickets'));
+            }
+            $ticketData = $request->only(['subject', 'level']) + ['user_id' => $request->user['id']];
+            $ticket = Ticket::create($ticketData);
+    
+            TicketMessage::create([
+                'user_id' => $request->user['id'],
+                'ticket_id' => $ticket->id,
+                'message' => $request->input('message')
+            ]);
+
+            DB::commit();
+            $this->sendNotify($ticket, $request->input('message'));
+            return response([
+                'data' => true
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            abort(500, $e->getMessage());
         }
-        $ticket = Ticket::create(array_merge($request->only([
-            'subject',
-            'level'
-        ]), [
-            'user_id' => $request->user['id']
-        ]));
-        if (!$ticket) {
-            DB::rollback();
-            abort(500, __('Failed to open ticket'));
-        }
-        $ticketMessage = TicketMessage::create([
-            'user_id' => $request->user['id'],
-            'ticket_id' => $ticket->id,
-            'message' => $request->input('message')
-        ]);
-        if (!$ticketMessage) {
-            DB::rollback();
-            abort(500, __('Failed to open ticket'));
-        }
-        DB::commit();
-        $this->sendNotify($ticket, $request->input('message'));
-        return response([
-            'data' => true
-        ]);
     }
 
     public function reply(Request $request)
