@@ -67,7 +67,7 @@ class TrafficFetchJob implements ShouldQueue
                 return;
             } catch (\Exception $e) {
                 DB::rollback();
-                if (str_contains($e->getMessage(), '40001') || str_contains(strtolower($e->getMessage()), 'deadlock')) {
+                if (strpos($e->getMessage(), '40001') !== false || strpos(strtolower($e->getMessage()), 'deadlock') !== false) {
                     $attempt++;
                     if ($attempt < $maxAttempts) {
                         sleep(5);
