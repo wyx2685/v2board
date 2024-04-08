@@ -274,6 +274,16 @@ class OrderService
         if ($this->user->expired_at === NULL) $this->buyByResetTraffic();
         // 新购
         if ($order->type === 1) $this->buyByResetTraffic();
+
+        // 到期当天续费刷新流量
+        $expireDay = date('d', $this->user->expired_at);
+        $expireMonth = date('m', $this->user->expired_at);
+        $today = date('d');
+        $currentMonth = date('m');
+        if ($order->type === 2 && $expireMonth == $currentMonth && $expireDay === $today ) {
+            $this->buyByResetTraffic();
+        }
+
         $this->user->plan_id = $plan->id;
         $this->user->group_id = $plan->group_id;
         $this->user->expired_at = $this->getTime($order->period, $this->user->expired_at);
