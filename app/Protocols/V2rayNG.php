@@ -62,6 +62,8 @@ class V2rayNG
 
     public static function buildVmess($uuid, $server)
     {
+        $networkSettings = $server['networkSettings'];
+
         $config = [
             "v" => "2",
             "ps" => $server['name'],
@@ -75,11 +77,20 @@ class V2rayNG
             "path" => "",
             "tls" => $server['tls'] ? "tls" : "",
         ];
+
         if ($server['tls']) {
             if ($server['tlsSettings']) {
                 $tlsSettings = $server['tlsSettings'];
-                if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
+                if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName'])) {
                     $config['sni'] = $tlsSettings['serverName'];
+
+                    if (isset($networkSettings['FingerPrint']) && (string)$networkSettings['FingerPrint'] != 'none') {
+                        $config['fp'] = $networkSettings['FingerPrint'];
+                    }
+                    if (isset($networkSettings['Alpn']) && (string)$networkSettings['Alpn'] != 'none') {
+                        $config['alpn'] = $networkSettings['Alpn'];
+                    }
+                }
             }
         }
         if ((string)$server['network'] === 'tcp') {

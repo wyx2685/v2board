@@ -151,15 +151,18 @@ class ResetTraffic extends Command
             $today = date('d');
 
             $currentMonth = date('m');
-            if ($expireMonth == $currentMonth) {
-                continue;
-            }
 
             if ($expireDay === $today) {
+                if ($expireMonth == $currentMonth) {
+                    continue;
+                }
                 array_push($users, $item->id);
             }
 
             if (($today === $lastDay) && $expireDay >= $lastDay) {
+                if ($expireMonth == $currentMonth) {
+                    continue;
+                }
                 array_push($users, $item->id);
             }
         }
