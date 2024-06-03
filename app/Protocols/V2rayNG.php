@@ -217,10 +217,12 @@ class V2rayNG
             }
             if($server['network'] === "ws") {
                 if(isset($server['network_settings']['path'])) {
-                    $uri .= "&path={$server['network_settings']['path']}";
+                    $path = Helper::encodeURIComponent($server['network_settings']['path']);
+                    $uri .= "&path={$path}";
                 }
                 if(isset($server['network_settings']['headers']['Host'])) {
-                    $uri .= "&host={$server['network_settings']['headers']['Host']}";
+                    $host = Helper::encodeURIComponent($server['network_settings']['headers']['Host']);
+                    $uri .= "&host={$host}";
                 }
             }
         }

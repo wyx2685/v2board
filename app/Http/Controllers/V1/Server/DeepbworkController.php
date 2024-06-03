@@ -106,7 +106,7 @@ class DeepbworkController extends Controller
             abort(500, $e->getMessage());
         }
 
-        die(json_encode($json, JSON_UNESCAPED_UNICODE));
+        return(json_encode($json, JSON_UNESCAPED_UNICODE));
     }
 
     private function getV2RayConfig(int $nodeId, int $localPort)

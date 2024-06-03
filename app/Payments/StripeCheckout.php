@@ -127,7 +127,7 @@ class StripeCheckout {
             default:
                 abort(500, 'event is not support');
         }
-        die('success');
+        return('success');
     }
 
     private function exchange($from, $to)

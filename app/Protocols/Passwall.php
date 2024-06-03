@@ -203,16 +203,18 @@ class Passwall
         ]);
         $uri = "trojan://{$password}@{$server['host']}:{$server['port']}?{$query}";
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
-            $uri ="trojan-go://{$password}@{$server['host']}:{$server['port']}?{$query}" . "&type={$server['network']}";
+            $uri .= "&type={$server['network']}";
             if($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
                 $uri .= "&serviceName={$server['network_settings']['serviceName']}";
             }
             if($server['network'] === "ws") {
                 if(isset($server['network_settings']['path'])) {
-                    $uri .= "&path={$server['network_settings']['path']}";
+                    $path = Helper::encodeURIComponent($server['network_settings']['path']);
+                    $uri .= "&path={$path}";
                 }
                 if(isset($server['network_settings']['headers']['Host'])) {
-                    $uri .= "&host={$server['network_settings']['headers']['Host']}";
+                    $host = Helper::encodeURIComponent($server['network_settings']['headers']['Host']);
+                    $uri .= "&host={$host}";
                 }
             }
         }

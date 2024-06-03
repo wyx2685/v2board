@@ -173,14 +173,14 @@ class OrderService
             ->first();
         if (!$lastOneTimeOrder) return;
         $nowUserTraffic = $user->transfer_enable / 1073741824;
-        if (!$nowUserTraffic) return;
+        if ($nowUserTraffic == 0) return;
         $paidTotalAmount = ($lastOneTimeOrder->total_amount + $lastOneTimeOrder->balance_amount);
-        if (!$paidTotalAmount) return;
-        $trafficUnitPrice = $paidTotalAmount / $nowUserTraffic;
+        if ($paidTotalAmount == 0) return;
         $notUsedTraffic = $nowUserTraffic - (($user->u + $user->d) / 1073741824);
-        $result = $trafficUnitPrice * $notUsedTraffic;
+        $remainingTrafficRatio = $notUsedTraffic / $nowUserTraffic;
+        $result = $remainingTrafficRatio * $paidTotalAmount;
+        $order->surplus_amount = max($result, 0);
         $orderModel = Order::where('user_id', $user->id)->where('period', '!=', 'reset_price')->where('status', 3);
-        $order->surplus_amount = $result > 0 ? $result : 0;
         $order->surplus_order_ids = array_column($orderModel->get()->toArray(), 'id');
     }
 
@@ -195,23 +195,39 @@ class OrderService
         if (!$orders) return;
         $orderAmountSum = 0;
         $orderMonthSum = 0;
-        $lastValidateAt = 0;
+        $lastValidateAt = null;
         foreach ($orders as $item) {
             $period = self::STR_TO_TIME[$item['period']];
-            if (strtotime("+{$period} month", $item['created_at']) < time()) continue;
-            $lastValidateAt = $item['created_at'];
-            $orderMonthSum = $period + $orderMonthSum;
-            $orderAmountSum = $orderAmountSum + ($item['total_amount'] + $item['balance_amount'] + $item['surplus_amount'] - $item['refund_amount']);
+            $orderEndTime = strtotime("+{$period} month", $item['created_at']);
+            if ($orderEndTime < time()) continue;
+            $lastValidateAt = $item['created_at'] > $lastValidateAt ? $item['created_at'] : $lastValidateAt;
+            $orderMonthSum += $period;
+            $orderAmountSum += $item['total_amount'] + $item['balance_amount'] + $item['surplus_amount'] - $item['refund_amount'];
         }
-        if (!$lastValidateAt) return;
+        if ($lastValidateAt === null) return;
+    
         $expiredAtByOrder = strtotime("+{$orderMonthSum} month", $lastValidateAt);
         if ($expiredAtByOrder < time()) return;
         $orderSurplusSecond = $expiredAtByOrder - time();
         $orderRangeSecond = $expiredAtByOrder - $lastValidateAt;
-        $avgPrice = $orderAmountSum / $orderRangeSecond;
-        $orderSurplusAmount = $avgPrice * $orderSurplusSecond;
-        if (!$orderSurplusSecond || !$orderSurplusAmount) return;
-        $order->surplus_amount = $orderSurplusAmount > 0 ? $orderSurplusAmount : 0;
+    
+        $totalTraffic = $user->transfer_enable / 1073741824;
+        $usedTraffic = ($user->u + $user->d) / 1073741824;
+        if ($totalTraffic == 0) return;
+    
+        $remainingTrafficRatio = ($totalTraffic - $usedTraffic) / $totalTraffic;
+    
+        $avgPricePerSecond = $orderAmountSum / $orderRangeSecond;
+        if ($orderRangeSecond <= 31 * 86400) {
+            $orderSurplusAmount = $avgPricePerSecond * $orderSurplusSecond * $remainingTrafficRatio;
+        } else {
+            $firstMonthSeconds = min($orderSurplusSecond, 30 * 86400);
+            $laterMonthsSeconds = $orderSurplusSecond - $firstMonthSeconds;
+            $orderSurplusAmount = $avgPricePerSecond * $firstMonthSeconds * $remainingTrafficRatio +
+                                  $avgPricePerSecond * $laterMonthsSeconds;
+        }
+    
+        $order->surplus_amount = max($orderSurplusAmount, 0);
         $order->surplus_order_ids = array_column($orders, 'id');
     }
 
@@ -291,8 +307,13 @@ class OrderService
 
     private function buyByOneTime(Plan $plan)
     {
+        $transfer_enable = $plan->transfer_enable;
+        $notUsedTraffic = ($this->user->transfer_enable - ($this->user->u + $this->user->d)) / 1073741824;
+        if ($notUsedTraffic > 0 && $this->user->expired_at == NULL) {
+            $transfer_enable += $notUsedTraffic;
+        }
         $this->buyByResetTraffic();
-        $this->user->transfer_enable = $plan->transfer_enable * 1073741824;
+        $this->user->transfer_enable = $transfer_enable * 1073741824;
         $this->user->device_limit = $plan->device_limit;
         $this->user->plan_id = $plan->id;
         $this->user->group_id = $plan->group_id;

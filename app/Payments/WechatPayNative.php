@@ -73,7 +73,7 @@ class WechatPayNative {
         ])->send();
 
         if (!$response->isPaid()) {
-            die('FAIL');
+            return('FAIL');
         }
 
         return [

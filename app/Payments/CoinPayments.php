@@ -98,7 +98,7 @@ class CoinPayments {
             abort(500, 'Payment Timed Out or Error');
         } else {
             //payment is pending, you can optionally add a note to the order page
-            die('IPN OK: pending');
+            return('IPN OK: pending');
         }
     }
 }
