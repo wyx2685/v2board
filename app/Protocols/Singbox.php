@@ -20,11 +20,11 @@ class Singbox
     public function handle()
     {
         $appName = config('app_name', 'V2Board');
-        $config = $this->loadConfig();
+        $this->config = $this->loadConfig();
         $outbounds = $this->buildOutbounds();
         $config['outbounds'] = $outbounds;
 
-        return json_encode($config);
+        return json_encode($this->config);
         //return response($config, 200);
     }
 
@@ -39,61 +39,57 @@ class Singbox
 
     protected function buildOutbounds()
     {
-        $outbounds = [];
-
-        $selector = [
-            "tag" => "节点选择",
-            "type" => "selector",
-            "default" => "自动选择",
-            "outbounds" => ["自动选择"]
+        $outbounds = $this->config['outbounds'] ?? [];
+        $proxies = [];
+    
+        $defaultOutbounds = [
+            ['type' => 'dns', 'tag' => 'dns-out'],
+            ['type' => 'direct', 'tag' => 'direct'],
+            ['type' => 'block', 'tag' => 'block'],
+            ['type' => 'selector', 'tag' => '节点选择', 'outbounds' => []],
+            ['type' => 'urltest', 'tag' => '自动选择', 'outbounds' => []],
         ];
 
-        $urltest = [
-            "tag" => "自动选择",
-            "type" => "urltest",
-            "outbounds" => []
-        ];
-
-        $outbounds[] = &$selector;
-
+        $outboundTypes = array_column($outbounds, 'type');
+        foreach ($defaultOutbounds as $default) {
+            if (!in_array($default['type'], $outboundTypes)) {
+                $outbounds[] = $default;
+            }
+        }
+    
         foreach ($this->servers as $item) {
             if ($item['type'] === 'shadowsocks') {
                 $ssConfig = $this->buildShadowsocks($this->user['uuid'], $item);
-                $outbounds[] = $ssConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $ssConfig;
             }
             if ($item['type'] === 'trojan') {
                 $trojanConfig = $this->buildTrojan($this->user['uuid'], $item);
-                $outbounds[] = $trojanConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $trojanConfig;
             }
             if ($item['type'] === 'vmess') {
                 $vmessConfig = $this->buildVmess($this->user['uuid'], $item);
-                $outbounds[] = $vmessConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $vmessConfig;
             }
             if ($item['type'] === 'vless') {
                 $vlessConfig = $this->buildVless($this->user['uuid'], $item);
-                $outbounds[] = $vlessConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $vlessConfig;
             }
             if ($item['type'] === 'hysteria') {
                 $hysteriaConfig = $this->buildHysteria($this->user['uuid'], $item, $this->user);
-                $outbounds[] = $hysteriaConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $hysteriaConfig;
             }
         }
 
-        $outbounds[] = [ "tag" => "direct", "type" => "direct" ];
-        $outbounds[] = [ "tag" => "block",  "type" => "block" ];
-        $outbounds[] = [ "tag" => "dns-out", "type" => "dns" ];
-        $outbounds[] = $urltest;
+        foreach ($outbounds as &$outbound) {
+            if ($outbound['type'] === 'selector' || $outbound['type'] === 'urltest') {
+                array_push($outbound['outbounds'], ...array_column($proxies, 'tag'));
+            }
+        }
 
+        $outbounds = array_merge($outbounds, $proxies);
+    
+        $this->config['outbounds'] = $outbounds;
+    
         return $outbounds;
     }
 
