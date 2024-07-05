@@ -101,7 +101,6 @@ class UniProxyController extends Controller
         $updateAt = time();
         foreach ($data as $uid => $ips) {
             $ips_array = Cache::get('ALIVE_IP_USER_'. $uid) ?? [];
-
             // 更新节点数据
             $ips_array[$this->nodeType . $this->nodeId] = ['aliveips' => $ips, 'lastupdateAt' => $updateAt];
             // 清理过期数据
@@ -111,9 +110,22 @@ class UniProxyController extends Controller
                 } 
             } 
             $count = 0;
-            foreach($ips_array as $nodetypeid => $newdata) {
-                if (!is_int($newdata) && isset($newdata['aliveips'])) {
-                    $count += count($newdata['aliveips']);
+            if (config('v2board.device_limit_mode', 0) == 1) {
+                $ipmap = [];
+                foreach($ips_array as $nodetypeid => $newdata) {
+                    if (!is_int($newdata) && isset($newdata['aliveips'])) {
+                        foreach($newdata['aliveips'] as $ip_NodeId) {
+                            $ip = explode("_", $ip_NodeId)[0];
+                            $ipmap[$ip] = 1;
+                        }
+                    }
+                }
+                $count = count($ipmap);
+            } else {
+                foreach($ips_array as $nodetypeid => $newdata) {
+                    if (!is_int($newdata) && isset($newdata['aliveips'])) {
+                        $count += count($newdata['aliveips']);
+                    }
                 }
             }
             $ips_array['alive_ip'] = $count;
