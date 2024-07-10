@@ -20,14 +20,14 @@ class Singbox
 
     public function handle()
     {
-        $appName = config('app_name', 'V2Board');
+        $appName = config('v2board.app_name', 'V2Board');
         $this->config = $this->loadConfig();
         $proxies = $this->buildProxies();
         $outbounds = $this->addProxies($proxies);
         $this->config['outbounds'] = $outbounds;
 
-        return json_encode($this->config);
-        //return response($config, 200);
+        return response($this->config, 200)
+            ->header('content-disposition', 'attachment;filename*=UTF-8\'\'' . rawurlencode($appName));
     }
 
     protected function loadConfig()
