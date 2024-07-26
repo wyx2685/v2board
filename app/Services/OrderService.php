@@ -240,7 +240,7 @@ class OrderService
         $order->callback_no = $callbackNo;
         if (!$order->save()) return false;
         try {
-            OrderHandleJob::dispatchNow($order->trade_no);
+            OrderHandleJob::dispatch($order->trade_no);
         } catch (\Exception $e) {
             return false;
         }

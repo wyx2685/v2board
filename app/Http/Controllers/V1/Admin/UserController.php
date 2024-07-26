@@ -8,8 +8,11 @@ use App\Http\Requests\Admin\UserGenerate;
 use App\Http\Requests\Admin\UserSendMail;
 use App\Http\Requests\Admin\UserUpdate;
 use App\Jobs\SendEmailJob;
+use App\Models\InviteCode;
+use App\Models\Ticket;
 use App\Models\Order;
 use App\Models\Plan;
+use App\Models\TicketMessage;
 use App\Models\User;
 use App\Services\AuthService;
 use App\Utils\Helper;
@@ -82,12 +85,21 @@ class UserController extends Controller
             }
             //统计在线设备
             $countalive = 0;
+            $ips = [];
             $ips_array = Cache::get('ALIVE_IP_USER_'. $res[$i]['id']);
             if ($ips_array) {
                 $countalive = $ips_array['alive_ip'];
+                foreach($ips_array as $nodetypeid => $data) {
+                    if (!is_int($data) && isset($data['aliveips'])) {
+                        foreach($data['aliveips'] as $ip_NodeId) {
+                            $ip = explode("_", $ip_NodeId)[0];
+                            $ips[] = $ip . '_' . $nodetypeid;
+                        }
+                    }
+                }
             }
             $res[$i]['alive_ip'] = $countalive;
-
+            $res[$i]['ips'] = implode(', ', $ips);
             $res[$i]['subscribe_url'] = Helper::getSubscribeUrl($res[$i]['token']);
         }
         return response([
@@ -316,39 +328,58 @@ class UserController extends Controller
         $builder = User::orderBy($sort, $sortType);
         $this->filter($request, $builder);
 
+        DB::beginTransaction();
         try {
             $builder->each(function ($user){
-                $deletedOrders = Order::where('user_id', $user->id)->delete();
-                $inviteUser = User::where('invite_user_id', $user->id)->update(['invite_user_id' => null]);
+                Order::where('user_id', $user->id)->delete();
+                InviteCode::where('user_id', $user->id)->delete();
+                $tickets = Ticket::where('user_id', $user->id)->get();
+                foreach($tickets as $ticket) {
+                    TicketMessage::where('ticket_id', $ticket->id)->delete();
+                }
+                Ticket::where('user_id', $user->id)->delete();
+                User::where('invite_user_id', $user->id)->update(['invite_user_id' => null]);
             });
+            $builder->delete();
+            DB::commit();
         } catch (\Exception $e) {
+            DB::rollBack();
             abort(500, '批量删除用户信息失败');
         }  
 
         return response([
-            'data' => $builder->delete()
+            'data' => true
         ]);
     }
 
     public function delUser(Request $request)
     {
         $user = User::find($request->input('id'));
-        if (!$user) abort(500, '用户不存在');
-        
+        if (!$user) {
+            abort(500, '用户不存在');
+        }
+    
+        DB::beginTransaction();
         try {
-            $deletedOrders = Order::where('user_id', $request->input('id'))->delete();
+            Order::where('user_id', $request->input('id'))->delete();
+            User::where('invite_user_id', $request->input('id'))->update(['invite_user_id' => null]);
+            InviteCode::where('user_id', $request->input('id'))->delete();
+            
+            $tickets = Ticket::where('user_id', $request->input('id'))->get();
+            foreach($tickets as $ticket) {
+                TicketMessage::where('ticket_id', $ticket->id)->delete();
+            }
+            Ticket::where('user_id', $request->input('id'))->delete();
+    
+            $user->delete();
+            DB::commit();
         } catch (\Exception $e) {
-            abort(500, '删除用户订单失败');
+            DB::rollBack();
+            abort(500, '删除用户失败');
         }
 
-        try {
-            $inviteUser = User::where('invite_user_id', $request->input('id'))->update(['invite_user_id' => null]);
-        } catch (\Exception $e) {
-            abort(500, '删除用户邀请人失败');
-        }
-        
         return response([
-            'data' => $user->delete()
+            'data' => true
         ]);
     }
 }

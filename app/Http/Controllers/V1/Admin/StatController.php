@@ -29,6 +29,8 @@ class StatController extends Controller
     {
         return [
             'data' => [
+                'online_user' => User::where('t','>=', time() - 600)
+                    ->count(),
                 'month_income' => Order::where('created_at', '>=', strtotime(date('Y-m-1')))
                     ->where('created_at', '<', time())
                     ->whereNotIn('status', [0, 2])

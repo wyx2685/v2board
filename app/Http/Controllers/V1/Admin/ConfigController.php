@@ -10,6 +10,7 @@ use App\Utils\Dict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class ConfigController extends Controller
@@ -197,6 +198,13 @@ class ConfigController extends Controller
             }
         }
         Artisan::call('config:cache');
+        if(Cache::has('WEBMANPID')) {
+            $pid = Cache::get('WEBMANPID');
+            Cache::forget('WEBMANPID');
+            return response([
+                'data' => posix_kill($pid, 15)
+            ]);
+        }
         return response([
             'data' => true
         ]);

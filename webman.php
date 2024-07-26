@@ -4,6 +4,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Adapterman\Adapterman;
 use Workerman\Worker;
+use Illuminate\Support\Facades\Cache;
+
+define('MAX_REQUEST', 6600);
 
 Adapterman::init();
 
@@ -19,8 +22,17 @@ $http_worker->onWorkerStart = static function () {
 };
 
 $http_worker->onMessage = static function ($connection, $request) {
-
+    static $request_count = 0;
+    static $pid;
+    if ($request_count == 1) {
+        $pid = posix_getppid();
+        Cache::forget("WEBMANPID");
+        Cache::forever("WEBMANPID", $pid);
+    }
     $connection->send(run());
+    if (++$request_count > MAX_REQUEST) {
+        Worker::stopAll();
+    }
 };
 
 Worker::runAll();

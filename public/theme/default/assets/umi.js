@@ -15894,6 +15894,17 @@
                     newPassword: this.refs.new_password.value
                 })
             }
+            redeemgiftcard() {
+                if (this.refs.giftcard.value.length == 0)
+                    return c["a"].error(Object(m["formatMessage"])({
+                        id: "\u8bf7\u8f93\u5165\u793c\u54c1\u5361"
+                    }));
+                this.props.dispatch({
+                    type: "user/redeemgiftcard",
+                    giftcard: this.refs.giftcard.value,
+                    callback: () => {componentDidMount()}
+                })
+            }
             update(e, t) {
                 this.props.dispatch({
                     type: "user/update",
@@ -15969,6 +15980,39 @@
                 }, Object(m["formatMessage"])({
                     id: "\u8d26\u6237\u4f59\u989d(\u4ec5\u6d88\u8d39)"
                 }))))))), l.a.createElement("div", {
+                    className: "row mb-3 mb-md-0"
+                }, l.a.createElement("div", {
+                    className: "col-md-12"
+                }, l.a.createElement("div", {
+                    className: "block block-rounded "
+                }, l.a.createElement("div", {
+                    className: "block-header block-header-default"
+                }, l.a.createElement("h3", {
+                    className: "block-title"
+                }, Object(m["formatMessage"])({
+                    id: "\u793c\u54c1\u5361"
+                }))), l.a.createElement("div", {
+                    className: "block-content"
+                }, l.a.createElement("div", {
+                    className: "row push"
+                }, l.a.createElement("div", {
+                    className: "col-lg-8 col-xl-5"
+                }, l.a.createElement("div", {
+                    className: "form-group"
+                }, l.a.createElement("input", {
+                    className: "form-control",
+                    placeholder: Object(m["formatMessage"])({
+                        id: "\u8bf7\u8f93\u5165\u793c\u54c1\u5361"
+                    }),
+                    ref: "giftcard",
+                    autocomplete: "one-time-code"
+                })), l.a.createElement(a["a"], {
+                    type: "primary",
+                    onClick: ()=>this.redeemgiftcard(),
+                    loading: e.redeemgiftcardLoading
+                }, Object(m["formatMessage"])({
+                    id: "\u5151\u6362"
+                })))))))), l.a.createElement("div", {
                     className: "row mb-3 mb-md-0"
                 }, l.a.createElement("div", {
                     className: "col-md-12"
@@ -35370,6 +35414,7 @@
                 this.props.dispatch({
                     type: "passport/sendEmailVerify",
                     email: this.getEmail(),
+                    isforget: 0,
                     recaptchaData: e,
                     callback: ()=>{
                         n()
@@ -44648,6 +44693,58 @@
                         }, n)
                     })()
                 },
+                redeemgiftcard(e, t) {
+                    return p().mark(function n() {
+                        var o, s, u;
+                        return p().wrap(function(n) {
+                            while (1)
+                                switch (n.prev = n.next) {
+                                case 0:
+                                    return o = e.giftcard,
+                                    s = t.put,
+                                    n.next = 4,
+                                    s({
+                                        type: "setState",
+                                        payload: {
+                                            redeemgiftcardLoading: !0
+                                        }
+                                    });
+                                case 4:
+                                    return n.next = 6,
+                                    Object(a["b"])("/user/redeemgiftcard", {
+                                        giftcard: o
+                                    });
+                                case 6:
+                                    return u = n.sent,
+                                    n.next = 9,
+                                    s({
+                                        type: "setState",
+                                        payload: {
+                                            redeemgiftcardLoading: !1
+                                        }
+                                    });
+                                case 9:
+                                    if (200 === u.code) {
+                                        n.next = 11;
+                                        break
+                                    }
+                                    return n.abrupt("return");
+                                case 11:
+                                    return n.next = 13,
+                                    s({
+                                        type: "user/getUserInfo"
+                                    });
+                                case 13:
+                                    r["a"].success("\u5151\u6362\u6210\u529f: " + 
+                                        (1===u.type ? ("\u8d26\u6237\u4f59\u989d " + (u.value / 100).toFixed(2)) : 
+                                        (2===u.type ? "\u8ba2\u9605\u65f6\u957f " + u.value + "\u5929": 
+                                            "\u5957\u9910\u6d41\u91cf " + u.value + "GB")));
+                                case "end":
+                                    return n.stop()
+                                }
+                        }, n)
+                    })()
+                },
                 resetSecurity(e, t) {
                     return p().mark(function e() {
                         var n, o;
@@ -49975,6 +50072,7 @@
                     type: "passport/sendEmailVerify",
                     email: this.refs.email.value,
                     recaptchaData: e,
+                    isforget: 1,
                     callback: ()=>{
                         n()
                     }
@@ -57290,6 +57388,7 @@
                                     return l = {},
                                     l["email"] = r,
                                     a && (l["recaptcha_data"] = a),
+                                    l["isforget"] = e.isforget,
                                     n.next = 9,
                                     Object(i["b"])("/passport/comm/sendEmailVerify", l);
                                 case 9:
