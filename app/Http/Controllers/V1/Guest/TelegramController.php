@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Guest;
 use App\Http\Controllers\Controller;
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class TelegramController extends Controller
 {
@@ -14,11 +15,22 @@ class TelegramController extends Controller
 
     public function __construct(Request $request)
     {
-        if ($request->input('access_token') !== md5(config('v2board.telegram_bot_token'))) {
-            abort(401);
+        if (!App::runningInConsole() && App::environment('production')) {
+            $this->validateAccessToken($request->input('access_token'));
         }
-
+        
         $this->telegramService = new TelegramService();
+    }
+
+    private function validateAccessToken($accessToken)
+    {
+        $expectedToken = md5(config('services.v2board.telegram_bot_token'));
+        \Log::info('Expected Token: ' . $expectedToken);
+        \Log::info('Access Token: ' . $accessToken);
+
+        if ($accessToken !== $expectedToken) {
+            abort(401, 'Unauthorized access');
+        }
     }
 
     public function webhook(Request $request)
@@ -37,13 +49,13 @@ class TelegramController extends Controller
         // To reduce request, only commands contains @ will get the bot name
         if (count($commandName) == 2) {
             $botName = $this->getBotName();
-            if ($commandName[1] === $botName){
+            if ($commandName[1] === $botName) {
                 $msg->command = $commandName[0];
             }
         }
 
         try {
-            foreach (glob(base_path('app//Plugins//Telegram//Commands') . '/*.php') as $file) {
+            foreach (glob(base_path('app/Plugins/Telegram/Commands') . '/*.php') as $file) {
                 $command = basename($file, '.php');
                 $class = '\\App\\Plugins\\Telegram\\Commands\\' . $command;
                 if (!class_exists($class)) continue;
@@ -114,7 +126,6 @@ class TelegramController extends Controller
             );
             return;
         }
-        $userService = new \App\Services\UserService();
         $this->telegramService->approveChatJoinRequest(
             $data['chat_join_request']['chat']['id'],
             $data['chat_join_request']['from']['id']
