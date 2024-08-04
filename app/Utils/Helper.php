@@ -104,6 +104,9 @@ class Helper
         $path = "{$path}?token={$token}";
         $subscribeUrls = explode(',', config('v2board.subscribe_url'));
         $subscribeUrl = $subscribeUrls[rand(0, count($subscribeUrls) - 1)];
+        if(strpos($subscribeUrl,"https://*.") !== false){
+            $subscribeUrl = "https://".Helper::randomChar(5).substr($subscribeUrl,9);
+        }
         if ($subscribeUrl) return $subscribeUrl . $path;
         return url($path);
     }
