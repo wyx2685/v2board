@@ -94,6 +94,58 @@ class Helper
             return round($byte, 2) . ' B';
         }
     }
+    
+    public static function cUrlGetIP($url) {
+        
+        // cUrl
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $header[] = 'user-agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        return curl_exec($ch);
+        curl_close($ch);
+    }
+    
+    public static function getProvince() {
+        
+        
+    
+    if(getenv('HTTP_CLIENT_IP')) {
+        $onlineip = getenv('HTTP_CLIENT_IP');
+    } elseif(getenv('HTTP_X_FORWARDED_FOR')) {
+        $onlineip = getenv('HTTP_X_FORWARDED_FOR');
+    } elseif(getenv('REMOTE_ADDR')) {
+        $onlineip = getenv('REMOTE_ADDR');
+    } else {
+        $onlineip = $HTTP_SERVER_VARS['REMOTE_ADDR'];
+    }
+        $response = Helper::cUrlGetIP('https://searchplugin.csdn.net/api/v1/ip/get?ip='.$onlineip);
+        $code = json_decode($response,true)['code'];
+        
+        if($code == 200) {
+            
+            $str1 = json_decode($response,true)['data']['address'];
+            
+            // 省份
+            $province = explode(' ', $str1)[1];
+            
+            
+            // 判断是否获取成功
+            if($province) {
+                
+                return $province;
+            }else {
+                
+                return "";
+            }
+        }else {
+            
+            return "";
+        }
+    }
 
     public static function getSubscribeUrl($token)
     {
@@ -106,6 +158,10 @@ class Helper
         $subscribeUrl = $subscribeUrls[rand(0, count($subscribeUrls) - 1)];
         if(strpos($subscribeUrl,"https://*.") !== false){
             $subscribeUrl = "https://".Helper::randomChar(5).substr($subscribeUrl,9);
+        }
+        $province = Helper::getProvince();
+        if($province == "四川" || $province == "重庆" || $province == "福建" || $province == "新疆" || $province == "北京" || $province == "浙江" || $province == "江苏" || $province == "江西" || $province == "上海"){
+            $subscribeUrl = "https://sub.lty.ieyf.cn";
         }
         if ($subscribeUrl) return $subscribeUrl . $path;
         return url($path);
