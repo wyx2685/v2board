@@ -147,6 +147,10 @@ class UserController extends Controller
                 case 3:
                     $user->transfer_enable += $giftcard->value * 1073741824;
                     break;
+                case 4:
+                    $user->u = 0;
+                    $user->d = 0;
+                    break;
                 default:
                     abort(500, __('Unknown gift card type'));
             }

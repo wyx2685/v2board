@@ -14,7 +14,7 @@ class GiftcardController extends Controller
     public function fetch(Request $request)
     {
         $current = $request->input('current', 1);
-        $pageSize = max($request->input('pageSize', 50), 50);
+        $pageSize = max($request->input('pageSize', 10), 10);
         $sortType = in_array($request->input('sort_type'), ['ASC', 'DESC']) ? $request->input('sort_type') : 'DESC';
         $sort = $request->input('sort', 'id');
         
@@ -86,17 +86,17 @@ class GiftcardController extends Controller
 
         $data = "名称,类型,数值,开始时间,结束时间,可用次数,礼品卡卡密,生成时间\r\n";
         foreach ($giftcards as $giftcard) {
-            $type = ['', '金额', '时长', '流量'][$giftcard['type']];
-            $value = ['', round($giftcard['value']/100, 2), $giftcard['value'] . '天', $giftcard['value'] . 'GB'][$giftcard['type']];
-            $startTime = date('Y-m-d H:i:s', strtotime($giftcard['started_at']));
-            $endTime = date('Y-m-d H:i:s', strtotime($giftcard['ended_at']));
+            $type = ['', '金额', '时长', '流量', '重置'][$giftcard['type']];
+            $value = ['', round($giftcard['value']/100, 2), $giftcard['value'] . '天', $giftcard['value'] . 'GB', '-'][$giftcard['type']];
+            $startTime = date('Y-m-d H:i:s', $giftcard['started_at']);
+            $endTime = date('Y-m-d H:i:s', $giftcard['ended_at']);
             $limitUse = $giftcard['limit_use'] ?? '不限制';
-            $createTime = date('Y-m-d H:i:s', strtotime($giftcard['created_at']));
+            $createTime = date('Y-m-d H:i:s', $giftcard['created_at']);
             $data .= "{$giftcard['name']},{$type},{$value},{$startTime},{$endTime},{$limitUse},{$giftcard['code']},{$createTime}\r\n";
         }
 
         // Return the CSV data as a response
-        return response($data)->header('Content-Type', 'text/csv');
+       echo($data);
     }
 
     public function drop(Request $request)

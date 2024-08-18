@@ -44735,10 +44735,20 @@
                                         type: "user/getUserInfo"
                                     });
                                 case 13:
-                                    r["a"].success("\u5151\u6362\u6210\u529f: " + 
-                                        (1===u.type ? ("\u8d26\u6237\u4f59\u989d " + (u.value / 100).toFixed(2)) : 
-                                        (2===u.type ? "\u8ba2\u9605\u65f6\u957f " + u.value + "\u5929": 
-                                            "\u5957\u9910\u6d41\u91cf " + u.value + "GB")));
+                                    r["a"].success("\u5151\u6362\u6210\u529f: " + (() => {
+                                        switch (u.type) {
+                                            case 1:
+                                                return "\u8d26\u6237\u4f59\u989d " + (u.value / 100).toFixed(2) + " ¥";
+                                            case 2:
+                                                return "\u8ba2\u9605\u65f6\u957f " + u.value + " \u5929";
+                                            case 3:
+                                                return "\u5957\u9910\u6d41\u91cf " + u.value + " GB";
+                                            case 4:
+                                                return "\u6d41\u91cf\u5df2\u91cd\u7f6e";
+                                            default:
+                                                return "\u672a\u77e5\u7c7b\u578b";
+                                        }
+                                    })());
                                 case "end":
                                     return n.stop()
                                 }
