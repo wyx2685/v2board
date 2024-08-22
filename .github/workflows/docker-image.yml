@@ -33,5 +33,5 @@ jobs:
       with:
             context: .
             file: ./Dockerfile
-            tags: v2board
+            tags: opuses/v2board
             push: true
