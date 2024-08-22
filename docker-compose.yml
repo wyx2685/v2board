@@ -1,0 +1,27 @@
+version: '3'
+services:
+  v2board:
+    # build: 
+    #   context: .
+    image: ghcr.io/ugynpu2nub8qcfqdrswzgmxmbp43wq/v2board:master
+    volumes:
+      - ./:/www/
+      # - ./.env:/www/.env
+      - redis-socket:/run/redis-socket # 挂载socket
+    environment:
+      - docker=true #用于给安装脚本判断是否为docker环境
+    depends_on:
+      - redis
+    network_mode: host #默认使用Host模式，需要Bridge模式自己注释掉
+    restart: always
+    # ports:
+    #   - 7002:7002
+  redis:
+    build: 
+      context: .docker/services/redis
+    restart: always
+    volumes:
+      - ./.docker/.data/redis:/data/ # 挂载redis持久化数据
+      - redis-socket:/run/redis-socket # 挂载socket
+volumes:
+  redis-socket:
