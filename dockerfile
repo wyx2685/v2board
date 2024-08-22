@@ -1,4 +1,4 @@
-FROM library/php:7.4.33-zts-alpine3.16
+FROM library/php:7.4.33-fpm-alpine3.16
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
