@@ -28,6 +28,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Docker Metadata action
+      id: meta
       uses: docker/metadata-action@v5.5.1
       with:
         images: v2board 
