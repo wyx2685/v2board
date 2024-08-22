@@ -38,6 +38,6 @@ jobs:
       with:
             context: .
             file: ./Dockerfile
-            tags: ${{ steps.meta.outputs.tags }}
+            tags: v2board
             labels: ${{ steps.meta.outputs.labels }}
             push: true
