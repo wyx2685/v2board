@@ -1,9 +1,10 @@
 /node_modules
 /config/v2board.php
+/config/googleCloudStorageKey.json
 /public/hot
 /public/storage
 /public/env.example.js
-/public/favicon.ico
+*.user.ini
 /storage/*.key
 /vendor
 .env
@@ -20,4 +21,10 @@ composer.lock
 yarn.lock
 docker-compose.yml
 .DS_Store
-public/clients/*
+/docker
+storage/laravels.conf
+storage/laravels.pid
+storage/laravels-timer-process.pid
+cli-php.ini
+frontend
+docker-compose.yaml
