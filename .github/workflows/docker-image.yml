@@ -26,11 +26,16 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Docker Metadata action
+      uses: docker/metadata-action@v5.5.1
+      with:
+        images: v2board 
         
     - name: Build and push Docker images
       uses: docker/build-push-action@v6.7.0
       with:
             file: ./Dockerfile
-            platforms: linux/amd64,linux/arm64
-            tags: ${{ secrets.DOCKERHUB_USERNAME }}/v2board:latest
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
             push: true
