@@ -32,4 +32,4 @@ jobs:
       with:
             file: ./Dockerfile
             platforms: linux/amd64,linux/arm64
-            tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.GITHUB_REPOSITORY }}:latest
+            tags: ${{ secrets.DOCKERHUB_USERNAME }}/$GITHUB_REPOSITORY:latest
