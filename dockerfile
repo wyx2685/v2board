@@ -3,7 +3,7 @@ FROM library/php:7.4.33-zts-alpine3.16
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
 RUN install-php-extensions pcntl redis fileinfo \ 
-&& apk --no-cache add shadow supervisor nginx sqlite nginx-mod-http-brotli mysql-client git patch \
+&& apk --no-cache add shadow supervisor nginx nginx-mod-http-brotli mysql-client git patch \
 && addgroup -S -g 1000 www && adduser -S -G www -u 1000 www 
 #复制项目文件以及配置文件
 WORKDIR /www
