@@ -25,12 +25,14 @@
 
 最后进入后台重新保存主题： 主题配置-主题设置-确定
 
-## Docker安装（mysql/mariadb需自行安装，另外注意配置网络）
+## Docker安装
 
     git clone --depth 1 https://github.com/UGYnpU2nuB8QCFqDrsWZgmxMBp43WQ/v2board
     cd v2board
     docker compose pull
     docker compose up -d
+    
+mysql/mariadb需自行安装，注意配置网络（默认v2board_default），保证数据库的连通性
 
 ## Docker更新
 
