@@ -24,3 +24,5 @@ RUN composer install --optimize-autoloader --no-cache --no-dev \
 && chmod -R 775 /www
 
 CMD ["supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
+
+ENTRYPOINT ["php-fpm"]
