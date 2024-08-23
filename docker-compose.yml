@@ -3,12 +3,12 @@ services:
     # build: 
     #   context: .
     image: ghcr.io/ugynpu2nub8qcfqdrswzgmxmbp43wq/v2board:master
-    # network_mode: host
+    network_mode: host
     volumes:
       - ./:/www/
       # - ./.env:/www/.env
     environment:
       - docker=true # 用于给安装脚本判断是否为docker环境
     restart: always
-    ports:
-      - 7002:7002
+    ## ports:
+    ##   - 7002:7002
