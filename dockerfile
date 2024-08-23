@@ -3,7 +3,7 @@ FROM library/php:fpm-alpine
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
 RUN install-php-extensions pcntl redis fileinfo pdo_mysql \ 
-&& apk --no-cache add shadow supervisor nginx nginx-mod-http-brotli mysql-client redis git patch vim lsof mtr\
+&& apk --no-cache add shadow supervisor nginx nginx-mod-http-brotli mysql-client git patch vim lsof mtr\
 && addgroup -S -g 1000 www && adduser -S -G www -u 1000 www
 
 #复制项目文件以及配置文件
