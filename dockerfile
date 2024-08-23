@@ -23,7 +23,6 @@ RUN composer install --optimize-autoloader --no-cache --no-dev \
 && chown -R www:www /www \
 && chmod -R 775 /www
 
-#启动！
 CMD ["supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
 CMD ["php-fpm"]
 CMD ["nginx"]
