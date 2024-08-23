@@ -33,6 +33,7 @@
     docker compose up -d
     
 网站默认端口 7002
+
 mysql/mariadb需自行安装，注意配置网络（默认v2board_default），使用面板 或 修改 docker-compose.yml ，保证数据库的连通性
 
 ## 使用 Docker Compose 更新 v2board
