@@ -3,6 +3,7 @@ services:
     # build: 
     #   context: .
     image: ghcr.io/ugynpu2nub8qcfqdrswzgmxmbp43wq/v2board:master
+    # network_mode: host
     volumes:
       - ./:/www/
       # - ./.env:/www/.env
