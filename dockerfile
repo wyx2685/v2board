@@ -25,3 +25,4 @@ RUN composer install --optimize-autoloader --no-cache --no-dev \
 
 CMD ["supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
 CMD ["php-fpm"]
+CMD ["nginx"]
