@@ -22,6 +22,6 @@ RUN composer install --optimize-autoloader --no-cache --no-dev \
 && php artisan storage:link \
 && chown -R www:www /www \
 && chmod -R 775 /www \
-$$ chmod -R 777 /www/storage
+&& chmod -R 777 /www/storage
 
 CMD ["supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
