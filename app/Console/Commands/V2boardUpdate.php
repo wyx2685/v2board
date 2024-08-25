@@ -57,6 +57,10 @@ class V2boardUpdate extends Command
             } catch (\Exception $e) {
             }
         }
+        \Artisan::call('view:clear');
+        \Artisan::call('view:cache');
+        \Artisan::call('config:clear');
+        \Artisan::call('config:cache');
         \Artisan::call('horizon:terminate');
         $this->info('更新完毕，队列服务已重启，你无需进行任何操作。');
     }
