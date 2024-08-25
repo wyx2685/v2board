@@ -1,0 +1,17 @@
+services:
+  v2board:
+    # build: 
+    #   context: .
+    image: ghcr.io/ugynpu2nub8qcfqdrswzgmxmbp43wq/v2board:master
+    network_mode: host
+    container_name: v2board
+    volumes:
+      - ./:/www/
+      - ./.docker/etc/nginx/http.d/default.conf:/etc/nginx/http.d/default.conf
+      - ./.docker/etc/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+      # - ./.env:/www/.env
+    environment:
+      - docker=true # 用于给安装脚本判断是否为docker环境
+    restart: always
+    ## ports:
+    ##   - 7002:7002
