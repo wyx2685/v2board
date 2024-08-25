@@ -1,9 +1,14 @@
 <?php
-
+/**
+ * 基于https://github.com/linusxiong/Xboard的StripeCheckout.php文件修改而。更新 paymentIntents API、checkout关闭手机号码，推送用户邮箱
+ * https://raw.githubusercontent.com/linusxiong/Xboard/dev/app/Payments/StripeCheckout.php
+ */
 namespace App\Payments;
 
+use App\Exceptions\ApiException;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
+use App\Models\User;
 
 class StripeCheckout {
     public function __construct($config)
@@ -33,11 +38,6 @@ class StripeCheckout {
                 'label' => 'WebHook 密钥签名',
                 'description' => '',
                 'type' => 'input',
-            ],
-            'stripe_custom_field_name' => [
-                'label' => '自定义字段名称',
-                'description' => '例如可设置为“联系方式”，以便及时与客户取得联系',
-                'type' => 'input',
             ]
         ];
     }
@@ -47,10 +47,11 @@ class StripeCheckout {
         $currency = $this->config['currency'];
         $exchange = $this->exchange('CNY', strtoupper($currency));
         if (!$exchange) {
-            abort(500, __('Currency conversion has timed out, please try again later'));
+            throw new abort('Currency conversion has timed out, please try again later', 500);
         }
-        $customFieldName = isset($this->config['stripe_custom_field_name']) ? $this->config['stripe_custom_field_name'] : 'Contact Infomation';
-
+        
+        $userEmail = $this->getUserEmail($order['user_id']);
+        
         $params = [
             'success_url' => $order['return_url'],
             'cancel_url' => $order['return_url'],
@@ -69,16 +70,8 @@ class StripeCheckout {
             ],
             'mode' => 'payment',
             'invoice_creation' => ['enabled' => true],
-            'phone_number_collection' => ['enabled' => true],
-            'custom_fields' => [
-                [
-                    'key' => 'contactinfo',
-                    'label' => ['type' => 'custom', 'custom' => $customFieldName],
-                    'type' => 'text',
-                ],
-            ],
-            // 'customer_email' => $user['email'] not support
-
+            'phone_number_collection' => ['enabled' => false],
+            'customer_email' => $userEmail, 
         ];
 
         Stripe::setApiKey($this->config['stripe_sk_live']);
@@ -86,7 +79,7 @@ class StripeCheckout {
             $session = Session::create($params);
         } catch (\Exception $e) {
             info($e);
-            abort(500, "Failed to create order. Error: {$e->getMessage}");
+            throw new abort("Failed to create order. Error: {$e->getMessage}");
         }
         return [
             'type' => 1, // 0:qrcode 1:url
@@ -96,8 +89,7 @@ class StripeCheckout {
 
     public function notify($params)
     {
-        \Stripe\Stripe::setApiKey($this->config['stripe_sk_live']);
-        try {
+       try {
             $event = \Stripe\Webhook::constructEvent(
                 request()->getContent() ?: json_encode($_POST),
                 $_SERVER['HTTP_STRIPE_SIGNATURE'],
@@ -125,15 +117,76 @@ class StripeCheckout {
                 ];
                 break;
             default:
-                abort(500, 'event is not support');
+                throw new abort('event is not support');
         }
-        return('success');
+        die('success');
     }
 
     private function exchange($from, $to)
-    {
-        $result = file_get_contents("https://api.exchangerate-api.com/v4/latest/{$from}");
+{
+    $from = strtolower($from);
+    $to = strtolower($to);
+    
+    // 使用第一个API进行货币转换
+    try {
+        $result = file_get_contents("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" . $from . ".min.json");
         $result = json_decode($result, true);
-        return $result['rates'][$to];
+        
+        // 如果转换成功，返回结果
+        if (isset($result[$from][$to])) {
+            return $result[$from][$to];
+        } else {
+            throw new \Exception("Primary currency API failed.");
+        }
+    } catch (\Exception $e) {
+        // 如果第一个API不可用，调用备用API
+        return $this->backupExchange($from, $to);
+    }
+}
+
+// 备用货币转换 API 方法
+private function backupExchange($from, $to)
+{
+    try {
+        $url = "https://api.exchangerate-api.com/v4/latest/{$from}";
+        $result = file_get_contents($url);
+        $result = json_decode($result, true);
+        
+        // 如果转换成功，返回结果
+        if (isset($result['rates'][$to])) {
+            return $result['rates'][$to];
+        } else {
+            throw new \Exception("Backup currency API failed.");
+        }
+    } catch (\Exception $e) {
+        // 如果备用API也失败，调用第二个备用API
+        return $this->thirdExchange($from, $to);
+    }
+}
+
+// 第二个备用货币转换 API 方法
+private function thirdExchange($from, $to)
+{
+    try {
+        $url = "https://api.frankfurter.app/latest?from={$from}&to={$to}";
+        $result = file_get_contents($url);
+        $result = json_decode($result, true);
+        
+        // 如果转换成功，返回结果
+        if (isset($result['rates'][$to])) {
+            return $result['rates'][$to];
+        } else {
+            throw new \Exception("Third currency API failed.");
+        }
+    } catch (\Exception $e) {
+        // 如果所有API都失败，抛出异常
+        throw new \Exception("All currency conversion APIs failed.");
+    }
+}
+
+    private function getUserEmail($userId)
+    {
+        $user = User::find($userId);
+        return $user ? $user->email : null;
     }
 }
