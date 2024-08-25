@@ -1,7 +1,8 @@
 <?php
 
 /**
- * 自己写别抄，抄NMB抄
+ * 基于https://github.com/linusxiong/Xboard的StripeALLInOne.php文件修改而来，修改支持wyx2685/v2board，支付宝、微信、checkout增加推送用户邮箱、站点元数据。更新 paymentIntents API、checkout关闭手机号码
+ * https://raw.githubusercontent.com/linusxiong/Xboard/dev/app/Payments/StripeALLInOne.php
  */
 namespace App\Payments;
 use Stripe\Stripe;
