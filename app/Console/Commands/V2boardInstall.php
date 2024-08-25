@@ -162,37 +162,38 @@ class V2boardInstall extends Command
 
     private function saveToEnv($data = [])
     {
-        function set_env_var($key, $value)
-        {
-            if (! is_bool(strpos($value, ' '))) {
-                $value = '"' . $value . '"';
-            }
-            $key = strtoupper($key);
-
-            $envPath = app()->environmentFilePath();
-            $contents = file_get_contents($envPath);
-
-            preg_match("/^{$key}=[^\r\n]*/m", $contents, $matches);
-
-            $oldValue = count($matches) ? $matches[0] : '';
-
-            if ($oldValue) {
-                $contents = str_replace("{$oldValue}", "{$key}={$value}", $contents);
-            } else {
-                $contents = $contents . "\n{$key}={$value}\n";
-            }
-
-            $file = fopen($envPath, 'w');
-            fwrite($file, $contents);
-            return fclose($file);
-        }
-        foreach($data as $key => $value) {
-            set_env_var($key, $value);
+        foreach ($data as $key => $value) {
+            $this->setEnvVar($key, $value);
         }
         return true;
     }
 
-    function getEnvValue($key, $default = null)
+    private function setEnvVar($key, $value)
+    {
+        if (!is_bool(strpos($value, ' '))) {
+            $value = '"' . $value . '"';
+        }
+        $key = strtoupper($key);
+
+        $envPath = app()->environmentFilePath();
+        $contents = file_get_contents($envPath);
+
+        preg_match("/^{$key}=[^\r\n]*/m", $contents, $matches);
+
+        $oldValue = count($matches) ? $matches[0] : '';
+
+        if ($oldValue) {
+            $contents = str_replace("{$oldValue}", "{$key}={$value}", $contents);
+        } else {
+            $contents = $contents . "\n{$key}={$value}\n";
+        }
+
+        $file = fopen($envPath, 'w');
+        fwrite($file, $contents);
+        fclose($file);
+    }
+
+    private function getEnvValue($key, $default = null)
     {
         $dotenv = \Dotenv\Dotenv::createImmutable(base_path());
         $dotenv->load();
