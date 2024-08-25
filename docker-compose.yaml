@@ -1,3 +1,4 @@
+version: '3'
 services:
   v2board:
     # build: 
@@ -9,9 +10,21 @@ services:
       - ./:/www/
       - ./.docker/etc/nginx/http.d/default.conf:/etc/nginx/http.d/default.conf
       - ./.docker/etc/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+      - redis-socket:/run/redis-socket # 挂载socket
       # - ./.env:/www/.env
-    environment:
-      - docker=true # 用于给安装脚本判断是否为docker环境
+    depends_on:
+      - redis
+    network_mode: host #默认使用Host模式，需要Bridge模式自己注释掉
     restart: always
     ## ports:
     ##   - 7002:7002
+  redis:
+    build: 
+      context: .docker/services/redis
+    restart: always
+    container_name: v2board-redis
+    volumes:
+      - ./.docker/.data/redis:/data/ # 挂载redis持久化数据
+      - redis-socket:/run/redis-socket # 挂载socket
+volumes:
+  redis-socket:
