@@ -43,19 +43,6 @@ class UniProxyController extends Controller
         $users = $this->serverService->getAvailableUsers($this->nodeInfo->group_id);
         $users = $users->toArray();
 
-        $users = array_map(function ($user) {
-            if ($user['device_limit'] == null || $user['device_limit'] <= 0) {
-                return $user;
-            }
-            $ips_array = Cache::get('ALIVE_IP_USER_'. $user['id']);
-            $count = 0;
-            if ($ips_array) {
-                $count = $ips_array['alive_ip'];
-            }
-            $user['alive_ip'] = $count;
-            return $user;
-        }, $users);
-
         $response['users'] = $users;
 
         $eTag = sha1(json_encode($response));
@@ -85,6 +72,25 @@ class UniProxyController extends Controller
         return response([
             'data' => true
         ]);
+    }
+
+    // 后端获取在线数据
+    public function alivelist(Request $request)
+    {
+        $userService = new UserService();
+        $maxId = $userService->getMaxId();
+        $alive = [];
+
+        for ($id = 1; $id <= $maxId; $id++) {
+            if (Cache::has('ALIVE_IP_USER_' . $id)) {
+                $ips_array = Cache::get('ALIVE_IP_USER_' . $id);
+                if ($ips_array) {
+                    $alive[$id] = $ips_array['alive_ip'];
+                }
+            }
+        }
+
+        return response()->json(['alive' => (object)$alive]);
     }
 
     // 后端提交在线数据
