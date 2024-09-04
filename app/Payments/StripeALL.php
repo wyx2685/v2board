@@ -39,8 +39,7 @@ class StripeALL {
     public function pay($order)
     {
         $currency = $this->config['currency'];
-        // $exchange = $this->exchange('CNY', strtoupper($currency));
-        $exchange = $this->exchange('CNY', strtoupper($currency), $order['total_amount']);
+        $exchange = $this->exchange('CNY', strtoupper($currency));
         if (!$exchange) {
             throw new abort('Currency conversion has timed out, please try again later', 500);
         }
