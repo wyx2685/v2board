@@ -12,6 +12,7 @@ class MailService
     public function remindTraffic (User $user)
     {
         if (!$user->remind_traffic) return;
+        if (!($user->expired_at > time())) return;
         if (!$this->remindTrafficIsWarnValue($user->u, $user->d, $user->transfer_enable)) return;
         $flag = CacheKey::get('LAST_SEND_EMAIL_REMIND_TRAFFIC', $user->id);
         if (Cache::get($flag)) return;
