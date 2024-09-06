@@ -83,7 +83,7 @@ class StripeALL {
         $nextAction = null;
         
         if (!$stripeIntents['next_action']) {
-            throw new abort(__('支付网关请求失败'));
+            throw new abort(__('Payment gateway request failed'));
         }else {
             $nextAction = $stripeIntents['next_action'];
         }
@@ -94,14 +94,14 @@ class StripeALL {
                     $jumpUrl = $nextAction['alipay_handle_redirect']['url'];
                     $actionType = 1;
                 }else {
-                    throw new abort('无法获取支付宝重定向网址', 500);
+                    throw new abort('unable get Alipay redirect url', 500);
                 }
                 break;
             case "wechat_pay":
                 if (isset($nextAction['wechat_pay_display_qr_code'])){
                     $jumpUrl = $nextAction['wechat_pay_display_qr_code']['data'];
                 }else {
-                    throw new abort('无法获取微信支付重定向网址', 500);
+                    throw new abort('unable get WeChat Pay redirect url', 500);
                 }
         }
     } else {
@@ -179,7 +179,7 @@ class StripeALL {
                     ];
                     break;
             default:
-                throw new abort('webhook事件不支持');
+                throw new abort('webhook events are not supported');
         }
         return('success');
     }
@@ -195,7 +195,7 @@ class StripeALL {
             if (isset($result['rates'][$to])) {
                 return $result['rates'][$to];
             } else {
-                throw new \Exception("第一个货币API失败");
+                throw new \Exception("First currency API fails");
             }
         } catch (\Exception $e) {
             // 如果API失败，调用第二个API
@@ -215,11 +215,11 @@ class StripeALL {
             if (isset($result['rates'][$to])) {
                 return $result['rates'][$to];
             } else {
-                throw new \Exception("第二个货币API失败");
+                throw new \Exception("Second currency API fails");
             }
         } catch (\Exception $e) {
             // 如果所有API都失败，抛出异常
-            throw new \Exception("所有货币转换API均失败");
+            throw new \Exception("All currency conversion APIs fail");
         }
     }
     // 从user中获取email
