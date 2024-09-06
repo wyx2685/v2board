@@ -41,7 +41,7 @@ class StripeALL {
         $currency = $this->config['currency'];
         $exchange = $this->exchange('CNY', strtoupper($currency));
         if (!$exchange) {
-            throw new abort('货币转换API失败', 500);
+            throw new abort('Currency conversion API failed', 500);
         }
         //jump url
         $jumpUrl = null;
