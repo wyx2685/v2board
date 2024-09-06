@@ -41,7 +41,7 @@ class StripeALL {
         $currency = $this->config['currency'];
         $exchange = $this->exchange('CNY', strtoupper($currency));
         if (!$exchange) {
-            throw new abort('Currency conversion has timed out, please try again later', 500);
+            throw new abort('货币转换API失败', 500);
         }
         //jump url
         $jumpUrl = null;
@@ -83,7 +83,7 @@ class StripeALL {
         $nextAction = null;
         
         if (!$stripeIntents['next_action']) {
-            throw new abort(__('Payment gateway request failed'));
+            throw new abort(__('支付网关请求失败'));
         }else {
             $nextAction = $stripeIntents['next_action'];
         }
@@ -94,14 +94,14 @@ class StripeALL {
                     $jumpUrl = $nextAction['alipay_handle_redirect']['url'];
                     $actionType = 1;
                 }else {
-                    throw new abort('unable get Alipay redirect url', 500);
+                    throw new abort('无法获取支付宝重定向网址', 500);
                 }
                 break;
             case "wechat_pay":
                 if (isset($nextAction['wechat_pay_display_qr_code'])){
                     $jumpUrl = $nextAction['wechat_pay_display_qr_code']['data'];
                 }else {
-                    throw new abort('unable get WeChat Pay redirect url', 500);
+                    throw new abort('无法获取微信支付重定向网址', 500);
                 }
         }
     } else {
@@ -179,35 +179,12 @@ class StripeALL {
                     ];
                     break;
             default:
-                throw new abort('event is not support');
+                throw new abort('webhook事件不支持');
         }
         return('success');
     }
-    // 货币转换 API 1
+    // 货币转换 API
     private function exchange($from, $to)
-    {
-        $from = strtolower($from);
-        $to = strtolower($to);
-
-        // 使用第一个API进行货币转换
-        try {
-            $result = file_get_contents("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" . $from . ".min.json");
-            $result = json_decode($result, true);
-
-            // 如果转换成功，返回结果
-            if (isset($result[$from][$to])) {
-                return $result[$from][$to];
-            } else {
-                throw new \Exception("Primary currency API failed.");
-            }
-        } catch (\Exception $e) {
-            // 如果第一个API不可用，调用备用API
-            return $this->backupExchange($from, $to);
-        }
-    }
-
-    // 备用货币转换 API 方法
-    private function backupExchange($from, $to)
     {
         try {
             $url = "https://api.exchangerate-api.com/v4/latest/{$from}";
@@ -218,16 +195,16 @@ class StripeALL {
             if (isset($result['rates'][$to])) {
                 return $result['rates'][$to];
             } else {
-                throw new \Exception("Backup currency API failed.");
+                throw new \Exception("第一个货币API失败");
             }
         } catch (\Exception $e) {
-            // 如果备用API也失败，调用第二个备用API
-            return $this->thirdExchange($from, $to);
+            // 如果API失败，调用第二个API
+            return $this->backupExchange($from, $to);
         }
     }
 
-    // 第二个备用货币转换 API 方法
-    private function thirdExchange($from, $to)
+    // 第二个货币转换 API 方法
+    private function backupExchange($from, $to)
     {
         try {
             $url = "https://api.frankfurter.app/latest?from={$from}&to={$to}";
@@ -238,11 +215,11 @@ class StripeALL {
             if (isset($result['rates'][$to])) {
                 return $result['rates'][$to];
             } else {
-                throw new \Exception("Third currency API failed.");
+                throw new \Exception("第二个货币API失败");
             }
         } catch (\Exception $e) {
             // 如果所有API都失败，抛出异常
-            throw new \Exception("All currency conversion APIs failed.");
+            throw new \Exception("所有货币转换API均失败");
         }
     }
     // 从user中获取email
