@@ -8,11 +8,11 @@
                 "server": "local"
             }, 
             {
-                "clash_mode": "全局代理",
+                "clash_mode": "جهانی",
                 "server": "remote"
             },
             {
-                "clash_mode": "全局直连",
+                "clash_mode": "مستقیم",
                 "server": "local"
             },
             {
@@ -31,7 +31,7 @@
         "servers": [
             {
                 "address": "https://1.1.1.1/dns-query",
-                "detour": "节点选择",
+                "detour": "دکتر‌موبایل‌جایزان",
                 "tag": "remote"
             },
             {
@@ -51,7 +51,7 @@
             "enabled": true
         },
         "clash_api": {
-            "default_mode": "绕过大陆地址",
+            "default_mode": "قوانین",
             "external_controller": "127.0.0.1:9090",
             "secret": ""
         }
@@ -94,14 +94,14 @@
     "outbounds": [
         {
             "type": "selector",
-            "tag": "节点选择",
+            "tag": "دکتر‌موبایل‌جایزان",
             "outbounds": [
-                "自动选择"
+                "انتخاب خودکار"
             ]
         },
         {
             "type": "urltest",
-            "tag": "自动选择",
+            "tag": "انتخاب خودکار",
             "outbounds": []
         },
         {
@@ -125,12 +125,12 @@
                 "protocol": "dns"
             },
             {
-                "clash_mode": "全局直连",
+                "clash_mode": "مستقیم",
                 "outbound": "direct"
             },
             {
-                "clash_mode": "全局代理",
-                "outbound": "节点选择"
+                "clash_mode": "جهانی",
+                "outbound": "دکتر‌موبایل‌جایزان"
             },
             {
                 "rule_set": [
@@ -155,21 +155,21 @@
               "type": "remote",
               "format": "binary",
               "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-              "download_detour": "节点选择"
+              "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
                 "tag": "category-ads-all",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-                "download_detour": "节点选择"
+                "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
                 "tag": "geoip-cn",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-                "download_detour": "节点选择"
+                "download_detour": "دکتر‌موبایل‌جایزان"
             }
         ]
     }
