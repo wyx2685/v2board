@@ -8,6 +8,7 @@ use App\Services\ServerService;
 use App\Services\UserService;
 use App\Utils\Helper;
 use Illuminate\Http\Request;
+use Morilog\Jalali\Jalalian;
 
 class ClientController extends Controller
 {
@@ -46,19 +47,19 @@ class ClientController extends Controller
         $useTraffic = $user['u'] + $user['d'];
         $totalTraffic = $user['transfer_enable'];
         $remainingTraffic = Helper::trafficConvert($totalTraffic - $useTraffic);
-        $expiredDate = $user['expired_at'] ? date('Y-m-d', $user['expired_at']) : '长期有效';
+        $expiredDate = $user['expired_at'] ? Jalalian::forge($user['expired_at'])->format('Y-m-d') : 'نامعلوم';
         $userService = new UserService();
         $resetDay = $userService->getResetDay($user);
         array_unshift($servers, array_merge($servers[0], [
-            'name' => "套餐到期：{$expiredDate}",
+            'name' => "تاریخ：{$expiredDate}",
         ]));
         if ($resetDay) {
             array_unshift($servers, array_merge($servers[0], [
-                'name' => "距离下次重置剩余：{$resetDay} 天",
+                'name' => "روزهای باقی‌مانده تا بازنشانی بعدی：{$resetDay}",
             ]));
         }
         array_unshift($servers, array_merge($servers[0], [
-            'name' => "剩余流量：{$remainingTraffic}",
+            'name' => "ترافیک：{$remainingTraffic}",
         ]));
     }
 }
