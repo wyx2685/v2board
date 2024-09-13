@@ -7,22 +7,32 @@ use App\Plugins\Telegram\Telegram;
 use App\Utils\Helper;
 
 class Traffic extends Telegram {
-    public $command = '/traffic';
-    public $description = '查询流量信息';
+    public $command = '/traffic';  // دستور برای دریافت ترافیک
+    public $description = 'مشاهده اطلاعات ترافیک';
 
     public function handle($message, $match = []) {
         $telegramService = $this->telegramService;
+
+        // بررسی این که پیام خصوصی است
         if (!$message->is_private) return;
+
+        // جستجوی کاربر با شناسه تلگرام
         $user = User::where('telegram_id', $message->chat_id)->first();
         if (!$user) {
-            $telegramService->sendMessage($message->chat_id, '没有查询到您的用户信息，请先绑定账号', 'markdown');
+            $telegramService->sendMessage($message->chat_id, 'اطلاعات کاربری شما یافت نشد، لطفاً ابتدا حساب خود را متصل کنید', 'markdown');
             return;
         }
+
+        // تبدیل مقادیر ترافیک به فرمت خوانا
         $transferEnable = Helper::trafficConvert($user->transfer_enable);
         $up = Helper::trafficConvert($user->u);
         $down = Helper::trafficConvert($user->d);
         $remaining = Helper::trafficConvert($user->transfer_enable - ($user->u + $user->d));
-        $text = "🚥流量查询\n———————————————\n计划流量：`{$transferEnable}`\n已用上行：`{$up}`\n已用下行：`{$down}`\n剩余流量：`{$remaining}`";
+
+        // پیام نهایی با اطلاعات ترافیک
+        $text = "🚥 اطلاعات ترافیک\n———————————————\nترافیک کل: `{$transferEnable}`\nترافیک آپلود: `{$up}`\nترافیک دانلود: `{$down}`\nترافیک باقی‌مانده: `{$remaining}`";
+
+        // ارسال پیام به کاربر
         $telegramService->sendMessage($message->chat_id, $text, 'markdown');
     }
 }
