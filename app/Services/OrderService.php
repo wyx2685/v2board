@@ -28,6 +28,8 @@ class OrderService
         $this->order = $order;
     }
 
+
+
     public function open()
     {
         $order = $this->order;
@@ -40,6 +42,7 @@ class OrderService
         DB::beginTransaction();
         if ($order->surplus_order_ids) {
             try {
+                // 开通
                 Order::whereIn('id', $order->surplus_order_ids)->update([
                     'status' => 4
                 ]);
@@ -82,7 +85,6 @@ class OrderService
             DB::rollBack();
             abort(500, '开通失败');
         }
-
         DB::commit();
     }
 
@@ -153,6 +155,7 @@ class OrderService
             ->whereNotIn('status', [0, 2])
             ->first();
     }
+
 
     private function getSurplusValue(User $user, Order $order)
     {

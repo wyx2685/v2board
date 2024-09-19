@@ -24,6 +24,17 @@ class UserRoute
             $router->post('/getQuickLoginUrl', 'V1\\User\\UserController@getQuickLoginUrl');
             $router->get ('/getActiveSession', 'V1\\User\\UserController@getActiveSession');
             $router->post('/removeActiveSession', 'V1\\User\\UserController@removeActiveSession');
+            $router->post('/bindYorabbit', 'V1\\User\\UserController@bindYorabbit');
+            $router->post('/unbindYorabbit', 'V1\\User\\UserController@unbindYorabbit');
+            $router->post('/checkinYorabbit', 'V1\\User\\UserController@checkinYorabbit');
+            $router->post('/checkin', 'V1\\User\\UserController@checkin');
+            $router->get('/getDescBalances', 'V1\\User\\UserController@getDescBalances');
+            $router->post('/buyBalance', 'V1\\User\\UserController@buyBalance');
+            $router->post('/checkOrderBalance', 'V1\\User\\UserController@checkOrderBalance');
+            $router->post('/lottery', 'V1\\User\\UserController@lottery');
+            $router->post('/redeemSubscribe', 'V1\\User\\UserController@redeemSubscribe');
+            
+            
             // Order
             $router->post('/order/save', 'V1\\User\\OrderController@save');
             $router->post('/order/checkout', 'V1\\User\\OrderController@checkout');
@@ -60,6 +71,8 @@ class UserRoute
             $router->get ('/knowledge/getCategory', 'V1\\User\\KnowledgeController@getCategory');
             // Stat
             $router->get ('/stat/getTrafficLog', 'V1\\User\\StatController@getTrafficLog');
+            // PlanCards
+            $router->post('/plancards/redeemCard', 'V1\\User\\PlanCardsController@redeemCard');
         });
     }
 }

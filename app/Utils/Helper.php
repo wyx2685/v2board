@@ -112,17 +112,7 @@ class Helper
     public static function getProvince() {
         
         
-    
-    if(getenv('HTTP_CLIENT_IP')) {
-        $onlineip = getenv('HTTP_CLIENT_IP');
-    } elseif(getenv('HTTP_X_FORWARDED_FOR')) {
-        $onlineip = getenv('HTTP_X_FORWARDED_FOR');
-    } elseif(getenv('REMOTE_ADDR')) {
-        $onlineip = getenv('REMOTE_ADDR');
-    } else {
-        $onlineip = $HTTP_SERVER_VARS['REMOTE_ADDR'];
-    }
-        $response = Helper::cUrlGetIP('https://searchplugin.csdn.net/api/v1/ip/get?ip='.$onlineip);
+        $response = Helper::cUrlGetIP('https://searchplugin.csdn.net/api/v1/ip/get?ip='.$_SERVER['REMOTE_ADDR']);
         $code = json_decode($response,true)['code'];
         
         if($code == 200) {
@@ -160,9 +150,9 @@ class Helper
             $subscribeUrl = "https://".Helper::randomChar(5).substr($subscribeUrl,9);
         }
         $province = Helper::getProvince();
-        if($province == "四川" || $province == "重庆" || $province == "福建" || $province == "新疆" || $province == "北京" || $province == "浙江" || $province == "江苏" || $province == "江西" || $province == "上海"){
-            $subscribeUrl = "https://sub.lty.ieyf.cn";
-        }
+        // if($province == "四川" || $province == "重庆" || $province == "福建" || $province == "新疆" || $province == "北京" || $province == "浙江" || $province == "江苏" || $province == "江西" || $province == "上海"){
+        //     $subscribeUrl = "https://sub.lty.xz61.cn";
+        // }
         if ($subscribeUrl) return $subscribeUrl . $path;
         return url($path);
     }
