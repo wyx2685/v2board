@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => 'mysql',
+    'default' => 'stack',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,15 +34,15 @@ return [
     */
 
     'channels' => [
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['daily', 'mysql'],
+            'ignore_exceptions' => false,
+        ],
+
         'mysql' => [
             'driver' => 'custom',
             'via' => App\Logging\MysqlLogger::class,
-        ],
-
-        'stack' => [
-            'driver' => 'stack',
-            'channels' => ['daily'],
-            'ignore_exceptions' => false,
         ],
 
         'single' => [
@@ -55,7 +55,7 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
-            'days' => 14,
+            'days' => 14,  // تعداد روزهایی که لاگ‌ها در فایل نگه‌داری می‌شوند
         ],
 
         'slack' => [
