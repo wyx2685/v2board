@@ -9,6 +9,7 @@ use App\Utils\CacheKey;
 use App\Utils\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use App\Models\User;
 
 class UniProxyController extends Controller
 {
@@ -43,19 +44,6 @@ class UniProxyController extends Controller
         $users = $this->serverService->getAvailableUsers($this->nodeInfo->group_id);
         $users = $users->toArray();
 
-        $users = array_map(function ($user) {
-            if ($user['device_limit'] == null || $user['device_limit'] <= 0) {
-                return $user;
-            }
-            $ips_array = Cache::get('ALIVE_IP_USER_'. $user['id']);
-            $count = 0;
-            if ($ips_array) {
-                $count = $ips_array['alive_ip'];
-            }
-            $user['alive_ip'] = $count;
-            return $user;
-        }, $users);
-
         $response['users'] = $users;
 
         $eTag = sha1(json_encode($response));
@@ -85,6 +73,32 @@ class UniProxyController extends Controller
         return response([
             'data' => true
         ]);
+    }
+
+    // 后端获取在线数据
+    public function alivelist(Request $request)
+    {
+        $userService = new UserService();
+        $users = $userService->getDeviceLimitedUsers();
+        if ($users->isEmpty()) {
+            return response()->json(['alive' => (object)[]]);        }
+        $cacheKeys = [];
+        foreach ($users as $user) {
+            $cacheKeys['ALIVE_IP_USER_' . $user->id] = $user->id;
+        }
+
+        $alive = Cache::remember('ALIVE_LIST', 60, function () use ($cacheKeys) {
+            $alive = [];
+            $ips_arrays = Cache::many(array_keys($cacheKeys));
+
+            foreach ($ips_arrays as $key => $data) {
+                if ($data && isset($data['alive_ip'])) {
+                    $alive[$cacheKeys[$key]] = $data['alive_ip'];
+                }
+            }
+            return $alive;
+        });
+        return response()->json(['alive' => (object)$alive]);
     }
 
     // 后端提交在线数据

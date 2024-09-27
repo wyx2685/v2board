@@ -750,3 +750,7 @@ CREATE TABLE `v2_giftcard` (
                              `updated_at` int(11) NOT NULL,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `v2_giftcard`
+    ADD `plan_id` int(11) NULL AFTER `value`,
+    CHANGE `used_user_ids` `used_user_ids` varchar(16384) NULL AFTER `limit_use`;

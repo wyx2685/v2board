@@ -96,7 +96,7 @@ class UserController extends Controller
                 abort(500, __('The user does not exist'));
             }
             $giftcard_input = $request->giftcard;
-            $giftcard = Giftcard::where('code', $giftcard_input)->first();;
+            $giftcard = Giftcard::where('code', $giftcard_input)->first();
 
             if (!$giftcard) {
                 abort(500, __('The gift card does not exist'));
@@ -150,6 +150,20 @@ class UserController extends Controller
                 case 4:
                     $user->u = 0;
                     $user->d = 0;
+                    break;
+                case 5:
+                    if ($user->plan_id == null || $user->expired_at < $currentTime) {
+                        $plan = Plan::where('id', $giftcard->plan_id)->first();
+                        $user->plan_id = $plan->id;
+                        $user->group_id = $plan->group_id;
+                        $user->transfer_enable = $plan->transfer_enable * 1073741824;
+                        $user->device_limit = $plan->device_limit;
+                        $user->u = 0;
+                        $user->d = 0;
+                        $user->expired_at = $currentTime + $giftcard->value * 86400;
+                    } else {
+                        abort(500, __('Not suitable gift card type'));
+                    }
                     break;
                 default:
                     abort(500, __('Unknown gift card type'));
