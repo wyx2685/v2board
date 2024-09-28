@@ -17,7 +17,7 @@
             },
             {
                 "rule_set": [
-                    "geosite-cn"
+                    "geosite-ir"
                 ],
                 "server": "local"
             },
@@ -134,7 +134,8 @@
             },
             {
                 "rule_set": [
-                    "geosite-cn","geoip-cn"
+                    "geosite-ir",
+                    "geoip-ir"
                 ],
                 "outbound": "direct"
             },
@@ -151,11 +152,11 @@
         ],
         "rule_set": [
             {
-              "tag": "geosite-cn",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-              "download_detour": "دکتر‌موبایل‌جایزان"
+                "tag": "geosite-ir",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-ir.srs",
+                "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
                 "tag": "category-ads-all",
@@ -165,10 +166,10 @@
                 "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
-                "tag": "geoip-cn",
+                "tag": "geoip-ir",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ir.srs",
                 "download_detour": "دکتر‌موبایل‌جایزان"
             }
         ]
