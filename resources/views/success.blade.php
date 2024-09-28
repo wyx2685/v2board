@@ -234,7 +234,7 @@
             <div class="progress"></div>
         </div>
         <div class="progress-percentage" id="progress-percentage">در حال فعالسازی: ۰٪</div>
-        <a href="https://drmobilejayzan.info/#/dashboard" class="button" role="button">رفتن به داشبرد</a>
+        <a href="https://drmobjay.com/index2332.html#/dashboard" class="button" role="button">رفتن به داشبرد</a>
         <div class="countdown-wrapper">
             <div class="countdown" id="countdown" aria-live="polite">10</div>
             <p>ثانیه دیگر به صورت خودکار به صفحه هدایت می‌شوید</p>
@@ -258,7 +258,7 @@
             countdownElement.textContent = countdown;
             if (countdown === 0) {
                 clearInterval(countdownInterval);
-                window.location.href = "https://drmobilejayzan.info/#/dashboard";
+                window.location.href = "https://drmobjay.com/index2332.html#/dashboard";
             }
         }, 1000);
 
