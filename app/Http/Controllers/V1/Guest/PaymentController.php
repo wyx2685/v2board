@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use App\Services\OrderService;
 use App\Services\PaymentService;
 use App\Services\TelegramService;
@@ -62,11 +63,16 @@ class PaymentController extends Controller
             return false;
         }
 
+        $this->logInfo('Order found', ['order' => $order->toArray()]);
+
         if ($order->status !== 0) {
+            $this->logInfo('Order already processed', ['trade_no' => $tradeNo]);
             return true;
         }
 
+        $user = User::find($order->user_id);
         $orderService = new OrderService($order);
+
         if (!$orderService->paid($transactionId)) {
             $this->logError('Could not update order status', [
                 'trade_no' => $tradeNo,
@@ -75,17 +81,32 @@ class PaymentController extends Controller
             return false;
         }
 
+        $this->logInfo('Order status updated successfully', [
+            'trade_no' => $tradeNo,
+            'transaction_id' => $transactionId
+        ]);
+
         $adjustedAmount = $order->total_amount / 1000;
-        $message = $this->generateTelegramMessage($adjustedAmount, $order->trade_no);
+        $message = $this->generateTelegramMessage($adjustedAmount, $order, $user);
 
         $telegramService = new TelegramService();
         $telegramService->sendMessageWithAdmin($message);
+
+        $this->logInfo('Telegram message sent', [
+            'message' => $message
+        ]);
 
         return true;
     }
 
     private function renderPaymentResult($success, $message, $tradeNo = null)
     {
+        $this->logInfo('Rendering payment result', [
+            'success' => $success,
+            'trade_no' => $tradeNo,
+            'message' => $message
+        ]);
+
         $orderInfo = '';
         if ($success && $tradeNo) {
             $order = Cache::remember("order_{$tradeNo}", 60, function() use ($tradeNo) {
@@ -119,12 +140,16 @@ class PaymentController extends Controller
         ]);
     }
 
-    private function generateTelegramMessage($adjustedAmount, $tradeNo)
+    private function generateTelegramMessage($adjustedAmount, $order, $user)
     {
+        $subscribeLink = "http://ddr.drmobilejayzan.info/api/v1/client/subscribe?token=" . $user->token;
+
         return sprintf(
-            "💰 پرداخت موفق به مبلغ %s تومان\n———————————————\nشماره سفارش: %s",
+            "💰 پرداخت موفق به مبلغ %s تومان\n———————————————\nشماره سفارش: %s\nایمیل کاربر: %s\n———————————————\nلینک اشتراک: %s",
             number_format($adjustedAmount, 0, '.', ','),
-            $tradeNo
+            $order->trade_no,
+            $user->email,
+            $subscribeLink
         );
     }
 }
