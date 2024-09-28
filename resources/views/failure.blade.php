@@ -227,7 +227,7 @@
         <div class="icon" aria-hidden="true">✘</div>
         <h1>خطا در پرداخت</h1>
         <p>{{ $message }}</p>
-        <a href="https://drmobilejayzan.info/#/dashboard/order" class="button" role="button">رفتن به سفارشات</a>
+        <a href="https://drmobjay.com/index2332.html#/dashboard/order" class="button" role="button">رفتن به سفارشات</a>
         <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
             <div class="progress"></div>
         </div>
@@ -255,7 +255,7 @@
             countdownElement.textContent = countdown;
             if (countdown === 0) {
                 clearInterval(countdownInterval);
-                window.location.href = "https://drmobilejayzan.info/#/dashboard/order";
+                window.location.href = "https://drmobjay.com/index2332.html#/dashboard/order";
             }
         }, 1000);
 
