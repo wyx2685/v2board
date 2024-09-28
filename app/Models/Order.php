@@ -14,4 +14,10 @@ class Order extends Model
         'updated_at' => 'timestamp',
         'surplus_order_ids' => 'array'
     ];
+
+    // رابطه با مدل User
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
