@@ -56,3 +56,5 @@ if (!empty(config('v2board.subscribe_path'))) {
 }
 Route::post('/api/v1/guest/payment/callback/aghayehpardakht', [PaymentController::class, 'aghayehpardakhtCallback']);
 Route::post('payment/notify/{method}/{uuid}', [PaymentController::class, 'notify'])->name('payment.notify');
+Route::post('/api/v1/guest/payment/callback/zibal', [PaymentController::class, 'zibalCallback']);
+Route::post('payment/notify/zibal/{uuid}', [PaymentController::class, 'notify'])->name('payment.notify.zibal');
