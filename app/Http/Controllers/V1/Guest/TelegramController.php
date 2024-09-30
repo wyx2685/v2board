@@ -26,7 +26,6 @@ class TelegramController extends Controller
         }
 
         $this->telegramService = new TelegramService();
-
         Log::info('TelegramService initialized successfully.');
     }
 
@@ -55,18 +54,18 @@ class TelegramController extends Controller
 
         if (count($commandName) == 2) {
             $botName = $this->getBotName();
-            if ($commandName[1] === $botName){
+            if ($commandName[1] === $botName) {
                 $msg->command = $commandName[0];
             }
         }
 
         try {
-            foreach (glob(base_path('app//Plugins//Telegram//Commands') . '/*.php') as $file) {
+            foreach (glob(base_path('app/Plugins/Telegram/Commands') . '/*.php') as $file) {
                 $command = basename($file, '.php');
                 $class = '\\App\\Plugins\\Telegram\\Commands\\' . $command;
                 if (!class_exists($class)) continue;
                 $instance = new $class();
-                
+
                 Log::info('Command class found.', ['command_class' => $class]);
 
                 if ($msg->message_type === 'message') {
@@ -105,7 +104,7 @@ class TelegramController extends Controller
     {
         if (!isset($data['message'])) return;
         if (!isset($data['message']['text'])) return;
-        
+
         Log::info('Formatting incoming message.', ['message_data' => $data['message']]);
 
         $obj = new \StdClass();
