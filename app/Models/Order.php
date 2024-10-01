@@ -41,11 +41,6 @@ class Order extends Model
         static::deleting(function ($order) {
             Log::warning('Deleting order.', ['order' => $order]);
         });
-
-        // هنگام بازیابی یک سفارش حذف شده
-        static::restoring(function ($order) {
-            Log::info('Restoring order.', ['order' => $order]);
-        });
     }
 
     // نمونه‌سازی از خطاهای احتمالی
