@@ -47,11 +47,19 @@ class Order extends Model
     public function save(array $options = [])
     {
         try {
-            parent::save($options);
-            Log::info('Order saved successfully.', ['order_id' => $this->id]);
+            // اطمینان از اجرای متد اصلی save
+            $saved = parent::save($options);
+            
+            if ($saved) {
+                Log::info('Order saved successfully.', ['order_id' => $this->id]);
+            } else {
+                Log::warning('Order not saved.', ['order_id' => $this->id]);
+            }
+
+            return $saved;
         } catch (\Exception $e) {
             Log::error('Error while saving order.', ['error' => $e->getMessage()]);
-            throw $e; // برای هندل کردن خطا در جاهای دیگر
+            throw $e; // خطا را برای هندل کردن در جاهای دیگر پرتاب می‌کنیم
         }
     }
 }
