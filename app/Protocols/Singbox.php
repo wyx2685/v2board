@@ -7,7 +7,7 @@ use App\Utils\Helper;
 
 class Singbox
 {
-    public $flag = 'sing-box';
+    public $flag = 'sing';
     private $servers;
     private $user;
     private $config;
