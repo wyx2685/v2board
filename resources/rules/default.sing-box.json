@@ -30,7 +30,7 @@
         ],
         "servers": [
             {
-                "address": "https://1.1.1.1/dns-query",
+                "address": "1.1.1.1",
                 "detour": "دکتر‌موبایل‌جایزان",
                 "tag": "remote"
             },
@@ -40,11 +40,13 @@
                 "tag": "local"
             },
             {
-                "address": "rcode://success",
+                "address": "rcode://refused",
                 "tag": "block"
             }
         ],
-        "strategy": "ipv4_only"
+        "final": "remote",
+        "strategy": "ipv4_only",
+        "disable_cache": false
     },
     "experimental": {
         "cache_file": {
