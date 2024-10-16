@@ -16,17 +16,13 @@ find-process-mode: always
 
 profile:
   store-selected: true
-  # 储存 API 对策略组的选择，以供下次启动时使用
   store-fake-ip: false
-  # 储存 fakeip 映射表，域名再次发生连接时，使用原有映射地址
 
 sniffer:
   enable: true
-  force-dns-mapping: true   # اجبار به استفاده از نقشه DNS برای شناسایی دامنه‌ها
-  parse-pure-ip: true       # شناسایی ترافیک‌هایی که فقط آی‌پی دارند و دامنه ندارند
-  override-destination: true  # استفاده از نتیجه Sniffer برای تغییر مقصد ترافیک
-
-  # دامنه‌هایی که Sniffer آن‌ها را نادیده می‌گیرد (برای سرویس‌های قابل اعتماد)
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
   skip-domain:
     - "*.trusted.com"
     - "*.microsoft.com"
@@ -36,8 +32,6 @@ sniffer:
     - "*.whatsapp.com"
     - "*.telegram.org"
     - "*.signal.org"
-  
-  # دامنه‌هایی که به صورت اجباری باید توسط Sniffer شناسایی شوند (برای سرویس‌های ناامن)
   force-domain:
     - "+.soroush.com"
     - "+.balad.ir"
@@ -49,19 +43,13 @@ sniffer:
     - "+.banino.ir"
     - "+.virasty.com"
     - "+.etelegram.com"
-
-  # برای پورت‌های مشخصی که باید به دقت تحلیل شوند
   sniff:
     TLS:
-      ports: [443, 8443, 9443]  # پورت‌های مربوط به TLS که نیاز به تحلیل دارند
+      ports: [443, 8443, 9443]
     HTTP:
-      ports: [80, 8080, 8880]   # پورت‌های HTTP که نیاز به تحلیل دارند
-
-  # برای سرویس‌هایی که نیاز به تحلیل‌های پیچیده‌تر دارند
+      ports: [80, 8080, 8880]
   sniff-http-payload:
-    enable: true    # فعال‌سازی تحلیل محتوای HTTP برای سرویس‌های پیچیده
-
-  # دسته‌بندی درخواست‌ها و تقسیم‌بندی بر اساس نوع سرویس برای تحلیل بهتر
+    enable: true
   sniff-category:
     messaging:
       force-domain:
@@ -75,8 +63,6 @@ sniffer:
         - "*.soroush.com"
         - "*.igap.net"
         - "*.rubika.ir"
-
-  # تنظیمات دقیق‌تر برای تحلیل دامنه‌های بدون DNS
   dns-hijack:
     - any:53
     - tcp://any:53
@@ -93,38 +79,38 @@ tun:
   auto-detect-interface: true
 
 dns:
-  enable: true  # فعال‌سازی DNS داخلی Clash
-  prefer-h3: true  # استفاده از HTTP/3 برای بهبود امنیت و کارایی DNS
+  enable: true
+  prefer-h3: true
   default-nameserver:
-    - 1.1.1.1  # Cloudflare DNS
-    - 8.8.8.8  # Google DNS
-  enhanced-mode: fake-ip  # استفاده از حالت Fake-IP برای جلوگیری از نشت DNS
+    - 1.1.1.1
+    - 8.8.8.8
+  enhanced-mode: fake-ip
   nameserver:
     - 1.1.1.1
     - 8.8.8.8
-    - 9.9.9.9  # Quad9 برای افزایش امنیت DNS
+    - 9.9.9.9
   fake-ip-filter:
-    - "*.lan"  # دامنه‌های شبکه محلی بدون Fake-IP
-    - "*.local"  # شبکه‌های داخلی بدون Fake-IP
+    - "*.lan"
+    - "*.local"
     - "localhost"
-    - "*.ir"  # دامنه‌های داخلی ایران بدون Fake-IP (در صورت نیاز)
+    - "*.ir"
     - "*.my.irancell.ir"
     - "*.mtnirancell.ir"
 proxy-groups:
   - { name: "💉دکتر‌موبایل‌جایزان", type: select, proxies: ["🚀 خودکار 🚀", "🚀 اولین سرور فعال 🚀", "load-balance"] }
-  
+
   - name: "🚀 خودکار 🚀"
     type: url-test
     proxies: []
     url: "http://www.gstatic.com/generate_204"
     interval: 1200
-    fallback-cache: false # گره‌ها همیشه تست شوند
+    fallback-cache: false
     health-check:
       enable: true
-      interval: 60 # هر یک دقیقه گره‌ها تست می‌شوند
+      interval: 60
       url: "http://www.gstatic.com/generate_204"
-      timeout: 5 # زمان انتظار برای تست پینگ
-      retries: 2 # تعداد تلاش‌های مجدد برای گره‌های ناموفق
+      timeout: 5
+      retries: 2
 
   - name: "🚀 اولین سرور فعال 🚀"
     type: fallback
@@ -134,7 +120,7 @@ proxy-groups:
 
   - name: "load-balance"
     type: load-balance
-    strategy: round-robin # استفاده از round-robin برای تغییر چرخشی گره‌ها
+    strategy: round-robin
     proxies: []
     url: "http://www.gstatic.com/generate_204"
     interval: 600
