@@ -13,16 +13,17 @@ class KnowledgeController extends Controller
 {
     public function fetch(Request $request)
     {
+        // 通过ID获取单个文章
         if ($request->input('id')) {
             $knowledge = Knowledge::where('id', $request->input('id'))
                 ->where('show', 1)
                 ->first()
                 ->toArray();
-            if (!$knowledge) abort(500, __('Article does not exist'));
+            if (!$knowledge) abort(500, __('Article does not exist')); // 如果文章不存在则返回错误
             $user = User::find($request->user['id']);
             $userService = new UserService();
             if (!$userService->isAvailable($user)) {
-                $this->formatAccessData($knowledge['body']);
+                $this->formatAccessData($knowledge['body']); // 如果用户无权限，格式化数据
             }
             $subscribeUrl = Helper::getSubscribeUrl($user['token']);
             $knowledge['body'] = str_replace('{{siteName}}', config('v2board.app_name', 'V2Board'), $knowledge['body']);
@@ -41,10 +42,25 @@ class KnowledgeController extends Controller
                 'data' => $knowledge
             ]);
         }
-        $builder = Knowledge::select(['id', 'category', 'title', 'updated_at'])
-            ->where('language', $request->input('language'))
-            ->where('show', 1)
+    
+        // 添加搜索功能
+        $builder = Knowledge::select(['id', 'category', 'title', 'language', 'sort', 'created_at', 'updated_at'])
+            ->where('show', 1) // 只获取显示状态为1的文章
             ->orderBy('sort', 'ASC');
+    
+        // 语言过滤
+        $language = $request->input('language');
+        if ($language) {
+            $builder = $builder->where('language', $language);
+        }
+    
+        // 分类过滤
+        $category = $request->input('category');
+        if ($category) {
+            $builder = $builder->where('category', $category);
+        }
+    
+        // 基于关键词的搜索
         $keyword = $request->input('keyword');
         if ($keyword) {
             $builder = $builder->where(function ($query) use ($keyword) {
@@ -52,11 +68,12 @@ class KnowledgeController extends Controller
                     ->orWhere('body', 'LIKE', "%{$keyword}%");
             });
         }
-
-        $knowledges = $builder->get()
-            ->groupBy('category');
+    
+        // 返回结果，去除分类分组并添加必要字段
+        $knowledges = $builder->get(); // 去除分组
+    
         return response([
-            'data' => $knowledges
+            'data' => $knowledges // 返回非分组的平铺数据
         ]);
     }
 
