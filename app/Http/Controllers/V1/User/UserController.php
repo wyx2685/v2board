@@ -152,7 +152,7 @@ class UserController extends Controller
                     $user->d = 0;
                     break;
                 case 5:
-                    if ($user->plan_id == null || $user->expired_at < $currentTime) {
+                    if ($user->plan_id == null || ($user->expired_at !== null && $user->expired_at < $currentTime)) {
                         $plan = Plan::where('id', $giftcard->plan_id)->first();
                         $user->plan_id = $plan->id;
                         $user->group_id = $plan->group_id;
