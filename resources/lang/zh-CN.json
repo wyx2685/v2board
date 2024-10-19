@@ -84,7 +84,7 @@
     "Email can not be empty": "ایمیل نمی تواند خالی باشد",
     "Email format is incorrect": "قالب ایمیل نادرست است",
     "Password can not be empty": "رمز عبور نمی تواند خالی باشد",
-    "The traffic usage in :app_name has reached 80%": "ترافیک استفاده شده :app_name به 80 درصد رسیده",
+    "The traffic usage in :app_name has reached 95%": "ترافیک استفاده شده :app_name به 95 درصد رسیده",
     "The service in :app_name is about to expire": "سرویس :app_name به پایان رسید",
     "The coupon can only be used :limit_use_with_user per person": "این کوپن برای هر نفر فقط :limit_use_with_user بار قابل استفاده است",
     "The coupon code cannot be used for this period": "این کوپن برای این دوره پرداخت قابل استفاده نیست",
