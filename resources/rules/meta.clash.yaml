@@ -4,7 +4,7 @@ mixed-port: 9889
 redir-port: 9797
 tproxy-port: 9898
 mode: rule
-allow-lan: false
+allow-lan: true
 bind-address: '*'
 log-level: silent
 ipv6: false
@@ -16,56 +16,31 @@ find-process-mode: always
 
 profile:
   store-selected: true
+  # 储存 API 对策略组的选择，以供下次启动时使用
   store-fake-ip: false
+  # 储存 fakeip 映射表，域名再次发生连接时，使用原有映射地址
 
-sniffer:
-  enable: true
-  force-dns-mapping: true
-  parse-pure-ip: true
-  override-destination: true
-  skip-domain:
-    - "*.trusted.com"
-    - "*.microsoft.com"
-    - "*.google.com"
-    - "*.amazon.com"
-    - "*.cdn.net"
-    - "*.whatsapp.com"
-    - "*.telegram.org"
-    - "*.signal.org"
-  force-domain:
-    - "+.soroush.com"
-    - "+.balad.ir"
-    - "+.igap.net"
-    - "+.rubika.ir"
-    - "+.eitaa.com"
-    - "+.bleem.ir"
-    - "+.shad.ir"
-    - "+.banino.ir"
-    - "+.virasty.com"
-    - "+.etelegram.com"
-  sniff:
-    TLS:
-      ports: [443, 8443, 9443]
-    HTTP:
-      ports: [80, 8080, 8880]
-  sniff-http-payload:
-    enable: true
-  sniff-category:
-    messaging:
-      force-domain:
-        - "*.whatsapp.com"
-        - "*.telegram.org"
-        - "*.signal.org"
-      skip-domain:
-        - "*.trusted-messenger.com"
-    unsafe-messaging:
-      force-domain:
-        - "*.soroush.com"
-        - "*.igap.net"
-        - "*.rubika.ir"
-  dns-hijack:
-    - any:53
-    - tcp://any:53
+sniffer:                           #【Meta专属】sniffer域名嗅探器
+enable: true                    # 嗅探器开关
+
+                                   # # 开启后对 redir-host 类型识别的流量进行强制嗅探
+                                   # # 包含 Tun、Redir 和 TProxy 或 DNS 为 redir-host
+  # # force-dns-mapping: false
+  # # parse-pure-ip: false           # 对所有未获取到域名的流量进行强制嗅探
+
+  # override-destination: false      # 是否使用嗅探结果作为实际访问,默认 true
+                                   # # 全局配置,优先级低于 sniffer.sniff 实际配置
+  # sniff: # TLS 默认如果不配置 ports 默认嗅探 443
+    # TLS:
+      # ports: [443, 8443]
+    # HTTP: # 需要嗅探的端口, 默认嗅探 80
+      # ports: [80, 8080-8880]
+      # override-destination: true # 可覆盖 sniffer.override-destination
+  # force-domain:
+    # - +.v2ex.com
+  # # 白名单,跳过嗅探结果
+  # skip-domain:
+    # - Mijia Cloud
 
 tun:
   enable: true
@@ -81,54 +56,31 @@ tun:
 dns:
   enable: true
   prefer-h3: true
-  default-nameserver:
-    - 1.1.1.1
-    - 8.8.8.8
+  default-nameserver: [8.8.8.8, 1.1.1.1]
   enhanced-mode: fake-ip
   nameserver:
-    - 1.1.1.1
     - 8.8.8.8
-    - 9.9.9.9
+    - 1.1.1.1
   fake-ip-filter:
     - "*.lan"
-    - "*.local"
-    - "localhost"
-    - "*.ir"
-    - "*.my.irancell.ir"
-    - "*.mtnirancell.ir"
+proxies:
+
 proxy-groups:
   - { name: "💉دکتر‌موبایل‌جایزان", type: select, proxies: ["🚀 خودکار 🚀", "🚀 اولین سرور فعال 🚀", "load-balance"] }
-
-  - name: "🚀 خودکار 🚀"
-    type: url-test
-    proxies: []
-    url: "http://www.gstatic.com/generate_204"
-    interval: 1200
-    fallback-cache: false
-    health-check:
-      enable: true
-      interval: 60
-      url: "http://www.gstatic.com/generate_204"
-      timeout: 5
-      retries: 2
-
-  - name: "🚀 اولین سرور فعال 🚀"
-    type: fallback
-    proxies: []
-    url: "http://www.gstatic.com/generate_204"
-    interval: 1200
-
+  - { name: "🚀 خودکار 🚀", type: url-test, proxies: [], url: "http://www.gstatic.com/generate_204", interval: 1200 }
+  - { name: "🚀 اولین سرور فعال 🚀", type: fallback, proxies: [], url: "http://www.gstatic.com/generate_204", interval: 1200 }
   - name: "load-balance"
     type: load-balance
-    strategy: round-robin
+    strategy: consistent-hashing
     proxies: []
     url: "http://www.gstatic.com/generate_204"
-    interval: 600
+    interval: 6400
+    lazy: true
     health-check:
       enable: true
-      timeout: 5
-      retries: 3
-      fail-time: 1
+      timeout: 1 # زمان انتظار برای پاسخ به ثانیه
+      retries: 2 # بدون تلاش مجدد برای بررسی وضعیت
+      fail-time: 1 # تعداد دفعات ناموفقیت برای حذف سرور
 rules:
   # دستی
   - DOMAIN-KEYWORD,digikala,DIRECT
