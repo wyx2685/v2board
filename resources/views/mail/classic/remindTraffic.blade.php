@@ -125,7 +125,7 @@
                                         <td class="content-block"
                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; color: #4a4a4a; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                             valign="top">
-                                            您本月的套餐流量已使用 <strong>80%</strong>，请合理安排使用，避免提前耗尽
+                                            您本月的套餐流量已使用 <strong>95%</strong>，请合理安排使用，避免提前耗尽
                                         </td>
                                     </tr>
                                     <tr
