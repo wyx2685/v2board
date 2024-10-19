@@ -18,7 +18,7 @@ class MailService
         if (!Cache::put($flag, 1, 24 * 3600)) return;
         SendEmailJob::dispatch([
             'email' => $user->email,
-            'subject' => __('The traffic usage in :app_name has reached 80%', [
+            'subject' => __('The traffic usage in :app_name has reached 95%', [
                 'app_name' => config('v2board.app_name', 'V2board')
             ]),
             'template_name' => 'remindTraffic',
@@ -51,7 +51,7 @@ class MailService
         if (!$ud) return false;
         if (!$transfer_enable) return false;
         $percentage = ($ud / $transfer_enable) * 100;
-        if ($percentage < 80) return false;
+        if ($percentage < 95) return false;
         if ($percentage >= 100) return false;
         return true;
     }
