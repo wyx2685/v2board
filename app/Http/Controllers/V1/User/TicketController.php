@@ -25,7 +25,8 @@ class TicketController extends Controller
     
         if ($ticketId) {
             $ticket = Ticket::where('id', $ticketId)
-                            ->firstOrFail();
+                ->where('user_id', $userId)
+                ->firstOrFail();
 
             $ticket['message'] = TicketMessage::where('ticket_id', $ticket->id)->get();
             for ($i = 0; $i < count($ticket['message']); $i++) {
