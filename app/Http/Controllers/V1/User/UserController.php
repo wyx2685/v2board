@@ -13,6 +13,7 @@ use App\Models\Plan;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Services\OrderService;
 use App\Services\UserService;
 use App\Utils\CacheKey;
 use App\Utils\Helper;
@@ -327,11 +328,28 @@ class UserController extends Controller
         if ($request->input('transfer_amount') > $user->commission_balance) {
             abort(500, __('Insufficient commission balance'));
         }
+        DB::beginTransaction();
+        $order = new Order();
+        $orderService = new OrderService($order);
+        $order->user_id = $request->user['id'];
+        $order->plan_id = 0;
+        $order->period = 'deposit';
+        $order->trade_no = Helper::generateOrderNo();
+        $order->total_amount = $request->input('transfer_amount');
+
+        $orderService->setOrderType($user);
+        $orderService->setInvite($user);
+
         $user->commission_balance = $user->commission_balance - $request->input('transfer_amount');
         $user->balance = $user->balance + $request->input('transfer_amount');
-        if (!$user->save()) {
+        $order->status = 3;
+        if (!$order->save()||!$user->save()) {
+            DB::rollback();
             abort(500, __('Transfer failed'));
         }
+
+        DB::commit();
+
         return response([
             'data' => true
         ]);
