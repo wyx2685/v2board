@@ -70,6 +70,9 @@ class ConfigController extends Controller
     {
         $key = $request->input('key');
         $data = [
+            'deposit' => [
+                'deposit_bounus' => config('v2board.deposit_bounus', [])
+            ],
             'invite' => [
                 'invite_force' => (int)config('v2board.invite_force', 0),
                 'invite_commission' => config('v2board.invite_commission', 10),
