@@ -32,6 +32,23 @@ class OrderService
     {
         $order = $this->order;
         $this->user = User::find($order->user_id);
+        if ($order->type == 9) {
+            DB::beginTransaction();
+            $this->user->balance += $order->total_amount + $this->getbounus($order->total_amount);
+
+            if (!$this->user->save()) {
+                DB::rollBack();
+                abort(500, '充值失败');
+            }
+            $order->status = 3;
+            if (!$order->save()) {
+                DB::rollBack();
+                abort(500, '充值失败');
+            }
+            DB::commit();
+            return;
+        }
+
         $plan = Plan::find($order->plan_id);
 
         if ($order->refund_amount) {
@@ -90,7 +107,9 @@ class OrderService
     public function setOrderType(User $user)
     {
         $order = $this->order;
-        if ($order->period === 'reset_price') {
+        if ($order->period === 'deposit'){
+            $order->type = 9;
+        } else if ($order->period === 'reset_price') {
             $order->type = 4;
         } else if ($user->plan_id !== NULL && $order->plan_id !== $user->plan_id && ($user->expired_at > time() || $user->expired_at === NULL)) {
             if (!(int)config('v2board.plan_change_enable', 1)) abort(500, '目前不允许更改订阅，请联系客服或提交工单操作');
@@ -350,5 +369,24 @@ class OrderService
                 $this->buyByResetTraffic();
                 break;
         }
+    }
+
+    private function getbounus($total_amount) {
+        $deposit_bounus = config('v2board.deposit_bounus', []);
+        if (empty($deposit_bounus)) {
+            return 0;
+        }
+        $add = 0;
+        foreach ($deposit_bounus as $tier) {
+            list($amount, $bounus) = explode(':', $tier);
+            $amount = (float)$amount * 100;
+            $bounus = (float)$bounus * 100;
+            $amount = (int)$amount;
+            $bounus = (int)$bounus;
+            if ($total_amount >= $amount) {
+                $add = max($add, $bounus);
+            }
+        }
+        return $add;
     }
 }
