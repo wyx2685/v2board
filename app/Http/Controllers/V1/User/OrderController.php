@@ -55,6 +55,18 @@ class OrderController extends Controller
         if (!$order) {
             abort(500, __('Order does not exist or has been paid'));
         }
+        if ($order->plan_id == 0) {
+            $order['plan'] = [
+                'id' => 0,
+                'name' => 'deposit'
+            ];
+            $order->bounus = $this->getbounus($order->total_amount);
+            $order->get_amount = $order->total_amount + $order->bounus;
+
+            return response([
+                'data' => $order
+            ]);
+        }
         $order['plan'] = Plan::find($order->plan_id);
         $order['try_out_plan_id'] = (int)config('v2board.try_out_plan_id');
         if (!$order['plan']) {
@@ -74,7 +86,31 @@ class OrderController extends Controller
         if ($userService->isNotCompleteOrderByUserId($request->user['id'])) {
             abort(500, __('You have an unpaid or pending order, please try again later or cancel it'));
         }
+        if ($request->input('plan_id') == 0) {
+            $user = User::find($request->user['id']);
+            DB::beginTransaction();
+            $order = new Order();
+            $orderService = new OrderService($order);
+            $order->user_id = $request->user['id'];
+            $order->plan_id = $request->input('plan_id');
+            $order->period = 'deposit';
+            $order->trade_no = Helper::generateOrderNo();
+            $order->total_amount = $request->input('deposit_amount');
+            
+            $orderService->setOrderType($user);
+            $orderService->setInvite($user);
 
+            if (!$order->save()) {
+                DB::rollback();
+                abort(500, __('Failed to create order'));
+            }
+    
+            DB::commit();
+    
+            return response([
+                'data' => $order->trade_no
+            ]);
+        }
         $planService = new PlanService($request->input('plan_id'));
 
         $plan = $planService->plan;
@@ -262,5 +298,24 @@ class OrderController extends Controller
         return response([
             'data' => true
         ]);
+    }
+
+    private function getbounus($total_amount) {
+        $deposit_bounus = config('v2board.deposit_bounus', []);
+        if (empty($deposit_bounus)) {
+            return 0;
+        }
+        $add = 0;
+        foreach ($deposit_bounus as $tier) {
+            list($amount, $bounus) = explode(':', $tier);
+            $amount = (float)$amount * 100;
+            $bounus = (float)$bounus * 100;
+            $amount = (int)$amount;
+            $bounus = (int)$bounus;
+            if ($total_amount >= $amount) {
+                $add = max($add, $bounus);
+            }
+        }
+        return $add;
     }
 }
