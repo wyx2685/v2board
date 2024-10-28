@@ -15,13 +15,8 @@ use App\Models\StatServer;
 use App\Models\StatUser;
 use App\Models\Ticket;
 use App\Models\User;
-use App\Services\StatisticalService;
-use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-
-use function PHPSTORM_META\map;
 
 class StatController extends Controller
 {
@@ -280,4 +275,3 @@ class StatController extends Controller
     }
 
 }
-
