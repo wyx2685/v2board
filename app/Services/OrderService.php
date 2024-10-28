@@ -208,6 +208,7 @@ class OrderService
         $orders = Order::where('user_id', $user->id)
             ->where('period', '!=', 'reset_price')
             ->where('period', '!=', 'onetime_price')
+            ->where('period', '!=', 'deposit')
             ->where('status', 3)
             ->get()
             ->toArray();
