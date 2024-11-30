@@ -306,9 +306,10 @@ class Helper
             "hysteria://{$remote}:{$firstPort}/?protocol=udp&auth={$password}&insecure={$server['insecure']}&peer={$server['server_name']}&upmbps={$server['down_mbps']}&downmbps={$server['up_mbps']}";
 
         if (isset($server['obfs']) && isset($server['obfs_password'])) {
+            $obfs_password = rawurlencode($server['obfs_password']);
             $uri .= $server['version'] == 2 ? 
-                "&obfs={$server['obfs']}&obfs-password={$server['obfs_password']}" :
-                "&obfs={$server['obfs']}&obfsParam{$server['obfs_password']}";
+                "&obfs={$server['obfs']}&obfs-password={$obfs_password}" :
+                "&obfs={$server['obfs']}&obfsParam{$obfs_password}";
         }
         if (count($parts) !== 1 || strpos($parts[0], '-') !== false) {
             $uri .= "&mport={$server['mport']}";
