@@ -2,6 +2,7 @@
 
 namespace App\Protocols;
 
+use Illuminate\Support\Facades\Cache;
 use App\Utils\Helper;
 
 class Surfboard
@@ -71,13 +72,32 @@ class Surfboard
         $config = str_replace('$subs_domain', $subsDomain, $config);
         $config = str_replace('$proxies', $proxies, $config);
         $config = str_replace('$proxy_group', rtrim($proxyGroup, ', '), $config);
+        
+        //统计在线设备
+        $countalive = 0;
+        $ips = [];
+        $ips_array = Cache::get('ALIVE_IP_USER_'. $user['id']);
+        if ($ips_array) {
+            $countalive = $ips_array['alive_ip'];
+            foreach($ips_array as $nodetypeid => $data) {
+                if (!is_int($data) && isset($data['aliveips'])) {
+                    foreach($data['aliveips'] as $ip_NodeId) {
+                        $ip = explode("_", $ip_NodeId)[0];
+                        $ips[] = $ip . '_' . $nodetypeid;
+                    }
+                }
+            }
+        }
+        $user['alive_ip'] = $countalive;
 
         $upload = round($user['u'] / (1024*1024*1024), 2);
         $download = round($user['d'] / (1024*1024*1024), 2);
         $useTraffic = $upload + $download;
         $totalTraffic = round($user['transfer_enable'] / (1024*1024*1024), 2);
+        $unusedTraffic = $totalTraffic - $useTraffic;
         $expireDate = $user['expired_at'] === NULL ? '长期有效' : date('Y-m-d H:i:s', $user['expired_at']);
-        $subscribeInfo = "title={$appName}订阅信息, content=上传流量：{$upload}GB\\n下载流量：{$download}GB\\n剩余流量：{$useTraffic}GB\\n套餐流量：{$totalTraffic}GB\\n到期时间：{$expireDate}";
+        $deviceLimit = $user['device_limit'] ? $user['device_limit'] : '∞';
+        $subscribeInfo = "title={$appName}订阅信息, content=🚀FassCloud🚀\\n邮箱：{$user['email']}\\n上传流量：{$upload}GB\\n下载流量：{$download}GB\\n剩余流量: {$unusedTraffic}GB\\n套餐流量：{$totalTraffic}GB\\n设备限制：{$user['alive_ip']} / {$deviceLimit}\\n到期时间：{$expireDate}\\n\\nhttps://dash.metc.uk/";
         $config = str_replace('$subscribe_info', $subscribeInfo, $config);
 
         return $config;
