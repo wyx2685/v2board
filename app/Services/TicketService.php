@@ -46,9 +46,9 @@ class TicketService {
             'message' => $message
         ]);
         if ($userId !== $ticket->user_id) {
-            $ticket->reply_status = 0;
-        } else {
             $ticket->reply_status = 1;
+        } else {
+            $ticket->reply_status = 0;
         }
         if (!$ticketMessage || !$ticket->save()) {
             DB::rollback();

@@ -215,14 +215,6 @@ class Singbox
                 if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
             }
         }
-        if ($server['network'] === 'h2') {
-            $array['transport']['type'] = 'http';
-            if ($server['network_settings']) {
-                $h2Settings = $server['network_settings'];
-                if (isset($h2Settings['host'])) $array['transport']['host'] = array($h2Settings['host']);
-                if (isset($h2Settings['path'])) $array['transport']['path'] = $h2Settings['path'];
-            }
-        }
 
         return $array;
     }

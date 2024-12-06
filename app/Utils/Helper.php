@@ -244,13 +244,9 @@ class Helper
             "headerType" => "none",
             "quicSecurity" => "none",
             "serviceName" => "",
-            "mode" => "gun",
             "security" => $server['tls'] != 0 ? ($server['tls'] == 2 ? "reality" : "tls") : "",
             "flow" => $server['flow'],
             "fp" => $server['tls_settings']['fingerprint'] ?? 'chrome',
-            "sni" => "",
-            "pbk" => "",
-            "sid" => "",
         ];
 
         if ($server['tls']) {
@@ -335,9 +331,6 @@ class Helper
             case 'kcp':
                 self::configureKcpSettings($settings, $config);
                 break;
-            case 'h2':
-                self::configureH2Settings($settings, $config);
-                break;
             case 'httpupgrade':
                 self::configureHttpupgradeSettings($settings, $config);
                 break;
@@ -374,12 +367,6 @@ class Helper
         if (isset($settings['seed'])) {
             $config['seed'] = $settings['seed'];
         }
-    }
-	
-    public static function configureH2Settings($settings, &$config)
-    {
-        $config['path'] = $settings['path'] ?? '';
-        $config['host'] = $settings['host'] ?? '';
     }
 
     public static function configureHttpupgradeSettings($settings, &$config)
