@@ -161,7 +161,11 @@ class UserController extends Controller
                         $user->device_limit = $plan->device_limit;
                         $user->u = 0;
                         $user->d = 0;
-                        $user->expired_at = $currentTime + $giftcard->value * 86400;
+                        if($giftcard->value == 0) {
+                            $user->expired_at = null;
+                        } else {
+                            $user->expired_at = $currentTime + $giftcard->value * 86400;
+                        }
                     } else {
                         abort(500, __('Not suitable gift card type'));
                     }

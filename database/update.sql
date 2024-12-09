@@ -757,3 +757,6 @@ ALTER TABLE `v2_giftcard`
 
 ALTER TABLE `v2_user`
 ADD `auto_renewal` tinyint(4) NOT NULL DEFAULT '0' AFTER `speed_limit`;
+
+ALTER TABLE `v2_ticket`
+CHANGE `reply_status` `reply_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:待回复 1:已回复' AFTER `status`;
