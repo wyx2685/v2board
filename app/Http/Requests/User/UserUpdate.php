@@ -14,6 +14,7 @@ class UserUpdate extends FormRequest
     public function rules()
     {
         return [
+            'auto_renewal' => 'in:0,1',
             'remind_expire' => 'in:0,1',
             'remind_traffic' => 'in:0,1'
         ];

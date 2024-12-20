@@ -735,3 +735,28 @@ ALTER TABLE `v2_server_trojan`
 
 ALTER TABLE `v2_server_hysteria`
     MODIFY COLUMN `port` VARCHAR(255) NOT NULL;
+
+CREATE TABLE `v2_giftcard` (
+                             `id` int(11) NOT NULL AUTO_INCREMENT,
+                             `code` varchar(255) NOT NULL,
+                             `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+                             `type` tinyint(1) NOT NULL,
+                             `value` int(11) DEFAULT NULL,
+                             `limit_use` int(11) DEFAULT NULL,
+                             `used_user_ids` varchar(255) DEFAULT NULL,
+                             `started_at` int(11) NOT NULL,
+                             `ended_at` int(11) NOT NULL,
+                             `created_at` int(11) NOT NULL,
+                             `updated_at` int(11) NOT NULL,
+                             PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `v2_giftcard`
+    ADD `plan_id` int(11) NULL AFTER `value`,
+    CHANGE `used_user_ids` `used_user_ids` varchar(16384) NULL AFTER `limit_use`;
+
+ALTER TABLE `v2_user`
+ADD `auto_renewal` tinyint(4) NOT NULL DEFAULT '0' AFTER `speed_limit`;
+
+ALTER TABLE `v2_ticket`
+CHANGE `reply_status` `reply_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:待回复 1:已回复' AFTER `status`;

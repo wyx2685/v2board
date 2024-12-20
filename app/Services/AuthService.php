@@ -29,7 +29,8 @@ class AuthService
         self::addSession($this->user->id, $guid, [
             'ip' => $request->ip(),
             'login_at' => time(),
-            'ua' => $request->userAgent()
+            'ua' => $request->userAgent(),
+            'auth_data' => $authData
         ]);
         return [
             'token' => $this->user->token,
@@ -99,6 +100,12 @@ class AuthService
     public function removeAllSession()
     {
         $cacheKey = CacheKey::get("USER_SESSIONS", $this->user->id);
+        $sessions = (array)Cache::get($cacheKey, []);
+        foreach ($sessions as $guid => $meta) {
+            if (isset($meta['auth_data'])) {
+                Cache::forget($meta['auth_data']);
+            }
+        }
         return Cache::forget($cacheKey);
     }
 }

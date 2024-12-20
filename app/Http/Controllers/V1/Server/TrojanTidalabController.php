@@ -102,7 +102,7 @@ class TrojanTidalabController extends Controller
             abort(500, $e->getMessage());
         }
 
-        die(json_encode($json, JSON_UNESCAPED_UNICODE));
+        return(json_encode($json, JSON_UNESCAPED_UNICODE));
     }
 
     private function getTrojanConfig(int $nodeId, int $localPort)

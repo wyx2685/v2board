@@ -6,6 +6,7 @@ use App\Models\Plan;
 use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Services\TelegramService;
 
 class ResetTraffic extends Command
 {
@@ -105,7 +106,7 @@ class ResetTraffic extends Command
         }
     }
 
-    private function resetByExpireYear($builder):void
+    private function resetByExpireYear($builder): void
     {
         $users = [];
         foreach ($builder->get() as $item) {
@@ -115,57 +116,81 @@ class ResetTraffic extends Command
                 array_push($users, $item->id);
             }
         }
-        User::whereIn('id', $users)->update([
-            'u' => 0,
-            'd' => 0
-        ]);
+        $this->retryTransaction(function () use ($users) {
+            User::whereIn('id', $users)->update([
+                'u' => 0,
+                'd' => 0
+            ]);
+        });
     }
 
-    private function resetByYearFirstDay($builder):void
+    private function resetByYearFirstDay($builder): void
     {
         if ((string)date('md') === '0101') {
-            $builder->update([
-                'u' => 0,
-                'd' => 0
-            ]);
+            $this->retryTransaction(function () use ($builder) {
+                $builder->update([
+                    'u' => 0,
+                    'd' => 0
+                ]);
+            });
         }
     }
 
-    private function resetByMonthFirstDay($builder):void
+    private function resetByMonthFirstDay($builder): void
     {
         if ((string)date('d') === '01') {
-            $builder->update([
-                'u' => 0,
-                'd' => 0
-            ]);
+            $this->retryTransaction(function () use ($builder) {
+                $builder->update([
+                    'u' => 0,
+                    'd' => 0
+                ]);
+            });
         }
     }
 
-    private function resetByExpireDay($builder):void
+    private function resetByExpireDay($builder): void
     {
-        $lastDay = date('d', strtotime('last day of +0 months'));
+        $lastDay = date('t');
         $users = [];
+        $today = date('d');
         foreach ($builder->get() as $item) {
             $expireDay = date('d', $item->expired_at);
-            $expireMonth = date('m', $item->expired_at);
-            $today = date('d');
 
-            $currentMonth = date('m');
-            if ($expireMonth == $currentMonth) {
-                continue;
+            if (($expireDay === $today) ||(($today === $lastDay) && $expireDay >= $lastDay)) {
+                if (time() < $item->expired_at - 2160000) {
+                    array_push($users, $item->id);
+                }
             }
 
-            if ($expireDay === $today) {
-                array_push($users, $item->id);
-            }
+        }
+        $this->retryTransaction(function () use ($users) {
+            User::whereIn('id', $users)->update([
+                'u' => 0,
+                'd' => 0
+            ]);
+        });
+    }
 
-            if (($today === $lastDay) && $expireDay >= $lastDay) {
-                array_push($users, $item->id);
+    private function retryTransaction($callback)
+    {
+        $attempts = 0;
+        $maxAttempts = 3;
+        while ($attempts < $maxAttempts) {
+            try {
+                DB::transaction($callback);
+                return;
+            } catch (\Exception $e) {
+                $attempts++;
+                if ($attempts >= $maxAttempts || strpos($e->getMessage(), '40001') === false && strpos(strtolower($e->getMessage()), 'deadlock') === false) {
+                    $telegramService = new TelegramService();
+                    $message = sprintf(
+                        date('Y/m/d H:i:s') . "用户流量重置失败：" . $e->getMessage()
+                    );
+                    $telegramService->sendMessageWithAdmin($message);
+                    abort(500, '用户流量重置失败'. $e->getMessage());
+                }
+                sleep(5);
             }
         }
-        User::whereIn('id', $users)->update([
-            'u' => 0,
-            'd' => 0
-        ]);
     }
 }

@@ -80,7 +80,7 @@ class Coinbase {
             'callback_no' => $pay_trade_no
         ];
         http_response_code(200);
-        die('success');
+        return('success');
     }
 
 

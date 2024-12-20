@@ -3,6 +3,8 @@
 /public/hot
 /public/storage
 /public/env.example.js
+/public/favicon.ico
+/public/assets/admin/custom.css
 /storage/*.key
 /vendor
 .env

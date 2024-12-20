@@ -22,7 +22,9 @@ class ClientController extends Controller
         if ($userService->isAvailable($user)) {
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
-            $this->setSubscribeInfoToServers($servers, $user);
+            if (!strpos($flag, 'sing')) {
+                $this->setSubscribeInfoToServers($servers, $user);
+            }
             if ($flag) {
                 foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
                     $file = 'App\\Protocols\\' . basename($file, '.php');

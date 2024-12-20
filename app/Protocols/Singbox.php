@@ -7,9 +7,10 @@ use App\Utils\Helper;
 
 class Singbox
 {
-    public $flag = 'sing-box';
+    public $flag = 'sing';
     private $servers;
     private $user;
+    private $config;
 
     public function __construct($user, $servers, array $options = null)
     {
@@ -19,13 +20,19 @@ class Singbox
 
     public function handle()
     {
-        $appName = config('app_name', 'V2Board');
-        $config = $this->loadConfig();
-        $outbounds = $this->buildOutbounds();
-        $config['outbounds'] = $outbounds;
+        $appName = config('v2board.app_name', 'V2Board');
+        $this->config = $this->loadConfig();
+        $proxies = $this->buildProxies();
+        $outbounds = $this->addProxies($proxies);
+        $this->config['outbounds'] = $outbounds;
+        $user = $this->user;
 
-        return json_encode($config);
-        //return response($config, 200);
+        return response(json_encode($this->config, JSON_UNESCAPED_SLASHES), 200)
+            ->header('Content-Type', 'application/json')
+            ->header('subscription-userinfo', "upload={$user['u']}; download={$user['d']}; total={$user['transfer_enable']}; expire={$user['expired_at']}")
+            ->header('profile-update-interval', '24')
+            ->header('Profile-Title', 'base64:' . base64_encode($appName))
+            ->header('Content-Disposition', 'attachment; filename="' . $appName . '"');
     }
 
     protected function loadConfig()
@@ -37,76 +44,54 @@ class Singbox
         return json_decode($jsonData, true);
     }
 
-    protected function buildOutbounds()
+    protected function buildProxies()
     {
-        $outbounds = [];
-
-        $selector = [
-            "tag" => "节点选择",
-            "type" => "selector",
-            "default" => "自动选择",
-            "outbounds" => ["自动选择"]
-        ];
-
-        $urltest = [
-            "tag" => "自动选择",
-            "type" => "urltest",
-            "outbounds" => []
-        ];
-
-        $outbounds[] = &$selector;
-
+        $proxies = [];
+    
         foreach ($this->servers as $item) {
             if ($item['type'] === 'shadowsocks') {
                 $ssConfig = $this->buildShadowsocks($this->user['uuid'], $item);
-                $outbounds[] = $ssConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $ssConfig;
             }
             if ($item['type'] === 'trojan') {
                 $trojanConfig = $this->buildTrojan($this->user['uuid'], $item);
-                $outbounds[] = $trojanConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $trojanConfig;
             }
             if ($item['type'] === 'vmess') {
                 $vmessConfig = $this->buildVmess($this->user['uuid'], $item);
-                $outbounds[] = $vmessConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $vmessConfig;
             }
             if ($item['type'] === 'vless') {
                 $vlessConfig = $this->buildVless($this->user['uuid'], $item);
-                $outbounds[] = $vlessConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $vlessConfig;
             }
             if ($item['type'] === 'hysteria') {
                 $hysteriaConfig = $this->buildHysteria($this->user['uuid'], $item, $this->user);
-                $outbounds[] = $hysteriaConfig;
-                $selector['outbounds'][] = $item['name'];
-                $urltest['outbounds'][] = $item['name'];
+                $proxies[] = $hysteriaConfig;
             }
         }
+    
+        return $proxies;
+    }
 
-        $outbounds[] = [ "tag" => "direct", "type" => "direct" ];
-        $outbounds[] = [ "tag" => "block",  "type" => "block" ];
-        $outbounds[] = [ "tag" => "dns-out", "type" => "dns" ];
-        $outbounds[] = $urltest;
-
+    protected function addProxies($proxies)
+    {
+        foreach ($this->config['outbounds'] as &$outbound) {
+            if (($outbound['type'] === 'selector' && $outbound['tag'] === '节点选择') || ($outbound['type'] === 'urltest' && $outbound['tag'] === '自动选择') || ($outbound['type'] === 'selector' && strpos($outbound['tag'], '#') === 0 )) {
+                array_push($outbound['outbounds'], ...array_column($proxies, 'tag'));
+            }
+        }
+        unset($outbound);
+        $outbounds = array_merge($this->config['outbounds'], $proxies);
         return $outbounds;
     }
 
     protected function buildShadowsocks($password, $server)
     {
-        if ($server['cipher'] === '2022-blake3-aes-128-gcm') {
-            $serverKey = Helper::getServerKey($server['created_at'], 16);
-            $userKey = Helper::uuidToBase64($password, 16);
-            $password = "{$serverKey}:{$userKey}";
-        }
-        if ($server['cipher'] === '2022-blake3-aes-256-gcm') {
-            $serverKey = Helper::getServerKey($server['created_at'], 32);
-            $userKey = Helper::uuidToBase64($password, 32);
+        if (strpos($server['cipher'], '2022-blake3') !== false) {
+            $length = $server['cipher'] === '2022-blake3-aes-128-gcm' ? 16 : 32;
+            $serverKey = Helper::getServerKey($server['created_at'], $length);
+            $userKey = Helper::uuidToBase64($password, $length);
             $password = "{$serverKey}:{$userKey}";
         }
         $array = [];
@@ -228,14 +213,6 @@ class Singbox
             if ($server['network_settings']) {
                 $grpcSettings = $server['network_settings'];
                 if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
-            }
-        }
-        if ($server['network'] === 'h2') {
-            $array['transport']['type'] = 'http';
-            if ($server['network_settings']) {
-                $h2Settings = $server['network_settings'];
-                if (isset($h2Settings['host'])) $array['transport']['host'] = array($h2Settings['host']);
-                if (isset($h2Settings['path'])) $array['transport']['path'] = $h2Settings['path'];
             }
         }
 

@@ -90,10 +90,10 @@ class Clash
         });
         $config['proxy-groups'] = array_values($config['proxy-groups']);
         // Force the current subscription domain to be a direct rule
-        $subsDomain = $_SERVER['HTTP_HOST'];
-        if ($subsDomain) {
-            array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
-        }
+        //$subsDomain = $_SERVER['HTTP_HOST'];
+        //if ($subsDomain) {
+        //    array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
+        //}
 
         $yaml = Yaml::dump($config, 2, 4, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
         $yaml = str_replace('$app_name', config('v2board.app_name', 'V2Board'), $yaml);
@@ -219,15 +219,6 @@ class Clash
                 $grpcSettings = $server['network_settings'];
                 $array['grpc-opts'] = [];
                 if (isset($grpcSettings['serviceName'])) $array['grpc-opts']['grpc-service-name'] = $grpcSettings['serviceName'];
-            }
-        }
-        if ($server['network'] === 'h2') {
-            $array['network'] = 'h2';
-            if ($server['network_settings']) {
-                $h2Settings = $server['network_settings'];
-                $array['h2-opts'] = [];
-                if (isset($h2Settings['host'])) $array['h2-opts']['host'] = array($h2Settings['host']);
-                if (isset($h2Settings['path'])) $array['h2-opts']['path'] = $h2Settings['path'];
             }
         }
 

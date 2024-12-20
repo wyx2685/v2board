@@ -25,7 +25,7 @@ class ServerVmessSave extends FormRequest
             'tls' => 'required',
             'tags' => 'nullable|array',
             'rate' => 'required|numeric',
-            'network' => 'required|in:tcp,kcp,ws,http,domainsocket,quic,grpc',
+            'network' => 'required|in:tcp,kcp,ws,http,domainsocket,quic,grpc,httpupgrade,xhttp',
             'networkSettings' => 'nullable|array',
             'ruleSettings' => 'nullable|array',
             'tlsSettings' => 'nullable|array',

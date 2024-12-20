@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Services\AuthService;
 use Closure;
-use Illuminate\Support\Facades\Cache;
 
 class Admin
 {

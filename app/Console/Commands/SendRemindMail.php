@@ -5,8 +5,6 @@ namespace App\Console\Commands;
 use App\Services\MailService;
 use Illuminate\Console\Command;
 use App\Models\User;
-use App\Models\MailLog;
-use App\Jobs\SendEmailJob;
 
 class SendRemindMail extends Command
 {
@@ -41,11 +39,14 @@ class SendRemindMail extends Command
      */
     public function handle()
     {
+        ini_set('memory_limit', -1);
         $users = User::all();
         $mailService = new MailService();
         foreach ($users as $user) {
             if ($user->remind_expire) $mailService->remindExpire($user);
-            if ($user->remind_traffic) $mailService->remindTraffic($user);
+            if (!($user->expired_at !== NULL && $user->expired_at < time()) && $user->remind_traffic) {
+                $mailService->remindTraffic($user);
+            }
         }
     }
 }

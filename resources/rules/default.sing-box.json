@@ -6,30 +6,31 @@
                     "any"
                 ],
                 "server": "local"
-            },
+            }, 
             {
-                "disable_cache": true,
-                "geosite": [
-                    "category-ads-all"
-                ],
-                "server": "block"
-            },
-            {
-                "clash_mode": "global",
+                "clash_mode": "全局代理",
                 "server": "remote"
             },
             {
-                "clash_mode": "direct",
+                "clash_mode": "全局直连",
                 "server": "local"
             },
             {
-                "geosite": "cn",
+                "rule_set": [
+                    "geosite-cn"
+                ],
                 "server": "local"
+            },
+            {
+                "rule_set": [
+                    "category-ads-all"
+                ],
+                "server": "block"
             }
         ],
         "servers": [
             {
-                "address": "https://1.1.1.1/dns-query",
+                "address": "1.1.1.1",
                 "detour": "节点选择",
                 "tag": "remote"
             },
@@ -39,14 +40,20 @@
                 "tag": "local"
             },
             {
-                "address": "rcode://success",
+                "address": "rcode://refused",
                 "tag": "block"
             }
         ],
-        "strategy": "prefer_ipv4"
+        "final": "remote",
+        "strategy": "ipv4_only",
+        "disable_cache": false
     },
     "experimental": {
+        "cache_file": {
+            "enabled": true
+        },
         "clash_api": {
+            "default_mode": "绕过大陆地址",
             "external_controller": "127.0.0.1:9090",
             "secret": ""
         }
@@ -87,36 +94,84 @@
         }
     ],
     "outbounds": [
+        {
+            "type": "selector",
+            "tag": "节点选择",
+            "outbounds": [
+                "自动选择"
+            ]
+        },
+        {
+            "type": "urltest",
+            "tag": "自动选择",
+            "outbounds": []
+        },
+        {
+            "type": "dns",
+            "tag": "dns-out"
+        },
+        {
+            "type": "direct",
+            "tag": "direct"
+        },
+        {
+            "type": "block",
+            "tag": "block"
+        }
     ],
     "route": {
         "auto_detect_interface": true,
         "rules": [
             {
-                "geosite": "category-ads-all",
-                "outbound": "block"
-            },
-            {
                 "outbound": "dns-out",
                 "protocol": "dns"
             },
             {
-                "clash_mode": "direct",
+                "clash_mode": "全局直连",
                 "outbound": "direct"
             },
             {
-                "clash_mode": "global",
+                "clash_mode": "全局代理",
                 "outbound": "节点选择"
             },
             {
-                "geoip": [
-                    "cn",
-                    "private"
+                "rule_set": [
+                    "geosite-cn","geoip-cn"
                 ],
                 "outbound": "direct"
             },
             {
-                "geosite": "cn",
+                "ip_is_private": true,
                 "outbound": "direct"
+            },
+            {
+                "rule_set": [
+                    "category-ads-all"
+                ],
+                "outbound": "block"
+            }
+        ],
+        "rule_set": [
+            {
+              "tag": "geosite-cn",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+              "download_detour": "节点选择"
+            },
+            {
+                "tag": "category-ads-all",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+                "download_detour": "节点选择"
+            },
+            {
+                "tag": "geoip-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/srs/cn.srs",
+                "download_detour": "节点选择"
             }
         ]
     }

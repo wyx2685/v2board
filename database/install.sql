@@ -53,6 +53,24 @@ CREATE TABLE `v2_coupon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+DROP TABLE IF EXISTS `v2_giftcard`;
+CREATE TABLE `v2_giftcard` (
+                             `id` int(11) NOT NULL AUTO_INCREMENT,
+                             `code` varchar(255) NOT NULL,
+                             `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+                             `type` tinyint(1) NOT NULL,
+                             `value` int(11) DEFAULT NULL,
+                             `plan_id` int(11) DEFAULT NULL,
+                             `limit_use` int(11) DEFAULT NULL,
+                             `used_user_ids` varchar(16384) DEFAULT NULL,
+                             `started_at` int(11) NOT NULL,
+                             `ended_at` int(11) NOT NULL,
+                             `created_at` int(11) NOT NULL,
+                             `updated_at` int(11) NOT NULL,
+                             PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS `v2_invite_code`;
 CREATE TABLE `v2_invite_code` (
                                   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -417,7 +435,7 @@ CREATE TABLE `v2_ticket` (
                              `subject` varchar(255) NOT NULL,
                              `level` tinyint(1) NOT NULL,
                              `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:已开启 1:已关闭',
-                             `reply_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:待回复 1:已回复',
+                             `reply_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:待回复 1:已回复',
                              `created_at` int(11) NOT NULL,
                              `updated_at` int(11) NOT NULL,
                              PRIMARY KEY (`id`)
@@ -464,6 +482,7 @@ CREATE TABLE `v2_user` (
                            `group_id` int(11) DEFAULT NULL,
                            `plan_id` int(11) DEFAULT NULL,
                            `speed_limit` int(11) DEFAULT NULL,
+                           `auto_renewal` tinyint(4) DEFAULT '0',
                            `remind_expire` tinyint(4) DEFAULT '1',
                            `remind_traffic` tinyint(4) DEFAULT '1',
                            `token` char(32) NOT NULL,
