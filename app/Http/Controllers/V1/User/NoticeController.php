@@ -10,16 +10,38 @@ class NoticeController extends Controller
 {
     public function fetch(Request $request)
     {
-        $current = $request->input('current') ? $request->input('current') : 1;
-        $pageSize = 5;
+        if ($request->has('id')) {
+            $id = $request->input('id');
+            $notice = Notice::where('id', $id)
+                ->where('show', 1)
+                ->first();
+    
+            if (!$notice) {
+                return response([
+                    'message' => 'Notice not found'
+                ], 404);
+            }
+    
+            return response([
+                'data' => $notice
+            ]);
+        }
+    
+        $current = $request->input('current', 1);
+        $pageSize = $request->input('pageSize', 5);
+    
+        $pageSize = min(max($pageSize, 1), 100);
+    
         $model = Notice::orderBy('created_at', 'DESC')
             ->where('show', 1);
+    
         $total = $model->count();
-        $res = $model->forPage($current, $pageSize)
-            ->get();
+        $res = $model->forPage($current, $pageSize)->get();
+    
         return response([
             'data' => $res,
             'total' => $total
         ]);
     }
+
 }
