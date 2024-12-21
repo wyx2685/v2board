@@ -70,6 +70,9 @@ class ConfigController extends Controller
     {
         $key = $request->input('key');
         $data = [
+            'ticket' =>[
+                'ticket_status' => config('v2board.ticket_status', 0)
+            ],
             'deposit' => [
                 'deposit_bounus' => config('v2board.deposit_bounus', [])
             ],

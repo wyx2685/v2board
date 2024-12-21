@@ -55,6 +55,29 @@ class TicketController extends Controller
             if ((int)Ticket::where('status', 0)->where('user_id', $request->user['id'])->lockForUpdate()->count()) {
                 throw new \Exception(__('There are other unresolved tickets'));
             }
+
+            // 获取工单状态
+            $ticketStatus = config('v2board.ticket_status', 0);
+    
+            switch ($ticketStatus) {
+                case 0:
+                    // 完全开放，不禁止任何工单
+                    break;
+                case 1:
+                    // 仅限有付费订单用户
+                    $tryOutPlanId = config('v2board.try_out_plan_id');
+                    if ($request->user['plan_id'] === null || $request->user['plan_id'] == $tryOutPlanId) {
+                        throw new \Exception(__('请先购买有效套餐'));
+                    }
+                    break;
+                case 2:
+                    // 完全禁止所有工单
+                    throw new \Exception(__('当前套餐不允许发起工单'));
+                    break;
+                default:
+                    // 处理未知状态
+                    throw new \Exception(__('未知的工单状态'));
+            }
 															 
             $ticketData = $request->only(['subject', 'level']) + ['user_id' => $request->user['id']];
             $ticket = Ticket::create($ticketData);

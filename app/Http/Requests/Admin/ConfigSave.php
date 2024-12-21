@@ -12,6 +12,8 @@ class ConfigSave extends FormRequest
             'nullable',
             'array',
         ],
+        // ticket
+        'ticket_status' => 'in:0,1,2',
         // invite & commission
         'invite_force' => 'in:0,1',
         'invite_commission' => 'integer',
