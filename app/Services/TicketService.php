@@ -38,18 +38,20 @@ class TicketService {
         if (!$ticket) {
             abort(500, '工单不存在');
         }
-        $ticket->status = 0;
+        
         DB::beginTransaction();
         $ticketMessage = TicketMessage::create([
             'user_id' => $userId,
             'ticket_id' => $ticket->id,
             'message' => $message
         ]);
+        $ticket->status = 0;
         if ($userId !== $ticket->user_id) {
             $ticket->reply_status = 1;
         } else {
             $ticket->reply_status = 0;
         }
+        $ticket->touch();
         if (!$ticketMessage || !$ticket->save()) {
             DB::rollback();
             abort(500, '工单回复失败');
