@@ -68,6 +68,7 @@ class TicketController extends Controller
                     // 仅限有付费订单用户
                     $hasOrder = DB::table('orders')
                         ->where('user_id', $request->user['id'])
+                        ->whereIn('status', [3, 4])
                         ->exists();
                 
                     if (!$hasOrder) {
