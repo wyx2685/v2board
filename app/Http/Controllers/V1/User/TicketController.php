@@ -8,6 +8,7 @@ use App\Http\Requests\User\TicketWithdraw;
 use App\Jobs\SendTelegramJob;
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\Order;
 use App\Services\TelegramService;
 use App\Services\TicketService;
 use App\Models\Ticket;
@@ -54,6 +55,32 @@ class TicketController extends Controller
             DB::beginTransaction();
             if ((int)Ticket::where('status', 0)->where('user_id', $request->user['id'])->lockForUpdate()->count()) {
                 throw new \Exception(__('There are other unresolved tickets'));
+            }
+
+            // 获取工单状态
+            $ticketStatus = config('v2board.ticket.ticket_status', 0);
+
+            switch ($ticketStatus) {
+                case 0:
+                    // 完全开放，不禁止任何工单
+                    break;
+                case 1:
+                    // 仅限有付费订单用户
+                    $hasOrder = DB::table('orders')
+                        ->where('user_id', $request->user['id'])
+                        ->exists();
+                
+                    if (!$hasOrder) {
+                        throw new \Exception(__('请先购买套餐'));
+                    }
+                    break;
+                case 2:
+                    // 完全禁止所有工单
+                    throw new \Exception(__('当前套餐不允许发起工单'));
+                    break;
+                default:
+                    // 处理未知状态
+                    throw new \Exception(__('未知的工单状态'));
             }
 															 
             $ticketData = $request->only(['subject', 'level']) + ['user_id' => $request->user['id']];
