@@ -58,7 +58,7 @@ class TicketController extends Controller
             }
 
             // 获取工单状态
-            $ticketStatus = config('v2board.ticket.ticket_status', 0);
+            $ticketStatus = config('v2board.ticket_status', 0);
 
             switch ($ticketStatus) {
                 case 0:
