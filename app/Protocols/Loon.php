@@ -231,7 +231,7 @@ class Loon
             "download-bandwidth={$server['up_mbps']}",
             $server['server_name'] ? "sni={$server['server_name']}" : "",
             // 'tfo=true', 
-            'udp-relay=true'
+            'udp=true'
         ];
         if (!empty($server['insecure'])) {
             array_push($config, $server['insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
