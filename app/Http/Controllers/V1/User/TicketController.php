@@ -66,8 +66,7 @@ class TicketController extends Controller
                     break;
                 case 1:
                     // 仅限有付费订单用户
-                    $hasOrder = DB::table('orders')
-                        ->where('user_id', $request->user['id'])
+                    $hasOrder = Order::where('user_id', $request->user['id'])
                         ->whereIn('status', [3, 4])
                         ->exists();
                 
@@ -94,7 +93,7 @@ class TicketController extends Controller
             ]);
 
             DB::commit();
-            $this->sendNotify($ticket, $request->input('message'));
+            $this->sendNotify($ticket, $request->input('message'),$request->user['id']);
             return response([
                 'data' => true
             ]);
