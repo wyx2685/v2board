@@ -230,7 +230,6 @@ class Loon
             "password={$password}",
             "download-bandwidth={$server['up_mbps']}",
             $server['server_name'] ? "sni={$server['server_name']}" : "",
-            // 'tfo=true', 
             'udp=true'
         ];
         if (!empty($server['insecure'])) {
