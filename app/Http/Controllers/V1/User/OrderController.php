@@ -80,6 +80,10 @@ class OrderController extends Controller
             abort(500, __('You have an unpaid or pending order, please try again later or cancel it'));
         }
         if ($request->input('plan_id') == 0) {
+            $amount = $request->input('deposit_amount');
+            if ($amount <= 0) {
+                abort(500, __('Failed to create order'));
+            }
             $user = User::find($request->user['id']);
             DB::beginTransaction();
             $order = new Order();
@@ -88,7 +92,7 @@ class OrderController extends Controller
             $order->plan_id = $request->input('plan_id');
             $order->period = 'deposit';
             $order->trade_no = Helper::generateOrderNo();
-            $order->total_amount = $request->input('deposit_amount');
+            $order->total_amount = $amount;
             
             $orderService->setOrderType($user);
             $orderService->setInvite($user);
