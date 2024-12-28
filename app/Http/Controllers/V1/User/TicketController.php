@@ -8,6 +8,7 @@ use App\Http\Requests\User\TicketWithdraw;
 use App\Jobs\SendTelegramJob;
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\Order;
 use App\Services\TelegramService;
 use App\Services\TicketService;
 use App\Models\Ticket;
@@ -31,9 +32,9 @@ class TicketController extends Controller
             $ticket['message'] = TicketMessage::where('ticket_id', $ticket->id)->get();
             for ($i = 0; $i < count($ticket['message']); $i++) {
                 if ($ticket['message'][$i]['user_id'] !== $ticket->user_id) {
-                    $ticket['message'][$i]['is_me'] = true;
-                } else {
                     $ticket['message'][$i]['is_me'] = false;
+                } else {
+                    $ticket['message'][$i]['is_me'] = true;
                 }
             }
 							 
@@ -55,6 +56,32 @@ class TicketController extends Controller
             if ((int)Ticket::where('status', 0)->where('user_id', $request->user['id'])->lockForUpdate()->count()) {
                 throw new \Exception(__('There are other unresolved tickets'));
             }
+
+            // 获取工单状态
+            $ticketStatus = config('v2board.ticket_status', 0);
+
+            switch ($ticketStatus) {
+                case 0:
+                    // 完全开放，不禁止任何工单
+                    break;
+                case 1:
+                    // 仅限有付费订单用户
+                    $hasOrder = Order::where('user_id', $request->user['id'])
+                        ->whereIn('status', [3, 4])
+                        ->exists();
+                
+                    if (!$hasOrder) {
+                        throw new \Exception(__('请先购买套餐'));
+                    }
+                    break;
+                case 2:
+                    // 完全禁止所有工单
+                    throw new \Exception(__('当前套餐不允许发起工单'));
+                    break;
+                default:
+                    // 处理未知状态
+                    throw new \Exception(__('未知的工单状态'));
+            }
 															 
             $ticketData = $request->only(['subject', 'level']) + ['user_id' => $request->user['id']];
             $ticket = Ticket::create($ticketData);
@@ -66,7 +93,7 @@ class TicketController extends Controller
             ]);
 
             DB::commit();
-            $this->sendNotify($ticket, $request->input('message'));
+            $this->sendNotify($ticket, $request->input('message'),$request->user['id']);
             return response([
                 'data' => true
             ]);

@@ -282,8 +282,7 @@ class UserController extends Controller
         $sort = $request->input('sort') ? $request->input('sort') : 'created_at';
         $builder = User::orderBy($sort, $sortType);
         $this->filter($request, $builder);
-        $users = $builder->get();
-        foreach ($users as $user) {
+        foreach ($builder->cursor() as $user) {
             SendEmailJob::dispatch([
                 'email' => $user->email,
                 'subject' => $request->input('subject'),
@@ -293,8 +292,7 @@ class UserController extends Controller
                     'url' => config('v2board.app_url'),
                     'content' => $request->input('content')
                 ]
-            ],
-            'send_email_mass');
+            ], 'send_email_mass');
         }
 
         return response([

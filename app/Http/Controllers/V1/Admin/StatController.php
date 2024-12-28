@@ -34,6 +34,7 @@ class StatController extends Controller
                     ->where('created_at', '<', time())
                     ->count(),
                 'ticket_pending_total' => Ticket::where('status', 0)
+                    ->where('reply_status', 0) // 只计算未回复的工单
                     ->count(),
                 'commission_pending_total' => Order::where('commission_status', 0)
                     ->where('invite_user_id', '!=', NULL)
