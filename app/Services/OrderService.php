@@ -65,7 +65,7 @@ class OrderService
         }
         switch ((string)$order->period) {
             case 'onetime_price':
-                $this->buyByOneTime($plan);
+                $this->buyByOneTime($order, $plan);
                 break;
             case 'reset_price':
                 $this->buyByResetTraffic();
@@ -323,15 +323,33 @@ class OrderService
         $this->user->expired_at = $this->getTime($order->period, $this->user->expired_at);
     }
 
-    private function buyByOneTime(Plan $plan)
+    private function buyByOneTime(Order $order, Plan $plan)
     {
         $transfer_enable = $plan->transfer_enable;
-        $notUsedTraffic = ($this->user->transfer_enable - ($this->user->u + $this->user->d)) / 1073741824;
-        if ($notUsedTraffic > 0 && $this->user->expired_at == NULL) {
-            $transfer_enable += $notUsedTraffic;
+    
+        if (config("v2board.surplus_enable", 0) === 1) {
+            // 开启折抵 时的逻辑
+            if ($order->type === 3) {
+                // 如果订单类型是升级（不限时套餐之间切换默认type为3），则直接设置为套餐的transfer_enable
+                $this->user->transfer_enable = $transfer_enable * 1073741824;
+            } else {
+                // 否则，进行叠加
+                $notUsedTraffic = ($this->user->transfer_enable - ($this->user->u + $this->user->d)) / 1073741824;
+                if ($notUsedTraffic > 0 && $this->user->expired_at == NULL) {
+                    $transfer_enable += $notUsedTraffic;
+                }
+                $this->user->transfer_enable = $transfer_enable * 1073741824;
+            }
+        } else {
+            // 未开启折抵时的原始逻辑
+            $notUsedTraffic = ($this->user->transfer_enable - ($this->user->u + $this->user->d)) / 1073741824;
+            if ($notUsedTraffic > 0 && $this->user->expired_at == NULL) {
+                $transfer_enable += $notUsedTraffic;
+            }
+            $this->user->transfer_enable = $transfer_enable * 1073741824;
         }
+    
         $this->buyByResetTraffic();
-        $this->user->transfer_enable = $transfer_enable * 1073741824;
         $this->user->device_limit = $plan->device_limit;
         $this->user->plan_id = $plan->id;
         $this->user->group_id = $plan->group_id;
