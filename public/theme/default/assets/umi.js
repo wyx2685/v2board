@@ -52825,11 +52825,11 @@
                         }), Object(w["formatMessage"])({
                             id: "\u5df2\u5173\u95ed"
                         })) : m.a.createElement("span", null, m.a.createElement(f["a"], {
-                            status: parseInt(e) ? "error" : "processing"
+                            status: parseInt(e) ? "processing" : "error"
                         }), parseInt(e) ? Object(w["formatMessage"])({
-                            id: "\u5f85\u56de\u590d"
+                            id: "\u5df2\u7b54\u590d"
                         }) : Object(w["formatMessage"])({
-                            id: "\u5df2\u56de\u590d"
+                            id: "\u5f85\u5904\u7406"
                         }))
                     }
                 }, {
