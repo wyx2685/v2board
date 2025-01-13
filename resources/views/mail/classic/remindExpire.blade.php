@@ -115,9 +115,9 @@
                                     <tr
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                         <td class="content-block"
-                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 34px; vertical-align: top; line-height: 1em; margin: 0; padding: 20px 0 30px;"
+                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 24px; vertical-align: top; line-height: 1em; margin: 0; padding: 20px 0 30px;"
                                             valign="top">
-                                            Dear Customer
+                                            亲爱的用户，您好
                                         </td>
                                     </tr>
                                     <tr
