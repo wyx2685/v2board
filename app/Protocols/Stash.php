@@ -2,6 +2,7 @@
 
 namespace App\Protocols;
 
+use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
 class Stash
@@ -36,14 +37,7 @@ class Stash
         $proxies = [];
 
         foreach ($servers as $item) {
-            if ($item['type'] === 'shadowsocks'
-                && in_array($item['cipher'], [
-                    'aes-128-gcm',
-                    'aes-192-gcm',
-                    'aes-256-gcm',
-                    'chacha20-ietf-poly1305'
-                ])
-            ) {
+            if ($item['type'] === 'shadowsocks') {
                 array_push($proxy, self::buildShadowsocks($user['uuid'], $item));
                 array_push($proxies, $item['name']);
             }
@@ -88,25 +82,36 @@ class Stash
         });
         $config['proxy-groups'] = array_values($config['proxy-groups']);
         // Force the current subscription domain to be a direct rule
-        $subsDomain = $_SERVER['HTTP_HOST'];
-        if ($subsDomain) {
-            array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
-        }
+        // $subsDomain = $_SERVER['HTTP_HOST'];
+        // if ($subsDomain) {
+        //     array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
+        // }
 
         $yaml = Yaml::dump($config, 2, 4, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
         $yaml = str_replace('$app_name', config('v2board.app_name', 'V2Board'), $yaml);
         return $yaml;
     }
 
-    public static function buildShadowsocks($uuid, $server)
+    public static function buildShadowsocks($password, $server)
     {
+        if ($server['cipher'] === '2022-blake3-aes-128-gcm') {
+            $serverKey = Helper::getServerKey($server['created_at'], 16);
+            $userKey = Helper::uuidToBase64($password, 16);
+            $password = "{$serverKey}:{$userKey}";
+        }
+        if ($server['cipher'] === '2022-blake3-aes-256-gcm') {
+            $serverKey = Helper::getServerKey($server['created_at'], 32);
+            $userKey = Helper::uuidToBase64($password, 32);
+            $password = "{$serverKey}:{$userKey}";
+        }
+
         $array = [];
         $array['name'] = $server['name'];
         $array['type'] = 'ss';
         $array['server'] = $server['host'];
         $array['port'] = $server['port'];
         $array['cipher'] = $server['cipher'];
-        $array['password'] = $uuid;
+        $array['password'] = $password;
         $array['udp'] = true;
         return $array;
     }
@@ -231,7 +236,7 @@ class Stash
 
         return $array;
     }
-    
+
     public static function buildTrojan($password, $server)
     {
         $array = [];
@@ -279,7 +284,7 @@ class Stash
         $array['port'] = (int)$firstPort;
         if (count($parts) !== 1 || strpos($parts[0], '-') !== false) {
             $array['ports'] = $server['port'];
-            $array['mport'] = $server['port'];   
+            $array['mport'] = $server['port'];
         }
         $array['udp'] = true;
         $array['skip-cert-verify'] = $server['insecure'] == 1 ? true : false;
