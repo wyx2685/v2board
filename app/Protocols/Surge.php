@@ -28,14 +28,7 @@ class Surge
         $proxyGroup = '';
 
         foreach ($servers as $item) {
-            if ($item['type'] === 'shadowsocks'
-                && in_array($item['cipher'], [
-                    'aes-128-gcm',
-                    'aes-192-gcm',
-                    'aes-256-gcm',
-                    'chacha20-ietf-poly1305'
-                ])
-            ) {
+            if ($item['type'] === 'shadowsocks') {
                 // [Proxy]
                 $proxies .= self::buildShadowsocks($user['uuid'], $item);
                 // [Proxy Group]
@@ -89,6 +82,15 @@ class Surge
 
     public static function buildShadowsocks($password, $server)
     {
+        if ($server['cipher'] === '2022-blake3-aes-128-gcm') {
+            $serverKey = Helper::getServerKey($server['created_at'], 16);
+            $userKey = Helper::uuidToBase64($password, 16);
+            $password = "{$serverKey}:{$userKey}";
+        } elseif ($server['cipher'] === '2022-blake3-aes-256-gcm') {
+            $serverKey = Helper::getServerKey($server['created_at'], 32);
+            $userKey = Helper::uuidToBase64($password, 32);
+            $password = "{$serverKey}:{$userKey}";
+        }
         $config = [
             "{$server['name']}=ss",
             "{$server['host']}",
