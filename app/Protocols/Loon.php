@@ -73,7 +73,7 @@ class Loon
             "{$server['name']}=vmess",
             "{$server['host']}",
             "{$server['port']}",
-            'auto',
+            $server['networkSettings']['security'] ?? 'auto',
             "{$uuid}",
             'fast-open=false',
             'udp=true',
