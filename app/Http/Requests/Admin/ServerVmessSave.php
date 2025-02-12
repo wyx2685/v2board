@@ -27,6 +27,7 @@ class ServerVmessSave extends FormRequest
             'rate' => 'required|numeric',
             'network' => 'required|in:tcp,kcp,ws,http,domainsocket,quic,grpc,httpupgrade,xhttp',
             'networkSettings' => 'nullable|array',
+            'networkSettings.security' => 'nullable|in:auto,aes-128-gcm,chacha20-poly1305,none',
             'ruleSettings' => 'nullable|array',
             'tlsSettings' => 'nullable|array',
             'dnsSettings' => 'nullable|array'
@@ -51,6 +52,7 @@ class ServerVmessSave extends FormRequest
             'network.required' => '传输协议不能为空',
             'network.in' => '传输协议格式不正确',
             'networkSettings.array' => '传输协议配置有误',
+            'networkSettings.security.in' => 'vmess加密类型只能是: auto, aes-128-gcm, chacha20-poly1305, none',
             'ruleSettings.array' => '规则配置有误',
             'tlsSettings.array' => 'tls配置有误',
             'dnsSettings.array' => 'dns配置有误'
