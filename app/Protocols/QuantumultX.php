@@ -86,6 +86,9 @@ class QuantumultX
                     array_push($config, "obfs-uri={$wsSettings['path']}");
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']) && !isset($host))
                     $host = $wsSettings['headers']['Host'];
+                if (isset($wsSettings['security'])) {
+                    array_splice($config, 1, 1, "method={$wsSettings['security']}");
+                }
             }
         }
 

@@ -144,6 +144,9 @@ class Singbox
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
                 $array['transport']['max_early_data'] = 2048;
                 $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
+                if (isset($wsSettings['security'])) {
+                    $array['security'] = $wsSettings['security'];
+                }
             }
         }
         if ($server['network'] === 'grpc') {

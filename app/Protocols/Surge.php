@@ -136,6 +136,8 @@ class Surge
                     array_push($config, "ws-path={$wsSettings['path']}");
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     array_push($config, "ws-headers=Host:{$wsSettings['headers']['Host']}");
+                if (isset($wsSettings['security'])) 
+                    array_push($config, "encrypt-method={$wsSettings['security']}");
             }
         }
 

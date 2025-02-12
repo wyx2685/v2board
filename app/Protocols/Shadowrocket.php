@@ -76,6 +76,8 @@ class Shadowrocket
                     $config['path'] = $wsSettings['path'];
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     $config['obfsParam'] = $wsSettings['headers']['Host'];
+                if (isset($wsSettings['security']))
+                    $config['method'] = $wsSettings['security'];
             }
         }
         if ($server['network'] === 'grpc') {
