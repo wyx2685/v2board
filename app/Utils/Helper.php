@@ -205,6 +205,7 @@ class Helper
             case 'ws':
                 $config['path'] = $networkSettings['path'] ?? null;
                 $config['host'] = $networkSettings['headers']['Host'] ?? null;
+                isset($networkSettings['security']) && $config['scy'] = $networkSettings['security'];
                 break;
     
             case 'grpc':
