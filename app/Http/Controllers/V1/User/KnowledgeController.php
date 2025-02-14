@@ -24,19 +24,23 @@ class KnowledgeController extends Controller
             if (!$userService->isAvailable($user)) {
                 $this->formatAccessData($knowledge['body']);
             }
-            $subscribeUrl = Helper::getSubscribeUrl($user['token']);
-            $knowledge['body'] = str_replace('{{siteName}}', config('v2board.app_name', 'V2Board'), $knowledge['body']);
-            $knowledge['body'] = str_replace('{{subscribeUrl}}', $subscribeUrl, $knowledge['body']);
-            $knowledge['body'] = str_replace('{{urlEncodeSubscribeUrl}}', urlencode($subscribeUrl), $knowledge['body']);
-            $knowledge['body'] = str_replace(
-                '{{safeBase64SubscribeUrl}}',
-                str_replace(
-                    array('+', '/', '='),
-                    array('-', '_', ''),
-                    base64_encode($subscribeUrl)
-                ),
-                $knowledge['body']
-            );
+            class KnowledgeController extends Controller
+{
+    public function fetch(Request $request)
+    {
+        if ($request->input('id')) {
+            $knowledge = Knowledge::where('id', $request->input('id'))
+                ->where('show', 1)
+                ->first()
+                ->toArray();
+            if (!$knowledge) abort(500, __('Article does not exist'));
+            $user = User::find($request->user['id']);
+            $userService = new UserService();
+            if (!$userService->isAvailable($user)) {
+                $this->formatAccessData($knowledge['body']);
+            }
+            $knowledge['body'] = $this->replaceSubscribeUrls($knowledge['body'], $user['token']);
+            $this->apple($knowledge['body']);
             return response([
                 'data' => $knowledge
             ]);
@@ -59,6 +63,28 @@ class KnowledgeController extends Controller
             'data' => $knowledges
         ]);
     }
+    private function replaceSubscribeUrls($body, $userToken) {
+    $subscribeUrl = Helper::getSubscribeUrl("/api/v1/client/subscribe?token={$userToken}");
+    $websitesubscribeUrl = Helper::getwebsiteSubscribeUrl("/api/v1/client/subscribe?token={$userToken}");
+
+    $body = str_replace('{{siteName}}', config('v2board.app_name', 'qmxy'), $body);
+    $body = str_replace('{{websitesubscribeUrl}}', $websitesubscribeUrl, $body);
+    $body = str_replace('{{urlEncodeSubscribeUrl}}', urlencode($websitesubscribeUrl), $body);
+    $body = str_replace(
+        '{{safeBase64SubscribeUrl}}',
+        str_replace(array('+', '/', '='), array('-', '_', ''), base64_encode($websitesubscribeUrl)),
+        $body
+    );
+    $body = str_replace('{{subscribeUrl}}', $subscribeUrl, $body);
+    $body = str_replace('{{urlEncodeSubscribeUrl}}', urlencode($subscribeUrl), $body);
+    $body = str_replace(
+        '{{safeBase64SubscribeUrl}}',
+        str_replace(array('+', '/', '='), array('-', '_', ''), base64_encode($subscribeUrl)),
+        $body
+    );
+
+    return $body;
+}
 
     private function getBetween($input, $start, $end)
     {
