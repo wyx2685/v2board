@@ -107,6 +107,13 @@ class Helper
         if ($subscribeUrl) return $subscribeUrl . $path;
         return url($path);
     }
+    public static function getwebsiteSubscribeUrl($path)
+    {
+        $websitesubscribeUrls = explode(',', config('v2board.app_url'));
+        $websitesubscribeUrl = $websitesubscribeUrls[rand(0, count($websitesubscribeUrls) - 1)];
+        if ($websitesubscribeUrl) return $websitesubscribeUrl . $path;
+        return url($path);
+    }
 
     public static function randomPort($range) {
         $portRange = explode('-', $range);
