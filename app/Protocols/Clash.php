@@ -152,6 +152,8 @@ class Clash
                     $array['ws-opts']['path'] = $wsSettings['path'];
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     $array['ws-opts']['headers'] = ['Host' => $wsSettings['headers']['Host']];
+                if (isset($wsSettings['security'])) 
+                    $array['cipher'] = $wsSettings['security'];
             }
         }
         if ($server['network'] === 'grpc') {

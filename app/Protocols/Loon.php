@@ -25,16 +25,7 @@ class Loon
         header("Subscription-Userinfo: upload={$user['u']}; download={$user['d']}; total={$user['transfer_enable']}; expire={$user['expired_at']}");
 
         foreach ($servers as $item) {
-            if ($item['type'] === 'shadowsocks'
-                && in_array($item['cipher'], [
-                    'aes-128-gcm',
-                    'aes-192-gcm',
-                    'aes-256-gcm',
-                    'chacha20-ietf-poly1305',
-                    '2022-blake3-aes-128-gcm',
-                    '2022-blake3-aes-256-gcm'
-                ])
-            ) {
+            if ($item['type'] === 'shadowsocks') {
                 $uri .= self::buildShadowsocks($user['uuid'], $item);
             }elseif ($item['type'] === 'vmess') {
                 $uri .= self::buildVmess($user['uuid'], $item);
@@ -82,7 +73,7 @@ class Loon
             "{$server['name']}=vmess",
             "{$server['host']}",
             "{$server['port']}",
-            'auto',
+            $server['networkSettings']['security'] ?? 'auto',
             "{$uuid}",
             'fast-open=false',
             'udp=true',

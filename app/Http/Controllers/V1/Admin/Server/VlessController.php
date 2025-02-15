@@ -48,6 +48,38 @@ class VlessController extends Controller
             }
         }
 
+        if ($params['network'] == 'xhttp' && isset($params['network_settings'])) {
+            $ns = $params['network_settings'];
+            if (isset($ns['extra']) && is_array($ns['extra'])) {
+                $extra = $ns['extra'];
+                if (isset($extra['noGRPCHeader'])) {
+                    $extra['noGRPCHeader'] = filter_var($extra['noGRPCHeader'], FILTER_VALIDATE_BOOLEAN);
+                }
+                if (isset($extra['noSSEHeader'])) {
+                    $extra['noSSEHeader'] = filter_var($extra['noSSEHeader'], FILTER_VALIDATE_BOOLEAN);
+                }
+                if (isset($extra['scMaxBufferedPosts'])) {
+                    $extra['scMaxBufferedPosts'] = (int)$extra['scMaxBufferedPosts'];
+                }
+                if (isset($extra['xmux']) && is_array($extra['xmux'])) {
+                    $xmux = $extra['xmux'];
+                    if (isset($xmux['hKeepAlivePeriod'])) {
+                        $xmux['hKeepAlivePeriod'] = (int)$xmux['hKeepAlivePeriod'];
+                    }
+                    $extra['xmux'] = $xmux;
+                }
+                if (isset($extra['downloadSettings']) && is_array($extra['downloadSettings'])) {
+                    $downloadSettings = $extra['downloadSettings'];
+                    if (isset($downloadSettings['port'])) {
+                        $downloadSettings['port'] = (int)$downloadSettings['port'];
+                    }
+                    $extra['downloadSettings'] = $downloadSettings;
+                }
+                $ns['extra'] = $extra;
+            }
+            $params['network_settings'] = $ns;
+        }
+
         if ($request->input('id')) {
             $server = ServerVless::find($request->input('id'));
             if (!$server) {
