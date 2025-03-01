@@ -23,13 +23,20 @@ class HysteriaController extends Controller
             'server_port' => 'required',
             'tags' => 'nullable|array',
             'rate' => 'required|numeric',
-            'up_mbps' => 'required|numeric|min:1',
-            'down_mbps' => 'required|numeric|min:1',
+            'up_mbps' => 'nullable|numeric',
+            'down_mbps' => 'nullable|numeric',
             'obfs' => 'nullable',
             'obfs_password' => 'nullable',
             'server_name' => 'nullable',
             'insecure' => 'required|in:0,1'
         ]);
+
+        if (!isset($params['up_mbps'])) {
+            $params['up_mbps'] = 0;
+        }
+        if (!isset($params['down_mbps'])) {
+            $params['down_mbps'] = 0;
+        }
 
         if(isset($params['obfs'])) {
             if(!isset($params['obfs_password']))  $params['obfs_password'] = Helper::getServerKey($request->input('created_at'), 16);
