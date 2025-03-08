@@ -24,7 +24,7 @@ class ClientController extends Controller
             $servers = $serverService->getAvailableServers($user);
             
             // MeT 20240823 Start
-            $subInfoBlacklist = ['surge', 'surfboard', 'stash', 'shadowrocket', 'quantumultx', 'loon', 'clashmeta', 'clash'];
+            $subInfoBlacklist = ['surge', 'surfboard', 'stash', 'shadowrocket', 'quantumultx', 'loon', 'clashmeta', 'clash', 'sing-box'];
             $showSub = true;
             foreach ($subInfoBlacklist as $subName) {
                 if (strpos($flag, $subName) !== false) {
@@ -32,7 +32,7 @@ class ClientController extends Controller
                     break;
                 }
             }
-            if ($showSub && (!($flag && strpos($flag, 'sing-box')))) {
+            if ($showSub) {
                 $this->setSubscribeInfoToServers($servers, $user);
             }
             // MeT 20240823 End

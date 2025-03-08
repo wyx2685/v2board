@@ -22,3 +22,4 @@ yarn.lock
 docker-compose.yml
 .DS_Store
 public/clients/*
+.vscode
