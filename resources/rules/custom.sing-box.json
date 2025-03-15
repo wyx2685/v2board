@@ -1,0 +1,160 @@
+{
+    "dns": {
+        "servers": [
+            {
+                "type": "local",
+                "tag": "local"
+            },
+            {
+                "type": "udp",
+                "tag": "remote",
+                "server": "1.1.1.1"
+            },
+            {
+                "type": "udp",
+                "tag": "cn",
+                "server": "223.5.5.5"
+            }
+        ],
+        "rules": [
+            {
+                "rule_set": [
+                    "geosite-cn"
+                ],
+                "action": "route",
+                "server": "cn"
+            }
+        ],
+        "final": "remote"
+    },
+    "inbounds": [
+        {
+            "tag": "tun-in",
+            "type": "tun",
+            "address": [
+                "172.19.0.1/30",
+                "2001:0470:f9da:fdfa::1/64"
+            ],
+            "auto_route": true,
+            "mtu": 9000,
+            "stack": "system",
+            "strict_route": true,
+            "route_exclude_address_set": ["geoip-cn"]
+        },
+        {
+            "tag": "socks-in",
+            "type": "socks",
+            "listen": "127.0.0.1",
+            "listen_port": 2333,
+            "users": []
+        },
+        {
+            "tag": "mixed-in",
+            "type": "mixed",
+            "listen": "127.0.0.1",
+            "listen_port": 2334,
+            "users": []
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "DIRECT",
+            "type": "direct",
+            "domain_resolver": {
+                "server": "local"
+            }
+        },
+        {
+            "tag": "节点选择",
+            "type": "selector",
+            "interrupt_exist_connections": true,
+            "outbounds": []
+        }
+    ],
+    "route": {
+        "rules": [
+            {
+                "action": "sniff"
+            },
+            {
+                "protocol": "dns",
+                "action": "hijack-dns"
+            },
+            {
+                "rule_set": [
+                    "category-ads-all"
+                ],
+                "action": "reject",
+                "method": "default",
+                "no_drop": false
+            },
+            {
+                "ip_is_private": true,
+                "action": "route",
+                "outbound": "DIRECT"
+            },
+            {
+                "clash_mode": "关闭代理",
+                "action": "route",
+                "outbound": "DIRECT"
+            },
+            {
+                "clash_mode": "全局代理",
+                "action": "route",
+                "outbound": "节点选择"
+            },
+            {
+                "rule_set": [
+                    "geosite-cn","geoip-cn"
+                ],
+                "action": "route",
+                "outbound": "DIRECT"
+            }
+        ],
+        "auto_detect_interface": true,
+        "final": "节点选择",
+        "default_domain_resolver": {
+            "server": "remote"
+        },
+        "rule_set": [
+            {
+                "tag": "geosite-geolocation-!cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+                "download_detour": "节点选择"
+            },
+            {
+                "tag": "geoip-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/srs/cn.srs",
+                "download_detour": "节点选择"
+            },
+            {
+                "tag": "geosite-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+                "download_detour": "节点选择"
+            },
+            {
+                "tag": "category-ads-all",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+                "download_detour": "节点选择"
+            }
+        ]
+    },
+    "experimental": {
+        "cache_file": {
+            "enabled": true
+        },
+        "clash_api": {
+            "default_mode": "海外代理",
+            "external_controller": "127.0.0.1:9090",
+            "secret": ""
+        }
+    }
+}
