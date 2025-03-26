@@ -265,19 +265,20 @@ class Singbox
 
     protected function buildHysteria($password, $server, $user)
     {
-        $parts = explode(",",$server['port']);
-        $firstPart = $parts[0];
-        if (strpos($firstPart, '-') !== false) {
-            $range = explode('-', $firstPart);
-            $firstPort = $range[0];
-        } else {
-            $firstPort = $firstPart;
+        $parts = explode(",", $server['port']);
+        $portArray = [];
+        foreach ($parts as $part) {
+            if (strpos($part, '-') !== false) {
+                $portArray[] = str_replace('-', ':', trim($part));
+            } else {
+                $portArray[] = trim($part);
+            }
         }
 
         $array = [
             'tag' => $server['name'],
             'server' => $server['host'],
-            'server_port' => (int)$firstPort,
+            'server_ports' => $portArray,
             'domain_resolver' => 'local',
             'tls' => [
                 'enabled' => true,
