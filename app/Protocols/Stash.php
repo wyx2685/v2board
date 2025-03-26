@@ -156,6 +156,9 @@ class Stash
                     $array['ws-path'] = $wsSettings['path'];
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     $array['ws-headers'] = ['Host' => $wsSettings['headers']['Host']];
+                if (isset($wsSettings['security'])) {
+                    $array['cipher'] = $wsSettings['security'];
+                }
             }
         }
         if ($server['network'] === 'grpc') {

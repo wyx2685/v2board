@@ -17,22 +17,34 @@ dns:
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
+    - 114.114.114.114
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
+  respect-rules: true
+  proxy-server-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
   fallback:
-    - https://doh.dns.sb/dns-query
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.twnic.tw/dns-query
-    - tls://8.8.4.4:853
+    - 1.1.1.1
+    - 8.8.8.8
   fallback-filter:
     geoip: true
+    geoip-code: CN
+    geosite:
+      - gfw
     ipcidr:
       - 240.0.0.0/4
-      - 0.0.0.0/32
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+
 
 proxies:
 
@@ -44,7 +56,8 @@ proxy-groups:
 rules:
   # 自定义规则
   ## 您可以在此处插入您补充的自定义规则（请注意保持缩进）
-
+  - IP-CIDR,1.1.1.1/32,$app_name,no-resolve
+  - IP-CIDR,8.8.8.8/32,$app_name,no-resolve
   # Google 中国服务
   - DOMAIN-SUFFIX,services.googleapis.cn,$app_name
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,$app_name
@@ -85,6 +98,7 @@ rules:
   # - DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数App开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消 # 注释。
 
   # 国内网站
+  - DOMAIN,cn.bing.com,DIRECT
   - DOMAIN-SUFFIX,126.com,DIRECT
   - DOMAIN-SUFFIX,126.net,DIRECT
   - DOMAIN-SUFFIX,127.net,DIRECT
