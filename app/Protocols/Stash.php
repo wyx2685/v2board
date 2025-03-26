@@ -25,8 +25,8 @@ class Stash
         header('profile-update-interval: 24');
         header("content-disposition: filename*=UTF-8''".rawurlencode($appName));
         // 暂时使用clash配置文件，后续根据Stash更新情况更新
-        $defaultConfig = base_path() . '/resources/rules/default.clash.yaml';
-        $customConfig = base_path() . '/resources/rules/custom.clash.yaml';
+        $defaultConfig = base_path() . '/resources/rules/default.stash.yaml';
+        $customConfig = base_path() . '/resources/rules/custom.stash.yaml';
         if (\File::exists($customConfig)) {
             $config = Yaml::parseFile($customConfig);
         } else {
@@ -181,10 +181,7 @@ class Stash
         $array['server'] = $server['host'];
         $array['port'] = $server['port'];
         $array['uuid'] = $uuid;
-        $array['flow'] = (function($value){
-            return in_array($value, [null, 'none', 'xtls-rprx-origin','xtls-rprx-direct','xtls-rprx-splice'], true) ? $value : null;
-        })($server['flow'] ?? null);
-        $array['client-fingerprint'] = 'chrome';
+        $array['flow'] = $server['flow'] ?? null;
         $array['udp'] = true;
 
         if ($server['tls']) {
@@ -198,6 +195,8 @@ class Stash
                    $array['reality-opts']['public-key'] = $tlsSettings['public_key'];
                    $array['reality-opts']['short-id'] = $tlsSettings['short_id'];
                 }
+                $array['skip-cert-verify'] = $tlsSettings['allow_insecure'] ? true : false;
+                $array['client-fingerprint'] = $tlsSettings['fingerprint'] ?? null;
             }
         }
 
