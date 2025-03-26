@@ -153,13 +153,7 @@ class Loon
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
                     array_push($config, "tls-name={$tlsSettings['server_name']}");
             }
-        }elseif($server['tls'] === 2){ // reality 暂不被 loon 支持 
-            // VLESS-Reality = VLESS,192.168.2.11,2345,
-            // "ae521383-9375-2e0d-c347-48cf3d98eb6e",
-            // transport=tcp,flow=xtls-rprx-vision,
-            // public-key="LgJ9bNTyUqBLFkDA12-QgEL7c1yQ1ztk-V1Q-3OLXSk",
-            // short-id=164168844958a16d,udp=true,over-tls=true,sni=douyin.com,
-            // skip-cert-verify=true
+        }elseif($server['tls'] === 2){
             array_push($config, "flow={$server['flow']}");
             if ($server['tls_settings']) {
                 $tlsSettings = $server['tls_settings'];
