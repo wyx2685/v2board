@@ -29,7 +29,7 @@ class Loon
                 $uri .= self::buildShadowsocks($user['uuid'], $item);
             }elseif ($item['type'] === 'vmess') {
                 $uri .= self::buildVmess($user['uuid'], $item);
-            }elseif ($item['type'] === 'vless' && !$item['flow'] ) { // loon 不支持流控,需要过滤掉
+            }elseif ($item['type'] === 'vless') {
                 $uri .= self::buildVless($user['uuid'], $item);
             }elseif ($item['type'] === 'trojan') {
                 $uri .= self::buildTrojan($user['uuid'], $item);
@@ -153,8 +153,19 @@ class Loon
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
                     array_push($config, "tls-name={$tlsSettings['server_name']}");
             }
-        }elseif($server['tls'] === 2){ // reality 暂不被 loon 支持 
-            return '';
+        }elseif($server['tls'] === 2){
+            array_push($config, "flow={$server['flow']}");
+            if ($server['tls_settings']) {
+                $tlsSettings = $server['tls_settings'];
+                if (isset($tlsSettings['public_key']) && !empty($tlsSettings['public_key']))
+                    array_push($config, "public-key={$tlsSettings['public_key']}");
+                if (isset($tlsSettings['short_id']) && !empty($tlsSettings['short_id']))
+                    array_push($config, "short-id={$tlsSettings['short_id']}");
+                if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
+                    array_push($config, "sni={$tlsSettings['server_name']}");
+                if (isset($tlsSettings['allow_insecure']) && !empty($tlsSettings['allow_insecure']))
+                    array_push($config, 'skip-cert-verify=' . ($tlsSettings['allow_insecure']? 'true' : 'false'));
+            }
         }
         if ($server['network'] === 'ws') {
             array_push($config, 'transport=ws');
