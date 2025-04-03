@@ -128,6 +128,11 @@ class ServerService
                 $shadowsocks[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_SHADOWSOCKS_LAST_CHECK_AT', $v['parent_id']));
                 $shadowsocks[$key]['created_at'] = $shadowsocks[$v['parent_id']]['created_at'];
             }
+            if ($v['obfs'] === 'http') {
+                $shadowsocks[$key]['obfs'] = 'http';
+                $shadowsocks[$key]['obfs-host'] = $v['obfs_settings']['host'];
+                $shadowsocks[$key]['obfs-path'] = $v['obfs_settings']['path'];
+            }
             $servers[] = $shadowsocks[$key]->toArray();
         }
         return $servers;
