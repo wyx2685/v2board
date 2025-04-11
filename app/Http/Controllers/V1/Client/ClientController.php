@@ -4,6 +4,9 @@ namespace App\Http\Controllers\V1\Client;
 
 use App\Http\Controllers\Controller;
 use App\Protocols\General;
+use App\Protocols\Singbox\Singbox;
+use App\Protocols\Singbox\SingboxOld;
+use App\Protocols\ClashMeta;
 use App\Services\ServerService;
 use App\Services\UserService;
 use App\Utils\Helper;
@@ -22,16 +25,31 @@ class ClientController extends Controller
         if ($userService->isAvailable($user)) {
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
-            if (!strpos($flag, 'sing')) {
-                $this->setSubscribeInfoToServers($servers, $user);
-            }
-            if ($flag) {
-                foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
-                    $file = 'App\\Protocols\\' . basename($file, '.php');
-                    $class = new $file($user, $servers);
-                    if (strpos($flag, $class->flag) !== false) {
-                        return $class->handle();
+            if($flag) {
+                if (!strpos($flag, 'sing')) {
+                    $this->setSubscribeInfoToServers($servers, $user);
+                    foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
+                        $file = 'App\\Protocols\\' . basename($file, '.php');
+                        $class = new $file($user, $servers);
+                        if (strpos($flag, $class->flag) !== false) {
+                            return $class->handle();
+                        }
                     }
+                }
+                if (!strpos($flag, 'hiddify')) {
+                    $version = null;
+                    if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
+                        $version = $matches[1];
+                    }
+                    if (!is_null($version) && $version >= '1.12.0') {
+                        $class = new Singbox($user, $servers);
+                    } else {
+                        $class = new SingboxOld($user, $servers);
+                    }
+                    return $class->handle();
+                } else {
+                    $class = new ClashMeta($user, $servers);
+                    return $class->handle();
                 }
             }
             $class = new General($user, $servers);

@@ -3229,15 +3229,15 @@
                   , t = e.groups
                   , n = e.fetchLoading
                   , r = [{
-                    title: "ID",
+                    title: "\u7ec4ID",
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Tên",
+                    title: "\u7ec4\u540d\u79f0",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "Tổng User",
+                    title: "\u7528\u6237\u6570\u91cf",
                     dataIndex: "user_count",
                     key: "user_count",
                     render: e=>{
@@ -3249,7 +3249,7 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "Số Node",
+                    title: "\u8282\u70b9\u6570\u91cf",
                     dataIndex: "server_count",
                     key: "server_count",
                     render: e=>{
@@ -3261,7 +3261,7 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -3271,16 +3271,16 @@
                             key: t.id
                         }, u.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Biên Tập")), u.a.createElement(s["a"], {
+                        }, "\u7f16\u8f91")), u.a.createElement(s["a"], {
                             type: "vertical"
                         }), u.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>this.drop(t.id)
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return u.a.createElement(h["a"], i()({}, this.props, {
-                    title: "Quản lý nhóm quyền"
+                    title: "\u6743\u9650\u7ec4\u7ba1\u7406"
                 }), u.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), u.a.createElement(p["a"], {
@@ -3297,7 +3297,7 @@
                     onClick: ()=>this.modalVisible()
                 }, u.a.createElement(l["a"], {
                     type: "plus"
-                }), " Thêm nhóm quyền"))), u.a.createElement(o["a"], {
+                }), " \u6dfb\u52a0\u6743\u9650\u7ec4"))), u.a.createElement(o["a"], {
                     tableLayout: "auto",
                     columns: r,
                     dataSource: t,
@@ -5657,7 +5657,7 @@
                   , _ = e.safe
                   , E = this.props.plan.plans;
                 return f.a.createElement(d["a"], i()({}, this.props, {
-                    title: "Cấu Hình Hệ Thống"
+                    title: "\u7cfb\u7edf\u914d\u7f6e"
                 }), f.a.createElement("div", {
                     className: "mb-0 block border-bottom ".concat(p ? "block-mode-loading" : "")
                 }, f.a.createElement(s["a"], {
@@ -5667,65 +5667,65 @@
                     defaultActiveKey: h,
                     size: "large"
                 }, f.a.createElement(s["a"].TabPane, {
-                    tab: "Tổng Quan",
+                    tab: "\u7ad9\u70b9",
                     key: "site"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Tên Trang Web",
-                    description: "Hiển thị ở đầu trang web"
+                    title: "\u7ad9\u70b9\u540d\u79f0",
+                    description: "\u7528\u4e8e\u663e\u793a\u9700\u8981\u7ad9\u70b9\u540d\u79f0\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui long nhập tên trang web",
+                    placeholder: "\u8bf7\u8f93\u5165\u7ad9\u70b9\u540d\u79f0",
                     defaultValue: t.app_name,
                     onChange: e=>this.set("site", "app_name", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Mô Tả web",
-                    description: "Hiển thị mô tả trang web"
+                    title: "\u7ad9\u70b9\u63cf\u8ff0",
+                    description: "\u7528\u4e8e\u663e\u793a\u9700\u8981\u7ad9\u70b9\u63cf\u8ff0\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập mô tả web",
+                    placeholder: "\u8bf7\u8f93\u5165\u7ad9\u70b9\u63cf\u8ff0",
                     defaultValue: t.app_description,
                     onChange: e=>this.set("site", "app_description", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "URL Trang web",
-                    description: "URL mới nhất của trang web hiện tại sẽ được hiển thị trong email và những nơi khác mà URL cần được sử dụng."
+                    title: "\u7ad9\u70b9\u7f51\u5740",
+                    description: "\u5f53\u524d\u7f51\u7ad9\u6700\u65b0\u7f51\u5740\uff0c\u5c06\u4f1a\u5728\u90ae\u4ef6\u7b49\u9700\u8981\u7528\u4e8e\u7f51\u5740\u5904\u4f53\u73b0\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL không có / ở cuối",
+                    placeholder: "\u8bf7\u8f93\u5165\u7ad9\u70b9URL\uff0c\u672b\u5c3e\u4e0d\u8981/",
                     defaultValue: t.app_url,
                     onChange: e=>this.set("site", "app_url", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Buộc HTTPS",
-                    description: "Khi trang web không sử dụng HTTPS, CDN hoặc proxy ngược cần được bật để buộc HTTPS."
+                    title: "\u5f3a\u5236HTTPS",
+                    description: "\u5f53\u7ad9\u70b9\u6ca1\u6709\u4f7f\u7528HTTPS\uff0cCDN\u6216\u53cd\u4ee3\u5f00\u542f\u5f3a\u5236HTTPS\u65f6\u9700\u8981\u5f00\u542f\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(t.force_https),
                     onChange: e=>this.set("site", "force_https", e ? 1 : 0)
                 })), f.a.createElement(m, {
                     title: "LOGO",
-                    description: "Được sử dụng để hiển thị nơi cần có LOGO."
+                    description: "\u7528\u4e8e\u663e\u793a\u9700\u8981LOGO\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL LOGO không có / ở cuối",
+                    placeholder: "\u8bf7\u8f93\u5165LOGO URL\uff0c\u672b\u5c3e\u4e0d\u8981/",
                     defaultValue: t.logo,
                     onChange: e=>this.set("site", "logo", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "URL đăng ký",
-                    description: "Được sử dụng để đăng ký. Nếu để trống thì đó sẽ là URL của trang web. Nếu bạn cần lấy ngẫu nhiên nhiều URL đăng ký, vui lòng phân tách chúng bằng dấu phẩy."
+                    title: "\u8ba2\u9605URL",
+                    description: "\u7528\u4e8e\u8ba2\u9605\u6240\u4f7f\u7528\uff0c\u7559\u7a7a\u5219\u4e3a\u7ad9\u70b9URL\u3002\u5982\u9700\u591a\u4e2a\u8ba2\u9605URL\u968f\u673a\u83b7\u53d6\u8bf7\u4f7f\u7528\u9017\u53f7\u8fdb\u884c\u5206\u5272\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "4",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL đăng ký không có / ở cuối. Phân tách bằng dấu phẩy hỗ trợ nhiều tên miền",
+                    placeholder: "\u8bf7\u8f93\u5165\u8ba2\u9605URL\uff0c\u672b\u5c3e\u4e0d\u8981/\u3002\u9017\u53f7\u5206\u5272\u652f\u6301\u591a\u57df\u540d",
                     defaultValue: t.subscribe_url,
                     onChange: e => this.set("site", "subscribe_url", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Đường dẫn đăng ký",
-                    description: "Được sử dụng để đăng ký. Nếu để trống, nó sẽ là /api/v1/client/subscribe. Nếu bạn cần thay đổi đường dẫn đăng ký khác, vui lòng đặt đường dẫn đó."
+                    title: "\u8ba2\u9605\u8def\u5f84",
+                    description: "\u7528\u4e8e\u8ba2\u9605\u6240\u4f7f\u7528\uff0c\u7559\u7a7a\u5219\u4e3a/api/v1/client/subscribe\u3002\u5982\u9700\u66f4\u6362\u4e0d\u540c\u7684\u8ba2\u9605\u8def\u5f84\u8bf7\u8bbe\u7f6e\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -5733,31 +5733,31 @@
                     defaultValue: t.subscribe_path,
                     onChange: e => this.set("site", "subscribe_path", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "URL Điều khoản người dùng (TOS)",
-                    description: "Được sử dụng để chuyển đến Điều khoản người dùng (TOS)"
+                    title: "\u7528\u6237\u6761\u6b3e(TOS)URL",
+                    description: "\u7528\u4e8e\u8df3\u8f6c\u5230\u7528\u6237\u6761\u6b3e(TOS)"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL điều khoản người dùng không có / ở cuối",
+                    placeholder: "\u8bf7\u8f93\u5165\u7528\u6237\u6761\u6b3eURL\uff0c\u672b\u5c3e\u4e0d\u8981/",
                     defaultValue: t.tos_url,
                     onChange: e=>this.set("site", "tos_url", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Dừng đăng ký người dùng mới",
-                    description: "Sau khi được kích hoạt, sẽ không ai có thể đăng ký."
+                    title: "\u505c\u6b62\u65b0\u7528\u6237\u6ce8\u518c",
+                    description: "\u5f00\u542f\u540e\u4efb\u4f55\u4eba\u90fd\u5c06\u65e0\u6cd5\u8fdb\u884c\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(t.stop_register),
                     onChange: e=>this.set("site", "stop_register", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Đăng ký dùng thử",
-                    description: "Chọn đăng ký bạn muốn thử. Nếu không có tùy chọn, vui lòng vào quản lý đăng ký để thêm nó trước."
+                    title: "\u6ce8\u518c\u8bd5\u7528",
+                    description: "\u9009\u62e9\u9700\u8981\u8bd5\u7528\u7684\u8ba2\u9605\uff0c\u5982\u679c\u6ca1\u6709\u9009\u9879\u8bf7\u5148\u524d\u5f80\u8ba2\u9605\u7ba1\u7406\u6dfb\u52a0\u3002"
                 }, f.a.createElement("select", {
                     onChange: e=>this.set("site", "try_out_plan_id", e.target.value),
                     className: "form-control",
                     value: t.try_out_plan_id,
-                    placeholder: "Vui lòng chọn đăng ký dùng thử"
+                    placeholder: "\u8bf7\u9009\u62e9\u8bd5\u7528\u8ba2\u9605"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Đóng"), E.map(e=>{
+                }, "\u5173\u95ed"), E.map(e=>{
                     return f.a.createElement("option", {
                         key: Math.random(),
                         value: e.id
@@ -5765,16 +5765,16 @@
                 }
                 ))), 0 === t.try_out_plan_id || f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Thời gian dùng thử (giờ)"
+                    title: "\u8bd5\u7528\u65f6\u95f4(\u5c0f\u65f6)"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: t.try_out_hour,
                     onChange: e=>this.set("site", "try_out_hour", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Đơn Vị Tiền Tệ",
-                    description: "Chỉ nhằm mục đích hiển thị, tất cả các đơn vị tiền tệ trong hệ thống sẽ thay đổi sau khi thay đổi."
+                    title: "\u8d27\u5e01\u5355\u4f4d",
+                    description: "\u4ec5\u7528\u4e8e\u5c55\u793a\u4f7f\u7528\uff0c\u66f4\u6539\u540e\u7cfb\u7edf\u4e2d\u6240\u6709\u7684\u8d27\u5e01\u5355\u4f4d\u90fd\u5c06\u53d1\u751f\u53d8\u66f4\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -5782,8 +5782,8 @@
                     defaultValue: t.currency,
                     onChange: e=>this.set("site", "currency", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Ký Hiệu",
-                    description: "Chỉ nhằm mục đích hiển thị, tất cả các đơn vị tiền tệ trong hệ thống sẽ thay đổi sau khi thay đổi."
+                    title: "\u8d27\u5e01\u7b26\u53f7",
+                    description: "\u4ec5\u7528\u4e8e\u5c55\u793a\u4f7f\u7528\uff0c\u66f4\u6539\u540e\u7cfb\u7edf\u4e2d\u6240\u6709\u7684\u8d27\u5e01\u5355\u4f4d\u90fd\u5c06\u53d1\u751f\u53d8\u66f4\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -5791,31 +5791,31 @@
                     defaultValue: t.currency_symbol,
                     onChange: e=>this.set("site", "currency_symbol", e.target.value)
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Bảo Mật",
+                    tab: "\u5b89\u5168",
                     key: "safe"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Xác minh email",
-                    description: "Khi bật, người dùng sẽ buộc phải thực hiện xác minh email."
+                    title: "\u90ae\u7bb1\u9a8c\u8bc1",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f1a\u5f3a\u5236\u8981\u6c42\u7528\u6237\u8fdb\u884c\u90ae\u7bb1\u9a8c\u8bc1\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.email_verify),
                     onChange: e=>this.set("safe", "email_verify", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Vô hiệu hóa nhiều bí danh trong Gmail",
-                    description: "Sau khi được bật, nhiều bí danh Gmail sẽ không thể đăng ký được."
+                    title: "\u7981\u6b62\u4f7f\u7528Gmail\u591a\u522b\u540d",
+                    description: "\u5f00\u542f\u540eGmail\u591a\u522b\u540d\u5c06\u65e0\u6cd5\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.email_gmail_limit_enable),
                     onChange: e=>this.set("safe", "email_gmail_limit_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Chế Độ An Toàn",
-                    description: "Sau khi bật nó lên, quyền truy cập vào tên miền được liên kết với trang này ngoài URL của trang sẽ là 403."
+                    title: "\u5b89\u5168\u6a21\u5f0f",
+                    description: "\u5f00\u542f\u540e\u9664\u4e86\u7ad9\u70b9URL\u4ee5\u5916\u7684\u7ed1\u5b9a\u672c\u7ad9\u70b9\u7684\u57df\u540d\u8bbf\u95ee\u90fd\u5c06\u4f1a\u88ab403\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.safe_mode_enable),
                     onChange: e=>this.set("safe", "safe_mode_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Đường dẫn ADMIN",
-                    description: "Đường dẫn quản lý phụ trợ. Việc sửa đổi sẽ thay đổi đường dẫn quản trị ban đầu."
+                    title: "\u540e\u53f0\u8def\u5f84",
+                    description: "\u540e\u53f0\u7ba1\u7406\u8def\u5f84\uff0c\u4fee\u6539\u540e\u5c06\u4f1a\u6539\u53d8\u539f\u6709\u7684admin\u8def\u5f84"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -5823,321 +5823,319 @@
                     defaultValue: _.secure_path,
                     onChange: e=>this.set("safe", "secure_path", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Danh sách trắng hậu tố email",
-                    description: "Chỉ những hậu tố email trong danh sách mới được phép đăng ký sau khi nó được bật."
+                    title: "\u90ae\u7bb1\u540e\u7f00\u767d\u540d\u5355",
+                    description: "\u5f00\u542f\u540e\u5728\u540d\u5355\u4e2d\u7684\u90ae\u7bb1\u540e\u7f00\u624d\u5141\u8bb8\u8fdb\u884c\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.email_whitelist_enable),
                     onChange: e=>this.set("safe", "email_whitelist_enable", e ? 1 : 0)
                 })), _.email_whitelist_enable ? f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Hậu tố danh sách trắng",
-                    description: "Vui lòng sử dụng dấu phẩy để phân tách, chẳng hạn như: qq.com,gmail.com."
+                    title: "\u767d\u540d\u5355\u540e\u7f00",
+                    description: "\u8bf7\u4f7f\u7528\u9017\u53f7\u8fdb\u884c\u5206\u5272\uff0c\u5982\uff1aqq.com,gmail.com\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "4",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng sử dụng dấu phẩy để phân tách, chẳng hạn như: qq.com,gmail.com.",
+                    placeholder: "\u8bf7\u8f93\u5165\u540e\u7f00\u57df\u540d\uff0c\u9017\u53f7\u5206\u5272 \u5982\uff1aqq.com,gmail.com",
                     defaultValue: _.email_whitelist_suffix,
                     onChange: e=>this.set("safe", "email_whitelist_suffix", e.target.value.split(","))
                 })) : "", f.a.createElement(m, {
-                    title: "Chống Bot",
-                    description: "Khi được bật, Google reCAPTCHA sẽ được sử dụng để ngăn chặn robot."
+                    title: "\u9632\u673a\u5668\u4eba",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f1a\u4f7f\u7528Google reCAPTCHA\u9632\u6b62\u673a\u5668\u4eba\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.recaptcha_enable),
                     onChange: e=>this.set("safe", "recaptcha_enable", e ? 1 : 0)
                 })), _.recaptcha_enable ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Chìa Khóa",
-                    description: "Khóa được áp dụng trong Google reCAPTCHA."
+                    title: "\u5bc6\u94a5",
+                    description: "\u5728Google reCAPTCHA\u7533\u8bf7\u7684\u5bc6\u94a5\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.recaptcha_key,
                     onChange: e=>this.set("safe", "recaptcha_key", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Khóa trang web",
-                    description: "Khóa trang web được áp dụng trong Google reCAPTCH."
+                    title: "\u7f51\u7ad9\u5bc6\u94a5",
+                    description: "\u5728Google reCAPTCH\u7533\u8bf7\u7684\u7f51\u7ad9\u5bc6\u94a5\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.recaptcha_site_key,
                     onChange: e=>this.set("safe", "recaptcha_site_key", e.target.value)
                 }))) : "", f.a.createElement(m, {
-                    title: "Hạn chế đăng ký IP",
-                    description: "Sau khi kích hoạt nó, nếu tài khoản đăng ký IP đáp ứng các yêu cầu về quy tắc, việc đăng ký sẽ bị hạn chế. Xin lưu ý rằng việc đánh giá IP có thể gây ra sự cố do CDN hoặc proxy giao diện người dùng."
+                    title: "IP\u6ce8\u518c\u9650\u5236",
+                    description: "\u5f00\u542f\u540e\u5982\u679cIP\u6ce8\u518c\u8d26\u6237\u8fbe\u5230\u89c4\u5219\u8981\u6c42\u5c06\u4f1a\u88ab\u9650\u5236\u6ce8\u518c\uff0c\u8bf7\u6ce8\u610fIP\u5224\u65ad\u53ef\u80fd\u56e0\u4e3aCDN\u6216\u524d\u7f6e\u4ee3\u7406\u5bfc\u81f4\u95ee\u9898\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.register_limit_by_ip_enable),
                     onChange: e=>this.set("safe", "register_limit_by_ip_enable", e ? 1 : 0)
                 })), _.register_limit_by_ip_enable ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tính thường xuyên",
-                    description: "Hình phạt sẽ bắt đầu sau khi đạt số lượng đăng ký."
+                    title: "\u6b21\u6570",
+                    description: "\u8fbe\u5230\u6ce8\u518c\u6b21\u6570\u540e\u5f00\u542f\u60e9\u7f5a\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.register_limit_count,
                     onChange: e=>this.set("safe", "register_limit_count", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Thời gian phạt đền (phút)",
-                    description: "Bạn cần đợi thời gian phạt trôi qua trước khi có thể đăng ký lại."
+                    title: "\u60e9\u7f5a\u65f6\u95f4(\u5206\u949f)",
+                    description: "\u9700\u8981\u7b49\u5f85\u60e9\u7f5a\u65f6\u95f4\u8fc7\u540e\u624d\u53ef\u4ee5\u518d\u6b21\u6ce8\u518c\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.register_limit_expire,
                     onChange: e=>this.set("safe", "register_limit_expire", e.target.value)
                 }))) : "", f.a.createElement(m, {
-                    title: "Hạn chế chống nổ",
-                    description: "Sau khi mở, nếu tài khoản không đăng nhập quá nhiều lần sẽ bị hạn chế."
+                    title: "\u9632\u7206\u7834\u9650\u5236",
+                    description: "\u5f00\u542f\u540e\u5982\u679c\u8be5\u8d26\u6237\u5c1d\u8bd5\u767b\u9646\u5931\u8d25\u6b21\u6570\u8fc7\u591a\u5c06\u4f1a\u88ab\u9650\u5236\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.password_limit_enable),
                     onChange: e=>this.set("safe", "password_limit_enable", e ? 1 : 0)
                 })), _.password_limit_enable ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tính thường xuyên",
-                    description: "Hình phạt bắt đầu sau khi đạt đến số lần thất bại."
+                    title: "\u6b21\u6570",
+                    description: "\u8fbe\u5230\u5931\u8d25\u6b21\u6570\u540e\u5f00\u542f\u60e9\u7f5a\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.password_limit_count,
                     onChange: e=>this.set("safe", "password_limit_count", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Thời gian phạt đền (phút)",
-                    description: "Bạn cần đợi thời gian phạt trôi qua trước khi có thể đăng nhập lại."
+                    title: "\u60e9\u7f5a\u65f6\u95f4(\u5206\u949f)",
+                    description: "\u9700\u8981\u7b49\u5f85\u60e9\u7f5a\u65f6\u95f4\u8fc7\u540e\u624d\u53ef\u4ee5\u518d\u6b21\u767b\u9646\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.password_limit_expire,
                     onChange: e=>this.set("safe", "password_limit_expire", e.target.value)
                 }))) : "")), f.a.createElement(s["a"].TabPane, {
-                    tab: "Đăng Ký",
+                    tab: "\u8ba2\u9605",
                     key: "subscribe"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Cho phép người dùng thay đổi đăng ký",
-                    description: "Sau khi bật tính năng này, người dùng sẽ có thể thực hiện các thay đổi đối với gói đăng ký của mình"
+                    title: "\u5141\u8bb8\u7528\u6237\u66f4\u6539\u8ba2\u9605",
+                    description: "\u5f00\u542f\u540e\u7528\u6237\u5c06\u4f1a\u53ef\u4ee5\u5bf9\u8ba2\u9605\u8ba1\u5212\u8fdb\u884c\u53d8\u66f4\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(r.plan_change_enable),
                     onChange: e=>this.set("subscribe", "plan_change_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Phương pháp thiết lập lại lưu lượng truy cập hàng tháng",
-                    description: "Phương pháp đặt lại lưu lượng truy cập toàn cầu, mặc định là ngày 1 hàng tháng. Điều này có thể được đặt riêng cho các đăng ký trong Quản lý đăng ký"
+                    title: "\u6708\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f",
+                    description: "\u5168\u5c40\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f\uff0c\u9ed8\u8ba4\u6bcf\u67081\u53f7\u3002\u53ef\u4ee5\u5728\u8ba2\u9605\u7ba1\u7406\u4e3a\u8ba2\u9605\u5355\u72ec\u8bbe\u7f6e\u3002"
                 }, f.a.createElement("select", {
                     onChange: e=>this.set("subscribe", "reset_traffic_method", e.target.value),
                     className: "form-control",
                     value: r.reset_traffic_method,
-                    placeholder: "Vui lòng chọn phương thức đặt lại đăng ký"
+                    placeholder: "\u8bf7\u9009\u62e9\u8ba2\u9605\u91cd\u7f6e\u65b9\u5f0f"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Ngày 1 hàng tháng"), f.a.createElement("option", {
+                }, "\u6bcf\u67081\u53f7"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại theo tháng"), f.a.createElement("option", {
+                }, "\u6309\u6708\u91cd\u7f6e"), f.a.createElement("option", {
                     value: 2
-                }, "Không đặt lại"), f.a.createElement("option", {
+                }, "\u4e0d\u91cd\u7f6e"), f.a.createElement("option", {
                     value: 3
-                }, "Ngày 1 tháng 1 hàng năm"), f.a.createElement("option", {
+                }, "\u6bcf\u5e741\u67081\u65e5"), f.a.createElement("option", {
                     value: 4
-                }, "Đặt lại theo năm"))), f.a.createElement(m, {
-                    title: "Mở chương trình giảm giá",
-                    description: "Sau khi kích hoạt, hệ thống sẽ giảm giá thuê bao ban đầu nếu người dùng thay đổi thuê bao. Vui lòng tham khảo tài liệu về kế hoạch."
+                }, "\u6309\u5e74\u91cd\u7f6e"))), f.a.createElement(m, {
+                    title: "\u5f00\u542f\u6298\u62b5\u65b9\u6848",
+                    description: "\u5f00\u542f\u540e\u7528\u6237\u66f4\u6362\u8ba2\u9605\u5c06\u4f1a\u7531\u7cfb\u7edf\u5bf9\u539f\u6709\u8ba2\u9605\u8fdb\u884c\u6298\u62b5\uff0c\u65b9\u6848\u53c2\u8003\u6587\u6863\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(r.surplus_enable),
-                    onChange: e => this.set("subscribe", "surplus_enable", e ? 1 : 0)
+                    onChange: e=>this.set("subscribe", "surplus_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Sự kiện kích hoạt khi mua gói đăng ký mới",
-                    description: "Khi hoàn tất mua gói đăng ký mới, nhiệm vụ này sẽ được kích hoạt."
+                    title: "\u5f53\u8ba2\u9605\u65b0\u8d2d\u65f6\u89e6\u53d1\u4e8b\u4ef6",
+                    description: "\u65b0\u8d2d\u8ba2\u9605\u5b8c\u6210\u65f6\u5c06\u89e6\u53d1\u8be5\u4efb\u52a1\u3002"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("subscribe", "new_order_event_id", e.target.value),
+                    onChange: e=>this.set("subscribe", "new_order_event_id", e.target.value),
                     className: "form-control",
                     value: r.new_order_event_id,
-                    placeholder: "Vui lòng chọn sự kiện"
+                    placeholder: "\u8bf7\u9009\u62e9\u4e8b\u4ef6"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Không thực hiện bất kỳ hành động nào"), f.a.createElement("option", {
+                }, "\u4e0d\u6267\u884c\u4efb\u4f55\u52a8\u4f5c"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại lưu lượng người dùng"))), f.a.createElement(m, {
-                    title: "Sự kiện kích hoạt khi gia hạn gói đăng ký",
-                    description: "Khi hoàn tất gia hạn gói đăng ký, nhiệm vụ này sẽ được kích hoạt."
+                }, "\u91cd\u7f6e\u7528\u6237\u6d41\u91cf"))), f.a.createElement(m, {
+                    title: "\u5f53\u8ba2\u9605\u7eed\u8d39\u65f6\u89e6\u53d1\u4e8b\u4ef6",
+                    description: "\u7eed\u8d39\u8ba2\u9605\u5b8c\u6210\u65f6\u5c06\u89e6\u53d1\u8be5\u4efb\u52a1\u3002"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("subscribe", "renew_order_event_id", e.target.value),
+                    onChange: e=>this.set("subscribe", "renew_order_event_id", e.target.value),
                     className: "form-control",
                     value: r.renew_order_event_id,
-                    placeholder: "Vui lòng chọn sự kiện"
+                    placeholder: "\u8bf7\u9009\u62e9\u4e8b\u4ef6"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Không thực hiện bất kỳ hành động nào"), f.a.createElement("option", {
+                }, "\u4e0d\u6267\u884c\u4efb\u4f55\u52a8\u4f5c"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại lưu lượng người dùng"))), f.a.createElement(m, {
-                    title: "Sự kiện kích hoạt khi thay đổi gói đăng ký",
-                    description: "Khi hoàn tất thay đổi gói đăng ký, nhiệm vụ này sẽ được kích hoạt."
+                }, "\u91cd\u7f6e\u7528\u6237\u6d41\u91cf"))), f.a.createElement(m, {
+                    title: "\u5f53\u8ba2\u9605\u53d8\u66f4\u65f6\u89e6\u53d1\u4e8b\u4ef6",
+                    description: "\u53d8\u66f4\u8ba2\u9605\u5b8c\u6210\u65f6\u5c06\u89e6\u53d1\u8be5\u4efb\u52a1\u3002"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("subscribe", "change_order_event_id", e.target.value),
+                    onChange: e=>this.set("subscribe", "change_order_event_id", e.target.value),
                     className: "form-control",
                     value: r.change_order_event_id,
-                    placeholder: "Vui lòng chọn sự kiện"
+                    placeholder: "\u8bf7\u9009\u62e9\u4e8b\u4ef6"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Không thực hiện bất kỳ hành động nào"), f.a.createElement("option", {
+                }, "\u4e0d\u6267\u884c\u4efb\u4f55\u52a8\u4f5c"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại lưu lượng người dùng"))), f.a.createElement(m, {
-                    title: "Hiển thị thông tin đăng ký trong phần đăng ký",
-                    description: "Sau khi bật, thông tin đăng ký sẽ được hiển thị trong phần đăng ký của người dùng."
-                },
-                 f.a.createElement(l["a"], {
+                }, "\u91cd\u7f6e\u7528\u6237\u6d41\u91cf"))), f.a.createElement(m, {
+                    title: "\u5728\u8ba2\u9605\u4e2d\u5c55\u793a\u8ba2\u9605\u4fe1\u606f",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f1a\u5728\u7528\u6237\u8ba2\u9605\u8282\u70b9\u65f6\u8f93\u51fa\u8ba2\u9605\u4fe1\u606f\u3002"
+                }, f.a.createElement(l["a"], {
                     checked: parseInt(r.show_info_to_server_enable),
                     onChange: e=>this.set("subscribe", "show_info_to_server_enable", e ? 1 : 0)
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Nạp tiền",
+                    tab: "\u5145\u503c",
                     key: "deposit"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Thưởng nạp tiền",
-                    description: "Nạp tiền một số tiền nhất định có thể nhận được thưởng."
+                    title: "\u5145\u503c\u5956\u52b1",
+                    description: "\u5145\u503c\u4e00\u5b9a\u91d1\u989d\u53ef\u4ee5\u83b7\u5f97\u7684\u5956\u52b1\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "2",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập số tiền nạp: Thưởng tiền, mã số chia tỷ lệ\nVí dụ: 50:18,100:38, 200:88",
+                    placeholder: "\u8bf7\u8f93\u5165 \u5145\u503c\u91d1\u989d:\u5956\u52b1\u91d1\u989d,\u9017\u53f7\u5206\u5272\n\u5982 50:18,100:38, 200:88",
                     defaultValue: e.deposit.deposit_bounus,
-                    onChange: e => this.set("deposit", "deposit_bounus", e.target.value.split(","))
+                    onChange: e=>this.set("deposit", "deposit_bounus", e.target.value.split(","))
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Ticket",
+                    tab: "\u5de5\u5355",
                     key: "ticket"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Ai có thể tạo Ticket",
-                    description: "Chọn đối tượng được phép tạo ticket"
+                    title: "\u5de5\u5355\u8bbe\u7f6e",
+                    description: "\u8bf7\u9009\u62e9\u5de5\u5355\u7684\u72b6\u6001\u3002"
                 }, f.a.createElement("select", {
                     onChange: e => this.set("ticket", "ticket_status", e.target.value),
                     className: "form-control",
                     value: e.ticket.ticket_status || 0,
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Tất cả mọi người"),
-                    f.a.createElement("option", {
-                        value: 1
-                    }, "Chỉ người dùng đã từng mua gói dịch vụ"),
-                    f.a.createElement("option", {
-                        value: 2
-                    }, "Không ai có thể")
+                }, "\u5b8c\u5168\u5f00\u653e\u5de5\u5355"),
+                   f.a.createElement("option", {
+                    value: 1
+                }, "\u4ec5\u9650\u6709\u4ed8\u8d39\u8ba2\u5355\u7528\u6237"),
+                   f.a.createElement("option", {
+                    value: 2
+                }, "\u5b8c\u5168\u7981\u6b62\u5de5\u5355")
                 )))), f.a.createElement(s["a"].TabPane, {
-                    tab: "CTV & Hoa Hồng",
+                    tab: "\u9080\u8bf7&\u4f63\u91d1",
                     key: "invite"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Bật lời mời bắt buộc",
-                    description: "Sau khi bật, chỉ những người dùng có mã mời mới có thể đăng ký."
+                    title: "\u5f00\u542f\u5f3a\u5236\u9080\u8bf7",
+                    description: "\u5f00\u542f\u540e\u53ea\u6709\u88ab\u9080\u8bf7\u7684\u7528\u6237\u624d\u53ef\u4ee5\u8fdb\u884c\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.invite_force),
-                    onChange: e => this.set("invite", "invite_force", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "invite_force", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Tỷ lệ hoa hồng",
-                    description: "Mặc định tỷ lệ hoa hồng cho mời là toàn web, bạn có thể tùy chỉnh tỷ lệ hoa hồng cho người dùng trong quản lý người dùng."
+                    title: "\u9080\u8bf7\u4f63\u91d1\u767e\u5206\u6bd4",
+                    description: "\u9ed8\u8ba4\u5168\u5c40\u7684\u4f63\u91d1\u5206\u914d\u6bd4\u4f8b\uff0c\u4f60\u53ef\u4ee5\u5728\u7528\u6237\u7ba1\u7406\u5355\u72ec\u914d\u7f6e\u5355\u4e2a\u6bd4\u4f8b\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: n.invite_commission,
-                    onChange: e => this.set("invite", "invite_commission", parseInt(e.target.value))
+                    onChange: e=>this.set("invite", "invite_commission", parseInt(e.target.value))
                 })), f.a.createElement(m, {
-                    title: "Giới hạn tạo mã mời cho người dùng"
+                    title: "\u7528\u6237\u53ef\u521b\u5efa\u9080\u8bf7\u7801\u4e0a\u9650"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: n.invite_gen_limit,
-                    onChange: e => this.set("invite", "invite_gen_limit", parseInt(e.target.value))
+                    onChange: e=>this.set("invite", "invite_gen_limit", parseInt(e.target.value))
                 })), f.a.createElement(m, {
-                    title: "Mã mời không hết hạn",
-                    description: "Sau khi bật, mã mời sẽ không hết hạn, nếu không sẽ hết hạn sau khi sử dụng."
+                    title: "\u9080\u8bf7\u7801\u6c38\u4e0d\u5931\u6548",
+                    description: "\u5f00\u542f\u540e\u9080\u8bf7\u7801\u88ab\u4f7f\u7528\u540e\u5c06\u4e0d\u4f1a\u5931\u6548\uff0c\u5426\u5219\u4f7f\u7528\u8fc7\u540e\u5373\u5931\u6548\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.invite_never_expire),
-                    onChange: e => this.set("invite", "invite_never_expire", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "invite_never_expire", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Hoa hồng chỉ lần đầu mời",
-                    description: "Sau khi bật, người mời chỉ nhận hoa hồng lần đầu tiên, có thể tùy chỉnh trong quản lý người dùng."
+                    title: "\u4f63\u91d1\u4ec5\u9996\u6b21\u53d1\u653e",
+                    description: "\u5f00\u542f\u540e\u88ab\u9080\u8bf7\u4eba\u9996\u6b21\u652f\u4ed8\u65f6\u624d\u4f1a\u4ea7\u751f\u4f63\u91d1\uff0c\u53ef\u4ee5\u5728\u7528\u6237\u7ba1\u7406\u5bf9\u7528\u6237\u8fdb\u884c\u5355\u72ec\u914d\u7f6e\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.commission_first_time_enable),
-                    onChange: e => this.set("invite", "commission_first_time_enable", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "commission_first_time_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "hoa hồng tự động xác nhận",
-                    description: "Sau khi bật, hoa hồng sẽ tự động được xác nhận sau 3 ngày từ khi đăng ký."
+                    title: "\u4f63\u91d1\u81ea\u52a8\u786e\u8ba4",
+                    description: "\u5f00\u542f\u540e\u4f63\u91d1\u5c06\u4f1a\u5728\u8ba2\u5355\u5b8c\u62103\u65e5\u540e\u81ea\u52a8\u8fdb\u884c\u786e\u8ba4\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.commission_auto_check_enable),
-                    onChange: e => this.set("invite", "commission_auto_check_enable", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "commission_auto_check_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Giới hạn yêu cầu rút tiền (VND)",
-                    description: "Nhỏ hơn mức yêu cầu tiền rút sẽ không được giao dịch."
+                    title: "\u63d0\u73b0\u5355\u7533\u8bf7\u95e8\u69db(\u5143)",
+                    description: "\u5c0f\u4e8e\u95e8\u69db\u91d1\u989d\u7684\u63d0\u73b0\u5355\u5c06\u4e0d\u4f1a\u88ab\u63d0\u4ea4\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: n.commission_withdraw_limit,
-                    onChange: e => this.set("invite", "commission_withdraw_limit", e.target.value)
+                    onChange: e=>this.set("invite", "commission_withdraw_limit", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Phương thức rút tiền",
-                    description: "Các phương thức rút tiền được hỗ trợ."
+                    title: "\u63d0\u73b0\u65b9\u5f0f",
+                    description: "\u53ef\u4ee5\u652f\u6301\u7684\u63d0\u73b0\u65b9\u5f0f\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "4",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập sau dấu phân cách, ví dụ: thanh toán bao,USDT,bitcoin",
+                    placeholder: "\u8bf7\u8f93\u5165\u540e\u7f00\u57df\u540d\uff0c\u9017\u53f7\u5206\u5272 \u5982\uff1a\u652f\u4ed8\u5b9d,USDT,\u8d1d\u5b9d",
                     defaultValue: n.commission_withdraw_method,
-                    onChange: e => this.set("invite", "commission_withdraw_method", e.target.value.split(","))
+                    onChange: e=>this.set("invite", "commission_withdraw_method", e.target.value.split(","))
                 })), f.a.createElement(m, {
-                    title: "Đóng yêu cầu rút tiền",
-                    description: "Sau khi đóng, người dùng sẽ không thể yêu cầu rút tiền, và thưởng sẽ trực tiếp được chuyển vào số dư người dùng."
+                    title: "\u5173\u95ed\u63d0\u73b0",
+                    description: "\u5173\u95ed\u540e\u5c06\u7981\u6b62\u7528\u6237\u7533\u8bf7\u63d0\u73b0\uff0c\u4e14\u9080\u8bf7\u4f63\u91d1\u5c06\u4f1a\u76f4\u63a5\u8fdb\u5165\u7528\u6237\u4f59\u989d\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.withdraw_close_enable),
-                    onChange: e => this.set("invite", "withdraw_close_enable", e ? 1 : 0)
-                })),
-                f.a.createElement(m, {
-                    title: "Phân phối cấp ba",
-                    description: "Sau khi bật, tiền thưởng sẽ được phân phối theo tỷ lệ 3 cấp, tổng tỷ lệ không được > 100%."
+                    onChange: e=>this.set("invite", "withdraw_close_enable", e ? 1 : 0)
+                })), f.a.createElement(m, {
+                    title: "\u4e09\u7ea7\u5206\u9500",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f63\u91d1\u5c06\u6309\u7167\u8bbe\u7f6e\u76843\u6210\u6bd4\u4f8b\u8fdb\u884c\u5206\u6210\uff0c\u4e09\u6210\u6bd4\u4f8b\u5408\u8ba1\u8bf7\u4e0d\u8981>100%\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.commission_distribution_enable),
-                    onChange: e => this.set("invite", "commission_distribution_enable", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "commission_distribution_enable", e ? 1 : 0)
                 })), parseInt(n.commission_distribution_enable) ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tỷ lệ mời cấp một"
+                    title: "\u4e00\u7ea7\u9080\u8bf7\u4eba\u6bd4\u4f8b"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập tỷ lệ ví dụ: 50",
+                    placeholder: "\u8bf7\u8f93\u5165\u6bd4\u4f8b\u5982\uff1a50",
                     defaultValue: n.commission_distribution_l1,
-                    onChange: e => this.set("invite", "commission_distribution_l1", e.target.value)
+                    onChange: e=>this.set("invite", "commission_distribution_l1", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tỷ lệ mời cấp hai"
+                    title: "\u4e8c\u7ea7\u9080\u8bf7\u4eba\u6bd4\u4f8b"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập tỷ lệ ví dụ: 30",
+                    placeholder: "\u8bf7\u8f93\u5165\u6bd4\u4f8b\u5982\uff1a30",
                     defaultValue: n.commission_distribution_l2,
-                    onChange: e => this.set("invite", "commission_distribution_l2", e.target.value)
+                    onChange: e=>this.set("invite", "commission_distribution_l2", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tỷ lệ mời cấp ba"
+                    title: "\u4e09\u7ea7\u9080\u8bf7\u4eba\u6bd4\u4f8b"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập tỷ lệ ví dụ: 20",
+                    placeholder: "\u8bf7\u8f93\u5165\u6bd4\u4f8b\u5982\uff1a20",
                     defaultValue: n.commission_distribution_l3,
-                    onChange: e => this.set("invite", "commission_distribution_l3", e.target.value)
+                    onChange: e=>this.set("invite", "commission_distribution_l3", e.target.value)
                 }))) : "")), f.a.createElement(s["a"].TabPane, {
-                    tab: "Cá nhân hóa",
+                    tab: "\u4e2a\u6027\u5316",
                     key: "frontend"
                 }, f.a.createElement("div", {
                     className: "block-content"
@@ -6150,95 +6148,93 @@
                     role: "alert"
                 }, f.a.createElement("p", {
                     className: "mb-0"
-                }, "Nếu bạn sử dụng phương thức phân ly trước V2board quản lý cuối, thì cấu hình trang này sẽ không có hiệu lực. Hiểu thêm", f.a.createElement("b", null, f.a.createElement("a", {
+                }, "\u5982\u679c\u4f60\u91c7\u7528\u524d\u540e\u5206\u79bb\u7684\u65b9\u5f0f\u90e8\u7f72V2board\u7ba1\u7406\u7aef\uff0c\u90a3\u4e48\u672c\u9875\u914d\u7f6e\u5c06\u4e0d\u4f1a\u751f\u6548\u3002\u4e86\u89e3", f.a.createElement("b", null, f.a.createElement("a", {
                     href: "https://docs.v2board.com/use/advanced.html#%E5%89%8D%E7%AB%AF%E5%88%86%E7%A6%BB"
-                }, "Phân ly trước"))))))), f.a.createElement("div", {
+                }, "\u524d\u540e\u5206\u79bb"))))))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Chế độ sidebar"
+                    title: "\u8fb9\u680f\u98ce\u683c"
                 }, f.a.createElement(l["a"], {
-                    checkedChildren: "Sáng",
-                    unCheckedChildren: "Tối",
+                    checkedChildren: "\u4eae",
+                    unCheckedChildren: "\u6697",
                     checked: "light" === c.frontend_theme_sidebar ? 1 : 0,
-                    onChange: e => this.set("site", "frontend_theme_sidebar", e ? "light" : "dark")
+                    onChange: e=>this.set("site", "frontend_theme_sidebar", e ? "light" : "dark")
                 })), f.a.createElement(m, {
-                    title: "Chế độ header"
+                    title: "\u5934\u90e8\u98ce\u683c"
                 }, f.a.createElement(l["a"], {
-                    checkedChildren: "Sáng",
-                    unCheckedChildren: "Tối",
+                    checkedChildren: "\u4eae",
+                    unCheckedChildren: "\u6697",
                     checked: "light" === c.frontend_theme_header ? 1 : 0,
-                    onChange: e => this.set("site", "frontend_theme_header", e ? "light" : "dark")
+                    onChange: e=>this.set("site", "frontend_theme_header", e ? "light" : "dark")
                 })), f.a.createElement(m, {
-                    title: "Màu chủ đề"
+                    title: "\u4e3b\u9898\u8272"
                 }, f.a.createElement("select", {
                     className: "form-control",
                     defaultValue: c.frontend_theme_color,
-                    onChange: e => this.set("frontend", "frontend_theme_color", e.target.value)
+                    onChange: e=>this.set("frontend", "frontend_theme_color", e.target.value)
                 }, f.a.createElement("option", {
                     value: "default"
-                }, "Mặc định"), f.a.createElement("option", {
+                }, "\u9ed8\u8ba4"), f.a.createElement("option", {
                     value: "black"
-                }, "Đen"), f.a.createElement("option", {
+                }, "\u9ed1\u8272"), f.a.createElement("option", {
                     value: "darkblue"
-                }, "Xanh đen"), f.a.createElement("option", {
+                }, "\u6697\u84dd\u8272"), f.a.createElement("option", {
                     value: "green"
-                }, "Xanh lá"))), f.a.createElement(m, {
-                    title: "Ảnh nền",
-                    description: "Ảnh nền sẽ hiển thị ở trang đăng nhập sau khi đăng nhập."
+                }, "\u5976\u7eff\u8272"))), f.a.createElement(m, {
+                    title: "\u80cc\u666f",
+                    description: "\u5c06\u4f1a\u5728\u540e\u53f0\u767b\u5f55\u9875\u9762\u8fdb\u884c\u5c55\u793a\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: "https://xxxxx.com/wallpaper.png",
                     defaultValue: c.frontend_background_url,
-                    onChange: e => this.set("frontend", "frontend_background_url", e.target.value)
+                    onChange: e=>this.set("frontend", "frontend_background_url", e.target.value)
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Server",
+                    tab: "\u8282\u70b9",
                     key: "server"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Khóa API",
-                    description: "Chìa khóa để V2Board giao tiếp với nút để người khác không lấy được dữ liệu."
+                    title: "\u901a\u8baf\u5bc6\u94a5",
+                    description: "V2board\u4e0e\u8282\u70b9\u901a\u8baf\u7684\u5bc6\u94a5\uff0c\u4ee5\u4fbf\u6570\u636e\u4e0d\u4f1a\u88ab\u4ed6\u4eba\u83b7\u53d6\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: u.server_token,
-                    onChange: e => this.set("server", "server_token", e.target.value)
+                    onChange: e=>this.set("server", "server_token", e.target.value)
                 }))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Khoảng cách giữa các lần yêu cầu dữ liệu của server",
-                    description: "Khoảng thời gian giữa các lần lấy dữ liệu từ server."
+                    title: "\u8282\u70b9\u62c9\u53d6\u52a8\u4f5c\u8f6e\u8be2\u95f4\u9694",
+                    description: "\u8282\u70b9\u4ece\u9762\u677f\u83b7\u53d6\u6570\u636e\u7684\u95f4\u9694\u9891\u7387\u3002"
                 }, f.a.createElement(a["a"], {
-                    addonAfter: "giây",
+                    addonAfter: "\u79d2",
                     size: "large",
                     type: "number",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: u.server_pull_interval,
-                    onChange: e => this.set("server", "server_pull_interval", e.target.value)
-                }))),
-                 f.a.createElement("div", {
+                    onChange: e=>this.set("server", "server_pull_interval", e.target.value)
+                }))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Chế độ gửi động tác nghỉ giữa các điểm",
-                    description: "Chế độ gửi dữ liệu đến màn hình với tần suất giữa các điểm."
+                    title: "\u8282\u70b9\u63a8\u9001\u52a8\u4f5c\u8f6e\u8be2\u95f4\u9694",
+                    description: "\u8282\u70b9\u63a8\u9001\u6570\u636e\u5230\u9762\u677f\u7684\u95f4\u9694\u9891\u7387\u3002"
                 }, f.a.createElement(a["a"], {
-                    addonAfter: "giây",
+                    addonAfter: "\u79d2",
                     size: "large",
                     type: "number",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: u.server_push_interval,
-                    onChange: e => this.set("server", "server_push_interval", e.target.value)
-                }))),
-                 f.a.createElement(m, {
-                    title: "Chế độ giới hạn thiết bị sử dụng mô hình phẳng",
-                    description: "Khi bật, cùng một địa chỉ IP sẽ chỉ được sử dụng cho một thiết bị tại một thời điểm."
+                    onChange: e=>this.set("server", "server_push_interval", e.target.value)
+                }))), f.a.createElement(m, {
+                    title: "\u5168\u5c40\u8bbe\u5907\u6570\u9650\u5236\u91c7\u7528\u5bbd\u677e\u6a21\u5f0f",
+                    description: "\u5f00\u542f\u540e\u540c\u4e00IP\u5730\u5740\u4f7f\u7528\u591a\u4e2a\u8282\u70b9\u53ea\u7edf\u8ba1\u4e3a\u4e00\u4e2a\u8bbe\u5907"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(u.device_limit_mode),
                     onChange: e=>this.set("server", "device_limit_mode", e ? 1 : 0)
                 }))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Email",
+                    tab: "\u90ae\u4ef6",
                     key: "email"
                 }, f.a.createElement("div", {
                     className: "block-content"
@@ -6251,67 +6247,67 @@
                     role: "alert"
                 }, f.a.createElement("p", {
                     className: "mb-0"
-                }, "Nếu bạn thay đổi cấu hình của trang này, bạn cần khởi động lại dịch vụ xếp hàng. Ngoài ra, mức độ ưu tiên cấu hình của trang này cao hơn cấu hình email trong .env"))))), f.a.createElement("div", {
+                }, "\u5982\u679c\u4f60\u66f4\u6539\u4e86\u672c\u9875\u914d\u7f6e\uff0c\u9700\u8981\u5bf9\u961f\u5217\u670d\u52a1\u8fdb\u884c\u91cd\u542f\u3002\u53e6\u5916\u672c\u9875\u914d\u7f6e\u4f18\u5148\u7ea7\u9ad8\u4e8e.env\u4e2d\u90ae\u4ef6\u914d\u7f6e\u3002"))))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Địa chỉ máy chủ SMTP",
-                    description: "Địa chỉ máy chủ do nhà cung cấp dịch vụ email cung cấp"
+                    title: "SMTP\u670d\u52a1\u5668\u5730\u5740",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u670d\u52a1\u5730\u5740"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_host,
                     onChange: e=>this.set("email", "email_host", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Cổng dịch vụ SMTP",
-                    description: "Các cổng thường gặp là 25, 465, 587"
+                    title: "SMTP\u670d\u52a1\u7aef\u53e3",
+                    description: "\u5e38\u89c1\u7684\u7aef\u53e3\u670925, 465, 587"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_port,
                     onChange: e=>this.set("email", "email_port", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Phương thức mã hóa SMTP",
-                    description: "Cổng 465 sử dụng phương thức mã hóa SSL, cổng 587 sử dụng phương thức mã hóa TLS"
+                    title: "SMTP\u52a0\u5bc6\u65b9\u5f0f",
+                    description: "465\u7aef\u53e3\u52a0\u5bc6\u65b9\u5f0f\u4e00\u822c\u4e3aSSL\uff0c587\u7aef\u53e3\u52a0\u5bc6\u65b9\u5f0f\u4e00\u822c\u4e3aTLS"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_encryption,
                     onChange: e=>this.set("email", "email_encryption", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Tài khoản SMTP",
-                    description: "Tài khoản do nhà cung cấp dịch vụ email cung cấp"
+                    title: "SMTP\u8d26\u53f7",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u8d26\u53f7"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_username,
                     onChange: e=>this.set("email", "email_username", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Mật khẩu SMTP",
-                    description: "Mật khẩu do nhà cung cấp dịch vụ email cung cấp"
+                    title: "SMTP\u5bc6\u7801",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u5bc6\u7801"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_password,
-                    onChange: e => this.set("email", "email_password", e.target.value)
+                    onChange: e=>this.set("email", "email_password", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Địa chỉ gửi email",
-                    description: "Địa chỉ gửi email do nhà cung cấp dịch vụ email cung cấp"
+                    title: "\u53d1\u4ef6\u5730\u5740",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u53d1\u4ef6\u5730\u5740"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_from_address,
-                    onChange: e => this.set("email", "email_from_address", e.target.value)
+                    onChange: e=>this.set("email", "email_from_address", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Mẫu email",
-                    description: "Bạn có thể trong văn bản kiểm tra cách tự định nghĩa mẫu email"
+                    title: "\u90ae\u4ef6\u6a21\u677f",
+                    description: "\u4f60\u53ef\u4ee5\u5728\u6587\u6863\u67e5\u770b\u5982\u4f55\u81ea\u5b9a\u4e49\u90ae\u4ef6\u6a21\u677f"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("email", "email_template", e.target.value),
+                    onChange: e=>this.set("email", "email_template", e.target.value),
                     className: "form-control",
                     value: v.email_template
                 }, g.map(e=>{
@@ -6321,22 +6317,22 @@
                     }, e)
                 }
                 ))), f.a.createElement(m, {
-                    title: "Gửi thử email",
-                    description: "Email sẽ được gửi đến hộp thư của người dùng hiện tại đang đăng nhập"
+                    title: "\u53d1\u9001\u6d4b\u8bd5\u90ae\u4ef6",
+                    description: "\u90ae\u4ef6\u5c06\u4f1a\u53d1\u9001\u5230\u5f53\u524d\u767b\u9646\u7528\u6237\u90ae\u7bb1"
                 }, f.a.createElement(o["a"], {
                     loading: x,
                     type: "primary",
                     onClick: ()=>this.props.dispatch({
                         type: "config/testSendMail"
                     })
-                }, "Gửi thử email")))), f.a.createElement(s["a"].TabPane, {
+                }, "\u53d1\u9001\u6d4b\u8bd5\u90ae\u4ef6")))), f.a.createElement(s["a"].TabPane, {
                     tab: "Telegram",
                     key: "telegram"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Token Bot Telegram",
-                    description: "Vui lòng nhập token do Botfather cung cấp."
+                    title: "\u673a\u5668\u4ebaToken",
+                    description: "\u8bf7\u8f93\u5165\u7531Botfather\u63d0\u4f9b\u7684token\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -6344,8 +6340,8 @@
                     defaultValue: y.telegram_bot_token,
                     onChange: e=>this.set("telegram", "telegram_bot_token", e.target.value)
                 })), y.telegram_bot_token && f.a.createElement(m, {
-                    title: "Cài đặt Webhook",
-                    description: "Cài đặt Webhook cho bot Telegram. Nếu không cài đặt, bot sẽ không nhận được thông báo từ Telegram."
+                    title: "\u8bbe\u7f6eWebhook",
+                    description: "\u5bf9\u673a\u5668\u4eba\u8fdb\u884cWebhook\u8bbe\u7f6e\uff0c\u4e0d\u8bbe\u7f6e\u5c06\u65e0\u6cd5\u6536\u5230Telegram\u901a\u77e5\u3002"
                 }, f.a.createElement(o["a"], {
                     type: "primary",
                     onClick: ()=>{
@@ -6356,15 +6352,15 @@
                     ,
                     loading: b,
                     disabled: b
-                }, "Cài đặt ngay")), f.a.createElement(m, {
-                    title: "Kích hoạt thông báo bot Telegram",
-                    description: "Kích hoạt bot Telegram sẽ giúp quản trị viên và người dùng nhận thông báo cơ bản từ Telegram."
-                    }, f.a.createElement(l["a"], {
+                }, "\u4e00\u952e\u8bbe\u7f6e")), f.a.createElement(m, {
+                    title: "\u5f00\u542f\u673a\u5668\u4eba\u901a\u77e5",
+                    description: "\u5f00\u542f\u540ebot\u5c06\u4f1a\u5bf9\u7ed1\u5b9a\u4e86telegram\u7684\u7ba1\u7406\u5458\u548c\u7528\u6237\u8fdb\u884c\u57fa\u7840\u901a\u77e5\u3002"
+                }, f.a.createElement(l["a"], {
                     checked: parseInt(y.telegram_bot_enable),
                     onChange: e=>this.set("telegram", "telegram_bot_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Địa chỉ nhóm Telegram",
-                    description: "Nhập địa chỉ nhóm Telegram để người dùng có thể tham gia, hoặc dùng cho các mục đích cần thiết."
+                    title: "\u7fa4\u7ec4\u5730\u5740",
+                    description: "\u586b\u5199\u540e\u5c06\u4f1a\u5728\u7528\u6237\u7aef\u5c55\u793a\uff0c\u6216\u8005\u88ab\u7528\u4e8e\u9700\u8981\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -12258,7 +12254,7 @@
                 }, d.a.createElement("label", null, "Server Name"), d.a.createElement(s["a"], {
                     value: t,
                     onChange: e=>this.change("serverName", e.target.value),
-                    placeholder: "Vui lòng để trống nếu không sử dụng"
+                    placeholder: "\u4e0d\u4f7f\u7528\u8bf7\u7559\u7a7a"
                 })), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", null, "Allow Insecure"), d.a.createElement("div", null, d.a.createElement(y["a"], {
@@ -12313,8 +12309,8 @@
                     })
                 } catch (e) {
                     h["a"].error({
-                        message: "Yêu cầu không thành công",
-                        description: "Định dạng cấu hình giao thức truyền tải không chính xác"
+                        message: "\u8bf7\u6c42\u5931\u8d25",
+                        description: "\u4f20\u8f93\u534f\u8bae\u914d\u7f6e\u683c\u5f0f\u6709\u8bef"
                     })
                 }
             }
@@ -12442,7 +12438,7 @@
                 }), d.a.createElement(r["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -12450,35 +12446,35 @@
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-8"
-                }, d.a.createElement("label", null, "Tên Nút"), d.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, d.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), d.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group col-4"
-                }, d.a.createElement("label", null, "Phóng đại"), d.a.createElement(s["a"], {
+                }, d.a.createElement("label", null, "\u500d\u7387"), d.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), d.a.createElement("div", {
                     className: "form-group"
-                }, d.a.createElement("label", null, "nhãn nút"), d.a.createElement(a["a"], {
+                }, d.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), d.a.createElement(a["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), d.a.createElement("div", {
                     className: "form-group"
-                }, d.a.createElement("label", null, "Nhóm quyền ", d.a.createElement(_["a"], null, d.a.createElement("a", {
+                }, d.a.createElement("label", null, "\u6743\u9650\u7ec4 ", d.a.createElement(_["a"], null, d.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), d.a.createElement(a["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), d.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -12492,18 +12488,18 @@
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-md-8 col-xs-12"
-                }, d.a.createElement("label", null, "Địa chỉ nút"), d.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập địa chỉ kết nối",
+                }, d.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), d.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8fde\u63a5\u5730\u5740",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
                 }, d.a.createElement("label", null, "TLS ", d.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình TLS", "tlsSettings")
-                }, "Chỉnh sửa cấu hình")), d.a.createElement(a["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91TLS\u914d\u7f6e", "tlsSettings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), d.a.createElement(a["a"], {
                     value: parseInt(e.tls) ? 1 : 0,
-                    placeholder: "Có hỗ trợ TLS hay không",
+                    placeholder: "\u662f\u5426\u652f\u6301TLS",
                     style: {
                         width: "100%"
                     },
@@ -12511,35 +12507,35 @@
                 }, d.a.createElement(a["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không hỗ trợ"), d.a.createElement(a["a"].Option, {
+                }, "\u4e0d\u652f\u6301"), d.a.createElement(a["a"].Option, {
                     key: 1,
                     value: 1
-                }, "hỗ trợ")))), d.a.createElement("div", {
+                }, "\u652f\u6301")))), d.a.createElement("div", {
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, d.a.createElement("label", null, "Cổng kết nối"), d.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, d.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), d.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), d.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, d.a.createElement("label", null, "Cảng dịch vụ"), d.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối không giống NAT",
+                }, d.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), d.a.createElement(s["a"], {
+                    placeholder: "\u975eNAT\u540c\u8fde\u63a5\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>this.formChange("server_port", e.target.value)
                 }))), d.a.createElement("div", {
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, d.a.createElement("label", null, "Giao thức vận chuyển ", d.a.createElement("a", {
+                }, d.a.createElement("label", null, "\u4f20\u8f93\u534f\u8bae ", d.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình giao thức", "networkSettings")
-                }, "Chỉnh sửa cấu hình")), d.a.createElement(a["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u534f\u8bae\u914d\u7f6e", "networkSettings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), d.a.createElement(a["a"], {
                     value: e.network,
-                    placeholder: "Chọn giao thức vận chuyển",
+                    placeholder: "\u9009\u62e9\u4f20\u8f93\u534f\u8bae",
                     style: {
                         width: "100%"
                     },
@@ -12560,7 +12556,7 @@
                     className: "form-group"
                 }, d.a.createElement("label", null, d.a.createElement(o["a"], {
                     placement: "top"
-                }, "Nút cha ", d.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", d.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
@@ -12574,7 +12570,7 @@
                     }
                 }, d.a.createElement(a["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("vmess" === t.type && t.id !== e.id)
                         return d.a.createElement(a["a"].Option, {
                             key: Math.random(),
@@ -12583,10 +12579,10 @@
                 }
                 ))), d.a.createElement("div", {
                     className: "form-group"
-                }, d.a.createElement("label", null, "nhóm định tuyến"), d.a.createElement(a["a"], {
+                }, d.a.createElement("label", null, "\u8def\u7531\u7ec4"), d.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -12603,11 +12599,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), d.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), d.a.createElement(i["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi")), d.a.createElement(r["a"], {
+                }, "\u63d0\u4ea4")), d.a.createElement(r["a"], {
                     closable: !1,
                     id: "server",
                     width: "80%",
@@ -18795,7 +18791,7 @@
                 e.getThemesLoading;
                 return l.a.createElement(c["a"], i()({}, this.props, {
                     loading: Object.keys(t).length <= 0,
-                    title: "Cấu hình chủ đề"
+                    title: "\u4e3b\u9898\u914d\u7f6e"
                 }), l.a.createElement("div", {
                     className: "row"
                 }, l.a.createElement("div", {
@@ -18805,9 +18801,9 @@
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Nếu bạn triển khai riêng V2board, cấu hình chủ đề sẽ không có hiệu lực. học hỏi", l.a.createElement("b", null, l.a.createElement("a", {
+                }, "\u5982\u679c\u4f60\u91c7\u7528\u524d\u540e\u5206\u79bb\u7684\u65b9\u5f0f\u90e8\u7f72V2board\uff0c\u90a3\u4e48\u4e3b\u9898\u914d\u7f6e\u5c06\u4e0d\u4f1a\u751f\u6548\u3002\u4e86\u89e3", l.a.createElement("b", null, l.a.createElement("a", {
                     href: "https://docs.v2board.com/use/advanced.html#%E5%89%8D%E7%AB%AF%E5%88%86%E7%A6%BB"
-                }, "sự tách biệt phía trước và phía sau")))))), Object.keys(t).map(e=>{
+                }, "\u524d\u540e\u5206\u79bb")))))), Object.keys(t).map(e=>{
                     var r = t[e];
                     return l.a.createElement("div", {
                         className: "block block-transparent bg-image mb-0 mb-md-3 bg-primary",
@@ -18831,14 +18827,14 @@
                         className: "btn btn-sm rounded-pill btn-outline-light px-3 mr-2",
                         onClick: ()=>this.activeTheme(e),
                         disabled: n === e
-                    }, n === e ? "Chủ đề hiện tại" : "Kích hoạt chủ đề"), l.a.createElement(g, {
+                    }, n === e ? "\u5f53\u524d\u4e3b\u9898" : "\u6fc0\u6d3b\u4e3b\u9898"), l.a.createElement(g, {
                         keyName: e,
                         themeName: r.name,
                         configs: r.configs
                     }, l.a.createElement("button", {
                         type: "button",
                         className: "btn btn-sm rounded-pill btn-outline-light px-3"
-                    }, "Cài đặt chủ đề"))))))
+                    }, "\u4e3b\u9898\u8bbe\u7f6e"))))))
                 }
                 ))
             }
@@ -19215,8 +19211,8 @@
                     onOk: ()=>e || this.save(),
                     okText: e ? c.a.createElement(o["a"], {
                         type: "loading"
-                    }) : "Gửi",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88"
                 }, c.a.createElement("div", null, c.a.createElement("div", {
                     className: "form-group"
                 }, c.a.createElement("label", {
@@ -20937,127 +20933,127 @@
                 super(e),
                 this.state = {
                     nav: [{
-                        title: "Bảng Điều Khiển",
+                        title: "\u4eea\u8868\u76d8",
                         type: "item",
                         href: "/dashboard",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-speedometer"
                         })
                     }, {
-                        title: "Cài Đặt",
+                        title: "\u8bbe\u7f6e",
                         type: "heading"
                     }, {
-                        title: "Cấu Hình Hệ Thống",
+                        title: "\u7cfb\u7edf\u914d\u7f6e",
                         type: "item",
                         href: "/config/system",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-equalizer"
                         })
                     }, {
-                        title: "Cấu Hình Thanh Toán",
+                        title: "\u652f\u4ed8\u914d\u7f6e",
                         type: "item",
                         href: "/config/payment",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-credit-card"
                         })
                     }, {
-                        title: "Cầu Hình Chủ Đề",
+                        title: "\u4e3b\u9898\u914d\u7f6e",
                         type: "item",
                         href: "/config/theme",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-magic-wand"
                         })
                     }, {
-                        title: "Máy Chủ",
+                        title: "\u670d\u52a1\u5668",
                         type: "heading"
                     }, {
-                        title: "Quản Lý Node",
+                        title: "\u8282\u70b9\u7ba1\u7406",
                         type: "item",
                         href: "/server/manage",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-layers"
                         })
                     }, {
-                        title: "Quản Lý Group",
+                        title: "\u6743\u9650\u7ec4\u7ba1\u7406",
                         type: "item",
                         href: "/server/group",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-wrench"
                         })
                     }, {
-                        title: "Quản Lý Tuyến Đường",
+                        title: "\u8def\u7531\u7ba1\u7406",
                         type: "item",
                         href: "/server/route",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-shuffle"
                         })
                     }, {
-                        title: "Tài Chính",
+                        title: "\u8d22\u52a1",
                         type: "heading"
                     }, {
-                        title: "Quản Lý Đăng Ký",
+                        title: "\u8ba2\u9605\u7ba1\u7406",
                         type: "item",
                         href: "/plan",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-bag"
                         })
                     }, {
-                        title: "Quản Lý Đơn Hàng",
+                        title: "\u8ba2\u5355\u7ba1\u7406",
                         type: "item",
                         href: "/order",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-list"
                         })
                     }, {
-                        title: "Quản Lý Mã Giảm Giá",
+                        title: "\u4f18\u60e0\u5238\u7ba1\u7406",
                         type: "item",
                         href: "/coupon",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-present"
                         })
                     }, {
-                        title: "Quản Lý Thẻ Quà",
+                        title: "\u793c\u54c1\u5361\u7ba1\u7406",
                         type: "item",
                         href: "/giftcard",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-star"
                         })
                     }, {
-                        title: "Người Dùng",
+                        title: "\u7528\u6237",
                         type: "heading"
                     }, {
-                        title: "Quản Lý Người Dùng",
+                        title: "\u7528\u6237\u7ba1\u7406",
                         type: "item",
                         href: "/user",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-users"
                         })
                     }, {
-                        title: "Quản Lý Thông Báo",
+                        title: "\u516c\u544a\u7ba1\u7406",
                         type: "item",
                         href: "/notice",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-speech"
                         })
                     }, {
-                        title: "Quản Lý Ticket",
+                        title: "\u5de5\u5355\u7ba1\u7406",
                         type: "item",
                         href: "/ticket",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-support"
                         })
                     }, {
-                        title: "Quản Lý Hướng Dẫn",
+                        title: "\u77e5\u8bc6\u5e93\u7ba1\u7406",
                         type: "item",
                         href: "/knowledge",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-bulb"
                         })
                     }, {
-                        title: "Mục Lục",
+                        title: "\u6307\u6807",
                         type: "heading"
                     }, {
-                        title: "Giám Sát Hàng Chờ",
+                        title: "\u961f\u5217\u76d1\u63a7",
                         type: "item",
                         href: "/queue",
                         icon: o.a.createElement("i", {
@@ -22222,7 +22218,7 @@
                     title: "\u7528\u6237\u7ba1\u7406",
                     visible: f,
                     onClose: ()=>this.hide(),
-                    cancelText: "Hủy bỏ"
+                    cancelText: "\u53d6\u6d88"
                 }, t.email ? p.a.createElement("div", null, p.a.createElement("div", null, p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
@@ -22325,7 +22321,7 @@
                     onChange: e=>this.formChange("plan_id", e)
                 }, p.a.createElement(l["a"].Option, {
                     value: null
-                }, "Không"), h.map(e=>{
+                }, "\u65e0"), h.map(e=>{
                     return p.a.createElement(l["a"].Option, {
                         key: Math.random(),
                         value: e.id
@@ -22428,12 +22424,12 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.hide()
-                }, "Hủy bỏ"), p.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), p.a.createElement(i["a"], {
                     disabled: n,
                     loading: n,
                     onClick: ()=>this.submit(),
                     type: "primary"
-                }, "Gửi"))) : p.a.createElement(s["a"], {
+                }, "\u63d0\u4ea4"))) : p.a.createElement(s["a"], {
                     type: "loading",
                     style: {
                         fontSize: 24,
@@ -28141,7 +28137,7 @@
                 }), h.a.createElement(r["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -28149,35 +28145,35 @@
                     className: "row"
                 }, h.a.createElement("div", {
                     className: "form-group col-8"
-                }, h.a.createElement("label", null, "Tên Nút"), h.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, h.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), h.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), h.a.createElement("div", {
                     className: "form-group col-4"
-                }, h.a.createElement("label", null, "Phóng đại"), h.a.createElement(s["a"], {
+                }, h.a.createElement("label", null, "\u500d\u7387"), h.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "nhãn nút"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), h.a.createElement(a["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "Nhóm quyền ", h.a.createElement(d["a"], null, h.a.createElement("a", {
+                }, h.a.createElement("label", null, "\u6743\u9650\u7ec4 ", h.a.createElement(d["a"], null, h.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), h.a.createElement(a["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), h.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -28191,31 +28187,31 @@
                     className: "row"
                 }, h.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, h.a.createElement("label", null, "Địa chỉ nút"), h.a.createElement(s["a"], {
-                    placeholder: "Địa chỉ hoặc IP",
+                }, h.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), h.a.createElement(s["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 }))), h.a.createElement("div", {
                     className: "row"
                 }, h.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, h.a.createElement("label", null, "Cổng kết nối"), h.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, h.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), h.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), h.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, h.a.createElement("label", null, "Cảng dịch vụ"), h.a.createElement(s["a"], {
-                    placeholder: "Cổng mở máy chủ",
+                }, h.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), h.a.createElement(s["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>{
                         this.formChange("server_port", e.target.value)
                     }
                 }))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "thuật toán mã hóa"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u52a0\u5bc6\u7b97\u6cd5"), h.a.createElement(a["a"], {
                     value: e.cipher,
                     onChange: e=>this.formChange("cipher", e),
                     style: {
@@ -28235,7 +28231,7 @@
                     value: "2022-blake3-aes-256-gcm"
                 }, "2022-blake3-aes-256-gcm"))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "Bối rối"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u6df7\u6dc6"), h.a.createElement(a["a"], {
                     value: e.obfs || "",
                     onChange: e=>this.formChange("obfs", e),
                     style: {
@@ -28243,17 +28239,17 @@
                     }
                 }, h.a.createElement(a["a"].Option, {
                     value: ""
-                }, "Không"), h.a.createElement(a["a"].Option, {
+                }, "\u65e0"), h.a.createElement(a["a"].Option, {
                     value: "http"
                 }, "HTTP")), h.a.createElement("div", null, this.renderObfs())), h.a.createElement("div", {
                     className: "form-group"
                 }, h.a.createElement("label", null, h.a.createElement(o["a"], {
                     placement: "top"
-                }, "Nút cha ", h.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", h.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
-                }, "Tìm hiểu thêm"))), h.a.createElement(a["a"], {
+                }, "\u66f4\u591a\u89e3\u7b54"))), h.a.createElement(a["a"], {
                     value: e.parent_id || "",
                     onChange: e=>this.formChange("parent_id", e),
                     style: {
@@ -28261,7 +28257,7 @@
                     }
                 }, h.a.createElement(a["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("shadowsocks" === t.type && t.id !== e.id)
                         return h.a.createElement(a["a"].Option, {
                             key: Math.random(),
@@ -28270,10 +28266,10 @@
                 }
                 ))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "nhóm định tuyến"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u8def\u7531\u7ec4"), h.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -28290,11 +28286,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), h.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), h.a.createElement(i["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         t["a"] = Object(f["c"])(e=>{
@@ -31282,7 +31278,7 @@
                         return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -31293,12 +31289,12 @@
                                 submit: t[r]
                             }, ()=>this.modalVisible()),
                             href: "javascript:void(0);"
-                        }, "Biên Tập"), g.a.createElement(h["a"], {
+                        }, "\u7f16\u8f91"), g.a.createElement(h["a"], {
                             type: "vertical"
                         }), g.a.createElement("a", {
                             onClick: ()=>this.drop(n),
                             href: "javascript:void(0);"
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
@@ -31334,8 +31330,8 @@
                     onOk: ()=>this.state.saveLoading || this.save(),
                     okText: this.state.saveLoading ? g.a.createElement(u["a"], {
                         type: "loading"
-                    }) : "Gửi",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88"
                 }, g.a.createElement("div", null, g.a.createElement("div", {
                     className: "form-group"
                 }, g.a.createElement("label", {
@@ -31375,7 +31371,7 @@
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>{
                         this.setState({
                             submit: p()({}, this.state.submit, {
@@ -32771,7 +32767,7 @@
             today: "\u4eca\u5929",
             now: "\u6b64\u523b",
             backToToday: "\u8fd4\u56de\u4eca\u5929",
-            ok: "Chắc chắn",
+            ok: "\u786e\u5b9a",
             timeSelect: "\u9009\u62e9\u65f6\u95f4",
             dateSelect: "\u9009\u62e9\u65e5\u671f",
             weekSelect: "\u9009\u62e9\u5468",
@@ -36486,7 +36482,7 @@
         t["a"] = {
             items_per_page: "\u6761/\u9875",
             jump_to: "\u8df3\u81f3",
-            jump_to_confirm: "Chắc chắn",
+            jump_to_confirm: "\u786e\u5b9a",
             page: "\u9875",
             prev_page: "\u4e0a\u4e00\u9875",
             next_page: "\u4e0b\u4e00\u9875",
@@ -39672,7 +39668,7 @@
                             },
                             onClick: ()=>{
                                 S()(e),
-                                p["a"].success("Sao chép thành công")
+                                p["a"].success("\u590d\u5236\u6210\u529f")
                             }
                         }, e)
                     }
@@ -39692,7 +39688,7 @@
                         return "".concat(_()(1e3 * t.started_at).format("YYYY/MM/DD HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("YYYY/MM/DD HH:mm"))
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -39709,21 +39705,21 @@
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Biên Tập"), b.a.createElement(f["a"], {
+                        }, "\u7f16\u8f91"), b.a.createElement(f["a"], {
                             type: "vertical"
                         }), b.a.createElement("a", {
                             onClick: ()=>{
                                 h["a"].confirm({
-                                    title: "Cảnh Báo",
-                                    content: "Bạn có chắc chắn muốn xóa mục này?",
+                                    title: "\u8b66\u544a",
+                                    content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                     onOk: ()=>this.drop(n),
-                                    okText: "Chắc chắn",
-                                    cancelText: "Hủy bỏ"
+                                    okText: "\u786e\u5b9a",
+                                    cancelText: "\u53d6\u6d88"
                                 })
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return b.a.createElement(w["a"], i()({}, this.props, {
@@ -39760,8 +39756,8 @@
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.generate(),
-                    okText: "Gửi",
-                    cancelText: "Hủy bỏ",
+                    okText: "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88",
                     okButtonProps: {
                         loading: r
                     },
@@ -40741,7 +40737,7 @@
                     title: "\u521b\u5efa\u7528\u6237",
                     visible: c,
                     onCancel: ()=>this.hide(),
-                    cancelText: "Hủy bỏ",
+                    cancelText: "\u53d6\u6d88",
                     onOk: ()=>this.submit(),
                     okButtonProps: {
                         loading: n
@@ -40806,7 +40802,7 @@
                     onChange: e=>this.formChange("plan_id", e)
                 }, u.a.createElement(i["a"].Option, {
                     value: null
-                }, "Không"), s.map(e=>{
+                }, "\u65e0"), s.map(e=>{
                     return u.a.createElement(i["a"].Option, {
                         key: Math.random(),
                         value: e.id
@@ -41130,7 +41126,7 @@
                     render: (e,t)=>{
                         return 1 === t.status ? d.a.createElement("span", null, d.a.createElement(h["a"], {
                             status: "success"
-                        }), "\u5df2Đóng") : d.a.createElement("span", null, d.a.createElement(h["a"], {
+                        }), "\u5df2\u5173\u95ed") : d.a.createElement("span", null, d.a.createElement(h["a"], {
                             status: e ? "processing" : "error"
                         }), e ? "\u5df2\u56de\u590d" : "\u5f85\u56de\u590d")
                     }
@@ -41149,7 +41145,7 @@
                         return v()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -41164,7 +41160,7 @@
                             disabled: t.status,
                             href: "javascript:void(0);",
                             onClick: ()=>this.close(t.id)
-                        }, "Đóng"))
+                        }, "\u5173\u95ed"))
                     }
                 }];
                 return d.a.createElement(p["a"], i()({}, this.props, {
@@ -41184,7 +41180,7 @@
                     value: 0
                 }, "\u5df2\u5f00\u542f"), d.a.createElement(c["a"].Button, {
                     value: 1
-                }, "\u5df2Đóng")), d.a.createElement("div", {
+                }, "\u5df2\u5173\u95ed")), d.a.createElement("div", {
                     style: {
                         float: "right"
                     }
@@ -45441,7 +45437,7 @@
                     align: "right",
                     render: e=>Object(p["b"])(e)
                 }, {
-                    title: "Phóng đại",
+                    title: "\u500d\u7387",
                     dataIndex: "server_rate",
                     key: "server_rate",
                     align: "right"
@@ -70790,8 +70786,8 @@
                             id: e.id
                         })
                     },
-                    okText: "Chắc chắn",
-                    cancelText: "Hủy bỏ"
+                    okText: "\u786e\u5b9a",
+                    cancelText: "\u53d6\u6d88"
                 })
             }
             delUser(e) {
@@ -70805,8 +70801,8 @@
                             id: e.id
                         })
                     },
-                    okText: "Chắc chắn",
-                    cancelText: "Hủy bỏ"
+                    okText: "\u786e\u5b9a",
+                    cancelText: "\u53d6\u6d88"
                 })
             }
             render() {
@@ -70838,7 +70834,7 @@
                         }, e ? "\u5c01\u7981" : "\u6b63\u5e38")
                     }
                 }, {
-                    title: "Đăng Ký",
+                    title: "\u8ba2\u9605",
                     dataIndex: "plan_name",
                     key: "plan_id",
                     sorter: !0,
@@ -70914,7 +70910,7 @@
                         return w()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -70931,7 +70927,7 @@
                                 key: t.id
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "edit"
-                            }), " Chỉnh Sửa"))), g.a.createElement(c["a"].Item, {
+                            }), " \u7f16\u8f91"))), g.a.createElement(c["a"].Item, {
                                 onContextMenu: e=>{
                                     e.stopPropagation()
                                 }
@@ -70969,10 +70965,10 @@
                                 onClick: ()=>this.delUser(t)
                             }, g.a.createElement(u["a"], {
                                 type: "delete"
-                            }), " Xóa người dùng")))
+                            }), " \u5220\u9664\u7528\u6237")))
                         }, g.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Chỉnh Sửa ", g.a.createElement(u["a"], {
+                        }, "\u64cd\u4f5c ", g.a.createElement(u["a"], {
                             type: "caret-down"
                         }))))
                     }
@@ -71010,7 +71006,7 @@
                         condition: ["=", ">=", ">", "<", "<="]
                     }, {
                         key: "plan_id",
-                        title: "Đăng Ký",
+                        title: "\u8ba2\u9605",
                         condition: ["="],
                         type: "select",
                         options:[{
@@ -71070,10 +71066,10 @@
                         condition: ["="],
                         type: "select",
                         options: [{
-                            key: "Đúng",
+                            key: "\u662f",
                             value: 1
                         }, {
-                            key: "Không",
+                            key: "\u5426",
                             value: 0
                         }]
                     }]
@@ -71105,7 +71101,7 @@
                     }), " \u6279\u91cf\u5220\u9664")))
                 }, g.a.createElement(s["a"], null, g.a.createElement(u["a"], {
                     type: "select"
-                }), "Chỉnh Sửa")))), g.a.createElement(T["a"], null, g.a.createElement(s["a"], {
+                }), "\u64cd\u4f5c")))), g.a.createElement(T["a"], null, g.a.createElement(s["a"], {
                     className: "ml-2"
                 }, g.a.createElement(u["a"], {
                     type: "user-add"
@@ -71137,7 +71133,7 @@
                     key: null === (t = this.record) || void 0 === t ? void 0 : t.id
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "edit"
-                }), " Chỉnh Sửa"))), g.a.createElement("li", {
+                }), " \u7f16\u8f91"))), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement(S["a"], {
                     email: null === (n = this.record) || void 0 === n ? void 0 : n.email,
@@ -73689,39 +73685,39 @@
                 return d.a.createElement(d.a.Fragment, null, d.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
                 }), d.a.createElement(s["a"], {
-                    title: this.state.submit.id ? "Chỉnh sửa phương thức thanh toán" : "Thêm phương thức thanh toán",
+                    title: this.state.submit.id ? "\u7f16\u8f91\u652f\u4ed8\u65b9\u5f0f" : "\u6dfb\u52a0\u652f\u4ed8\u65b9\u5f0f",
                     visible: this.state.visible,
-                    onCancel: () => this.setState({
+                    onCancel: ()=>this.setState({
                         visible: !1
                     }),
-                    onOk: () => this.save(),
-                    okText: this.state.submit.id ? "Lưu" : "Thêm",
+                    onOk: ()=>this.save(),
+                    okText: this.state.submit.id ? "\u4fdd\u5b58" : "\u6dfb\u52a0",
                     okButtonProps: {
                         loading: e
                     },
-                    cancelText: "Hủy bỏ"
+                    cancelText: "\u53d6\u6d88"
                 }, d.a.createElement("div", null, d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Hiển thị tên"), d.a.createElement(v["a"], {
-                    placeholder: "Sử dụng để hiển thị trên frontend",
+                }, "\u663e\u793a\u540d\u79f0"), d.a.createElement(v["a"], {
+                    placeholder: "\u7528\u4e8e\u524d\u7aef\u663e\u793a\u4f7f\u7528",
                     defaultValue: a.name,
-                    onChange: e => this.submitOnChange("name", e.target.value)
+                    onChange: e=>this.submitOnChange("name", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "URL biểu tượng (tùy chọn)"), d.a.createElement(v["a"], {
-                    placeholder: "Sử dụng để hiển thị trên frontend (https://x.com/icon.svg)",
+                }, "\u56fe\u6807URL(\u9009\u586b)"), d.a.createElement(v["a"], {
+                    placeholder: "\u7528\u4e8e\u524d\u7aef\u663e\u793a\u4f7f\u7528(https://x.com/icon.svg)",
                     defaultValue: a.icon,
-                    onChange: e => this.submitOnChange("icon", e.target.value)
+                    onChange: e=>this.submitOnChange("icon", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Tùy chỉnh tên miền thông báo (tùy chọn)"), d.a.createElement(v["a"], {
-                    placeholder: "Thông báo liên quan đến trang web sẽ được gửi đến tên miền này (https://x.com)",
+                }, "\u81ea\u5b9a\u4e49\u901a\u77e5\u57df\u540d(\u9009\u586b)"), d.a.createElement(v["a"], {
+                    placeholder: "\u7f51\u5173\u7684\u901a\u77e5\u5c06\u4f1a\u53d1\u9001\u5230\u8be5\u57df\u540d(https://x.com)",
                     defaultValue: a.notify_domain,
                     onChange: e=>this.submitOnChange("notify_domain", e.target.value)
                 })), d.a.createElement("div", {
@@ -73732,10 +73728,10 @@
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Phần trăm phí xử lý (tùy chọn)"), d.a.createElement(v["a"], {
+                }, "\u767e\u5206\u6bd4\u624b\u7eed\u8d39(\u9009\u586b)"), d.a.createElement(v["a"], {
                     suffix: "%",
                     type: "number",
-                    placeholder: "Một khoản phí xử lý sẽ được thêm vào số tiền đặt hàng.",
+                    placeholder: "\u5728\u8ba2\u5355\u91d1\u989d\u57fa\u7840\u4e0a\u9644\u52a0\u624b\u7eed\u8d39",
                     defaultValue: a.handling_fee_percent,
                     onChange: e=>this.submitOnChange("handling_fee_percent", e.target.value)
                 }))), d.a.createElement("div", {
@@ -73744,16 +73740,16 @@
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Phí xử lý cố định (tùy chọn)"), d.a.createElement(v["a"], {
+                }, "\u56fa\u5b9a\u624b\u7eed\u8d39(\u9009\u586b)"), d.a.createElement(v["a"], {
                     type: "number",
-                    placeholder: "Một khoản phí xử lý sẽ được thêm vào số tiền đặt hàng.",
+                    placeholder: "\u5728\u8ba2\u5355\u91d1\u989d\u57fa\u7840\u4e0a\u9644\u52a0\u624b\u7eed\u8d39",
                     defaultValue: a.handling_fee_fixed / 100,
                     onChange: e=>this.submitOnChange("handling_fee_fixed", 100 * e.target.value)
                 })))), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "tập tin giao diện"), d.a.createElement("div", null, d.a.createElement(g["a"], {
+                }, "\u63a5\u53e3\u6587\u4ef6"), d.a.createElement("div", null, d.a.createElement(g["a"], {
                     style: {
                         width: "100%"
                     },
@@ -73840,7 +73836,7 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "Hiện",
+                    title: "\u542f\u7528",
                     dataIndex: "enable",
                     key: "enable",
                     render: (e,t)=>d.a.createElement(u["a"], {
@@ -73849,24 +73845,24 @@
                         onChange: e=>this.show(t.id)
                     })
                 }, {
-                    title: "Tên",
+                    title: "\u663e\u793a\u540d\u79f0",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "Giao Diện",
+                    title: "\u652f\u4ed8\u63a5\u53e3",
                     dataIndex: "payment",
                     key: "payment"
                 }, {
-                    title: d.a.createElement("span", null, "URL thông báo ", d.a.createElement(c["a"], {
+                    title: d.a.createElement("span", null, "\u901a\u77e5\u5730\u5740 ", d.a.createElement(c["a"], {
                         placement: "top",
-                        title: "Cổng thanh toán sẽ thông báo dữ liệu về địa chỉ này. Vui lòng cho phép địa chỉ này thông qua tường lửa."
+                        title: "\u652f\u4ed8\u7f51\u5173\u5c06\u4f1a\u628a\u6570\u636e\u901a\u77e5\u5230\u672c\u5730\u5740\uff0c\u8bf7\u901a\u8fc7\u9632\u706b\u5899\u653e\u884c\u672c\u5730\u5740\u3002"
                     }, d.a.createElement(h["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "notify_url",
                     key: "notify_url"
                 }, {
-                    title: "Chỉnh Sủa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -73876,26 +73872,26 @@
                         record: t
                     }, d.a.createElement("a", {
                         href: "javascript:void(0);"
-                    }, "Biên Tập")), d.a.createElement(l["a"], {
+                    }, "\u7f16\u8f91")), d.a.createElement(l["a"], {
                         type: "vertical"
                     }), d.a.createElement("a", {
                         href: "javascript:void(0)",
                         onClick: ()=>{
                             s["a"].confirm({
-                                title: "Cảnh Báo",
-                                content: "Bạn có chắc chắn muốn xóa mục này?",
+                                title: "\u8b66\u544a",
+                                content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                 onOk: ()=>this.props.dispatch({
                                     type: "payment/drop",
                                     id: t.id
                                 }),
-                                okText: "Chắc chắn",
-                                cancelText: "Hủy bỏ"
+                                okText: "\u786e\u5b9a",
+                                cancelText: "\u53d6\u6d88"
                             })
                         }
-                    }, "Xóa bỏ"))
+                    }, "\u5220\u9664"))
                 }];
                 return d.a.createElement(p["a"], i()({}, this.props, {
-                    title: "Cấu hình thanh toán"
+                    title: "\u652f\u4ed8\u914d\u7f6e"
                 }), d.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), d.a.createElement(_["a"], {
@@ -73912,7 +73908,7 @@
                     key: 0
                 }, d.a.createElement(a["a"], null, d.a.createElement(h["a"], {
                     type: "plus"
-                }), " Thêm phương thức thanh toán"))), d.a.createElement(E["a"], {
+                }), " \u6dfb\u52a0\u652f\u4ed8\u65b9\u5f0f"))), d.a.createElement(E["a"], {
                     onDragEnd: (t,n)=>{
                         e.props.dispatch({
                             type: "payment/sort",
@@ -78335,7 +78331,7 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.hide()
-                }, "Hủy bỏ"), m.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), m.a.createElement(i["a"], {
                     disabled: !this.state.filter.length,
                     onClick: ()=>this.onOk(),
                     type: "primary"
@@ -80674,7 +80670,7 @@
                     onClose: ()=>this.setState({
                         visible: !1
                     }),
-                    title: "".concat(this.state.record.id ? "Chỉnh sửa đăng ký" : "Đăng ký mới"),
+                    title: "".concat(this.state.record.id ? "\u7f16\u8f91\u8ba2\u9605" : "\u65b0\u5efa\u8ba2\u9605"),
                     visible: this.state.visible,
                     width: "80%"
                 }, m.a.createElement("div", null, m.a.createElement("div", {
@@ -80824,10 +80820,10 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Nhóm quyền ", m.a.createElement(O["a"], null, m.a.createElement("a", {
+                }, "\u6743\u9650\u7ec4 ", m.a.createElement(O["a"], null, m.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), m.a.createElement(_["a"], {
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), m.a.createElement(_["a"], {
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -80850,7 +80846,7 @@
                 }, m.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
                 }, "\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f"), m.a.createElement(_["a"], {
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -80932,11 +80928,11 @@
                     onClick: ()=>this.setState({
                         visible: !1
                     })
-                }, "Hủy bỏ"), m.a.createElement(o["a"], {
+                }, "\u53d6\u6d88"), m.a.createElement(o["a"], {
                     loading: t,
                     onClick: ()=>t || this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         var L = Object(v["c"])(e=>{
@@ -81004,7 +81000,7 @@
             }
             render() {
                 var e, t = this.props.plan, n = t.plans, r = t.fetchLoading, f = this.props.serverGroup.groups, d = [{
-                    title: "Loại",
+                    title: "\u6392\u5e8f",
                     dataIndex: "sort",
                     key: "sort",
                     render: (e,t)=>{
@@ -81016,7 +81012,7 @@
                         }))
                     }
                 }, {
-                    title: "Hiện",
+                    title: "\u9500\u552e\u72b6\u6001",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -81027,9 +81023,9 @@
                         })
                     }
                 }, {
-                    title: m.a.createElement("span", null, "Gia Hạn ", m.a.createElement(c["a"], {
+                    title: m.a.createElement("span", null, "\u7eed\u8d39 ", m.a.createElement(c["a"], {
                         placement: "top",
-                        title: "Khi gói đăng ký không còn mua mới được, người dùng hiện tại có thể gia hạn gói đăng ký của mình không?"
+                        title: "\u5728\u8ba2\u9605\u505c\u6b62\u9500\u552e\u65f6\uff0c\u5df2\u8d2d\u7528\u6237\u662f\u5426\u53ef\u4ee5\u7eed\u8d39"
                     }, m.a.createElement(h["a"], {
                         type: "question-circle"
                     }))),
@@ -81043,11 +81039,11 @@
                         })
                     }
                 }, {
-                    title: "Tên",
+                    title: "\u540d\u79f0",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "Tổng",
+                    title: "\u7edf\u8ba1",
                     dataIndex: "count",
                     key: "count",
                     render: e=>{
@@ -81059,77 +81055,77 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "Data",
+                    title: "\u6d41\u91cf",
                     dataIndex: "transfer_enable",
                     key: "transfer_enable",
                     render: e=>{
                         return m.a.createElement(m.a.Fragment, null, e, " GB")
                     }
                 }, {
-                    title: "Limit Thiết bị",
+                    title: "\u8bbe\u5907\u6570\u9650\u5236",
                     dataIndex: "device_limit",
                     key: "device_limit",
                     render: e=>{
                         return null !== e ? e : "-"
                     }
                 }, {
-                    title: "Tháng",
+                    title: "\u6708\u4ed8",
                     dataIndex: "month_price",
                     key: "month_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Quý",
+                    title: "\u5b63\u4ed8",
                     dataIndex: "quarter_price",
                     key: "quarter_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "6 Tháng",
+                    title: "\u534a\u5e74\u4ed8",
                     dataIndex: "half_year_price",
                     key: "half_year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Năm",
+                    title: "\u5e74\u4ed8",
                     dataIndex: "year_price",
                     key: "year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "2 năm",
+                    title: "\u4e24\u5e74\u4ed8",
                     dataIndex: "two_year_price",
                     key: "two_year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "3 năm",
+                    title: "\u4e09\u5e74\u4ed8",
                     dataIndex: "three_year_price",
                     key: "three_year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Vĩnh Viễn",
+                    title: "\u4e00\u6b21\u6027",
                     dataIndex: "onetime_price",
                     key: "onetime_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Reset data",
+                    title: "\u91cd\u7f6e\u5305",
                     dataIndex: "reset_price",
                     key: "reset_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(1) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Group",
+                    title: "\u6743\u9650\u7ec4",
                     dataIndex: "group_id",
                     key: "group_id",
                     render: (e,t)=>{
@@ -81141,7 +81137,7 @@
                         n
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     fixed: "right",
@@ -81158,23 +81154,23 @@
                                 key: null === t || void 0 === t ? void 0 : t.id
                             }, m.a.createElement("a", null, m.a.createElement(h["a"], {
                                 type: "edit"
-                            }), " Chỉnh Sửa"))), m.a.createElement(s["a"].Item, {
+                            }), " \u7f16\u8f91"))), m.a.createElement(s["a"].Item, {
                                 style: {
                                     color: "#ff4d4f"
                                 },
                                 onClick: ()=>this.drop(t.id)
                             }, m.a.createElement(h["a"], {
                                 type: "delete"
-                            }), " Xóa bỏ"))
+                            }), " \u5220\u9664"))
                         }, m.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Chỉnh Sửa ", m.a.createElement(h["a"], {
+                        }, "\u64cd\u4f5c ", m.a.createElement(h["a"], {
                             type: "caret-down"
                         }))))
                     }
                 }], p = this;
                 return m.a.createElement(g["a"], i()({}, this.props, {
-                    title: "Quản lý đăng ký"
+                    title: "\u8ba2\u9605\u7ba1\u7406"
                 }), m.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), m.a.createElement(P["a"], {
@@ -81189,7 +81185,7 @@
                     }
                 }, m.a.createElement(L, null, m.a.createElement(o["a"], null, m.a.createElement(h["a"], {
                     type: "plus"
-                }), " Thêm đăng ký"))), m.a.createElement(b["a"], {
+                }), " \u6dfb\u52a0\u8ba2\u9605"))), m.a.createElement(b["a"], {
                     onDragEnd: (e,t)=>{
                         p.props.dispatch({
                             type: "plan/sort",
@@ -81222,7 +81218,7 @@
                     key: null === (e = this.record) || void 0 === e ? void 0 : e.id
                 }, m.a.createElement("a", null, m.a.createElement(h["a"], {
                     type: "edit"
-                }), " Chỉnh Sửa"))), m.a.createElement("li", {
+                }), " \u7f16\u8f91"))), m.a.createElement("li", {
                     className: "ant-dropdown-menu-item",
                     onClick: ()=>{
                         var e;
@@ -81234,7 +81230,7 @@
                     }
                 }, m.a.createElement(h["a"], {
                     type: "delete"
-                }), " Xóa bỏ")))))))))
+                }), " \u5220\u9664")))))))))
             }
         }
         t["default"] = Object(v["c"])(e=>{
@@ -81994,11 +81990,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.hide()
-                }, "Hủy bỏ"), f.a.createElement(a["a"], {
+                }, "\u53d6\u6d88"), f.a.createElement(a["a"], {
                     loading: i,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         var j = Object(g["c"])(e=>{
@@ -82057,7 +82053,7 @@
                   , n = e.fetchLoading
                   , r = (e.categorys,
                 [{
-                    title: "Loại",
+                    title: "\u6392\u5e8f",
                     dataIndex: "sort",
                     key: "sort",
                     render: e=>{
@@ -82100,7 +82096,7 @@
                         return m()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -82110,20 +82106,20 @@
                             id: t.id
                         }, f.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Biên Tập")), f.a.createElement(l["a"], {
+                        }, "\u7f16\u8f91")), f.a.createElement(l["a"], {
                             type: "vertical"
                         }), f.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>{
                                 s["a"].confirm({
-                                    title: "Cảnh Báo",
-                                    content: "Bạn có chắc chắn muốn xóa mục này?",
+                                    title: "\u8b66\u544a",
+                                    content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                     onOk: ()=>this.drop(t),
-                                    okText: "Chắc chắn",
-                                    cancelText: "Hủy bỏ"
+                                    okText: "\u786e\u5b9a",
+                                    cancelText: "\u53d6\u6d88"
                                 })
                             }
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }])
                   , h = this;
@@ -84771,8 +84767,8 @@
                     onOk: ()=>this.ok(),
                     okText: l ? u.a.createElement(a["a"], {
                         type: "loading"
-                    }) : "Chắc chắn",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u786e\u5b9a",
+                    cancelText: "\u53d6\u6d88"
                 }, u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
@@ -93947,7 +93943,7 @@
                                         tradeNo: t.trade_no
                                     })
                                 }
-                            }, "Hủy bỏ"))
+                            }, "\u53d6\u6d88"))
                         }, g.a.createElement("div", null, g.a.createElement(u["a"], {
                             status: n[e]
                         }), g.a.createElement("span", null, y["a"].orderStatusText[e], " "), 0 === e && g.a.createElement("a", {
@@ -96513,17 +96509,17 @@
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Có ", t.ticket_pending_total, " ticket chưa xử lý ", l.a.createElement("a", {
+                }, "\u6709 ", t.ticket_pending_total, " \u6761\u5de5\u5355\u7b49\u5f85\u5904\u7406 ", l.a.createElement("a", {
                     className: "alert-link",
                     href: "javascript:void(0)",
                     onClick: ()=>f.a.push("/ticket")
-                }, "Xem Ngay")))),
+                }, "\u7acb\u5373\u5904\u7406")))),
                 t.commission_pending_total && r.push(l.a.createElement("div", {
                     className: "alert alert-danger",
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Có ", t.commission_pending_total, " đơn hoa hồng cần xác nhận ", l.a.createElement("a", {
+                }, "\u6709 ", t.commission_pending_total, " \u7b14\u4f63\u91d1\u7b49\u5f85\u786e\u8ba4 ", l.a.createElement("a", {
                     className: "alert-link",
                     href: "javascript:void(0)",
                     onClick: ()=>{
@@ -96547,9 +96543,9 @@
                         }),
                         f.a.push("/order")
                     }
-                }, "Xem Ngay")))),
+                }, "\u7acb\u5373\u5904\u7406")))),
                 l.a.createElement(c["a"], i()({}, this.props, {
-                    title: "Bảng Điều Khiển"
+                    title: "\u4eea\u8868\u76d8"
                 }), this.state.queueStatus && "running" !== this.state.queueStatus && l.a.createElement("div", {
                     className: "row"
                 }, l.a.createElement("div", {
@@ -96559,7 +96555,7 @@
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Dịch vụ xếp hàng hiện tại đang chạy bất thường, có thể khiến doanh nghiệp không hoạt động được.")))), r.map(e=>e), l.a.createElement("div", {
+                }, "\u5f53\u524d\u961f\u5217\u670d\u52a1\u8fd0\u884c\u5f02\u5e38\uff0c\u53ef\u80fd\u4f1a\u5bfc\u81f4\u4e1a\u52a1\u65e0\u6cd5\u4f7f\u7528\u3002")))), r.map(e=>e), l.a.createElement("div", {
                     className: "mb-0 block border-bottom js-classic-nav d-none d-sm-block"
                 }, l.a.createElement("div", {
                     className: "block-content block-content-full"
@@ -96577,7 +96573,7 @@
                     className: "fa-2x si si-equalizer text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Cài đặt hệ thống")))), l.a.createElement("div", {
+                }, "\u7cfb\u7edf\u8bbe\u7f6e")))), l.a.createElement("div", {
                     className: "col-sm-6 col-xl-3 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("a", {
@@ -96589,7 +96585,7 @@
                     className: "fa-2x si si-list text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Quản lý đơn hàng")))), l.a.createElement("div", {
+                }, "\u8ba2\u5355\u7ba1\u7406")))), l.a.createElement("div", {
                     className: "col-sm-6 col-xl-3 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("a", {
@@ -96601,7 +96597,7 @@
                     className: "fa-2x si si-bag text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Quản lý đăng ký")))), l.a.createElement("div", {
+                }, "\u8ba2\u9605\u7ba1\u7406")))), l.a.createElement("div", {
                     className: "col-sm-6 col-xl-3 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("a", {
@@ -96613,7 +96609,7 @@
                     className: "fa-2x si si-users text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Quản lý người dùng"))))))), l.a.createElement("div", {
+                }, "\u7528\u6237\u7ba1\u7406"))))))), l.a.createElement("div", {
                     className: "row no-gutters"
                 }, l.a.createElement("div", {
                     className: "col-lg-12 js-appear-enabled animated",
@@ -96631,7 +96627,7 @@
                 }), l.a.createElement("div", {
                     className: "text-muted mb-1",
                     style: { width: '120px' }
-                }, "Đang Online"), 
+                }, "\u5728\u7ebf\u4eba\u6570"), 
                 l.a.createElement("div", {
                     className: "display-4 text-black font-w300"
                 }, t.online_user ? t.online_user : "0")) ,l.a.createElement("div", {
@@ -96640,7 +96636,7 @@
                     className: "fa fa-chart-line fa-2x text-gray-light float-right"
                 }), l.a.createElement("p", {
                     className: "text-muted w-75 mb-1"
-                }, "Thu nhập hôm nay"), l.a.createElement("p", {
+                }, "\u4eca\u65e5\u6536\u5165"), l.a.createElement("p", {
                     className: "display-4 text-black font-w300 mb-2"
                 }, t.day_income ? (t.day_income / 100).toFixed(2) : "0.00", l.a.createElement("span", {
                     className: "font-size-h5 font-w600 text-muted"
@@ -96660,25 +96656,25 @@
                     class: "fs-3 text-dark mb-0"
                 }, t.month_income ? (t.month_income / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Thu nhập tháng này")), l.a.createElement("div", {
+                }, "\u672c\u6708\u6536\u5165")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
                 }, t.last_month_income ? (t.last_month_income / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Thu nhập tháng trước")), l.a.createElement("div", {
+                }, "\u4e0a\u6708\u6536\u5165")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
                 }, t.commission_last_month_payout ? (t.commission_last_month_payout / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Tiền hoa hồng tháng trước")), l.a.createElement("div", {
+                }, "\u4e0a\u6708\u4f63\u91d1\u652f\u51fa")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
                 }, t.month_register_total || "-"), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Người dùng mới tháng này")))))), l.a.createElement("div", {
+                }, "\u672c\u6708\u65b0\u589e\u7528\u6237")))))), l.a.createElement("div", {
                     className: "col-lg-12 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("div", {
@@ -96701,7 +96697,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập nút ngày hôm nay")), l.a.createElement("div", {
+                }, "\u4eca\u65e5\u8282\u70b9\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -96719,7 +96715,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập nút của ngày hôm qua")), l.a.createElement("div", {
+                }, "\u6628\u65e5\u8282\u70b9\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -96737,7 +96733,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập của người dùng ngày hôm nay")), l.a.createElement("div", {
+                }, "\u4eca\u65e5\u7528\u6237\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -96755,7 +96751,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập của người dùng hôm qua")), l.a.createElement("div", {
+                }, "\u6628\u65e5\u7528\u6237\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -98565,7 +98561,7 @@
                                 break
                             }
                             return o["a"].error({
-                                message: "Yêu cầu không thành công",
+                                message: "\u8bf7\u6c42\u5931\u8d25",
                                 description: Object.values(s.errors)[0][0],
                                 duration: 1.5
                             }),
@@ -98575,7 +98571,7 @@
                             });
                         case 28:
                             return o["a"].error({
-                                message: "Yêu cầu không thành công",
+                                message: "\u8bf7\u6c42\u5931\u8d25",
                                 description: s.message,
                                 duration: 1.5
                             }),
@@ -98872,7 +98868,7 @@
                 0: "\u5f00\u542f",
                 1: "\u5f85\u56de\u590d",
                 2: "\u5f85\u7b54\u590d",
-                3: "Đóng"
+                3: "\u5173\u95ed"
             },
             routeActionText: {
                 block: "\u7981\u6b62\u8bbf\u95ee",
@@ -102551,7 +102547,7 @@
                 }), y.a.createElement(R["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -102559,35 +102555,35 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-8"
-                }, y.a.createElement("label", null, "Tên Nút"), y.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group col-4"
-                }, y.a.createElement("label", null, "Phóng đại"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u500d\u7387"), y.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhãn nút"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), y.a.createElement(N["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "Nhóm quyền ", y.a.createElement(B["a"], null, y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u6743\u9650\u7ec4 ", y.a.createElement(B["a"], null, y.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), y.a.createElement(N["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -102601,7 +102597,7 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-3 col-xs-12"
-                }, y.a.createElement("label", null, "Phiên bản"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "HYSTERIA\u7248\u672c"), y.a.createElement(N["a"], {
                     value: parseInt(e.version) ? parseInt(e.version) : 1,
                     style: {
                         width: "100%"
@@ -102617,24 +102613,24 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, y.a.createElement("label", null, "Địa chỉ nút"), y.a.createElement(s["a"], {
-                    placeholder: "Địa chỉ hoặc IP",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), y.a.createElement(s["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, y.a.createElement("label", null, "Cổng kết nối"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, y.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), y.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, y.a.createElement("label", null, "Cảng dịch vụ"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng mở máy chủ",
+                }, y.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>{
                         this.formChange("server_port", e.target.value)
@@ -102643,12 +102639,12 @@
                     className: "form-group col-md-4 col-xs-12"
                 }, y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top",
-                    title: "Sử dụng chứng chỉ tự ký yêu cầu phải cho phép sự không an toàn trước khi người dùng có thể kết nối"
-                }, "Cho phép không an toàn", y.a.createElement(m["a"], {
+                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
+                }, "\u5141\u8bb8\u4e0d\u5b89\u5168 ", y.a.createElement(m["a"], {
                     type: "question-circle"
                 }))), y.a.createElement(N["a"], {
                     value: parseInt(e.insecure) ? 1 : 0,
-                    placeholder: "cho phép không an toàn",
+                    placeholder: "\u5141\u8bb8\u4e0d\u5b89\u5168",
                     style: {
                         width: "100%"
                     },
@@ -102656,20 +102652,20 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u5426"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: 1
-                }, "Đúng")))), y.a.createElement("div", {
+                }, "\u662f")))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "Chỉ định tên máy chủ (sni)"), y.a.createElement(s["a"], {
-                    placeholder: "Được sử dụng để xác minh chứng chỉ khi địa chỉ nút không nhất quán với chứng chỉ",
+                }, y.a.createElement("label", null, "\u670d\u52a1\u5668\u540d\u79f0\u6307\u793a(sni)"), y.a.createElement(s["a"], {
+                    placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
                     value: e.server_name,
                     onChange: e=>this.formChange("server_name", e.target.value)
                 })), y.a.createElement("div", {
                     className: "row"
                 }, (parseInt(e.version) == 1) && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Phương pháp làm xáo trộn obfs"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u65b9\u5f0fobfs"), y.a.createElement(N["a"], {
                     value: e.obfs,
                     style: {
                         width: "100%"
@@ -102678,18 +102674,18 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: null
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: "xplus"
                 }, "xplus"))), (parseInt(e.version) == 1 && e.obfs === "xplus") && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Mật khẩu bị xáo trộn obfsParam"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u5bc6\u7801obfsParam"), y.a.createElement(s["a"], {
                     value: e.obfs_password,
-                    placeholder: "Để trống để tự động tạo",
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210",
                     onChange: e=>this.formChange("obfs_password", e.target.value)
                 })), (parseInt(e.version) == 2) && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Phương pháp làm xáo trộn obfs"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u65b9\u5f0fobfs"), y.a.createElement(N["a"], {
                     value: e.obfs,
                     style: {
                         width: "100%"
@@ -102698,38 +102694,38 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: null
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: "salamander"
                 }, "salamander"))), (parseInt(e.version) == 2 && e.obfs === "salamander") && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "mật khẩu bị xáo trộn obfs_password"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u5bc6\u7801obfs_password"), y.a.createElement(s["a"], {
                     value: e.obfs_password,
-                    placeholder: "Để trống để tự động tạo",
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210",
                     onChange: e=>this.formChange("obfs_password", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "băng thông ngược dòng"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u4e0a\u884c\u5e26\u5bbd"), y.a.createElement(s["a"], {
                     addonAfter: "Mbps",
-                    placeholder: "Máy chủ gửi băng thông, để trống hoặc điền 0 để sử dụng BBR",
+                    placeholder: "\u670d\u52a1\u7aef\u53d1\u9001\u5e26\u5bbd,\u7559\u7a7a\u6216\u586b0\u4f7f\u7528BBR",
                     value: e.up_mbps,
                     onChange: e=>this.formChange("up_mbps", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "băng thông hạ lưu"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u4e0b\u884c\u5e26\u5bbd"), y.a.createElement(s["a"], {
                     addonAfter: "Mbps",
-                    placeholder: "Server nhận băng thông, để trống hoặc điền số 0 để sử dụng BBR",
+                    placeholder: "\u670d\u52a1\u7aef\u63a5\u6536\u5e26\u5bbd,\u7559\u7a7a\u6216\u586b0\u4f7f\u7528BBR",
                     value: e.down_mbps,
                     onChange: e=>this.formChange("down_mbps", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top"
-                }, "Nút cha ", y.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", y.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
-                }, "Tìm hiểu thêm"))), y.a.createElement(N["a"], {
+                }, "\u66f4\u591a\u89e3\u7b54"))), y.a.createElement(N["a"], {
                     value: e.parent_id || "",
                     onChange: e=>this.formChange("parent_id", e),
                     style: {
@@ -102737,7 +102733,7 @@
                     }
                 }, y.a.createElement(N["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("hysteria" === t.type && t.id !== e.id)
                         return y.a.createElement(N["a"].Option, {
                             key: Math.random(),
@@ -102746,10 +102742,10 @@
                 }
                 ))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhóm định tuyến"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8def\u7531\u7ec4"), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -102766,11 +102762,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), y.a.createElement(l["a"], {
+                }, "\u53d6\u6d88"), y.a.createElement(l["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         var W = Object(_["c"])(e=>{
@@ -102826,19 +102822,19 @@
                 }, y.a.createElement("label", null, "Server Name(SNI)"), y.a.createElement(s["a"], {
                     value: t,
                     onChange: e=>this.change("server_name", e.target.value),
-                    placeholder: tls == 2 ? "REALITY là bắt buộc và phù hợp với phần phụ trợ" : ""
+                    placeholder: tls == 2 ? "REALITY\u5fc5\u586b\uff0c\u4e0e\u540e\u7aef\u4fdd\u6301\u4e00\u81f4" : ""
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Server Address"), y.a.createElement(s["a"], {
                     value: ds,
                     onChange: e=>this.change("dest", e.target.value),
-                    placeholder: "Địa chỉ mục tiêu REALITY, SNI được sử dụng theo mặc định"
+                    placeholder: "REALITY\u76ee\u6807\u5730\u5740\u002c\u9ed8\u8ba4\u4f7f\u7528SNI"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Server Port"), y.a.createElement(s["a"], {
                     value: pt,
                     onChange: e=>this.change("server_port", e.target.value),
-                    placeholder: "Cổng mục tiêu REALITY, mặc định 443"
+                    placeholder: "REALITY\u76ee\u6807\u7aef\u53e3,\u9ed8\u8ba4443"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Proxy Protocol"), y.a.createElement(N["a"], {
@@ -102861,19 +102857,19 @@
                 }, y.a.createElement("label", null, "Private Key"), y.a.createElement(s["a"], {
                     value: pv,
                     onChange: e=>this.change("private_key", e.target.value),
-                    placeholder: "Để trống để tự động tạo"
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Public Key"), y.a.createElement(s["a"], {
                     value: pb,
                     onChange: e=>this.change("public_key", e.target.value),
-                    placeholder: "Để trống để tự động tạo"
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "ShortId"), y.a.createElement(s["a"], {
                     value: sd,
                     onChange: e=>this.change("short_id", e.target.value),
-                    placeholder: "Để trống để tự động tạo"
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
                 })), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "FingerPrint"), y.a.createElement(N["a"], {
@@ -102882,7 +102878,7 @@
                         width: "100%"
                     },
                     onChange: e=>this.change("fingerprint", e),
-                    placeholder: "TLS vân tay mặc định Chrome"
+                    placeholder: "TLS\u6307\u7eb9\u9ed8\u8ba4Chrome"
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: "chrome"
@@ -102955,8 +102951,8 @@
                     })
                 } catch (e) {
                     H["a"].error({
-                        message: "Yêu cầu không thành công",
-                        description: "Định dạng cấu hình giao thức truyền tải không chính xác"
+                        message: "\u8bf7\u6c42\u5931\u8d25",
+                        description: "\u4f20\u8f93\u534f\u8bae\u914d\u7f6e\u683c\u5f0f\u6709\u8bef"
                     })
                 }
             }
@@ -103026,11 +103022,11 @@
                         id: "v2ray-protocol"
                     }, y.a.createElement("div", {
                         className: "form-group"
-                    }, y.a.createElement("label", null, "Cấu hình chi tiết giao thức", y.a.createElement("a", {
+                    }, y.a.createElement("label", null, "\u534f\u8bae\u8be6\u7ec6\u914d\u7f6e", y.a.createElement("a", {
                         href: "https://www.v2ray.com/chapter_02/05_transport.html"
                     }, y.a.createElement(m["a"], {
                         type: "link"
-                    }),  "thẩm quyền giải quyết")), y.a.createElement(F.a, {
+                    }), "\u53c2\u8003")), y.a.createElement(F.a, {
                         placeholder: (null === r || void 0 === r ? void 0 : r[this.state.server.network]) || "",
                         mode: "json",
                         theme: "github",
@@ -103076,7 +103072,7 @@
                 }), y.a.createElement(R["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -103084,35 +103080,35 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-8"
-                }, y.a.createElement("label", null, "Tên Nút"), y.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group col-4"
-                }, y.a.createElement("label", null, "Phóng đại"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u500d\u7387"), y.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhãn nút"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), y.a.createElement(N["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "Nhóm quyền ", y.a.createElement(B["a"], null, y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u6743\u9650\u7ec4 ", y.a.createElement(B["a"], null, y.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), y.a.createElement(N["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -103126,16 +103122,16 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-8 col-xs-12"
-                }, y.a.createElement("label", null, "Địa chỉ nút"), y.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập địa chỉ kết nối",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8fde\u63a5\u5730\u5740",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, y.a.createElement("label", null, "Bảo vệ ", parseInt(e.tls) != 0 && y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u5b89\u5168\u6027 ", parseInt(e.tls) != 0 && y.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình bảo mật", "tls_settings")
-                }, "Chỉnh sửa cấu hình")), y.a.createElement(N["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u5b89\u5168\u6027\u914d\u7f6e", "tls_settings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), y.a.createElement(N["a"], {
                     value: parseInt(e.tls) || 0,
                     style: {
                         width: "100%"
@@ -103144,7 +103140,7 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: 1
                 }, "TLS"), y.a.createElement(N["a"].Option, {
@@ -103154,28 +103150,28 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Cổng kết nối"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, y.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Cảng dịch vụ"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối không giống NAT",
+                }, y.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u975eNAT\u540c\u8fde\u63a5\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>this.formChange("server_port", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, y.a.createElement("label", null, "Giao thức vận chuyển ", y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u4f20\u8f93\u534f\u8bae ", y.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình giao thức", "network_settings")
-                }, "Chỉnh sửa cấu hình")), y.a.createElement(N["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u534f\u8bae\u914d\u7f6e", "network_settings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), y.a.createElement(N["a"], {
                     value: e.network,
-                    placeholder: "Chọn giao thức vận chuyển",
+                    placeholder: "\u9009\u62e9\u4f20\u8f93\u534f\u8bae",
                     style: {
                         width: "100%"
                     },
@@ -103196,22 +103192,22 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, y.a.createElement("label", null, "Thuật toán điều khiển luồng XTLS"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "XTLS\u6d41\u63a7\u7b97\u6cd5"), y.a.createElement(N["a"], {
                     value: e.flow,
-                    placeholder: "Chọn thuật toán điều khiển luồng XTLS",
+                    placeholder: "\u9009\u62e9XTLS\u6d41\u63a7\u7b97\u6cd5",
                     style: {
                         width: "100%"
                     },
                     onChange: e=>this.formChange("flow", e)
                 }, y.a.createElement(N["a"].Option, {
                     value: null
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"),e.network == "tcp" && y.a.createElement(N["a"].Option, {
                     value: "xtls-rprx-vision"
                 }, "xtls-rprx-vision")))), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top"
-                }, "Nút cha ", y.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", y.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
@@ -103225,7 +103221,7 @@
                     }
                 }, y.a.createElement(N["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("vless" === t.type && t.id !== e.id)
                         return y.a.createElement(N["a"].Option, {
                             key: Math.random(),
@@ -103234,10 +103230,10 @@
                 }
                 ))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhóm định tuyến"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8def\u7531\u7ec4"), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -103254,11 +103250,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), y.a.createElement(l["a"], {
+                }, "\u53d6\u6d88"), y.a.createElement(l["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi")), y.a.createElement(R["a"], {
+                }, "\u63d0\u4ea4")), y.a.createElement(R["a"], {
                     closable: !1,
                     id: "server",
                     width: "80%",
@@ -103375,44 +103371,44 @@
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "vmess" === e.type && y.a.createElement(k["a"], {
+                    }), " \u7f16\u8f91")), "vmess" === e.type && y.a.createElement(k["a"], {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "trojan" === e.type && y.a.createElement(C["a"], {
+                    }), " \u7f16\u8f91")), "trojan" === e.type && y.a.createElement(C["a"], {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "hysteria" === e.type && y.a.createElement(W, {
+                    }), " \u7f16\u8f91")), "hysteria" === e.type && y.a.createElement(W, {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "vless" === e.type && y.a.createElement(G, {
+                    }), " \u7f16\u8f91")), "vless" === e.type && y.a.createElement(G, {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa"))), y.a.createElement(p["a"].Item, {
+                    }), " \u7f16\u8f91"))), y.a.createElement(p["a"].Item, {
                         onClick: ()=>this.copy(e)
                     }, y.a.createElement(m["a"], {
                         type: "copy"
-                    }), " Sao chép"), y.a.createElement(p["a"].Item, {
+                    }), " \u590d\u5236"), y.a.createElement(p["a"].Item, {
                         style: {
                             color: "#ff4d4f"
                         },
                         onClick: ()=>this.drop(e)
                     }, y.a.createElement(m["a"], {
                         type: "delete"
-                    }), " Xóa bỏ"))
+                    }), " \u5220\u9664"))
                 }, t || y.a.createElement("a", {
                     href: "javascript:void(0);"
-                }, "Chỉnh Sửa ", y.a.createElement(m["a"], {
+                }, "\u64cd\u4f5c ", y.a.createElement(m["a"], {
                     type: "caret-down"
                 }))), $ = [{
-                    title: "Nút ID",
+                    title: "\u8282\u70b9ID",
                     dataIndex: "id",
                     key: "id",
                     width: 150,
@@ -103425,7 +103421,7 @@
                         return y.a.createElement("span", null, this.getTypeTag(t.type, t.parent_id ? e + " => " + t.parent_id : e))
                     }
                 }, {
-                    title: "Hiện",
+                    title: "\u663e\u9690",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -103440,12 +103436,12 @@
                         placement: "top",
                         title: y.a.createElement("div", null, y.a.createElement(h["a"], {
                             status: "error"
-                        }), " Không chạy", y.a.createElement("br", null), y.a.createElement(h["a"], {
+                        }), " \u672a\u8fd0\u884c", y.a.createElement("br", null), y.a.createElement(h["a"], {
                             status: "warning"
-                        }), " Không ai sử dụng nó hoặc máy chủ báo cáo một ngoại lệ.", y.a.createElement("br", null), y.a.createElement(h["a"], {
+                        }), " \u65e0\u4eba\u4f7f\u7528\u6216\u670d\u52a1\u7aef\u4e0a\u62a5\u5f02\u5e38", y.a.createElement("br", null), y.a.createElement(h["a"], {
                             status: "processing"
-                        }), " Chạy bình thường", y.a.createElement("br", null))
-                    }, "Nút ", y.a.createElement(m["a"], {
+                        }), " \u8fd0\u884c\u6b63\u5e38", y.a.createElement("br", null))
+                    }, "\u8282\u70b9 ", y.a.createElement(m["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "name",
@@ -103456,7 +103452,7 @@
                         }), y.a.createElement("span", null, e))
                     }
                 }, {
-                    title: "Host",
+                    title: "\u5730\u5740",
                     dataIndex: "host",
                     key: "host",
                     render: (e,t)=>{
@@ -103466,15 +103462,15 @@
                             },
                             onClick: ()=>{
                                 S()(t.host),
-                                c["a"].success("Sao chép thành công")
+                                c["a"].success("\u590d\u5236\u6210\u529f")
                             }
                         }, t.host + ":" + t.port)
                     }
                 }, {
                     title: y.a.createElement("span", null, y.a.createElement(u["a"], {
                         placement: "top",
-                        title: "Phụ thuộc vào tần suất báo cáo của máy chủ"
-                    }, "Online ", y.a.createElement(m["a"], {
+                        title: "\u6839\u636e\u670d\u52a1\u7aef\u4e0a\u62a5\u9891\u7387\u800c\u5b9a"
+                    }, "\u4eba\u6570 ", y.a.createElement(m["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "online",
@@ -103490,8 +103486,8 @@
                 }, {
                     title: y.a.createElement(u["a"], {
                         placement: "top",
-                        title: "Lưu lượng truy cập được sử dụng sẽ được nhân với hệ số nhân để khấu trừ."
-                    }, "Phóng đại ", y.a.createElement(m["a"], {
+                        title: "\u4f7f\u7528\u7684\u6d41\u91cf\u5c06\u4e58\u4ee5\u500d\u7387\u8fdb\u884c\u6263\u9664"
+                    }, "\u500d\u7387 ", y.a.createElement(m["a"], {
                         type: "question-circle"
                     })),
                     dataIndex: "rate",
@@ -103505,7 +103501,7 @@
                         }, e + " x")
                     }
                 }, {
-                    title: "Group",
+                    title: "\u6743\u9650\u7ec4",
                     dataIndex: "group_id",
                     key: "group_id",
                     filters: R.map(e=>({
@@ -103523,7 +103519,7 @@
                         y.a.createElement(y.a.Fragment, null, n)
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -103534,11 +103530,11 @@
                     }
                 }], F = this;
                 return y.a.createElement(b["a"], i()({}, this.props, {
-                    title: "Quản Lý Node"
+                    title: "\u8282\u70b9\u7ba1\u7406"
                 }), y.a.createElement(P.a, {
                     when: A,
                     message: e=>{
-                        return window.confirm("Việc sắp xếp nút chưa được lưu. Bạn có muốn rời đi không?")
+                        return window.confirm("\u8282\u70b9\u6392\u5e8f\u8fd8\u6ca1\u6709\u4fdd\u5b58\uff0c\u662f\u5426\u79bb\u5f00")
                     }
                 }), y.a.createElement(M["a"], {
                     loading: O
@@ -103566,7 +103562,7 @@
                 }, y.a.createElement(l["a"], null, y.a.createElement(m["a"], {
                     type: "plus"
                 }))), y.a.createElement(s["a"], {
-                    placeholder: "Nhập từ khóa bất kỳ để tìm kiếm",
+                    placeholder: "\u8f93\u5165\u4efb\u610f\u5173\u952e\u5b57\u641c\u7d22",
                     style: {
                         width: 200
                     },
@@ -103589,7 +103585,7 @@
                             }
                         })
                     }
-                }, A ? "Lưu sắp xếp" : "Chỉnh sửa sắp xếp")), Object(L["f"])() ? y.a.createElement(o["a"], {
+                }, A ? "\u4fdd\u5b58\u6392\u5e8f" : "\u7f16\u8f91\u6392\u5e8f")), Object(L["f"])() ? y.a.createElement(o["a"], {
                     className: "v2board-table",
                     itemLayout: "vertical",
                     dataSource: N ? E.filter(e=>-1 !== JSON.stringify(e).indexOf(N)) : E,
@@ -103633,7 +103629,7 @@
                     tableLayout: "auto",
                     dataSource: N ? E.filter(e=>-1 !== JSON.stringify(e).indexOf(N)) : E,
                     columns: A ? [{
-                        title: "Loại",
+                        title: "\u6392\u5e8f",
                         dataIndex: "sort",
                         key: "sort",
                         align: "left",
@@ -103644,11 +103640,11 @@
                                 style: {
                                     cursor: "move"
                                 },
-                                title: "Kéo để sắp xếp"
+                                title: "\u62d6\u52a8\u6392\u5e8f"
                             }))
                         }
                     }, {
-                        title: "Node ID",
+                        title: "\u8282\u70b9ID",
                         dataIndex: "id",
                         key: "id",
                         width: 150,
@@ -103656,7 +103652,7 @@
                             return y.a.createElement("span", null, this.getTypeTag(t.type, t.parent_id ? e + " => " + t.parent_id : e))
                         }
                     }, {
-                        title: "Node",
+                        title: "\u8282\u70b9",
                         dataIndex: "name",
                         key: "name"
                     }] : $,
@@ -103686,32 +103682,32 @@
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "vmess" === (null === (t = this.record) || void 0 === t ? void 0 : t.type) && y.a.createElement(k["a"], {
+                }), " \u7f16\u8f91")), "vmess" === (null === (t = this.record) || void 0 === t ? void 0 : t.type) && y.a.createElement(k["a"], {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "trojan" === (null === (n = this.record) || void 0 === n ? void 0 : n.type) && y.a.createElement(C["a"], {
+                }), " \u7f16\u8f91")), "trojan" === (null === (n = this.record) || void 0 === n ? void 0 : n.type) && y.a.createElement(C["a"], {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "hysteria" === (null === (r = this.record) || void 0 === r ? void 0 : r.type) && y.a.createElement(W, {
+                }), " \u7f16\u8f91")), "hysteria" === (null === (r = this.record) || void 0 === r ? void 0 : r.type) && y.a.createElement(W, {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "vless" === (null === (v = this.record) || void 0 === v ? void 0 : v.type) && y.a.createElement(G, {
+                }), " \u7f16\u8f91")), "vless" === (null === (v = this.record) || void 0 === v ? void 0 : v.type) && y.a.createElement(G, {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa"))), y.a.createElement("li", {
+                }), " \u7f16\u8f91"))), y.a.createElement("li", {
                     onClick: ()=>this.copy(this.record),
                     className: "ant-dropdown-menu-item"
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "copy"
-                }), " Sao chép")), y.a.createElement("li", {
+                }), " \u590d\u5236")), y.a.createElement("li", {
                     onClick: ()=>this.drop(this.record),
                     className: "ant-dropdown-menu-item"
                 }, y.a.createElement("a", {
@@ -103720,7 +103716,7 @@
                     }
                 }, y.a.createElement(m["a"], {
                     type: "delete"
-                }), " Xóa bỏ")))))))))
+                }), " \u5220\u9664")))))))))
             }
         }
         t["default"] = Object(_["c"])(e=>{
@@ -107781,8 +107777,8 @@
                     onOk: ()=>r || this.save(),
                     okText: r ? f.a.createElement(s["a"], {
                         type: "loading"
-                    }) : "Gửi",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88"
                 }, f.a.createElement("div", null, f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
@@ -107817,7 +107813,7 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Chỉnh Sửa"), f.a.createElement("div", null, f.a.createElement(v["a"], {
+                }, "\u52a8\u4f5c"), f.a.createElement("div", null, f.a.createElement(v["a"], {
                     value: this.state.route.action,
                     placeholder: "\u8bf7\u9009\u62e9\u52a8\u4f5c",
                     style: {
@@ -107893,26 +107889,26 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Nhật xét",
+                    title: "\u5907\u6ce8",
                     dataIndex: "remarks",
                     key: "remarks"
                 }, {
-                    title: "Số trận đấu",
+                    title: "\u5339\u914d\u6570\u91cf",
                     dataIndex: "match",
                     key: "match",
                     render: e=>{
                         var t;
-                        return "Cuộc thi ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " Quy tắc")
+                        return "\u5339\u914d ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " \u6761\u89c4\u5219")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u52a8\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     render: e=>{
                         return b["a"].routeActionText[e]
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action2",
                     key: "action2",
                     align: "right",
@@ -107922,16 +107918,16 @@
                             key: t.id
                         }, f.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Biên Tập")), f.a.createElement(l["a"], {
+                        }, "\u7f16\u8f91")), f.a.createElement(l["a"], {
                             type: "vertical"
                         }), f.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>this.drop(t.id)
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return f.a.createElement(d["a"], i()({}, this.props, {
-                    title: "Quản lý tuyến đường"
+                    title: "\u8def\u7531\u7ba1\u7406"
                 }), f.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), f.a.createElement(m["a"], {
@@ -107948,7 +107944,7 @@
                     onClick: ()=>this.modalVisible()
                 }, f.a.createElement(s["a"], {
                     type: "plus"
-                }), " Thêm tuyến đường"))), f.a.createElement(o["a"], {
+                }), " \u6dfb\u52a0\u8def\u7531"))), f.a.createElement(o["a"], {
                     tableLayout: "auto",
                     columns: r,
                     dataSource: t,
@@ -109958,7 +109954,7 @@
         }
         function f(e) {
             o()(e),
-            r["a"].success("Sao chép thành công")
+            r["a"].success("\u590d\u5236\u6210\u529f")
         }
         function d(e) {
             return window.localStorage.setItem("authorization", e)
@@ -110111,7 +110107,7 @@
                 }), f.a.createElement(r["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -110119,35 +110115,35 @@
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-8"
-                }, f.a.createElement("label", null, "Tên Nút"), f.a.createElement(l["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, f.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), f.a.createElement(l["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), f.a.createElement("div", {
                     className: "form-group col-4"
-                }, f.a.createElement("label", null, "Phóng đại"), f.a.createElement(l["a"], {
+                }, f.a.createElement("label", null, "\u500d\u7387"), f.a.createElement(l["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "nhãn nút"), f.a.createElement(s["a"], {
+                }, f.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), f.a.createElement(s["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "Nhóm quyền ", f.a.createElement(p["a"], null, f.a.createElement("a", {
+                }, f.a.createElement("label", null, "\u6743\u9650\u7ec4 ", f.a.createElement(p["a"], null, f.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), f.a.createElement(s["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), f.a.createElement(s["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -110161,24 +110157,24 @@
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, f.a.createElement("label", null, "Địa chỉ nút"), f.a.createElement(l["a"], {
-                    placeholder: "Địa chỉ hoặc IP",
+                }, f.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), f.a.createElement(l["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 }))), f.a.createElement("div", {
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, f.a.createElement("label", null, "Cổng kết nối"), f.a.createElement(l["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, f.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), f.a.createElement(l["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), f.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, f.a.createElement("label", null, "Cảng dịch vụ"), f.a.createElement(l["a"], {
-                    placeholder: "Cổng mở máy chủ",
+                }, f.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), f.a.createElement(l["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>{
                         this.formChange("server_port", e.target.value)
@@ -110187,12 +110183,12 @@
                     className: "form-group col-md-4 col-xs-12"
                 }, f.a.createElement("label", null, f.a.createElement(o["a"], {
                     placement: "top",
-                    title: "Sử dụng chứng chỉ tự ký yêu cầu phải cho phép sự không an toàn trước khi người dùng có thể kết nối"
-                }, "Cho phép không an toàn", f.a.createElement(a["a"], {
+                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
+                }, "\u5141\u8bb8\u4e0d\u5b89\u5168 ", f.a.createElement(a["a"], {
                     type: "question-circle"
                 }))), f.a.createElement(s["a"], {
                     value: parseInt(e.allow_insecure) ? 1 : 0,
-                    placeholder: "cho phép không an toàn",
+                    placeholder: "\u5141\u8bb8\u4e0d\u5b89\u5168",
                     style: {
                         width: "100%"
                     },
@@ -110200,25 +110196,25 @@
                 }, f.a.createElement(s["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không"), f.a.createElement(s["a"].Option, {
+                }, "\u5426"), f.a.createElement(s["a"].Option, {
                     key: 1,
                     value: 1
-                }, "Đúng")))), f.a.createElement("div", {
+                }, "\u662f")))), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "Chỉ định tên máy chủ (sni)"), f.a.createElement(l["a"], {
-                    placeholder: "Được sử dụng để xác minh chứng chỉ khi địa chỉ nút không nhất quán với chứng chỉ",
+                }, f.a.createElement("label", null, "\u670d\u52a1\u5668\u540d\u79f0\u6307\u793a(sni)"), f.a.createElement(l["a"], {
+                    placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
                     value: e.server_name,
                     onChange: e=>this.formChange("server_name", e.target.value)
                 })), f.a.createElement("div", {
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, f.a.createElement("label", null, "Giao thức vận chuyển ", f.a.createElement("a", {
+                }, f.a.createElement("label", null, "\u4f20\u8f93\u534f\u8bae ", f.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình giao thức", "network_settings")
-                }, "Chỉnh sửa cấu hình")), f.a.createElement(s["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u534f\u8bae\u914d\u7f6e", "network_settings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), f.a.createElement(s["a"], {
                     value: e.network,
-                    placeholder: "Chọn giao thức vận chuyển",
+                    placeholder: "\u9009\u62e9\u4f20\u8f93\u534f\u8bae",
                     style: {
                         width: "100%"
                     },
@@ -110233,11 +110229,11 @@
                     className: "form-group"
                 }, f.a.createElement("label", null, f.a.createElement(o["a"], {
                     placement: "top"
-                }, "Nút cha ", f.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", f.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
-                }, "Tìm hiểu thêm"))), f.a.createElement(s["a"], {
+                }, "\u66f4\u591a\u89e3\u7b54"))), f.a.createElement(s["a"], {
                     value: e.parent_id || "",
                     onChange: e=>this.formChange("parent_id", e),
                     style: {
@@ -110245,7 +110241,7 @@
                     }
                 }, f.a.createElement(s["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("trojan" === t.type && t.id !== e.id)
                         return f.a.createElement(s["a"].Option, {
                             key: Math.random(),
@@ -110254,10 +110250,10 @@
                 }
                 ))), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "nhóm định tuyến"), f.a.createElement(s["a"], {
+                }, f.a.createElement("label", null, "\u8def\u7531\u7ec4"), f.a.createElement(s["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -110274,11 +110270,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), f.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), f.a.createElement(i["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi")), f.a.createElement(r["a"], {
+                }, "\u63d0\u4ea4")), f.a.createElement(r["a"], {
                     closable: !1,
                     id: "server",
                     width: "80%",
@@ -111102,7 +111098,7 @@
                             },
                             onClick: ()=>{
                                 S()(e),
-                                p["a"].success("Sao chép thành công")
+                                p["a"].success("\u590d\u5236\u6210\u529f")
                             }
                         }, e)
                     }
@@ -111122,7 +111118,7 @@
                         return "".concat(_()(1e3 * t.started_at).format("YYYY/MM/DD HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("YYYY/MM/DD HH:mm"))
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -111139,21 +111135,21 @@
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Biên Tập"), b.a.createElement(f["a"], {
+                        }, "\u7f16\u8f91"), b.a.createElement(f["a"], {
                             type: "vertical"
                         }), b.a.createElement("a", {
                             onClick: ()=>{
                                 h["a"].confirm({
-                                    title: "Cảnh Báo",
-                                    content: "Bạn có chắc chắn muốn xóa mục này?",
+                                    title: "\u8b66\u544a",
+                                    content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                     onOk: ()=>this.drop(n),
-                                    okText: "Chắc chắn",
-                                    cancelText: "Hủy bỏ"
+                                    okText: "\u786e\u5b9a",
+                                    cancelText: "\u53d6\u6d88"
                                 })
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return b.a.createElement(w["a"], i()({}, this.props, {
@@ -111190,8 +111186,8 @@
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.generate(),
-                    okText: "Gửi",
-                    cancelText: "Hủy bỏ",
+                    okText: "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88",
                     okButtonProps: {
                         loading: r
                     },

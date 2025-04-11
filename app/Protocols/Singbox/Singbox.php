@@ -1,8 +1,6 @@
 <?php
-namespace App\Protocols;
+namespace App\Protocols\Singbox;
 
-use App\Models\ServerHysteria;
-use App\Models\User;
 use App\Utils\Helper;
 
 class Singbox

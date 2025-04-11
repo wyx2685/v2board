@@ -47,7 +47,9 @@ class VlessController extends Controller
                 $params['tls_settings']['server_port'] = "443";
             }
         }
-
+        if ($params['network'] != 'tcp') {
+            $params['flow'] = null;
+        }
         if ($params['network'] == 'xhttp' && isset($params['network_settings'])) {
             $ns = $params['network_settings'];
             if (isset($ns['extra']) && is_array($ns['extra'])) {
