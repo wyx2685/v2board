@@ -5787,7 +5787,7 @@
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "\xa5",
+                    placeholder: "₫",
                     defaultValue: t.currency_symbol,
                     onChange: e=>this.set("site", "currency_symbol", e.target.value)
                 })))), f.a.createElement(s["a"].TabPane, {
@@ -22219,7 +22219,7 @@
                 }), p.a.createElement(r["a"], {
                     id: "user",
                     width: "80%",
-                    title: "\u7528\u6237\u7ba1\u7406",
+                    title: "Quản lý người dùng",
                     visible: f,
                     onClose: ()=>this.hide(),
                     cancelText: "Hủy bỏ"
@@ -22227,86 +22227,86 @@
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u90ae\u7bb1"), p.a.createElement(u["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u90ae\u7bb1",
+                }, "Email"), p.a.createElement(u["a"], {
+                    placeholder: "Vui lòng nhập email",
                     defaultValue: t.email,
                     onChange: e=>this.formChange("email", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u9080\u8bf7\u4eba\u90ae\u7bb1"), p.a.createElement(u["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u9080\u8bf7\u4eba\u90ae\u7bb1",
+                }, "Email người mời"), p.a.createElement(u["a"], {
+                    placeholder: "Vui lòng nhập email của người mời",
                     defaultValue: t.invite_user_email,
                     onChange: e=>this.formChange("invite_user_email", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5bc6\u7801"), p.a.createElement(u["a"], {
+                }, "Mật khẩu mới"), p.a.createElement(u["a"], {
                     defaultValue: t.password,
-                    placeholder: "\u5982\u9700\u4fee\u6539\u5bc6\u7801\u8bf7\u8f93\u5165",
+                    placeholder: "Vui lòng nhập mật khẩu mới",
                     onChange: e=>this.formChange("password", e.target.value)
                 })), p.a.createElement("div", {
                     className: "row"
                 }, p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "\u4f59\u989d"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "Số dư"), p.a.createElement(u["a"], {
                     type: "number",
-                    addonAfter: "\xa5",
-                    placeholder: "\u4f59\u989d",
+                    addonAfter: "₫",
+                    placeholder: "Số dư",
                     defaultValue: t.balance,
                     onChange: e=>this.formChange("balance", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "\u63a8\u5e7f\u4f63\u91d1"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "Hoa hồng"), p.a.createElement(u["a"], {
                     type: "number",
-                    addonAfter: "\xa5",
-                    placeholder: "\u63a8\u5e7f\u4f63\u91d1",
+                    addonAfter: "₫",
+                    placeholder: "Hoa hồng",
                     defaultValue: t.commission_balance,
                     onChange: e=>this.formChange("commission_balance", e.target.value)
                 }))), p.a.createElement("div", {
                     className: "row"
                 }, p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "\u5df2\u7528\u4e0a\u884c"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "upload"), p.a.createElement(u["a"], {
                     type: "number",
                     addonAfter: "GB",
-                    placeholder: "\u5df2\u7528\u4e0a\u884c",
+                    placeholder: "upload",
                     defaultValue: t.u,
                     onChange: e=>this.formChange("u", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "\u5df2\u7528\u4e0b\u884c"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "download"), p.a.createElement(u["a"], {
                     type: "number",
                     addonAfter: "GB",
-                    placeholder: "\u5df2\u7528\u4e0b\u884c",
+                    placeholder: "download",
                     defaultValue: t.d,
                     onChange: e=>this.formChange("d", e.target.value)
                 }))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6d41\u91cf"), p.a.createElement(u["a"], {
+                }, "Dung Lượng"), p.a.createElement(u["a"], {
                     type: "number",
                     addonAfter: "GB",
                     defaultValue: t.transfer_enable,
-                    placeholder: "\u8bf7\u8f93\u5165\u6d41\u91cf",
+                    placeholder: "Vui lòng nhập dung lượng",
                     onChange: e=>this.formChange("transfer_enable", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u8bbe\u5907\u6570\u9650\u5236"), p.a.createElement(u["a"], {
-                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
+                }, "Limit Thiết Bị"), p.a.createElement(u["a"], {
+                    placeholder: "Để trống sẽ không giới hạn",
                     defaultValue: t.device_limit,
                     onChange: e=>this.formChange("device_limit", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5230\u671f\u65f6\u95f4"), p.a.createElement("div", null, p.a.createElement(c["a"], {
-                    placeholder: "\u957f\u671f\u6709\u6548",
+                }, "Hạn sử dụng"), p.a.createElement("div", null, p.a.createElement(c["a"], {
+                    placeholder: "hạn sử dụng",
                     defaultValue: null !== t.expired_at && v()(1e3 * t.expired_at),
                     style: {
                         width: "100%"
@@ -22316,8 +22316,8 @@
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u8ba2\u9605\u8ba1\u5212"), p.a.createElement(l["a"], {
-                    placeholder: "\u8bf7\u9009\u62e9\u7528\u6237\u8ba2\u9605\u8ba1\u5212",
+                }, "Gói"), p.a.createElement(l["a"], {
+                    placeholder: "Vui lòng chọn gói đăng ký người dùng",
                     style: {
                         width: "100%"
                     },
@@ -22335,7 +22335,7 @@
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u8d26\u6237\u72b6\u6001"), p.a.createElement(l["a"], {
+                }, "Trạng thái tài khoản"), p.a.createElement(l["a"], {
                     style: {
                         width: "100%"
                     },
@@ -22344,14 +22344,14 @@
                 }, p.a.createElement(l["a"].Option, {
                     key: 1,
                     value: 1
-                }, "\u5c01\u7981"), p.a.createElement(l["a"].Option, {
+                }, "Bị khóa"), p.a.createElement(l["a"].Option, {
                     key: 0,
                     value: 0
-                }, "\u6b63\u5e38"))), p.a.createElement("div", {
+                }, "Bình thường"))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u63a8\u8350\u8fd4\u5229\u7c7b\u578b"), p.a.createElement(l["a"], {
+                }, "Kiểu hoa hồng nhận được"), p.a.createElement(l["a"], {
                     style: {
                         width: "100%"
                     },
@@ -22360,65 +22360,65 @@
                 }, p.a.createElement(l["a"].Option, {
                     key: 0,
                     value: 0
-                }, "\u8ddf\u968f\u7cfb\u7edf\u8bbe\u7f6e"), p.a.createElement(l["a"].Option, {
+                }, "Theo thiết lập hệ thống"), p.a.createElement(l["a"].Option, {
                     key: 1,
                     value: 1
-                }, "\u5faa\u73af\u8fd4\u5229"), p.a.createElement(l["a"].Option, {
+                }, "Hoa hồng theo chu kỳ"), p.a.createElement(l["a"].Option, {
                     key: 2,
                     value: 2
-                }, "\u9996\u6b21\u8fd4\u5229"))), p.a.createElement("div", {
+                }, "Hoa hồng lần đầu"))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u63a8\u8350\u8fd4\u5229\u6bd4\u4f8b"), p.a.createElement(u["a"], {
+                }, "Phần trăm hoa hồng nhận được"), p.a.createElement(u["a"], {
                     addonAfter: "%",
                     defaultValue: t.commission_rate,
-                    placeholder: "\u8bf7\u8f93\u5165\u63a8\u8350\u8fd4\u5229\u6bd4\u4f8b(\u4e3a\u7a7a\u5219\u8ddf\u968f\u7ad9\u70b9\u8bbe\u7f6e\u8fd4\u5229\u6bd4\u4f8b)",
+                    placeholder: "Vui lòng nhập tỷ lệ hoàn tiền giới thiệu (để trống thì sẽ theo thiết lập của trang)",
                     onChange: e=>this.formChange("commission_rate", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u4e13\u4eab\u6298\u6263\u6bd4\u4f8b ", p.a.createElement(a["a"], {
+                }, "Giảm giá độc quyền cho user này ", p.a.createElement(a["a"], {
                     placement: "top",
-                    title: "\u8bbe\u7f6e\u540e\u8be5\u7528\u6237\u8d2d\u4e70\u4efb\u4f55\u8ba2\u9605\u5c06\u59cb\u7ec8\u4eab\u53d7\u8be5\u6298\u6263"
+                    title: "Sau khi thiết lập, người dùng này sẽ luôn được hưởng mức chiết khấu này khi mua bất kỳ gói đăng ký nào"
                 }, p.a.createElement(s["a"], {
                     type: "question-circle"
                 }))), p.a.createElement(u["a"], {
                     addonAfter: "%",
                     defaultValue: t.discount,
-                    placeholder: "\u8bf7\u8f93\u5165\u4e13\u4eab\u6298\u6263\u6bd4\u4f8b",
+                    placeholder: "vui lòng nhập % giảm giá độc quyền",
                     onChange: e=>this.formChange("discount", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u9650\u901f"), p.a.createElement(u["a"], {
+                }, "Speed limit"), p.a.createElement(u["a"], {
                     addonAfter: "Mbps",
                     defaultValue: t.speed_limit,
-                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
+                    placeholder: "Để trống sẽ không giới hạn",
                     onChange: e=>this.formChange("speed_limit", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u662f\u5426\u7ba1\u7406\u5458"), p.a.createElement("div", null, p.a.createElement(o["a"], {
+                }, "Quyền Admin"), p.a.createElement("div", null, p.a.createElement(o["a"], {
                     checked: t.is_admin,
                     onChange: e=>this.formChange("is_admin", e ? 1 : 0)
                 }))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u662f\u5426\u5458\u5de5"), p.a.createElement("div", null, p.a.createElement(o["a"], {
+                }, "Quyền Nhân viên"), p.a.createElement("div", null, p.a.createElement(o["a"], {
                     checked: t.is_staff,
                     onChange: e=>this.formChange("is_staff", e ? 1 : 0)
                 }))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u5907\u6ce8"), p.a.createElement("div", null, p.a.createElement(u["a"].TextArea, {
+                }, "Ghi chú"), p.a.createElement("div", null, p.a.createElement(u["a"].TextArea, {
                     rows: 4,
-                    placeholder: "\u8bf7\u5728\u8fd9\u91cc\u8bb0\u5f55..",
+                    placeholder: "Vui long nhập ghi chú..",
                     defaultValue: t.remarks,
                     onChange: e=>this.formChange("remarks", e.target.value)
                 })))), p.a.createElement("div", {
@@ -26318,7 +26318,7 @@
                 }, o.a.createElement(p["a"], {
                     userId: null === n || void 0 === n ? void 0 : n.user_id
                 }, o.a.createElement(l["a"], {
-                    title: "\u7528\u6237\u7ba1\u7406",
+                    title: "Quản lý người dùng",
                     placement: "left"
                 }, o.a.createElement(c["a"], {
                     type: "user"
@@ -31256,7 +31256,7 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "\u663e\u793a",
+                    title: "Show",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -31270,11 +31270,11 @@
                         })
                     }
                 }, {
-                    title: "\u6807\u9898",
+                    title: "Tiêu đề",
                     dataIndex: "title",
                     key: "title"
                 }, {
-                    title: "\u521b\u5efa\u65f6\u95f4",
+                    title: "Tạo ngày",
                     dataIndex: "created_at",
                     key: "created_at",
                     align: "right",
@@ -31302,7 +31302,7 @@
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
-                    title: "\u516c\u544a\u7ba1\u7406"
+                    title: "Quản lý thông báo"
                 }), g.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), g.a.createElement(x["a"], {
@@ -31319,7 +31319,7 @@
                     onClick: ()=>this.modalVisible()
                 }, g.a.createElement(u["a"], {
                     type: "plus"
-                }), " \u6dfb\u52a0\u516c\u544a")), g.a.createElement(l["a"], {
+                }), " Thêm thông báo")), g.a.createElement(l["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     pagination: !1,
@@ -31328,7 +31328,7 @@
                         x: 950
                     }
                 })))), g.a.createElement(o["a"], {
-                    title: "".concat(this.state.submit.id ? "\u7f16\u8f91\u516c\u544a" : "\u65b0\u5efa\u516c\u544a"),
+                    title: "".concat(this.state.submit.id ? "Chỉnh sửa thông báo" : "Tạo thông báo mới"),
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.state.saveLoading || this.save(),
@@ -31340,8 +31340,8 @@
                     className: "form-group"
                 }, g.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6807\u9898"), g.a.createElement(s["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u516c\u544a\u6807\u9898",
+                }, "Tiêu đề"), g.a.createElement(s["a"], {
+                    placeholder: "Vui lòng nhập tiêu đề",
                     value: this.state.submit.title,
                     onChange: e=>{
                         this.setState({
@@ -31354,10 +31354,10 @@
                     className: "form-group"
                 }, g.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u516c\u544a\u5185\u5bb9"), g.a.createElement(s["a"].TextArea, {
+                }, "Nội dung thông báo"), g.a.createElement(s["a"].TextArea, {
                     rows: 12,
                     value: this.state.submit.content,
-                    placeholder: "\u8bf7\u8f93\u5165\u516c\u544a\u5185\u5bb9",
+                    placeholder: "Vui lòng nhập nội dung thông báo",
                     onChange: e=>{
                         this.setState({
                             submit: p()({}, this.state.submit, {
@@ -31369,13 +31369,13 @@
                     className: "form-group"
                 }, g.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u516c\u544a\u6807\u7b7e"), g.a.createElement(a["a"], {
+                }, "Thẻ của thông báo"), g.a.createElement(a["a"], {
                     mode: "tags",
                     value: this.state.submit.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "Nhập popup để thông báo tự bật lên",
                     onChange: e=>{
                         this.setState({
                             submit: p()({}, this.state.submit, {
@@ -31387,8 +31387,8 @@
                     className: "form-group"
                 }, g.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u56fe\u7247URL"), g.a.createElement(s["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u56fe\u7247URL",
+                }, "URL hình nền thông báo"), g.a.createElement(s["a"], {
+                    placeholder: "Vui lòng nhập URL hình nền thông báo",
                     value: this.state.submit.img_url,
                     onChange: e=>{
                         this.setState({
@@ -31914,7 +31914,7 @@
                 e.queueWorkload);
                 e.getQueueWorkloadLoading;
                 return s.a.createElement(l["a"], i()({}, this.props, {
-                    title: "\u961f\u5217\u76d1\u63a7"
+                    title: "Giám sát queue"
                 }), s.a.createElement(u["a"], {
                     loading: !t
                 }, s.a.createElement("div", {
@@ -31923,27 +31923,27 @@
                     className: "block-header block-header-default"
                 }, s.a.createElement("h3", {
                     className: "block-title"
-                }, "\u603b\u89c8")), s.a.createElement("div", {
+                }, "Tổng quan")), s.a.createElement("div", {
                     className: "block-content p-0"
                 }, s.a.createElement("div", {
                     className: "row no-gutters"
                 }, s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 border-right p-4 border-bottom"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, "\u5f53\u524d\u4f5c\u4e1a\u91cf"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, " Khối lượng tác vụ hiện tại"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
                 }, (null === t || void 0 === t ? void 0 : t.jobsPerMinute) || "0"))), s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 border-right p-4 border-bottom"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, "\u8fd1\u4e00\u5c0f\u65f6\u5904\u7406\u91cf"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, "Khối lượng xử lý trong 1 giờ qua"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
                 }, (null === t || void 0 === t ? void 0 : t.recentJobs) || "0"))), s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 border-right p-4 border-bottom"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, "7\u65e5\u5185\u62a5\u9519\u6570\u91cf"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, "Số lỗi trong 7 ngày qua"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
                 }, (null === t || void 0 === t ? void 0 : t.failedJobs) || "0"))), s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 p-4 border-bottom overflow-hidden"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, "\u72b6\u6001"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, "Trạng thái"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
-                }, t && ((null === t || void 0 === t ? void 0 : t.status) ? "\u8fd0\u884c\u4e2d" : "\u672a\u542f\u52a8")), t && ((null === t || void 0 === t ? void 0 : t.status) ? s.a.createElement("i", {
+                }, t && ((null === t || void 0 === t ? void 0 : t.status) ? "Đang chạy" : "Chưa khởi động")), t && ((null === t || void 0 === t ? void 0 : t.status) ? s.a.createElement("i", {
                     class: "si si-check text-success",
                     style: {
                         position: "absolute",
@@ -31967,34 +31967,34 @@
                     className: "block-header block-header-default"
                 }, s.a.createElement("h3", {
                     className: "block-title"
-                }, "\u5f53\u524d\u4f5c\u4e1a\u8be6\u60c5")), s.a.createElement("div", {
+                }, "Chi tiết công việc hiện tại")), s.a.createElement("div", {
                     className: "block-content p-0"
                 }, s.a.createElement(o["a"], {
                     columns: [{
-                        title: "\u961f\u5217\u540d\u79f0",
+                        title: "Tên hàng đợi",
                         dataIndex: "name",
                         key: "name",
                         render: e=>{
                             var t = {
-                                order_handle: "\u8ba2\u5355\u961f\u5217",
-                                send_email: "\u90ae\u4ef6\u961f\u5217",
-                                send_email_mass: "\u90ae\u4ef6\u7fa4\u53d1\u961f\u5217",
-                                send_telegram: "Telegram\u6d88\u606f\u961f\u5217",
-                                stat: "\u7edf\u8ba1\u961f\u5217",
-                                traffic_fetch: "\u6d41\u91cf\u6d88\u8d39\u961f\u5217"
+                                order_handle: "Hàng đợi đơn hàng",
+                                send_email: "Hàng đợi email",
+                                send_email_mass: "Hàng đợi gửi email hàng loạt",
+                                send_telegram: "Hàng đợi tin nhắn Telegram",
+                                stat: "Hàng đợi thống kê",
+                                traffic_fetch: "Hàng đợi tiêu thụ lưu lượng"
                             };
                             return t[e]
                         }
                     }, {
-                        title: "\u4f5c\u4e1a\u91cf",
+                        title: "Khối lượng tác vụ",
                         dataIndex: "processes",
                         key: "processes"
                     }, {
-                        title: "\u4efb\u52a1\u91cf",
+                        title: "Số lượng nhiệm vụ",
                         dataIndex: "length",
                         key: "length"
                     }, {
-                        title: "\u5360\u7528\u65f6\u95f4",
+                        title: "Thời gian chiếm dụng",
                         dataIndex: "wait",
                         key: "wait",
                         align: "right",
@@ -39637,7 +39637,7 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "\u542f\u7528",
+                    title: "Mở",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -39651,18 +39651,18 @@
                         })
                     }
                 }, {
-                    title: "\u5238\u540d\u79f0",
+                    title: "Tên",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "\u7c7b\u578b",
+                    title: "Loại",
                     dataIndex: "type",
                     key: "type",
                     render: e=>{
-                        return 1 === e ? "\u91d1\u989d" : "\u6bd4\u4f8b"
+                        return 1 === e ? "Giảm tiền" : "Giảm %"
                     }
                 }, {
-                    title: "\u5238\u7801",
+                    title: "Mã",
                     dataIndex: "code",
                     key: "code",
                     render: e=>{
@@ -39677,14 +39677,14 @@
                         }, e)
                     }
                 }, {
-                    title: "\u5269\u4f59\u6b21\u6570",
+                    title: "Còn lại",
                     dataIndex: "limit_use",
                     key: "limit_use",
                     render: e=>{
-                        return b.a.createElement(d["a"], null, null !== e ? e : "\u65e0\u9650")
+                        return b.a.createElement(d["a"], null, null !== e ? e : "Không giới hạn")
                     }
                 }, {
-                    title: "\u6709\u6548\u671f",
+                    title: "Bắt đầu",
                     dataIndex: "started_at",
                     key: "started_at",
                     align: "left",
@@ -39727,7 +39727,7 @@
                     }
                 }];
                 return b.a.createElement(w["a"], i()({}, this.props, {
-                    title: "\u4f18\u60e0\u5238\u7ba1\u7406"
+                    title: "Quản lý mã giảm giá"
                 }), b.a.createElement(O["a"], {
                     loading: n
                 }, b.a.createElement("div", {
@@ -39742,7 +39742,7 @@
                     onClick: ()=>this.modalVisible()
                 }, b.a.createElement(u["a"], {
                     type: "plus"
-                }), " \u6dfb\u52a0\u4f18\u60e0\u5238")), b.a.createElement(l["a"], {
+                }), " Thêm mã giảm giá")), b.a.createElement(l["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     columns: x,
@@ -39756,7 +39756,7 @@
                     }),
                     onChange: (e,t,n)=>this.tableOnChange(e, n)
                 })))), b.a.createElement(h["a"], {
-                    title: "".concat(this.state.submit.id ? "\u7f16\u8f91\u4f18\u60e0\u5238" : "\u65b0\u5efa\u4f18\u60e0\u5238"),
+                    title: "".concat(this.state.submit.id ? "Chỉnh sửa mã giảm giá" : "Tạo mới mã giảm giá"),
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.generate(),
@@ -39770,8 +39770,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u540d\u79f0"), b.a.createElement(s["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u4f18\u60e0\u5238\u540d\u79f0",
+                }, "Tên"), b.a.createElement(s["a"], {
+                    placeholder: "Vui lòng nhập tên mã giảm giá",
                     value: this.state.submit.name,
                     onChange: e=>{
                         this.setState({
@@ -39784,8 +39784,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u81ea\u5b9a\u4e49\u4f18\u60e0\u5238\u7801"), b.a.createElement(s["a"], {
-                    placeholder: "\u81ea\u5b9a\u4e49\u4f18\u60e0\u5238\u7801(\u7559\u7a7a\u968f\u673a\u751f\u6210)",
+                }, "Mã giảm giá tùy chỉnh"), b.a.createElement(s["a"], {
+                    placeholder: "Mã giảm giá tùy chỉnh (để trống sẽ tạo ngẫu nhiên)",
                     value: this.state.submit.code,
                     onChange: e=>{
                         this.setState({
@@ -39799,7 +39799,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u4f18\u60e0\u4fe1\u606f"), b.a.createElement(s["a"], {
+                }, "Thông tin khuyến mãi"), b.a.createElement(s["a"], {
                     type: "number",
                     addonBefore: b.a.createElement(a["a"], {
                         style: {
@@ -39815,11 +39815,11 @@
                         }
                     }, b.a.createElement(a["a"].Option, {
                         value: 1
-                    }, "\u6309\u91d1\u989d\u4f18\u60e0"), b.a.createElement(a["a"].Option, {
+                    }, "Giảm tiền"), b.a.createElement(a["a"].Option, {
                         value: 2
-                    }, "\u6309\u6bd4\u4f8b\u4f18\u60e0")),
-                    addonAfter: 1 === this.state.submit.type ? "\xa5" : "%",
-                    placeholder: "\u8bf7\u8f93\u5165\u503c",
+                    }, "Giảm %")),
+                    addonAfter: 1 === this.state.submit.type ? "₫" : "%",
+                    placeholder: "Vui lòng nhập giá trị",
                     value: this.state.submit.value,
                     onChange: e=>{
                         this.setState({
@@ -39832,7 +39832,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u4f18\u60e0\u5238\u6709\u6548\u671f"), b.a.createElement(o["a"].RangePicker, {
+                }, "Thời hạn hiệu lực của mã giảm giá"), b.a.createElement(o["a"].RangePicker, {
                     style: {
                         width: "100%"
                     },
@@ -39858,8 +39858,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6700\u5927\u4f7f\u7528\u6b21\u6570"), b.a.createElement(s["a"], {
-                    placeholder: "\u9650\u5236\u6700\u5927\u4f7f\u7528\u6b21\u6570\uff0c\u7528\u5b8c\u5219\u65e0\u6cd5\u4f7f\u7528(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
+                }, "Số lần sử dụng tối đa"), b.a.createElement(s["a"], {
+                    placeholder: "Giới hạn số lần sử dụng tối đa, dùng hết thì không thể sử dụng (để trống thì không giới hạn)",
                     value: this.state.submit.limit_use,
                     onChange: e=>{
                         this.setState({
@@ -39872,8 +39872,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u6bcf\u4e2a\u7528\u6237\u53ef\u4f7f\u7528\u6b21\u6570"), b.a.createElement(s["a"], {
-                    placeholder: "\u9650\u5236\u6bcf\u4e2a\u7528\u6237\u53ef\u4f7f\u7528\u6b21\u6570(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
+                }, "Số lần sử dụng cho mỗi người dùng"), b.a.createElement(s["a"], {
+                    placeholder: "Giới hạn số lần sử dụng cho mỗi người dùng (để trống thì không giới hạn)",
                     value: this.state.submit.limit_use_with_user,
                     onChange: e=>{
                         this.setState({
@@ -39886,7 +39886,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6307\u5b9a\u8ba2\u9605"), b.a.createElement("div", null, b.a.createElement(a["a"], {
+                }, "Chỉ định gói đăng ký"), b.a.createElement("div", null, b.a.createElement(a["a"], {
                     value: this.state.submit.limit_plan_ids || [],
                     onChange: e=>{
                         this.setState({
@@ -39897,7 +39897,7 @@
                     }
                     ,
                     mode: "multiple",
-                    placeholder: "\u9650\u5236\u6307\u5b9a\u8ba2\u9605\u53ef\u4ee5\u4f7f\u7528\u4f18\u60e0(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
+                    placeholder: "Giới hạn chỉ những gói đăng ký được chỉ định mới có thể sử dụng mã giảm giá (để trống thì không giới hạn)",
                     style: {
                         width: "100%"
                     }
@@ -39911,7 +39911,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u6307\u5b9a\u5468\u671f"), b.a.createElement("div", null, b.a.createElement(a["a"], {
+                }, "Chỉ định chu kỳ"), b.a.createElement("div", null, b.a.createElement(a["a"], {
                     value: this.state.submit.limit_period || [],
                     onChange: e=>{
                         this.setState({
@@ -39922,7 +39922,7 @@
                     }
                     ,
                     mode: "multiple",
-                    placeholder: "\u9650\u5236\u6307\u5b9a\u5468\u671f\u53ef\u4ee5\u4f7f\u7528\u4f18\u60e0(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
+                    placeholder: "Giới hạn chỉ những chu kỳ được chỉ định mới có thể sử dụng mã giảm giá (để trống thì không giới hạn)",
                     style: {
                         width: "100%"
                     }
@@ -39936,8 +39936,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u751f\u6210\u6570\u91cf"), b.a.createElement(s["a"], {
-                    placeholder: "\u8f93\u5165\u6570\u91cf\u6279\u91cf\u751f\u6210",
+                }, "Số lượng cần tạo"), b.a.createElement(s["a"], {
+                    placeholder: "Nhập số lượng để tạo hàng loạt",
                     value: this.state.submit.generate_count,
                     onChange: e=>{
                         this.setState({
@@ -40738,7 +40738,7 @@
                 return u.a.createElement(u.a.Fragment, null, u.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
                 }), u.a.createElement(r["a"], {
-                    title: "\u521b\u5efa\u7528\u6237",
+                    title: "Tạo người dùng",
                     visible: c,
                     onCancel: ()=>this.hide(),
                     cancelText: "Hủy bỏ",
@@ -40746,15 +40746,15 @@
                     okButtonProps: {
                         loading: n
                     },
-                    okText: "\u751f\u6210"
+                    okText: "Tạo"
                 }, u.a.createElement("div", null, u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u90ae\u7bb1"), u.a.createElement(a["a"].Group, {
+                }, "Email"), u.a.createElement(a["a"].Group, {
                     compact: !0
                 }, !h.generate_count && u.a.createElement(a["a"], {
-                    placeholder: "\u8d26\u53f7\uff08\u6279\u91cf\u751f\u6210\u8bf7\u7559\u7a7a\uff09",
+                    placeholder: "Tài khoản (để trống nếu muốn tạo hàng loạt)",
                     style: {
                         width: "45%"
                     },
@@ -40768,7 +40768,7 @@
                     },
                     disabled: !0
                 }), u.a.createElement(a["a"], {
-                    placeholder: "\u57df",
+                    placeholder: "đuôi mail",
                     style: {
                         width: "45%"
                     },
@@ -40778,16 +40778,16 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u5bc6\u7801"), u.a.createElement(a["a"], {
+                }, "Mật khẩu"), u.a.createElement(a["a"], {
                     value: h.password,
-                    placeholder: "\u7559\u7a7a\u5219\u5bc6\u7801\u4e0e\u90ae\u7bb1\u76f8\u540c",
+                    placeholder: "Bỏ trống sẽ giống email",
                     onChange: e=>this.formChange("password", e.target.value)
                 })), u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u5230\u671f\u65f6\u95f4"), u.a.createElement("div", null, u.a.createElement(o["a"], {
-                    placeholder: "\u8bf7\u9009\u62e9\u7528\u6237\u5230\u671f\u65e5\u671f\uff0c\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236\u5230\u671f\u65f6\u95f4",
+                }, "Hạn sử dụng"), u.a.createElement("div", null, u.a.createElement(o["a"], {
+                    placeholder: "Vui lòng chọn ngày hết hạn của người dùng, để trống nếu không giới hạn thời gian hết hạn",
                     defaultValue: h.expired_at && d()(1e3 * t.expired_at),
                     style: {
                         width: "100%"
@@ -40797,8 +40797,8 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u8ba2\u9605\u8ba1\u5212"), u.a.createElement(i["a"], {
-                    placeholder: "\u8bf7\u9009\u62e9\u7528\u6237\u8ba2\u9605\u8ba1\u5212",
+                }, "Gói"), u.a.createElement(i["a"], {
+                    placeholder: "Vui lòng chọn gói đăng ký",
                     style: {
                         width: "100%"
                     },
@@ -40816,9 +40816,9 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u751f\u6210\u6570\u91cf"), u.a.createElement(a["a"], {
+                }, "Số lượng tạo"), u.a.createElement(a["a"], {
                     value: h.generate_count,
-                    placeholder: "\u5982\u679c\u4e3a\u6279\u91cf\u751f\u6210\u8bf7\u8f93\u5165\u751f\u6210\u6570\u91cf",
+                    placeholder: "Nếu tạo hàng loạt, vui lòng nhập số lượng cần tạo",
                     onChange: e=>this.formChange("generate_count", e.target.value)
                 })))))
             }
@@ -41100,49 +41100,49 @@
                   , n = e.fetchLoading
                   , r = e.pagination
                   , a = e.filter
-                  , f = ["\u4f4e", "\u4e2d", "\u9ad8"]
+                  , f = ["Thấp", "Trung Bình", "Cao"]
                   , m = [{
                     title: "#",
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "\u4e3b\u9898",
+                    title: "Chủ Đề",
                     dataIndex: "subject",
                     key: "subject"
                 }, {
-                    title: "\u5de5\u5355\u7ea7\u522b",
+                    title: "Mức độ",
                     dataIndex: "level",
                     key: "level",
                     render: e=>{
                         return f[e]
                     }
                 }, {
-                    title: "\u5de5\u5355\u72b6\u6001",
+                    title: "Trạng thái",
                     dataIndex: "reply_status",
                     key: "reply_status",
                     filters: 1 !== a.status && [{
-                        text: "\u5df2\u56de\u590d",
+                        text: "Đã trả lời",
                         value: 1
                     }, {
-                        text: "\u5f85\u56de\u590d",
+                        text: "Chờ trả lời",
                         value: 0
                     }],
                     render: (e,t)=>{
                         return 1 === t.status ? d.a.createElement("span", null, d.a.createElement(h["a"], {
                             status: "success"
-                        }), "\u5df2Đóng") : d.a.createElement("span", null, d.a.createElement(h["a"], {
+                        }), "Đã Đóng") : d.a.createElement("span", null, d.a.createElement(h["a"], {
                             status: e ? "processing" : "error"
-                        }), e ? "\u5df2\u56de\u590d" : "\u5f85\u56de\u590d")
+                        }), e ? "Đã trả lời" : "Chờ trả lời")
                     }
                 }, {
-                    title: "\u521b\u5efa\u65f6\u95f4",
+                    title: "Time tạo",
                     dataIndex: "created_at",
                     key: "created_at",
                     render: e=>{
                         return v()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "\u6700\u540e\u56de\u590d",
+                    title: "Time cập nhật",
                     dataIndex: "updated_at",
                     key: "updated_at",
                     render: e=>{
@@ -41158,7 +41158,7 @@
                         return d.a.createElement("div", null, d.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>this.toChat(t.id)
-                        }, "\u67e5\u770b"), d.a.createElement(u["a"], {
+                        }, "Xem"), d.a.createElement(u["a"], {
                             type: "vertical"
                         }), d.a.createElement("a", {
                             disabled: t.status,
@@ -41168,7 +41168,7 @@
                     }
                 }];
                 return d.a.createElement(p["a"], i()({}, this.props, {
-                    title: "\u5de5\u5355\u7ba1\u7406"
+                    title: "Quản lý ticket"
                 }), d.a.createElement(y["a"], {
                     loading: n
                 }, d.a.createElement("div", {
@@ -41182,14 +41182,14 @@
                     onChange: e=>this.filter("status", e.target.value)
                 }, d.a.createElement(c["a"].Button, {
                     value: 0
-                }, "\u5df2\u5f00\u542f"), d.a.createElement(c["a"].Button, {
+                }, "Hoạt Động"), d.a.createElement(c["a"].Button, {
                     value: 1
-                }, "\u5df2Đóng")), d.a.createElement("div", {
+                }, "Đã Đóng")), d.a.createElement("div", {
                     style: {
                         float: "right"
                     }
                 }, d.a.createElement(l["a"], {
-                    placeholder: "\u8f93\u5165\u90ae\u7bb1\u641c\u7d22",
+                    placeholder: "Nhập địa chỉ email để tìm kiếm",
                     onChange: e=>this.onSearch("email", e.target.value)
                 }))), d.a.createElement(o["a"], {
                     tableLayout: "auto",
@@ -41445,14 +41445,14 @@
                 }, a.a.createElement("input", {
                     type: "text",
                     className: "form-control form-control-alt",
-                    placeholder: "\u90ae\u7bb1",
+                    placeholder: "Email",
                     ref: "email"
                 })), a.a.createElement("div", {
                     className: "form-group"
                 }, a.a.createElement("input", {
                     type: "password",
                     className: "form-control form-control-alt",
-                    placeholder: "\u5bc6\u7801",
+                    placeholder: "Mật khẩu",
                     ref: "password"
                 })), a.a.createElement("div", {
                     className: "form-group mb-0"
@@ -70740,8 +70740,8 @@
             }
             ban() {
                 p["a"].confirm({
-                    title: "\u63d0\u9192",
-                    content: "\u786e\u5b9a\u8981\u8fdb\u884c\u5c01\u7981\u5417\uff1f",
+                    title: "Nhắc nhở",
+                    content: "Bạn có chắc chắn muốn tiến hành khóa tài khoản không?",
                     onOk: ()=>{
                         this.props.dispatch({
                             type: "user/ban"
@@ -70751,8 +70751,8 @@
             }
             allDel() {
                 p["a"].confirm({
-                    title: "\u63d0\u9192",
-                    content: "\u786e\u5b9a\u8981\u8fdb\u884c\u5220\u9664\u5417\uff1f",
+                    title: "Nhắc nhở",
+                    content: "Bạn có chắc chắn muốn xóa không?",
                     onOk: ()=>{
                         this.props.dispatch({
                             type: "user/allDel"
@@ -70782,8 +70782,8 @@
             resetSecret(e) {
                 var t = this;
                 p["a"].confirm({
-                    title: "\u91cd\u7f6e\u5b89\u5168\u4fe1\u606f",
-                    content: "\u786e\u5b9a\u8981\u91cd\u7f6e".concat(e.email, "\u7684\u5b89\u5168\u4fe1\u606f\u5417\uff1f"),
+                    title: "Đặt lại thông tin bảo mật",
+                    content: "Bạn có chắc chắn muốn đặt lại thông tin bảo mật của ".concat(e.email, "hay không?"),
                     onOk() {
                         t.props.dispatch({
                             type: "user/resetSecret",
@@ -70797,8 +70797,8 @@
             delUser(e) {
                 var t = this;
                 p["a"].confirm({
-                    title: "\u5220\u9664\u7528\u6237",
-                    content: "\u786e\u5b9a\u8981\u5220\u9664".concat(e.email, "\u7684\u7528\u6237\u4fe1\u606f\u5417\uff1f"),
+                    title: "Xóa người dùng",
+                    content: "Bạn có chắc chắn muốn xóa người dùng có email ".concat(e.email, " hay không?"),
                     onOk() {
                         t.props.dispatch({
                             type: "user/delUser",
@@ -70816,26 +70816,26 @@
                     key: "id",
                     sorter: !0
                 }, {
-                    title: "\u90ae\u7bb1",
+                    title: "Email",
                     dataIndex: "email",
                     key: "email",
                     render: (e,t)=>{
                         return g.a.createElement(f["a"], {
                             placement: "top",
-                            title: t.t ? "\u6700\u540e\u5728\u7ebf".concat(w()(1e3 * t.t).format("YYYY-MM-DD HH:mm:ss")) : "\u4ece\u672a\u5728\u7ebf"
+                            title: t.t ? "Lần cuối online: ".concat(w()(1e3 * t.t).format("YYYY-MM-DD HH:mm:ss")) : "Chưa từng online"
                         }, g.a.createElement(d["a"], {
                             status: (new Date).getTime() / 1e3 - 600 > t.t ? "default" : "success"
                         }), e)
                     }
                 }, {
-                    title: "\u72b6\u6001",
+                    title: "Trạng thái",
                     dataIndex: "banned",
                     key: "banned",
                     sorter: !0,
                     render: e=>{
                         return g.a.createElement(h["a"], {
                             color: e ? "red" : "green"
-                        }, e ? "\u5c01\u7981" : "\u6b63\u5e38")
+                        }, e ? "Bị Khóa" : "Bình Thường")
                     }
                 }, {
                     title: "Đăng Ký",
@@ -70846,7 +70846,7 @@
                         return e || "-"
                     }
                 }, {
-                    title: "\u6743\u9650\u7ec4",
+                    title: "Group ID",
                     dataIndex: "group_id",
                     key: "group_id",
                     sorter: !0,
@@ -70855,7 +70855,7 @@
                         return t ? t.name : "-"
                     }
                 }, {
-                    title: "\u5df2\u7528(G)",
+                    title: "Đã dùng (G)",
                     dataIndex: "total_used",
                     key: "total_used",
                     sorter: !0,
@@ -70865,7 +70865,7 @@
                         }, e)
                     }
                 }, {
-                    title: "\u6d41\u91cf(G)",
+                    title: "Data (G)",
                     dataIndex: "transfer_enable",
                     key: "transfer_enable",
                     sorter: !0,
@@ -70873,7 +70873,7 @@
                         return e
                     }
                 }, {
-                    title: "\u8bbe\u5907\u6570",
+                    title: "Limit thiết bị",
                     dataIndex: "device_limit",
                     key: "updated_at",
                     sorter: (e,t) => e.alive_ip - t.alive_ip,
@@ -70886,27 +70886,27 @@
                         }, `${deviceCount} / ${deviceLimit}`) : `${deviceCount} / ${deviceLimit}`
                     }
                 }, {
-                    title: "\u5230\u671f\u65f6\u95f4",
+                    title: "Hạn dùng",
                     dataIndex: "expired_at",
                     key: "expired_at",
                     sorter: !0,
                     render: e=>{
                         return g.a.createElement(h["a"], {
                             color: e < (new Date).getTime() / 1e3 && null !== e ? "red" : "green"
-                        }, e ? w()(1e3 * e).format("YYYY/MM/DD HH:mm") : null === e ? "\u957f\u671f\u6709\u6548" : "-")
+                        }, e ? w()(1e3 * e).format("YYYY/MM/DD HH:mm") : null === e ? "Vĩnh viễn" : "-")
                     }
                 }, {
-                    title: "\u4f59\u989d",
+                    title: "Số dư",
                     dataIndex: "balance",
                     key: "balance",
                     sorter: !0
                 }, {
-                    title: "\u4f63\u91d1",
+                    title: "Hoa hồng",
                     dataIndex: "commission_balance",
                     key: "commission_balance",
                     sorter: !0
                 }, {
-                    title: "\u52a0\u5165\u65f6\u95f4",
+                    title: "Ngày tạo",
                     dataIndex: "created_at",
                     key: "created_at",
                     sorter: !0,
@@ -70940,23 +70940,23 @@
                                 key: t.email
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "plus"
-                            }), " \u5206\u914d\u8ba2\u5355"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " Gán đơn hàng"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>Object(L["a"])(t.subscribe_url)
                             }, g.a.createElement(u["a"], {
                                 type: "copy"
-                            }), " \u590d\u5236\u8ba2\u9605URL")), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " Sao chép URL đăng ký")), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>this.resetSecret(t)
                             }, g.a.createElement(u["a"], {
                                 type: "reload"
-                            }), " \u91cd\u7f6eUUID\u53ca\u8ba2\u9605URL")), g.a.createElement(c["a"].Item, {
+                            }), " Đặt lại URL đăng ký")), g.a.createElement(c["a"].Item, {
                                 onClick: ()=>this.orderFilter("user_id", "=", t.id)
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "account-book"
-                            }), " TA\u7684\u8ba2\u5355")), g.a.createElement(c["a"].Item, {
+                            }), " Đơn hàng")), g.a.createElement(c["a"].Item, {
                                 onClick: ()=>this.userFilter("invite_user_id", "=", t.id, !0)
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "usergroup-add"
-                            }), " TA\u7684\u9080\u8bf7")), g.a.createElement(c["a"].Item, {
+                            }), " User đã mời")), g.a.createElement(c["a"].Item, {
                                 onContextMenu: e=>{
                                     e.stopPropagation()
                                 }
@@ -70965,7 +70965,7 @@
                                 key: null === t || void 0 === t ? void 0 : t.email
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "solution"
-                            }), " TA\u7684\u6d41\u91cf\u8bb0\u5f55"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " Lịch sử dung lượng"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>this.delUser(t)
                             }, g.a.createElement(u["a"], {
                                 type: "delete"
@@ -70978,7 +70978,7 @@
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
-                    title: "\u7528\u6237\u7ba1\u7406"
+                    title: "Quản lý người dùng"
                 }), g.a.createElement(P["a"], {
                     loading: _
                 }, g.a.createElement("div", {
@@ -70991,7 +70991,7 @@
                         padding: 15
                     }
                 }, g.a.createElement(f["a"], {
-                    title: "Tips\uff1a\u53ef\u4ee5\u4f7f\u7528\u8fc7\u6ee4\u5668\u8fc7\u6ee4\u540e\u518d\u4f7f\u7528\u64cd\u4f5c\u5bf9\u8fc7\u6ee4\u7684\u7528\u6237\u8fdb\u884c\u64cd\u4f5c\u3002",
+                    title: "💡 Mẹo: Bạn có thể sử dụng bộ lọc để lọc người dùng, sau đó thao tác với các người dùng đã được lọc.",
                     placement: "right"
                 }, g.a.createElement(C["a"], null, g.a.createElement(O["a"], {
                     key: E.length,
@@ -71002,11 +71002,11 @@
                     }),
                     keys: [{
                         key: "email",
-                        title: "\u90ae\u7bb1",
+                        title: "Email",
                         condition: ["\u6a21\u7cca"]
                     }, {
                         key: "id",
-                        title: "\u7528\u6237ID",
+                        title: "User ID",
                         condition: ["=", ">=", ">", "<", "<="]
                     }, {
                         key: "plan_id",
@@ -71014,14 +71014,14 @@
                         condition: ["="],
                         type: "select",
                         options:[{
-                            key: "\u65e0\u8ba2\u9605",
+                            key: "Gói đăng ký",
                             value: "null" }, ...R.map(e=>({
                             key: e.name,
                             value: e.id
                         }))]
                     }, {
                         key: "transfer_enable",
-                        title: "\u6d41\u91cf",
+                        title: "Data",
                         condition: [">=", ">", "<", "<="]
                     }, {
                         key: "d",
@@ -71029,7 +71029,7 @@
                         condition: [">=", ">", "<", "<="]
                     }, {
                         key: "expired_at",
-                        title: "\u5230\u671f\u65f6\u95f4",
+                        title: "Hạn dùng",
                         condition: [">=", ">", "<", "<="],
                         type: "date"
                     }, {
@@ -71042,31 +71042,31 @@
                         condition: ["="]
                     }, {
                         key: "banned",
-                        title: "\u8d26\u53f7\u72b6\u6001",
+                        title: "Trạng thái User",
                         condition: ["="],
                         type: "select",
                         options: [{
-                            key: "\u6b63\u5e38",
+                            key: "Bình Thường",
                             value: 0
                         }, {
-                            key: "\u5c01\u7981",
+                            key: "Bị khóa",
                             value: 1
                         }]
                     }, {
                         key: "invite_by_email",
-                        title: "\u9080\u8bf7\u4eba\u90ae\u7bb1",
+                        title: "Email người mời",
                         condition: ["\u6a21\u7cca"]
                     }, {
                         key: "invite_user_id",
-                        title: "\u9080\u8bf7\u4ebaID",
+                        title: "ID người mời",
                         condition: ["="]
                     }, {
                         key: "remarks",
-                        title: "\u5907\u6ce8",
+                        title: "Ghi chú",
                         condition: ["\u6a21\u7cca"]
                     }, {
                         key: "is_admin",
-                        title: "\u7ba1\u7406\u5458",
+                        title: "Quyền Admin",
                         condition: ["="],
                         type: "select",
                         options: [{
@@ -71081,28 +71081,28 @@
                     type: E.length > 0 ? "primary" : ""
                 }, g.a.createElement(u["a"], {
                     type: "filter"
-                }), " \u8fc7\u6ee4\u5668")), g.a.createElement(l["a"], {
+                }), " Bộ lọc")), g.a.createElement(l["a"], {
                     overlay: g.a.createElement(c["a"], null, g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                         onClick: ()=>this.dumpCSV()
                     }, g.a.createElement(u["a"], {
                         type: "file-excel"
-                    }), " \u5bfc\u51faCSV")), g.a.createElement(c["a"].Item, null, g.a.createElement(y["a"], null, g.a.createElement("a", null, g.a.createElement(u["a"], {
+                    }), " Xuất CSV")), g.a.createElement(c["a"].Item, null, g.a.createElement(y["a"], null, g.a.createElement("a", null, g.a.createElement(u["a"], {
                         type: "mail"
-                    }), " \u53d1\u9001\u90ae\u4ef6"))), g.a.createElement(c["a"].Item, {
+                    }), " Gửi email"))), g.a.createElement(c["a"].Item, {
                         disabled: !E.length
                     }, g.a.createElement("a", {
                         disabled: !E.length,
                         onClick: ()=>this.ban()
                     }, g.a.createElement(u["a"], {
                         type: "stop"
-                    }), " \u6279\u91cf\u5c01\u7981")), g.a.createElement(c["a"].Item, {
+                    }), " Khoá hàng loạt")), g.a.createElement(c["a"].Item, {
                         disabled: !E.length
                     }, g.a.createElement("a", {
                         disabled: !E.length,
                         onClick: ()=>this.allDel()
                     }, g.a.createElement(u["a"], {
                         type: "delete"
-                    }), " \u6279\u91cf\u5220\u9664")))
+                    }), " Xoá hàng loạt")))
                 }, g.a.createElement(s["a"], null, g.a.createElement(u["a"], {
                     type: "select"
                 }), "Chỉnh Sửa")))), g.a.createElement(T["a"], null, g.a.createElement(s["a"], {
@@ -71144,7 +71144,7 @@
                     key: null === (r = this.record) || void 0 === r ? void 0 : r.email
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "plus"
-                }), " \u5206\u914d\u8ba2\u5355"))), g.a.createElement("li", {
+                }), " Gán đơn hàng"))), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement("a", {
                     onClick: ()=>{
@@ -71153,7 +71153,7 @@
                     }
                 }, g.a.createElement(u["a"], {
                     type: "copy"
-                }), " \u590d\u5236\u8ba2\u9605URL")), g.a.createElement("li", {
+                }), " Sao chép URL đăng ký")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement("a", {
                     style: {
@@ -71162,7 +71162,7 @@
                     onClick: ()=>this.resetSecret(this.record)
                 }, g.a.createElement(u["a"], {
                     type: "reload"
-                }), " \u91cd\u7f6eUUID\u53ca\u8ba2\u9605URL")), g.a.createElement("li", {
+                }), " Đặt lại URL đăng ký")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item",
                     onClick: ()=>{
                         var e;
@@ -71170,7 +71170,7 @@
                     }
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "account-book"
-                }), " TA\u7684\u8ba2\u5355")), g.a.createElement("li", {
+                }), " Đơn hàng User")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item",
                     onClick: ()=>{
                         var e;
@@ -71178,20 +71178,20 @@
                     }
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "usergroup-add"
-                }), " TA\u7684\u9080\u8bf7")), g.a.createElement("li", {
+                }), " Lời mời User")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement(j["a"], {
                     userId: null === (o = this.record) || void 0 === o ? void 0 : o.id,
                     key: null === (p = this.record) || void 0 === p ? void 0 : p.email
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "solution"
-                }), " TA\u7684\u6d41\u91cf\u8bb0\u5f55"))), g.a.createElement("li", {
+                }), " Lịch sử dung lượng"))), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement("a", {
                     onClick: ()=>this.delUser(this.record)
                 }, g.a.createElement(u["a"], {
                     type: "delete"
-                }), " \u5220\u9664\u7528\u6237"))))))))
+                }), " Xóa User"))))))))
             }
         }
         t["default"] = Object(E["c"])(e=>{
@@ -78182,7 +78182,7 @@
                         selectIndex: 0
                     })
                 }
-                )) : h["a"].error("\u503c\u4e0d\u80fd\u4e3a\u7a7a")
+                )) : h["a"].error("Giá trị không thể trống")
             }
             onChange(e, t, n, r) {
                 var i = this.state.filter;
@@ -78199,8 +78199,8 @@
                 var e = !0;
                 this.state.filter.forEach(t=>{
                     "" === t.value && (u["a"].error({
-                        message: "\u8fc7\u6ee4\u5668",
-                        description: "\u6b32\u68c0\u7d22\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a",
+                        message: "Lọc",
+                        description: "Nội dung cần lấy không được để trống",
                         duration: 1.5
                     }),
                     e = !1)
@@ -78239,7 +78239,7 @@
                     onClick: ()=>this.show()
                 }), m.a.createElement(r["a"], {
                     onOk: ()=>this.onOk(),
-                    title: "\u8fc7\u6ee4\u5668",
+                    title: "Lọc",
                     visible: this.state.visible,
                     onClose: ()=>this.hide(),
                     className: "v2board-filter-drawer",
@@ -78248,7 +78248,7 @@
                     var n = this.props.keys.find(e=>e.key === this.state.filter[t].key);
                     return m.a.createElement(m.a.Fragment, null, m.a.createElement(l["a"], {
                         type: "horizontal"
-                    }, "\u6761\u4ef6".concat(t + 1), " ", m.a.createElement(c["a"], {
+                    }, "Tình Trạng".concat(t + 1), " ", m.a.createElement(c["a"], {
                         type: "delete",
                         style: {
                             color: "#ff4d4f"
@@ -78256,7 +78256,7 @@
                         onClick: ()=>this.onDelete(t)
                     })), m.a.createElement("div", {
                         className: "form-group"
-                    }, m.a.createElement("label", null, "\u5b57\u6bb5\u540d"), m.a.createElement("div", null, m.a.createElement(s["a"], {
+                    }, m.a.createElement("label", null, "Tên trường"), m.a.createElement("div", null, m.a.createElement(s["a"], {
                         value: this.state.filter[t].key,
                         style: {
                             width: "100%"
@@ -78270,7 +78270,7 @@
                     }
                     )))), m.a.createElement("div", {
                         className: "form-group"
-                    }, m.a.createElement("label", null, "\u6761\u4ef6"), m.a.createElement("div", null, m.a.createElement(s["a"], {
+                    }, m.a.createElement("label", null, "Tình Trạng"), m.a.createElement("div", null, m.a.createElement(s["a"], {
                         value: this.state.filter[t].condition,
                         style: {
                             width: "100%"
@@ -78284,12 +78284,12 @@
                     }
                     )))), m.a.createElement("div", {
                         className: "form-group"
-                    }, m.a.createElement("label", null, "\u6b32\u68c0\u7d22\u5185\u5bb9"), m.a.createElement("div", null, "select" === n.type && m.a.createElement(s["a"], {
+                    }, m.a.createElement("label", null, "Để tìm kiếm nội dung"), m.a.createElement("div", null, "select" === n.type && m.a.createElement(s["a"], {
                         defaultValue: this.state.filter[t].value || void 0,
                         style: {
                             width: "100%"
                         },
-                        placeholder: "\u8bf7\u9009\u62e9\u503c",
+                        placeholder: "Vui lòng chọn một giá trị",
                         onChange: e=>this.onChange("value", e, t)
                     }, n.options.map((e,t)=>{
                         return m.a.createElement(s["a"].Option, {
@@ -78309,7 +78309,7 @@
                             width: "100%"
                         },
                         defaultValue: this.state.filter[t].value || void 0,
-                        placeholder: "\u503c",
+                        placeholder: "giá trị",
                         onChange: e=>this.onChange("value", e.target.value, t)
                     }))))
                 }
@@ -78321,7 +78321,7 @@
                     onClick: ()=>this.add()
                 }, m.a.createElement(c["a"], {
                     type: "plus"
-                }), " \u6dfb\u52a0\u6761\u4ef6"), m.a.createElement("div", {
+                }), " Thêm điều kiện"), m.a.createElement("div", {
                     className: "v2board-drawer-action"
                 }, m.a.createElement(i["a"], {
                     disabled: !this.state.filter.length,
@@ -78330,7 +78330,7 @@
                     style: {
                         float: "left"
                     }
-                }, "\u91cd\u7f6e"), m.a.createElement(i["a"], {
+                }, "Cài lại"), m.a.createElement(i["a"], {
                     style: {
                         marginRight: 8
                     },
@@ -78339,7 +78339,7 @@
                     disabled: !this.state.filter.length,
                     onClick: ()=>this.onOk(),
                     type: "primary"
-                }, "\u68c0\u7d22"))))
+                }, "Tìm kiếm"))))
             }
         }
     },
@@ -80674,15 +80674,15 @@
                     onClose: ()=>this.setState({
                         visible: !1
                     }),
-                    title: "".concat(this.state.record.id ? "\u7f16\u8f91\u8ba2\u9605" : "\u65b0\u5efa\u8ba2\u9605"),
+                    title: "".concat(this.state.record.id ? "Chỉnh sửa gói đăng ký" : "Tạo mới gói đăng ký"),
                     visible: this.state.visible,
                     width: "80%"
                 }, m.a.createElement("div", null, m.a.createElement("div", {
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5957\u9910\u540d\u79f0"), m.a.createElement(C["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u5957\u9910\u540d\u79f0",
+                }, "Tên Gói"), m.a.createElement(C["a"], {
+                    placeholder: "Vui long nhập tên gói",
                     value: this.state.record.name,
                     onChange: e=>{
                         this.setState({
@@ -80695,10 +80695,10 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5957\u9910\u63cf\u8ff0"), m.a.createElement(C["a"].TextArea, {
+                }, "Mô tả"), m.a.createElement(C["a"].TextArea, {
                     rows: 4,
                     value: this.state.record.content,
-                    placeholder: "\u8bf7\u8f93\u5165\u5957\u9910\u63cf\u8ff0\uff0c\u652f\u6301HTML",
+                    placeholder: "Vui lòng nhập mô tả. có hỗ trợ html",
                     onChange: e=>{
                         this.setState({
                             record: d()({}, this.state.record, {
@@ -80708,9 +80708,9 @@
                     }
                 })), m.a.createElement(k["a"], {
                     orientation: "center"
-                }, "\u552e\u4ef7\u8bbe\u7f6e ", m.a.createElement(c["a"], {
+                }, "Thiết lập giá bán ", m.a.createElement(c["a"], {
                     placement: "top",
-                    title: "\u5c06\u91d1\u989d\u7559\u7a7a\u5219\u4e0d\u4f1a\u8fdb\u884c\u51fa\u552e"
+                    title: "Nếu để trống số tiền, chu kỳ đó sẽ không được bán"
                 }, m.a.createElement(h["a"], {
                     type: "info-circle"
                 }))), m.a.createElement(E["a"], {
@@ -80721,7 +80721,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6708\u4ed8"), m.a.createElement(C["a"], {
+                }, "1 Tháng"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.month_price ? this.state.record.month_price : void 0,
                     onChange: e=>this.priceOnChange("month_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80730,7 +80730,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5b63\u4ed8"), m.a.createElement(C["a"], {
+                }, "3 Tháng"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.quarter_price ? this.state.record.quarter_price : void 0,
                     onChange: e=>this.priceOnChange("quarter_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80739,7 +80739,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u534a\u5e74"), m.a.createElement(C["a"], {
+                }, "6 Tháng"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.half_year_price ? this.state.record.half_year_price : void 0,
                     onChange: e=>this.priceOnChange("half_year_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80748,7 +80748,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5e74\u4ed8"), m.a.createElement(C["a"], {
+                }, "1 Năm"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.year_price ? this.state.record.year_price : void 0,
                     onChange: e=>this.priceOnChange("year_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80757,7 +80757,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u4e24\u5e74\u4ed8"), m.a.createElement(C["a"], {
+                }, "2 Năm"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.two_year_price ? this.state.record.two_year_price : void 0,
                     onChange: e=>this.priceOnChange("two_year_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80766,7 +80766,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u4e09\u5e74\u4ed8"), m.a.createElement(C["a"], {
+                }, "3 Năm"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.three_year_price ? this.state.record.three_year_price : void 0,
                     onChange: e=>this.priceOnChange("three_year_price", e.target.value)
                 })))), m.a.createElement(E["a"], {
@@ -80777,7 +80777,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u4e00\u6b21\u6027"), m.a.createElement(C["a"], {
+                }, "Vĩnh Viễn"), m.a.createElement(C["a"], {
                     addonAfter: e.currency_symbol,
                     value: null !== this.state.record.onetime_price ? this.state.record.onetime_price : void 0,
                     onChange: e=>this.priceOnChange("onetime_price", e.target.value)
@@ -80787,7 +80787,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u91cd\u7f6e\u5305"), m.a.createElement(C["a"], {
+                }, "Đặt lại data"), m.a.createElement(C["a"], {
                     addonAfter: e.currency_symbol,
                     value: null !== this.state.record.reset_price ? this.state.record.reset_price : void 0,
                     onChange: e=>this.priceOnChange("reset_price", e.target.value)
@@ -80795,9 +80795,9 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5957\u9910\u6d41\u91cf"), m.a.createElement(C["a"], {
+                }, "Dung Lượng"), m.a.createElement(C["a"], {
                     addonAfter: "GB",
-                    placeholder: "\u8bf7\u8f93\u5165\u5957\u9910\u6d41\u91cf",
+                    placeholder: "Vui lòng nhập dung lượng gói cước",
                     value: this.state.record.transfer_enable,
                     onChange: e=>{
                         this.setState({
@@ -80810,8 +80810,8 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u8bbe\u5907\u6570\u9650\u5236"), m.a.createElement(C["a"], {
-                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
+                }, "Limit Thiết Bị"), m.a.createElement(C["a"], {
+                    placeholder: "Để trống sẽ không giới hạn",
                     value: this.state.record.device_limit,
                     onChange: e=>{
                         this.setState({
@@ -80849,8 +80849,8 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f"), m.a.createElement(_["a"], {
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                }, "Phương thức reset lưu lượng"), m.a.createElement(_["a"], {
+                    placeholder: "Vui lòng chọn",
                     style: {
                         width: "100%"
                     },
@@ -80865,27 +80865,27 @@
                 }, m.a.createElement(_["a"].Option, {
                     key: null,
                     value: null
-                }, "\u8ddf\u968f\u7cfb\u7edf\u8bbe\u7f6e"), m.a.createElement(_["a"].Option, {
+                }, "Theo thiết lập hệ thống"), m.a.createElement(_["a"].Option, {
                     key: 0,
                     value: 0
-                }, "\u6bcf\u67081\u53f7"), m.a.createElement(_["a"].Option, {
+                }, "Ngày 1 mỗi tháng"), m.a.createElement(_["a"].Option, {
                     key: 1,
                     value: 1
-                }, "\u6309\u6708\u91cd\u7f6e"), m.a.createElement(_["a"].Option, {
+                }, "Reset theo tháng"), m.a.createElement(_["a"].Option, {
                     key: 2,
                     value: 2
-                }, "\u4e0d\u91cd\u7f6e"), m.a.createElement(_["a"].Option, {
+                }, "Không reset"), m.a.createElement(_["a"].Option, {
                     key: 3,
                     value: 3
-                }, "\u6bcf\u5e741\u67081\u65e5"), m.a.createElement(_["a"].Option, {
+                }, "Ngày 1 tháng 1 hàng năm"), m.a.createElement(_["a"].Option, {
                     key: 4,
                     value: 4
-                }, "\u6309\u5e74\u91cd\u7f6e")))), m.a.createElement("div", {
+                }, "Reset theo năm")))), m.a.createElement("div", {
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6700\u5927\u5bb9\u7eb3\u7528\u6237\u91cf"), m.a.createElement(C["a"], {
-                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
+                }, "Giới hạn số lượng người mua gói"), m.a.createElement(C["a"], {
+                    placeholder: "Để trống sẽ không giới hạn",
                     value: this.state.record.capacity_limit,
                     onChange: e=>{
                         this.setState({
@@ -80898,9 +80898,9 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u9650\u901f"), m.a.createElement(C["a"], {
+                }, "Speed limit"), m.a.createElement(C["a"], {
                     addonAfter: "Mbps",
-                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
+                    placeholder: "Để trống sẽ không giới hạn",
                     value: this.state.record.speed_limit,
                     onChange: e=>{
                         this.setState({
@@ -80917,7 +80917,7 @@
                         marginTop: 5
                     }
                 }, m.a.createElement(c["a"], {
-                    title: "\u52fe\u9009\u540e\u53d8\u66f4\u7684\u6d41\u91cf\u3001\u9650\u901f\u3001\u6743\u9650\u7ec4\u5c06\u5e94\u7528\u5230\u8be5\u5957\u9910\u4e0b\u7684\u7528\u6237",
+                    title: "Sau khi chọn, các thay đổi về lưu lượng, giới hạn tốc độ và nhóm quyền sẽ được áp dụng cho người dùng thuộc gói này",
                     placement: "top"
                 }, m.a.createElement(x["a"], {
                     onChange: e=>this.setState({
@@ -80925,7 +80925,7 @@
                             force_update: e.target.checked
                         })
                     })
-                }, "\u5f3a\u5236\u66f4\u65b0\u5230\u7528\u6237"))), m.a.createElement(o["a"], {
+                }, "Cập nhật bắt buộc đến người dùng"))), m.a.createElement(o["a"], {
                     style: {
                         marginRight: 8
                     },
@@ -81016,7 +81016,7 @@
                         }))
                     }
                 }, {
-                    title: "\u9500\u552e\u72b6\u6001",
+                    title: "Mở bán",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -81027,9 +81027,9 @@
                         })
                     }
                 }, {
-                    title: m.a.createElement("span", null, "\u7eed\u8d39 ", m.a.createElement(c["a"], {
+                    title: m.a.createElement("span", null, "Gia Hạn ", m.a.createElement(c["a"], {
                         placement: "top",
-                        title: "\u5728\u8ba2\u9605\u505c\u6b62\u9500\u552e\u65f6\uff0c\u5df2\u8d2d\u7528\u6237\u662f\u5426\u53ef\u4ee5\u7eed\u8d39"
+                        title: "Khi gói đăng ký ngừng bán, người dùng đã mua có thể gia hạn hay không"
                     }, m.a.createElement(h["a"], {
                         type: "question-circle"
                     }))),
@@ -81043,11 +81043,11 @@
                         })
                     }
                 }, {
-                    title: "\u540d\u79f0",
+                    title: "Tên",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "\u7edf\u8ba1",
+                    title: "Tổng",
                     dataIndex: "count",
                     key: "count",
                     render: e=>{
@@ -81059,77 +81059,77 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "\u6d41\u91cf",
+                    title: "Data",
                     dataIndex: "transfer_enable",
                     key: "transfer_enable",
                     render: e=>{
                         return m.a.createElement(m.a.Fragment, null, e, " GB")
                     }
                 }, {
-                    title: "\u8bbe\u5907\u6570\u9650\u5236",
+                    title: "Limit Thiết Bị",
                     dataIndex: "device_limit",
                     key: "device_limit",
                     render: e=>{
                         return null !== e ? e : "-"
                     }
                 }, {
-                    title: "\u6708\u4ed8",
+                    title: "1 Tháng",
                     dataIndex: "month_price",
                     key: "month_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u5b63\u4ed8",
+                    title: "3 Tháng",
                     dataIndex: "quarter_price",
                     key: "quarter_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u534a\u5e74\u4ed8",
+                    title: "6 Tháng",
                     dataIndex: "half_year_price",
                     key: "half_year_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u5e74\u4ed8",
+                    title: "1 Năm",
                     dataIndex: "year_price",
                     key: "year_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u4e24\u5e74\u4ed8",
+                    title: "2 Năm",
                     dataIndex: "two_year_price",
                     key: "two_year_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u4e09\u5e74\u4ed8",
+                    title: "3 Năm",
                     dataIndex: "three_year_price",
                     key: "three_year_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u4e00\u6b21\u6027",
+                    title: "Vĩnh Viễn",
                     dataIndex: "onetime_price",
                     key: "onetime_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u91cd\u7f6e\u5305",
+                    title: "Đặt là data",
                     dataIndex: "reset_price",
                     key: "reset_price",
                     render: e=>{
                         return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "\u6743\u9650\u7ec4",
+                    title: "Group ID",
                     dataIndex: "group_id",
                     key: "group_id",
                     render: (e,t)=>{
@@ -81174,7 +81174,7 @@
                     }
                 }], p = this;
                 return m.a.createElement(g["a"], i()({}, this.props, {
-                    title: "\u8ba2\u9605\u7ba1\u7406"
+                    title: "Quản lý gói đăng ký"
                 }), m.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), m.a.createElement(P["a"], {
@@ -81189,7 +81189,7 @@
                     }
                 }, m.a.createElement(L, null, m.a.createElement(o["a"], null, m.a.createElement(h["a"], {
                     type: "plus"
-                }), " \u6dfb\u52a0\u8ba2\u9605"))), m.a.createElement(b["a"], {
+                }), " Thêm gói đăng ký"))), m.a.createElement(b["a"], {
                     onDragEnd: (e,t)=>{
                         p.props.dispatch({
                             type: "plan/sort",
@@ -81912,7 +81912,7 @@
                 this.props.dispatch({
                     type: "knowledge/save",
                     callback: ()=>{
-                        x["a"].success("\u4fdd\u5b58\u6210\u529f")
+                        x["a"].success("Lưu thành công")
                     }
                 })
             }
@@ -81929,7 +81929,7 @@
                 }), f.a.createElement(y["a"], {
                     width: "80%",
                     visible: e,
-                    title: o ? "\u7f16\u8f91\u77e5\u8bc6" : "\u65b0\u589e\u77e5\u8bc6",
+                    title: o ? "Chỉnh sửa kiến thức" : "Thêm kiến thức mới",
                     id: "knowledge",
                     onClose: ()=>this.hide()
                 }, r ? f.a.createElement(u["a"], {
@@ -81938,24 +81938,24 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u6807\u9898"), f.a.createElement(w["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u77e5\u8bc6\u6807\u9898",
+                }, "Tiêu đề"), f.a.createElement(w["a"], {
+                    placeholder: "Vui lòng nhập tiêu đề kiến thức",
                     value: n.title,
                     onChange: e=>this.formChange("title", e.target.value)
                 })), f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u5206\u7c7b"), f.a.createElement(w["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u5206\u7c7b\uff0c\u5206\u7c7b\u5c06\u4f1a\u81ea\u52a8\u5f52\u96c6",
+                }, "Phân loại"), f.a.createElement(w["a"], {
+                    placeholder: "Vui lòng nhập phân loại, phân loại sẽ được tự động gom nhóm",
                     value: n.category,
                     onChange: e=>this.formChange("category", e.target.value)
                 })), f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u8bed\u8a00"), f.a.createElement(b["a"], {
-                    placeholder: "\u8bf7\u9009\u62e9\u77e5\u8bc6\u8bed\u8a00",
+                }, "Ngôn ngữ"), f.a.createElement(b["a"], {
+                    placeholder: "Vui lòng chọn ngôn ngữ của kiến thức",
                     defaultValue: n.language || 1,
                     style: {
                         width: "100%"
@@ -81971,7 +81971,7 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u5185\u5bb9"), f.a.createElement(L, {
+                }, "Nội dung"), f.a.createElement(L, {
                     key: this.key,
                     style: {
                         height: "500px"
@@ -82069,11 +82069,11 @@
                         }))
                     }
                 }, {
-                    title: "\u6587\u7ae0ID",
+                    title: "ID",
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "\u663e\u793a",
+                    title: "Hiện",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -82084,15 +82084,15 @@
                         })
                     }
                 }, {
-                    title: "\u6807\u9898",
+                    title: "Tiêu Đề",
                     dataIndex: "title",
                     key: "title"
                 }, {
-                    title: "\u5206\u7c7b",
+                    title: "Thư Mục",
                     dataIndex: "category",
                     key: "category"
                 }, {
-                    title: "\u66f4\u65b0\u65f6\u95f4",
+                    title: "Cập nhật",
                     dataIndex: "updated_at",
                     key: "updated_at",
                     align: "right",
@@ -82128,7 +82128,7 @@
                 }])
                   , h = this;
                 return f.a.createElement(d["a"], i()({}, this.props, {
-                    title: "\u77e5\u8bc6\u5e93\u7ba1\u7406"
+                    title: "Quản lý hướng dẫn"
                 }), f.a.createElement(M["a"], {
                     loading: n
                 }, f.a.createElement("div", {
@@ -82141,7 +82141,7 @@
                     }
                 }, f.a.createElement(j, null, f.a.createElement(a["a"], null, f.a.createElement(u["a"], {
                     type: "plus"
-                }), "\u65b0\u589e"))), f.a.createElement(v["a"], {
+                }), " Thêm mới"))), f.a.createElement(v["a"], {
                     onDragEnd: (e,t)=>{
                         h.props.dispatch({
                             type: "knowledge/sort",
@@ -84765,7 +84765,7 @@
                 return u.a.createElement(u.a.Fragment, null, u.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
                 }), u.a.createElement(r["a"], {
-                    title: "\u8ba2\u5355\u5206\u914d",
+                    title: "Phân phối đơn hàng",
                     visible: t,
                     onCancel: ()=>this.show(),
                     onOk: ()=>this.ok(),
@@ -84777,20 +84777,20 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u7528\u6237\u90ae\u7bb1"), u.a.createElement(o["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u7528\u6237\u90ae\u7bb1",
+                }, "Email người dùng"), u.a.createElement(o["a"], {
+                    placeholder: "Vui lòng nhập email người dùng",
                     value: n.email,
                     onChange: e=>this.setSubmit("email", e.target.value)
                 })), u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u8bf7\u9009\u62e9\u8ba2\u9605"), u.a.createElement("div", null, u.a.createElement(i["a"], {
+                }, "Vui lòng chọn gói đăng ký"), u.a.createElement("div", null, u.a.createElement(i["a"], {
                     value: n.plan_id,
                     style: {
                         width: "100%"
                     },
-                    placeholder: "\u8bf7\u9009\u62e9\u8ba2\u9605",
+                    placeholder: "Vui lòng chọn gói đăng ký",
                     onChange: e=>this.setSubmit("plan_id", e)
                 }, s.map(e=>{
                     return u.a.createElement(i["a"].Option, {
@@ -84802,12 +84802,12 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u8bf7\u9009\u62e9\u5468\u671f"), u.a.createElement("div", null, u.a.createElement(i["a"], {
+                }, "Vui lòng chọn chu kỳ"), u.a.createElement("div", null, u.a.createElement(i["a"], {
                     value: n.period,
                     style: {
                         width: "100%"
                     },
-                    placeholder: "\u8bf7\u9009\u62e9\u5468\u671f",
+                    placeholder: "Vui lòng chọn chu kỳ",
                     onChange: e=>this.setSubmit("period", e)
                 }, Object.keys(f["a"].periodText).map(e=>{
                     return u.a.createElement(i["a"].Option, {
@@ -84819,9 +84819,9 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u652f\u4ed8\u91d1\u989d"), u.a.createElement(o["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u9700\u8981\u652f\u4ed8\u7684\u91d1\u989d",
-                    addonAfter: "\xa5",
+                }, "Số Tiền"), u.a.createElement(o["a"], {
+                    placeholder: "Vui lòng nhập số tiền cần thanh toán",
+                    addonAfter: "₫",
                     value: n.total_amount,
                     onChange: e=>this.setSubmit("total_amount", e.target.value)
                 }))))
@@ -93678,7 +93678,7 @@
                     onClick: ()=>this.getOrderInfo()
                 }, this.props.children), g.a.createElement(x["a"], {
                     visible: this.state.visible,
-                    title: "\u8ba2\u5355\u4fe1\u606f",
+                    title: "Thông tin đơn hàng",
                     onCancel: ()=>this.onShow(),
                     footer: !1
                 }, this.state.user.email ? g.a.createElement("div", null, g.a.createElement(E["a"], {
@@ -93686,7 +93686,7 @@
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u90ae\u7bb1"), g.a.createElement(S["a"], {
+                }, "Email"), g.a.createElement(S["a"], {
                     span: 18
                 }, g.a.createElement("a", {
                     onClick: ()=>this.jumpUserFilter("email", "\u6a21\u7cca", this.state.user.email),
@@ -93696,94 +93696,94 @@
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u8ba2\u5355\u53f7"), g.a.createElement(S["a"], {
+                }, "Mã đơn hàng"), g.a.createElement(S["a"], {
                     span: 18
                 }, this.state.order.trade_no)), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u8ba2\u5355\u5468\u671f"), g.a.createElement(S["a"], {
+                }, "Chu kỳ"), g.a.createElement(S["a"], {
                     span: 18
                 }, y["a"].periodText[this.state.order.period])), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u8ba2\u5355\u72b6\u6001"), g.a.createElement(S["a"], {
+                }, "Trạng thái"), g.a.createElement(S["a"], {
                     span: 18
                 }, y["a"].orderStatusText[this.state.order.status])), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u8ba2\u9605\u8ba1\u5212"), g.a.createElement(S["a"], {
+                }, "Gói"), g.a.createElement(S["a"], {
                     span: 18
                 }, null === (e = t.find(e=>e.id === this.state.order.plan_id)) || void 0 === e ? void 0 : e.name)), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u56de\u8c03\u5355\u53f7"), g.a.createElement(S["a"], {
+                }, "Callback No"), g.a.createElement(S["a"], {
                     span: 18
                 }, this.state.order.callback_no ? this.state.order.callback_no : "-")), g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u652f\u4ed8\u91d1\u989d"), g.a.createElement(S["a"], {
+                }, "Số Tiền"), g.a.createElement(S["a"], {
                     span: 18
                 }, (this.state.order.total_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u4f59\u989d\u652f\u4ed8"), g.a.createElement(S["a"], {
+                }, "TT bằng số dư"), g.a.createElement(S["a"], {
                     span: 18
                 }, (this.state.order.balance_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u4f18\u60e0\u91d1\u989d"), g.a.createElement(S["a"], {
+                }, "Số tiền ưu đãi"), g.a.createElement(S["a"], {
                     span: 18
                 }, (this.state.order.discount_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u9000\u56de\u91d1\u989d"), g.a.createElement(S["a"], {
+                }, "Số tiền hoàn lại"), g.a.createElement(S["a"], {
                     span: 18
                 }, (this.state.order.refund_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u6298\u62b5\u91d1\u989d"), g.a.createElement(S["a"], {
+                }, "Số tiền khấu trừ"), g.a.createElement(S["a"], {
                     span: 18
                 }, (this.state.order.surplus_amount / 100).toFixed(2))), g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u521b\u5efa\u65f6\u95f4"), g.a.createElement(S["a"], {
+                }, "Thời gian tạo"), g.a.createElement(S["a"], {
                     span: 18
                 }, w()(1e3 * this.state.order.created_at).format("YYYY-MM-DD HH:mm:ss"))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u66f4\u65b0\u65f6\u95f4"), g.a.createElement(S["a"], {
+                }, "Thời gian cập nhật"), g.a.createElement(S["a"], {
                     span: 18
                 }, w()(1e3 * this.state.order.updated_at).format("YYYY-MM-DD HH:mm:ss"))), this.state.order.invite_user_id && 3 === this.state.order.status ? g.a.createElement("div", null, g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u9080\u8bf7\u4eba"), g.a.createElement(S["a"], {
+                }, "Người mời"), g.a.createElement(S["a"], {
                     span: 18
                 }, g.a.createElement(f["a"], {
-                    title: "\u67e5\u770bTA\u9080\u8bf7\u7684\u4eba"
+                    title: "Xem những người họ đã mời"
                 }, g.a.createElement("a", {
                     onClick: ()=>this.jumpUserFilter("invite_by_email", "\u6a21\u7cca", this.state.invite_user.email),
                     href: "javascript:void(0);"
@@ -93792,21 +93792,21 @@
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u4f63\u91d1\u91d1\u989d"), g.a.createElement(S["a"], {
+                }, "Số tiền hoa hồng"), g.a.createElement(S["a"], {
                     span: 18
                 }, (this.state.order.commission_balance / 100).toFixed(2))), this.state.order.actual_commission_balance && g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u5b9e\u9645\u53d1\u653e"), g.a.createElement(S["a"], {
+                }, "Hoa hồng thực tế"), g.a.createElement(S["a"], {
                     span: 18
                 }, (this.state.order.actual_commission_balance / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "\u4f63\u91d1\u72b6\u6001"), g.a.createElement(S["a"], {
+                }, "Trạng thái hoa hồng"), g.a.createElement(S["a"], {
                     span: 18
                 }, y["a"].commissionStatusText[this.state.order.commission_status]))) : "") : g.a.createElement(d["a"], {
                     type: "loading",
@@ -93873,7 +93873,7 @@
                   , r = e.pagination
                   , a = e.filter
                   , m = [{
-                    title: "# \u8ba2\u5355\u53f7",
+                    title: "# Mã đơn",
                     dataIndex: "trade_no",
                     key: "trade_no",
                     render: (e,t)=>{
@@ -93883,26 +93883,31 @@
                             href: "javascript:void(0);"
                         }, e.substr(0, 3), "...", e.substr(-3)))
                     }
+                },
+                {
+                    title: "ID",
+                    dataIndex: "id",
+                    key: "id"
                 }, {
-                    title: "\u7c7b\u578b",
+                    title: "Loại",
                     dataIndex: "type",
                     key: "type",
                     render: e=>{
                         var t = {
-                            1: "\u65b0\u8d2d",
-                            2: "\u7eed\u8d39",
-                            3: "\u53d8\u66f4",
-                            4: "\u6d41\u91cf\u5305",
-                            9: "\u5145\u503c"
+                            1: "Mua mới",
+                            2: "Gia hạn",
+                            3: "Thay đổi",
+                            4: "Gói lưu lượng",
+                            9: "Nạp tiền"
                         };
                         return t[e]
                     }
                 }, {
-                    title: "\u8ba2\u9605\u8ba1\u5212",
+                    title: "Gói",
                     dataIndex: "plan_name",
                     key: "plan_name"
                 }, {
-                    title: "\u5468\u671f",
+                    title: "Chu kỳ",
                     dataIndex: "period",
                     key: "period",
                     align: "center",
@@ -93910,7 +93915,7 @@
                         return g.a.createElement(p["a"], null, y["a"].periodText[t.period])
                     }
                 }, {
-                    title: "\u652f\u4ed8\u91d1\u989d",
+                    title: "Số Tiền",
                     dataIndex: "total_amount",
                     key: "total_amount",
                     align: "right",
@@ -93920,8 +93925,8 @@
                 }, {
                     title: g.a.createElement("span", null, g.a.createElement(f["a"], {
                         placement: "top",
-                        title: "\u6807\u8bb0\u4e3a[\u5df2\u652f\u4ed8]\u540e\u5c06\u4f1a\u7531\u7cfb\u7edf\u8fdb\u884c\u5f00\u901a\u540e\u5e76\u5b8c\u6210"
-                    }, "\u8ba2\u5355\u72b6\u6001 ", g.a.createElement(d["a"], {
+                        title: "Được đánh dấu là [Đã thanh toán] thì hệ thống sẽ tiến hành kích hoạt và hoàn tất sau đó."
+                    }, "Trạng thái đơn hàng ", g.a.createElement(d["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "status",
@@ -93939,7 +93944,7 @@
                                         tradeNo: t.trade_no
                                     })
                                 }
-                            }, "\u5df2\u652f\u4ed8"), g.a.createElement(h["a"].Item, {
+                            }, "Đã thanh toán"), g.a.createElement(h["a"].Item, {
                                 key: "2",
                                 onClick: e=>{
                                     this.props.dispatch({
@@ -93952,12 +93957,12 @@
                             status: n[e]
                         }), g.a.createElement("span", null, y["a"].orderStatusText[e], " "), 0 === e && g.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "\u6807\u8bb0\u4e3a ", g.a.createElement(d["a"], {
+                        }, "Đánh dấu là ", g.a.createElement(d["a"], {
                             type: "caret-down"
                         })))))
                     }
                 }, {
-                    title: "\u4f63\u91d1\u91d1\u989d",
+                    title: "Hoa Hồng",
                     dataIndex: "commission_balance",
                     key: "commission_balance",
                     align: "right",
@@ -93965,9 +93970,9 @@
                         return 0 === t.status || 2 === t.status ? "-" : e ? (e / 100).toFixed(2) : "-"
                     }
                 }, {
-                    title: g.a.createElement("span", null, "\u4f63\u91d1\u72b6\u6001 ", g.a.createElement(f["a"], {
+                    title: g.a.createElement("span", null, "Thạng thái hoa hồng ", g.a.createElement(f["a"], {
                         placement: "top",
-                        title: "\u6807\u8bb0\u4e3a[\u6709\u6548]\u540e\u5c06\u4f1a\u7531\u7cfb\u7edf\u5904\u7406\u540e\u53d1\u653e\u5230\u7528\u6237\u5e76\u5b8c\u6210"
+                        title: "Sau khi được đánh dấu là [Hợp lệ], hệ thống sẽ xử lý và phân phát cho người dùng, sau đó hoàn tất."
                     }, g.a.createElement(d["a"], {
                         type: "question-circle"
                     }))),
@@ -93989,29 +93994,29 @@
                                 onClick: e=>{
                                     this.update(t.trade_no, "commission_status", e.key)
                                 }
-                            }, "\u5f85\u786e\u8ba4"), g.a.createElement(h["a"].Item, {
+                            }, "Chờ xác nhận"), g.a.createElement(h["a"].Item, {
                                 key: "1",
                                 disabled: 1 === e,
                                 onClick: e=>{
                                     this.update(t.trade_no, "commission_status", e.key)
                                 }
-                            }, "\u6709\u6548"), g.a.createElement(h["a"].Item, {
+                            }, "Hợp lệ"), g.a.createElement(h["a"].Item, {
                                 key: "3",
                                 disabled: 3 === e,
                                 onClick: e=>{
                                     this.update(t.trade_no, "commission_status", e.key)
                                 }
-                            }, "\u65e0\u6548"))
+                            }, "Không hợp lệ"))
                         }, g.a.createElement("div", null, g.a.createElement(u["a"], {
                             status: n[e]
                         }), g.a.createElement("span", null, y["a"].commissionStatusText[e], " "), g.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "\u6807\u8bb0\u4e3a ", g.a.createElement(d["a"], {
+                        }, "Đánh dấu là ", g.a.createElement(d["a"], {
                             type: "caret-down"
                         })))))
                     }
                 }, {
-                    title: "\u521b\u5efa\u65f6\u95f4",
+                    title: "Tạo",
                     dataIndex: "created_at",
                     key: "created_at",
                     align: "right",
@@ -94020,7 +94025,7 @@
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
-                    title: "\u8ba2\u5355\u7ba1\u7406"
+                    title: " Quản lý đơn hàng"
                 }), g.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), g.a.createElement(I["a"], {
@@ -94041,75 +94046,75 @@
                     }),
                     keys: [{
                         key: "trade_no",
-                        title: "\u8ba2\u5355\u53f7",
+                        title: "Trade no",
                         condition: ["\u6a21\u7cca", "="]
                     }, {
                         key: "status",
-                        title: "\u8ba2\u5355\u72b6\u6001",
+                        title: "Trạng thái",
                         type: "select",
                         condition: ["="],
                         options: [{
-                            key: "\u672a\u652f\u4ed8",
+                            key: "Chờ thanh toán",
                             value: 0
                         }, {
-                            key: "\u5df2\u652f\u4ed8",
+                            key: "Đã thanh toán",
                             value: 1
                         }, {
-                            key: "\u5df2\u53d6\u6d88",
+                            key: "Đã hủy",
                             value: 2
                         }, {
-                            key: "\u5df2\u5b8c\u6210",
+                            key: "Đã hoàn thành",
                             value: 3
                         },{
-                            key: "\u5df2\u6298\u62b5",
+                            key: "Đã chiết khấu",
                             value: 4
                         }]
                     }, {
                         key: "commission_status",
-                        title: "\u4f63\u91d1\u72b6\u6001",
+                        title: "Trạng thái hoa hồng",
                         type: "select",
                         condition: ["="],
                         options: [{
-                            key: "\u5f85\u786e\u8ba4",
+                            key: "Chờ xác nhận",
                             value: 0
                         }, {
-                            key: "\u53d1\u653e\u4e2d",
+                            key: "Đang phát hành",
                             value: 1
                         }, {
-                            key: "\u5df2\u53d1\u653e",
+                            key: "Đã hoàn thành",
                             value: 2
                         }, {
-                            key: "\u65e0\u6548",
+                            key: "Vô hiệu",
                             value: 3
                         }]
                     }, {
                         key: "user_id",
-                        title: "\u7528\u6237ID",
+                        title: "ID người dùng",
                         condition: ["="]
                     }, {
                         key: "invite_user_id",
-                        title: "\u9080\u8bf7\u4ebaID",
+                        title: "ID người mời",
                         condition: ["=", "!="]
                     }, {
                         key: "callback_no",
-                        title: "\u56de\u8c03\u5355\u53f7",
+                        title: "Callback No",
                         condition: ["\u6a21\u7cca"]
                     }, {
                         key: "commission_balance",
-                        title: "\u4f63\u91d1\u91d1\u989d",
+                        title: "Hoa hồng",
                         condition: [">", "<", "=", "!=", ">=", "<="]
                     }]
                 }, g.a.createElement(l["a"], {
                     type: a.length > 0 ? "primary" : ""
                 }, g.a.createElement(d["a"], {
                     type: "filter"
-                }), " \u8fc7\u6ee4\u5668"))), g.a.createElement(R["a"], null, g.a.createElement(l["a"], {
+                }), " Bộ lọc"))), g.a.createElement(R["a"], null, g.a.createElement(l["a"], {
                     style: {
                         marginLeft: 10
                     }
                 }, g.a.createElement(d["a"], {
                     type: "plus"
-                }), " \u6dfb\u52a0\u8ba2\u5355"))), g.a.createElement(o["a"], {
+                }), " Thêm đơn hàng"))), g.a.createElement(o["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     pagination: s()({}, r, {
@@ -96642,7 +96647,10 @@
                     className: "text-muted w-75 mb-1"
                 }, "Thu nhập hôm nay"), l.a.createElement("p", {
                     className: "display-4 text-black font-w300 mb-2"
-                }, t.day_income ? (t.day_income / 100).toFixed(2) : "0.00", l.a.createElement("span", {
+                }, t.day_income ? (t.day_income / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                  }) : "0", l.a.createElement("span", {
                     className: "font-size-h5 font-w600 text-muted"
                 }, n.site.currency))))))), l.a.createElement("div", {
                     className: "col-lg-12 js-appear-enabled animated",
@@ -96658,19 +96666,28 @@
                     class: "pr-4 pr-sm-5 pl-0 pl-sm-3"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
-                }, t.month_income ? (t.month_income / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
+                }, t.month_income ? (t.month_income / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                  }) : "0", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
                 }, "Thu nhập tháng này")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
-                }, t.last_month_income ? (t.last_month_income / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
+                }, t.last_month_income ? (t.last_month_income / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                  }) : "0", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
                 }, "Thu nhập tháng trước")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
-                }, t.commission_last_month_payout ? (t.commission_last_month_payout / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
+                }, t.commission_last_month_payout ? (t.commission_last_month_payout / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                  }) : "0", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
                 }, "Tiền hoa hồng tháng trước")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
@@ -98830,14 +98847,14 @@
                 "ko-KR": "\ud55c\uad6d\uc5b4"
             },
             periodText: {
-                month_price: "\u6708\u4ed8",
-                quarter_price: "\u5b63\u4ed8",
-                half_year_price: "\u534a\u5e74\u4ed8",
-                year_price: "\u5e74\u4ed8",
-                two_year_price: "\u4e24\u5e74\u4ed8",
-                three_year_price: "\u4e09\u5e74\u4ed8",
-                onetime_price: "\u4e00\u6b21\u6027",
-                reset_price: "\u6d41\u91cf\u91cd\u7f6e\u5305"
+                month_price: "1 Tháng",
+                quarter_price: "3 Tháng",
+                half_year_price: "6 Tháng",
+                year_price: "1 Năm",
+                two_year_price: "2 Năm",
+                three_year_price: "3 Năm",
+                onetime_price: "Vĩnh Viễn",
+                reset_price: "Đặt lại data"
             },
             tutorialCategoryText: {
                 1: "Windows",
@@ -98858,8 +98875,8 @@
             orderStatusText: {
                 0: "\u5f85\u652f\u4ed8",
                 1: "\u5f00\u901a\u4e2d",
-                2: "\u5df2\u53d6\u6d88",
-                3: "\u5df2\u5b8c\u6210",
+                2: "Đã hủy",
+                3: "Đã hoàn thành",
                 4: "\u5df2\u6298\u62b5"
             },
             commissionStatusText: {
@@ -103205,7 +103222,7 @@
                     onChange: e=>this.formChange("flow", e)
                 }, y.a.createElement(N["a"].Option, {
                     value: null
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "Không"),e.network == "tcp" && y.a.createElement(N["a"].Option, {
                     value: "xtls-rprx-vision"
                 }, "xtls-rprx-vision")))), y.a.createElement("div", {
                     className: "form-group"
@@ -107773,7 +107790,7 @@
                         visible: !0
                     })
                 }), f.a.createElement(g["a"], {
-                    title: "".concat(this.state.route.id ? "\u7f16\u8f91\u8def\u7531" : "\u521b\u5efa\u8def\u7531"),
+                    title: "".concat(this.state.route.id ? "Chỉnh sửa route" : "Tạo route"),
                     visible: this.state.visible,
                     onCancel: ()=>this.setState({
                         visible: !1
@@ -107787,8 +107804,8 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5907\u6ce8"), f.a.createElement(y["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u5907\u6ce8",
+                }, "Ghi chú"), f.a.createElement(y["a"], {
+                    placeholder: "Vui lòng nhập ghi chú",
                     value: this.state.route.remarks,
                     onChange: e=>{
                         this.setState({
@@ -107801,7 +107818,7 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u5339\u914d\u503c"), f.a.createElement(y["a"].TextArea, {
+                }, "Giá trị phù hợp"), f.a.createElement(y["a"].TextArea, {
                     rows: 5,
                     placeholder: "example.com\n*.example.com",
                     value: "object" === typeof this.state.route.match ? null === (e = this.state.route.match) || void 0 === e ? void 0 : e.join("\n") : null === (t = this.state.route.match) || void 0 === t ? void 0 : null === (n = t.split(",")) || void 0 === n ? void 0 : n.join("\n"),
@@ -107817,9 +107834,9 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u52a8\u4f5c"), f.a.createElement("div", null, f.a.createElement(v["a"], {
+                }, "Hành động"), f.a.createElement("div", null, f.a.createElement(v["a"], {
                     value: this.state.route.action,
-                    placeholder: "\u8bf7\u9009\u62e9\u52a8\u4f5c",
+                    placeholder: "Vui lòng chọn hành động",
                     style: {
                         width: "100%"
                     },
@@ -107836,8 +107853,8 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "DNS\u670d\u52a1\u5668"), f.a.createElement(y["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u7528\u4e8e\u89e3\u6790\u7684DNS\u670d\u52a1\u5668\u5730\u5740",
+                }, "Máy chủ DNS"), f.a.createElement(y["a"], {
+                    placeholder: "Vui lòng nhập địa chỉ máy chủ DNS dùng để phân giải",
                     value: this.state.route.action_value,
                     onChange: e=>{
                         this.setState({
@@ -107893,19 +107910,19 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "\u5907\u6ce8",
+                    title: "Ghi chú",
                     dataIndex: "remarks",
                     key: "remarks"
                 }, {
-                    title: "\u5339\u914d\u6570\u91cf",
+                    title: "Số lượng khớp",
                     dataIndex: "match",
                     key: "match",
                     render: e=>{
                         var t;
-                        return "\u5339\u914d ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " \u6761\u89c4\u5219")
+                        return "Khớp ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " quy tắc")
                     }
                 }, {
-                    title: "\u52a8\u4f5c",
+                    title: "Hành động",
                     dataIndex: "action",
                     key: "action",
                     render: e=>{
@@ -107931,7 +107948,7 @@
                     }
                 }];
                 return f.a.createElement(d["a"], i()({}, this.props, {
-                    title: "\u8def\u7531\u7ba1\u7406"
+                    title: "Quản lý route"
                 }), f.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), f.a.createElement(m["a"], {
@@ -107948,7 +107965,7 @@
                     onClick: ()=>this.modalVisible()
                 }, f.a.createElement(s["a"], {
                     type: "plus"
-                }), " \u6dfb\u52a0\u8def\u7531"))), f.a.createElement(o["a"], {
+                }), " Thêm route"))), f.a.createElement(o["a"], {
                     tableLayout: "auto",
                     columns: r,
                     dataSource: t,
@@ -108415,7 +108432,7 @@
         }
     },
     xWCP: function(e) {
-        e.exports = JSON.parse('{"Aacute":"\xc1","aacute":"\xe1","Abreve":"\u0102","abreve":"\u0103","ac":"\u223e","acd":"\u223f","acE":"\u223e\u0333","Acirc":"\xc2","acirc":"\xe2","acute":"\xb4","Acy":"\u0410","acy":"\u0430","AElig":"\xc6","aelig":"\xe6","af":"\u2061","Afr":"\ud835\udd04","afr":"\ud835\udd1e","Agrave":"\xc0","agrave":"\xe0","alefsym":"\u2135","aleph":"\u2135","Alpha":"\u0391","alpha":"\u03b1","Amacr":"\u0100","amacr":"\u0101","amalg":"\u2a3f","amp":"&","AMP":"&","andand":"\u2a55","And":"\u2a53","and":"\u2227","andd":"\u2a5c","andslope":"\u2a58","andv":"\u2a5a","ang":"\u2220","ange":"\u29a4","angle":"\u2220","angmsdaa":"\u29a8","angmsdab":"\u29a9","angmsdac":"\u29aa","angmsdad":"\u29ab","angmsdae":"\u29ac","angmsdaf":"\u29ad","angmsdag":"\u29ae","angmsdah":"\u29af","angmsd":"\u2221","angrt":"\u221f","angrtvb":"\u22be","angrtvbd":"\u299d","angsph":"\u2222","angst":"\xc5","angzarr":"\u237c","Aogon":"\u0104","aogon":"\u0105","Aopf":"\ud835\udd38","aopf":"\ud835\udd52","apacir":"\u2a6f","ap":"\u2248","apE":"\u2a70","ape":"\u224a","apid":"\u224b","apos":"\'","ApplyFunction":"\u2061","approx":"\u2248","approxeq":"\u224a","Aring":"\xc5","aring":"\xe5","Ascr":"\ud835\udc9c","ascr":"\ud835\udcb6","Assign":"\u2254","ast":"*","asymp":"\u2248","asympeq":"\u224d","Atilde":"\xc3","atilde":"\xe3","Auml":"\xc4","auml":"\xe4","awconint":"\u2233","awint":"\u2a11","backcong":"\u224c","backepsilon":"\u03f6","backprime":"\u2035","backsim":"\u223d","backsimeq":"\u22cd","Backslash":"\u2216","Barv":"\u2ae7","barvee":"\u22bd","barwed":"\u2305","Barwed":"\u2306","barwedge":"\u2305","bbrk":"\u23b5","bbrktbrk":"\u23b6","bcong":"\u224c","Bcy":"\u0411","bcy":"\u0431","bdquo":"\u201e","becaus":"\u2235","because":"\u2235","Because":"\u2235","bemptyv":"\u29b0","bepsi":"\u03f6","bernou":"\u212c","Bernoullis":"\u212c","Beta":"\u0392","beta":"\u03b2","beth":"\u2136","between":"\u226c","Bfr":"\ud835\udd05","bfr":"\ud835\udd1f","bigcap":"\u22c2","bigcirc":"\u25ef","bigcup":"\u22c3","bigodot":"\u2a00","bigoplus":"\u2a01","bigotimes":"\u2a02","bigsqcup":"\u2a06","bigstar":"\u2605","bigtriangledown":"\u25bd","bigtriangleup":"\u25b3","biguplus":"\u2a04","bigvee":"\u22c1","bigwedge":"\u22c0","bkarow":"\u290d","blacklozenge":"\u29eb","blacksquare":"\u25aa","blacktriangle":"\u25b4","blacktriangledown":"\u25be","blacktriangleleft":"\u25c2","blacktriangleright":"\u25b8","blank":"\u2423","blk12":"\u2592","blk14":"\u2591","blk34":"\u2593","block":"\u2588","bne":"=\u20e5","bnequiv":"\u2261\u20e5","bNot":"\u2aed","bnot":"\u2310","Bopf":"\ud835\udd39","bopf":"\ud835\udd53","bot":"\u22a5","bottom":"\u22a5","bowtie":"\u22c8","boxbox":"\u29c9","boxdl":"\u2510","boxdL":"\u2555","boxDl":"\u2556","boxDL":"\u2557","boxdr":"\u250c","boxdR":"\u2552","boxDr":"\u2553","boxDR":"\u2554","boxh":"\u2500","boxH":"\u2550","boxhd":"\u252c","boxHd":"\u2564","boxhD":"\u2565","boxHD":"\u2566","boxhu":"\u2534","boxHu":"\u2567","boxhU":"\u2568","boxHU":"\u2569","boxminus":"\u229f","boxplus":"\u229e","boxtimes":"\u22a0","boxul":"\u2518","boxuL":"\u255b","boxUl":"\u255c","boxUL":"\u255d","boxur":"\u2514","boxuR":"\u2558","boxUr":"\u2559","boxUR":"\u255a","boxv":"\u2502","boxV":"\u2551","boxvh":"\u253c","boxvH":"\u256a","boxVh":"\u256b","boxVH":"\u256c","boxvl":"\u2524","boxvL":"\u2561","boxVl":"\u2562","boxVL":"\u2563","boxvr":"\u251c","boxvR":"\u255e","boxVr":"\u255f","boxVR":"\u2560","bprime":"\u2035","breve":"\u02d8","Breve":"\u02d8","brvbar":"\xa6","bscr":"\ud835\udcb7","Bscr":"\u212c","bsemi":"\u204f","bsim":"\u223d","bsime":"\u22cd","bsolb":"\u29c5","bsol":"\\\\","bsolhsub":"\u27c8","bull":"\u2022","bullet":"\u2022","bump":"\u224e","bumpE":"\u2aae","bumpe":"\u224f","Bumpeq":"\u224e","bumpeq":"\u224f","Cacute":"\u0106","cacute":"\u0107","capand":"\u2a44","capbrcup":"\u2a49","capcap":"\u2a4b","cap":"\u2229","Cap":"\u22d2","capcup":"\u2a47","capdot":"\u2a40","CapitalDifferentialD":"\u2145","caps":"\u2229\ufe00","caret":"\u2041","caron":"\u02c7","Cayleys":"\u212d","ccaps":"\u2a4d","Ccaron":"\u010c","ccaron":"\u010d","Ccedil":"\xc7","ccedil":"\xe7","Ccirc":"\u0108","ccirc":"\u0109","Cconint":"\u2230","ccups":"\u2a4c","ccupssm":"\u2a50","Cdot":"\u010a","cdot":"\u010b","cedil":"\xb8","Cedilla":"\xb8","cemptyv":"\u29b2","cent":"\xa2","centerdot":"\xb7","CenterDot":"\xb7","cfr":"\ud835\udd20","Cfr":"\u212d","CHcy":"\u0427","chcy":"\u0447","check":"\u2713","checkmark":"\u2713","Chi":"\u03a7","chi":"\u03c7","circ":"\u02c6","circeq":"\u2257","circlearrowleft":"\u21ba","circlearrowright":"\u21bb","circledast":"\u229b","circledcirc":"\u229a","circleddash":"\u229d","CircleDot":"\u2299","circledR":"\xae","circledS":"\u24c8","CircleMinus":"\u2296","CirclePlus":"\u2295","CircleTimes":"\u2297","cir":"\u25cb","cirE":"\u29c3","cire":"\u2257","cirfnint":"\u2a10","cirmid":"\u2aef","cirscir":"\u29c2","ClockwiseContourIntegral":"\u2232","CloseCurlyDoubleQuote":"\u201d","CloseCurlyQuote":"\u2019","clubs":"\u2663","clubsuit":"\u2663","colon":":","Colon":"\u2237","Colone":"\u2a74","colone":"\u2254","coloneq":"\u2254","comma":",","commat":"@","comp":"\u2201","compfn":"\u2218","complement":"\u2201","complexes":"\u2102","cong":"\u2245","congdot":"\u2a6d","Congruent":"\u2261","conint":"\u222e","Conint":"\u222f","ContourIntegral":"\u222e","copf":"\ud835\udd54","Copf":"\u2102","coprod":"\u2210","Coproduct":"\u2210","copy":"\xa9","COPY":"\xa9","copysr":"\u2117","CounterClockwiseContourIntegral":"\u2233","crarr":"\u21b5","cross":"\u2717","Cross":"\u2a2f","Cscr":"\ud835\udc9e","cscr":"\ud835\udcb8","csub":"\u2acf","csube":"\u2ad1","csup":"\u2ad0","csupe":"\u2ad2","ctdot":"\u22ef","cudarrl":"\u2938","cudarrr":"\u2935","cuepr":"\u22de","cuesc":"\u22df","cularr":"\u21b6","cularrp":"\u293d","cupbrcap":"\u2a48","cupcap":"\u2a46","CupCap":"\u224d","cup":"\u222a","Cup":"\u22d3","cupcup":"\u2a4a","cupdot":"\u228d","cupor":"\u2a45","cups":"\u222a\ufe00","curarr":"\u21b7","curarrm":"\u293c","curlyeqprec":"\u22de","curlyeqsucc":"\u22df","curlyvee":"\u22ce","curlywedge":"\u22cf","curren":"\xa4","curvearrowleft":"\u21b6","curvearrowright":"\u21b7","cuvee":"\u22ce","cuwed":"\u22cf","cwconint":"\u2232","cwint":"\u2231","cylcty":"\u232d","dagger":"\u2020","Dagger":"\u2021","daleth":"\u2138","darr":"\u2193","Darr":"\u21a1","dArr":"\u21d3","dash":"\u2010","Dashv":"\u2ae4","dashv":"\u22a3","dbkarow":"\u290f","dblac":"\u02dd","Dcaron":"\u010e","dcaron":"\u010f","Dcy":"\u0414","dcy":"\u0434","ddagger":"\u2021","ddarr":"\u21ca","DD":"\u2145","dd":"\u2146","DDotrahd":"\u2911","ddotseq":"\u2a77","deg":"\xb0","Del":"\u2207","Delta":"\u0394","delta":"\u03b4","demptyv":"\u29b1","dfisht":"\u297f","Dfr":"\ud835\udd07","dfr":"\ud835\udd21","dHar":"\u2965","dharl":"\u21c3","dharr":"\u21c2","DiacriticalAcute":"\xb4","DiacriticalDot":"\u02d9","DiacriticalDoubleAcute":"\u02dd","DiacriticalGrave":"`","DiacriticalTilde":"\u02dc","diam":"\u22c4","diamond":"\u22c4","Diamond":"\u22c4","diamondsuit":"\u2666","diams":"\u2666","die":"\xa8","DifferentialD":"\u2146","digamma":"\u03dd","disin":"\u22f2","div":"\xf7","divide":"\xf7","divideontimes":"\u22c7","divonx":"\u22c7","DJcy":"\u0402","djcy":"\u0452","dlcorn":"\u231e","dlcrop":"\u230d","dollar":"$","Dopf":"\ud835\udd3b","dopf":"\ud835\udd55","Dot":"\xa8","dot":"\u02d9","DotDot":"\u20dc","doteq":"\u2250","doteqdot":"\u2251","DotEqual":"\u2250","dotminus":"\u2238","dotplus":"\u2214","dotsquare":"\u22a1","doublebarwedge":"\u2306","DoubleContourIntegral":"\u222f","DoubleDot":"\xa8","DoubleDownArrow":"\u21d3","DoubleLeftArrow":"\u21d0","DoubleLeftRightArrow":"\u21d4","DoubleLeftTee":"\u2ae4","DoubleLongLeftArrow":"\u27f8","DoubleLongLeftRightArrow":"\u27fa","DoubleLongRightArrow":"\u27f9","DoubleRightArrow":"\u21d2","DoubleRightTee":"\u22a8","DoubleUpArrow":"\u21d1","DoubleUpDownArrow":"\u21d5","DoubleVerticalBar":"\u2225","DownArrowBar":"\u2913","downarrow":"\u2193","DownArrow":"\u2193","Downarrow":"\u21d3","DownArrowUpArrow":"\u21f5","DownBreve":"\u0311","downdownarrows":"\u21ca","downharpoonleft":"\u21c3","downharpoonright":"\u21c2","DownLeftRightVector":"\u2950","DownLeftTeeVector":"\u295e","DownLeftVectorBar":"\u2956","DownLeftVector":"\u21bd","DownRightTeeVector":"\u295f","DownRightVectorBar":"\u2957","DownRightVector":"\u21c1","DownTeeArrow":"\u21a7","DownTee":"\u22a4","drbkarow":"\u2910","drcorn":"\u231f","drcrop":"\u230c","Dscr":"\ud835\udc9f","dscr":"\ud835\udcb9","DScy":"\u0405","dscy":"\u0455","dsol":"\u29f6","Dstrok":"\u0110","dstrok":"\u0111","dtdot":"\u22f1","dtri":"\u25bf","dtrif":"\u25be","duarr":"\u21f5","duhar":"\u296f","dwangle":"\u29a6","DZcy":"\u040f","dzcy":"\u045f","dzigrarr":"\u27ff","Eacute":"\xc9","eacute":"\xe9","easter":"\u2a6e","Ecaron":"\u011a","ecaron":"\u011b","Ecirc":"\xca","ecirc":"\xea","ecir":"\u2256","ecolon":"\u2255","Ecy":"\u042d","ecy":"\u044d","eDDot":"\u2a77","Edot":"\u0116","edot":"\u0117","eDot":"\u2251","ee":"\u2147","efDot":"\u2252","Efr":"\ud835\udd08","efr":"\ud835\udd22","eg":"\u2a9a","Egrave":"\xc8","egrave":"\xe8","egs":"\u2a96","egsdot":"\u2a98","el":"\u2a99","Element":"\u2208","elinters":"\u23e7","ell":"\u2113","els":"\u2a95","elsdot":"\u2a97","Emacr":"\u0112","emacr":"\u0113","empty":"\u2205","emptyset":"\u2205","EmptySmallSquare":"\u25fb","emptyv":"\u2205","EmptyVerySmallSquare":"\u25ab","emsp13":"\u2004","emsp14":"\u2005","emsp":"\u2003","ENG":"\u014a","eng":"\u014b","ensp":"\u2002","Eogon":"\u0118","eogon":"\u0119","Eopf":"\ud835\udd3c","eopf":"\ud835\udd56","epar":"\u22d5","eparsl":"\u29e3","eplus":"\u2a71","epsi":"\u03b5","Epsilon":"\u0395","epsilon":"\u03b5","epsiv":"\u03f5","eqcirc":"\u2256","eqcolon":"\u2255","eqsim":"\u2242","eqslantgtr":"\u2a96","eqslantless":"\u2a95","Equal":"\u2a75","equals":"=","EqualTilde":"\u2242","equest":"\u225f","Equilibrium":"\u21cc","equiv":"\u2261","equivDD":"\u2a78","eqvparsl":"\u29e5","erarr":"\u2971","erDot":"\u2253","escr":"\u212f","Escr":"\u2130","esdot":"\u2250","Esim":"\u2a73","esim":"\u2242","Eta":"\u0397","eta":"\u03b7","ETH":"\xd0","eth":"\xf0","Euml":"\xcb","euml":"\xeb","euro":"\u20ac","excl":"!","exist":"\u2203","Exists":"\u2203","expectation":"\u2130","exponentiale":"\u2147","ExponentialE":"\u2147","fallingdotseq":"\u2252","Fcy":"\u0424","fcy":"\u0444","female":"\u2640","ffilig":"\ufb03","fflig":"\ufb00","ffllig":"\ufb04","Ffr":"\ud835\udd09","ffr":"\ud835\udd23","filig":"\ufb01","FilledSmallSquare":"\u25fc","FilledVerySmallSquare":"\u25aa","fjlig":"fj","flat":"\u266d","fllig":"\ufb02","fltns":"\u25b1","fnof":"\u0192","Fopf":"\ud835\udd3d","fopf":"\ud835\udd57","forall":"\u2200","ForAll":"\u2200","fork":"\u22d4","forkv":"\u2ad9","Fouriertrf":"\u2131","fpartint":"\u2a0d","frac12":"\xbd","frac13":"\u2153","frac14":"\xbc","frac15":"\u2155","frac16":"\u2159","frac18":"\u215b","frac23":"\u2154","frac25":"\u2156","frac34":"\xbe","frac35":"\u2157","frac38":"\u215c","frac45":"\u2158","frac56":"\u215a","frac58":"\u215d","frac78":"\u215e","frasl":"\u2044","frown":"\u2322","fscr":"\ud835\udcbb","Fscr":"\u2131","gacute":"\u01f5","Gamma":"\u0393","gamma":"\u03b3","Gammad":"\u03dc","gammad":"\u03dd","gap":"\u2a86","Gbreve":"\u011e","gbreve":"\u011f","Gcedil":"\u0122","Gcirc":"\u011c","gcirc":"\u011d","Gcy":"\u0413","gcy":"\u0433","Gdot":"\u0120","gdot":"\u0121","ge":"\u2265","gE":"\u2267","gEl":"\u2a8c","gel":"\u22db","geq":"\u2265","geqq":"\u2267","geqslant":"\u2a7e","gescc":"\u2aa9","ges":"\u2a7e","gesdot":"\u2a80","gesdoto":"\u2a82","gesdotol":"\u2a84","gesl":"\u22db\ufe00","gesles":"\u2a94","Gfr":"\ud835\udd0a","gfr":"\ud835\udd24","gg":"\u226b","Gg":"\u22d9","ggg":"\u22d9","gimel":"\u2137","GJcy":"\u0403","gjcy":"\u0453","gla":"\u2aa5","gl":"\u2277","glE":"\u2a92","glj":"\u2aa4","gnap":"\u2a8a","gnapprox":"\u2a8a","gne":"\u2a88","gnE":"\u2269","gneq":"\u2a88","gneqq":"\u2269","gnsim":"\u22e7","Gopf":"\ud835\udd3e","gopf":"\ud835\udd58","grave":"`","GreaterEqual":"\u2265","GreaterEqualLess":"\u22db","GreaterFullEqual":"\u2267","GreaterGreater":"\u2aa2","GreaterLess":"\u2277","GreaterSlantEqual":"\u2a7e","GreaterTilde":"\u2273","Gscr":"\ud835\udca2","gscr":"\u210a","gsim":"\u2273","gsime":"\u2a8e","gsiml":"\u2a90","gtcc":"\u2aa7","gtcir":"\u2a7a","gt":">","GT":">","Gt":"\u226b","gtdot":"\u22d7","gtlPar":"\u2995","gtquest":"\u2a7c","gtrapprox":"\u2a86","gtrarr":"\u2978","gtrdot":"\u22d7","gtreqless":"\u22db","gtreqqless":"\u2a8c","gtrless":"\u2277","gtrsim":"\u2273","gvertneqq":"\u2269\ufe00","gvnE":"\u2269\ufe00","Hacek":"\u02c7","hairsp":"\u200a","half":"\xbd","hamilt":"\u210b","HARDcy":"\u042a","hardcy":"\u044a","harrcir":"\u2948","harr":"\u2194","hArr":"\u21d4","harrw":"\u21ad","Hat":"^","hbar":"\u210f","Hcirc":"\u0124","hcirc":"\u0125","hearts":"\u2665","heartsuit":"\u2665","hellip":"\u2026","hercon":"\u22b9","hfr":"\ud835\udd25","Hfr":"\u210c","HilbertSpace":"\u210b","hksearow":"\u2925","hkswarow":"\u2926","hoarr":"\u21ff","homtht":"\u223b","hookleftarrow":"\u21a9","hookrightarrow":"\u21aa","hopf":"\ud835\udd59","Hopf":"\u210d","horbar":"\u2015","HorizontalLine":"\u2500","hscr":"\ud835\udcbd","Hscr":"\u210b","hslash":"\u210f","Hstrok":"\u0126","hstrok":"\u0127","HumpDownHump":"\u224e","HumpEqual":"\u224f","hybull":"\u2043","hyphen":"\u2010","Iacute":"\xcd","iacute":"\xed","ic":"\u2063","Icirc":"\xce","icirc":"\xee","Icy":"\u0418","icy":"\u0438","Idot":"\u0130","IEcy":"\u0415","iecy":"\u0435","iexcl":"\xa1","iff":"\u21d4","ifr":"\ud835\udd26","Ifr":"\u2111","Igrave":"\xcc","igrave":"\xec","ii":"\u2148","iiiint":"\u2a0c","iiint":"\u222d","iinfin":"\u29dc","iiota":"\u2129","IJlig":"\u0132","ijlig":"\u0133","Imacr":"\u012a","imacr":"\u012b","image":"\u2111","ImaginaryI":"\u2148","imagline":"\u2110","imagpart":"\u2111","imath":"\u0131","Im":"\u2111","imof":"\u22b7","imped":"\u01b5","Implies":"\u21d2","incare":"\u2105","in":"\u2208","infin":"\u221e","infintie":"\u29dd","inodot":"\u0131","intcal":"\u22ba","int":"\u222b","Int":"\u222c","integers":"\u2124","Integral":"\u222b","intercal":"\u22ba","Intersection":"\u22c2","intlarhk":"\u2a17","intprod":"\u2a3c","InvisibleComma":"\u2063","InvisibleTimes":"\u2062","IOcy":"\u0401","iocy":"\u0451","Iogon":"\u012e","iogon":"\u012f","Iopf":"\ud835\udd40","iopf":"\ud835\udd5a","Iota":"\u0399","iota":"\u03b9","iprod":"\u2a3c","iquest":"\xbf","iscr":"\ud835\udcbe","Iscr":"\u2110","isin":"\u2208","isindot":"\u22f5","isinE":"\u22f9","isins":"\u22f4","isinsv":"\u22f3","isinv":"\u2208","it":"\u2062","Itilde":"\u0128","itilde":"\u0129","Iukcy":"\u0406","iukcy":"\u0456","Iuml":"\xcf","iuml":"\xef","Jcirc":"\u0134","jcirc":"\u0135","Jcy":"\u0419","jcy":"\u0439","Jfr":"\ud835\udd0d","jfr":"\ud835\udd27","jmath":"\u0237","Jopf":"\ud835\udd41","jopf":"\ud835\udd5b","Jscr":"\ud835\udca5","jscr":"\ud835\udcbf","Jsercy":"\u0408","jsercy":"\u0458","Jukcy":"\u0404","jukcy":"\u0454","Kappa":"\u039a","kappa":"\u03ba","kappav":"\u03f0","Kcedil":"\u0136","kcedil":"\u0137","Kcy":"\u041a","kcy":"\u043a","Kfr":"\ud835\udd0e","kfr":"\ud835\udd28","kgreen":"\u0138","KHcy":"\u0425","khcy":"\u0445","KJcy":"\u040c","kjcy":"\u045c","Kopf":"\ud835\udd42","kopf":"\ud835\udd5c","Kscr":"\ud835\udca6","kscr":"\ud835\udcc0","lAarr":"\u21da","Lacute":"\u0139","lacute":"\u013a","laemptyv":"\u29b4","lagran":"\u2112","Lambda":"\u039b","lambda":"\u03bb","lang":"\u27e8","Lang":"\u27ea","langd":"\u2991","langle":"\u27e8","lap":"\u2a85","Laplacetrf":"\u2112","laquo":"\xab","larrb":"\u21e4","larrbfs":"\u291f","larr":"\u2190","Larr":"\u219e","lArr":"\u21d0","larrfs":"\u291d","larrhk":"\u21a9","larrlp":"\u21ab","larrpl":"\u2939","larrsim":"\u2973","larrtl":"\u21a2","latail":"\u2919","lAtail":"\u291b","lat":"\u2aab","late":"\u2aad","lates":"\u2aad\ufe00","lbarr":"\u290c","lBarr":"\u290e","lbbrk":"\u2772","lbrace":"{","lbrack":"[","lbrke":"\u298b","lbrksld":"\u298f","lbrkslu":"\u298d","Lcaron":"\u013d","lcaron":"\u013e","Lcedil":"\u013b","lcedil":"\u013c","lceil":"\u2308","lcub":"{","Lcy":"\u041b","lcy":"\u043b","ldca":"\u2936","ldquo":"\u201c","ldquor":"\u201e","ldrdhar":"\u2967","ldrushar":"\u294b","ldsh":"\u21b2","le":"\u2264","lE":"\u2266","LeftAngleBracket":"\u27e8","LeftArrowBar":"\u21e4","leftarrow":"\u2190","LeftArrow":"\u2190","Leftarrow":"\u21d0","LeftArrowRightArrow":"\u21c6","leftarrowtail":"\u21a2","LeftCeiling":"\u2308","LeftDoubleBracket":"\u27e6","LeftDownTeeVector":"\u2961","LeftDownVectorBar":"\u2959","LeftDownVector":"\u21c3","LeftFloor":"\u230a","leftharpoondown":"\u21bd","leftharpoonup":"\u21bc","leftleftarrows":"\u21c7","leftrightarrow":"\u2194","LeftRightArrow":"\u2194","Leftrightarrow":"\u21d4","leftrightarrows":"\u21c6","leftrightharpoons":"\u21cb","leftrightsquigarrow":"\u21ad","LeftRightVector":"\u294e","LeftTeeArrow":"\u21a4","LeftTee":"\u22a3","LeftTeeVector":"\u295a","leftthreetimes":"\u22cb","LeftTriangleBar":"\u29cf","LeftTriangle":"\u22b2","LeftTriangleEqual":"\u22b4","LeftUpDownVector":"\u2951","LeftUpTeeVector":"\u2960","LeftUpVectorBar":"\u2958","LeftUpVector":"\u21bf","LeftVectorBar":"\u2952","LeftVector":"\u21bc","lEg":"\u2a8b","leg":"\u22da","leq":"\u2264","leqq":"\u2266","leqslant":"\u2a7d","lescc":"\u2aa8","les":"\u2a7d","lesdot":"\u2a7f","lesdoto":"\u2a81","lesdotor":"\u2a83","lesg":"\u22da\ufe00","lesges":"\u2a93","lessapprox":"\u2a85","lessdot":"\u22d6","lesseqgtr":"\u22da","lesseqqgtr":"\u2a8b","LessEqualGreater":"\u22da","LessFullEqual":"\u2266","LessGreater":"\u2276","lessgtr":"\u2276","LessLess":"\u2aa1","lesssim":"\u2272","LessSlantEqual":"\u2a7d","LessTilde":"\u2272","lfisht":"\u297c","lfloor":"\u230a","Lfr":"\ud835\udd0f","lfr":"\ud835\udd29","lg":"\u2276","lgE":"\u2a91","lHar":"\u2962","lhard":"\u21bd","lharu":"\u21bc","lharul":"\u296a","lhblk":"\u2584","LJcy":"\u0409","ljcy":"\u0459","llarr":"\u21c7","ll":"\u226a","Ll":"\u22d8","llcorner":"\u231e","Lleftarrow":"\u21da","llhard":"\u296b","lltri":"\u25fa","Lmidot":"\u013f","lmidot":"\u0140","lmoustache":"\u23b0","lmoust":"\u23b0","lnap":"\u2a89","lnapprox":"\u2a89","lne":"\u2a87","lnE":"\u2268","lneq":"\u2a87","lneqq":"\u2268","lnsim":"\u22e6","loang":"\u27ec","loarr":"\u21fd","lobrk":"\u27e6","longleftarrow":"\u27f5","LongLeftArrow":"\u27f5","Longleftarrow":"\u27f8","longleftrightarrow":"\u27f7","LongLeftRightArrow":"\u27f7","Longleftrightarrow":"\u27fa","longmapsto":"\u27fc","longrightarrow":"\u27f6","LongRightArrow":"\u27f6","Longrightarrow":"\u27f9","looparrowleft":"\u21ab","looparrowright":"\u21ac","lopar":"\u2985","Lopf":"\ud835\udd43","lopf":"\ud835\udd5d","loplus":"\u2a2d","lotimes":"\u2a34","lowast":"\u2217","lowbar":"_","LowerLeftArrow":"\u2199","LowerRightArrow":"\u2198","loz":"\u25ca","lozenge":"\u25ca","lozf":"\u29eb","lpar":"(","lparlt":"\u2993","lrarr":"\u21c6","lrcorner":"\u231f","lrhar":"\u21cb","lrhard":"\u296d","lrm":"\u200e","lrtri":"\u22bf","lsaquo":"\u2039","lscr":"\ud835\udcc1","Lscr":"\u2112","lsh":"\u21b0","Lsh":"\u21b0","lsim":"\u2272","lsime":"\u2a8d","lsimg":"\u2a8f","lsqb":"[","lsquo":"\u2018","lsquor":"\u201a","Lstrok":"\u0141","lstrok":"\u0142","ltcc":"\u2aa6","ltcir":"\u2a79","lt":"<","LT":"<","Lt":"\u226a","ltdot":"\u22d6","lthree":"\u22cb","ltimes":"\u22c9","ltlarr":"\u2976","ltquest":"\u2a7b","ltri":"\u25c3","ltrie":"\u22b4","ltrif":"\u25c2","ltrPar":"\u2996","lurdshar":"\u294a","luruhar":"\u2966","lvertneqq":"\u2268\ufe00","lvnE":"\u2268\ufe00","macr":"\xaf","male":"\u2642","malt":"\u2720","maltese":"\u2720","Map":"\u2905","map":"\u21a6","mapsto":"\u21a6","mapstodown":"\u21a7","mapstoleft":"\u21a4","mapstoup":"\u21a5","marker":"\u25ae","mcomma":"\u2a29","Mcy":"\u041c","mcy":"\u043c","mdash":"\u2014","mDDot":"\u223a","measuredangle":"\u2221","MediumSpace":"\u205f","Mellintrf":"\u2133","Mfr":"\ud835\udd10","mfr":"\ud835\udd2a","mho":"\u2127","micro":"\xb5","midast":"*","midcir":"\u2af0","mid":"\u2223","middot":"\xb7","minusb":"\u229f","minus":"\u2212","minusd":"\u2238","minusdu":"\u2a2a","MinusPlus":"\u2213","mlcp":"\u2adb","mldr":"\u2026","mnplus":"\u2213","models":"\u22a7","Mopf":"\ud835\udd44","mopf":"\ud835\udd5e","mp":"\u2213","mscr":"\ud835\udcc2","Mscr":"\u2133","mstpos":"\u223e","Mu":"\u039c","mu":"\u03bc","multimap":"\u22b8","mumap":"\u22b8","nabla":"\u2207","Nacute":"\u0143","nacute":"\u0144","nang":"\u2220\u20d2","nap":"\u2249","napE":"\u2a70\u0338","napid":"\u224b\u0338","napos":"\u0149","napprox":"\u2249","natural":"\u266e","naturals":"\u2115","natur":"\u266e","nbsp":"\xa0","nbump":"\u224e\u0338","nbumpe":"\u224f\u0338","ncap":"\u2a43","Ncaron":"\u0147","ncaron":"\u0148","Ncedil":"\u0145","ncedil":"\u0146","ncong":"\u2247","ncongdot":"\u2a6d\u0338","ncup":"\u2a42","Ncy":"\u041d","ncy":"\u043d","ndash":"\u2013","nearhk":"\u2924","nearr":"\u2197","neArr":"\u21d7","nearrow":"\u2197","ne":"\u2260","nedot":"\u2250\u0338","NegativeMediumSpace":"\u200b","NegativeThickSpace":"\u200b","NegativeThinSpace":"\u200b","NegativeVeryThinSpace":"\u200b","nequiv":"\u2262","nesear":"\u2928","nesim":"\u2242\u0338","NestedGreaterGreater":"\u226b","NestedLessLess":"\u226a","NewLine":"\\n","nexist":"\u2204","nexists":"\u2204","Nfr":"\ud835\udd11","nfr":"\ud835\udd2b","ngE":"\u2267\u0338","nge":"\u2271","ngeq":"\u2271","ngeqq":"\u2267\u0338","ngeqslant":"\u2a7e\u0338","nges":"\u2a7e\u0338","nGg":"\u22d9\u0338","ngsim":"\u2275","nGt":"\u226b\u20d2","ngt":"\u226f","ngtr":"\u226f","nGtv":"\u226b\u0338","nharr":"\u21ae","nhArr":"\u21ce","nhpar":"\u2af2","ni":"\u220b","nis":"\u22fc","nisd":"\u22fa","niv":"\u220b","NJcy":"\u040a","njcy":"\u045a","nlarr":"\u219a","nlArr":"\u21cd","nldr":"\u2025","nlE":"\u2266\u0338","nle":"\u2270","nleftarrow":"\u219a","nLeftarrow":"\u21cd","nleftrightarrow":"\u21ae","nLeftrightarrow":"\u21ce","nleq":"\u2270","nleqq":"\u2266\u0338","nleqslant":"\u2a7d\u0338","nles":"\u2a7d\u0338","nless":"\u226e","nLl":"\u22d8\u0338","nlsim":"\u2274","nLt":"\u226a\u20d2","nlt":"\u226e","nltri":"\u22ea","nltrie":"\u22ec","nLtv":"\u226a\u0338","nmid":"\u2224","NoBreak":"\u2060","NonBreakingSpace":"\xa0","nopf":"\ud835\udd5f","Nopf":"\u2115","Not":"\u2aec","not":"\xac","NotCongruent":"\u2262","NotCupCap":"\u226d","NotDoubleVerticalBar":"\u2226","NotElement":"\u2209","NotEqual":"\u2260","NotEqualTilde":"\u2242\u0338","NotExists":"\u2204","NotGreater":"\u226f","NotGreaterEqual":"\u2271","NotGreaterFullEqual":"\u2267\u0338","NotGreaterGreater":"\u226b\u0338","NotGreaterLess":"\u2279","NotGreaterSlantEqual":"\u2a7e\u0338","NotGreaterTilde":"\u2275","NotHumpDownHump":"\u224e\u0338","NotHumpEqual":"\u224f\u0338","notin":"\u2209","notindot":"\u22f5\u0338","notinE":"\u22f9\u0338","notinva":"\u2209","notinvb":"\u22f7","notinvc":"\u22f6","NotLeftTriangleBar":"\u29cf\u0338","NotLeftTriangle":"\u22ea","NotLeftTriangleEqual":"\u22ec","NotLess":"\u226e","NotLessEqual":"\u2270","NotLessGreater":"\u2278","NotLessLess":"\u226a\u0338","NotLessSlantEqual":"\u2a7d\u0338","NotLessTilde":"\u2274","NotNestedGreaterGreater":"\u2aa2\u0338","NotNestedLessLess":"\u2aa1\u0338","notni":"\u220c","notniva":"\u220c","notnivb":"\u22fe","notnivc":"\u22fd","NotPrecedes":"\u2280","NotPrecedesEqual":"\u2aaf\u0338","NotPrecedesSlantEqual":"\u22e0","NotReverseElement":"\u220c","NotRightTriangleBar":"\u29d0\u0338","NotRightTriangle":"\u22eb","NotRightTriangleEqual":"\u22ed","NotSquareSubset":"\u228f\u0338","NotSquareSubsetEqual":"\u22e2","NotSquareSuperset":"\u2290\u0338","NotSquareSupersetEqual":"\u22e3","NotSubset":"\u2282\u20d2","NotSubsetEqual":"\u2288","NotSucceeds":"\u2281","NotSucceedsEqual":"\u2ab0\u0338","NotSucceedsSlantEqual":"\u22e1","NotSucceedsTilde":"\u227f\u0338","NotSuperset":"\u2283\u20d2","NotSupersetEqual":"\u2289","NotTilde":"\u2241","NotTildeEqual":"\u2244","NotTildeFullEqual":"\u2247","NotTildeTilde":"\u2249","NotVerticalBar":"\u2224","nparallel":"\u2226","npar":"\u2226","nparsl":"\u2afd\u20e5","npart":"\u2202\u0338","npolint":"\u2a14","npr":"\u2280","nprcue":"\u22e0","nprec":"\u2280","npreceq":"\u2aaf\u0338","npre":"\u2aaf\u0338","nrarrc":"\u2933\u0338","nrarr":"\u219b","nrArr":"\u21cf","nrarrw":"\u219d\u0338","nrightarrow":"\u219b","nRightarrow":"\u21cf","nrtri":"\u22eb","nrtrie":"\u22ed","nsc":"\u2281","nsccue":"\u22e1","nsce":"\u2ab0\u0338","Nscr":"\ud835\udca9","nscr":"\ud835\udcc3","nshortmid":"\u2224","nshortparallel":"\u2226","nsim":"\u2241","nsime":"\u2244","nsimeq":"\u2244","nsmid":"\u2224","nspar":"\u2226","nsqsube":"\u22e2","nsqsupe":"\u22e3","nsub":"\u2284","nsubE":"\u2ac5\u0338","nsube":"\u2288","nsubset":"\u2282\u20d2","nsubseteq":"\u2288","nsubseteqq":"\u2ac5\u0338","nsucc":"\u2281","nsucceq":"\u2ab0\u0338","nsup":"\u2285","nsupE":"\u2ac6\u0338","nsupe":"\u2289","nsupset":"\u2283\u20d2","nsupseteq":"\u2289","nsupseteqq":"\u2ac6\u0338","ntgl":"\u2279","Ntilde":"\xd1","ntilde":"\xf1","ntlg":"\u2278","ntriangleleft":"\u22ea","ntrianglelefteq":"\u22ec","ntriangleright":"\u22eb","ntrianglerighteq":"\u22ed","Nu":"\u039d","nu":"\u03bd","num":"#","numero":"\u2116","numsp":"\u2007","nvap":"\u224d\u20d2","nvdash":"\u22ac","nvDash":"\u22ad","nVdash":"\u22ae","nVDash":"\u22af","nvge":"\u2265\u20d2","nvgt":">\u20d2","nvHarr":"\u2904","nvinfin":"\u29de","nvlArr":"\u2902","nvle":"\u2264\u20d2","nvlt":"<\u20d2","nvltrie":"\u22b4\u20d2","nvrArr":"\u2903","nvrtrie":"\u22b5\u20d2","nvsim":"\u223c\u20d2","nwarhk":"\u2923","nwarr":"\u2196","nwArr":"\u21d6","nwarrow":"\u2196","nwnear":"\u2927","Oacute":"\xd3","oacute":"\xf3","oast":"\u229b","Ocirc":"\xd4","ocirc":"\xf4","ocir":"\u229a","Ocy":"\u041e","ocy":"\u043e","odash":"\u229d","Odblac":"\u0150","odblac":"\u0151","odiv":"\u2a38","odot":"\u2299","odsold":"\u29bc","OElig":"\u0152","oelig":"\u0153","ofcir":"\u29bf","Ofr":"\ud835\udd12","ofr":"\ud835\udd2c","ogon":"\u02db","Ograve":"\xd2","ograve":"\xf2","ogt":"\u29c1","ohbar":"\u29b5","ohm":"\u03a9","oint":"\u222e","olarr":"\u21ba","olcir":"\u29be","olcross":"\u29bb","oline":"\u203e","olt":"\u29c0","Omacr":"\u014c","omacr":"\u014d","Omega":"\u03a9","omega":"\u03c9","Omicron":"\u039f","omicron":"\u03bf","omid":"\u29b6","ominus":"\u2296","Oopf":"\ud835\udd46","oopf":"\ud835\udd60","opar":"\u29b7","OpenCurlyDoubleQuote":"\u201c","OpenCurlyQuote":"\u2018","operp":"\u29b9","oplus":"\u2295","orarr":"\u21bb","Or":"\u2a54","or":"\u2228","ord":"\u2a5d","order":"\u2134","orderof":"\u2134","ordf":"\xaa","ordm":"\xba","origof":"\u22b6","oror":"\u2a56","orslope":"\u2a57","orv":"\u2a5b","oS":"\u24c8","Oscr":"\ud835\udcaa","oscr":"\u2134","Oslash":"\xd8","oslash":"\xf8","osol":"\u2298","Otilde":"\xd5","otilde":"\xf5","otimesas":"\u2a36","Otimes":"\u2a37","otimes":"\u2297","Ouml":"\xd6","ouml":"\xf6","ovbar":"\u233d","OverBar":"\u203e","OverBrace":"\u23de","OverBracket":"\u23b4","OverParenthesis":"\u23dc","para":"\xb6","parallel":"\u2225","par":"\u2225","parsim":"\u2af3","parsl":"\u2afd","part":"\u2202","PartialD":"\u2202","Pcy":"\u041f","pcy":"\u043f","percnt":"%","period":".","permil":"\u2030","perp":"\u22a5","pertenk":"\u2031","Pfr":"\ud835\udd13","pfr":"\ud835\udd2d","Phi":"\u03a6","phi":"\u03c6","phiv":"\u03d5","phmmat":"\u2133","phone":"\u260e","Pi":"\u03a0","pi":"\u03c0","pitchfork":"\u22d4","piv":"\u03d6","planck":"\u210f","planckh":"\u210e","plankv":"\u210f","plusacir":"\u2a23","plusb":"\u229e","pluscir":"\u2a22","plus":"+","plusdo":"\u2214","plusdu":"\u2a25","pluse":"\u2a72","PlusMinus":"\xb1","plusmn":"\xb1","plussim":"\u2a26","plustwo":"\u2a27","pm":"\xb1","Poincareplane":"\u210c","pointint":"\u2a15","popf":"\ud835\udd61","Popf":"\u2119","pound":"\xa3","prap":"\u2ab7","Pr":"\u2abb","pr":"\u227a","prcue":"\u227c","precapprox":"\u2ab7","prec":"\u227a","preccurlyeq":"\u227c","Precedes":"\u227a","PrecedesEqual":"\u2aaf","PrecedesSlantEqual":"\u227c","PrecedesTilde":"\u227e","preceq":"\u2aaf","precnapprox":"\u2ab9","precneqq":"\u2ab5","precnsim":"\u22e8","pre":"\u2aaf","prE":"\u2ab3","precsim":"\u227e","prime":"\u2032","Prime":"\u2033","primes":"\u2119","prnap":"\u2ab9","prnE":"\u2ab5","prnsim":"\u22e8","prod":"\u220f","Product":"\u220f","profalar":"\u232e","profline":"\u2312","profsurf":"\u2313","prop":"\u221d","Proportional":"\u221d","Proportion":"\u2237","propto":"\u221d","prsim":"\u227e","prurel":"\u22b0","Pscr":"\ud835\udcab","pscr":"\ud835\udcc5","Psi":"\u03a8","psi":"\u03c8","puncsp":"\u2008","Qfr":"\ud835\udd14","qfr":"\ud835\udd2e","qint":"\u2a0c","qopf":"\ud835\udd62","Qopf":"\u211a","qprime":"\u2057","Qscr":"\ud835\udcac","qscr":"\ud835\udcc6","quaternions":"\u210d","quatint":"\u2a16","quest":"?","questeq":"\u225f","quot":"\\"","QUOT":"\\"","rAarr":"\u21db","race":"\u223d\u0331","Racute":"\u0154","racute":"\u0155","radic":"\u221a","raemptyv":"\u29b3","rang":"\u27e9","Rang":"\u27eb","rangd":"\u2992","range":"\u29a5","rangle":"\u27e9","raquo":"\xbb","rarrap":"\u2975","rarrb":"\u21e5","rarrbfs":"\u2920","rarrc":"\u2933","rarr":"\u2192","Rarr":"\u21a0","rArr":"\u21d2","rarrfs":"\u291e","rarrhk":"\u21aa","rarrlp":"\u21ac","rarrpl":"\u2945","rarrsim":"\u2974","Rarrtl":"\u2916","rarrtl":"\u21a3","rarrw":"\u219d","ratail":"\u291a","rAtail":"\u291c","ratio":"\u2236","rationals":"\u211a","rbarr":"\u290d","rBarr":"\u290f","RBarr":"\u2910","rbbrk":"\u2773","rbrace":"}","rbrack":"]","rbrke":"\u298c","rbrksld":"\u298e","rbrkslu":"\u2990","Rcaron":"\u0158","rcaron":"\u0159","Rcedil":"\u0156","rcedil":"\u0157","rceil":"\u2309","rcub":"}","Rcy":"\u0420","rcy":"\u0440","rdca":"\u2937","rdldhar":"\u2969","rdquo":"\u201d","rdquor":"\u201d","rdsh":"\u21b3","real":"\u211c","realine":"\u211b","realpart":"\u211c","reals":"\u211d","Re":"\u211c","rect":"\u25ad","reg":"\xae","REG":"\xae","ReverseElement":"\u220b","ReverseEquilibrium":"\u21cb","ReverseUpEquilibrium":"\u296f","rfisht":"\u297d","rfloor":"\u230b","rfr":"\ud835\udd2f","Rfr":"\u211c","rHar":"\u2964","rhard":"\u21c1","rharu":"\u21c0","rharul":"\u296c","Rho":"\u03a1","rho":"\u03c1","rhov":"\u03f1","RightAngleBracket":"\u27e9","RightArrowBar":"\u21e5","rightarrow":"\u2192","RightArrow":"\u2192","Rightarrow":"\u21d2","RightArrowLeftArrow":"\u21c4","rightarrowtail":"\u21a3","RightCeiling":"\u2309","RightDoubleBracket":"\u27e7","RightDownTeeVector":"\u295d","RightDownVectorBar":"\u2955","RightDownVector":"\u21c2","RightFloor":"\u230b","rightharpoondown":"\u21c1","rightharpoonup":"\u21c0","rightleftarrows":"\u21c4","rightleftharpoons":"\u21cc","rightrightarrows":"\u21c9","rightsquigarrow":"\u219d","RightTeeArrow":"\u21a6","RightTee":"\u22a2","RightTeeVector":"\u295b","rightthreetimes":"\u22cc","RightTriangleBar":"\u29d0","RightTriangle":"\u22b3","RightTriangleEqual":"\u22b5","RightUpDownVector":"\u294f","RightUpTeeVector":"\u295c","RightUpVectorBar":"\u2954","RightUpVector":"\u21be","RightVectorBar":"\u2953","RightVector":"\u21c0","ring":"\u02da","risingdotseq":"\u2253","rlarr":"\u21c4","rlhar":"\u21cc","rlm":"\u200f","rmoustache":"\u23b1","rmoust":"\u23b1","rnmid":"\u2aee","roang":"\u27ed","roarr":"\u21fe","robrk":"\u27e7","ropar":"\u2986","ropf":"\ud835\udd63","Ropf":"\u211d","roplus":"\u2a2e","rotimes":"\u2a35","RoundImplies":"\u2970","rpar":")","rpargt":"\u2994","rppolint":"\u2a12","rrarr":"\u21c9","Rrightarrow":"\u21db","rsaquo":"\u203a","rscr":"\ud835\udcc7","Rscr":"\u211b","rsh":"\u21b1","Rsh":"\u21b1","rsqb":"]","rsquo":"\u2019","rsquor":"\u2019","rthree":"\u22cc","rtimes":"\u22ca","rtri":"\u25b9","rtrie":"\u22b5","rtrif":"\u25b8","rtriltri":"\u29ce","RuleDelayed":"\u29f4","ruluhar":"\u2968","rx":"\u211e","Sacute":"\u015a","sacute":"\u015b","sbquo":"\u201a","scap":"\u2ab8","Scaron":"\u0160","scaron":"\u0161","Sc":"\u2abc","sc":"\u227b","sccue":"\u227d","sce":"\u2ab0","scE":"\u2ab4","Scedil":"\u015e","scedil":"\u015f","Scirc":"\u015c","scirc":"\u015d","scnap":"\u2aba","scnE":"\u2ab6","scnsim":"\u22e9","scpolint":"\u2a13","scsim":"\u227f","Scy":"\u0421","scy":"\u0441","sdotb":"\u22a1","sdot":"\u22c5","sdote":"\u2a66","searhk":"\u2925","searr":"\u2198","seArr":"\u21d8","searrow":"\u2198","sect":"\xa7","semi":";","seswar":"\u2929","setminus":"\u2216","setmn":"\u2216","sext":"\u2736","Sfr":"\ud835\udd16","sfr":"\ud835\udd30","sfrown":"\u2322","sharp":"\u266f","SHCHcy":"\u0429","shchcy":"\u0449","SHcy":"\u0428","shcy":"\u0448","ShortDownArrow":"\u2193","ShortLeftArrow":"\u2190","shortmid":"\u2223","shortparallel":"\u2225","ShortRightArrow":"\u2192","ShortUpArrow":"\u2191","shy":"\xad","Sigma":"\u03a3","sigma":"\u03c3","sigmaf":"\u03c2","sigmav":"\u03c2","sim":"\u223c","simdot":"\u2a6a","sime":"\u2243","simeq":"\u2243","simg":"\u2a9e","simgE":"\u2aa0","siml":"\u2a9d","simlE":"\u2a9f","simne":"\u2246","simplus":"\u2a24","simrarr":"\u2972","slarr":"\u2190","SmallCircle":"\u2218","smallsetminus":"\u2216","smashp":"\u2a33","smeparsl":"\u29e4","smid":"\u2223","smile":"\u2323","smt":"\u2aaa","smte":"\u2aac","smtes":"\u2aac\ufe00","SOFTcy":"\u042c","softcy":"\u044c","solbar":"\u233f","solb":"\u29c4","sol":"/","Sopf":"\ud835\udd4a","sopf":"\ud835\udd64","spades":"\u2660","spadesuit":"\u2660","spar":"\u2225","sqcap":"\u2293","sqcaps":"\u2293\ufe00","sqcup":"\u2294","sqcups":"\u2294\ufe00","Sqrt":"\u221a","sqsub":"\u228f","sqsube":"\u2291","sqsubset":"\u228f","sqsubseteq":"\u2291","sqsup":"\u2290","sqsupe":"\u2292","sqsupset":"\u2290","sqsupseteq":"\u2292","square":"\u25a1","Square":"\u25a1","SquareIntersection":"\u2293","SquareSubset":"\u228f","SquareSubsetEqual":"\u2291","SquareSuperset":"\u2290","SquareSupersetEqual":"\u2292","SquareUnion":"\u2294","squarf":"\u25aa","squ":"\u25a1","squf":"\u25aa","srarr":"\u2192","Sscr":"\ud835\udcae","sscr":"\ud835\udcc8","ssetmn":"\u2216","ssmile":"\u2323","sstarf":"\u22c6","Star":"\u22c6","star":"\u2606","starf":"\u2605","straightepsilon":"\u03f5","straightphi":"\u03d5","strns":"\xaf","sub":"\u2282","Sub":"\u22d0","subdot":"\u2abd","subE":"\u2ac5","sube":"\u2286","subedot":"\u2ac3","submult":"\u2ac1","subnE":"\u2acb","subne":"\u228a","subplus":"\u2abf","subrarr":"\u2979","subset":"\u2282","Subset":"\u22d0","subseteq":"\u2286","subseteqq":"\u2ac5","SubsetEqual":"\u2286","subsetneq":"\u228a","subsetneqq":"\u2acb","subsim":"\u2ac7","subsub":"\u2ad5","subsup":"\u2ad3","succapprox":"\u2ab8","succ":"\u227b","succcurlyeq":"\u227d","Succeeds":"\u227b","SucceedsEqual":"\u2ab0","SucceedsSlantEqual":"\u227d","SucceedsTilde":"\u227f","succeq":"\u2ab0","succnapprox":"\u2aba","succneqq":"\u2ab6","succnsim":"\u22e9","succsim":"\u227f","SuchThat":"\u220b","sum":"\u2211","Sum":"\u2211","sung":"\u266a","sup1":"\xb9","sup2":"\xb2","sup3":"\xb3","sup":"\u2283","Sup":"\u22d1","supdot":"\u2abe","supdsub":"\u2ad8","supE":"\u2ac6","supe":"\u2287","supedot":"\u2ac4","Superset":"\u2283","SupersetEqual":"\u2287","suphsol":"\u27c9","suphsub":"\u2ad7","suplarr":"\u297b","supmult":"\u2ac2","supnE":"\u2acc","supne":"\u228b","supplus":"\u2ac0","supset":"\u2283","Supset":"\u22d1","supseteq":"\u2287","supseteqq":"\u2ac6","supsetneq":"\u228b","supsetneqq":"\u2acc","supsim":"\u2ac8","supsub":"\u2ad4","supsup":"\u2ad6","swarhk":"\u2926","swarr":"\u2199","swArr":"\u21d9","swarrow":"\u2199","swnwar":"\u292a","szlig":"\xdf","Tab":"\\t","target":"\u2316","Tau":"\u03a4","tau":"\u03c4","tbrk":"\u23b4","Tcaron":"\u0164","tcaron":"\u0165","Tcedil":"\u0162","tcedil":"\u0163","Tcy":"\u0422","tcy":"\u0442","tdot":"\u20db","telrec":"\u2315","Tfr":"\ud835\udd17","tfr":"\ud835\udd31","there4":"\u2234","therefore":"\u2234","Therefore":"\u2234","Theta":"\u0398","theta":"\u03b8","thetasym":"\u03d1","thetav":"\u03d1","thickapprox":"\u2248","thicksim":"\u223c","ThickSpace":"\u205f\u200a","ThinSpace":"\u2009","thinsp":"\u2009","thkap":"\u2248","thksim":"\u223c","THORN":"\xde","thorn":"\xfe","tilde":"\u02dc","Tilde":"\u223c","TildeEqual":"\u2243","TildeFullEqual":"\u2245","TildeTilde":"\u2248","timesbar":"\u2a31","timesb":"\u22a0","times":"\xd7","timesd":"\u2a30","tint":"\u222d","toea":"\u2928","topbot":"\u2336","topcir":"\u2af1","top":"\u22a4","Topf":"\ud835\udd4b","topf":"\ud835\udd65","topfork":"\u2ada","tosa":"\u2929","tprime":"\u2034","trade":"\u2122","TRADE":"\u2122","triangle":"\u25b5","triangledown":"\u25bf","triangleleft":"\u25c3","trianglelefteq":"\u22b4","triangleq":"\u225c","triangleright":"\u25b9","trianglerighteq":"\u22b5","tridot":"\u25ec","trie":"\u225c","triminus":"\u2a3a","TripleDot":"\u20db","triplus":"\u2a39","trisb":"\u29cd","tritime":"\u2a3b","trpezium":"\u23e2","Tscr":"\ud835\udcaf","tscr":"\ud835\udcc9","TScy":"\u0426","tscy":"\u0446","TSHcy":"\u040b","tshcy":"\u045b","Tstrok":"\u0166","tstrok":"\u0167","twixt":"\u226c","twoheadleftarrow":"\u219e","twoheadrightarrow":"\u21a0","Uacute":"\xda","uacute":"\xfa","uarr":"\u2191","Uarr":"\u219f","uArr":"\u21d1","Uarrocir":"\u2949","Ubrcy":"\u040e","ubrcy":"\u045e","Ubreve":"\u016c","ubreve":"\u016d","Ucirc":"\xdb","ucirc":"\xfb","Ucy":"\u0423","ucy":"\u0443","udarr":"\u21c5","Udblac":"\u0170","udblac":"\u0171","udhar":"\u296e","ufisht":"\u297e","Ufr":"\ud835\udd18","ufr":"\ud835\udd32","Ugrave":"\xd9","ugrave":"\xf9","uHar":"\u2963","uharl":"\u21bf","uharr":"\u21be","uhblk":"\u2580","ulcorn":"\u231c","ulcorner":"\u231c","ulcrop":"\u230f","ultri":"\u25f8","Umacr":"\u016a","umacr":"\u016b","uml":"\xa8","UnderBar":"_","UnderBrace":"\u23df","UnderBracket":"\u23b5","UnderParenthesis":"\u23dd","Union":"\u22c3","UnionPlus":"\u228e","Uogon":"\u0172","uogon":"\u0173","Uopf":"\ud835\udd4c","uopf":"\ud835\udd66","UpArrowBar":"\u2912","uparrow":"\u2191","UpArrow":"\u2191","Uparrow":"\u21d1","UpArrowDownArrow":"\u21c5","updownarrow":"\u2195","UpDownArrow":"\u2195","Updownarrow":"\u21d5","UpEquilibrium":"\u296e","upharpoonleft":"\u21bf","upharpoonright":"\u21be","uplus":"\u228e","UpperLeftArrow":"\u2196","UpperRightArrow":"\u2197","upsi":"\u03c5","Upsi":"\u03d2","upsih":"\u03d2","Upsilon":"\u03a5","upsilon":"\u03c5","UpTeeArrow":"\u21a5","UpTee":"\u22a5","upuparrows":"\u21c8","urcorn":"\u231d","urcorner":"\u231d","urcrop":"\u230e","Uring":"\u016e","uring":"\u016f","urtri":"\u25f9","Uscr":"\ud835\udcb0","uscr":"\ud835\udcca","utdot":"\u22f0","Utilde":"\u0168","utilde":"\u0169","utri":"\u25b5","utrif":"\u25b4","uuarr":"\u21c8","Uuml":"\xdc","uuml":"\xfc","uwangle":"\u29a7","vangrt":"\u299c","varepsilon":"\u03f5","varkappa":"\u03f0","varnothing":"\u2205","varphi":"\u03d5","varpi":"\u03d6","varpropto":"\u221d","varr":"\u2195","vArr":"\u21d5","varrho":"\u03f1","varsigma":"\u03c2","varsubsetneq":"\u228a\ufe00","varsubsetneqq":"\u2acb\ufe00","varsupsetneq":"\u228b\ufe00","varsupsetneqq":"\u2acc\ufe00","vartheta":"\u03d1","vartriangleleft":"\u22b2","vartriangleright":"\u22b3","vBar":"\u2ae8","Vbar":"\u2aeb","vBarv":"\u2ae9","Vcy":"\u0412","vcy":"\u0432","vdash":"\u22a2","vDash":"\u22a8","Vdash":"\u22a9","VDash":"\u22ab","Vdashl":"\u2ae6","veebar":"\u22bb","vee":"\u2228","Vee":"\u22c1","veeeq":"\u225a","vellip":"\u22ee","verbar":"|","Verbar":"\u2016","vert":"|","Vert":"\u2016","VerticalBar":"\u2223","VerticalLine":"|","VerticalSeparator":"\u2758","VerticalTilde":"\u2240","VeryThinSpace":"\u200a","Vfr":"\ud835\udd19","vfr":"\ud835\udd33","vltri":"\u22b2","vnsub":"\u2282\u20d2","vnsup":"\u2283\u20d2","Vopf":"\ud835\udd4d","vopf":"\ud835\udd67","vprop":"\u221d","vrtri":"\u22b3","Vscr":"\ud835\udcb1","vscr":"\ud835\udccb","vsubnE":"\u2acb\ufe00","vsubne":"\u228a\ufe00","vsupnE":"\u2acc\ufe00","vsupne":"\u228b\ufe00","Vvdash":"\u22aa","vzigzag":"\u299a","Wcirc":"\u0174","wcirc":"\u0175","wedbar":"\u2a5f","wedge":"\u2227","Wedge":"\u22c0","wedgeq":"\u2259","weierp":"\u2118","Wfr":"\ud835\udd1a","wfr":"\ud835\udd34","Wopf":"\ud835\udd4e","wopf":"\ud835\udd68","wp":"\u2118","wr":"\u2240","wreath":"\u2240","Wscr":"\ud835\udcb2","wscr":"\ud835\udccc","xcap":"\u22c2","xcirc":"\u25ef","xcup":"\u22c3","xdtri":"\u25bd","Xfr":"\ud835\udd1b","xfr":"\ud835\udd35","xharr":"\u27f7","xhArr":"\u27fa","Xi":"\u039e","xi":"\u03be","xlarr":"\u27f5","xlArr":"\u27f8","xmap":"\u27fc","xnis":"\u22fb","xodot":"\u2a00","Xopf":"\ud835\udd4f","xopf":"\ud835\udd69","xoplus":"\u2a01","xotime":"\u2a02","xrarr":"\u27f6","xrArr":"\u27f9","Xscr":"\ud835\udcb3","xscr":"\ud835\udccd","xsqcup":"\u2a06","xuplus":"\u2a04","xutri":"\u25b3","xvee":"\u22c1","xwedge":"\u22c0","Yacute":"\xdd","yacute":"\xfd","YAcy":"\u042f","yacy":"\u044f","Ycirc":"\u0176","ycirc":"\u0177","Ycy":"\u042b","ycy":"\u044b","yen":"\xa5","Yfr":"\ud835\udd1c","yfr":"\ud835\udd36","YIcy":"\u0407","yicy":"\u0457","Yopf":"\ud835\udd50","yopf":"\ud835\udd6a","Yscr":"\ud835\udcb4","yscr":"\ud835\udcce","YUcy":"\u042e","yucy":"\u044e","yuml":"\xff","Yuml":"\u0178","Zacute":"\u0179","zacute":"\u017a","Zcaron":"\u017d","zcaron":"\u017e","Zcy":"\u0417","zcy":"\u0437","Zdot":"\u017b","zdot":"\u017c","zeetrf":"\u2128","ZeroWidthSpace":"\u200b","Zeta":"\u0396","zeta":"\u03b6","zfr":"\ud835\udd37","Zfr":"\u2128","ZHcy":"\u0416","zhcy":"\u0436","zigrarr":"\u21dd","zopf":"\ud835\udd6b","Zopf":"\u2124","Zscr":"\ud835\udcb5","zscr":"\ud835\udccf","zwj":"\u200d","zwnj":"\u200c"}')
+        e.exports = JSON.parse('{"Aacute":"\xc1","aacute":"\xe1","Abreve":"\u0102","abreve":"\u0103","ac":"\u223e","acd":"\u223f","acE":"\u223e\u0333","Acirc":"\xc2","acirc":"\xe2","acute":"\xb4","Acy":"\u0410","acy":"\u0430","AElig":"\xc6","aelig":"\xe6","af":"\u2061","Afr":"\ud835\udd04","afr":"\ud835\udd1e","Agrave":"\xc0","agrave":"\xe0","alefsym":"\u2135","aleph":"\u2135","Alpha":"\u0391","alpha":"\u03b1","Amacr":"\u0100","amacr":"\u0101","amalg":"\u2a3f","amp":"&","AMP":"&","andand":"\u2a55","And":"\u2a53","and":"\u2227","andd":"\u2a5c","andslope":"\u2a58","andv":"\u2a5a","ang":"\u2220","ange":"\u29a4","angle":"\u2220","angmsdaa":"\u29a8","angmsdab":"\u29a9","angmsdac":"\u29aa","angmsdad":"\u29ab","angmsdae":"\u29ac","angmsdaf":"\u29ad","angmsdag":"\u29ae","angmsdah":"\u29af","angmsd":"\u2221","angrt":"\u221f","angrtvb":"\u22be","angrtvbd":"\u299d","angsph":"\u2222","angst":"\xc5","angzarr":"\u237c","Aogon":"\u0104","aogon":"\u0105","Aopf":"\ud835\udd38","aopf":"\ud835\udd52","apacir":"\u2a6f","ap":"\u2248","apE":"\u2a70","ape":"\u224a","apid":"\u224b","apos":"\'","ApplyFunction":"\u2061","approx":"\u2248","approxeq":"\u224a","Aring":"\xc5","aring":"\xe5","Ascr":"\ud835\udc9c","ascr":"\ud835\udcb6","Assign":"\u2254","ast":"*","asymp":"\u2248","asympeq":"\u224d","Atilde":"\xc3","atilde":"\xe3","Auml":"\xc4","auml":"\xe4","awconint":"\u2233","awint":"\u2a11","backcong":"\u224c","backepsilon":"\u03f6","backprime":"\u2035","backsim":"\u223d","backsimeq":"\u22cd","Backslash":"\u2216","Barv":"\u2ae7","barvee":"\u22bd","barwed":"\u2305","Barwed":"\u2306","barwedge":"\u2305","bbrk":"\u23b5","bbrktbrk":"\u23b6","bcong":"\u224c","Bcy":"\u0411","bcy":"\u0431","bdquo":"\u201e","becaus":"\u2235","because":"\u2235","Because":"\u2235","bemptyv":"\u29b0","bepsi":"\u03f6","bernou":"\u212c","Bernoullis":"\u212c","Beta":"\u0392","beta":"\u03b2","beth":"\u2136","between":"\u226c","Bfr":"\ud835\udd05","bfr":"\ud835\udd1f","bigcap":"\u22c2","bigcirc":"\u25ef","bigcup":"\u22c3","bigodot":"\u2a00","bigoplus":"\u2a01","bigotimes":"\u2a02","bigsqcup":"\u2a06","bigstar":"\u2605","bigtriangledown":"\u25bd","bigtriangleup":"\u25b3","biguplus":"\u2a04","bigvee":"\u22c1","bigwedge":"\u22c0","bkarow":"\u290d","blacklozenge":"\u29eb","blacksquare":"\u25aa","blacktriangle":"\u25b4","blacktriangledown":"\u25be","blacktriangleleft":"\u25c2","blacktriangleright":"\u25b8","blank":"\u2423","blk12":"\u2592","blk14":"\u2591","blk34":"\u2593","block":"\u2588","bne":"=\u20e5","bnequiv":"\u2261\u20e5","bNot":"\u2aed","bnot":"\u2310","Bopf":"\ud835\udd39","bopf":"\ud835\udd53","bot":"\u22a5","bottom":"\u22a5","bowtie":"\u22c8","boxbox":"\u29c9","boxdl":"\u2510","boxdL":"\u2555","boxDl":"\u2556","boxDL":"\u2557","boxdr":"\u250c","boxdR":"\u2552","boxDr":"\u2553","boxDR":"\u2554","boxh":"\u2500","boxH":"\u2550","boxhd":"\u252c","boxHd":"\u2564","boxhD":"\u2565","boxHD":"\u2566","boxhu":"\u2534","boxHu":"\u2567","boxhU":"\u2568","boxHU":"\u2569","boxminus":"\u229f","boxplus":"\u229e","boxtimes":"\u22a0","boxul":"\u2518","boxuL":"\u255b","boxUl":"\u255c","boxUL":"\u255d","boxur":"\u2514","boxuR":"\u2558","boxUr":"\u2559","boxUR":"\u255a","boxv":"\u2502","boxV":"\u2551","boxvh":"\u253c","boxvH":"\u256a","boxVh":"\u256b","boxVH":"\u256c","boxvl":"\u2524","boxvL":"\u2561","boxVl":"\u2562","boxVL":"\u2563","boxvr":"\u251c","boxvR":"\u255e","boxVr":"\u255f","boxVR":"\u2560","bprime":"\u2035","breve":"\u02d8","Breve":"\u02d8","brvbar":"\xa6","bscr":"\ud835\udcb7","Bscr":"\u212c","bsemi":"\u204f","bsim":"\u223d","bsime":"\u22cd","bsolb":"\u29c5","bsol":"\\\\","bsolhsub":"\u27c8","bull":"\u2022","bullet":"\u2022","bump":"\u224e","bumpE":"\u2aae","bumpe":"\u224f","Bumpeq":"\u224e","bumpeq":"\u224f","Cacute":"\u0106","cacute":"\u0107","capand":"\u2a44","capbrcup":"\u2a49","capcap":"\u2a4b","cap":"\u2229","Cap":"\u22d2","capcup":"\u2a47","capdot":"\u2a40","CapitalDifferentialD":"\u2145","caps":"\u2229\ufe00","caret":"\u2041","caron":"\u02c7","Cayleys":"\u212d","ccaps":"\u2a4d","Ccaron":"\u010c","ccaron":"\u010d","Ccedil":"\xc7","ccedil":"\xe7","Ccirc":"\u0108","ccirc":"\u0109","Cconint":"\u2230","ccups":"\u2a4c","ccupssm":"\u2a50","Cdot":"\u010a","cdot":"\u010b","cedil":"\xb8","Cedilla":"\xb8","cemptyv":"\u29b2","cent":"\xa2","centerdot":"\xb7","CenterDot":"\xb7","cfr":"\ud835\udd20","Cfr":"\u212d","CHcy":"\u0427","chcy":"\u0447","check":"\u2713","checkmark":"\u2713","Chi":"\u03a7","chi":"\u03c7","circ":"\u02c6","circeq":"\u2257","circlearrowleft":"\u21ba","circlearrowright":"\u21bb","circledast":"\u229b","circledcirc":"\u229a","circleddash":"\u229d","CircleDot":"\u2299","circledR":"\xae","circledS":"\u24c8","CircleMinus":"\u2296","CirclePlus":"\u2295","CircleTimes":"\u2297","cir":"\u25cb","cirE":"\u29c3","cire":"\u2257","cirfnint":"\u2a10","cirmid":"\u2aef","cirscir":"\u29c2","ClockwiseContourIntegral":"\u2232","CloseCurlyDoubleQuote":"\u201d","CloseCurlyQuote":"\u2019","clubs":"\u2663","clubsuit":"\u2663","colon":":","Colon":"\u2237","Colone":"\u2a74","colone":"\u2254","coloneq":"\u2254","comma":",","commat":"@","comp":"\u2201","compfn":"\u2218","complement":"\u2201","complexes":"\u2102","cong":"\u2245","congdot":"\u2a6d","Congruent":"\u2261","conint":"\u222e","Conint":"\u222f","ContourIntegral":"\u222e","copf":"\ud835\udd54","Copf":"\u2102","coprod":"\u2210","Coproduct":"\u2210","copy":"\xa9","COPY":"\xa9","copysr":"\u2117","CounterClockwiseContourIntegral":"\u2233","crarr":"\u21b5","cross":"\u2717","Cross":"\u2a2f","Cscr":"\ud835\udc9e","cscr":"\ud835\udcb8","csub":"\u2acf","csube":"\u2ad1","csup":"\u2ad0","csupe":"\u2ad2","ctdot":"\u22ef","cudarrl":"\u2938","cudarrr":"\u2935","cuepr":"\u22de","cuesc":"\u22df","cularr":"\u21b6","cularrp":"\u293d","cupbrcap":"\u2a48","cupcap":"\u2a46","CupCap":"\u224d","cup":"\u222a","Cup":"\u22d3","cupcup":"\u2a4a","cupdot":"\u228d","cupor":"\u2a45","cups":"\u222a\ufe00","curarr":"\u21b7","curarrm":"\u293c","curlyeqprec":"\u22de","curlyeqsucc":"\u22df","curlyvee":"\u22ce","curlywedge":"\u22cf","curren":"\xa4","curvearrowleft":"\u21b6","curvearrowright":"\u21b7","cuvee":"\u22ce","cuwed":"\u22cf","cwconint":"\u2232","cwint":"\u2231","cylcty":"\u232d","dagger":"\u2020","Dagger":"\u2021","daleth":"\u2138","darr":"\u2193","Darr":"\u21a1","dArr":"\u21d3","dash":"\u2010","Dashv":"\u2ae4","dashv":"\u22a3","dbkarow":"\u290f","dblac":"\u02dd","Dcaron":"\u010e","dcaron":"\u010f","Dcy":"\u0414","dcy":"\u0434","ddagger":"\u2021","ddarr":"\u21ca","DD":"\u2145","dd":"\u2146","DDotrahd":"\u2911","ddotseq":"\u2a77","deg":"\xb0","Del":"\u2207","Delta":"\u0394","delta":"\u03b4","demptyv":"\u29b1","dfisht":"\u297f","Dfr":"\ud835\udd07","dfr":"\ud835\udd21","dHar":"\u2965","dharl":"\u21c3","dharr":"\u21c2","DiacriticalAcute":"\xb4","DiacriticalDot":"\u02d9","DiacriticalDoubleAcute":"\u02dd","DiacriticalGrave":"`","DiacriticalTilde":"\u02dc","diam":"\u22c4","diamond":"\u22c4","Diamond":"\u22c4","diamondsuit":"\u2666","diams":"\u2666","die":"\xa8","DifferentialD":"\u2146","digamma":"\u03dd","disin":"\u22f2","div":"\xf7","divide":"\xf7","divideontimes":"\u22c7","divonx":"\u22c7","DJcy":"\u0402","djcy":"\u0452","dlcorn":"\u231e","dlcrop":"\u230d","dollar":"$","Dopf":"\ud835\udd3b","dopf":"\ud835\udd55","Dot":"\xa8","dot":"\u02d9","DotDot":"\u20dc","doteq":"\u2250","doteqdot":"\u2251","DotEqual":"\u2250","dotminus":"\u2238","dotplus":"\u2214","dotsquare":"\u22a1","doublebarwedge":"\u2306","DoubleContourIntegral":"\u222f","DoubleDot":"\xa8","DoubleDownArrow":"\u21d3","DoubleLeftArrow":"\u21d0","DoubleLeftRightArrow":"\u21d4","DoubleLeftTee":"\u2ae4","DoubleLongLeftArrow":"\u27f8","DoubleLongLeftRightArrow":"\u27fa","DoubleLongRightArrow":"\u27f9","DoubleRightArrow":"\u21d2","DoubleRightTee":"\u22a8","DoubleUpArrow":"\u21d1","DoubleUpDownArrow":"\u21d5","DoubleVerticalBar":"\u2225","DownArrowBar":"\u2913","downarrow":"\u2193","DownArrow":"\u2193","Downarrow":"\u21d3","DownArrowUpArrow":"\u21f5","DownBreve":"\u0311","downdownarrows":"\u21ca","downharpoonleft":"\u21c3","downharpoonright":"\u21c2","DownLeftRightVector":"\u2950","DownLeftTeeVector":"\u295e","DownLeftVectorBar":"\u2956","DownLeftVector":"\u21bd","DownRightTeeVector":"\u295f","DownRightVectorBar":"\u2957","DownRightVector":"\u21c1","DownTeeArrow":"\u21a7","DownTee":"\u22a4","drbkarow":"\u2910","drcorn":"\u231f","drcrop":"\u230c","Dscr":"\ud835\udc9f","dscr":"\ud835\udcb9","DScy":"\u0405","dscy":"\u0455","dsol":"\u29f6","Dstrok":"\u0110","dstrok":"\u0111","dtdot":"\u22f1","dtri":"\u25bf","dtrif":"\u25be","duarr":"\u21f5","duhar":"\u296f","dwangle":"\u29a6","DZcy":"\u040f","dzcy":"\u045f","dzigrarr":"\u27ff","Eacute":"\xc9","eacute":"\xe9","easter":"\u2a6e","Ecaron":"\u011a","ecaron":"\u011b","Ecirc":"\xca","ecirc":"\xea","ecir":"\u2256","ecolon":"\u2255","Ecy":"\u042d","ecy":"\u044d","eDDot":"\u2a77","Edot":"\u0116","edot":"\u0117","eDot":"\u2251","ee":"\u2147","efDot":"\u2252","Efr":"\ud835\udd08","efr":"\ud835\udd22","eg":"\u2a9a","Egrave":"\xc8","egrave":"\xe8","egs":"\u2a96","egsdot":"\u2a98","el":"\u2a99","Element":"\u2208","elinters":"\u23e7","ell":"\u2113","els":"\u2a95","elsdot":"\u2a97","Emacr":"\u0112","emacr":"\u0113","empty":"\u2205","emptyset":"\u2205","EmptySmallSquare":"\u25fb","emptyv":"\u2205","EmptyVerySmallSquare":"\u25ab","emsp13":"\u2004","emsp14":"\u2005","emsp":"\u2003","ENG":"\u014a","eng":"\u014b","ensp":"\u2002","Eogon":"\u0118","eogon":"\u0119","Eopf":"\ud835\udd3c","eopf":"\ud835\udd56","epar":"\u22d5","eparsl":"\u29e3","eplus":"\u2a71","epsi":"\u03b5","Epsilon":"\u0395","epsilon":"\u03b5","epsiv":"\u03f5","eqcirc":"\u2256","eqcolon":"\u2255","eqsim":"\u2242","eqslantgtr":"\u2a96","eqslantless":"\u2a95","Equal":"\u2a75","equals":"=","EqualTilde":"\u2242","equest":"\u225f","Equilibrium":"\u21cc","equiv":"\u2261","equivDD":"\u2a78","eqvparsl":"\u29e5","erarr":"\u2971","erDot":"\u2253","escr":"\u212f","Escr":"\u2130","esdot":"\u2250","Esim":"\u2a73","esim":"\u2242","Eta":"\u0397","eta":"\u03b7","ETH":"\xd0","eth":"\xf0","Euml":"\xcb","euml":"\xeb","euro":"\u20ac","excl":"!","exist":"\u2203","Exists":"\u2203","expectation":"\u2130","exponentiale":"\u2147","ExponentialE":"\u2147","fallingdotseq":"\u2252","Fcy":"\u0424","fcy":"\u0444","female":"\u2640","ffilig":"\ufb03","fflig":"\ufb00","ffllig":"\ufb04","Ffr":"\ud835\udd09","ffr":"\ud835\udd23","filig":"\ufb01","FilledSmallSquare":"\u25fc","FilledVerySmallSquare":"\u25aa","fjlig":"fj","flat":"\u266d","fllig":"\ufb02","fltns":"\u25b1","fnof":"\u0192","Fopf":"\ud835\udd3d","fopf":"\ud835\udd57","forall":"\u2200","ForAll":"\u2200","fork":"\u22d4","forkv":"\u2ad9","Fouriertrf":"\u2131","fpartint":"\u2a0d","frac12":"\xbd","frac13":"\u2153","frac14":"\xbc","frac15":"\u2155","frac16":"\u2159","frac18":"\u215b","frac23":"\u2154","frac25":"\u2156","frac34":"\xbe","frac35":"\u2157","frac38":"\u215c","frac45":"\u2158","frac56":"\u215a","frac58":"\u215d","frac78":"\u215e","frasl":"\u2044","frown":"\u2322","fscr":"\ud835\udcbb","Fscr":"\u2131","gacute":"\u01f5","Gamma":"\u0393","gamma":"\u03b3","Gammad":"\u03dc","gammad":"\u03dd","gap":"\u2a86","Gbreve":"\u011e","gbreve":"\u011f","Gcedil":"\u0122","Gcirc":"\u011c","gcirc":"\u011d","Gcy":"\u0413","gcy":"\u0433","Gdot":"\u0120","gdot":"\u0121","ge":"\u2265","gE":"\u2267","gEl":"\u2a8c","gel":"\u22db","geq":"\u2265","geqq":"\u2267","geqslant":"\u2a7e","gescc":"\u2aa9","ges":"\u2a7e","gesdot":"\u2a80","gesdoto":"\u2a82","gesdotol":"\u2a84","gesl":"\u22db\ufe00","gesles":"\u2a94","Gfr":"\ud835\udd0a","gfr":"\ud835\udd24","gg":"\u226b","Gg":"\u22d9","ggg":"\u22d9","gimel":"\u2137","GJcy":"\u0403","gjcy":"\u0453","gla":"\u2aa5","gl":"\u2277","glE":"\u2a92","glj":"\u2aa4","gnap":"\u2a8a","gnapprox":"\u2a8a","gne":"\u2a88","gnE":"\u2269","gneq":"\u2a88","gneqq":"\u2269","gnsim":"\u22e7","Gopf":"\ud835\udd3e","gopf":"\ud835\udd58","grave":"`","GreaterEqual":"\u2265","GreaterEqualLess":"\u22db","GreaterFullEqual":"\u2267","GreaterGreater":"\u2aa2","GreaterLess":"\u2277","GreaterSlantEqual":"\u2a7e","GreaterTilde":"\u2273","Gscr":"\ud835\udca2","gscr":"\u210a","gsim":"\u2273","gsime":"\u2a8e","gsiml":"\u2a90","gtcc":"\u2aa7","gtcir":"\u2a7a","gt":">","GT":">","Gt":"\u226b","gtdot":"\u22d7","gtlPar":"\u2995","gtquest":"\u2a7c","gtrapprox":"\u2a86","gtrarr":"\u2978","gtrdot":"\u22d7","gtreqless":"\u22db","gtreqqless":"\u2a8c","gtrless":"\u2277","gtrsim":"\u2273","gvertneqq":"\u2269\ufe00","gvnE":"\u2269\ufe00","Hacek":"\u02c7","hairsp":"\u200a","half":"\xbd","hamilt":"\u210b","HARDcy":"\u042a","hardcy":"\u044a","harrcir":"\u2948","harr":"\u2194","hArr":"\u21d4","harrw":"\u21ad","Hat":"^","hbar":"\u210f","Hcirc":"\u0124","hcirc":"\u0125","hearts":"\u2665","heartsuit":"\u2665","hellip":"\u2026","hercon":"\u22b9","hfr":"\ud835\udd25","Hfr":"\u210c","HilbertSpace":"\u210b","hksearow":"\u2925","hkswarow":"\u2926","hoarr":"\u21ff","homtht":"\u223b","hookleftarrow":"\u21a9","hookrightarrow":"\u21aa","hopf":"\ud835\udd59","Hopf":"\u210d","horbar":"\u2015","HorizontalLine":"\u2500","hscr":"\ud835\udcbd","Hscr":"\u210b","hslash":"\u210f","Hstrok":"\u0126","hstrok":"\u0127","HumpDownHump":"\u224e","HumpEqual":"\u224f","hybull":"\u2043","hyphen":"\u2010","Iacute":"\xcd","iacute":"\xed","ic":"\u2063","Icirc":"\xce","icirc":"\xee","Icy":"\u0418","icy":"\u0438","Idot":"\u0130","IEcy":"\u0415","iecy":"\u0435","iexcl":"\xa1","iff":"\u21d4","ifr":"\ud835\udd26","Ifr":"\u2111","Igrave":"\xcc","igrave":"\xec","ii":"\u2148","iiiint":"\u2a0c","iiint":"\u222d","iinfin":"\u29dc","iiota":"\u2129","IJlig":"\u0132","ijlig":"\u0133","Imacr":"\u012a","imacr":"\u012b","image":"\u2111","ImaginaryI":"\u2148","imagline":"\u2110","imagpart":"\u2111","imath":"\u0131","Im":"\u2111","imof":"\u22b7","imped":"\u01b5","Implies":"\u21d2","incare":"\u2105","in":"\u2208","infin":"\u221e","infintie":"\u29dd","inodot":"\u0131","intcal":"\u22ba","int":"\u222b","Int":"\u222c","integers":"\u2124","Integral":"\u222b","intercal":"\u22ba","Intersection":"\u22c2","intlarhk":"\u2a17","intprod":"\u2a3c","InvisibleComma":"\u2063","InvisibleTimes":"\u2062","IOcy":"\u0401","iocy":"\u0451","Iogon":"\u012e","iogon":"\u012f","Iopf":"\ud835\udd40","iopf":"\ud835\udd5a","Iota":"\u0399","iota":"\u03b9","iprod":"\u2a3c","iquest":"\xbf","iscr":"\ud835\udcbe","Iscr":"\u2110","isin":"\u2208","isindot":"\u22f5","isinE":"\u22f9","isins":"\u22f4","isinsv":"\u22f3","isinv":"\u2208","it":"\u2062","Itilde":"\u0128","itilde":"\u0129","Iukcy":"\u0406","iukcy":"\u0456","Iuml":"\xcf","iuml":"\xef","Jcirc":"\u0134","jcirc":"\u0135","Jcy":"\u0419","jcy":"\u0439","Jfr":"\ud835\udd0d","jfr":"\ud835\udd27","jmath":"\u0237","Jopf":"\ud835\udd41","jopf":"\ud835\udd5b","Jscr":"\ud835\udca5","jscr":"\ud835\udcbf","Jsercy":"\u0408","jsercy":"\u0458","Jukcy":"\u0404","jukcy":"\u0454","Kappa":"\u039a","kappa":"\u03ba","kappav":"\u03f0","Kcedil":"\u0136","kcedil":"\u0137","Kcy":"\u041a","kcy":"\u043a","Kfr":"\ud835\udd0e","kfr":"\ud835\udd28","kgreen":"\u0138","KHcy":"\u0425","khcy":"\u0445","KJcy":"\u040c","kjcy":"\u045c","Kopf":"\ud835\udd42","kopf":"\ud835\udd5c","Kscr":"\ud835\udca6","kscr":"\ud835\udcc0","lAarr":"\u21da","Lacute":"\u0139","lacute":"\u013a","laemptyv":"\u29b4","lagran":"\u2112","Lambda":"\u039b","lambda":"\u03bb","lang":"\u27e8","Lang":"\u27ea","langd":"\u2991","langle":"\u27e8","lap":"\u2a85","Laplacetrf":"\u2112","laquo":"\xab","larrb":"\u21e4","larrbfs":"\u291f","larr":"\u2190","Larr":"\u219e","lArr":"\u21d0","larrfs":"\u291d","larrhk":"\u21a9","larrlp":"\u21ab","larrpl":"\u2939","larrsim":"\u2973","larrtl":"\u21a2","latail":"\u2919","lAtail":"\u291b","lat":"\u2aab","late":"\u2aad","lates":"\u2aad\ufe00","lbarr":"\u290c","lBarr":"\u290e","lbbrk":"\u2772","lbrace":"{","lbrack":"[","lbrke":"\u298b","lbrksld":"\u298f","lbrkslu":"\u298d","Lcaron":"\u013d","lcaron":"\u013e","Lcedil":"\u013b","lcedil":"\u013c","lceil":"\u2308","lcub":"{","Lcy":"\u041b","lcy":"\u043b","ldca":"\u2936","ldquo":"\u201c","ldquor":"\u201e","ldrdhar":"\u2967","ldrushar":"\u294b","ldsh":"\u21b2","le":"\u2264","lE":"\u2266","LeftAngleBracket":"\u27e8","LeftArrowBar":"\u21e4","leftarrow":"\u2190","LeftArrow":"\u2190","Leftarrow":"\u21d0","LeftArrowRightArrow":"\u21c6","leftarrowtail":"\u21a2","LeftCeiling":"\u2308","LeftDoubleBracket":"\u27e6","LeftDownTeeVector":"\u2961","LeftDownVectorBar":"\u2959","LeftDownVector":"\u21c3","LeftFloor":"\u230a","leftharpoondown":"\u21bd","leftharpoonup":"\u21bc","leftleftarrows":"\u21c7","leftrightarrow":"\u2194","LeftRightArrow":"\u2194","Leftrightarrow":"\u21d4","leftrightarrows":"\u21c6","leftrightharpoons":"\u21cb","leftrightsquigarrow":"\u21ad","LeftRightVector":"\u294e","LeftTeeArrow":"\u21a4","LeftTee":"\u22a3","LeftTeeVector":"\u295a","leftthreetimes":"\u22cb","LeftTriangleBar":"\u29cf","LeftTriangle":"\u22b2","LeftTriangleEqual":"\u22b4","LeftUpDownVector":"\u2951","LeftUpTeeVector":"\u2960","LeftUpVectorBar":"\u2958","LeftUpVector":"\u21bf","LeftVectorBar":"\u2952","LeftVector":"\u21bc","lEg":"\u2a8b","leg":"\u22da","leq":"\u2264","leqq":"\u2266","leqslant":"\u2a7d","lescc":"\u2aa8","les":"\u2a7d","lesdot":"\u2a7f","lesdoto":"\u2a81","lesdotor":"\u2a83","lesg":"\u22da\ufe00","lesges":"\u2a93","lessapprox":"\u2a85","lessdot":"\u22d6","lesseqgtr":"\u22da","lesseqqgtr":"\u2a8b","LessEqualGreater":"\u22da","LessFullEqual":"\u2266","LessGreater":"\u2276","lessgtr":"\u2276","LessLess":"\u2aa1","lesssim":"\u2272","LessSlantEqual":"\u2a7d","LessTilde":"\u2272","lfisht":"\u297c","lfloor":"\u230a","Lfr":"\ud835\udd0f","lfr":"\ud835\udd29","lg":"\u2276","lgE":"\u2a91","lHar":"\u2962","lhard":"\u21bd","lharu":"\u21bc","lharul":"\u296a","lhblk":"\u2584","LJcy":"\u0409","ljcy":"\u0459","llarr":"\u21c7","ll":"\u226a","Ll":"\u22d8","llcorner":"\u231e","Lleftarrow":"\u21da","llhard":"\u296b","lltri":"\u25fa","Lmidot":"\u013f","lmidot":"\u0140","lmoustache":"\u23b0","lmoust":"\u23b0","lnap":"\u2a89","lnapprox":"\u2a89","lne":"\u2a87","lnE":"\u2268","lneq":"\u2a87","lneqq":"\u2268","lnsim":"\u22e6","loang":"\u27ec","loarr":"\u21fd","lobrk":"\u27e6","longleftarrow":"\u27f5","LongLeftArrow":"\u27f5","Longleftarrow":"\u27f8","longleftrightarrow":"\u27f7","LongLeftRightArrow":"\u27f7","Longleftrightarrow":"\u27fa","longmapsto":"\u27fc","longrightarrow":"\u27f6","LongRightArrow":"\u27f6","Longrightarrow":"\u27f9","looparrowleft":"\u21ab","looparrowright":"\u21ac","lopar":"\u2985","Lopf":"\ud835\udd43","lopf":"\ud835\udd5d","loplus":"\u2a2d","lotimes":"\u2a34","lowast":"\u2217","lowbar":"_","LowerLeftArrow":"\u2199","LowerRightArrow":"\u2198","loz":"\u25ca","lozenge":"\u25ca","lozf":"\u29eb","lpar":"(","lparlt":"\u2993","lrarr":"\u21c6","lrcorner":"\u231f","lrhar":"\u21cb","lrhard":"\u296d","lrm":"\u200e","lrtri":"\u22bf","lsaquo":"\u2039","lscr":"\ud835\udcc1","Lscr":"\u2112","lsh":"\u21b0","Lsh":"\u21b0","lsim":"\u2272","lsime":"\u2a8d","lsimg":"\u2a8f","lsqb":"[","lsquo":"\u2018","lsquor":"\u201a","Lstrok":"\u0141","lstrok":"\u0142","ltcc":"\u2aa6","ltcir":"\u2a79","lt":"<","LT":"<","Lt":"\u226a","ltdot":"\u22d6","lthree":"\u22cb","ltimes":"\u22c9","ltlarr":"\u2976","ltquest":"\u2a7b","ltri":"\u25c3","ltrie":"\u22b4","ltrif":"\u25c2","ltrPar":"\u2996","lurdshar":"\u294a","luruhar":"\u2966","lvertneqq":"\u2268\ufe00","lvnE":"\u2268\ufe00","macr":"\xaf","male":"\u2642","malt":"\u2720","maltese":"\u2720","Map":"\u2905","map":"\u21a6","mapsto":"\u21a6","mapstodown":"\u21a7","mapstoleft":"\u21a4","mapstoup":"\u21a5","marker":"\u25ae","mcomma":"\u2a29","Mcy":"\u041c","mcy":"\u043c","mdash":"\u2014","mDDot":"\u223a","measuredangle":"\u2221","MediumSpace":"\u205f","Mellintrf":"\u2133","Mfr":"\ud835\udd10","mfr":"\ud835\udd2a","mho":"\u2127","micro":"\xb5","midast":"*","midcir":"\u2af0","mid":"\u2223","middot":"\xb7","minusb":"\u229f","minus":"\u2212","minusd":"\u2238","minusdu":"\u2a2a","MinusPlus":"\u2213","mlcp":"\u2adb","mldr":"\u2026","mnplus":"\u2213","models":"\u22a7","Mopf":"\ud835\udd44","mopf":"\ud835\udd5e","mp":"\u2213","mscr":"\ud835\udcc2","Mscr":"\u2133","mstpos":"\u223e","Mu":"\u039c","mu":"\u03bc","multimap":"\u22b8","mumap":"\u22b8","nabla":"\u2207","Nacute":"\u0143","nacute":"\u0144","nang":"\u2220\u20d2","nap":"\u2249","napE":"\u2a70\u0338","napid":"\u224b\u0338","napos":"\u0149","napprox":"\u2249","natural":"\u266e","naturals":"\u2115","natur":"\u266e","nbsp":"\xa0","nbump":"\u224e\u0338","nbumpe":"\u224f\u0338","ncap":"\u2a43","Ncaron":"\u0147","ncaron":"\u0148","Ncedil":"\u0145","ncedil":"\u0146","ncong":"\u2247","ncongdot":"\u2a6d\u0338","ncup":"\u2a42","Ncy":"\u041d","ncy":"\u043d","ndash":"\u2013","nearhk":"\u2924","nearr":"\u2197","neArr":"\u21d7","nearrow":"\u2197","ne":"\u2260","nedot":"\u2250\u0338","NegativeMediumSpace":"\u200b","NegativeThickSpace":"\u200b","NegativeThinSpace":"\u200b","NegativeVeryThinSpace":"\u200b","nequiv":"\u2262","nesear":"\u2928","nesim":"\u2242\u0338","NestedGreaterGreater":"\u226b","NestedLessLess":"\u226a","NewLine":"\\n","nexist":"\u2204","nexists":"\u2204","Nfr":"\ud835\udd11","nfr":"\ud835\udd2b","ngE":"\u2267\u0338","nge":"\u2271","ngeq":"\u2271","ngeqq":"\u2267\u0338","ngeqslant":"\u2a7e\u0338","nges":"\u2a7e\u0338","nGg":"\u22d9\u0338","ngsim":"\u2275","nGt":"\u226b\u20d2","ngt":"\u226f","ngtr":"\u226f","nGtv":"\u226b\u0338","nharr":"\u21ae","nhArr":"\u21ce","nhpar":"\u2af2","ni":"\u220b","nis":"\u22fc","nisd":"\u22fa","niv":"\u220b","NJcy":"\u040a","njcy":"\u045a","nlarr":"\u219a","nlArr":"\u21cd","nldr":"\u2025","nlE":"\u2266\u0338","nle":"\u2270","nleftarrow":"\u219a","nLeftarrow":"\u21cd","nleftrightarrow":"\u21ae","nLeftrightarrow":"\u21ce","nleq":"\u2270","nleqq":"\u2266\u0338","nleqslant":"\u2a7d\u0338","nles":"\u2a7d\u0338","nless":"\u226e","nLl":"\u22d8\u0338","nlsim":"\u2274","nLt":"\u226a\u20d2","nlt":"\u226e","nltri":"\u22ea","nltrie":"\u22ec","nLtv":"\u226a\u0338","nmid":"\u2224","NoBreak":"\u2060","NonBreakingSpace":"\xa0","nopf":"\ud835\udd5f","Nopf":"\u2115","Not":"\u2aec","not":"\xac","NotCongruent":"\u2262","NotCupCap":"\u226d","NotDoubleVerticalBar":"\u2226","NotElement":"\u2209","NotEqual":"\u2260","NotEqualTilde":"\u2242\u0338","NotExists":"\u2204","NotGreater":"\u226f","NotGreaterEqual":"\u2271","NotGreaterFullEqual":"\u2267\u0338","NotGreaterGreater":"\u226b\u0338","NotGreaterLess":"\u2279","NotGreaterSlantEqual":"\u2a7e\u0338","NotGreaterTilde":"\u2275","NotHumpDownHump":"\u224e\u0338","NotHumpEqual":"\u224f\u0338","notin":"\u2209","notindot":"\u22f5\u0338","notinE":"\u22f9\u0338","notinva":"\u2209","notinvb":"\u22f7","notinvc":"\u22f6","NotLeftTriangleBar":"\u29cf\u0338","NotLeftTriangle":"\u22ea","NotLeftTriangleEqual":"\u22ec","NotLess":"\u226e","NotLessEqual":"\u2270","NotLessGreater":"\u2278","NotLessLess":"\u226a\u0338","NotLessSlantEqual":"\u2a7d\u0338","NotLessTilde":"\u2274","NotNestedGreaterGreater":"\u2aa2\u0338","NotNestedLessLess":"\u2aa1\u0338","notni":"\u220c","notniva":"\u220c","notnivb":"\u22fe","notnivc":"\u22fd","NotPrecedes":"\u2280","NotPrecedesEqual":"\u2aaf\u0338","NotPrecedesSlantEqual":"\u22e0","NotReverseElement":"\u220c","NotRightTriangleBar":"\u29d0\u0338","NotRightTriangle":"\u22eb","NotRightTriangleEqual":"\u22ed","NotSquareSubset":"\u228f\u0338","NotSquareSubsetEqual":"\u22e2","NotSquareSuperset":"\u2290\u0338","NotSquareSupersetEqual":"\u22e3","NotSubset":"\u2282\u20d2","NotSubsetEqual":"\u2288","NotSucceeds":"\u2281","NotSucceedsEqual":"\u2ab0\u0338","NotSucceedsSlantEqual":"\u22e1","NotSucceedsTilde":"\u227f\u0338","NotSuperset":"\u2283\u20d2","NotSupersetEqual":"\u2289","NotTilde":"\u2241","NotTildeEqual":"\u2244","NotTildeFullEqual":"\u2247","NotTildeTilde":"\u2249","NotVerticalBar":"\u2224","nparallel":"\u2226","npar":"\u2226","nparsl":"\u2afd\u20e5","npart":"\u2202\u0338","npolint":"\u2a14","npr":"\u2280","nprcue":"\u22e0","nprec":"\u2280","npreceq":"\u2aaf\u0338","npre":"\u2aaf\u0338","nrarrc":"\u2933\u0338","nrarr":"\u219b","nrArr":"\u21cf","nrarrw":"\u219d\u0338","nrightarrow":"\u219b","nRightarrow":"\u21cf","nrtri":"\u22eb","nrtrie":"\u22ed","nsc":"\u2281","nsccue":"\u22e1","nsce":"\u2ab0\u0338","Nscr":"\ud835\udca9","nscr":"\ud835\udcc3","nshortmid":"\u2224","nshortparallel":"\u2226","nsim":"\u2241","nsime":"\u2244","nsimeq":"\u2244","nsmid":"\u2224","nspar":"\u2226","nsqsube":"\u22e2","nsqsupe":"\u22e3","nsub":"\u2284","nsubE":"\u2ac5\u0338","nsube":"\u2288","nsubset":"\u2282\u20d2","nsubseteq":"\u2288","nsubseteqq":"\u2ac5\u0338","nsucc":"\u2281","nsucceq":"\u2ab0\u0338","nsup":"\u2285","nsupE":"\u2ac6\u0338","nsupe":"\u2289","nsupset":"\u2283\u20d2","nsupseteq":"\u2289","nsupseteqq":"\u2ac6\u0338","ntgl":"\u2279","Ntilde":"\xd1","ntilde":"\xf1","ntlg":"\u2278","ntriangleleft":"\u22ea","ntrianglelefteq":"\u22ec","ntriangleright":"\u22eb","ntrianglerighteq":"\u22ed","Nu":"\u039d","nu":"\u03bd","num":"#","numero":"\u2116","numsp":"\u2007","nvap":"\u224d\u20d2","nvdash":"\u22ac","nvDash":"\u22ad","nVdash":"\u22ae","nVDash":"\u22af","nvge":"\u2265\u20d2","nvgt":">\u20d2","nvHarr":"\u2904","nvinfin":"\u29de","nvlArr":"\u2902","nvle":"\u2264\u20d2","nvlt":"<\u20d2","nvltrie":"\u22b4\u20d2","nvrArr":"\u2903","nvrtrie":"\u22b5\u20d2","nvsim":"\u223c\u20d2","nwarhk":"\u2923","nwarr":"\u2196","nwArr":"\u21d6","nwarrow":"\u2196","nwnear":"\u2927","Oacute":"\xd3","oacute":"\xf3","oast":"\u229b","Ocirc":"\xd4","ocirc":"\xf4","ocir":"\u229a","Ocy":"\u041e","ocy":"\u043e","odash":"\u229d","Odblac":"\u0150","odblac":"\u0151","odiv":"\u2a38","odot":"\u2299","odsold":"\u29bc","OElig":"\u0152","oelig":"\u0153","ofcir":"\u29bf","Ofr":"\ud835\udd12","ofr":"\ud835\udd2c","ogon":"\u02db","Ograve":"\xd2","ograve":"\xf2","ogt":"\u29c1","ohbar":"\u29b5","ohm":"\u03a9","oint":"\u222e","olarr":"\u21ba","olcir":"\u29be","olcross":"\u29bb","oline":"\u203e","olt":"\u29c0","Omacr":"\u014c","omacr":"\u014d","Omega":"\u03a9","omega":"\u03c9","Omicron":"\u039f","omicron":"\u03bf","omid":"\u29b6","ominus":"\u2296","Oopf":"\ud835\udd46","oopf":"\ud835\udd60","opar":"\u29b7","OpenCurlyDoubleQuote":"\u201c","OpenCurlyQuote":"\u2018","operp":"\u29b9","oplus":"\u2295","orarr":"\u21bb","Or":"\u2a54","or":"\u2228","ord":"\u2a5d","order":"\u2134","orderof":"\u2134","ordf":"\xaa","ordm":"\xba","origof":"\u22b6","oror":"\u2a56","orslope":"\u2a57","orv":"\u2a5b","oS":"\u24c8","Oscr":"\ud835\udcaa","oscr":"\u2134","Oslash":"\xd8","oslash":"\xf8","osol":"\u2298","Otilde":"\xd5","otilde":"\xf5","otimesas":"\u2a36","Otimes":"\u2a37","otimes":"\u2297","Ouml":"\xd6","ouml":"\xf6","ovbar":"\u233d","OverBar":"\u203e","OverBrace":"\u23de","OverBracket":"\u23b4","OverParenthesis":"\u23dc","para":"\xb6","parallel":"\u2225","par":"\u2225","parsim":"\u2af3","parsl":"\u2afd","part":"\u2202","PartialD":"\u2202","Pcy":"\u041f","pcy":"\u043f","percnt":"%","period":".","permil":"\u2030","perp":"\u22a5","pertenk":"\u2031","Pfr":"\ud835\udd13","pfr":"\ud835\udd2d","Phi":"\u03a6","phi":"\u03c6","phiv":"\u03d5","phmmat":"\u2133","phone":"\u260e","Pi":"\u03a0","pi":"\u03c0","pitchfork":"\u22d4","piv":"\u03d6","planck":"\u210f","planckh":"\u210e","plankv":"\u210f","plusacir":"\u2a23","plusb":"\u229e","pluscir":"\u2a22","plus":"+","plusdo":"\u2214","plusdu":"\u2a25","pluse":"\u2a72","PlusMinus":"\xb1","plusmn":"\xb1","plussim":"\u2a26","plustwo":"\u2a27","pm":"\xb1","Poincareplane":"\u210c","pointint":"\u2a15","popf":"\ud835\udd61","Popf":"\u2119","pound":"\xa3","prap":"\u2ab7","Pr":"\u2abb","pr":"\u227a","prcue":"\u227c","precapprox":"\u2ab7","prec":"\u227a","preccurlyeq":"\u227c","Precedes":"\u227a","PrecedesEqual":"\u2aaf","PrecedesSlantEqual":"\u227c","PrecedesTilde":"\u227e","preceq":"\u2aaf","precnapprox":"\u2ab9","precneqq":"\u2ab5","precnsim":"\u22e8","pre":"\u2aaf","prE":"\u2ab3","precsim":"\u227e","prime":"\u2032","Prime":"\u2033","primes":"\u2119","prnap":"\u2ab9","prnE":"\u2ab5","prnsim":"\u22e8","prod":"\u220f","Product":"\u220f","profalar":"\u232e","profline":"\u2312","profsurf":"\u2313","prop":"\u221d","Proportional":"\u221d","Proportion":"\u2237","propto":"\u221d","prsim":"\u227e","prurel":"\u22b0","Pscr":"\ud835\udcab","pscr":"\ud835\udcc5","Psi":"\u03a8","psi":"\u03c8","puncsp":"\u2008","Qfr":"\ud835\udd14","qfr":"\ud835\udd2e","qint":"\u2a0c","qopf":"\ud835\udd62","Qopf":"\u211a","qprime":"\u2057","Qscr":"\ud835\udcac","qscr":"\ud835\udcc6","quaternions":"\u210d","quatint":"\u2a16","quest":"?","questeq":"\u225f","quot":"\\"","QUOT":"\\"","rAarr":"\u21db","race":"\u223d\u0331","Racute":"\u0154","racute":"\u0155","radic":"\u221a","raemptyv":"\u29b3","rang":"\u27e9","Rang":"\u27eb","rangd":"\u2992","range":"\u29a5","rangle":"\u27e9","raquo":"\xbb","rarrap":"\u2975","rarrb":"\u21e5","rarrbfs":"\u2920","rarrc":"\u2933","rarr":"\u2192","Rarr":"\u21a0","rArr":"\u21d2","rarrfs":"\u291e","rarrhk":"\u21aa","rarrlp":"\u21ac","rarrpl":"\u2945","rarrsim":"\u2974","Rarrtl":"\u2916","rarrtl":"\u21a3","rarrw":"\u219d","ratail":"\u291a","rAtail":"\u291c","ratio":"\u2236","rationals":"\u211a","rbarr":"\u290d","rBarr":"\u290f","RBarr":"\u2910","rbbrk":"\u2773","rbrace":"}","rbrack":"]","rbrke":"\u298c","rbrksld":"\u298e","rbrkslu":"\u2990","Rcaron":"\u0158","rcaron":"\u0159","Rcedil":"\u0156","rcedil":"\u0157","rceil":"\u2309","rcub":"}","Rcy":"\u0420","rcy":"\u0440","rdca":"\u2937","rdldhar":"\u2969","rdquo":"\u201d","rdquor":"\u201d","rdsh":"\u21b3","real":"\u211c","realine":"\u211b","realpart":"\u211c","reals":"\u211d","Re":"\u211c","rect":"\u25ad","reg":"\xae","REG":"\xae","ReverseElement":"\u220b","ReverseEquilibrium":"\u21cb","ReverseUpEquilibrium":"\u296f","rfisht":"\u297d","rfloor":"\u230b","rfr":"\ud835\udd2f","Rfr":"\u211c","rHar":"\u2964","rhard":"\u21c1","rharu":"\u21c0","rharul":"\u296c","Rho":"\u03a1","rho":"\u03c1","rhov":"\u03f1","RightAngleBracket":"\u27e9","RightArrowBar":"\u21e5","rightarrow":"\u2192","RightArrow":"\u2192","Rightarrow":"\u21d2","RightArrowLeftArrow":"\u21c4","rightarrowtail":"\u21a3","RightCeiling":"\u2309","RightDoubleBracket":"\u27e7","RightDownTeeVector":"\u295d","RightDownVectorBar":"\u2955","RightDownVector":"\u21c2","RightFloor":"\u230b","rightharpoondown":"\u21c1","rightharpoonup":"\u21c0","rightleftarrows":"\u21c4","rightleftharpoons":"\u21cc","rightrightarrows":"\u21c9","rightsquigarrow":"\u219d","RightTeeArrow":"\u21a6","RightTee":"\u22a2","RightTeeVector":"\u295b","rightthreetimes":"\u22cc","RightTriangleBar":"\u29d0","RightTriangle":"\u22b3","RightTriangleEqual":"\u22b5","RightUpDownVector":"\u294f","RightUpTeeVector":"\u295c","RightUpVectorBar":"\u2954","RightUpVector":"\u21be","RightVectorBar":"\u2953","RightVector":"\u21c0","ring":"\u02da","risingdotseq":"\u2253","rlarr":"\u21c4","rlhar":"\u21cc","rlm":"\u200f","rmoustache":"\u23b1","rmoust":"\u23b1","rnmid":"\u2aee","roang":"\u27ed","roarr":"\u21fe","robrk":"\u27e7","ropar":"\u2986","ropf":"\ud835\udd63","Ropf":"\u211d","roplus":"\u2a2e","rotimes":"\u2a35","RoundImplies":"\u2970","rpar":")","rpargt":"\u2994","rppolint":"\u2a12","rrarr":"\u21c9","Rrightarrow":"\u21db","rsaquo":"\u203a","rscr":"\ud835\udcc7","Rscr":"\u211b","rsh":"\u21b1","Rsh":"\u21b1","rsqb":"]","rsquo":"\u2019","rsquor":"\u2019","rthree":"\u22cc","rtimes":"\u22ca","rtri":"\u25b9","rtrie":"\u22b5","rtrif":"\u25b8","rtriltri":"\u29ce","RuleDelayed":"\u29f4","ruluhar":"\u2968","rx":"\u211e","Sacute":"\u015a","sacute":"\u015b","sbquo":"\u201a","scap":"\u2ab8","Scaron":"\u0160","scaron":"\u0161","Sc":"\u2abc","sc":"\u227b","sccue":"\u227d","sce":"\u2ab0","scE":"\u2ab4","Scedil":"\u015e","scedil":"\u015f","Scirc":"\u015c","scirc":"\u015d","scnap":"\u2aba","scnE":"\u2ab6","scnsim":"\u22e9","scpolint":"\u2a13","scsim":"\u227f","Scy":"\u0421","scy":"\u0441","sdotb":"\u22a1","sdot":"\u22c5","sdote":"\u2a66","searhk":"\u2925","searr":"\u2198","seArr":"\u21d8","searrow":"\u2198","sect":"\xa7","semi":";","seswar":"\u2929","setminus":"\u2216","setmn":"\u2216","sext":"\u2736","Sfr":"\ud835\udd16","sfr":"\ud835\udd30","sfrown":"\u2322","sharp":"\u266f","SHCHcy":"\u0429","shchcy":"\u0449","SHcy":"\u0428","shcy":"\u0448","ShortDownArrow":"\u2193","ShortLeftArrow":"\u2190","shortmid":"\u2223","shortparallel":"\u2225","ShortRightArrow":"\u2192","ShortUpArrow":"\u2191","shy":"\xad","Sigma":"\u03a3","sigma":"\u03c3","sigmaf":"\u03c2","sigmav":"\u03c2","sim":"\u223c","simdot":"\u2a6a","sime":"\u2243","simeq":"\u2243","simg":"\u2a9e","simgE":"\u2aa0","siml":"\u2a9d","simlE":"\u2a9f","simne":"\u2246","simplus":"\u2a24","simrarr":"\u2972","slarr":"\u2190","SmallCircle":"\u2218","smallsetminus":"\u2216","smashp":"\u2a33","smeparsl":"\u29e4","smid":"\u2223","smile":"\u2323","smt":"\u2aaa","smte":"\u2aac","smtes":"\u2aac\ufe00","SOFTcy":"\u042c","softcy":"\u044c","solbar":"\u233f","solb":"\u29c4","sol":"/","Sopf":"\ud835\udd4a","sopf":"\ud835\udd64","spades":"\u2660","spadesuit":"\u2660","spar":"\u2225","sqcap":"\u2293","sqcaps":"\u2293\ufe00","sqcup":"\u2294","sqcups":"\u2294\ufe00","Sqrt":"\u221a","sqsub":"\u228f","sqsube":"\u2291","sqsubset":"\u228f","sqsubseteq":"\u2291","sqsup":"\u2290","sqsupe":"\u2292","sqsupset":"\u2290","sqsupseteq":"\u2292","square":"\u25a1","Square":"\u25a1","SquareIntersection":"\u2293","SquareSubset":"\u228f","SquareSubsetEqual":"\u2291","SquareSuperset":"\u2290","SquareSupersetEqual":"\u2292","SquareUnion":"\u2294","squarf":"\u25aa","squ":"\u25a1","squf":"\u25aa","srarr":"\u2192","Sscr":"\ud835\udcae","sscr":"\ud835\udcc8","ssetmn":"\u2216","ssmile":"\u2323","sstarf":"\u22c6","Star":"\u22c6","star":"\u2606","starf":"\u2605","straightepsilon":"\u03f5","straightphi":"\u03d5","strns":"\xaf","sub":"\u2282","Sub":"\u22d0","subdot":"\u2abd","subE":"\u2ac5","sube":"\u2286","subedot":"\u2ac3","submult":"\u2ac1","subnE":"\u2acb","subne":"\u228a","subplus":"\u2abf","subrarr":"\u2979","subset":"\u2282","Subset":"\u22d0","subseteq":"\u2286","subseteqq":"\u2ac5","SubsetEqual":"\u2286","subsetneq":"\u228a","subsetneqq":"\u2acb","subsim":"\u2ac7","subsub":"\u2ad5","subsup":"\u2ad3","succapprox":"\u2ab8","succ":"\u227b","succcurlyeq":"\u227d","Succeeds":"\u227b","SucceedsEqual":"\u2ab0","SucceedsSlantEqual":"\u227d","SucceedsTilde":"\u227f","succeq":"\u2ab0","succnapprox":"\u2aba","succneqq":"\u2ab6","succnsim":"\u22e9","succsim":"\u227f","SuchThat":"\u220b","sum":"\u2211","Sum":"\u2211","sung":"\u266a","sup1":"\xb9","sup2":"\xb2","sup3":"\xb3","sup":"\u2283","Sup":"\u22d1","supdot":"\u2abe","supdsub":"\u2ad8","supE":"\u2ac6","supe":"\u2287","supedot":"\u2ac4","Superset":"\u2283","SupersetEqual":"\u2287","suphsol":"\u27c9","suphsub":"\u2ad7","suplarr":"\u297b","supmult":"\u2ac2","supnE":"\u2acc","supne":"\u228b","supplus":"\u2ac0","supset":"\u2283","Supset":"\u22d1","supseteq":"\u2287","supseteqq":"\u2ac6","supsetneq":"\u228b","supsetneqq":"\u2acc","supsim":"\u2ac8","supsub":"\u2ad4","supsup":"\u2ad6","swarhk":"\u2926","swarr":"\u2199","swArr":"\u21d9","swarrow":"\u2199","swnwar":"\u292a","szlig":"\xdf","Tab":"\\t","target":"\u2316","Tau":"\u03a4","tau":"\u03c4","tbrk":"\u23b4","Tcaron":"\u0164","tcaron":"\u0165","Tcedil":"\u0162","tcedil":"\u0163","Tcy":"\u0422","tcy":"\u0442","tdot":"\u20db","telrec":"\u2315","Tfr":"\ud835\udd17","tfr":"\ud835\udd31","there4":"\u2234","therefore":"\u2234","Therefore":"\u2234","Theta":"\u0398","theta":"\u03b8","thetasym":"\u03d1","thetav":"\u03d1","thickapprox":"\u2248","thicksim":"\u223c","ThickSpace":"\u205f\u200a","ThinSpace":"\u2009","thinsp":"\u2009","thkap":"\u2248","thksim":"\u223c","THORN":"\xde","thorn":"\xfe","tilde":"\u02dc","Tilde":"\u223c","TildeEqual":"\u2243","TildeFullEqual":"\u2245","TildeTilde":"\u2248","timesbar":"\u2a31","timesb":"\u22a0","times":"\xd7","timesd":"\u2a30","tint":"\u222d","toea":"\u2928","topbot":"\u2336","topcir":"\u2af1","top":"\u22a4","Topf":"\ud835\udd4b","topf":"\ud835\udd65","topfork":"\u2ada","tosa":"\u2929","tprime":"\u2034","trade":"\u2122","TRADE":"\u2122","triangle":"\u25b5","triangledown":"\u25bf","triangleleft":"\u25c3","trianglelefteq":"\u22b4","triangleq":"\u225c","triangleright":"\u25b9","trianglerighteq":"\u22b5","tridot":"\u25ec","trie":"\u225c","triminus":"\u2a3a","TripleDot":"\u20db","triplus":"\u2a39","trisb":"\u29cd","tritime":"\u2a3b","trpezium":"\u23e2","Tscr":"\ud835\udcaf","tscr":"\ud835\udcc9","TScy":"\u0426","tscy":"\u0446","TSHcy":"\u040b","tshcy":"\u045b","Tstrok":"\u0166","tstrok":"\u0167","twixt":"\u226c","twoheadleftarrow":"\u219e","twoheadrightarrow":"\u21a0","Uacute":"\xda","uacute":"\xfa","uarr":"\u2191","Uarr":"\u219f","uArr":"\u21d1","Uarrocir":"\u2949","Ubrcy":"\u040e","ubrcy":"\u045e","Ubreve":"\u016c","ubreve":"\u016d","Ucirc":"\xdb","ucirc":"\xfb","Ucy":"\u0423","ucy":"\u0443","udarr":"\u21c5","Udblac":"\u0170","udblac":"\u0171","udhar":"\u296e","ufisht":"\u297e","Ufr":"\ud835\udd18","ufr":"\ud835\udd32","Ugrave":"\xd9","ugrave":"\xf9","uHar":"\u2963","uharl":"\u21bf","uharr":"\u21be","uhblk":"\u2580","ulcorn":"\u231c","ulcorner":"\u231c","ulcrop":"\u230f","ultri":"\u25f8","Umacr":"\u016a","umacr":"\u016b","uml":"\xa8","UnderBar":"_","UnderBrace":"\u23df","UnderBracket":"\u23b5","UnderParenthesis":"\u23dd","Union":"\u22c3","UnionPlus":"\u228e","Uogon":"\u0172","uogon":"\u0173","Uopf":"\ud835\udd4c","uopf":"\ud835\udd66","UpArrowBar":"\u2912","uparrow":"\u2191","UpArrow":"\u2191","Uparrow":"\u21d1","UpArrowDownArrow":"\u21c5","updownarrow":"\u2195","UpDownArrow":"\u2195","Updownarrow":"\u21d5","UpEquilibrium":"\u296e","upharpoonleft":"\u21bf","upharpoonright":"\u21be","uplus":"\u228e","UpperLeftArrow":"\u2196","UpperRightArrow":"\u2197","upsi":"\u03c5","Upsi":"\u03d2","upsih":"\u03d2","Upsilon":"\u03a5","upsilon":"\u03c5","UpTeeArrow":"\u21a5","UpTee":"\u22a5","upuparrows":"\u21c8","urcorn":"\u231d","urcorner":"\u231d","urcrop":"\u230e","Uring":"\u016e","uring":"\u016f","urtri":"\u25f9","Uscr":"\ud835\udcb0","uscr":"\ud835\udcca","utdot":"\u22f0","Utilde":"\u0168","utilde":"\u0169","utri":"\u25b5","utrif":"\u25b4","uuarr":"\u21c8","Uuml":"\xdc","uuml":"\xfc","uwangle":"\u29a7","vangrt":"\u299c","varepsilon":"\u03f5","varkappa":"\u03f0","varnothing":"\u2205","varphi":"\u03d5","varpi":"\u03d6","varpropto":"\u221d","varr":"\u2195","vArr":"\u21d5","varrho":"\u03f1","varsigma":"\u03c2","varsubsetneq":"\u228a\ufe00","varsubsetneqq":"\u2acb\ufe00","varsupsetneq":"\u228b\ufe00","varsupsetneqq":"\u2acc\ufe00","vartheta":"\u03d1","vartriangleleft":"\u22b2","vartriangleright":"\u22b3","vBar":"\u2ae8","Vbar":"\u2aeb","vBarv":"\u2ae9","Vcy":"\u0412","vcy":"\u0432","vdash":"\u22a2","vDash":"\u22a8","Vdash":"\u22a9","VDash":"\u22ab","Vdashl":"\u2ae6","veebar":"\u22bb","vee":"\u2228","Vee":"\u22c1","veeeq":"\u225a","vellip":"\u22ee","verbar":"|","Verbar":"\u2016","vert":"|","Vert":"\u2016","VerticalBar":"\u2223","VerticalLine":"|","VerticalSeparator":"\u2758","VerticalTilde":"\u2240","VeryThinSpace":"\u200a","Vfr":"\ud835\udd19","vfr":"\ud835\udd33","vltri":"\u22b2","vnsub":"\u2282\u20d2","vnsup":"\u2283\u20d2","Vopf":"\ud835\udd4d","vopf":"\ud835\udd67","vprop":"\u221d","vrtri":"\u22b3","Vscr":"\ud835\udcb1","vscr":"\ud835\udccb","vsubnE":"\u2acb\ufe00","vsubne":"\u228a\ufe00","vsupnE":"\u2acc\ufe00","vsupne":"\u228b\ufe00","Vvdash":"\u22aa","vzigzag":"\u299a","Wcirc":"\u0174","wcirc":"\u0175","wedbar":"\u2a5f","wedge":"\u2227","Wedge":"\u22c0","wedgeq":"\u2259","weierp":"\u2118","Wfr":"\ud835\udd1a","wfr":"\ud835\udd34","Wopf":"\ud835\udd4e","wopf":"\ud835\udd68","wp":"\u2118","wr":"\u2240","wreath":"\u2240","Wscr":"\ud835\udcb2","wscr":"\ud835\udccc","xcap":"\u22c2","xcirc":"\u25ef","xcup":"\u22c3","xdtri":"\u25bd","Xfr":"\ud835\udd1b","xfr":"\ud835\udd35","xharr":"\u27f7","xhArr":"\u27fa","Xi":"\u039e","xi":"\u03be","xlarr":"\u27f5","xlArr":"\u27f8","xmap":"\u27fc","xnis":"\u22fb","xodot":"\u2a00","Xopf":"\ud835\udd4f","xopf":"\ud835\udd69","xoplus":"\u2a01","xotime":"\u2a02","xrarr":"\u27f6","xrArr":"\u27f9","Xscr":"\ud835\udcb3","xscr":"\ud835\udccd","xsqcup":"\u2a06","xuplus":"\u2a04","xutri":"\u25b3","xvee":"\u22c1","xwedge":"\u22c0","Yacute":"\xdd","yacute":"\xfd","YAcy":"\u042f","yacy":"\u044f","Ycirc":"\u0176","ycirc":"\u0177","Ycy":"\u042b","ycy":"\u044b","yen":"₫","Yfr":"\ud835\udd1c","yfr":"\ud835\udd36","YIcy":"\u0407","yicy":"\u0457","Yopf":"\ud835\udd50","yopf":"\ud835\udd6a","Yscr":"\ud835\udcb4","yscr":"\ud835\udcce","YUcy":"\u042e","yucy":"\u044e","yuml":"\xff","Yuml":"\u0178","Zacute":"\u0179","zacute":"\u017a","Zcaron":"\u017d","zcaron":"\u017e","Zcy":"\u0417","zcy":"\u0437","Zdot":"\u017b","zdot":"\u017c","zeetrf":"\u2128","ZeroWidthSpace":"\u200b","Zeta":"\u0396","zeta":"\u03b6","zfr":"\ud835\udd37","Zfr":"\u2128","ZHcy":"\u0416","zhcy":"\u0436","zigrarr":"\u21dd","zopf":"\ud835\udd6b","Zopf":"\u2124","Zscr":"\ud835\udcb5","zscr":"\ud835\udccf","zwj":"\u200d","zwnj":"\u200c"}')
     },
     xg5P: function(e, t, n) {
         "use strict";
@@ -111039,51 +111056,51 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "\u540d\u79f0",
+                    title: "Tên",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "\u7c7b\u578b",
+                    title: "Loại",
                     dataIndex: "type",
                     key: "type",
                     render: e=>{
                         switch (e) {
                             case 1:
-                                return "\u91d1\u989d";
+                                return "Số tiền";
                             case 2:
-                                return "\u65f6\u957f";
+                                return "Thời gian";
                             case 3:
-                                return "\u6d41\u91cf";
+                                return "Dung lượng";
                             case 4:
-                                return "\u91cd\u7f6e";
+                                return "Đặt lại";
                             case 5:
-                                return "\u5957\u9910";
+                                return "Gói cước";
                             default:
                                 return "";
                         }
                     }
                 }, {
-                    title: "\u6570\u503c",
+                    title: "Giá trị",
                     dataIndex: "value",
                     key: "value",
                     render: (e,t)=>{
                         switch (t.type) {
                             case 1:
-                                return e.toFixed(2) + " \xa5";
+                                return e.toFixed(2) + " đ";
                             case 2:
-                                return e + " \u5929";
+                                return e + " Ngày";
                             case 3:
                                 return e + " GB";
                             case 4:
                                 return "-";
                             case 5:
-                                return e + " \u5929";
+                                return e + " Ngày";
                             default:
                                 return e;
                         }
                     }
                 }, {
-                    title: "\u5957\u9910",
+                    title: "Gói",
                     dataIndex: "plan_id",
                     key: "plan_id",
                     render: e=>{
@@ -111092,7 +111109,7 @@
                         return name;
                     }
                 }, {
-                    title: "\u5361\u5bc6",
+                    title: "Mã",
                     dataIndex: "code",
                     key: "code",
                     render: e=>{
@@ -111107,14 +111124,14 @@
                         }, e)
                     }
                 }, {
-                    title: "\u5269\u4f59\u6b21\u6570",
+                    title: "Còn lại",
                     dataIndex: "limit_use",
                     key: "limit_use",
                     render: e=>{
-                        return b.a.createElement(d["a"], null, null !== e ? e : "\u65e0\u9650")
+                        return b.a.createElement(d["a"], null, null !== e ? e : "Không giới hạn")
                     }
                 }, {
-                    title: "\u6709\u6548\u671f",
+                    title: "Áp dụng từ",
                     dataIndex: "started_at",
                     key: "started_at",
                     align: "left",
@@ -111157,7 +111174,7 @@
                     }
                 }];
                 return b.a.createElement(w["a"], i()({}, this.props, {
-                    title: "\u793c\u54c1\u5361\u7ba1\u7406"
+                    title: "Quản lý thẻ quà tặng"
                 }), b.a.createElement(O["a"], {
                     loading: n
                 }, b.a.createElement("div", {
@@ -111172,7 +111189,7 @@
                     onClick: ()=>this.modalVisible()
                 }, b.a.createElement(u["a"], {
                     type: "plus"
-                }), "\u6dfb\u52a0\u793c\u54c1\u5361")), b.a.createElement(l["a"], {
+                }), " Thêm thẻ quà tặng")), b.a.createElement(l["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     columns: x,
@@ -111186,7 +111203,7 @@
                     }),
                     onChange: (e,t,n)=>this.tableOnChange(e, n)
                 })))), b.a.createElement(h["a"], {
-                    title: "".concat(this.state.submit.id ? "\u7f16\u8f91\u793c\u54c1\u5361" : "\u65b0\u5efa\u793c\u54c1\u5361"),
+                    title: "".concat(this.state.submit.id ? "Chỉnh sửa thẻ quà tặng" : "Tạo thẻ quà tặng mới"),
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.generate(),
@@ -111200,8 +111217,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u540d\u79f0"), b.a.createElement(s["a"], {
-                    placeholder: "\u8bf7\u8f93\u5165\u793c\u54c1\u5361\u540d\u79f0",
+                }, "Tên"), b.a.createElement(s["a"], {
+                    placeholder: "Vui lòng nhập tên",
                     value: this.state.submit.name,
                     onChange: e=>{
                         this.setState({
@@ -111214,8 +111231,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u81ea\u5b9a\u4e49\u793c\u54c1\u5361\u5361\u5bc6"), b.a.createElement(s["a"], {
-                    placeholder: "\u81ea\u5b9a\u4e49\u793c\u54c1\u5361\u5361\u5bc6(\u7559\u7a7a\u968f\u673a\u751f\u6210)",
+                }, "Mã thẻ quà"), b.a.createElement(s["a"], {
+                    placeholder: "Tùy chỉnh mã thẻ quà tặng (để trống sẽ tạo ngẫu nhiên).",
                     value: this.state.submit.code,
                     onChange: e=>{
                         this.setState({
@@ -111229,7 +111246,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u793c\u54c1\u5361\u7c7b\u578b"), b.a.createElement(s["a"], {
+                }, "Loại thẻ quà tặng"), b.a.createElement(s["a"], {
                     type: "number",
                     addonBefore: b.a.createElement(a["a"], {
                         style: {
@@ -111245,33 +111262,33 @@
                         }
                     }, b.a.createElement(a["a"].Option, {
                         value: 1
-                    }, "\u589e\u52a0\u8d26\u6237\u4f59\u989d"), b.a.createElement(a["a"].Option, {
+                    }, "Tăng số dư tài khoản"), b.a.createElement(a["a"].Option, {
                         value: 2
-                    }, "\u589e\u52a0\u8ba2\u9605\u65f6\u957f"), b.a.createElement(a["a"].Option, {
+                    }, "Tăng thời gian đăng ký"), b.a.createElement(a["a"].Option, {
                         value: 3
-                    }, "\u589e\u52a0\u5957\u9910\u6d41\u91cf"), b.a.createElement(a["a"].Option, {
+                    }, "Tăng lưu lượng gói đăng ký"), b.a.createElement(a["a"].Option, {
                         value: 4
-                    }, "\u91cd\u7f6e\u5957\u9910\u6d41\u91cf"), b.a.createElement(a["a"].Option, {
+                    }, "Đặt lại lưu lượng gói đăng ký"), b.a.createElement(a["a"].Option, {
                         value: 5
-                    }, "\u5151\u6362\u8ba2\u9605\u5957\u9910")),
+                    }, "Đổi gói đăng ký")),
                     addonAfter: (() => {
                         switch (this.state.submit.type) {
                             case 1:
-                                return "\xa5";
+                                return "₫";
                             case 2:
-                                return "\u5929";
+                                return "Ngày";
                             case 3:
                                 return "GB";
                             case 4:
                                 return "";
                             case 5:
-                                return "\u5929";
+                                return "Ngày";
                             default:
                                 return "";
                         }
                     })(),
                     disabled: this.state.submit.type === 4,
-                    placeholder: this.state.submit.type === 5 ? "\u4e00\u6b21\u6027\u5957\u9910\u8f93\u51650" : "\u8bf7\u8f93\u5165\u503c",
+                    placeholder: this.state.submit.type === 5 ? "Gói vĩnh viễn thì nhập 0" : "Vui lòng nhập giá trị",
                     value: this.state.submit.type === 4 ? 0 : this.state.submit.value,
                     onChange: e=>{
                         this.setState({
@@ -111284,7 +111301,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6307\u5b9a\u8ba2\u9605"), b.a.createElement("div", null, b.a.createElement(a["a"], {
+                }, "Chỉ định gói đăng ký"), b.a.createElement("div", null, b.a.createElement(a["a"], {
                     value: this.state.submit.plan_id,
                     onChange: e=>{
                         this.setState({
@@ -111294,7 +111311,7 @@
                         })
                     },
                     mode: "single",
-                    placeholder: "\u6307\u5b9a\u8ba2\u9605",
+                    placeholder: "Chỉ định gói đăng ký",
                     style: {
                         width: "100%"
                     }
@@ -111308,7 +111325,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u793c\u54c1\u5361\u6709\u6548\u671f"), b.a.createElement(o["a"].RangePicker, {
+                }, "Thời hạn hiệu lực của thẻ quà tặng"), b.a.createElement(o["a"].RangePicker, {
                     style: {
                         width: "100%"
                     },
@@ -111334,8 +111351,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "\u6700\u5927\u4f7f\u7528\u6b21\u6570"), b.a.createElement(s["a"], {
-                    placeholder: "\u9650\u5236\u6700\u5927\u4f7f\u7528\u6b21\u6570\uff0c\u7528\u5b8c\u5219\u65e0\u6cd5\u4f7f\u7528(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
+                }, "Số lần sử dụng tối đa"), b.a.createElement(s["a"], {
+                    placeholder: "Giới hạn số lần sử dụng tối đa, khi dùng hết sẽ không thể sử dụng tiếp (để trống nếu không giới hạn)",
                     value: this.state.submit.limit_use,
                     onChange: e=>{
                         this.setState({
@@ -111348,8 +111365,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "\u751f\u6210\u6570\u91cf"), b.a.createElement(s["a"], {
-                    placeholder: "\u8f93\u5165\u6570\u91cf\u6279\u91cf\u751f\u6210",
+                }, "Số lượng tạo"), b.a.createElement(s["a"], {
+                    placeholder: "Nhập số lượng để tạo hàng loạt",
                     value: this.state.submit.generate_count,
                     onChange: e=>{
                         this.setState({
