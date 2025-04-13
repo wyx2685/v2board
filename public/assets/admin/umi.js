@@ -26338,13 +26338,13 @@
                 }, null === (t = this.props.ticket) || void 0 === t ? void 0 : t.message.map(e=>{
                     return e.is_me ? o.a.createElement("div", null, o.a.createElement("div", {
                         className: "font-size-sm text-muted my-2 text-right"
-                    }, h()(1e3 * e.created_at).format("YYYY/MM/DD HH:mm")), o.a.createElement("div", {
+                    }, h()(1e3 * e.created_at).format("DD/MM/YYYY HH:mm")), o.a.createElement("div", {
                         className: "text-right ml-4"
                     }, o.a.createElement("div", {
                         className: "d-inline-block bg-gray-lighter px-3 py-2 mb-2 mw-100 rounded text-left"
                     }, e.message))) : o.a.createElement("div", null, o.a.createElement("div", {
                         className: "font-size-sm text-muted my-2"
-                    }, h()(1e3 * e.created_at).format("YYYY/MM/DD HH:mm")), o.a.createElement("div", {
+                    }, h()(1e3 * e.created_at).format("DD/MM/YYYY HH:mm")), o.a.createElement("div", {
                         className: "mr-4"
                     }, o.a.createElement("div", {
                         className: "d-inline-block bg-success-lighter px-3 py-2 mb-2 mw-100 rounded text-left"
@@ -31279,7 +31279,7 @@
                     key: "created_at",
                     align: "right",
                     render: e=>{
-                        return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return b()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: "Chỉnh Sửa",
@@ -39689,7 +39689,7 @@
                     key: "started_at",
                     align: "left",
                     render: (e,t)=>{
-                        return "".concat(_()(1e3 * t.started_at).format("YYYY/MM/DD HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("YYYY/MM/DD HH:mm"))
+                        return "".concat(_()(1e3 * t.started_at).format("DD/MM/YYYY HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("DD/MM/YYYY HH:mm"))
                     }
                 }, {
                     title: "Chỉnh Sửa",
@@ -41139,14 +41139,14 @@
                     dataIndex: "created_at",
                     key: "created_at",
                     render: e=>{
-                        return v()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return v()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: "Time cập nhật",
                     dataIndex: "updated_at",
                     key: "updated_at",
                     render: e=>{
-                        return v()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return v()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: "Chỉnh Sửa",
@@ -70893,25 +70893,33 @@
                     render: e=>{
                         return g.a.createElement(h["a"], {
                             color: e < (new Date).getTime() / 1e3 && null !== e ? "red" : "green"
-                        }, e ? w()(1e3 * e).format("YYYY/MM/DD HH:mm") : null === e ? "Vĩnh viễn" : "-")
+                        }, e ? w()(1e3 * e).format("DD/MM/YYYY HH:mm") : null === e ? "Vĩnh viễn" : "-")
                     }
                 }, {
                     title: "Số dư",
                     dataIndex: "balance",
                     key: "balance",
-                    sorter: !0
+                    sorter: !0,
+                    render: (e, t) => parseFloat(e).toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    })
                 }, {
                     title: "Hoa hồng",
                     dataIndex: "commission_balance",
                     key: "commission_balance",
-                    sorter: !0
+                    sorter: !0,
+                    render: (e, t) => parseFloat(e).toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                      })
                 }, {
                     title: "Ngày tạo",
                     dataIndex: "created_at",
                     key: "created_at",
                     sorter: !0,
                     render: e=>{
-                        return w()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return w()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: "Chỉnh Sửa",
@@ -81077,56 +81085,80 @@
                     dataIndex: "month_price",
                     key: "month_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "3 Tháng",
                     dataIndex: "quarter_price",
                     key: "quarter_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "6 Tháng",
                     dataIndex: "half_year_price",
                     key: "half_year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "1 Năm",
                     dataIndex: "year_price",
                     key: "year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "2 Năm",
                     dataIndex: "two_year_price",
                     key: "two_year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "3 Năm",
                     dataIndex: "three_year_price",
                     key: "three_year_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "Vĩnh Viễn",
                     dataIndex: "onetime_price",
                     key: "onetime_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "Đặt là data",
                     dataIndex: "reset_price",
                     key: "reset_price",
                     render: e=>{
-                        return null !== e ? e.toFixed(2) : "-"
+                        return null !== e ? e.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }) : "-"
                     }
                 }, {
                     title: "Group ID",
@@ -82097,7 +82129,7 @@
                     key: "updated_at",
                     align: "right",
                     render: e=>{
-                        return m()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return m()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: "Chỉnh Sửa",
@@ -93733,35 +93765,50 @@
                     span: 6
                 }, "Số Tiền"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.total_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
+                }, (this.state.order.total_amount / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
                 }, "TT bằng số dư"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.balance_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
+                }, (this.state.order.balance_amount / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
                 }, "Số tiền ưu đãi"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.discount_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
+                }, (this.state.order.discount_amount / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
                 }, "Số tiền hoàn lại"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.refund_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
+                }, (this.state.order.refund_amount / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
                 }, "Số tiền khấu trừ"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.surplus_amount / 100).toFixed(2))), g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
+                }, (this.state.order.surplus_amount / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }))), g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
@@ -93794,14 +93841,20 @@
                     span: 6
                 }, "Số tiền hoa hồng"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.commission_balance / 100).toFixed(2))), this.state.order.actual_commission_balance && g.a.createElement(E["a"], {
+                }, (this.state.order.commission_balance / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }))), this.state.order.actual_commission_balance && g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
                 }, "Hoa hồng thực tế"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.actual_commission_balance / 100).toFixed(2))), g.a.createElement(E["a"], {
+                }, (this.state.order.actual_commission_balance / 100).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
@@ -93919,9 +93972,10 @@
                     dataIndex: "total_amount",
                     key: "total_amount",
                     align: "right",
-                    render: e=>{
-                        return (e / 100).toFixed(2)
-                    }
+                    render: e => null !== e ? (e / 100).toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                      }) : "0"
                 }, {
                     title: g.a.createElement("span", null, g.a.createElement(f["a"], {
                         placement: "top",
@@ -93967,7 +94021,12 @@
                     key: "commission_balance",
                     align: "right",
                     render: (e,t)=>{
-                        return 0 === t.status || 2 === t.status ? "-" : e ? (e / 100).toFixed(2) : "-"
+                        return 0 === t.status || 2 === t.status ? "-" : e
+                        ? (e / 100).toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        })
+                        : "-"
                     }
                 }, {
                     title: g.a.createElement("span", null, "Thạng thái hoa hồng ", g.a.createElement(f["a"], {
@@ -94021,7 +94080,7 @@
                     key: "created_at",
                     align: "right",
                     render: e=>{
-                        return w()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return w()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
@@ -111086,7 +111145,10 @@
                     render: (e,t)=>{
                         switch (t.type) {
                             case 1:
-                                return e.toFixed(2) + " đ";
+                                return e.toLocaleString('vi-VN', {
+                                    style: 'currency',
+                                    currency: 'VND'
+                                });
                             case 2:
                                 return e + " Ngày";
                             case 3:
@@ -111136,7 +111198,7 @@
                     key: "started_at",
                     align: "left",
                     render: (e,t)=>{
-                        return "".concat(_()(1e3 * t.started_at).format("YYYY/MM/DD HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("YYYY/MM/DD HH:mm"))
+                        return "".concat(_()(1e3 * t.started_at).format("DD/MM/YYYY HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("DD/MM/YYYY HH:mm"))
                     }
                 }, {
                     title: "Chỉnh Sửa",
