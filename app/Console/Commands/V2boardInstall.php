@@ -49,59 +49,59 @@ class V2boardInstall extends Command
             $this->info("   \_/  |_____|____/ \___/ \__,_|_|  \__,_| ");
             if (\File::exists(base_path() . '/.env')) {
                 $securePath = config('v2board.secure_path', config('v2board.frontend_admin_path', hash('crc32b', config('app.key'))));
-                $this->info("访问 http(s)://你的站点/{$securePath} 进入管理面板，你可以在用户中心修改你的密码。");
-                abort(500, '如需重新安装请删除目录下.env文件');
+                $this->info("Truy cập http(s)://domain_của_bạn/{$securePath} Vào bảng quản trị, bạn có thể thay đổi mật khẩu trong trung tâm người dùng.");
+                abort(500, 'Nếu bạn cần cài đặt lại, vui lòng xóa tệp .env trong thư mục');
             }
 
             if (!copy(base_path() . '/.env.example', base_path() . '/.env')) {
-                abort(500, '复制环境文件失败，请检查目录权限');
+                abort(500, 'Không thể sao chép tệp môi trường, vui lòng kiểm tra quyền thư mục');
             }
             $this->saveToEnv([
                 'APP_KEY' => 'base64:' . base64_encode(Encrypter::generateKey('AES-256-CBC')),
-                'DB_HOST' => $this->ask('请输入数据库地址（默认:localhost）', 'localhost'),
-                'DB_DATABASE' => $this->ask('请输入数据库名'),
-                'DB_USERNAME' => $this->ask('请输入数据库用户名'),
-                'DB_PASSWORD' => $this->ask('请输入数据库密码')
+                'DB_HOST' => $this->ask('Vui lòng nhập địa chỉ cơ sở dữ liệu (mặc định: localhost)', 'localhost'),
+                'DB_DATABASE' => $this->ask('Tên cơ sở dữ liệu'),
+                'DB_USERNAME' => $this->ask('User cơ sử dữ liệu'),
+                'DB_PASSWORD' => $this->ask('Pass cơ sở dữ liệu')
             ]);
             \Artisan::call('config:clear');
             \Artisan::call('config:cache');
             try {
                 DB::connection()->getPdo();
             } catch (\Exception $e) {
-                abort(500, '数据库连接失败');
+                abort(500, 'Kết nối cơ sở dữ liệu không thành công');
             }
             $file = \File::get(base_path() . '/database/install.sql');
             if (!$file) {
-                abort(500, '数据库文件不存在');
+                abort(500, 'Tệp cơ sở dữ liệu không tồn tại');
             }
             $sql = str_replace("\n", "", $file);
             $sql = preg_split("/;/", $sql);
             if (!is_array($sql)) {
-                abort(500, '数据库文件格式有误');
+                abort(500, 'Định dạng tệp cơ sở dữ liệu không đúng');
             }
-            $this->info('正在导入数据库请稍等...');
+            $this->info('Đang nhập cơ sở dữ liệu, vui lòng đợi...');
             foreach ($sql as $item) {
                 try {
                     DB::select(DB::raw($item));
                 } catch (\Exception $e) {
                 }
             }
-            $this->info('数据库导入完成');
+            $this->info('Nhập cơ sở dữ liệu đã hoàn tất');
             $email = '';
             while (!$email) {
-                $email = $this->ask('请输入管理员邮箱?');
+                $email = $this->ask('Vui lòng nhập địa chỉ email của người quản trị?');
             }
             $password = Helper::guid(false);
             if (!$this->registerAdmin($email, $password)) {
-                abort(500, '管理员账号注册失败，请重试');
+                abort(500, 'Đăng ký tài khoản quản trị viên không thành công, vui lòng thử lại');
             }
 
-            $this->info('一切就绪');
-            $this->info("管理员邮箱：{$email}");
-            $this->info("管理员密码：{$password}");
+            $this->info('Mọi thứ đã sẵn sàng');
+            $this->info("Email quản trị viên：{$email}");
+            $this->info("Mật khẩu quản trị viên:{$password}");
 
             $defaultSecurePath = hash('crc32b', config('app.key'));
-            $this->info("访问 http(s)://你的站点/{$defaultSecurePath} 进入管理面板，你可以在用户中心修改你的密码。");
+            $this->info("Truy cập http(s)://domain_của_bạn/{$defaultSecurePath} Vào bảng quản trị, bạn có thể thay đổi mật khẩu trong trung tâm người dùng.");
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
@@ -112,7 +112,7 @@ class V2boardInstall extends Command
         $user = new User();
         $user->email = $email;
         if (strlen($password) < 8) {
-            abort(500, '管理员密码长度最小为8位字符');
+            abort(500, 'Độ dài tối thiểu của mật khẩu quản trị viên là 8 ký tự');
         }
         $user->password = password_hash($password, PASSWORD_DEFAULT);
         $user->uuid = Helper::guid(true);

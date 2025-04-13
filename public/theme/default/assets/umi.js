@@ -6749,7 +6749,7 @@
                                     return n.abrupt("break", 20);
                                 case 17:
                                     return window.location.href = c.data,
-                                    r["a"].info("\u6b63\u5728\u524d\u5f80\u6536\u94f6\u53f0"),
+                                    r["a"].info("Chuyển đến trang thanh toán"),
                                     n.abrupt("break", 20);
                                 case 20:
                                 case "end":
@@ -18342,13 +18342,13 @@
                 }, null === (t = this.props.ticket) || void 0 === t ? void 0 : t.message.map(e=>{
                     return e.is_me ? s.a.createElement("div", null, s.a.createElement("div", {
                         className: "font-size-sm text-muted my-2 text-right"
-                    }, l()(1e3 * e.created_at).format("YYYY/MM/DD HH:mm")), s.a.createElement("div", {
+                    }, l()(1e3 * e.created_at).format("DD/MM/YYYY HH:mm")), s.a.createElement("div", {
                         className: "text-right ml-4"
                     }, s.a.createElement("div", {
                         className: "d-inline-block bg-gray-lighter px-3 py-2 mb-2 mw-100 rounded text-left"
                     }, e.message))) : s.a.createElement("div", null, s.a.createElement("div", {
                         className: "font-size-sm text-muted my-2"
-                    }, l()(1e3 * e.created_at).format("YYYY/MM/DD HH:mm")), s.a.createElement("div", {
+                    }, l()(1e3 * e.created_at).format("DD/MM/YYYY HH:mm")), s.a.createElement("div", {
                         className: "mr-4"
                     }, s.a.createElement("div", {
                         className: "d-inline-block bg-success-lighter px-3 py-2 mb-2 mw-100 rounded text-left"
@@ -30615,7 +30615,7 @@
                     dataIndex: "record_at",
                     key: "record_at",
                     render: e=>{
-                        return e ? h()(1e3 * e).format("YYYY/MM/DD") : "-"
+                        return e ? h()(1e3 * e).format("DD/MM/YYYY") : "-"
                     }
                 }, {
                     title: Object(v["formatMessage"])({
@@ -30954,7 +30954,7 @@
                 })) : l.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u4e8e {date} \u5230\u671f\uff0c\u8ddd\u79bb\u5230\u671f\u8fd8\u6709 {day} \u5929\u3002"
                 }, {
-                    date: v()(1e3 * d.expired_at).format("YYYY/MM/DD"),
+                    date: v()(1e3 * d.expired_at).format("DD/MM/YYYY"),
                     day: ((d.expired_at - v()().format("X")) / 86400).toFixed(0)
                 }), null !== d.reset_day ? 0 !== d.reset_day ? Object(b["formatMessage"])({
                     id: "\u5df2\u7528\u6d41\u91cf\u5c06\u5728 {reset_day} \u65e5\u540e\u91cd\u7f6e"
@@ -30962,7 +30962,8 @@
                     reset_day: d.reset_day
                 }) : Object(b["formatMessage"])({
                     id: "\u5df2\u7528\u6d41\u91cf\u5df2\u5728\u4eca\u65e5\u91cd\u7f6e"
-                }) : "")), l.a.createElement("div", {
+                }) : "")), 
+                l.a.createElement("div", {
                     className: "mb-0"
                 }, l.a.createElement("div", {
                     className: "progress mb-1",
@@ -30975,7 +30976,9 @@
                     style: {
                         width: Object(p["f"])(d.u + d.d, d.transfer_enable) + "%"
                     }
-                })), l.a.createElement("p", {
+                })),
+                
+                l.a.createElement("p", {
                     className: "font-size-sm font-w600 mb-3"
                 }, l.a.createElement("span", {
                     className: "font-w700"
@@ -30984,7 +30987,9 @@
                 }, {
                     used: Object(p["b"])(d.u + d.d),
                     total: Object(p["b"])(d.transfer_enable)
-                })),l.a.createElement("span",{
+                })),
+                l.a.createElement("br"),
+                l.a.createElement("span",{
                     className: "font-w700"
                 },"  "), l.a.createElement("span", {
                     className: "font-w700"
@@ -32051,7 +32056,7 @@
                         }, e.title), s.a.createElement("small", null, Object(l["formatMessage"])({
                             id: "\u6700\u540e\u66f4\u65b0: {date}"
                         }, {
-                            date: p()(1e3 * e.updated_at).format("YYYY/MM/DD")
+                            date: p()(1e3 * e.updated_at).format("DD/MM/YYYY")
                         }))))
                     }
                     )))))
@@ -36304,7 +36309,7 @@
                                     }
                                     return e.abrupt("return");
                                 case 10:
-                                    return r["a"].success("\u5df2\u751f\u6210"),
+                                    return r["a"].success("Đã tạo"),
                                     e.next = 13,
                                     n({
                                         type: "fetch"
@@ -39149,7 +39154,7 @@
                                     }
                                     return n.abrupt("return");
                                 case 17:
-                                    return r["a"].success("\u53d1\u9001\u6210\u529f"),
+                                    return r["a"].success("Đã gửi thành công"),
                                     n.next = 20,
                                     c({
                                         type: "setState",
@@ -44750,7 +44755,7 @@
                                     }
                                     return n.abrupt("return");
                                 case 11:
-                                    r["a"].success("\u4fee\u6539\u6210\u529f\uff0c\u8bf7\u91cd\u65b0\u767b\u9646"),
+                                    r["a"].success("Sửa đổi thành công, vui lòng đăng nhập lại"),
                                     c.a.push("/login");
                                 case 13:
                                 case "end":
@@ -44801,20 +44806,20 @@
                                         type: "user/getUserInfo"
                                     });
                                 case 13:
-                                    r["a"].success("\u5151\u6362\u6210\u529f: " + (() => {
+                                    r["a"].success("Đổi thành công: " + (() => {
                                         switch (u.type) {
                                             case 1:
-                                                return "\u8d26\u6237\u4f59\u989d " + (u.value / 100).toFixed(2);
+                                                return "Số dư tài khoản " + (u.value / 100).toLocaleString();
                                             case 2:
-                                                return "\u8ba2\u9605\u65f6\u957f " + u.value + " \u5929";
+                                                return "Thời hạn gói tăng " + u.value + " ngày";
                                             case 3:
-                                                return "\u5957\u9910\u6d41\u91cf " + u.value + " GB";
+                                                return "Dung lượng gói cước " + u.value + " GB";
                                             case 4:
-                                                return "\u6d41\u91cf\u5df2\u91cd\u7f6e";
+                                                return "Dung lượng đã được đặt lại";
                                             case 5:
-                                                return "\u8ba2\u9605\u5957\u9910 " + u.value + " \u5929";
+                                                return "Gói thuê bao " + u.value + " ngày";
                                             default:
-                                                return "\u672a\u77e5\u7c7b\u578b";
+                                                return "Không rõ loại";
                                         }
                                     })());
                                 case "end":
@@ -44857,7 +44862,7 @@
                                     }
                                     return e.abrupt("return");
                                 case 10:
-                                    r["a"].success("\u91cd\u7f6e\u6210\u529f");
+                                    r["a"].success("Đặt lại thành công");
                                 case 11:
                                 case "end":
                                     return e.stop()
@@ -50403,7 +50408,7 @@
                     key: "created_at",
                     align: "right",
                     render: e=>{
-                        return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return b()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }]
                   , k = [{
@@ -50413,7 +50418,7 @@
                     dataIndex: "created_at",
                     key: "created_at",
                     render: e=>{
-                        return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return b()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: Object(w["formatMessage"])({
@@ -50452,7 +50457,7 @@
                     id: "\u6211\u7684\u9080\u8bf7"
                 })), d.a.createElement("p", {
                     className: "display-4 text-black font-w300 mb-2"
-                }, void 0 !== E.commission_balance ? (parseInt(E.commission_balance) / 100).toFixed(2) : "--.--", d.a.createElement("span", {
+                }, void 0 !== E.commission_balance ? (parseInt(E.commission_balance) / 100).toLocaleString() : "--.--", d.a.createElement("span", {
                     className: "font-size-h5 text-muted ml-4"
                 }, g.currency)), d.a.createElement("span", {
                     className: "text-muted",
@@ -52841,7 +52846,7 @@
                     dataIndex: "created_at",
                     key: "created_at",
                     render: e=>{
-                        return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return b()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: Object(w["formatMessage"])({
@@ -52850,7 +52855,7 @@
                     dataIndex: "updated_at",
                     key: "updated_at",
                     render: e=>{
-                        return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return b()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: Object(w["formatMessage"])({
@@ -59559,7 +59564,7 @@
                     dataIndex: "created_at",
                     key: "created_at",
                     render: e=>{
-                        return z()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                        return z()(1e3 * e).format("DD/MM/YYYY HH:mm")
                     }
                 }, {
                     title: Object(B["formatMessage"])({

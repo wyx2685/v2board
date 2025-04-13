@@ -42,14 +42,14 @@ class V2boardUpdate extends Command
         DB::connection()->getPdo();
         $file = \File::get(base_path() . '/database/update.sql');
         if (!$file) {
-            abort(500, '数据库文件不存在');
+            abort(500, 'Tệp cơ sở dữ liệu không tồn tại');
         }
         $sql = str_replace("\n", "", $file);
         $sql = preg_split("/;/", $sql);
         if (!is_array($sql)) {
-            abort(500, '数据库文件格式有误');
+            abort(500, 'Định dạng tệp cơ sở dữ liệu không đúng');
         }
-        $this->info('正在导入数据库请稍等...');
+        $this->info('Đang nhập cơ sở dữ liệu, vui lòng đợi...');
         foreach ($sql as $item) {
             if (!$item) continue;
             try {
@@ -58,6 +58,6 @@ class V2boardUpdate extends Command
             }
         }
         \Artisan::call('horizon:terminate');
-        $this->info('更新完毕，队列服务已重启，你无需进行任何操作。');
+        $this->info('Quá trình cập nhật đã hoàn tất và dịch vụ hàng đợi đã được khởi động lại. Bạn không cần phải làm gì cả.');
     }
 }
