@@ -70668,6 +70668,7 @@
           , _ = n.n(x)
           , E = n("/MKj")
           , S = n("mCd/")
+          , Q = n("qrc/")
           , k = n("CgOb")
           , C = n("yiO6")
           , O = n("hVla")
@@ -70941,16 +70942,35 @@
                                 onContextMenu: e=>{
                                     e.stopPropagation()
                                 }
-                            }, g.a.createElement(S["a"], {
+                            }, 
+                            
+                            g.a.createElement(S["a"], {
                                 email: t.email,
                                 key: t.email
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "plus"
-                            }), " Gán đơn hàng"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " Gán đơn hàng"))), 
+                            
+                            
+                            g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>Object(L["a"])(t.subscribe_url)
                             }, g.a.createElement(u["a"], {
                                 type: "copy"
-                            }), " Sao chép URL đăng ký")), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " Sao chép URL đăng ký")),
+
+                            g.a.createElement(c["a"].Item, {
+                                onContextMenu: e=>{
+                                    e.stopPropagation()
+                                }
+                            }, g.a.createElement(Q["a"], {
+                                uid: t.id,
+                                qrUrl: t.subscribe_url
+                            }, g.a.createElement("a", null, g.a.createElement(u["a"], {
+                                type: "qrcode"
+                            }), " Lấy QR code"))),
+
+                            
+                            g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>this.resetSecret(t)
                             }, g.a.createElement(u["a"], {
                                 type: "reload"
@@ -70971,7 +70991,9 @@
                                 key: null === t || void 0 === t ? void 0 : t.email
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "solution"
-                            }), " Lịch sử dung lượng"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " Lịch sử dung lượng"))), 
+                            
+                            g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>this.delUser(t)
                             }, g.a.createElement(u["a"], {
                                 type: "delete"
@@ -84867,6 +84889,75 @@
         }
         )(d)
     },
+    "qrc/": function(e, t, n) {
+        "use strict";
+        n("2qtc");
+        var r = n("kLXV"),
+            i = (n("OaEy"), n("2fM7")),
+            o = (n("5NDa"), n("5rEg")),
+            a = (n("Pwec"), n("CtXQ")),
+            s = n("p0pE"),
+            l = n.n(s),
+            c = n("q1tI"),
+            u = n.n(c),
+            h = n("/MKj");
+
+        class d extends u.a.Component {
+            constructor(e) {
+                super(e),
+                this.state = {
+                    visible: !1
+                };
+            }
+
+            show() {
+                this.setState({
+                    visible: !this.state.visible
+                });
+            }
+
+            render() {
+                var e = this.state,
+                    t = e.visible,
+                    z = this.props.uid,
+                    n = this.props.qrUrl;
+
+                return u.a.createElement(u.a.Fragment, null,
+                    u.a.cloneElement(this.props.children, {
+                        onClick: () => this.show()
+                    }),
+                    u.a.createElement(r["a"], {
+                        title: "QR VPN ID: " + z,
+                        visible: t,
+                        onCancel: () => this.show(),
+                        footer: [
+                            u.a.createElement("button", {
+                                key: "cancel",
+                                onClick: () => this.show(),
+                                className: "ant-btn"
+                            }, "Đóng")
+                        ]
+                    }, n ? u.a.createElement("div", {
+                        style: { textAlign: "center" }
+                    }, u.a.createElement("img", {
+                        src: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+ n,
+                        alt: "QR Code",
+                        style: { maxWidth: "100%", height: "auto" }
+                    })) : u.a.createElement("p", null, "Không có mã QR để hiển thị."))
+                );
+            }
+        }
+
+        t["a"] = Object(h["c"])(e => {
+            var t = e.plan,
+                n = e.order;
+            return {
+                plan: t,
+                order: n
+            };
+        })(d);
+    },
+
     mFDi: function(e, t, n) {
         "use strict";
         var r = n("Fofx")
