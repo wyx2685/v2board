@@ -15948,7 +15948,7 @@
                     title: l.a.createElement("input", {
                         className: "form-control",
                         placeholder: Object(m["formatMessage"])({
-                            id: "\u8bf7\u8f93\u5165\u5145\u503c\u91d1\u989d" + e.props.comm.config.currency
+                            id: "\u8bf7\u8f93\u5165\u5145\u503c\u91d1\u989d" + (e?.props?.comm?.config?.currency || "")
                         }),
                         onChange: function(event) {
                             e.deposit_amount = event.target.value * 100;
@@ -16006,7 +16006,7 @@
                     id: "\u6211\u7684\u94b1\u5305(\u4ec5\u6d88\u8d39)"
                 })), l.a.createElement("p", {
                     className: "display-4 text-black font-w300 mb-2"
-                }, void 0 !== t.balance ? (parseInt(t.balance) / 100).toFixed(2) : "--.--", l.a.createElement("span", {
+                }, void 0 !== t.balance ? (parseInt(t.balance) / 100).toLocaleString() : "--.--", l.a.createElement("span", {
                     className: "font-size-h5 text-muted ml-4"
                 }, r.currency)), l.a.createElement("span", {
                     className: "text-muted",
@@ -17882,7 +17882,7 @@
                             className: "py-2"
                         }, a.a.createElement("p", {
                             className: "h1 mb-2"
-                        }, t.currency_symbol, " ", (n.price / 100).toFixed(2)), a.a.createElement("p", {
+                        },  (n.price / 100).toLocaleString()," ",t.currency_symbol), a.a.createElement("p", {
                             className: "h6 text-muted"
                         }, n.tag))), a.a.createElement("div", {
                             className: "block-content py-3"
@@ -18928,15 +18928,15 @@
                     id: "\u8ba2\u5355\u53f7"
                 }), "\uff1a"), f.a.createElement("span", null, t.trade_no)), t.discount_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u4f18\u60e0\u91d1\u989d"
-                }), "\uff1a"), f.a.createElement("span", null, (t.discount_amount / 100).toFixed(2))) : "", t.surplus_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
+                }), "\uff1a"), f.a.createElement("span", null, (t.discount_amount / 100).toLocaleString()," ",g.currency_symbol)) : "", t.surplus_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u65e7\u8ba2\u9605\u6298\u62b5\u91d1\u989d"
-                }), "\uff1a"), f.a.createElement("span", null, (t.surplus_amount / 100).toFixed(2))) : "", t.refund_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
+                }), "\uff1a"), f.a.createElement("span", null, (t.surplus_amount / 100).toLocaleString()," ",g.currency_symbol)) : "", t.refund_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u9000\u6b3e\u91d1\u989d"
-                }), "\uff1a"), f.a.createElement("span", null, (t.refund_amount / 100).toFixed(2))) : "", t.balance_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
+                }), "\uff1a"), f.a.createElement("span", null, (t.refund_amount / 100).toLocaleString()," ",g.currency_symbol)) : "", t.balance_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u4f59\u989d\u652f\u4ed8"
-                }), "\uff1a"), f.a.createElement("span", null, (t.balance_amount / 100).toFixed(2))) : "", t.pre_handling_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
+                }), "\uff1a"), f.a.createElement("span", null, (t.balance_amount / 100).toLocaleString()," ",g.currency_symbol)) : "", t.pre_handling_amount ? f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u652f\u4ed8\u624b\u7eed\u8d39"
-                }), "\uff1a"), f.a.createElement("span", null, (t.pre_handling_amount / 100).toFixed(2))) : "", f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
+                }), "\uff1a"), f.a.createElement("span", null, (t.pre_handling_amount / 100).toLocaleString()," ",g.currency_symbol)) : "", f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u521b\u5efa\u65f6\u95f4"
                 }), "\uff1a"), f.a.createElement("span", null, x()(1e3 * t.created_at).format("YYYY-MM-DD HH:mm:ss")))))), 0 === t.status && f.a.createElement(f.a.Fragment, null, f.a.createElement("div", {
                     className: "block block-rounded js-appear-enabled"
@@ -19010,13 +19010,13 @@
                     id: "\u5145\u503c\u5956\u52b1"
                 }), f.a.createElement("div", {
                     className: "text-right"
-                }, g.currency_symbol, (t.bounus / 100).toFixed(2)))), t.plan.id == 0 && f.a.createElement("div", null, f.a.createElement("div", {
+                },  (t.bounus / 100).toLocaleString()," ",g.currency_symbol))), t.plan.id == 0 && f.a.createElement("div", null, f.a.createElement("div", {
                     className: "pt-3"
                 }, Object(b["formatMessage"])({
                     id: "\u5b9e\u9645\u5230\u8d26"
                 }),f.a.createElement("div", {
                     className: "text-right"
-                }, g.currency_symbol, (t.get_amount / 100).toFixed(2))), f.a.createElement("div", {
+                }, (t.get_amount / 100).toLocaleString()," ",g.currency_symbol)), f.a.createElement("div", {
                     className: "row no-gutters py-3",
                     style: {
                         borderBottom: "1px solid #646669"
@@ -19030,7 +19030,7 @@
                     className: "col-8"
                 }, t.plan.name, " x ", h["a"].periodText[t.period] && h["a"].periodText[t.period]()), f.a.createElement("div", {
                     className: "col-4 text-right"
-                }, g.currency_symbol, (t.plan[t.period] / 100).toFixed(2))), t.discount_amount ? f.a.createElement("div", null, f.a.createElement("div", {
+                },  (t.plan[t.period] / 100).toLocaleString()," ",g.currency_symbol)), t.discount_amount ? f.a.createElement("div", null, f.a.createElement("div", {
                     className: "pt-3",
                     style: {
                         color: "#646669"
@@ -19046,7 +19046,7 @@
                     className: "col-8"
                 }), f.a.createElement("div", {
                     className: "col-4 text-right"
-                }, g.currency_symbol, (t.discount_amount / 100).toFixed(2)))) : "", t.surplus_amount ? f.a.createElement("div", null, f.a.createElement("div", {
+                }, (t.discount_amount / 100).toLocaleString()," ",g.currency_symbol))) : "", t.surplus_amount ? f.a.createElement("div", null, f.a.createElement("div", {
                     className: "pt-3",
                     style: {
                         color: "#646669"
@@ -19062,7 +19062,7 @@
                     className: "col-8"
                 }), f.a.createElement("div", {
                     className: "col-4 text-right"
-                }, g.currency_symbol, (t.surplus_amount / 100).toFixed(2)))) : "", t.refund_amount ? f.a.createElement("div", null, f.a.createElement("div", {
+                },  (t.surplus_amount / 100).toLocaleString()," ",g.currency_symbol))) : "", t.refund_amount ? f.a.createElement("div", null, f.a.createElement("div", {
                     className: "pt-3",
                     style: {
                         color: "#646669"
@@ -19078,7 +19078,7 @@
                     className: "col-8"
                 }), f.a.createElement("div", {
                     className: "col-4 text-right"
-                }, "- ", g.currency_symbol, (t.refund_amount / 100).toFixed(2)))) : "", t.pre_handling_amount ? f.a.createElement("div", null, f.a.createElement("div", {
+                }, "- ",  (t.refund_amount / 100).toLocaleString()," ",g.currency_symbol))) : "", t.pre_handling_amount ? f.a.createElement("div", null, f.a.createElement("div", {
                     className: "pt-3",
                     style: {
                         color: "#646669"
@@ -19094,7 +19094,7 @@
                     className: "col-8"
                 }), f.a.createElement("div", {
                     className: "col-4 text-right"
-                }, "+ ", (t.pre_handling_amount / 100).toFixed(2)))) : "", f.a.createElement("div", {
+                }, "+ ", (t.pre_handling_amount / 100).toLocaleString()))) : "", f.a.createElement("div", {
                     className: "pt-3",
                     style: {
                         color: "#646669"
@@ -19103,7 +19103,7 @@
                     id: "\u603b\u8ba1"
                 })), f.a.createElement("h1", {
                     className: "text-light mt-3 mb-3"
-                }, g.currency_symbol, " ", ((t.total_amount + (t.pre_handling_amount || 0)) / 100).toFixed(2), " ", g.currency), f.a.createElement("button", {
+                }, ((t.total_amount + (t.pre_handling_amount || 0)) / 100).toLocaleString(), " ", g.currency_symbol), f.a.createElement("button", {
                     type: "button",
                     className: "btn btn-block btn-primary",
                     disabled: d || "StripeCredit" === E.payment && !w.token,
@@ -32819,7 +32819,7 @@
                   , o = r[n];
                 return e.name && (o -= this.couponProcess(o, e.type, e.value)),
                 o <= 0 && (o = 0),
-                (o / 100).toFixed(2)
+                (o / 100).toLocaleString()
             }
             getCouponJSX() {
                 var e = this.props.coupon.coupon
@@ -32844,7 +32844,7 @@
                         className: "col-8"
                     }, e.name), f.a.createElement("div", {
                         className: "col-4 text-right"
-                    }, "-", o.currency_symbol, (this.couponProcess(r[n], e.type, e.value) / 100).toFixed(2))))
+                    }, "-",  (this.couponProcess(r[n], e.type, e.value) / 100).toLocaleString()," ",o.currency_symbol)))
             }
             render() {
                 var e = this.props.plan
@@ -32948,7 +32948,7 @@
                             }
                         }, f.a.createElement("span", {
                             className: "price"
-                        }, d.currency_symbol, (t[e] / 100).toFixed(2)))) : void 0
+                        },  (t[e] / 100).toLocaleString()," ", d.currency_symbol))) : void 0
                 }
                 )))), f.a.createElement("div", {
                     className: "col-md-4 col-sm-12"
@@ -32995,7 +32995,7 @@
                     className: "col-8"
                 }, t.name, " x ", h["a"].periodText[n] && h["a"].periodText[n]()), f.a.createElement("div", {
                     className: "col-4 text-right"
-                }, d.currency_symbol, (t[n] / 100).toFixed(2))), this.getCouponJSX(), f.a.createElement("div", {
+                },  (t[n] / 100).toLocaleString()," ", d.currency_symbol)), this.getCouponJSX(), f.a.createElement("div", {
                     className: "pt-3",
                     style: {
                         color: "#646669"
@@ -33004,7 +33004,7 @@
                     id: "\u603b\u8ba1"
                 })), f.a.createElement("h1", {
                     className: "text-light mt-3 mb-3"
-                }, d.currency_symbol, " ", this.getTotalAmount(), " ", d.currency), f.a.createElement("button", {
+                },  this.getTotalAmount(), " ", d.currency_symbol), f.a.createElement("button", {
                     type: "button",
                     className: "btn btn-block btn-primary",
                     disabled: l,
@@ -59538,7 +59538,7 @@
                     key: "total_amount",
                     align: "right",
                     render: e=>{
-                        return (e / 100).toFixed(2)
+                        return (e / 100).toLocaleString()
                     }
                 }, {
                     title: Object(B["formatMessage"])({

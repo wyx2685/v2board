@@ -1,12 +1,12 @@
 window.settings.i18n['vi-VN'] = {
   '请求失败': 'Yêu Cầu Thất Bại',
-  '月付': 'Tháng',
-  '季付': 'Hàng Quý',
+  '月付': '1 Tháng',
+  '季付': '3 Tháng',
   '半年付': '6 Tháng',
-  '年付': 'Năm',
-  '两年付': 'Hai Năm',
-  '三年付': 'Ba Năm',
-  '一次性': 'Dài Hạn',
+  '年付': '1 Năm',
+  '两年付': '2 Năm',
+  '三年付': '3 Năm',
+  '一次性': 'Vĩnh Viễn',
   '流量重置包': 'Cập Nhật Dung Lượng',
   '待支付': 'Đợi Thanh Toán',
   '开通中': 'Đang xử lý',
@@ -282,5 +282,6 @@ window.settings.i18n['vi-VN'] = {
   '当前剩余佣金': 'Hoa hồng hiện tại còn lại',
   '三级分销比例': 'Tỷ lệ phân phối ba cấp',
   '累计获得佣金': 'Hoa hồng tích lũy kiếm được',
-  '您邀请的用户再次邀请用户将按照订单金额乘以分销等级的比例进行分成。': 'Người dùng mà bạn mời tiếp tục mời sẽ được chia theo số tiền đặt hàng nhân với cấp độ phân phối.'
+  '您邀请的用户再次邀请用户将按照订单金额乘以分销等级的比例进行分成。': 'Người dùng mà bạn mời tiếp tục mời sẽ được chia theo số tiền đặt hàng nhân với cấp độ phân phối.',
+  '请输入充值金额': 'Nhập số tiền cần nạp (đơn vị VNĐ)'
 };
