@@ -36,7 +36,7 @@ class ClientController extends Controller
                         }
                     }
                 }
-                if (!strpos($flag, 'hiddify')) {
+                if (strpos($flag, 'sing') !== false) {
                     $version = null;
                     if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
                         $version = $matches[1];
@@ -46,9 +46,6 @@ class ClientController extends Controller
                     } else {
                         $class = new SingboxOld($user, $servers);
                     }
-                    return $class->handle();
-                } else {
-                    $class = new ClashMeta($user, $servers);
                     return $class->handle();
                 }
             }

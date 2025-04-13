@@ -1042,7 +1042,7 @@
                     href: "hiddify://import/" + e + "&flag=sing" + "#" + window.settings.title
                 }), t.push({
                     title: "Sing-box",
-                    href: "sing-box://import-remote-profile?url=" + encodeURIComponent(e + "&flag=sing-box") + "#" + window.settings.title
+                    href: "sing-box://import-remote-profile?url=" + encodeURIComponent(e) + "#" + window.settings.title
                 }), (Object(u["i"])() || Object(u["j"])()) && (t.push({
                     title: "Shadowrocket",
                     href: "shadowrocket://add/sub://" + window.btoa(e + "&flag=shadowrocket").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "") + "?remark=" + window.settings.title
