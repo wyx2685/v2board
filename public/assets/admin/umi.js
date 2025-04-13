@@ -70869,9 +70869,7 @@
                     dataIndex: "transfer_enable",
                     key: "transfer_enable",
                     sorter: !0,
-                    render: (e,t)=>{
-                        return e
-                    }
+                    render: (e, t) => Math.floor(e),
                 }, {
                     title: "Limit thiết bị",
                     dataIndex: "device_limit",
