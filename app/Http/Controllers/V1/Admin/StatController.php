@@ -70,22 +70,22 @@ class StatController extends Controller
         foreach ($statistics as $statistic) {
             $date = date('m-d', $statistic['record_at']);
             $result[] = [
-                'type' => '收款金额',
+                'type' => 'Tiền thanh toán',
                 'date' => $date,
                 'value' => $statistic['paid_total'] / 100
             ];
             $result[] = [
-                'type' => '收款笔数',
+                'type' => 'Tiền nhận được',
                 'date' => $date,
                 'value' => $statistic['paid_count']
             ];
             $result[] = [
-                'type' => '佣金金额(已发放)',
+                'type' => 'Tiền hoa hồng',
                 'date' => $date,
                 'value' => $statistic['commission_total'] / 100
             ];
             $result[] = [
-                'type' => '佣金笔数(已发放)',
+                'type' => 'Đơn hoa hồng',
                 'date' => $date,
                 'value' => $statistic['commission_count']
             ];
@@ -128,7 +128,7 @@ class StatController extends Controller
                     $statistics[$k]['server_name'] = $server['name'];
                 }
             }
-            $statistics[$k]['total'] = $statistics[$k]['total'] / 1073741824;
+            $statistics[$k]['total'] = round($statistics[$k]['total'] / 1073741824, 2);
         }
         array_multisort(array_column($statistics, 'total'), SORT_DESC, $statistics);
         return [
@@ -168,7 +168,7 @@ class StatController extends Controller
                     $statistics[$k]['server_name'] = $server['name'];
                 }
             }
-            $statistics[$k]['total'] = $statistics[$k]['total'] / 1073741824;
+            $statistics[$k]['total'] = round($statistics[$k]['total'] / 1073741824, 2);
         }
         array_multisort(array_column($statistics, 'total'), SORT_DESC, $statistics);
         return [
@@ -200,10 +200,10 @@ class StatController extends Controller
             $id = $statistics[$k]['user_id'];
             $user = User::where('id', $id)->first();
             $statistics[$k]['email'] = empty($user) ? "null" : $user['email'];
-            $statistics[$k]['total'] = $statistics[$k]['total'] * $statistics[$k]['server_rate'] / 1073741824;
+            $statistics[$k]['total'] = round($statistics[$k]['total'] * $statistics[$k]['server_rate'] / 1073741824, 2);
             if (isset($idIndexMap[$id])) {
                 $index = $idIndexMap[$id];
-                $data[$index]['total'] += $statistics[$k]['total'];
+                $data[$index]['total'] = round($data[$index]['total'] + $statistics[$k]['total'], 2);
             } else {
                 unset($statistics[$k]['server_rate']);
                 $data[] = $statistics[$k];
@@ -240,11 +240,11 @@ class StatController extends Controller
             $id = $statistics[$k]['user_id'];
             $user = User::where('id', $id)->first();
             $statistics[$k]['email'] = empty($user) ? "null" : $user['email'];
-            $statistics[$k]['total'] = $statistics[$k]['total'] * $statistics[$k]['server_rate'] / 1073741824;
+            $statistics[$k]['total'] = round($statistics[$k]['total'] * $statistics[$k]['server_rate'] / 1073741824, 2);
             if (isset($idIndexMap[$id])) {
                 
                 $index = $idIndexMap[$id];
-                $data[$index]['total'] += $statistics[$k]['total'];
+                $data[$index]['total'] = round($data[$index]['total'] + $statistics[$k]['total'], 2);
             } else {
                 unset($statistics[$k]['server_rate']);
                 $data[] = $statistics[$k];

@@ -98919,7 +98919,7 @@
                 3: "iOS",
                 4: "Android",
                 5: "Linux",
-                6: "\u8def\u7531\u5668"
+                6: "Bộ định tuyến"
             },
             tutorialCategoryIcon: {
                 1: "fab fa-2x fa-windows",
@@ -98930,27 +98930,27 @@
                 6: "fa fa-2x fa-wifi"
             },
             orderStatusText: {
-                0: "\u5f85\u652f\u4ed8",
-                1: "\u5f00\u901a\u4e2d",
+                0: "Chờ thanh toán",
+                1: "Đang xử lý",
                 2: "Đã hủy",
                 3: "Đã hoàn thành",
-                4: "\u5df2\u6298\u62b5"
+                4: "Đã giảm giá"
             },
             commissionStatusText: {
-                0: "\u5f85\u786e\u8ba4",
-                1: "\u53d1\u653e\u4e2d",
-                2: "\u5df2\u53d1\u653e",
-                3: "\u5df2\u9a73\u56de"
+                0: "Chờ xác nhận",
+                1: "Đang phát hành",
+                2: "Đã phát hành",
+                3: "Đã thu hồi"
             },
             ticketStatusText: {
-                0: "\u5f00\u542f",
-                1: "\u5f85\u56de\u590d",
-                2: "\u5f85\u7b54\u590d",
+                0: "Đã mở",
+                1: "Chờ phản hồi",
+                2: "Chờ trả lời",
                 3: "Đóng"
             },
             routeActionText: {
-                block: "\u7981\u6b62\u8bbf\u95ee",
-                dns: "\u6307\u5b9aDNS\u670d\u52a1\u5668\u8fdb\u884c\u89e3\u6790"
+                block: "Chặn truy cập",
+                dns: "Chỉ định máy chủ DNS để phân giải"
             }
         }
     },

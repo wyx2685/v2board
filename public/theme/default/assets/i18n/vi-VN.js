@@ -284,5 +284,7 @@ window.settings.i18n['vi-VN'] = {
   '累计获得佣金': 'Hoa hồng tích lũy kiếm được',
   '您邀请的用户再次邀请用户将按照订单金额乘以分销等级的比例进行分成。': 'Người dùng mà bạn mời tiếp tục mời sẽ được chia theo số tiền đặt hàng nhân với cấp độ phân phối.',
   '请输入充值金额': 'Nhập số tiền cần nạp (đơn vị VNĐ)',
-  '人': 'Người'
+  '人': 'Người',
+  '充值奖励':'Thưởng nạp tiền',
+  '实际到账':'Số tiền thực nhận'
 };

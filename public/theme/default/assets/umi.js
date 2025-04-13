@@ -18872,7 +18872,8 @@
                     className: "v2board-order-info"
                 }, t.plan.id == 0 ? (f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u4ea7\u54c1\u540d\u79f0"
-                }), "\uff1a"), f.a.createElement("span", null, "\u5145\u503c"))) : (f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
+                }), "\uff1a"), f.a.createElement("span", null, Object(b["formatMessage"])({
+                    id:"\u5145\u503c" })))) : (f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u4ea7\u54c1\u540d\u79f0"
                 }), "\uff1a"), f.a.createElement("span", null, t.plan.name)), f.a.createElement("div", null, f.a.createElement("span", null, Object(b["formatMessage"])({
                     id: "\u7c7b\u578b/\u5468\u671f"
