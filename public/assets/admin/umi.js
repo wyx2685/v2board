@@ -32768,31 +32768,31 @@
     L9pr: function(e, t, n) {
         "use strict";
         t["a"] = {
-            today: "\u4eca\u5929",
-            now: "\u6b64\u523b",
-            backToToday: "\u8fd4\u56de\u4eca\u5929",
+            today: "Hôm nay",
+            now: "Bây giờ",
+            backToToday: "Quay lại hôm nay",
             ok: "Chắc chắn",
-            timeSelect: "\u9009\u62e9\u65f6\u95f4",
-            dateSelect: "\u9009\u62e9\u65e5\u671f",
-            weekSelect: "\u9009\u62e9\u5468",
-            clear: "\u6e05\u9664",
-            month: "\u6708",
-            year: "\u5e74",
-            previousMonth: "\u4e0a\u4e2a\u6708 (\u7ffb\u9875\u4e0a\u952e)",
-            nextMonth: "\u4e0b\u4e2a\u6708 (\u7ffb\u9875\u4e0b\u952e)",
-            monthSelect: "\u9009\u62e9\u6708\u4efd",
-            yearSelect: "\u9009\u62e9\u5e74\u4efd",
-            decadeSelect: "\u9009\u62e9\u5e74\u4ee3",
-            yearFormat: "YYYY\u5e74",
-            dayFormat: "D\u65e5",
-            dateFormat: "YYYY\u5e74M\u6708D\u65e5",
-            dateTimeFormat: "YYYY\u5e74M\u6708D\u65e5 HH\u65f6mm\u5206ss\u79d2",
-            previousYear: "\u4e0a\u4e00\u5e74 (Control\u952e\u52a0\u5de6\u65b9\u5411\u952e)",
-            nextYear: "\u4e0b\u4e00\u5e74 (Control\u952e\u52a0\u53f3\u65b9\u5411\u952e)",
-            previousDecade: "\u4e0a\u4e00\u5e74\u4ee3",
-            nextDecade: "\u4e0b\u4e00\u5e74\u4ee3",
-            previousCentury: "\u4e0a\u4e00\u4e16\u7eaa",
-            nextCentury: "\u4e0b\u4e00\u4e16\u7eaa"
+            timeSelect: "Chọn thời gian",
+            dateSelect: "Chọn ngày",
+            weekSelect: "Chọn tuần",
+            clear: "Xóa",
+            month: "Tháng",
+            year: "Năm",
+            previousMonth: "Tháng trước (phím mũi tên trái)",
+            nextMonth: "Tháng sau (phím mũi tên phải)",
+            monthSelect: "Chọn tháng",
+            yearSelect: "Chọn năm",
+            decadeSelect: "Chọn thập kỷ",
+            yearFormat: "YYYY",
+            dayFormat: "D",
+            dateFormat: "D M YYYY",
+            dateTimeFormat: "D M YYYY HH:mm:ss",
+            previousYear: "Năm trước (Control + mũi tên trái)",
+            nextYear: "Năm sau (Control + mũi tên phải)",
+            previousDecade: "Thập kỷ trước",
+            nextDecade: "Thập kỷ sau",
+            previousCentury: "Thế kỷ trước",
+            nextCentury: "Thế kỷ sau"
         }
     },
     LIAx: function(e, t, n) {
@@ -41440,7 +41440,7 @@
                     className: "text-dark"
                 }, window.settings.title || "V2Board")), a.a.createElement("p", {
                     className: "font-size-sm text-muted mb-3"
-                }, "\u767b\u5f55\u5230\u7ba1\u7406\u4e2d\u5fc3")), a.a.createElement("div", {
+                }, "Đăng nhập vào trang Admin")), a.a.createElement("div", {
                     className: "form-group"
                 }, a.a.createElement("input", {
                     type: "text",
@@ -41465,19 +41465,24 @@
                     type: "loading"
                 }) : a.a.createElement("span", null, a.a.createElement("i", {
                     className: "si si-login mr-1"
-                }), "\u767b\u5165")))))), a.a.createElement("div", {
+                }), "Đăng Nhập")))))), a.a.createElement("div", {
                     className: "text-center bg-gray-lighter p-3 px-4"
                 }, a.a.createElement("a", {
                     onClick: ()=>{
                         r["a"].info({
-                            title: "\u5fd8\u8bb0\u5bc6\u7801",
-                            content: a.a.createElement("div", null, a.a.createElement("div", null, "\u5728\u7ad9\u70b9\u76ee\u5f55\u4e0b\u6267\u884c\u547d\u4ee4\u627e\u56de\u5bc6\u7801"), a.a.createElement("code", null, "php artisan reset:password \u7ba1\u7406\u5458\u90ae\u7bb1")),
+                            title: "Quên mật khẩu",
+                            content: a.a.createElement(
+                                "div",
+                                null,
+                                a.a.createElement("div", null, "Thực thi lệnh trong thư mục gốc của site để khôi phục mật khẩu"),
+                                a.a.createElement("code", null, "php artisan reset:password email quản trị viên")
+                            ),
                             centered: !0,
-                            okText: "\u6211\u77e5\u9053\u4e86",
+                            okText: "Tôi biết rồi",
                             onOk() {}
                         })
                     }
-                }, "\u5fd8\u8bb0\u5bc6\u7801"))))))))
+                }, "Quên mật khẩu"))))))))
             }
         }
         t["default"] = Object(s["c"])(e=>{
@@ -71031,7 +71036,7 @@
                     keys: [{
                         key: "email",
                         title: "Email",
-                        condition: ["\u6a21\u7cca"]
+                        condition: ["Gần đúng"]
                     }, {
                         key: "id",
                         title: "User ID",
@@ -71083,7 +71088,7 @@
                     }, {
                         key: "invite_by_email",
                         title: "Email người mời",
-                        condition: ["\u6a21\u7cca"]
+                        condition: ["Gần đúng"]
                     }, {
                         key: "invite_user_id",
                         title: "ID người mời",
@@ -71091,7 +71096,7 @@
                     }, {
                         key: "remarks",
                         title: "Ghi chú",
-                        condition: ["\u6a21\u7cca"]
+                        condition: ["Gần đúng"]
                     }, {
                         key: "is_admin",
                         title: "Quyền Admin",
@@ -93810,7 +93815,7 @@
                 }, "Email"), g.a.createElement(S["a"], {
                     span: 18
                 }, g.a.createElement("a", {
-                    onClick: ()=>this.jumpUserFilter("email", "\u6a21\u7cca", this.state.user.email),
+                    onClick: ()=>this.jumpUserFilter("email", "Gần đúng", this.state.user.email),
                     href: "javascript:void(0);"
                 }, this.state.user.email))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
@@ -93921,7 +93926,7 @@
                 }, g.a.createElement(f["a"], {
                     title: "Xem những người họ đã mời"
                 }, g.a.createElement("a", {
-                    onClick: ()=>this.jumpUserFilter("invite_by_email", "\u6a21\u7cca", this.state.invite_user.email),
+                    onClick: ()=>this.jumpUserFilter("invite_by_email", "Gần đúng", this.state.invite_user.email),
                     href: "javascript:void(0);"
                 }, this.state.invite_user.email)))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
@@ -94195,7 +94200,7 @@
                     keys: [{
                         key: "trade_no",
                         title: "Trade no",
-                        condition: ["\u6a21\u7cca", "="]
+                        condition: ["Gần đúng", "="]
                     }, {
                         key: "status",
                         title: "Trạng thái",
@@ -94246,7 +94251,7 @@
                     }, {
                         key: "callback_no",
                         title: "Callback No",
-                        condition: ["\u6a21\u7cca"]
+                        condition: ["Gần đúng"]
                     }, {
                         key: "commission_balance",
                         title: "Hoa hồng",

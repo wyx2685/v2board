@@ -38,7 +38,7 @@ class UserController extends Controller
         $filters = $request->input('filter');
         if ($filters) {
             foreach ($filters as $k => $filter) {
-                if ($filter['condition'] === '模糊') {
+                if ($filter['condition'] === 'Gần đúng') {
                     $filter['condition'] = 'like';
                     $filter['value'] = "%{$filter['value']}%";
                 }

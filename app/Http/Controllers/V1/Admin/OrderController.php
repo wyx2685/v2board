@@ -28,7 +28,7 @@ class OrderController extends Controller
                     $builder->where('user_id', $user->id);
                     continue;
                 }
-                if ($filter['condition'] === '模糊') {
+                if ($filter['condition'] === 'Gần đúng') {
                     $filter['condition'] = 'like';
                     $filter['value'] = "%{$filter['value']}%";
                 }
