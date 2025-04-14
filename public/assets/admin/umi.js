@@ -32784,6 +32784,7 @@
             yearSelect: "Chọn năm",
             decadeSelect: "Chọn thập kỷ",
             yearFormat: "YYYY",
+            monthFormat: "M",
             dayFormat: "D",
             dateFormat: "D M YYYY",
             dateTimeFormat: "D M YYYY HH:mm:ss",
