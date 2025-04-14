@@ -5778,7 +5778,7 @@
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "CNY",
+                    placeholder: "VNĐ",
                     defaultValue: t.currency,
                     onChange: e=>this.set("site", "currency", e.target.value)
                 })), f.a.createElement(m, {
@@ -21269,7 +21269,7 @@
                     className: "dropdown-item d-flex justify-content-between align-items-center",
                     href: "javascript:void(0);",
                     onClick: ()=>this.logout()
-                }, "\u767b\u51fa", o.a.createElement("i", {
+                }, "Đăng Xuất", o.a.createElement("i", {
                     className: "fa fa-fw fa-sign-out-alt text-danger ml-1"
                 }))))))), this.props.search && o.a.createElement("div", {
                     className: "overlay-header bg-dark ".concat(this.state.showSearchBar ? "show" : "")
@@ -32784,7 +32784,7 @@
             yearSelect: "Chọn năm",
             decadeSelect: "Chọn thập kỷ",
             yearFormat: "YYYY",
-            monthFormat: "M",
+            monthFormat: "\u0054 M",
             dayFormat: "D",
             dateFormat: "D M YYYY",
             dateTimeFormat: "D M YYYY HH:mm:ss",

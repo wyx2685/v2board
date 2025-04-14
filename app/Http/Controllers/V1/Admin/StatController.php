@@ -75,7 +75,7 @@ class StatController extends Controller
                 'value' => $statistic['paid_total'] / 100
             ];
             $result[] = [
-                'type' => 'Tiền nhận được',
+                'type' => 'Đơn thành công',
                 'date' => $date,
                 'value' => $statistic['paid_count']
             ];
