@@ -70,6 +70,11 @@ class StatController extends Controller
         foreach ($statistics as $statistic) {
             $date = date('m-d', $statistic['record_at']);
             $result[] = [
+                'type' => 'Người đăng ký mới',
+                'date' => $date,
+                'value' => $statistic['register_count']
+            ];
+            $result[] = [
                 'type' => 'Tiền thanh toán',
                 'date' => $date,
                 'value' => $statistic['paid_total'] / 100
@@ -242,7 +247,6 @@ class StatController extends Controller
             $statistics[$k]['email'] = empty($user) ? "null" : $user['email'];
             $statistics[$k]['total'] = round($statistics[$k]['total'] * $statistics[$k]['server_rate'] / 1073741824, 2);
             if (isset($idIndexMap[$id])) {
-                
                 $index = $idIndexMap[$id];
                 $data[$index]['total'] = round($data[$index]['total'] + $statistics[$k]['total'], 2);
             } else {
