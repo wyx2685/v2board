@@ -33,6 +33,9 @@ class StatController extends Controller
                 'month_register_total' => User::where('created_at', '>=', strtotime(date('Y-m-1')))
                     ->where('created_at', '<', time())
                     ->count(),
+                'day_register_total' => User::where('created_at', '>=', strtotime(date('Y-m-d')))
+                    ->where('created_at', '<', time())
+                    ->count(),
                 'ticket_pending_total' => Ticket::where('status', 0)
                     ->where('reply_status', 0)
                     ->count(),
@@ -45,6 +48,10 @@ class StatController extends Controller
                     ->where('created_at', '<', time())
                     ->whereNotIn('status', [0, 2])
                     ->sum('total_amount'),
+                'day_orders_total' => Order::where('created_at', '>=', strtotime(date('Y-m-d')))
+                    ->where('created_at', '<', time())
+                    ->whereNotIn('status', [0, 2])
+                    ->count(),
                 'last_month_income' => Order::where('created_at', '>=', strtotime('-1 month', strtotime(date('Y-m-1'))))
                     ->where('created_at', '<', strtotime(date('Y-m-1')))
                     ->whereNotIn('status', [0, 2])
