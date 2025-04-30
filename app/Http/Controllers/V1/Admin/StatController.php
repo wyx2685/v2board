@@ -34,6 +34,9 @@ class StatController extends Controller
                 'month_register_total' => User::where('created_at', '>=', strtotime(date('Y-m-1')))
                     ->where('created_at', '<', time())
                     ->count(),
+                'day_register_total' => User::where('created_at', '>=', strtotime(date('Y-m-d')))
+                    ->where('created_at', '<', time())
+                    ->count(),
                 'ticket_pending_total' => Ticket::where('status', 0)
                     ->where('reply_status', 0)
                     ->count(),
