@@ -270,6 +270,7 @@ class ClashVerge
             'port' => $server['port'],
             'uuid' => $password,
             'password' => $password,
+            'alpn' => ['h3'],
             'disable-sni' => $server['disable_sni'] ? true : false,
             'reduce-rtt' => $server['zero_rtt_handshake'] ? true : false,
             'udp-relay-mode' => $server['udp_relay_mode'] ?? 'native',

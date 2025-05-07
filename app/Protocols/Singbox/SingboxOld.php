@@ -63,6 +63,10 @@ class SingboxOld
                 $vlessConfig = $this->buildVless($this->user['uuid'], $item);
                 $proxies[] = $vlessConfig;
             }
+            if ($item['type'] === 'tuic') {
+                $tuicConfig = $this->buildTuic($this->user['uuid'], $item);
+                $proxies[] = $tuicConfig;
+            }
             if ($item['type'] === 'hysteria') {
                 $hysteriaConfig = $this->buildHysteria($this->user['uuid'], $item, $this->user);
                 $proxies[] = $hysteriaConfig;
@@ -250,6 +254,32 @@ class SingboxOld
                 $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
             }
         };
+
+        return $array;
+    }
+
+    protected function buildTuic($password, $server)
+    {
+        $array = [];
+        $array['tag'] = $server['name'];
+        $array['type'] = 'tuic';
+        $array['server'] = $server['host'];
+        $array['server_port'] = $server['port'];
+        $array['uuid'] = $password;
+        $array['password'] = $password;
+        $array['congestion_control'] = $server['congestion_control'] ?? 'cubic';
+        $array['udp_relay_mode'] = $server['udp_relay_mode'] ?? 'native';
+        $array['zero_rtt_handshake'] = $server['zero_rtt_handshake'] ? true : false;
+
+        $array['tls'] = [
+            'enabled' => true,
+            'insecure' => $server['insecure'] ? true : false,
+            'alpn' => ['h3'],
+            'disable_sni' => $server['disable_sni'] ? true : false,
+        ];
+        if (isset($server['server_name'])) {
+            $array['tls']['server_name'] = $server['server_name'];
+        }
 
         return $array;
     }

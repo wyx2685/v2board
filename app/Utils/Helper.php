@@ -336,7 +336,7 @@ class Helper
         $name = self::encodeURIComponent($server['name']);
 
         $query = http_build_query($config);
-        return "tuic://{$password}%3A{$password}@{$remote}:{$port}?{$query}#{$name}\r\n";
+        return "tuic://{$password}:{$password}@{$remote}:{$port}?{$query}#{$name}\r\n";
     }
 
     public static function configureNetworkSettings($server, &$config)
