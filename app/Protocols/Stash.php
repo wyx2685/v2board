@@ -2,6 +2,7 @@
 
 namespace App\Protocols;
 
+use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
 class Stash
