@@ -117,7 +117,6 @@ class ClashVerge
         $array['udp'] = true;
         if (isset($server['obfs']) && $server['obfs'] === 'http') {
             $array['plugin'] = 'obfs';
-
             $plugin_opts = [
                 'mode' => 'http'
             ];
@@ -129,7 +128,6 @@ class ClashVerge
             if (isset($server['obfs-path'])) {
                 $plugin_opts['path'] = $server['obfs-path'];
             }
-
             $array['plugin-opts'] = $plugin_opts;
         }
         return $array;
