@@ -115,6 +115,23 @@ class ClashVerge
         $array['cipher'] = $server['cipher'];
         $array['password'] = $password;
         $array['udp'] = true;
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $array['plugin'] = 'obfs';
+
+            $plugin_opts = [
+                'mode' => 'http'
+            ];
+            if (isset($server['obfs-host'])) {
+                $plugin_opts['host'] = $server['obfs-host'];
+            } else {
+                $plugin_opts['host'] = '';
+            }
+            if (isset($server['obfs-path'])) {
+                $plugin_opts['path'] = $server['obfs-path'];
+            }
+
+            $array['plugin-opts'] = $plugin_opts;
+        }
         return $array;
     }
 
