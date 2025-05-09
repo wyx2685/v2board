@@ -110,6 +110,16 @@ class Clash
         $array['cipher'] = $server['cipher'];
         $array['password'] = $uuid;
         $array['udp'] = true;
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $array['plugin'] = 'obfs';
+            $plugin_opts = [
+                'mode' => 'http'
+            ];
+            if (isset($server['obfs-host'])) {
+                $plugin_opts['host'] = $server['obfs-host'];
+            }
+            $array['plugin-opts'] = $plugin_opts;
+        }
         return $array;
     }
 

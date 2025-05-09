@@ -2,6 +2,8 @@
 
 namespace App\Protocols;
 
+use App\Utils\Helper;
+
 
 class QuantumultX
 {
@@ -37,17 +39,38 @@ class QuantumultX
 
     public static function buildShadowsocks($password, $server)
     {
+        if ($server['cipher'] === '2022-blake3-aes-128-gcm') {
+            $serverKey = Helper::getServerKey($server['created_at'], 16);
+            $userKey = Helper::uuidToBase64($password, 16);
+            $password = "{$serverKey}:{$userKey}";
+        } elseif ($server['cipher'] === '2022-blake3-aes-256-gcm') {
+            $serverKey = Helper::getServerKey($server['created_at'], 32);
+            $userKey = Helper::uuidToBase64($password, 32);
+            $password = "{$serverKey}:{$userKey}";
+        }
         $config = [
             "shadowsocks={$server['host']}:{$server['port']}",
             "method={$server['cipher']}",
             "password={$password}",
-            'fast-open=true',
-            'udp-relay=true',
-            "tag={$server['name']}"
         ];
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $config[] = "obfs=http";
+            if (isset($server['obfs-host']) && !empty($server['obfs-host'])) {
+                $config[] = "obfs-host={$server['obfs-host']}";
+            }
+            if (isset($server['obfs-path'])) {
+                $config[] = "obfs-uri={$server['obfs-path']}";
+            }
+        }
+
+        $config[] = 'fast-open=false';
+        $config[] = 'udp-relay=true';
+        $config[] = "tag={$server['name']}";
+
         $config = array_filter($config);
         $uri = implode(',', $config);
         $uri .= "\r\n";
+
         return $uri;
     }
 

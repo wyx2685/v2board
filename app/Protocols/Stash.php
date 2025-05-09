@@ -115,6 +115,16 @@ class Stash
         $array['cipher'] = $server['cipher'];
         $array['password'] = $password;
         $array['udp'] = true;
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $array['plugin'] = 'obfs';
+            $plugin_opts = [
+                'mode' => 'http',
+            ];
+            if (isset($server['obfs-host']) && !empty($server['obfs-host'])) {
+                $plugin_opts['host'] = $server['obfs-host'];
+            }
+            $array['plugin-opts'] = $plugin_opts;
+        }
         return $array;
     }
 
@@ -145,7 +155,6 @@ class Stash
             if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
                 $array['network'] = $tcpSettings['header']['type'];
                 if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['http-opts']['headers']['Host'] = $tcpSettings['header']['request']['headers']['Host'];
-                if (isset($tcpSettings['header']['request']['path'][0])) $array['http-opts']['path'] = $tcpSettings['header']['request']['path'][0];
             }
         }
         if ($server['network'] === 'ws') {

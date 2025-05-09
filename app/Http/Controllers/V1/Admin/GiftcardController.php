@@ -83,11 +83,11 @@ class GiftcardController extends Controller
             DB::rollBack();
             abort(500, $e->getMessage());
         }
-
+        $giftcardvalue = $giftcard['value'] ?? 0;
         $data = "名称,类型,数值,开始时间,结束时间,可用次数,礼品卡卡密,生成时间\r\n";
         foreach ($giftcards as $giftcard) {
             $type = ['', '金额', '时长', '流量', '重置', '套餐'][$giftcard['type']];
-            $value = ['', round($giftcard['value']/100, 2), $giftcard['value'] . '天', $giftcard['value'] . 'GB', '-', $giftcard['value'] . '天'][$giftcard['type']];
+            $value = ['', round($giftcardvalue/100, 2), $giftcardvalue . '天', $giftcardvalue . 'GB', '-', $giftcardvalue . '天'][$giftcard['type']];
             $startTime = date('Y-m-d H:i:s', $giftcard['started_at']);
             $endTime = date('Y-m-d H:i:s', $giftcard['ended_at']);
             $limitUse = $giftcard['limit_use'] ?? '不限制';

@@ -103,7 +103,18 @@ class SingboxOld
         $array['server_port'] = $server['port'];
         $array['method'] = $server['cipher'];
         $array['password'] = $password;
-
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $array['plugin'] = 'obfs-local';
+            $plugin_opts_parts = [];
+            $plugin_opts_parts[] = "obfs=" . $server['obfs'];
+            if (isset($server['obfs-host'])) {
+                $plugin_opts_parts[] = "obfs-host=" . $server['obfs-host'];
+            }
+            if (isset($server['obfs-path'])) {
+                $plugin_opts_parts[] = "path=" . $server['obfs-path'];
+            }
+            $array['plugin_opts'] = implode(';', $plugin_opts_parts);
+        }
         return $array;
     }
 
