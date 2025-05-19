@@ -89,8 +89,8 @@ class QuantumultX
         ];
 
         if ($server['network'] === 'tcp') {
-            if ($server['network_settings']) {
-                $tcpSettings = $server['network_settings'];
+            if ($server['networkSettings']) {
+                $tcpSettings = $server['networkSettings'];
                 if (isset($tcpSettings['header']['type']) && !empty($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
                     array_push($config, 'obfs=http');
                 }
