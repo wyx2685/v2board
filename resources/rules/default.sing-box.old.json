@@ -8,16 +8,16 @@
                 "server": "local"
             }, 
             {
-                "clash_mode": "全局代理",
+                "clash_mode": "پراکسی سراسری",
                 "server": "remote"
             },
             {
-                "clash_mode": "全局直连",
+                "clash_mode": "بدون پراکسی",
                 "server": "local"
             },
             {
                 "rule_set": [
-                    "geosite-cn"
+                    "geosite-ir"
                 ],
                 "server": "local"
             },
@@ -31,11 +31,11 @@
         "servers": [
             {
                 "address": "1.1.1.1",
-                "detour": "节点选择",
+                "detour": "دکتر‌موبایل‌جایزان",
                 "tag": "remote"
             },
             {
-                "address": "https://223.5.5.5/dns-query",
+                "address": "8.8.8.8",
                 "detour": "direct",
                 "tag": "local"
             },
@@ -53,7 +53,7 @@
             "enabled": true
         },
         "clash_api": {
-            "default_mode": "海外代理",
+            "default_mode": "پراکسی بین‌المللی",
             "external_controller": "127.0.0.1:9090",
             "secret": ""
         }
@@ -96,14 +96,14 @@
     "outbounds": [
         {
             "type": "selector",
-            "tag": "节点选择",
+            "tag": "دکتر‌موبایل‌جایزان",
             "outbounds": [
-                "自动选择"
+                "انتخاب خودکار"
             ]
         },
         {
             "type": "urltest",
-            "tag": "自动选择",
+            "tag": "انتخاب خودکار",
             "outbounds": []
         },
         {
@@ -127,16 +127,16 @@
                 "protocol": "dns"
             },
             {
-                "clash_mode": "关闭代理",
+                "clash_mode": "غیرفعال کردن پراکسی",
                 "outbound": "direct"
             },
             {
-                "clash_mode": "全局代理",
-                "outbound": "节点选择"
+                "clash_mode": "پراکسی سراسری",
+                "outbound": "دکتر‌موبایل‌جایزان"
             },
             {
                 "rule_set": [
-                    "geosite-cn","geoip-cn"
+                    "geosite-ir","geoip-ir"
                 ],
                 "outbound": "direct"
             },
@@ -153,25 +153,25 @@
         ],
         "rule_set": [
             {
-              "tag": "geosite-cn",
+              "tag": "geosite-ir",
               "type": "remote",
               "format": "binary",
-              "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-              "download_detour": "节点选择"
+              "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-ir.srs",
+              "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
                 "tag": "category-ads-all",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-                "download_detour": "节点选择"
+                "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
-                "tag": "geoip-cn",
+                "tag": "geoip-ir",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/srs/cn.srs",
-                "download_detour": "节点选择"
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ir.srs",
+                "download_detour": "دکتر‌موبایل‌جایزان"
             }
         ]
     }
