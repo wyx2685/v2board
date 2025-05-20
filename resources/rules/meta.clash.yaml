@@ -1,0 +1,156 @@
+port: 59950
+socks-port: 38815
+redir-port: 32488
+mode: rule
+allow-lan: false
+bind-address: 127.0.0.1
+log-level: silent
+ipv6: false
+external-controller: 127.0.0.1:54344
+secret: "YourSecurePasswordHere!"
+tcp-concurrent: true
+find-process-mode: off
+
+tun:
+  enable: true
+  stack: gvisor
+  mtu: 1500
+  strict-route: true
+  auto-route: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+
+dns:
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+
+sniffer:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080]
+  skip-domain:
+    - "*.google.com"
+    - "*.apple.com"
+
+proxies: []
+
+proxy-groups:
+  - name: "💉دکتر‌موبایل‌جایزان"
+    type: select
+    proxies:
+      - "🚀 خودکار 🚀"
+      - "🚀 اولین سرور فعال 🚀"
+      - "⚖️ متعادل‌سازی بار"
+
+  - name: "🚀 خودکار 🚀"
+    type: url-test
+    proxies: []
+    url: "http://www.gstatic.com/generate_204"
+    interval: 1200
+    lazy: true
+    health-check:
+      enable: true
+      timeout: 1
+      retries: 2
+      fail-time: 1
+
+  - name: "🚀 اولین سرور فعال 🚀"
+    type: fallback
+    proxies: []
+    url: "http://www.gstatic.com/generate_204"
+    interval: 1200
+    lazy: true
+    health-check:
+      enable: true
+      timeout: 1
+      retries: 2
+      fail-time: 1
+
+  - name: "⚖️ متعادل‌سازی بار"
+    type: load-balance
+    strategy: consistent-hashing
+    proxies: []
+    url: "http://www.gstatic.com/generate_204"
+    interval: 6400
+    lazy: true
+    health-check:
+      enable: true
+      timeout: 1
+      retries: 2
+      fail-time: 1
+
+rules:
+  - RULE-SET,ir,DIRECT
+  - RULE-SET,ircidr,DIRECT
+  - RULE-SET,irasn,DIRECT
+  - RULE-SET,ads,REJECT
+  - RULE-SET,malware,REJECT
+  - RULE-SET,phishing,REJECT
+  - RULE-SET,cryptominers,REJECT
+  - MATCH,💉دکتر‌موبایل‌جایزان
+
+rule-providers:
+  ir:
+    type: http
+    format: yaml
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ir.yaml"
+    path: ./ruleset/ir.yaml
+    interval: 86400
+  ads:
+    type: http
+    format: yaml
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ads.yaml"
+    path: ./ruleset/ads.yaml
+    interval: 86400
+  malware:
+    type: http
+    format: yaml
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware.yaml"
+    path: ./ruleset/malware.yaml
+    interval: 86400
+  phishing:
+    type: http
+    format: yaml
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.yaml"
+    path: ./ruleset/phishing.yaml
+    interval: 86400
+  cryptominers:
+    type: http
+    format: yaml
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/cryptominers.yaml"
+    path: ./ruleset/cryptominers.yaml"
+    interval: 86400
+  ircidr:
+    type: http
+    format: yaml
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ircidr.yaml"
+    path: ./ruleset/ircidr.yaml
+    interval: 86400
+  irasn:
+    type: http
+    format: yaml
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/irasn.yaml"
+    path: ./ruleset/irasn.yaml
+    interval: 86400
