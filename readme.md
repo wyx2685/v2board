@@ -10,7 +10,7 @@
 
 按以下步骤进行面板文件迁移：
 
-    git remote set-url origin https://github.com/wyx2685/v2board  
+    git remote set-url origin https://github.com/Ahmad10611/v2board  
     git checkout master  
     ./update.sh  
 
