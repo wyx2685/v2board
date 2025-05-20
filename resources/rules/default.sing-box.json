@@ -13,13 +13,13 @@
             {
                 "type": "udp",
                 "tag": "cn",
-                "server": "223.5.5.5"
+                "server": "8.8.8.8"
             }
         ],
         "rules": [
             {
                 "rule_set": [
-                    "geosite-cn"
+                    "geosite-ir"
                 ],
                 "action": "route",
                 "server": "cn"
@@ -39,7 +39,7 @@
             "mtu": 9000,
             "stack": "system",
             "strict_route": true,
-            "route_exclude_address_set": ["geoip-cn"]
+            "route_exclude_address_set": ["geoip-ir"]
         },
         {
             "tag": "socks-in",
@@ -65,15 +65,15 @@
             }
         },
         {
-            "tag": "节点选择",
+            "tag": "دکتر‌موبایل‌جایزان",
             "type": "selector",
             "interrupt_exist_connections": true,
             "outbounds": [
-                "自动选择"
+                "انتخاب خودکار"
             ]
         },
         {
-            "tag": "自动选择",
+            "tag": "انتخاب خودکار",
             "type": "urltest",
             "url": "https://www.gstatic.com/generate_204",
             "interval": "10m",
@@ -106,56 +106,49 @@
                 "outbound": "DIRECT"
             },
             {
-                "clash_mode": "关闭代理",
+                "clash_mode": "غیرفعال کردن پراکسی",
                 "action": "route",
                 "outbound": "DIRECT"
             },
             {
-                "clash_mode": "全局代理",
+                "clash_mode": "پراکسی سراسری",
                 "action": "route",
-                "outbound": "节点选择"
+                "outbound": "دکتر‌موبایل‌جایزان"
             },
             {
                 "rule_set": [
-                    "geosite-cn","geoip-cn"
+                    "geosite-ir","geoip-ir"
                 ],
                 "action": "route",
                 "outbound": "DIRECT"
             }
         ],
         "auto_detect_interface": true,
-        "final": "节点选择",
+        "final": "دکتر‌موبایل‌جایزان",
         "default_domain_resolver": {
             "server": "remote"
         },
         "rule_set": [
             {
-                "tag": "geosite-geolocation-!cn",
+                "tag": "geoip-ir",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
-                "download_detour": "节点选择"
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ir.srs",
+                "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
-                "tag": "geoip-cn",
+                "tag": "geosite-ir",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/srs/cn.srs",
-                "download_detour": "节点选择"
-            },
-            {
-                "tag": "geosite-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-                "download_detour": "节点选择"
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-ir.srs",
+                "download_detour": "دکتر‌موبایل‌جایزان"
             },
             {
                 "tag": "category-ads-all",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-                "download_detour": "节点选择"
+                "download_detour": "دکتر‌موبایل‌جایزان"
             }
         ]
     },
@@ -164,7 +157,7 @@
             "enabled": true
         },
         "clash_api": {
-            "default_mode": "海外代理",
+            "default_mode": "پراکسی بین‌المللی",
             "external_controller": "127.0.0.1:9090",
             "secret": ""
         }
