@@ -26,6 +26,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // تغییر مالکیت و مجوزها برای فولدر logs
+        $schedule->call(function () {
+            $directory = base_path('storage/logs');
+
+            // تغییر مالکیت و گروه به کاربر www
+            exec("sudo chown -R www:www " . escapeshellarg($directory));
+
+            // تغییر مجوزها به 775
+            exec("sudo chmod -R 775 " . escapeshellarg($directory));
+
+            echo "مجوزها و مالکیت فایل‌ها به‌روزرسانی شد.\n";
+        })->before(function () {
+            // هر عملیاتی که باید قبل از اجرای تمامی دستورات انجام شود
+        })->everyMinute(); // می‌توانید زمان‌بندی اجرای این تابع را تغییر دهید
+
         Cache::put(CacheKey::get('SCHEDULE_LAST_CHECK_AT', null), time());
         // v2board
         $schedule->command('v2board:statistics')->dailyAt('0:10');
