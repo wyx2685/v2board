@@ -12,6 +12,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3.0|^8.0",
+        "cedar2025/http-foundation": "5.4.x-dev",
+        "joanhey/adapterman": "^0.7.0",
         "fideloper/proxy": "^4.4",
         "firebase/php-jwt": "^6.3",
         "fruitcake/laravel-cors": "^2.0",
@@ -23,6 +25,7 @@
         "linfo/linfo": "^4.0",
         "paragonie/sodium_compat": "^1.20",
         "php-curl-class/php-curl-class": "^8.6",
+        "morilog/jalali": "^3.0",
         "stripe/stripe-php": "^v14.9.0",
         "symfony/yaml": "^4.3"
     },
