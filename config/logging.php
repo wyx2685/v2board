@@ -10,52 +10,55 @@ return [
     | Default Log Channel
     |--------------------------------------------------------------------------
     |
-    | This option defines the default log channel that gets used when writing
-    | messages to the logs. The name specified in this option should match
-    | one of the channels defined in the "channels" configuration array.
+    | این تنظیم مشخص می‌کند که کدام کانال به صورت پیش‌فرض برای لاگ‌گیری
+    | استفاده می‌شود. در اینجا از "stack" استفاده می‌کنیم که شامل چندین
+    | کانال است.
     |
     */
 
-    'default' => 'mysql',
+    'default' => 'stack',
 
     /*
     |--------------------------------------------------------------------------
     | Log Channels
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the log channels for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Drivers: "single", "daily", "slack", "syslog",
-    |                    "errorlog", "monolog",
-    |                    "custom", "stack"
+    | در این بخش کانال‌های لاگ‌گیری تنظیم می‌شوند. در اینجا ما چندین کانال
+    | مختلف برای ذخیره لاگ در فایل، دیتابیس و سایر موارد داریم.
     |
     */
 
     'channels' => [
-        'mysql' => [
-            'driver' => 'custom',
-            'via' => App\Logging\MysqlLogger::class,
-        ],
-
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
+            'channels' => ['daily', 'mysql', 'payment'], // اضافه کردن payment به stack
             'ignore_exceptions' => false,
         ],
 
-        'single' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => 'debug',
+        'payment' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/payment.log'),
+            'level' => 'info',
+            'days' => 2, // نگهداری لاگ‌ها برای ۷ روز
+        ],
+
+        'mysql' => [
+            'driver' => 'custom',
+            'via' => App\Logging\MysqlLogger::class,
+            'level' => 'debug', // بالاترین سطح لاگ‌گیری برای دیتابیس
         ],
 
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
-            'days' => 14,
+            'days' => 14, // نگهداری لاگ‌ها تا ۱۴ روز
+        ],
+
+        'single' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => 'debug',
         ],
 
         'slack' => [
