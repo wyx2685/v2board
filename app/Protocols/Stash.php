@@ -2,6 +2,7 @@
 
 namespace App\Protocols;
 
+use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
 class Stash
@@ -50,6 +51,10 @@ class Stash
             }
             if ($item['type'] === 'trojan') {
                 array_push($proxy, self::buildTrojan($user['uuid'], $item));
+                array_push($proxies, $item['name']);
+            }
+            if ($item['type'] === 'tuic') {
+                array_push($proxy, self::buildTuic($user['uuid'], $item));
                 array_push($proxies, $item['name']);
             }
             if ($item['type'] === 'hysteria') {
@@ -110,6 +115,16 @@ class Stash
         $array['cipher'] = $server['cipher'];
         $array['password'] = $password;
         $array['udp'] = true;
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $array['plugin'] = 'obfs';
+            $plugin_opts = [
+                'mode' => 'http',
+            ];
+            if (isset($server['obfs-host']) && !empty($server['obfs-host'])) {
+                $plugin_opts['host'] = $server['obfs-host'];
+            }
+            $array['plugin-opts'] = $plugin_opts;
+        }
         return $array;
     }
 
@@ -140,7 +155,6 @@ class Stash
             if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
                 $array['network'] = $tcpSettings['header']['type'];
                 if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['http-opts']['headers']['Host'] = $tcpSettings['header']['request']['headers']['Host'];
-                if (isset($tcpSettings['header']['request']['path'][0])) $array['http-opts']['path'] = $tcpSettings['header']['request']['path'][0];
             }
         }
         if ($server['network'] === 'ws') {
@@ -263,6 +277,30 @@ class Stash
         };
         if (!empty($server['server_name'])) $array['sni'] = $server['server_name'];
         if (!empty($server['allow_insecure'])) $array['skip-cert-verify'] = ($server['allow_insecure'] ? true : false);
+        return $array;
+    }
+
+    public static function buildTuic($password, $server)
+    {
+        $array = [
+            'name' => $server['name'],
+            'type' => 'tuic',
+            'server' => $server['host'],
+            'port' => $server['port'],
+            'version' => 5,
+            'uuid' => $password,
+            'password' => $password,
+            'alpn' => ['h3'],
+            //'disable-sni' => $server['disable_sni'] ? true : false,
+            //'reduce-rtt' => $server['zero_rtt_handshake'] ? true : false,
+            //'udp-relay-mode' => $server['udp_relay_mode'] ?? 'native',
+            //congestion-controller' => $server['congestion_control'] ?? 'cubic',
+            'skip-cert-verify' => $server['insecure'] ? true : false,
+        ];
+        if (isset($server['server_name'])) {
+            $array['sni'] = $server['server_name'];
+        }
+
         return $array;
     }
 

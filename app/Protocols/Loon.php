@@ -54,16 +54,26 @@ class Loon
         }
         $config = [
             "{$server['name']}=Shadowsocks",
-            "{$server['host']}",
-            "{$server['port']}",
-            "{$server['cipher']}",
-            "{$password}",
-            'fast-open=false',
-            'udp=true'
         ];
-        $config = array_filter($config);
+        $config[] = $server['host'];
+        $config[] = $server['port'];
+        $config[] = $server['cipher'];
+        $config[] = $password;
+
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $config[] = "obfs-name={$server['obfs']}";
+            if (isset($server['obfs-host']) && !empty($server['obfs-host'])) {
+                $config[] = "obfs-host={$server['obfs-host']}";
+            }
+            if (isset($server['obfs-path'])) {
+                $config[] = "obfs-uri={$server['obfs-path']}";
+            }
+        }
+        $config[] = 'fast-open=false';
+        $config[] = 'udp=true';
         $uri = implode(',', $config);
         $uri .= "\r\n";
+
         return $uri;
     }
 
@@ -236,6 +246,9 @@ class Loon
         ];
         if (!empty($server['insecure'])) {
             array_push($config, $server['insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
+        }
+        if (isset($server['obfs'])){
+            array_push($config, 'salamander-password=' . $server['obfs_password']);
         }
         $config = array_filter($config);
         $uri = implode(',', $config);

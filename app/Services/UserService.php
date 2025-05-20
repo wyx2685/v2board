@@ -53,6 +53,7 @@ class UserService
     public function getResetDay(User $user)
     {
         if (!isset($user->plan)) {
+            if ($user->plan_id === NULL) return null;
             $user->plan = Plan::find($user->plan_id);
         }
         if ($user->expired_at <= time() || $user->expired_at === NULL) return null;

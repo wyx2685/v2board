@@ -197,6 +197,14 @@ class UniProxyController extends Controller
                     'server_name' => $this->nodeInfo->server_name,
                 ];
                 break;
+            case 'tuic':
+                $response = [
+                    'server_port' => $this->nodeInfo->server_port,
+                    'server_name' => $this->nodeInfo->server_name,
+                    'congestion_control' => $this->nodeInfo->congestion_control,
+                    'zero_rtt_handshake' => $this->nodeInfo->zero_rtt_handshake ? true : false,
+                ];
+                break;
             case 'hysteria':
                 $response = [
                     'version' => $this->nodeInfo->version,
@@ -217,6 +225,13 @@ class UniProxyController extends Controller
                    $response['obfs'] = $this->nodeInfo->obfs ?? null;
                    $response['obfs-password'] = $this->nodeInfo->obfs_password ?? null;
                 }
+                break;
+            case 'anytls':
+                $response = [
+                    'server_port' => $this->nodeInfo->server_port,
+                    'server_name' => $this->nodeInfo->server_name,
+                    'padding_scheme' => $this->nodeInfo->padding_scheme
+                ];
                 break;
         }
         $response['base_config'] = [

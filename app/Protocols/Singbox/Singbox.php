@@ -47,25 +47,31 @@ class Singbox
         $proxies = [];
     
         foreach ($this->servers as $item) {
-            if ($item['type'] === 'shadowsocks') {
-                $ssConfig = $this->buildShadowsocks($this->user['uuid'], $item);
-                $proxies[] = $ssConfig;
-            }
-            if ($item['type'] === 'trojan') {
-                $trojanConfig = $this->buildTrojan($this->user['uuid'], $item);
-                $proxies[] = $trojanConfig;
-            }
-            if ($item['type'] === 'vmess') {
-                $vmessConfig = $this->buildVmess($this->user['uuid'], $item);
-                $proxies[] = $vmessConfig;
-            }
-            if ($item['type'] === 'vless') {
-                $vlessConfig = $this->buildVless($this->user['uuid'], $item);
-                $proxies[] = $vlessConfig;
-            }
-            if ($item['type'] === 'hysteria') {
-                $hysteriaConfig = $this->buildHysteria($this->user['uuid'], $item, $this->user);
-                $proxies[] = $hysteriaConfig;
+            switch ($item['type']) {
+                case 'shadowsocks':
+                    $ssConfig = $this->buildShadowsocks($this->user['uuid'], $item);
+                    $proxies[] = $ssConfig;
+                    break;
+                case 'trojan':
+                    $trojanConfig = $this->buildTrojan($this->user['uuid'], $item);
+                    $proxies[] = $trojanConfig;
+                    break;
+                case 'vmess':
+                    $vmessConfig = $this->buildVmess($this->user['uuid'], $item);
+                    $proxies[] = $vmessConfig;
+                    break;
+                case 'vless':
+                    $vlessConfig = $this->buildVless($this->user['uuid'], $item);
+                    $proxies[] = $vlessConfig;
+                    break;
+                case 'tuic':
+                    $tuicConfig = $this->buildTuic($this->user['uuid'], $item);
+                    $proxies[] = $tuicConfig;
+                    break;
+                case 'hysteria':
+                    $hysteriaConfig = $this->buildHysteria($this->user['uuid'], $item, $this->user);
+                    $proxies[] = $hysteriaConfig;
+                    break;
             }
         }
     
@@ -100,7 +106,18 @@ class Singbox
         $array['method'] = $server['cipher'];
         $array['password'] = $password;
         $array['domain_resolver'] = 'local';
-
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $array['plugin'] = 'obfs-local';
+            $plugin_opts_parts = [];
+            $plugin_opts_parts[] = "obfs=" . $server['obfs'];
+            if (isset($server['obfs-host'])) {
+                $plugin_opts_parts[] = "obfs-host=" . $server['obfs-host'];
+            }
+            if (isset($server['obfs-path'])) {
+                $plugin_opts_parts[] = "path=" . $server['obfs-path'];
+            }
+            $array['plugin_opts'] = implode(';', $plugin_opts_parts);
+        }
         return $array;
     }
 
@@ -257,6 +274,33 @@ class Singbox
                 $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
             }
         };
+
+        return $array;
+    }
+
+    protected function buildTuic($password, $server)
+    {
+        $array = [];
+        $array['tag'] = $server['name'];
+        $array['type'] = 'tuic';
+        $array['server'] = $server['host'];
+        $array['server_port'] = $server['port'];
+        $array['uuid'] = $password;
+        $array['password'] = $password;
+        $array['congestion_control'] = $server['congestion_control'] ?? 'cubic';
+        $array['udp_relay_mode'] = $server['udp_relay_mode'] ?? 'native';
+        $array['zero_rtt_handshake'] = $server['zero_rtt_handshake'] ? true : false;
+        $array['domain_resolver'] = 'local';
+
+        $array['tls'] = [
+            'enabled' => true,
+            'insecure' => $server['insecure'] ? true : false,
+            'alpn' => ['h3'],
+            'disable_sni' => $server['disable_sni'] ? true : false,
+        ];
+        if (isset($server['server_name'])) {
+            $array['tls']['server_name'] = $server['server_name'];
+        }
 
         return $array;
     }

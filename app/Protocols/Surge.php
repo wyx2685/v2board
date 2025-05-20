@@ -79,7 +79,6 @@ class Surge
         return $config;
     }
 
-
     public static function buildShadowsocks($password, $server)
     {
         if ($server['cipher'] === '2022-blake3-aes-128-gcm') {
@@ -93,16 +92,26 @@ class Surge
         }
         $config = [
             "{$server['name']}=ss",
-            "{$server['host']}",
-            "{$server['port']}",
-            "encrypt-method={$server['cipher']}",
-            "password={$password}",
-            'tfo=true',
-            'udp-relay=true'
         ];
-        $config = array_filter($config);
+        $config[] = $server['host'];
+        $config[] = $server['port'];
+        $config[] = "encrypt-method={$server['cipher']}";
+        $config[] = "password={$password}";
+
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $config[] = "obfs={$server['obfs']}";
+            if (isset($server['obfs-host']) && !empty($server['obfs-host'])) {
+                $config[] = "obfs-host={$server['obfs-host']}";
+            }
+            if (isset($server['obfs-path'])) {
+                $config[] = "obfs-uri={$server['obfs-path']}";
+            }
+        }
+        $config[] = 'fast-open=false';
+        $config[] = 'udp=true';
         $uri = implode(',', $config);
         $uri .= "\r\n";
+
         return $uri;
     }
 

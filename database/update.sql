@@ -760,3 +760,48 @@ ADD `auto_renewal` tinyint(4) NOT NULL DEFAULT '0' AFTER `speed_limit`;
 
 ALTER TABLE `v2_ticket`
 CHANGE `reply_status` `reply_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:待回复 1:已回复' AFTER `status`;
+
+CREATE TABLE `v2_server_tuic` (
+                                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                                      `group_id` varchar(255) NOT NULL,
+                                      `route_id` varchar(255) DEFAULT NULL,
+                                      `name` varchar(255) NOT NULL,
+                                      `parent_id` int(11) DEFAULT NULL,
+                                      `host` varchar(255) NOT NULL,
+                                      `port` varchar(11) NOT NULL,
+                                      `server_port` int(11) NOT NULL,
+                                      `tags` varchar(255) DEFAULT NULL,
+                                      `rate` varchar(11) NOT NULL,
+                                      `show` tinyint(1) NOT NULL DEFAULT '0',
+                                      `sort` int(11) DEFAULT NULL,
+                                      `server_name` varchar(64) DEFAULT NULL,
+                                      `insecure` tinyint(1) NOT NULL DEFAULT '0',
+                                      `disable_sni` tinyint(1) NOT NULL DEFAULT '0',
+                                      `udp_relay_mode` varchar(64) DEFAULT NULL,
+                                      `zero_rtt_handshake` tinyint(1) NOT NULL DEFAULT '0',
+                                      `congestion_control` varchar(64) DEFAULT NULL,
+                                      `created_at` int(11) NOT NULL,
+                                      `updated_at` int(11) NOT NULL,
+                                      PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `v2_server_anytls` (
+                                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                                      `group_id` varchar(255) NOT NULL,
+                                      `route_id` varchar(255) DEFAULT NULL,
+                                      `name` varchar(255) NOT NULL,
+                                      `parent_id` int(11) DEFAULT NULL,
+                                      `host` varchar(255) NOT NULL,
+                                      `port` varchar(11) NOT NULL,
+                                      `server_port` int(11) NOT NULL,
+                                      `tags` varchar(255) DEFAULT NULL,
+                                      `rate` varchar(11) NOT NULL,
+                                      `show` tinyint(1) NOT NULL DEFAULT '0',
+                                      `sort` int(11) DEFAULT NULL,
+                                      `server_name` varchar(64) DEFAULT NULL,
+                                      `insecure` tinyint(1) NOT NULL DEFAULT '0',
+                                      `padding_scheme` text,
+                                      `created_at` int(11) NOT NULL,
+                                      `updated_at` int(11) NOT NULL,
+                                      PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

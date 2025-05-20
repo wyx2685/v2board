@@ -19,6 +19,10 @@ php composer.phar update -vvv
 php_main_version=$(php -v | head -n 1 | cut -d ' ' -f 2 | cut -d '.' -f 1)
 if [ $php_main_version -ge 8 ]; then
     php composer.phar require joanhey/adapterman
+    if ! php -m | grep -q "pcntl"; then
+        echo "Adding pcntl extension to cli-php.ini"
+        sed -i '/extension=redis.so/a extension=pcntl.so' cli-php.ini
+    fi
     php -c cli-php.ini webman.php stop
     echo "Webman stopped.Please restart it by yourself."
 fi

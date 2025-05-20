@@ -108,7 +108,7 @@ class UserController extends Controller
                 abort(500, __('The gift card is not yet valid'));
             }
 
-            if ($giftcard->end_at && $currentTime > $giftcard->end_at) {
+            if ($giftcard->ended_at && $currentTime > $giftcard->ended_at) {
                 abort(500, __('The gift card has expired'));
             }
 

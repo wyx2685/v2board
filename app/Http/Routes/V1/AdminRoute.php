@@ -58,6 +58,14 @@ class AdminRoute
                 $router->post('copy', 'V1\\Admin\\Server\\ShadowsocksController@copy');
             });
             $router->group([
+                'prefix' => 'server/tuic'
+            ], function ($router) {
+                $router->post('save', 'V1\\Admin\\Server\\TuicController@save');
+                $router->post('drop', 'V1\\Admin\\Server\\TuicController@drop');
+                $router->post('update', 'V1\\Admin\\Server\\TuicController@update');
+                $router->post('copy', 'V1\\Admin\\Server\\TuicController@copy');
+            });
+            $router->group([
                 'prefix' => 'server/hysteria'
             ], function ($router) {
                 $router->post('save', 'V1\\Admin\\Server\\HysteriaController@save');
@@ -72,6 +80,14 @@ class AdminRoute
                 $router->post('drop', 'V1\\Admin\\Server\\VlessController@drop');
                 $router->post('update', 'V1\\Admin\\Server\\VlessController@update');
                 $router->post('copy', 'V1\\Admin\\Server\\VlessController@copy');
+            });
+            $router->group([
+                'prefix' => 'server/anytls'
+            ], function ($router) {
+                $router->post('save', 'V1\\Admin\\Server\\AnyTLSController@save');
+                $router->post('drop', 'V1\\Admin\\Server\\AnyTLSController@drop');
+                $router->post('update', 'V1\\Admin\\Server\\AnyTLSController@update');
+                $router->post('copy', 'V1\\Admin\\Server\\AnyTLSController@copy');
             });
             // Order
             $router->get ('/order/fetch', 'V1\\Admin\\OrderController@fetch');
