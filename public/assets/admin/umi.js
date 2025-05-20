@@ -3261,7 +3261,7 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -3271,12 +3271,12 @@
                             key: t.id
                         }, u.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Biên Tập")), u.a.createElement(s["a"], {
+                        }, "\u7f16\u8f91")), u.a.createElement(s["a"], {
                             type: "vertical"
                         }), u.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>this.drop(t.id)
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return u.a.createElement(h["a"], i()({}, this.props, {
@@ -5657,7 +5657,7 @@
                   , _ = e.safe
                   , E = this.props.plan.plans;
                 return f.a.createElement(d["a"], i()({}, this.props, {
-                    title: "Cấu Hình Hệ Thống"
+                    title: "\u7cfb\u7edf\u914d\u7f6e"
                 }), f.a.createElement("div", {
                     className: "mb-0 block border-bottom ".concat(p ? "block-mode-loading" : "")
                 }, f.a.createElement(s["a"], {
@@ -5667,65 +5667,65 @@
                     defaultActiveKey: h,
                     size: "large"
                 }, f.a.createElement(s["a"].TabPane, {
-                    tab: "Tổng Quan",
+                    tab: "\u7ad9\u70b9",
                     key: "site"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Tên Trang Web",
-                    description: "Hiển thị ở đầu trang web"
+                    title: "\u7ad9\u70b9\u540d\u79f0",
+                    description: "\u7528\u4e8e\u663e\u793a\u9700\u8981\u7ad9\u70b9\u540d\u79f0\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui long nhập tên trang web",
+                    placeholder: "\u8bf7\u8f93\u5165\u7ad9\u70b9\u540d\u79f0",
                     defaultValue: t.app_name,
                     onChange: e=>this.set("site", "app_name", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Mô Tả web",
-                    description: "Hiển thị mô tả trang web"
+                    title: "\u7ad9\u70b9\u63cf\u8ff0",
+                    description: "\u7528\u4e8e\u663e\u793a\u9700\u8981\u7ad9\u70b9\u63cf\u8ff0\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập mô tả web",
+                    placeholder: "\u8bf7\u8f93\u5165\u7ad9\u70b9\u63cf\u8ff0",
                     defaultValue: t.app_description,
                     onChange: e=>this.set("site", "app_description", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "URL Trang web",
-                    description: "URL mới nhất của trang web hiện tại sẽ được hiển thị trong email và những nơi khác mà URL cần được sử dụng."
+                    title: "\u7ad9\u70b9\u7f51\u5740",
+                    description: "\u5f53\u524d\u7f51\u7ad9\u6700\u65b0\u7f51\u5740\uff0c\u5c06\u4f1a\u5728\u90ae\u4ef6\u7b49\u9700\u8981\u7528\u4e8e\u7f51\u5740\u5904\u4f53\u73b0\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL không có / ở cuối",
+                    placeholder: "\u8bf7\u8f93\u5165\u7ad9\u70b9URL\uff0c\u672b\u5c3e\u4e0d\u8981/",
                     defaultValue: t.app_url,
                     onChange: e=>this.set("site", "app_url", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Buộc HTTPS",
-                    description: "Khi trang web không sử dụng HTTPS, CDN hoặc proxy ngược cần được bật để buộc HTTPS."
+                    title: "\u5f3a\u5236HTTPS",
+                    description: "\u5f53\u7ad9\u70b9\u6ca1\u6709\u4f7f\u7528HTTPS\uff0cCDN\u6216\u53cd\u4ee3\u5f00\u542f\u5f3a\u5236HTTPS\u65f6\u9700\u8981\u5f00\u542f\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(t.force_https),
                     onChange: e=>this.set("site", "force_https", e ? 1 : 0)
                 })), f.a.createElement(m, {
                     title: "LOGO",
-                    description: "Được sử dụng để hiển thị nơi cần có LOGO."
+                    description: "\u7528\u4e8e\u663e\u793a\u9700\u8981LOGO\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL LOGO không có / ở cuối",
+                    placeholder: "\u8bf7\u8f93\u5165LOGO URL\uff0c\u672b\u5c3e\u4e0d\u8981/",
                     defaultValue: t.logo,
                     onChange: e=>this.set("site", "logo", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "URL đăng ký",
-                    description: "Được sử dụng để đăng ký. Nếu để trống thì đó sẽ là URL của trang web. Nếu bạn cần lấy ngẫu nhiên nhiều URL đăng ký, vui lòng phân tách chúng bằng dấu phẩy."
+                    title: "\u8ba2\u9605URL",
+                    description: "\u7528\u4e8e\u8ba2\u9605\u6240\u4f7f\u7528\uff0c\u7559\u7a7a\u5219\u4e3a\u7ad9\u70b9URL\u3002\u5982\u9700\u591a\u4e2a\u8ba2\u9605URL\u968f\u673a\u83b7\u53d6\u8bf7\u4f7f\u7528\u9017\u53f7\u8fdb\u884c\u5206\u5272\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "4",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL đăng ký không có / ở cuối. Phân tách bằng dấu phẩy hỗ trợ nhiều tên miền",
+                    placeholder: "\u8bf7\u8f93\u5165\u8ba2\u9605URL\uff0c\u672b\u5c3e\u4e0d\u8981/\u3002\u9017\u53f7\u5206\u5272\u652f\u6301\u591a\u57df\u540d",
                     defaultValue: t.subscribe_url,
                     onChange: e => this.set("site", "subscribe_url", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Đường dẫn đăng ký",
-                    description: "Được sử dụng để đăng ký. Nếu để trống, nó sẽ là /api/v1/client/subscribe. Nếu bạn cần thay đổi đường dẫn đăng ký khác, vui lòng đặt đường dẫn đó."
+                    title: "\u8ba2\u9605\u8def\u5f84",
+                    description: "\u7528\u4e8e\u8ba2\u9605\u6240\u4f7f\u7528\uff0c\u7559\u7a7a\u5219\u4e3a/api/v1/client/subscribe\u3002\u5982\u9700\u66f4\u6362\u4e0d\u540c\u7684\u8ba2\u9605\u8def\u5f84\u8bf7\u8bbe\u7f6e\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -5733,31 +5733,31 @@
                     defaultValue: t.subscribe_path,
                     onChange: e => this.set("site", "subscribe_path", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "URL Điều khoản người dùng (TOS)",
-                    description: "Được sử dụng để chuyển đến Điều khoản người dùng (TOS)"
+                    title: "\u7528\u6237\u6761\u6b3e(TOS)URL",
+                    description: "\u7528\u4e8e\u8df3\u8f6c\u5230\u7528\u6237\u6761\u6b3e(TOS)"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập URL điều khoản người dùng không có / ở cuối",
+                    placeholder: "\u8bf7\u8f93\u5165\u7528\u6237\u6761\u6b3eURL\uff0c\u672b\u5c3e\u4e0d\u8981/",
                     defaultValue: t.tos_url,
                     onChange: e=>this.set("site", "tos_url", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Dừng đăng ký người dùng mới",
-                    description: "Sau khi được kích hoạt, sẽ không ai có thể đăng ký."
+                    title: "\u505c\u6b62\u65b0\u7528\u6237\u6ce8\u518c",
+                    description: "\u5f00\u542f\u540e\u4efb\u4f55\u4eba\u90fd\u5c06\u65e0\u6cd5\u8fdb\u884c\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(t.stop_register),
                     onChange: e=>this.set("site", "stop_register", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Đăng ký dùng thử",
-                    description: "Chọn đăng ký bạn muốn thử. Nếu không có tùy chọn, vui lòng vào quản lý đăng ký để thêm nó trước."
+                    title: "\u6ce8\u518c\u8bd5\u7528",
+                    description: "\u9009\u62e9\u9700\u8981\u8bd5\u7528\u7684\u8ba2\u9605\uff0c\u5982\u679c\u6ca1\u6709\u9009\u9879\u8bf7\u5148\u524d\u5f80\u8ba2\u9605\u7ba1\u7406\u6dfb\u52a0\u3002"
                 }, f.a.createElement("select", {
                     onChange: e=>this.set("site", "try_out_plan_id", e.target.value),
                     className: "form-control",
                     value: t.try_out_plan_id,
-                    placeholder: "Vui lòng chọn đăng ký dùng thử"
+                    placeholder: "\u8bf7\u9009\u62e9\u8bd5\u7528\u8ba2\u9605"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Đóng"), E.map(e=>{
+                }, "\u5173\u95ed"), E.map(e=>{
                     return f.a.createElement("option", {
                         key: Math.random(),
                         value: e.id
@@ -5765,57 +5765,57 @@
                 }
                 ))), 0 === t.try_out_plan_id || f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Thời gian dùng thử (giờ)"
+                    title: "\u8bd5\u7528\u65f6\u95f4(\u5c0f\u65f6)"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: t.try_out_hour,
                     onChange: e=>this.set("site", "try_out_hour", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Đơn Vị Tiền Tệ",
-                    description: "Chỉ nhằm mục đích hiển thị, tất cả các đơn vị tiền tệ trong hệ thống sẽ thay đổi sau khi thay đổi."
+                    title: "\u8d27\u5e01\u5355\u4f4d",
+                    description: "\u4ec5\u7528\u4e8e\u5c55\u793a\u4f7f\u7528\uff0c\u66f4\u6539\u540e\u7cfb\u7edf\u4e2d\u6240\u6709\u7684\u8d27\u5e01\u5355\u4f4d\u90fd\u5c06\u53d1\u751f\u53d8\u66f4\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "VNĐ",
+                    placeholder: "CNY",
                     defaultValue: t.currency,
                     onChange: e=>this.set("site", "currency", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Ký Hiệu",
-                    description: "Chỉ nhằm mục đích hiển thị, tất cả các đơn vị tiền tệ trong hệ thống sẽ thay đổi sau khi thay đổi."
+                    title: "\u8d27\u5e01\u7b26\u53f7",
+                    description: "\u4ec5\u7528\u4e8e\u5c55\u793a\u4f7f\u7528\uff0c\u66f4\u6539\u540e\u7cfb\u7edf\u4e2d\u6240\u6709\u7684\u8d27\u5e01\u5355\u4f4d\u90fd\u5c06\u53d1\u751f\u53d8\u66f4\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "₫",
+                    placeholder: "\xa5",
                     defaultValue: t.currency_symbol,
                     onChange: e=>this.set("site", "currency_symbol", e.target.value)
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Bảo Mật",
+                    tab: "\u5b89\u5168",
                     key: "safe"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Xác minh email",
-                    description: "Khi bật, người dùng sẽ buộc phải thực hiện xác minh email."
+                    title: "\u90ae\u7bb1\u9a8c\u8bc1",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f1a\u5f3a\u5236\u8981\u6c42\u7528\u6237\u8fdb\u884c\u90ae\u7bb1\u9a8c\u8bc1\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.email_verify),
                     onChange: e=>this.set("safe", "email_verify", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Vô hiệu hóa nhiều bí danh trong Gmail",
-                    description: "Sau khi được bật, nhiều bí danh Gmail sẽ không thể đăng ký được."
+                    title: "\u7981\u6b62\u4f7f\u7528Gmail\u591a\u522b\u540d",
+                    description: "\u5f00\u542f\u540eGmail\u591a\u522b\u540d\u5c06\u65e0\u6cd5\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.email_gmail_limit_enable),
                     onChange: e=>this.set("safe", "email_gmail_limit_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Chế Độ An Toàn",
-                    description: "Sau khi bật nó lên, quyền truy cập vào tên miền được liên kết với trang này ngoài URL của trang sẽ là 403."
+                    title: "\u5b89\u5168\u6a21\u5f0f",
+                    description: "\u5f00\u542f\u540e\u9664\u4e86\u7ad9\u70b9URL\u4ee5\u5916\u7684\u7ed1\u5b9a\u672c\u7ad9\u70b9\u7684\u57df\u540d\u8bbf\u95ee\u90fd\u5c06\u4f1a\u88ab403\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.safe_mode_enable),
                     onChange: e=>this.set("safe", "safe_mode_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Đường dẫn ADMIN",
-                    description: "Đường dẫn quản lý phụ trợ. Việc sửa đổi sẽ thay đổi đường dẫn quản trị ban đầu."
+                    title: "\u540e\u53f0\u8def\u5f84",
+                    description: "\u540e\u53f0\u7ba1\u7406\u8def\u5f84\uff0c\u4fee\u6539\u540e\u5c06\u4f1a\u6539\u53d8\u539f\u6709\u7684admin\u8def\u5f84"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -5823,321 +5823,319 @@
                     defaultValue: _.secure_path,
                     onChange: e=>this.set("safe", "secure_path", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Danh sách trắng hậu tố email",
-                    description: "Chỉ những hậu tố email trong danh sách mới được phép đăng ký sau khi nó được bật."
+                    title: "\u90ae\u7bb1\u540e\u7f00\u767d\u540d\u5355",
+                    description: "\u5f00\u542f\u540e\u5728\u540d\u5355\u4e2d\u7684\u90ae\u7bb1\u540e\u7f00\u624d\u5141\u8bb8\u8fdb\u884c\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.email_whitelist_enable),
                     onChange: e=>this.set("safe", "email_whitelist_enable", e ? 1 : 0)
                 })), _.email_whitelist_enable ? f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Hậu tố danh sách trắng",
-                    description: "Vui lòng sử dụng dấu phẩy để phân tách, chẳng hạn như: qq.com,gmail.com."
+                    title: "\u767d\u540d\u5355\u540e\u7f00",
+                    description: "\u8bf7\u4f7f\u7528\u9017\u53f7\u8fdb\u884c\u5206\u5272\uff0c\u5982\uff1aqq.com,gmail.com\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "4",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng sử dụng dấu phẩy để phân tách, chẳng hạn như: qq.com,gmail.com.",
+                    placeholder: "\u8bf7\u8f93\u5165\u540e\u7f00\u57df\u540d\uff0c\u9017\u53f7\u5206\u5272 \u5982\uff1aqq.com,gmail.com",
                     defaultValue: _.email_whitelist_suffix,
                     onChange: e=>this.set("safe", "email_whitelist_suffix", e.target.value.split(","))
                 })) : "", f.a.createElement(m, {
-                    title: "Chống Bot",
-                    description: "Khi được bật, Google reCAPTCHA sẽ được sử dụng để ngăn chặn robot."
+                    title: "\u9632\u673a\u5668\u4eba",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f1a\u4f7f\u7528Google reCAPTCHA\u9632\u6b62\u673a\u5668\u4eba\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.recaptcha_enable),
                     onChange: e=>this.set("safe", "recaptcha_enable", e ? 1 : 0)
                 })), _.recaptcha_enable ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Chìa Khóa",
-                    description: "Khóa được áp dụng trong Google reCAPTCHA."
+                    title: "\u5bc6\u94a5",
+                    description: "\u5728Google reCAPTCHA\u7533\u8bf7\u7684\u5bc6\u94a5\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.recaptcha_key,
                     onChange: e=>this.set("safe", "recaptcha_key", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Khóa trang web",
-                    description: "Khóa trang web được áp dụng trong Google reCAPTCH."
+                    title: "\u7f51\u7ad9\u5bc6\u94a5",
+                    description: "\u5728Google reCAPTCH\u7533\u8bf7\u7684\u7f51\u7ad9\u5bc6\u94a5\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.recaptcha_site_key,
                     onChange: e=>this.set("safe", "recaptcha_site_key", e.target.value)
                 }))) : "", f.a.createElement(m, {
-                    title: "Hạn chế đăng ký IP",
-                    description: "Sau khi kích hoạt nó, nếu tài khoản đăng ký IP đáp ứng các yêu cầu về quy tắc, việc đăng ký sẽ bị hạn chế. Xin lưu ý rằng việc đánh giá IP có thể gây ra sự cố do CDN hoặc proxy giao diện người dùng."
+                    title: "IP\u6ce8\u518c\u9650\u5236",
+                    description: "\u5f00\u542f\u540e\u5982\u679cIP\u6ce8\u518c\u8d26\u6237\u8fbe\u5230\u89c4\u5219\u8981\u6c42\u5c06\u4f1a\u88ab\u9650\u5236\u6ce8\u518c\uff0c\u8bf7\u6ce8\u610fIP\u5224\u65ad\u53ef\u80fd\u56e0\u4e3aCDN\u6216\u524d\u7f6e\u4ee3\u7406\u5bfc\u81f4\u95ee\u9898\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.register_limit_by_ip_enable),
                     onChange: e=>this.set("safe", "register_limit_by_ip_enable", e ? 1 : 0)
                 })), _.register_limit_by_ip_enable ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tính thường xuyên",
-                    description: "Hình phạt sẽ bắt đầu sau khi đạt số lượng đăng ký."
+                    title: "\u6b21\u6570",
+                    description: "\u8fbe\u5230\u6ce8\u518c\u6b21\u6570\u540e\u5f00\u542f\u60e9\u7f5a\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.register_limit_count,
                     onChange: e=>this.set("safe", "register_limit_count", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Thời gian phạt đền (phút)",
-                    description: "Bạn cần đợi thời gian phạt trôi qua trước khi có thể đăng ký lại."
+                    title: "\u60e9\u7f5a\u65f6\u95f4(\u5206\u949f)",
+                    description: "\u9700\u8981\u7b49\u5f85\u60e9\u7f5a\u65f6\u95f4\u8fc7\u540e\u624d\u53ef\u4ee5\u518d\u6b21\u6ce8\u518c\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.register_limit_expire,
                     onChange: e=>this.set("safe", "register_limit_expire", e.target.value)
                 }))) : "", f.a.createElement(m, {
-                    title: "Hạn chế chống nổ",
-                    description: "Sau khi mở, nếu tài khoản không đăng nhập quá nhiều lần sẽ bị hạn chế."
+                    title: "\u9632\u7206\u7834\u9650\u5236",
+                    description: "\u5f00\u542f\u540e\u5982\u679c\u8be5\u8d26\u6237\u5c1d\u8bd5\u767b\u9646\u5931\u8d25\u6b21\u6570\u8fc7\u591a\u5c06\u4f1a\u88ab\u9650\u5236\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(_.password_limit_enable),
                     onChange: e=>this.set("safe", "password_limit_enable", e ? 1 : 0)
                 })), _.password_limit_enable ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tính thường xuyên",
-                    description: "Hình phạt bắt đầu sau khi đạt đến số lần thất bại."
+                    title: "\u6b21\u6570",
+                    description: "\u8fbe\u5230\u5931\u8d25\u6b21\u6570\u540e\u5f00\u542f\u60e9\u7f5a\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.password_limit_count,
                     onChange: e=>this.set("safe", "password_limit_count", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Thời gian phạt đền (phút)",
-                    description: "Bạn cần đợi thời gian phạt trôi qua trước khi có thể đăng nhập lại."
+                    title: "\u60e9\u7f5a\u65f6\u95f4(\u5206\u949f)",
+                    description: "\u9700\u8981\u7b49\u5f85\u60e9\u7f5a\u65f6\u95f4\u8fc7\u540e\u624d\u53ef\u4ee5\u518d\u6b21\u767b\u9646\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: _.password_limit_expire,
                     onChange: e=>this.set("safe", "password_limit_expire", e.target.value)
                 }))) : "")), f.a.createElement(s["a"].TabPane, {
-                    tab: "Đăng Ký",
+                    tab: "\u8ba2\u9605",
                     key: "subscribe"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Cho phép người dùng thay đổi đăng ký",
-                    description: "Sau khi bật tính năng này, người dùng sẽ có thể thực hiện các thay đổi đối với gói đăng ký của mình"
+                    title: "\u5141\u8bb8\u7528\u6237\u66f4\u6539\u8ba2\u9605",
+                    description: "\u5f00\u542f\u540e\u7528\u6237\u5c06\u4f1a\u53ef\u4ee5\u5bf9\u8ba2\u9605\u8ba1\u5212\u8fdb\u884c\u53d8\u66f4\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(r.plan_change_enable),
                     onChange: e=>this.set("subscribe", "plan_change_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Phương pháp thiết lập lại lưu lượng truy cập hàng tháng",
-                    description: "Phương pháp đặt lại lưu lượng truy cập toàn cầu, mặc định là ngày 1 hàng tháng. Điều này có thể được đặt riêng cho các đăng ký trong Quản lý đăng ký"
+                    title: "\u6708\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f",
+                    description: "\u5168\u5c40\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f\uff0c\u9ed8\u8ba4\u6bcf\u67081\u53f7\u3002\u53ef\u4ee5\u5728\u8ba2\u9605\u7ba1\u7406\u4e3a\u8ba2\u9605\u5355\u72ec\u8bbe\u7f6e\u3002"
                 }, f.a.createElement("select", {
                     onChange: e=>this.set("subscribe", "reset_traffic_method", e.target.value),
                     className: "form-control",
                     value: r.reset_traffic_method,
-                    placeholder: "Vui lòng chọn phương thức đặt lại đăng ký"
+                    placeholder: "\u8bf7\u9009\u62e9\u8ba2\u9605\u91cd\u7f6e\u65b9\u5f0f"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Ngày 1 hàng tháng"), f.a.createElement("option", {
+                }, "\u6bcf\u67081\u53f7"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại theo tháng"), f.a.createElement("option", {
+                }, "\u6309\u6708\u91cd\u7f6e"), f.a.createElement("option", {
                     value: 2
-                }, "Không đặt lại"), f.a.createElement("option", {
+                }, "\u4e0d\u91cd\u7f6e"), f.a.createElement("option", {
                     value: 3
-                }, "Ngày 1 tháng 1 hàng năm"), f.a.createElement("option", {
+                }, "\u6bcf\u5e741\u67081\u65e5"), f.a.createElement("option", {
                     value: 4
-                }, "Đặt lại theo năm"))), f.a.createElement(m, {
-                    title: "Mở chương trình giảm giá",
-                    description: "Sau khi kích hoạt, hệ thống sẽ giảm giá thuê bao ban đầu nếu người dùng thay đổi thuê bao. Vui lòng tham khảo tài liệu về kế hoạch."
+                }, "\u6309\u5e74\u91cd\u7f6e"))), f.a.createElement(m, {
+                    title: "\u5f00\u542f\u6298\u62b5\u65b9\u6848",
+                    description: "\u5f00\u542f\u540e\u7528\u6237\u66f4\u6362\u8ba2\u9605\u5c06\u4f1a\u7531\u7cfb\u7edf\u5bf9\u539f\u6709\u8ba2\u9605\u8fdb\u884c\u6298\u62b5\uff0c\u65b9\u6848\u53c2\u8003\u6587\u6863\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(r.surplus_enable),
-                    onChange: e => this.set("subscribe", "surplus_enable", e ? 1 : 0)
+                    onChange: e=>this.set("subscribe", "surplus_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Sự kiện kích hoạt khi mua gói đăng ký mới",
-                    description: "Khi hoàn tất mua gói đăng ký mới, nhiệm vụ này sẽ được kích hoạt."
+                    title: "\u5f53\u8ba2\u9605\u65b0\u8d2d\u65f6\u89e6\u53d1\u4e8b\u4ef6",
+                    description: "\u65b0\u8d2d\u8ba2\u9605\u5b8c\u6210\u65f6\u5c06\u89e6\u53d1\u8be5\u4efb\u52a1\u3002"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("subscribe", "new_order_event_id", e.target.value),
+                    onChange: e=>this.set("subscribe", "new_order_event_id", e.target.value),
                     className: "form-control",
                     value: r.new_order_event_id,
-                    placeholder: "Vui lòng chọn sự kiện"
+                    placeholder: "\u8bf7\u9009\u62e9\u4e8b\u4ef6"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Không thực hiện bất kỳ hành động nào"), f.a.createElement("option", {
+                }, "\u4e0d\u6267\u884c\u4efb\u4f55\u52a8\u4f5c"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại lưu lượng người dùng"))), f.a.createElement(m, {
-                    title: "Sự kiện kích hoạt khi gia hạn gói đăng ký",
-                    description: "Khi hoàn tất gia hạn gói đăng ký, nhiệm vụ này sẽ được kích hoạt."
+                }, "\u91cd\u7f6e\u7528\u6237\u6d41\u91cf"))), f.a.createElement(m, {
+                    title: "\u5f53\u8ba2\u9605\u7eed\u8d39\u65f6\u89e6\u53d1\u4e8b\u4ef6",
+                    description: "\u7eed\u8d39\u8ba2\u9605\u5b8c\u6210\u65f6\u5c06\u89e6\u53d1\u8be5\u4efb\u52a1\u3002"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("subscribe", "renew_order_event_id", e.target.value),
+                    onChange: e=>this.set("subscribe", "renew_order_event_id", e.target.value),
                     className: "form-control",
                     value: r.renew_order_event_id,
-                    placeholder: "Vui lòng chọn sự kiện"
+                    placeholder: "\u8bf7\u9009\u62e9\u4e8b\u4ef6"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Không thực hiện bất kỳ hành động nào"), f.a.createElement("option", {
+                }, "\u4e0d\u6267\u884c\u4efb\u4f55\u52a8\u4f5c"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại lưu lượng người dùng"))), f.a.createElement(m, {
-                    title: "Sự kiện kích hoạt khi thay đổi gói đăng ký",
-                    description: "Khi hoàn tất thay đổi gói đăng ký, nhiệm vụ này sẽ được kích hoạt."
+                }, "\u91cd\u7f6e\u7528\u6237\u6d41\u91cf"))), f.a.createElement(m, {
+                    title: "\u5f53\u8ba2\u9605\u53d8\u66f4\u65f6\u89e6\u53d1\u4e8b\u4ef6",
+                    description: "\u53d8\u66f4\u8ba2\u9605\u5b8c\u6210\u65f6\u5c06\u89e6\u53d1\u8be5\u4efb\u52a1\u3002"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("subscribe", "change_order_event_id", e.target.value),
+                    onChange: e=>this.set("subscribe", "change_order_event_id", e.target.value),
                     className: "form-control",
                     value: r.change_order_event_id,
-                    placeholder: "Vui lòng chọn sự kiện"
+                    placeholder: "\u8bf7\u9009\u62e9\u4e8b\u4ef6"
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Không thực hiện bất kỳ hành động nào"), f.a.createElement("option", {
+                }, "\u4e0d\u6267\u884c\u4efb\u4f55\u52a8\u4f5c"), f.a.createElement("option", {
                     value: 1
-                }, "Đặt lại lưu lượng người dùng"))), f.a.createElement(m, {
-                    title: "Hiển thị thông tin đăng ký trong phần đăng ký",
-                    description: "Sau khi bật, thông tin đăng ký sẽ được hiển thị trong phần đăng ký của người dùng."
-                },
-                 f.a.createElement(l["a"], {
+                }, "\u91cd\u7f6e\u7528\u6237\u6d41\u91cf"))), f.a.createElement(m, {
+                    title: "\u5728\u8ba2\u9605\u4e2d\u5c55\u793a\u8ba2\u9605\u4fe1\u606f",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f1a\u5728\u7528\u6237\u8ba2\u9605\u8282\u70b9\u65f6\u8f93\u51fa\u8ba2\u9605\u4fe1\u606f\u3002"
+                }, f.a.createElement(l["a"], {
                     checked: parseInt(r.show_info_to_server_enable),
                     onChange: e=>this.set("subscribe", "show_info_to_server_enable", e ? 1 : 0)
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Nạp tiền",
+                    tab: "\u5145\u503c",
                     key: "deposit"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Thưởng nạp tiền",
-                    description: "Nạp tiền một số tiền nhất định có thể nhận được thưởng."
+                    title: "\u5145\u503c\u5956\u52b1",
+                    description: "\u5145\u503c\u4e00\u5b9a\u91d1\u989d\u53ef\u4ee5\u83b7\u5f97\u7684\u5956\u52b1\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "2",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập số tiền nạp: Thưởng tiền, mã số chia tỷ lệ\nVí dụ: 50:18,100:38, 200:88",
+                    placeholder: "\u8bf7\u8f93\u5165 \u5145\u503c\u91d1\u989d:\u5956\u52b1\u91d1\u989d,\u9017\u53f7\u5206\u5272\n\u5982 50:18,100:38, 200:88",
                     defaultValue: e.deposit.deposit_bounus,
-                    onChange: e => this.set("deposit", "deposit_bounus", e.target.value.split(","))
+                    onChange: e=>this.set("deposit", "deposit_bounus", e.target.value.split(","))
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Ticket",
+                    tab: "\u5de5\u5355",
                     key: "ticket"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Ai có thể tạo Ticket",
-                    description: "Chọn đối tượng được phép tạo ticket"
+                    title: "\u5de5\u5355\u8bbe\u7f6e",
+                    description: "\u8bf7\u9009\u62e9\u5de5\u5355\u7684\u72b6\u6001\u3002"
                 }, f.a.createElement("select", {
                     onChange: e => this.set("ticket", "ticket_status", e.target.value),
                     className: "form-control",
                     value: e.ticket.ticket_status || 0,
                 }, f.a.createElement("option", {
                     value: 0
-                }, "Tất cả mọi người"),
-                    f.a.createElement("option", {
-                        value: 1
-                    }, "Chỉ người dùng đã từng mua gói dịch vụ"),
-                    f.a.createElement("option", {
-                        value: 2
-                    }, "Không ai có thể")
+                }, "\u5b8c\u5168\u5f00\u653e\u5de5\u5355"),
+                   f.a.createElement("option", {
+                    value: 1
+                }, "\u4ec5\u9650\u6709\u4ed8\u8d39\u8ba2\u5355\u7528\u6237"),
+                   f.a.createElement("option", {
+                    value: 2
+                }, "\u5b8c\u5168\u7981\u6b62\u5de5\u5355")
                 )))), f.a.createElement(s["a"].TabPane, {
-                    tab: "CTV & Hoa Hồng",
+                    tab: "\u9080\u8bf7&\u4f63\u91d1",
                     key: "invite"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Bật lời mời bắt buộc",
-                    description: "Sau khi bật, chỉ những người dùng có mã mời mới có thể đăng ký."
+                    title: "\u5f00\u542f\u5f3a\u5236\u9080\u8bf7",
+                    description: "\u5f00\u542f\u540e\u53ea\u6709\u88ab\u9080\u8bf7\u7684\u7528\u6237\u624d\u53ef\u4ee5\u8fdb\u884c\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.invite_force),
-                    onChange: e => this.set("invite", "invite_force", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "invite_force", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Tỷ lệ hoa hồng",
-                    description: "Mặc định tỷ lệ hoa hồng cho mời là toàn web, bạn có thể tùy chỉnh tỷ lệ hoa hồng cho người dùng trong quản lý người dùng."
+                    title: "\u9080\u8bf7\u4f63\u91d1\u767e\u5206\u6bd4",
+                    description: "\u9ed8\u8ba4\u5168\u5c40\u7684\u4f63\u91d1\u5206\u914d\u6bd4\u4f8b\uff0c\u4f60\u53ef\u4ee5\u5728\u7528\u6237\u7ba1\u7406\u5355\u72ec\u914d\u7f6e\u5355\u4e2a\u6bd4\u4f8b\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: n.invite_commission,
-                    onChange: e => this.set("invite", "invite_commission", parseInt(e.target.value))
+                    onChange: e=>this.set("invite", "invite_commission", parseInt(e.target.value))
                 })), f.a.createElement(m, {
-                    title: "Giới hạn tạo mã mời cho người dùng"
+                    title: "\u7528\u6237\u53ef\u521b\u5efa\u9080\u8bf7\u7801\u4e0a\u9650"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: n.invite_gen_limit,
-                    onChange: e => this.set("invite", "invite_gen_limit", parseInt(e.target.value))
+                    onChange: e=>this.set("invite", "invite_gen_limit", parseInt(e.target.value))
                 })), f.a.createElement(m, {
-                    title: "Mã mời không hết hạn",
-                    description: "Sau khi bật, mã mời sẽ không hết hạn, nếu không sẽ hết hạn sau khi sử dụng."
+                    title: "\u9080\u8bf7\u7801\u6c38\u4e0d\u5931\u6548",
+                    description: "\u5f00\u542f\u540e\u9080\u8bf7\u7801\u88ab\u4f7f\u7528\u540e\u5c06\u4e0d\u4f1a\u5931\u6548\uff0c\u5426\u5219\u4f7f\u7528\u8fc7\u540e\u5373\u5931\u6548\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.invite_never_expire),
-                    onChange: e => this.set("invite", "invite_never_expire", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "invite_never_expire", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Hoa hồng chỉ lần đầu mời",
-                    description: "Sau khi bật, người mời chỉ nhận hoa hồng lần đầu tiên, có thể tùy chỉnh trong quản lý người dùng."
+                    title: "\u4f63\u91d1\u4ec5\u9996\u6b21\u53d1\u653e",
+                    description: "\u5f00\u542f\u540e\u88ab\u9080\u8bf7\u4eba\u9996\u6b21\u652f\u4ed8\u65f6\u624d\u4f1a\u4ea7\u751f\u4f63\u91d1\uff0c\u53ef\u4ee5\u5728\u7528\u6237\u7ba1\u7406\u5bf9\u7528\u6237\u8fdb\u884c\u5355\u72ec\u914d\u7f6e\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.commission_first_time_enable),
-                    onChange: e => this.set("invite", "commission_first_time_enable", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "commission_first_time_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "hoa hồng tự động xác nhận",
-                    description: "Sau khi bật, hoa hồng sẽ tự động được xác nhận sau 3 ngày từ khi đăng ký."
+                    title: "\u4f63\u91d1\u81ea\u52a8\u786e\u8ba4",
+                    description: "\u5f00\u542f\u540e\u4f63\u91d1\u5c06\u4f1a\u5728\u8ba2\u5355\u5b8c\u62103\u65e5\u540e\u81ea\u52a8\u8fdb\u884c\u786e\u8ba4\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.commission_auto_check_enable),
-                    onChange: e => this.set("invite", "commission_auto_check_enable", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "commission_auto_check_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Giới hạn yêu cầu rút tiền (VND)",
-                    description: "Nhỏ hơn mức yêu cầu tiền rút sẽ không được giao dịch."
+                    title: "\u63d0\u73b0\u5355\u7533\u8bf7\u95e8\u69db(\u5143)",
+                    description: "\u5c0f\u4e8e\u95e8\u69db\u91d1\u989d\u7684\u63d0\u73b0\u5355\u5c06\u4e0d\u4f1a\u88ab\u63d0\u4ea4\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: n.commission_withdraw_limit,
-                    onChange: e => this.set("invite", "commission_withdraw_limit", e.target.value)
+                    onChange: e=>this.set("invite", "commission_withdraw_limit", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Phương thức rút tiền",
-                    description: "Các phương thức rút tiền được hỗ trợ."
+                    title: "\u63d0\u73b0\u65b9\u5f0f",
+                    description: "\u53ef\u4ee5\u652f\u6301\u7684\u63d0\u73b0\u65b9\u5f0f\u3002"
                 }, f.a.createElement("textarea", {
                     rows: "4",
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập sau dấu phân cách, ví dụ: thanh toán bao,USDT,bitcoin",
+                    placeholder: "\u8bf7\u8f93\u5165\u540e\u7f00\u57df\u540d\uff0c\u9017\u53f7\u5206\u5272 \u5982\uff1a\u652f\u4ed8\u5b9d,USDT,\u8d1d\u5b9d",
                     defaultValue: n.commission_withdraw_method,
-                    onChange: e => this.set("invite", "commission_withdraw_method", e.target.value.split(","))
+                    onChange: e=>this.set("invite", "commission_withdraw_method", e.target.value.split(","))
                 })), f.a.createElement(m, {
-                    title: "Đóng yêu cầu rút tiền",
-                    description: "Sau khi đóng, người dùng sẽ không thể yêu cầu rút tiền, và thưởng sẽ trực tiếp được chuyển vào số dư người dùng."
+                    title: "\u5173\u95ed\u63d0\u73b0",
+                    description: "\u5173\u95ed\u540e\u5c06\u7981\u6b62\u7528\u6237\u7533\u8bf7\u63d0\u73b0\uff0c\u4e14\u9080\u8bf7\u4f63\u91d1\u5c06\u4f1a\u76f4\u63a5\u8fdb\u5165\u7528\u6237\u4f59\u989d\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.withdraw_close_enable),
-                    onChange: e => this.set("invite", "withdraw_close_enable", e ? 1 : 0)
-                })),
-                f.a.createElement(m, {
-                    title: "Phân phối cấp ba",
-                    description: "Sau khi bật, tiền thưởng sẽ được phân phối theo tỷ lệ 3 cấp, tổng tỷ lệ không được > 100%."
+                    onChange: e=>this.set("invite", "withdraw_close_enable", e ? 1 : 0)
+                })), f.a.createElement(m, {
+                    title: "\u4e09\u7ea7\u5206\u9500",
+                    description: "\u5f00\u542f\u540e\u5c06\u4f63\u91d1\u5c06\u6309\u7167\u8bbe\u7f6e\u76843\u6210\u6bd4\u4f8b\u8fdb\u884c\u5206\u6210\uff0c\u4e09\u6210\u6bd4\u4f8b\u5408\u8ba1\u8bf7\u4e0d\u8981>100%\u3002"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(n.commission_distribution_enable),
-                    onChange: e => this.set("invite", "commission_distribution_enable", e ? 1 : 0)
+                    onChange: e=>this.set("invite", "commission_distribution_enable", e ? 1 : 0)
                 })), parseInt(n.commission_distribution_enable) ? f.a.createElement(f.a.Fragment, null, f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tỷ lệ mời cấp một"
+                    title: "\u4e00\u7ea7\u9080\u8bf7\u4eba\u6bd4\u4f8b"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập tỷ lệ ví dụ: 50",
+                    placeholder: "\u8bf7\u8f93\u5165\u6bd4\u4f8b\u5982\uff1a50",
                     defaultValue: n.commission_distribution_l1,
-                    onChange: e => this.set("invite", "commission_distribution_l1", e.target.value)
+                    onChange: e=>this.set("invite", "commission_distribution_l1", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tỷ lệ mời cấp hai"
+                    title: "\u4e8c\u7ea7\u9080\u8bf7\u4eba\u6bd4\u4f8b"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập tỷ lệ ví dụ: 30",
+                    placeholder: "\u8bf7\u8f93\u5165\u6bd4\u4f8b\u5982\uff1a30",
                     defaultValue: n.commission_distribution_l2,
-                    onChange: e => this.set("invite", "commission_distribution_l2", e.target.value)
+                    onChange: e=>this.set("invite", "commission_distribution_l2", e.target.value)
                 })), f.a.createElement(m, {
                     isChildren: !0,
-                    title: "Tỷ lệ mời cấp ba"
+                    title: "\u4e09\u7ea7\u9080\u8bf7\u4eba\u6bd4\u4f8b"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập tỷ lệ ví dụ: 20",
+                    placeholder: "\u8bf7\u8f93\u5165\u6bd4\u4f8b\u5982\uff1a20",
                     defaultValue: n.commission_distribution_l3,
-                    onChange: e => this.set("invite", "commission_distribution_l3", e.target.value)
+                    onChange: e=>this.set("invite", "commission_distribution_l3", e.target.value)
                 }))) : "")), f.a.createElement(s["a"].TabPane, {
-                    tab: "Cá nhân hóa",
+                    tab: "\u4e2a\u6027\u5316",
                     key: "frontend"
                 }, f.a.createElement("div", {
                     className: "block-content"
@@ -6150,95 +6148,93 @@
                     role: "alert"
                 }, f.a.createElement("p", {
                     className: "mb-0"
-                }, "Nếu bạn sử dụng phương thức phân ly trước V2board quản lý cuối, thì cấu hình trang này sẽ không có hiệu lực. Hiểu thêm", f.a.createElement("b", null, f.a.createElement("a", {
+                }, "\u5982\u679c\u4f60\u91c7\u7528\u524d\u540e\u5206\u79bb\u7684\u65b9\u5f0f\u90e8\u7f72V2board\u7ba1\u7406\u7aef\uff0c\u90a3\u4e48\u672c\u9875\u914d\u7f6e\u5c06\u4e0d\u4f1a\u751f\u6548\u3002\u4e86\u89e3", f.a.createElement("b", null, f.a.createElement("a", {
                     href: "https://docs.v2board.com/use/advanced.html#%E5%89%8D%E7%AB%AF%E5%88%86%E7%A6%BB"
-                }, "Phân ly trước"))))))), f.a.createElement("div", {
+                }, "\u524d\u540e\u5206\u79bb"))))))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Chế độ sidebar"
+                    title: "\u8fb9\u680f\u98ce\u683c"
                 }, f.a.createElement(l["a"], {
-                    checkedChildren: "Sáng",
-                    unCheckedChildren: "Tối",
+                    checkedChildren: "\u4eae",
+                    unCheckedChildren: "\u6697",
                     checked: "light" === c.frontend_theme_sidebar ? 1 : 0,
-                    onChange: e => this.set("site", "frontend_theme_sidebar", e ? "light" : "dark")
+                    onChange: e=>this.set("site", "frontend_theme_sidebar", e ? "light" : "dark")
                 })), f.a.createElement(m, {
-                    title: "Chế độ header"
+                    title: "\u5934\u90e8\u98ce\u683c"
                 }, f.a.createElement(l["a"], {
-                    checkedChildren: "Sáng",
-                    unCheckedChildren: "Tối",
+                    checkedChildren: "\u4eae",
+                    unCheckedChildren: "\u6697",
                     checked: "light" === c.frontend_theme_header ? 1 : 0,
-                    onChange: e => this.set("site", "frontend_theme_header", e ? "light" : "dark")
+                    onChange: e=>this.set("site", "frontend_theme_header", e ? "light" : "dark")
                 })), f.a.createElement(m, {
-                    title: "Màu chủ đề"
+                    title: "\u4e3b\u9898\u8272"
                 }, f.a.createElement("select", {
                     className: "form-control",
                     defaultValue: c.frontend_theme_color,
-                    onChange: e => this.set("frontend", "frontend_theme_color", e.target.value)
+                    onChange: e=>this.set("frontend", "frontend_theme_color", e.target.value)
                 }, f.a.createElement("option", {
                     value: "default"
-                }, "Mặc định"), f.a.createElement("option", {
+                }, "\u9ed8\u8ba4"), f.a.createElement("option", {
                     value: "black"
-                }, "Đen"), f.a.createElement("option", {
+                }, "\u9ed1\u8272"), f.a.createElement("option", {
                     value: "darkblue"
-                }, "Xanh đen"), f.a.createElement("option", {
+                }, "\u6697\u84dd\u8272"), f.a.createElement("option", {
                     value: "green"
-                }, "Xanh lá"))), f.a.createElement(m, {
-                    title: "Ảnh nền",
-                    description: "Ảnh nền sẽ hiển thị ở trang đăng nhập sau khi đăng nhập."
+                }, "\u5976\u7eff\u8272"))), f.a.createElement(m, {
+                    title: "\u80cc\u666f",
+                    description: "\u5c06\u4f1a\u5728\u540e\u53f0\u767b\u5f55\u9875\u9762\u8fdb\u884c\u5c55\u793a\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: "https://xxxxx.com/wallpaper.png",
                     defaultValue: c.frontend_background_url,
-                    onChange: e => this.set("frontend", "frontend_background_url", e.target.value)
+                    onChange: e=>this.set("frontend", "frontend_background_url", e.target.value)
                 })))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Server",
+                    tab: "\u8282\u70b9",
                     key: "server"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Khóa API",
-                    description: "Chìa khóa để V2Board giao tiếp với nút để người khác không lấy được dữ liệu."
+                    title: "\u901a\u8baf\u5bc6\u94a5",
+                    description: "V2board\u4e0e\u8282\u70b9\u901a\u8baf\u7684\u5bc6\u94a5\uff0c\u4ee5\u4fbf\u6570\u636e\u4e0d\u4f1a\u88ab\u4ed6\u4eba\u83b7\u53d6\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: u.server_token,
-                    onChange: e => this.set("server", "server_token", e.target.value)
+                    onChange: e=>this.set("server", "server_token", e.target.value)
                 }))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Khoảng cách giữa các lần yêu cầu dữ liệu của server",
-                    description: "Khoảng thời gian giữa các lần lấy dữ liệu từ server."
+                    title: "\u8282\u70b9\u62c9\u53d6\u52a8\u4f5c\u8f6e\u8be2\u95f4\u9694",
+                    description: "\u8282\u70b9\u4ece\u9762\u677f\u83b7\u53d6\u6570\u636e\u7684\u95f4\u9694\u9891\u7387\u3002"
                 }, f.a.createElement(a["a"], {
-                    addonAfter: "giây",
+                    addonAfter: "\u79d2",
                     size: "large",
                     type: "number",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: u.server_pull_interval,
-                    onChange: e => this.set("server", "server_pull_interval", e.target.value)
-                }))),
-                 f.a.createElement("div", {
+                    onChange: e=>this.set("server", "server_pull_interval", e.target.value)
+                }))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Chế độ gửi động tác nghỉ giữa các điểm",
-                    description: "Chế độ gửi dữ liệu đến màn hình với tần suất giữa các điểm."
+                    title: "\u8282\u70b9\u63a8\u9001\u52a8\u4f5c\u8f6e\u8be2\u95f4\u9694",
+                    description: "\u8282\u70b9\u63a8\u9001\u6570\u636e\u5230\u9762\u677f\u7684\u95f4\u9694\u9891\u7387\u3002"
                 }, f.a.createElement(a["a"], {
-                    addonAfter: "giây",
+                    addonAfter: "\u79d2",
                     size: "large",
                     type: "number",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: u.server_push_interval,
-                    onChange: e => this.set("server", "server_push_interval", e.target.value)
-                }))),
-                 f.a.createElement(m, {
-                    title: "Chế độ giới hạn thiết bị sử dụng mô hình phẳng",
-                    description: "Khi bật, cùng một địa chỉ IP sẽ chỉ được sử dụng cho một thiết bị tại một thời điểm."
+                    onChange: e=>this.set("server", "server_push_interval", e.target.value)
+                }))), f.a.createElement(m, {
+                    title: "\u5168\u5c40\u8bbe\u5907\u6570\u9650\u5236\u91c7\u7528\u5bbd\u677e\u6a21\u5f0f",
+                    description: "\u5f00\u542f\u540e\u540c\u4e00IP\u5730\u5740\u4f7f\u7528\u591a\u4e2a\u8282\u70b9\u53ea\u7edf\u8ba1\u4e3a\u4e00\u4e2a\u8bbe\u5907"
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(u.device_limit_mode),
                     onChange: e=>this.set("server", "device_limit_mode", e ? 1 : 0)
                 }))), f.a.createElement(s["a"].TabPane, {
-                    tab: "Email",
+                    tab: "\u90ae\u4ef6",
                     key: "email"
                 }, f.a.createElement("div", {
                     className: "block-content"
@@ -6251,67 +6247,67 @@
                     role: "alert"
                 }, f.a.createElement("p", {
                     className: "mb-0"
-                }, "Nếu bạn thay đổi cấu hình của trang này, bạn cần khởi động lại dịch vụ xếp hàng. Ngoài ra, mức độ ưu tiên cấu hình của trang này cao hơn cấu hình email trong .env"))))), f.a.createElement("div", {
+                }, "\u5982\u679c\u4f60\u66f4\u6539\u4e86\u672c\u9875\u914d\u7f6e\uff0c\u9700\u8981\u5bf9\u961f\u5217\u670d\u52a1\u8fdb\u884c\u91cd\u542f\u3002\u53e6\u5916\u672c\u9875\u914d\u7f6e\u4f18\u5148\u7ea7\u9ad8\u4e8e.env\u4e2d\u90ae\u4ef6\u914d\u7f6e\u3002"))))), f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Địa chỉ máy chủ SMTP",
-                    description: "Địa chỉ máy chủ do nhà cung cấp dịch vụ email cung cấp"
+                    title: "SMTP\u670d\u52a1\u5668\u5730\u5740",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u670d\u52a1\u5730\u5740"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_host,
                     onChange: e=>this.set("email", "email_host", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Cổng dịch vụ SMTP",
-                    description: "Các cổng thường gặp là 25, 465, 587"
+                    title: "SMTP\u670d\u52a1\u7aef\u53e3",
+                    description: "\u5e38\u89c1\u7684\u7aef\u53e3\u670925, 465, 587"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_port,
                     onChange: e=>this.set("email", "email_port", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Phương thức mã hóa SMTP",
-                    description: "Cổng 465 sử dụng phương thức mã hóa SSL, cổng 587 sử dụng phương thức mã hóa TLS"
+                    title: "SMTP\u52a0\u5bc6\u65b9\u5f0f",
+                    description: "465\u7aef\u53e3\u52a0\u5bc6\u65b9\u5f0f\u4e00\u822c\u4e3aSSL\uff0c587\u7aef\u53e3\u52a0\u5bc6\u65b9\u5f0f\u4e00\u822c\u4e3aTLS"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_encryption,
                     onChange: e=>this.set("email", "email_encryption", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Tài khoản SMTP",
-                    description: "Tài khoản do nhà cung cấp dịch vụ email cung cấp"
+                    title: "SMTP\u8d26\u53f7",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u8d26\u53f7"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_username,
                     onChange: e=>this.set("email", "email_username", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Mật khẩu SMTP",
-                    description: "Mật khẩu do nhà cung cấp dịch vụ email cung cấp"
+                    title: "SMTP\u5bc6\u7801",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u5bc6\u7801"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_password,
-                    onChange: e => this.set("email", "email_password", e.target.value)
+                    onChange: e=>this.set("email", "email_password", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Địa chỉ gửi email",
-                    description: "Địa chỉ gửi email do nhà cung cấp dịch vụ email cung cấp"
+                    title: "\u53d1\u4ef6\u5730\u5740",
+                    description: "\u7531\u90ae\u4ef6\u670d\u52a1\u5546\u63d0\u4f9b\u7684\u53d1\u4ef6\u5730\u5740"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
-                    placeholder: "Vui lòng nhập",
+                    placeholder: "\u8bf7\u8f93\u5165",
                     defaultValue: v.email_from_address,
-                    onChange: e => this.set("email", "email_from_address", e.target.value)
+                    onChange: e=>this.set("email", "email_from_address", e.target.value)
                 })), f.a.createElement(m, {
-                    title: "Mẫu email",
-                    description: "Bạn có thể trong văn bản kiểm tra cách tự định nghĩa mẫu email"
+                    title: "\u90ae\u4ef6\u6a21\u677f",
+                    description: "\u4f60\u53ef\u4ee5\u5728\u6587\u6863\u67e5\u770b\u5982\u4f55\u81ea\u5b9a\u4e49\u90ae\u4ef6\u6a21\u677f"
                 }, f.a.createElement("select", {
-                    onChange: e => this.set("email", "email_template", e.target.value),
+                    onChange: e=>this.set("email", "email_template", e.target.value),
                     className: "form-control",
                     value: v.email_template
                 }, g.map(e=>{
@@ -6321,22 +6317,22 @@
                     }, e)
                 }
                 ))), f.a.createElement(m, {
-                    title: "Gửi thử email",
-                    description: "Email sẽ được gửi đến hộp thư của người dùng hiện tại đang đăng nhập"
+                    title: "\u53d1\u9001\u6d4b\u8bd5\u90ae\u4ef6",
+                    description: "\u90ae\u4ef6\u5c06\u4f1a\u53d1\u9001\u5230\u5f53\u524d\u767b\u9646\u7528\u6237\u90ae\u7bb1"
                 }, f.a.createElement(o["a"], {
                     loading: x,
                     type: "primary",
                     onClick: ()=>this.props.dispatch({
                         type: "config/testSendMail"
                     })
-                }, "Gửi thử email")))), f.a.createElement(s["a"].TabPane, {
+                }, "\u53d1\u9001\u6d4b\u8bd5\u90ae\u4ef6")))), f.a.createElement(s["a"].TabPane, {
                     tab: "Telegram",
                     key: "telegram"
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
-                    title: "Token Bot Telegram",
-                    description: "Vui lòng nhập token do Botfather cung cấp."
+                    title: "\u673a\u5668\u4ebaToken",
+                    description: "\u8bf7\u8f93\u5165\u7531Botfather\u63d0\u4f9b\u7684token\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -6344,8 +6340,8 @@
                     defaultValue: y.telegram_bot_token,
                     onChange: e=>this.set("telegram", "telegram_bot_token", e.target.value)
                 })), y.telegram_bot_token && f.a.createElement(m, {
-                    title: "Cài đặt Webhook",
-                    description: "Cài đặt Webhook cho bot Telegram. Nếu không cài đặt, bot sẽ không nhận được thông báo từ Telegram."
+                    title: "\u8bbe\u7f6eWebhook",
+                    description: "\u5bf9\u673a\u5668\u4eba\u8fdb\u884cWebhook\u8bbe\u7f6e\uff0c\u4e0d\u8bbe\u7f6e\u5c06\u65e0\u6cd5\u6536\u5230Telegram\u901a\u77e5\u3002"
                 }, f.a.createElement(o["a"], {
                     type: "primary",
                     onClick: ()=>{
@@ -6356,15 +6352,15 @@
                     ,
                     loading: b,
                     disabled: b
-                }, "Cài đặt ngay")), f.a.createElement(m, {
-                    title: "Kích hoạt thông báo bot Telegram",
-                    description: "Kích hoạt bot Telegram sẽ giúp quản trị viên và người dùng nhận thông báo cơ bản từ Telegram."
-                    }, f.a.createElement(l["a"], {
+                }, "\u4e00\u952e\u8bbe\u7f6e")), f.a.createElement(m, {
+                    title: "\u5f00\u542f\u673a\u5668\u4eba\u901a\u77e5",
+                    description: "\u5f00\u542f\u540ebot\u5c06\u4f1a\u5bf9\u7ed1\u5b9a\u4e86telegram\u7684\u7ba1\u7406\u5458\u548c\u7528\u6237\u8fdb\u884c\u57fa\u7840\u901a\u77e5\u3002"
+                }, f.a.createElement(l["a"], {
                     checked: parseInt(y.telegram_bot_enable),
                     onChange: e=>this.set("telegram", "telegram_bot_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
-                    title: "Địa chỉ nhóm Telegram",
-                    description: "Nhập địa chỉ nhóm Telegram để người dùng có thể tham gia, hoặc dùng cho các mục đích cần thiết."
+                    title: "\u7fa4\u7ec4\u5730\u5740",
+                    description: "\u586b\u5199\u540e\u5c06\u4f1a\u5728\u7528\u6237\u7aef\u5c55\u793a\uff0c\u6216\u8005\u88ab\u7528\u4e8e\u9700\u8981\u7684\u5730\u65b9\u3002"
                 }, f.a.createElement("input", {
                     type: "text",
                     className: "form-control",
@@ -12258,7 +12254,7 @@
                 }, d.a.createElement("label", null, "Server Name"), d.a.createElement(s["a"], {
                     value: t,
                     onChange: e=>this.change("serverName", e.target.value),
-                    placeholder: "Vui lòng để trống nếu không sử dụng"
+                    placeholder: "\u4e0d\u4f7f\u7528\u8bf7\u7559\u7a7a"
                 })), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", null, "Allow Insecure"), d.a.createElement("div", null, d.a.createElement(y["a"], {
@@ -12313,8 +12309,8 @@
                     })
                 } catch (e) {
                     h["a"].error({
-                        message: "Yêu cầu không thành công",
-                        description: "Định dạng cấu hình giao thức truyền tải không chính xác"
+                        message: "\u8bf7\u6c42\u5931\u8d25",
+                        description: "\u4f20\u8f93\u534f\u8bae\u914d\u7f6e\u683c\u5f0f\u6709\u8bef"
                     })
                 }
             }
@@ -12442,7 +12438,7 @@
                 }), d.a.createElement(r["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -12450,35 +12446,35 @@
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-8"
-                }, d.a.createElement("label", null, "Tên Nút"), d.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, d.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), d.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group col-4"
-                }, d.a.createElement("label", null, "Phóng đại"), d.a.createElement(s["a"], {
+                }, d.a.createElement("label", null, "\u500d\u7387"), d.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), d.a.createElement("div", {
                     className: "form-group"
-                }, d.a.createElement("label", null, "nhãn nút"), d.a.createElement(a["a"], {
+                }, d.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), d.a.createElement(a["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), d.a.createElement("div", {
                     className: "form-group"
-                }, d.a.createElement("label", null, "Nhóm quyền ", d.a.createElement(_["a"], null, d.a.createElement("a", {
+                }, d.a.createElement("label", null, "\u6743\u9650\u7ec4 ", d.a.createElement(_["a"], null, d.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), d.a.createElement(a["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), d.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -12492,18 +12488,18 @@
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-md-8 col-xs-12"
-                }, d.a.createElement("label", null, "Địa chỉ nút"), d.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập địa chỉ kết nối",
+                }, d.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), d.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8fde\u63a5\u5730\u5740",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
                 }, d.a.createElement("label", null, "TLS ", d.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình TLS", "tlsSettings")
-                }, "Chỉnh sửa cấu hình")), d.a.createElement(a["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91TLS\u914d\u7f6e", "tlsSettings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), d.a.createElement(a["a"], {
                     value: parseInt(e.tls) ? 1 : 0,
-                    placeholder: "Có hỗ trợ TLS hay không",
+                    placeholder: "\u662f\u5426\u652f\u6301TLS",
                     style: {
                         width: "100%"
                     },
@@ -12511,35 +12507,35 @@
                 }, d.a.createElement(a["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không được hỗ trợ"), d.a.createElement(a["a"].Option, {
+                }, "\u4e0d\u652f\u6301"), d.a.createElement(a["a"].Option, {
                     key: 1,
                     value: 1
-                }, "hỗ trợ")))), d.a.createElement("div", {
+                }, "\u652f\u6301")))), d.a.createElement("div", {
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, d.a.createElement("label", null, "Cổng kết nối"), d.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, d.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), d.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), d.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, d.a.createElement("label", null, "Cảng dịch vụ"), d.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối không giống NAT",
+                }, d.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), d.a.createElement(s["a"], {
+                    placeholder: "\u975eNAT\u540c\u8fde\u63a5\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>this.formChange("server_port", e.target.value)
                 }))), d.a.createElement("div", {
                     className: "row"
                 }, d.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, d.a.createElement("label", null, "Giao thức vận chuyển ", d.a.createElement("a", {
+                }, d.a.createElement("label", null, "\u4f20\u8f93\u534f\u8bae ", d.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình giao thức", "networkSettings")
-                }, "Chỉnh sửa cấu hình")), d.a.createElement(a["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u534f\u8bae\u914d\u7f6e", "networkSettings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), d.a.createElement(a["a"], {
                     value: e.network,
-                    placeholder: "Chọn giao thức vận chuyển",
+                    placeholder: "\u9009\u62e9\u4f20\u8f93\u534f\u8bae",
                     style: {
                         width: "100%"
                     },
@@ -12560,7 +12556,7 @@
                     className: "form-group"
                 }, d.a.createElement("label", null, d.a.createElement(o["a"], {
                     placement: "top"
-                }, "Nút cha ", d.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", d.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
@@ -12574,7 +12570,7 @@
                     }
                 }, d.a.createElement(a["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("vmess" === t.type && t.id !== e.id)
                         return d.a.createElement(a["a"].Option, {
                             key: Math.random(),
@@ -12583,10 +12579,10 @@
                 }
                 ))), d.a.createElement("div", {
                     className: "form-group"
-                }, d.a.createElement("label", null, "nhóm định tuyến"), d.a.createElement(a["a"], {
+                }, d.a.createElement("label", null, "\u8def\u7531\u7ec4"), d.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -12603,11 +12599,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), d.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), d.a.createElement(i["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi")), d.a.createElement(r["a"], {
+                }, "\u63d0\u4ea4")), d.a.createElement(r["a"], {
                     closable: !1,
                     id: "server",
                     width: "80%",
@@ -18795,7 +18791,7 @@
                 e.getThemesLoading;
                 return l.a.createElement(c["a"], i()({}, this.props, {
                     loading: Object.keys(t).length <= 0,
-                    title: "Cấu hình chủ đề"
+                    title: "\u4e3b\u9898\u914d\u7f6e"
                 }), l.a.createElement("div", {
                     className: "row"
                 }, l.a.createElement("div", {
@@ -18805,9 +18801,9 @@
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Nếu bạn triển khai riêng V2board, cấu hình chủ đề sẽ không có hiệu lực. học hỏi", l.a.createElement("b", null, l.a.createElement("a", {
+                }, "\u5982\u679c\u4f60\u91c7\u7528\u524d\u540e\u5206\u79bb\u7684\u65b9\u5f0f\u90e8\u7f72V2board\uff0c\u90a3\u4e48\u4e3b\u9898\u914d\u7f6e\u5c06\u4e0d\u4f1a\u751f\u6548\u3002\u4e86\u89e3", l.a.createElement("b", null, l.a.createElement("a", {
                     href: "https://docs.v2board.com/use/advanced.html#%E5%89%8D%E7%AB%AF%E5%88%86%E7%A6%BB"
-                }, "sự tách biệt phía trước và phía sau")))))), Object.keys(t).map(e=>{
+                }, "\u524d\u540e\u5206\u79bb")))))), Object.keys(t).map(e=>{
                     var r = t[e];
                     return l.a.createElement("div", {
                         className: "block block-transparent bg-image mb-0 mb-md-3 bg-primary",
@@ -18831,14 +18827,14 @@
                         className: "btn btn-sm rounded-pill btn-outline-light px-3 mr-2",
                         onClick: ()=>this.activeTheme(e),
                         disabled: n === e
-                    }, n === e ? "Chủ đề hiện tại" : "Kích hoạt chủ đề"), l.a.createElement(g, {
+                    }, n === e ? "\u5f53\u524d\u4e3b\u9898" : "\u6fc0\u6d3b\u4e3b\u9898"), l.a.createElement(g, {
                         keyName: e,
                         themeName: r.name,
                         configs: r.configs
                     }, l.a.createElement("button", {
                         type: "button",
                         className: "btn btn-sm rounded-pill btn-outline-light px-3"
-                    }, "Cài đặt chủ đề"))))))
+                    }, "\u4e3b\u9898\u8bbe\u7f6e"))))))
                 }
                 ))
             }
@@ -19215,8 +19211,8 @@
                     onOk: ()=>e || this.save(),
                     okText: e ? c.a.createElement(o["a"], {
                         type: "loading"
-                    }) : "Gửi",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88"
                 }, c.a.createElement("div", null, c.a.createElement("div", {
                     className: "form-group"
                 }, c.a.createElement("label", {
@@ -20937,127 +20933,127 @@
                 super(e),
                 this.state = {
                     nav: [{
-                        title: "Bảng Điều Khiển",
+                        title: "\u4eea\u8868\u76d8",
                         type: "item",
                         href: "/dashboard",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-speedometer"
                         })
                     }, {
-                        title: "Cài Đặt",
+                        title: "\u8bbe\u7f6e",
                         type: "heading"
                     }, {
-                        title: "Cấu Hình Hệ Thống",
+                        title: "\u7cfb\u7edf\u914d\u7f6e",
                         type: "item",
                         href: "/config/system",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-equalizer"
                         })
                     }, {
-                        title: "Cấu Hình Thanh Toán",
+                        title: "\u652f\u4ed8\u914d\u7f6e",
                         type: "item",
                         href: "/config/payment",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-credit-card"
                         })
                     }, {
-                        title: "Cầu Hình Chủ Đề",
+                        title: "\u4e3b\u9898\u914d\u7f6e",
                         type: "item",
                         href: "/config/theme",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-magic-wand"
                         })
                     }, {
-                        title: "Máy Chủ",
+                        title: "\u670d\u52a1\u5668",
                         type: "heading"
                     }, {
-                        title: "Quản Lý Node",
+                        title: "\u8282\u70b9\u7ba1\u7406",
                         type: "item",
                         href: "/server/manage",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-layers"
                         })
                     }, {
-                        title: "Quản Lý Group",
+                        title: "\u6743\u9650\u7ec4\u7ba1\u7406",
                         type: "item",
                         href: "/server/group",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-wrench"
                         })
                     }, {
-                        title: "Quản Lý Tuyến Đường",
+                        title: "\u8def\u7531\u7ba1\u7406",
                         type: "item",
                         href: "/server/route",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-shuffle"
                         })
                     }, {
-                        title: "Tài Chính",
+                        title: "\u8d22\u52a1",
                         type: "heading"
                     }, {
-                        title: "Quản Lý Đăng Ký",
+                        title: "\u8ba2\u9605\u7ba1\u7406",
                         type: "item",
                         href: "/plan",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-bag"
                         })
                     }, {
-                        title: "Quản Lý Đơn Hàng",
+                        title: "\u8ba2\u5355\u7ba1\u7406",
                         type: "item",
                         href: "/order",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-list"
                         })
                     }, {
-                        title: "Quản Lý Mã Giảm Giá",
+                        title: "\u4f18\u60e0\u5238\u7ba1\u7406",
                         type: "item",
                         href: "/coupon",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-present"
                         })
                     }, {
-                        title: "Quản Lý Thẻ Quà",
+                        title: "\u793c\u54c1\u5361\u7ba1\u7406",
                         type: "item",
                         href: "/giftcard",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-star"
                         })
                     }, {
-                        title: "Người Dùng",
+                        title: "\u7528\u6237",
                         type: "heading"
                     }, {
-                        title: "Quản Lý Người Dùng",
+                        title: "\u7528\u6237\u7ba1\u7406",
                         type: "item",
                         href: "/user",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-users"
                         })
                     }, {
-                        title: "Quản Lý Thông Báo",
+                        title: "\u516c\u544a\u7ba1\u7406",
                         type: "item",
                         href: "/notice",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-speech"
                         })
                     }, {
-                        title: "Quản Lý Ticket",
+                        title: "\u5de5\u5355\u7ba1\u7406",
                         type: "item",
                         href: "/ticket",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-support"
                         })
                     }, {
-                        title: "Quản Lý Hướng Dẫn",
+                        title: "\u77e5\u8bc6\u5e93\u7ba1\u7406",
                         type: "item",
                         href: "/knowledge",
                         icon: o.a.createElement("i", {
                             className: "nav-main-link-icon si si-bulb"
                         })
                     }, {
-                        title: "Mục Lục",
+                        title: "\u6307\u6807",
                         type: "heading"
                     }, {
-                        title: "Giám Sát Hàng Chờ",
+                        title: "\u961f\u5217\u76d1\u63a7",
                         type: "item",
                         href: "/queue",
                         icon: o.a.createElement("i", {
@@ -21269,7 +21265,7 @@
                     className: "dropdown-item d-flex justify-content-between align-items-center",
                     href: "javascript:void(0);",
                     onClick: ()=>this.logout()
-                }, "Đăng Xuất", o.a.createElement("i", {
+                }, "\u767b\u51fa", o.a.createElement("i", {
                     className: "fa fa-fw fa-sign-out-alt text-danger ml-1"
                 }))))))), this.props.search && o.a.createElement("div", {
                     className: "overlay-header bg-dark ".concat(this.state.showSearchBar ? "show" : "")
@@ -22219,94 +22215,94 @@
                 }), p.a.createElement(r["a"], {
                     id: "user",
                     width: "80%",
-                    title: "Quản lý người dùng",
+                    title: "\u7528\u6237\u7ba1\u7406",
                     visible: f,
                     onClose: ()=>this.hide(),
-                    cancelText: "Hủy bỏ"
+                    cancelText: "\u53d6\u6d88"
                 }, t.email ? p.a.createElement("div", null, p.a.createElement("div", null, p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Email"), p.a.createElement(u["a"], {
-                    placeholder: "Vui lòng nhập email",
+                }, "\u90ae\u7bb1"), p.a.createElement(u["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u90ae\u7bb1",
                     defaultValue: t.email,
                     onChange: e=>this.formChange("email", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Email người mời"), p.a.createElement(u["a"], {
-                    placeholder: "Vui lòng nhập email của người mời",
+                }, "\u9080\u8bf7\u4eba\u90ae\u7bb1"), p.a.createElement(u["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u9080\u8bf7\u4eba\u90ae\u7bb1",
                     defaultValue: t.invite_user_email,
                     onChange: e=>this.formChange("invite_user_email", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Mật khẩu mới"), p.a.createElement(u["a"], {
+                }, "\u5bc6\u7801"), p.a.createElement(u["a"], {
                     defaultValue: t.password,
-                    placeholder: "Vui lòng nhập mật khẩu mới",
+                    placeholder: "\u5982\u9700\u4fee\u6539\u5bc6\u7801\u8bf7\u8f93\u5165",
                     onChange: e=>this.formChange("password", e.target.value)
                 })), p.a.createElement("div", {
                     className: "row"
                 }, p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "Số dư"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "\u4f59\u989d"), p.a.createElement(u["a"], {
                     type: "number",
-                    addonAfter: "₫",
-                    placeholder: "Số dư",
+                    addonAfter: "\xa5",
+                    placeholder: "\u4f59\u989d",
                     defaultValue: t.balance,
                     onChange: e=>this.formChange("balance", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "Hoa hồng"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "\u63a8\u5e7f\u4f63\u91d1"), p.a.createElement(u["a"], {
                     type: "number",
-                    addonAfter: "₫",
-                    placeholder: "Hoa hồng",
+                    addonAfter: "\xa5",
+                    placeholder: "\u63a8\u5e7f\u4f63\u91d1",
                     defaultValue: t.commission_balance,
                     onChange: e=>this.formChange("commission_balance", e.target.value)
                 }))), p.a.createElement("div", {
                     className: "row"
                 }, p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "upload"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "\u5df2\u7528\u4e0a\u884c"), p.a.createElement(u["a"], {
                     type: "number",
                     addonAfter: "GB",
-                    placeholder: "upload",
+                    placeholder: "\u5df2\u7528\u4e0a\u884c",
                     defaultValue: t.u,
                     onChange: e=>this.formChange("u", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, p.a.createElement("label", null, "download"), p.a.createElement(u["a"], {
+                }, p.a.createElement("label", null, "\u5df2\u7528\u4e0b\u884c"), p.a.createElement(u["a"], {
                     type: "number",
                     addonAfter: "GB",
-                    placeholder: "download",
+                    placeholder: "\u5df2\u7528\u4e0b\u884c",
                     defaultValue: t.d,
                     onChange: e=>this.formChange("d", e.target.value)
                 }))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Dung Lượng"), p.a.createElement(u["a"], {
+                }, "\u6d41\u91cf"), p.a.createElement(u["a"], {
                     type: "number",
                     addonAfter: "GB",
                     defaultValue: t.transfer_enable,
-                    placeholder: "Vui lòng nhập dung lượng",
+                    placeholder: "\u8bf7\u8f93\u5165\u6d41\u91cf",
                     onChange: e=>this.formChange("transfer_enable", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Limit Thiết Bị"), p.a.createElement(u["a"], {
-                    placeholder: "Để trống sẽ không giới hạn",
+                }, "\u8bbe\u5907\u6570\u9650\u5236"), p.a.createElement(u["a"], {
+                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
                     defaultValue: t.device_limit,
                     onChange: e=>this.formChange("device_limit", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Hạn sử dụng"), p.a.createElement("div", null, p.a.createElement(c["a"], {
-                    placeholder: "hạn sử dụng",
+                }, "\u5230\u671f\u65f6\u95f4"), p.a.createElement("div", null, p.a.createElement(c["a"], {
+                    placeholder: "\u957f\u671f\u6709\u6548",
                     defaultValue: null !== t.expired_at && v()(1e3 * t.expired_at),
                     style: {
                         width: "100%"
@@ -22316,8 +22312,8 @@
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Gói"), p.a.createElement(l["a"], {
-                    placeholder: "Vui lòng chọn gói đăng ký người dùng",
+                }, "\u8ba2\u9605\u8ba1\u5212"), p.a.createElement(l["a"], {
+                    placeholder: "\u8bf7\u9009\u62e9\u7528\u6237\u8ba2\u9605\u8ba1\u5212",
                     style: {
                         width: "100%"
                     },
@@ -22325,7 +22321,7 @@
                     onChange: e=>this.formChange("plan_id", e)
                 }, p.a.createElement(l["a"].Option, {
                     value: null
-                }, "Không"), h.map(e=>{
+                }, "\u65e0"), h.map(e=>{
                     return p.a.createElement(l["a"].Option, {
                         key: Math.random(),
                         value: e.id
@@ -22335,7 +22331,7 @@
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Trạng thái tài khoản"), p.a.createElement(l["a"], {
+                }, "\u8d26\u6237\u72b6\u6001"), p.a.createElement(l["a"], {
                     style: {
                         width: "100%"
                     },
@@ -22344,14 +22340,14 @@
                 }, p.a.createElement(l["a"].Option, {
                     key: 1,
                     value: 1
-                }, "Bị khóa"), p.a.createElement(l["a"].Option, {
+                }, "\u5c01\u7981"), p.a.createElement(l["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Bình thường"))), p.a.createElement("div", {
+                }, "\u6b63\u5e38"))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Kiểu hoa hồng nhận được"), p.a.createElement(l["a"], {
+                }, "\u63a8\u8350\u8fd4\u5229\u7c7b\u578b"), p.a.createElement(l["a"], {
                     style: {
                         width: "100%"
                     },
@@ -22360,65 +22356,65 @@
                 }, p.a.createElement(l["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Theo thiết lập hệ thống"), p.a.createElement(l["a"].Option, {
+                }, "\u8ddf\u968f\u7cfb\u7edf\u8bbe\u7f6e"), p.a.createElement(l["a"].Option, {
                     key: 1,
                     value: 1
-                }, "Hoa hồng theo chu kỳ"), p.a.createElement(l["a"].Option, {
+                }, "\u5faa\u73af\u8fd4\u5229"), p.a.createElement(l["a"].Option, {
                     key: 2,
                     value: 2
-                }, "Hoa hồng lần đầu"))), p.a.createElement("div", {
+                }, "\u9996\u6b21\u8fd4\u5229"))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Phần trăm hoa hồng nhận được"), p.a.createElement(u["a"], {
+                }, "\u63a8\u8350\u8fd4\u5229\u6bd4\u4f8b"), p.a.createElement(u["a"], {
                     addonAfter: "%",
                     defaultValue: t.commission_rate,
-                    placeholder: "Vui lòng nhập tỷ lệ hoàn tiền giới thiệu (để trống thì sẽ theo thiết lập của trang)",
+                    placeholder: "\u8bf7\u8f93\u5165\u63a8\u8350\u8fd4\u5229\u6bd4\u4f8b(\u4e3a\u7a7a\u5219\u8ddf\u968f\u7ad9\u70b9\u8bbe\u7f6e\u8fd4\u5229\u6bd4\u4f8b)",
                     onChange: e=>this.formChange("commission_rate", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Giảm giá độc quyền cho user này ", p.a.createElement(a["a"], {
+                }, "\u4e13\u4eab\u6298\u6263\u6bd4\u4f8b ", p.a.createElement(a["a"], {
                     placement: "top",
-                    title: "Sau khi thiết lập, người dùng này sẽ luôn được hưởng mức chiết khấu này khi mua bất kỳ gói đăng ký nào"
+                    title: "\u8bbe\u7f6e\u540e\u8be5\u7528\u6237\u8d2d\u4e70\u4efb\u4f55\u8ba2\u9605\u5c06\u59cb\u7ec8\u4eab\u53d7\u8be5\u6298\u6263"
                 }, p.a.createElement(s["a"], {
                     type: "question-circle"
                 }))), p.a.createElement(u["a"], {
                     addonAfter: "%",
                     defaultValue: t.discount,
-                    placeholder: "vui lòng nhập % giảm giá độc quyền",
+                    placeholder: "\u8bf7\u8f93\u5165\u4e13\u4eab\u6298\u6263\u6bd4\u4f8b",
                     onChange: e=>this.formChange("discount", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Speed limit"), p.a.createElement(u["a"], {
+                }, "\u9650\u901f"), p.a.createElement(u["a"], {
                     addonAfter: "Mbps",
                     defaultValue: t.speed_limit,
-                    placeholder: "Để trống sẽ không giới hạn",
+                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
                     onChange: e=>this.formChange("speed_limit", e.target.value)
                 })), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Quyền Admin"), p.a.createElement("div", null, p.a.createElement(o["a"], {
+                }, "\u662f\u5426\u7ba1\u7406\u5458"), p.a.createElement("div", null, p.a.createElement(o["a"], {
                     checked: t.is_admin,
                     onChange: e=>this.formChange("is_admin", e ? 1 : 0)
                 }))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Quyền Nhân viên"), p.a.createElement("div", null, p.a.createElement(o["a"], {
+                }, "\u662f\u5426\u5458\u5de5"), p.a.createElement("div", null, p.a.createElement(o["a"], {
                     checked: t.is_staff,
                     onChange: e=>this.formChange("is_staff", e ? 1 : 0)
                 }))), p.a.createElement("div", {
                     className: "form-group"
                 }, p.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Ghi chú"), p.a.createElement("div", null, p.a.createElement(u["a"].TextArea, {
+                }, "\u5907\u6ce8"), p.a.createElement("div", null, p.a.createElement(u["a"].TextArea, {
                     rows: 4,
-                    placeholder: "Vui long nhập ghi chú..",
+                    placeholder: "\u8bf7\u5728\u8fd9\u91cc\u8bb0\u5f55..",
                     defaultValue: t.remarks,
                     onChange: e=>this.formChange("remarks", e.target.value)
                 })))), p.a.createElement("div", {
@@ -22428,12 +22424,12 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.hide()
-                }, "Hủy bỏ"), p.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), p.a.createElement(i["a"], {
                     disabled: n,
                     loading: n,
                     onClick: ()=>this.submit(),
                     type: "primary"
-                }, "Gửi"))) : p.a.createElement(s["a"], {
+                }, "\u63d0\u4ea4"))) : p.a.createElement(s["a"], {
                     type: "loading",
                     style: {
                         fontSize: 24,
@@ -26318,7 +26314,7 @@
                 }, o.a.createElement(p["a"], {
                     userId: null === n || void 0 === n ? void 0 : n.user_id
                 }, o.a.createElement(l["a"], {
-                    title: "Quản lý người dùng",
+                    title: "\u7528\u6237\u7ba1\u7406",
                     placement: "left"
                 }, o.a.createElement(c["a"], {
                     type: "user"
@@ -26338,13 +26334,13 @@
                 }, null === (t = this.props.ticket) || void 0 === t ? void 0 : t.message.map(e=>{
                     return e.is_me ? o.a.createElement("div", null, o.a.createElement("div", {
                         className: "font-size-sm text-muted my-2 text-right"
-                    }, h()(1e3 * e.created_at).format("DD/MM/YYYY HH:mm")), o.a.createElement("div", {
+                    }, h()(1e3 * e.created_at).format("YYYY/MM/DD HH:mm")), o.a.createElement("div", {
                         className: "text-right ml-4"
                     }, o.a.createElement("div", {
                         className: "d-inline-block bg-gray-lighter px-3 py-2 mb-2 mw-100 rounded text-left"
                     }, e.message))) : o.a.createElement("div", null, o.a.createElement("div", {
                         className: "font-size-sm text-muted my-2"
-                    }, h()(1e3 * e.created_at).format("DD/MM/YYYY HH:mm")), o.a.createElement("div", {
+                    }, h()(1e3 * e.created_at).format("YYYY/MM/DD HH:mm")), o.a.createElement("div", {
                         className: "mr-4"
                     }, o.a.createElement("div", {
                         className: "d-inline-block bg-success-lighter px-3 py-2 mb-2 mw-100 rounded text-left"
@@ -28141,7 +28137,7 @@
                 }), h.a.createElement(r["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -28149,35 +28145,35 @@
                     className: "row"
                 }, h.a.createElement("div", {
                     className: "form-group col-8"
-                }, h.a.createElement("label", null, "Tên Nút"), h.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, h.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), h.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), h.a.createElement("div", {
                     className: "form-group col-4"
-                }, h.a.createElement("label", null, "Phóng đại"), h.a.createElement(s["a"], {
+                }, h.a.createElement("label", null, "\u500d\u7387"), h.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "nhãn nút"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), h.a.createElement(a["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "Nhóm quyền ", h.a.createElement(d["a"], null, h.a.createElement("a", {
+                }, h.a.createElement("label", null, "\u6743\u9650\u7ec4 ", h.a.createElement(d["a"], null, h.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), h.a.createElement(a["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), h.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -28191,31 +28187,31 @@
                     className: "row"
                 }, h.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, h.a.createElement("label", null, "Địa chỉ nút"), h.a.createElement(s["a"], {
-                    placeholder: "Địa chỉ hoặc IP",
+                }, h.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), h.a.createElement(s["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 }))), h.a.createElement("div", {
                     className: "row"
                 }, h.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, h.a.createElement("label", null, "Cổng kết nối"), h.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, h.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), h.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), h.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, h.a.createElement("label", null, "Cảng dịch vụ"), h.a.createElement(s["a"], {
-                    placeholder: "Cổng mở máy chủ",
+                }, h.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), h.a.createElement(s["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>{
                         this.formChange("server_port", e.target.value)
                     }
                 }))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "thuật toán mã hóa"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u52a0\u5bc6\u7b97\u6cd5"), h.a.createElement(a["a"], {
                     value: e.cipher,
                     onChange: e=>this.formChange("cipher", e),
                     style: {
@@ -28235,7 +28231,7 @@
                     value: "2022-blake3-aes-256-gcm"
                 }, "2022-blake3-aes-256-gcm"))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "Bối rối"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u6df7\u6dc6"), h.a.createElement(a["a"], {
                     value: e.obfs || "",
                     onChange: e=>this.formChange("obfs", e),
                     style: {
@@ -28243,17 +28239,17 @@
                     }
                 }, h.a.createElement(a["a"].Option, {
                     value: ""
-                }, "Không"), h.a.createElement(a["a"].Option, {
+                }, "\u65e0"), h.a.createElement(a["a"].Option, {
                     value: "http"
                 }, "HTTP")), h.a.createElement("div", null, this.renderObfs())), h.a.createElement("div", {
                     className: "form-group"
                 }, h.a.createElement("label", null, h.a.createElement(o["a"], {
                     placement: "top"
-                }, "Nút cha ", h.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", h.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
-                }, "Tìm hiểu thêm"))), h.a.createElement(a["a"], {
+                }, "\u66f4\u591a\u89e3\u7b54"))), h.a.createElement(a["a"], {
                     value: e.parent_id || "",
                     onChange: e=>this.formChange("parent_id", e),
                     style: {
@@ -28261,7 +28257,7 @@
                     }
                 }, h.a.createElement(a["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("shadowsocks" === t.type && t.id !== e.id)
                         return h.a.createElement(a["a"].Option, {
                             key: Math.random(),
@@ -28270,10 +28266,10 @@
                 }
                 ))), h.a.createElement("div", {
                     className: "form-group"
-                }, h.a.createElement("label", null, "nhóm định tuyến"), h.a.createElement(a["a"], {
+                }, h.a.createElement("label", null, "\u8def\u7531\u7ec4"), h.a.createElement(a["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -28290,11 +28286,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), h.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), h.a.createElement(i["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         t["a"] = Object(f["c"])(e=>{
@@ -31256,7 +31252,7 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Show",
+                    title: "\u663e\u793a",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -31270,19 +31266,19 @@
                         })
                     }
                 }, {
-                    title: "Tiêu đề",
+                    title: "\u6807\u9898",
                     dataIndex: "title",
                     key: "title"
                 }, {
-                    title: "Tạo ngày",
+                    title: "\u521b\u5efa\u65f6\u95f4",
                     dataIndex: "created_at",
                     key: "created_at",
                     align: "right",
                     render: e=>{
-                        return b()(1e3 * e).format("DD/MM/YYYY HH:mm")
+                        return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -31293,16 +31289,16 @@
                                 submit: t[r]
                             }, ()=>this.modalVisible()),
                             href: "javascript:void(0);"
-                        }, "Biên Tập"), g.a.createElement(h["a"], {
+                        }, "\u7f16\u8f91"), g.a.createElement(h["a"], {
                             type: "vertical"
                         }), g.a.createElement("a", {
                             onClick: ()=>this.drop(n),
                             href: "javascript:void(0);"
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
-                    title: "Quản lý thông báo"
+                    title: "\u516c\u544a\u7ba1\u7406"
                 }), g.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), g.a.createElement(x["a"], {
@@ -31319,7 +31315,7 @@
                     onClick: ()=>this.modalVisible()
                 }, g.a.createElement(u["a"], {
                     type: "plus"
-                }), " Thêm thông báo")), g.a.createElement(l["a"], {
+                }), " \u6dfb\u52a0\u516c\u544a")), g.a.createElement(l["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     pagination: !1,
@@ -31328,20 +31324,20 @@
                         x: 950
                     }
                 })))), g.a.createElement(o["a"], {
-                    title: "".concat(this.state.submit.id ? "Chỉnh sửa thông báo" : "Tạo thông báo mới"),
+                    title: "".concat(this.state.submit.id ? "\u7f16\u8f91\u516c\u544a" : "\u65b0\u5efa\u516c\u544a"),
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.state.saveLoading || this.save(),
                     okText: this.state.saveLoading ? g.a.createElement(u["a"], {
                         type: "loading"
-                    }) : "Gửi",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88"
                 }, g.a.createElement("div", null, g.a.createElement("div", {
                     className: "form-group"
                 }, g.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Tiêu đề"), g.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tiêu đề",
+                }, "\u6807\u9898"), g.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u516c\u544a\u6807\u9898",
                     value: this.state.submit.title,
                     onChange: e=>{
                         this.setState({
@@ -31354,10 +31350,10 @@
                     className: "form-group"
                 }, g.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Nội dung thông báo"), g.a.createElement(s["a"].TextArea, {
+                }, "\u516c\u544a\u5185\u5bb9"), g.a.createElement(s["a"].TextArea, {
                     rows: 12,
                     value: this.state.submit.content,
-                    placeholder: "Vui lòng nhập nội dung thông báo",
+                    placeholder: "\u8bf7\u8f93\u5165\u516c\u544a\u5185\u5bb9",
                     onChange: e=>{
                         this.setState({
                             submit: p()({}, this.state.submit, {
@@ -31369,13 +31365,13 @@
                     className: "form-group"
                 }, g.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Thẻ của thông báo"), g.a.createElement(a["a"], {
+                }, "\u516c\u544a\u6807\u7b7e"), g.a.createElement(a["a"], {
                     mode: "tags",
                     value: this.state.submit.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập popup để thông báo tự bật lên",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>{
                         this.setState({
                             submit: p()({}, this.state.submit, {
@@ -31387,8 +31383,8 @@
                     className: "form-group"
                 }, g.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "URL hình nền thông báo"), g.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập URL hình nền thông báo",
+                }, "\u56fe\u7247URL"), g.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u56fe\u7247URL",
                     value: this.state.submit.img_url,
                     onChange: e=>{
                         this.setState({
@@ -31914,7 +31910,7 @@
                 e.queueWorkload);
                 e.getQueueWorkloadLoading;
                 return s.a.createElement(l["a"], i()({}, this.props, {
-                    title: "Giám sát queue"
+                    title: "\u961f\u5217\u76d1\u63a7"
                 }), s.a.createElement(u["a"], {
                     loading: !t
                 }, s.a.createElement("div", {
@@ -31923,27 +31919,27 @@
                     className: "block-header block-header-default"
                 }, s.a.createElement("h3", {
                     className: "block-title"
-                }, "Tổng quan")), s.a.createElement("div", {
+                }, "\u603b\u89c8")), s.a.createElement("div", {
                     className: "block-content p-0"
                 }, s.a.createElement("div", {
                     className: "row no-gutters"
                 }, s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 border-right p-4 border-bottom"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, " Khối lượng tác vụ hiện tại"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, "\u5f53\u524d\u4f5c\u4e1a\u91cf"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
                 }, (null === t || void 0 === t ? void 0 : t.jobsPerMinute) || "0"))), s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 border-right p-4 border-bottom"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, "Khối lượng xử lý trong 1 giờ qua"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, "\u8fd1\u4e00\u5c0f\u65f6\u5904\u7406\u91cf"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
                 }, (null === t || void 0 === t ? void 0 : t.recentJobs) || "0"))), s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 border-right p-4 border-bottom"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, "Số lỗi trong 7 ngày qua"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, "7\u65e5\u5185\u62a5\u9519\u6570\u91cf"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
                 }, (null === t || void 0 === t ? void 0 : t.failedJobs) || "0"))), s.a.createElement("div", {
                     className: "col-lg-6 col-xl-3 p-4 border-bottom overflow-hidden"
-                }, s.a.createElement("div", null, s.a.createElement("div", null, "Trạng thái"), s.a.createElement("div", {
+                }, s.a.createElement("div", null, s.a.createElement("div", null, "\u72b6\u6001"), s.a.createElement("div", {
                     className: "mt-4 font-size-h3"
-                }, t && ((null === t || void 0 === t ? void 0 : t.status) ? "Đang chạy" : "Chưa khởi động")), t && ((null === t || void 0 === t ? void 0 : t.status) ? s.a.createElement("i", {
+                }, t && ((null === t || void 0 === t ? void 0 : t.status) ? "\u8fd0\u884c\u4e2d" : "\u672a\u542f\u52a8")), t && ((null === t || void 0 === t ? void 0 : t.status) ? s.a.createElement("i", {
                     class: "si si-check text-success",
                     style: {
                         position: "absolute",
@@ -31967,34 +31963,34 @@
                     className: "block-header block-header-default"
                 }, s.a.createElement("h3", {
                     className: "block-title"
-                }, "Chi tiết công việc hiện tại")), s.a.createElement("div", {
+                }, "\u5f53\u524d\u4f5c\u4e1a\u8be6\u60c5")), s.a.createElement("div", {
                     className: "block-content p-0"
                 }, s.a.createElement(o["a"], {
                     columns: [{
-                        title: "Tên hàng đợi",
+                        title: "\u961f\u5217\u540d\u79f0",
                         dataIndex: "name",
                         key: "name",
                         render: e=>{
                             var t = {
-                                order_handle: "Hàng đợi đơn hàng",
-                                send_email: "Hàng đợi email",
-                                send_email_mass: "Hàng đợi gửi email hàng loạt",
-                                send_telegram: "Hàng đợi tin nhắn Telegram",
-                                stat: "Hàng đợi thống kê",
-                                traffic_fetch: "Hàng đợi tiêu thụ lưu lượng"
+                                order_handle: "\u8ba2\u5355\u961f\u5217",
+                                send_email: "\u90ae\u4ef6\u961f\u5217",
+                                send_email_mass: "\u90ae\u4ef6\u7fa4\u53d1\u961f\u5217",
+                                send_telegram: "Telegram\u6d88\u606f\u961f\u5217",
+                                stat: "\u7edf\u8ba1\u961f\u5217",
+                                traffic_fetch: "\u6d41\u91cf\u6d88\u8d39\u961f\u5217"
                             };
                             return t[e]
                         }
                     }, {
-                        title: "Khối lượng tác vụ",
+                        title: "\u4f5c\u4e1a\u91cf",
                         dataIndex: "processes",
                         key: "processes"
                     }, {
-                        title: "Số lượng nhiệm vụ",
+                        title: "\u4efb\u52a1\u91cf",
                         dataIndex: "length",
                         key: "length"
                     }, {
-                        title: "Thời gian chiếm dụng",
+                        title: "\u5360\u7528\u65f6\u95f4",
                         dataIndex: "wait",
                         key: "wait",
                         align: "right",
@@ -32768,32 +32764,31 @@
     L9pr: function(e, t, n) {
         "use strict";
         t["a"] = {
-            today: "Hôm nay",
-            now: "Bây giờ",
-            backToToday: "Quay lại hôm nay",
-            ok: "Chắc chắn",
-            timeSelect: "Chọn thời gian",
-            dateSelect: "Chọn ngày",
-            weekSelect: "Chọn tuần",
-            clear: "Xóa",
-            month: "Tháng",
-            year: "Năm",
-            previousMonth: "Tháng trước (phím mũi tên trái)",
-            nextMonth: "Tháng sau (phím mũi tên phải)",
-            monthSelect: "Chọn tháng",
-            yearSelect: "Chọn năm",
-            decadeSelect: "Chọn thập kỷ",
-            yearFormat: "YYYY",
-            monthFormat: "\u0054 M",
-            dayFormat: "D",
-            dateFormat: "D M YYYY",
-            dateTimeFormat: "D M YYYY HH:mm:ss",
-            previousYear: "Năm trước (Control + mũi tên trái)",
-            nextYear: "Năm sau (Control + mũi tên phải)",
-            previousDecade: "Thập kỷ trước",
-            nextDecade: "Thập kỷ sau",
-            previousCentury: "Thế kỷ trước",
-            nextCentury: "Thế kỷ sau"
+            today: "\u4eca\u5929",
+            now: "\u6b64\u523b",
+            backToToday: "\u8fd4\u56de\u4eca\u5929",
+            ok: "\u786e\u5b9a",
+            timeSelect: "\u9009\u62e9\u65f6\u95f4",
+            dateSelect: "\u9009\u62e9\u65e5\u671f",
+            weekSelect: "\u9009\u62e9\u5468",
+            clear: "\u6e05\u9664",
+            month: "\u6708",
+            year: "\u5e74",
+            previousMonth: "\u4e0a\u4e2a\u6708 (\u7ffb\u9875\u4e0a\u952e)",
+            nextMonth: "\u4e0b\u4e2a\u6708 (\u7ffb\u9875\u4e0b\u952e)",
+            monthSelect: "\u9009\u62e9\u6708\u4efd",
+            yearSelect: "\u9009\u62e9\u5e74\u4efd",
+            decadeSelect: "\u9009\u62e9\u5e74\u4ee3",
+            yearFormat: "YYYY\u5e74",
+            dayFormat: "D\u65e5",
+            dateFormat: "YYYY\u5e74M\u6708D\u65e5",
+            dateTimeFormat: "YYYY\u5e74M\u6708D\u65e5 HH\u65f6mm\u5206ss\u79d2",
+            previousYear: "\u4e0a\u4e00\u5e74 (Control\u952e\u52a0\u5de6\u65b9\u5411\u952e)",
+            nextYear: "\u4e0b\u4e00\u5e74 (Control\u952e\u52a0\u53f3\u65b9\u5411\u952e)",
+            previousDecade: "\u4e0a\u4e00\u5e74\u4ee3",
+            nextDecade: "\u4e0b\u4e00\u5e74\u4ee3",
+            previousCentury: "\u4e0a\u4e00\u4e16\u7eaa",
+            nextCentury: "\u4e0b\u4e00\u4e16\u7eaa"
         }
     },
     LIAx: function(e, t, n) {
@@ -36487,7 +36482,7 @@
         t["a"] = {
             items_per_page: "\u6761/\u9875",
             jump_to: "\u8df3\u81f3",
-            jump_to_confirm: "Chắc chắn",
+            jump_to_confirm: "\u786e\u5b9a",
             page: "\u9875",
             prev_page: "\u4e0a\u4e00\u9875",
             next_page: "\u4e0b\u4e00\u9875",
@@ -39638,7 +39633,7 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Mở",
+                    title: "\u542f\u7528",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -39652,18 +39647,18 @@
                         })
                     }
                 }, {
-                    title: "Tên",
+                    title: "\u5238\u540d\u79f0",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "Loại",
+                    title: "\u7c7b\u578b",
                     dataIndex: "type",
                     key: "type",
                     render: e=>{
-                        return 1 === e ? "Giảm tiền" : "Giảm %"
+                        return 1 === e ? "\u91d1\u989d" : "\u6bd4\u4f8b"
                     }
                 }, {
-                    title: "Mã",
+                    title: "\u5238\u7801",
                     dataIndex: "code",
                     key: "code",
                     render: e=>{
@@ -39673,27 +39668,27 @@
                             },
                             onClick: ()=>{
                                 S()(e),
-                                p["a"].success("Sao chép thành công")
+                                p["a"].success("\u590d\u5236\u6210\u529f")
                             }
                         }, e)
                     }
                 }, {
-                    title: "Còn lại",
+                    title: "\u5269\u4f59\u6b21\u6570",
                     dataIndex: "limit_use",
                     key: "limit_use",
                     render: e=>{
-                        return b.a.createElement(d["a"], null, null !== e ? e : "Không giới hạn")
+                        return b.a.createElement(d["a"], null, null !== e ? e : "\u65e0\u9650")
                     }
                 }, {
-                    title: "Bắt đầu",
+                    title: "\u6709\u6548\u671f",
                     dataIndex: "started_at",
                     key: "started_at",
                     align: "left",
                     render: (e,t)=>{
-                        return "".concat(_()(1e3 * t.started_at).format("DD/MM/YYYY HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("DD/MM/YYYY HH:mm"))
+                        return "".concat(_()(1e3 * t.started_at).format("YYYY/MM/DD HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("YYYY/MM/DD HH:mm"))
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -39710,25 +39705,25 @@
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Biên Tập"), b.a.createElement(f["a"], {
+                        }, "\u7f16\u8f91"), b.a.createElement(f["a"], {
                             type: "vertical"
                         }), b.a.createElement("a", {
                             onClick: ()=>{
                                 h["a"].confirm({
-                                    title: "Cảnh Báo",
-                                    content: "Bạn có chắc chắn muốn xóa mục này?",
+                                    title: "\u8b66\u544a",
+                                    content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                     onOk: ()=>this.drop(n),
-                                    okText: "Chắc chắn",
-                                    cancelText: "Hủy bỏ"
+                                    okText: "\u786e\u5b9a",
+                                    cancelText: "\u53d6\u6d88"
                                 })
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return b.a.createElement(w["a"], i()({}, this.props, {
-                    title: "Quản lý mã giảm giá"
+                    title: "\u4f18\u60e0\u5238\u7ba1\u7406"
                 }), b.a.createElement(O["a"], {
                     loading: n
                 }, b.a.createElement("div", {
@@ -39743,7 +39738,7 @@
                     onClick: ()=>this.modalVisible()
                 }, b.a.createElement(u["a"], {
                     type: "plus"
-                }), " Thêm mã giảm giá")), b.a.createElement(l["a"], {
+                }), " \u6dfb\u52a0\u4f18\u60e0\u5238")), b.a.createElement(l["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     columns: x,
@@ -39757,12 +39752,12 @@
                     }),
                     onChange: (e,t,n)=>this.tableOnChange(e, n)
                 })))), b.a.createElement(h["a"], {
-                    title: "".concat(this.state.submit.id ? "Chỉnh sửa mã giảm giá" : "Tạo mới mã giảm giá"),
+                    title: "".concat(this.state.submit.id ? "\u7f16\u8f91\u4f18\u60e0\u5238" : "\u65b0\u5efa\u4f18\u60e0\u5238"),
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.generate(),
-                    okText: "Gửi",
-                    cancelText: "Hủy bỏ",
+                    okText: "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88",
                     okButtonProps: {
                         loading: r
                     },
@@ -39771,8 +39766,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Tên"), b.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên mã giảm giá",
+                }, "\u540d\u79f0"), b.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u4f18\u60e0\u5238\u540d\u79f0",
                     value: this.state.submit.name,
                     onChange: e=>{
                         this.setState({
@@ -39785,8 +39780,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Mã giảm giá tùy chỉnh"), b.a.createElement(s["a"], {
-                    placeholder: "Mã giảm giá tùy chỉnh (để trống sẽ tạo ngẫu nhiên)",
+                }, "\u81ea\u5b9a\u4e49\u4f18\u60e0\u5238\u7801"), b.a.createElement(s["a"], {
+                    placeholder: "\u81ea\u5b9a\u4e49\u4f18\u60e0\u5238\u7801(\u7559\u7a7a\u968f\u673a\u751f\u6210)",
                     value: this.state.submit.code,
                     onChange: e=>{
                         this.setState({
@@ -39800,7 +39795,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Thông tin khuyến mãi"), b.a.createElement(s["a"], {
+                }, "\u4f18\u60e0\u4fe1\u606f"), b.a.createElement(s["a"], {
                     type: "number",
                     addonBefore: b.a.createElement(a["a"], {
                         style: {
@@ -39816,11 +39811,11 @@
                         }
                     }, b.a.createElement(a["a"].Option, {
                         value: 1
-                    }, "Giảm tiền"), b.a.createElement(a["a"].Option, {
+                    }, "\u6309\u91d1\u989d\u4f18\u60e0"), b.a.createElement(a["a"].Option, {
                         value: 2
-                    }, "Giảm %")),
-                    addonAfter: 1 === this.state.submit.type ? "₫" : "%",
-                    placeholder: "Vui lòng nhập giá trị",
+                    }, "\u6309\u6bd4\u4f8b\u4f18\u60e0")),
+                    addonAfter: 1 === this.state.submit.type ? "\xa5" : "%",
+                    placeholder: "\u8bf7\u8f93\u5165\u503c",
                     value: this.state.submit.value,
                     onChange: e=>{
                         this.setState({
@@ -39833,7 +39828,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Thời hạn hiệu lực của mã giảm giá"), b.a.createElement(o["a"].RangePicker, {
+                }, "\u4f18\u60e0\u5238\u6709\u6548\u671f"), b.a.createElement(o["a"].RangePicker, {
                     style: {
                         width: "100%"
                     },
@@ -39859,8 +39854,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Số lần sử dụng tối đa"), b.a.createElement(s["a"], {
-                    placeholder: "Giới hạn số lần sử dụng tối đa, dùng hết thì không thể sử dụng (để trống thì không giới hạn)",
+                }, "\u6700\u5927\u4f7f\u7528\u6b21\u6570"), b.a.createElement(s["a"], {
+                    placeholder: "\u9650\u5236\u6700\u5927\u4f7f\u7528\u6b21\u6570\uff0c\u7528\u5b8c\u5219\u65e0\u6cd5\u4f7f\u7528(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
                     value: this.state.submit.limit_use,
                     onChange: e=>{
                         this.setState({
@@ -39873,8 +39868,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Số lần sử dụng cho mỗi người dùng"), b.a.createElement(s["a"], {
-                    placeholder: "Giới hạn số lần sử dụng cho mỗi người dùng (để trống thì không giới hạn)",
+                }, "\u6bcf\u4e2a\u7528\u6237\u53ef\u4f7f\u7528\u6b21\u6570"), b.a.createElement(s["a"], {
+                    placeholder: "\u9650\u5236\u6bcf\u4e2a\u7528\u6237\u53ef\u4f7f\u7528\u6b21\u6570(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
                     value: this.state.submit.limit_use_with_user,
                     onChange: e=>{
                         this.setState({
@@ -39887,7 +39882,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Chỉ định gói đăng ký"), b.a.createElement("div", null, b.a.createElement(a["a"], {
+                }, "\u6307\u5b9a\u8ba2\u9605"), b.a.createElement("div", null, b.a.createElement(a["a"], {
                     value: this.state.submit.limit_plan_ids || [],
                     onChange: e=>{
                         this.setState({
@@ -39898,7 +39893,7 @@
                     }
                     ,
                     mode: "multiple",
-                    placeholder: "Giới hạn chỉ những gói đăng ký được chỉ định mới có thể sử dụng mã giảm giá (để trống thì không giới hạn)",
+                    placeholder: "\u9650\u5236\u6307\u5b9a\u8ba2\u9605\u53ef\u4ee5\u4f7f\u7528\u4f18\u60e0(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
                     style: {
                         width: "100%"
                     }
@@ -39912,7 +39907,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Chỉ định chu kỳ"), b.a.createElement("div", null, b.a.createElement(a["a"], {
+                }, "\u6307\u5b9a\u5468\u671f"), b.a.createElement("div", null, b.a.createElement(a["a"], {
                     value: this.state.submit.limit_period || [],
                     onChange: e=>{
                         this.setState({
@@ -39923,7 +39918,7 @@
                     }
                     ,
                     mode: "multiple",
-                    placeholder: "Giới hạn chỉ những chu kỳ được chỉ định mới có thể sử dụng mã giảm giá (để trống thì không giới hạn)",
+                    placeholder: "\u9650\u5236\u6307\u5b9a\u5468\u671f\u53ef\u4ee5\u4f7f\u7528\u4f18\u60e0(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
                     style: {
                         width: "100%"
                     }
@@ -39937,8 +39932,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Số lượng cần tạo"), b.a.createElement(s["a"], {
-                    placeholder: "Nhập số lượng để tạo hàng loạt",
+                }, "\u751f\u6210\u6570\u91cf"), b.a.createElement(s["a"], {
+                    placeholder: "\u8f93\u5165\u6570\u91cf\u6279\u91cf\u751f\u6210",
                     value: this.state.submit.generate_count,
                     onChange: e=>{
                         this.setState({
@@ -40739,23 +40734,23 @@
                 return u.a.createElement(u.a.Fragment, null, u.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
                 }), u.a.createElement(r["a"], {
-                    title: "Tạo người dùng",
+                    title: "\u521b\u5efa\u7528\u6237",
                     visible: c,
                     onCancel: ()=>this.hide(),
-                    cancelText: "Hủy bỏ",
+                    cancelText: "\u53d6\u6d88",
                     onOk: ()=>this.submit(),
                     okButtonProps: {
                         loading: n
                     },
-                    okText: "Tạo"
+                    okText: "\u751f\u6210"
                 }, u.a.createElement("div", null, u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Email"), u.a.createElement(a["a"].Group, {
+                }, "\u90ae\u7bb1"), u.a.createElement(a["a"].Group, {
                     compact: !0
                 }, !h.generate_count && u.a.createElement(a["a"], {
-                    placeholder: "Tài khoản (để trống nếu muốn tạo hàng loạt)",
+                    placeholder: "\u8d26\u53f7\uff08\u6279\u91cf\u751f\u6210\u8bf7\u7559\u7a7a\uff09",
                     style: {
                         width: "45%"
                     },
@@ -40769,7 +40764,7 @@
                     },
                     disabled: !0
                 }), u.a.createElement(a["a"], {
-                    placeholder: "đuôi mail",
+                    placeholder: "\u57df",
                     style: {
                         width: "45%"
                     },
@@ -40779,16 +40774,16 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Mật khẩu"), u.a.createElement(a["a"], {
+                }, "\u5bc6\u7801"), u.a.createElement(a["a"], {
                     value: h.password,
-                    placeholder: "Bỏ trống sẽ giống email",
+                    placeholder: "\u7559\u7a7a\u5219\u5bc6\u7801\u4e0e\u90ae\u7bb1\u76f8\u540c",
                     onChange: e=>this.formChange("password", e.target.value)
                 })), u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Hạn sử dụng"), u.a.createElement("div", null, u.a.createElement(o["a"], {
-                    placeholder: "Vui lòng chọn ngày hết hạn của người dùng, để trống nếu không giới hạn thời gian hết hạn",
+                }, "\u5230\u671f\u65f6\u95f4"), u.a.createElement("div", null, u.a.createElement(o["a"], {
+                    placeholder: "\u8bf7\u9009\u62e9\u7528\u6237\u5230\u671f\u65e5\u671f\uff0c\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236\u5230\u671f\u65f6\u95f4",
                     defaultValue: h.expired_at && d()(1e3 * t.expired_at),
                     style: {
                         width: "100%"
@@ -40798,8 +40793,8 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Gói"), u.a.createElement(i["a"], {
-                    placeholder: "Vui lòng chọn gói đăng ký",
+                }, "\u8ba2\u9605\u8ba1\u5212"), u.a.createElement(i["a"], {
+                    placeholder: "\u8bf7\u9009\u62e9\u7528\u6237\u8ba2\u9605\u8ba1\u5212",
                     style: {
                         width: "100%"
                     },
@@ -40807,7 +40802,7 @@
                     onChange: e=>this.formChange("plan_id", e)
                 }, u.a.createElement(i["a"].Option, {
                     value: null
-                }, "Không"), s.map(e=>{
+                }, "\u65e0"), s.map(e=>{
                     return u.a.createElement(i["a"].Option, {
                         key: Math.random(),
                         value: e.id
@@ -40817,9 +40812,9 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Số lượng tạo"), u.a.createElement(a["a"], {
+                }, "\u751f\u6210\u6570\u91cf"), u.a.createElement(a["a"], {
                     value: h.generate_count,
-                    placeholder: "Nếu tạo hàng loạt, vui lòng nhập số lượng cần tạo",
+                    placeholder: "\u5982\u679c\u4e3a\u6279\u91cf\u751f\u6210\u8bf7\u8f93\u5165\u751f\u6210\u6570\u91cf",
                     onChange: e=>this.formChange("generate_count", e.target.value)
                 })))))
             }
@@ -41101,56 +41096,56 @@
                   , n = e.fetchLoading
                   , r = e.pagination
                   , a = e.filter
-                  , f = ["Thấp", "Trung Bình", "Cao"]
+                  , f = ["\u4f4e", "\u4e2d", "\u9ad8"]
                   , m = [{
                     title: "#",
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Chủ Đề",
+                    title: "\u4e3b\u9898",
                     dataIndex: "subject",
                     key: "subject"
                 }, {
-                    title: "Mức độ",
+                    title: "\u5de5\u5355\u7ea7\u522b",
                     dataIndex: "level",
                     key: "level",
                     render: e=>{
                         return f[e]
                     }
                 }, {
-                    title: "Trạng thái",
+                    title: "\u5de5\u5355\u72b6\u6001",
                     dataIndex: "reply_status",
                     key: "reply_status",
                     filters: 1 !== a.status && [{
-                        text: "Đã trả lời",
+                        text: "\u5df2\u56de\u590d",
                         value: 1
                     }, {
-                        text: "Chờ trả lời",
+                        text: "\u5f85\u56de\u590d",
                         value: 0
                     }],
                     render: (e,t)=>{
                         return 1 === t.status ? d.a.createElement("span", null, d.a.createElement(h["a"], {
                             status: "success"
-                        }), "Đã Đóng") : d.a.createElement("span", null, d.a.createElement(h["a"], {
+                        }), "\u5df2\u5173\u95ed") : d.a.createElement("span", null, d.a.createElement(h["a"], {
                             status: e ? "processing" : "error"
-                        }), e ? "Đã trả lời" : "Chờ trả lời")
+                        }), e ? "\u5df2\u56de\u590d" : "\u5f85\u56de\u590d")
                     }
                 }, {
-                    title: "Time tạo",
+                    title: "\u521b\u5efa\u65f6\u95f4",
                     dataIndex: "created_at",
                     key: "created_at",
                     render: e=>{
-                        return v()(1e3 * e).format("DD/MM/YYYY HH:mm")
+                        return v()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Time cập nhật",
+                    title: "\u6700\u540e\u56de\u590d",
                     dataIndex: "updated_at",
                     key: "updated_at",
                     render: e=>{
-                        return v()(1e3 * e).format("DD/MM/YYYY HH:mm")
+                        return v()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -41159,17 +41154,17 @@
                         return d.a.createElement("div", null, d.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>this.toChat(t.id)
-                        }, "Xem"), d.a.createElement(u["a"], {
+                        }, "\u67e5\u770b"), d.a.createElement(u["a"], {
                             type: "vertical"
                         }), d.a.createElement("a", {
                             disabled: t.status,
                             href: "javascript:void(0);",
                             onClick: ()=>this.close(t.id)
-                        }, "Đóng"))
+                        }, "\u5173\u95ed"))
                     }
                 }];
                 return d.a.createElement(p["a"], i()({}, this.props, {
-                    title: "Quản lý ticket"
+                    title: "\u5de5\u5355\u7ba1\u7406"
                 }), d.a.createElement(y["a"], {
                     loading: n
                 }, d.a.createElement("div", {
@@ -41183,14 +41178,14 @@
                     onChange: e=>this.filter("status", e.target.value)
                 }, d.a.createElement(c["a"].Button, {
                     value: 0
-                }, "Hoạt Động"), d.a.createElement(c["a"].Button, {
+                }, "\u5df2\u5f00\u542f"), d.a.createElement(c["a"].Button, {
                     value: 1
-                }, "Đã Đóng")), d.a.createElement("div", {
+                }, "\u5df2\u5173\u95ed")), d.a.createElement("div", {
                     style: {
                         float: "right"
                     }
                 }, d.a.createElement(l["a"], {
-                    placeholder: "Nhập địa chỉ email để tìm kiếm",
+                    placeholder: "\u8f93\u5165\u90ae\u7bb1\u641c\u7d22",
                     onChange: e=>this.onSearch("email", e.target.value)
                 }))), d.a.createElement(o["a"], {
                     tableLayout: "auto",
@@ -41441,19 +41436,19 @@
                     className: "text-dark"
                 }, window.settings.title || "V2Board")), a.a.createElement("p", {
                     className: "font-size-sm text-muted mb-3"
-                }, "Đăng nhập vào trang Admin")), a.a.createElement("div", {
+                }, "\u767b\u5f55\u5230\u7ba1\u7406\u4e2d\u5fc3")), a.a.createElement("div", {
                     className: "form-group"
                 }, a.a.createElement("input", {
                     type: "text",
                     className: "form-control form-control-alt",
-                    placeholder: "Email",
+                    placeholder: "\u90ae\u7bb1",
                     ref: "email"
                 })), a.a.createElement("div", {
                     className: "form-group"
                 }, a.a.createElement("input", {
                     type: "password",
                     className: "form-control form-control-alt",
-                    placeholder: "Mật khẩu",
+                    placeholder: "\u5bc6\u7801",
                     ref: "password"
                 })), a.a.createElement("div", {
                     className: "form-group mb-0"
@@ -41466,24 +41461,19 @@
                     type: "loading"
                 }) : a.a.createElement("span", null, a.a.createElement("i", {
                     className: "si si-login mr-1"
-                }), "Đăng Nhập")))))), a.a.createElement("div", {
+                }), "\u767b\u5165")))))), a.a.createElement("div", {
                     className: "text-center bg-gray-lighter p-3 px-4"
                 }, a.a.createElement("a", {
                     onClick: ()=>{
                         r["a"].info({
-                            title: "Quên mật khẩu",
-                            content: a.a.createElement(
-                                "div",
-                                null,
-                                a.a.createElement("div", null, "Thực thi lệnh trong thư mục gốc của site để khôi phục mật khẩu"),
-                                a.a.createElement("code", null, "php artisan reset:password email quản trị viên")
-                            ),
+                            title: "\u5fd8\u8bb0\u5bc6\u7801",
+                            content: a.a.createElement("div", null, a.a.createElement("div", null, "\u5728\u7ad9\u70b9\u76ee\u5f55\u4e0b\u6267\u884c\u547d\u4ee4\u627e\u56de\u5bc6\u7801"), a.a.createElement("code", null, "php artisan reset:password \u7ba1\u7406\u5458\u90ae\u7bb1")),
                             centered: !0,
-                            okText: "Tôi biết rồi",
+                            okText: "\u6211\u77e5\u9053\u4e86",
                             onOk() {}
                         })
                     }
-                }, "Quên mật khẩu"))))))))
+                }, "\u5fd8\u8bb0\u5bc6\u7801"))))))))
             }
         }
         t["default"] = Object(s["c"])(e=>{
@@ -45447,7 +45437,7 @@
                     align: "right",
                     render: e=>Object(p["b"])(e)
                 }, {
-                    title: "Phóng đại",
+                    title: "\u500d\u7387",
                     dataIndex: "server_rate",
                     key: "server_rate",
                     align: "right"
@@ -70674,7 +70664,6 @@
           , _ = n.n(x)
           , E = n("/MKj")
           , S = n("mCd/")
-          , Q = n("qrc/")
           , k = n("CgOb")
           , C = n("yiO6")
           , O = n("hVla")
@@ -70747,8 +70736,8 @@
             }
             ban() {
                 p["a"].confirm({
-                    title: "Nhắc nhở",
-                    content: "Bạn có chắc chắn muốn tiến hành khóa tài khoản không?",
+                    title: "\u63d0\u9192",
+                    content: "\u786e\u5b9a\u8981\u8fdb\u884c\u5c01\u7981\u5417\uff1f",
                     onOk: ()=>{
                         this.props.dispatch({
                             type: "user/ban"
@@ -70758,8 +70747,8 @@
             }
             allDel() {
                 p["a"].confirm({
-                    title: "Nhắc nhở",
-                    content: "Bạn có chắc chắn muốn xóa không?",
+                    title: "\u63d0\u9192",
+                    content: "\u786e\u5b9a\u8981\u8fdb\u884c\u5220\u9664\u5417\uff1f",
                     onOk: ()=>{
                         this.props.dispatch({
                             type: "user/allDel"
@@ -70789,31 +70778,31 @@
             resetSecret(e) {
                 var t = this;
                 p["a"].confirm({
-                    title: "Đặt lại thông tin bảo mật",
-                    content: "Bạn có chắc chắn muốn đặt lại thông tin bảo mật của ".concat(e.email, "hay không?"),
+                    title: "\u91cd\u7f6e\u5b89\u5168\u4fe1\u606f",
+                    content: "\u786e\u5b9a\u8981\u91cd\u7f6e".concat(e.email, "\u7684\u5b89\u5168\u4fe1\u606f\u5417\uff1f"),
                     onOk() {
                         t.props.dispatch({
                             type: "user/resetSecret",
                             id: e.id
                         })
                     },
-                    okText: "Chắc chắn",
-                    cancelText: "Hủy bỏ"
+                    okText: "\u786e\u5b9a",
+                    cancelText: "\u53d6\u6d88"
                 })
             }
             delUser(e) {
                 var t = this;
                 p["a"].confirm({
-                    title: "Xóa người dùng",
-                    content: "Bạn có chắc chắn muốn xóa người dùng có email ".concat(e.email, " hay không?"),
+                    title: "\u5220\u9664\u7528\u6237",
+                    content: "\u786e\u5b9a\u8981\u5220\u9664".concat(e.email, "\u7684\u7528\u6237\u4fe1\u606f\u5417\uff1f"),
                     onOk() {
                         t.props.dispatch({
                             type: "user/delUser",
                             id: e.id
                         })
                     },
-                    okText: "Chắc chắn",
-                    cancelText: "Hủy bỏ"
+                    okText: "\u786e\u5b9a",
+                    cancelText: "\u53d6\u6d88"
                 })
             }
             render() {
@@ -70823,29 +70812,29 @@
                     key: "id",
                     sorter: !0
                 }, {
-                    title: "Email",
+                    title: "\u90ae\u7bb1",
                     dataIndex: "email",
                     key: "email",
                     render: (e,t)=>{
                         return g.a.createElement(f["a"], {
                             placement: "top",
-                            title: t.t ? "Lần cuối online: ".concat(w()(1e3 * t.t).format("YYYY-MM-DD HH:mm:ss")) : "Chưa từng online"
+                            title: t.t ? "\u6700\u540e\u5728\u7ebf".concat(w()(1e3 * t.t).format("YYYY-MM-DD HH:mm:ss")) : "\u4ece\u672a\u5728\u7ebf"
                         }, g.a.createElement(d["a"], {
                             status: (new Date).getTime() / 1e3 - 600 > t.t ? "default" : "success"
                         }), e)
                     }
                 }, {
-                    title: "Trạng thái",
+                    title: "\u72b6\u6001",
                     dataIndex: "banned",
                     key: "banned",
                     sorter: !0,
                     render: e=>{
                         return g.a.createElement(h["a"], {
                             color: e ? "red" : "green"
-                        }, e ? "Bị Khóa" : "Bình Thường")
+                        }, e ? "\u5c01\u7981" : "\u6b63\u5e38")
                     }
                 }, {
-                    title: "Đăng Ký",
+                    title: "\u8ba2\u9605",
                     dataIndex: "plan_name",
                     key: "plan_id",
                     sorter: !0,
@@ -70853,7 +70842,7 @@
                         return e || "-"
                     }
                 }, {
-                    title: "Group ID",
+                    title: "\u6743\u9650\u7ec4",
                     dataIndex: "group_id",
                     key: "group_id",
                     sorter: !0,
@@ -70862,7 +70851,7 @@
                         return t ? t.name : "-"
                     }
                 }, {
-                    title: "Đã dùng (G)",
+                    title: "\u5df2\u7528(G)",
                     dataIndex: "total_used",
                     key: "total_used",
                     sorter: !0,
@@ -70872,13 +70861,15 @@
                         }, e)
                     }
                 }, {
-                    title: "Data (G)",
+                    title: "\u6d41\u91cf(G)",
                     dataIndex: "transfer_enable",
                     key: "transfer_enable",
                     sorter: !0,
-                    render: (e, t) => Math.floor(e),
+                    render: (e,t)=>{
+                        return e
+                    }
                 }, {
-                    title: "Limit thiết bị",
+                    title: "\u8bbe\u5907\u6570",
                     dataIndex: "device_limit",
                     key: "updated_at",
                     sorter: (e,t) => e.alive_ip - t.alive_ip,
@@ -70891,43 +70882,35 @@
                         }, `${deviceCount} / ${deviceLimit}`) : `${deviceCount} / ${deviceLimit}`
                     }
                 }, {
-                    title: "Hạn dùng",
+                    title: "\u5230\u671f\u65f6\u95f4",
                     dataIndex: "expired_at",
                     key: "expired_at",
                     sorter: !0,
                     render: e=>{
                         return g.a.createElement(h["a"], {
                             color: e < (new Date).getTime() / 1e3 && null !== e ? "red" : "green"
-                        }, e ? w()(1e3 * e).format("DD/MM/YYYY HH:mm") : null === e ? "Vĩnh viễn" : "-")
+                        }, e ? w()(1e3 * e).format("YYYY/MM/DD HH:mm") : null === e ? "\u957f\u671f\u6709\u6548" : "-")
                     }
                 }, {
-                    title: "Số dư",
+                    title: "\u4f59\u989d",
                     dataIndex: "balance",
                     key: "balance",
-                    sorter: !0,
-                    render: (e, t) => parseFloat(e).toLocaleString('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                    })
+                    sorter: !0
                 }, {
-                    title: "Hoa hồng",
+                    title: "\u4f63\u91d1",
                     dataIndex: "commission_balance",
                     key: "commission_balance",
-                    sorter: !0,
-                    render: (e, t) => parseFloat(e).toLocaleString('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                      })
+                    sorter: !0
                 }, {
-                    title: "Ngày tạo",
+                    title: "\u52a0\u5165\u65f6\u95f4",
                     dataIndex: "created_at",
                     key: "created_at",
                     sorter: !0,
                     render: e=>{
-                        return w()(1e3 * e).format("DD/MM/YYYY HH:mm")
+                        return w()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -70944,51 +70927,32 @@
                                 key: t.id
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "edit"
-                            }), " Chỉnh Sửa"))), g.a.createElement(c["a"].Item, {
+                            }), " \u7f16\u8f91"))), g.a.createElement(c["a"].Item, {
                                 onContextMenu: e=>{
                                     e.stopPropagation()
                                 }
-                            }, 
-                            
-                            g.a.createElement(S["a"], {
+                            }, g.a.createElement(S["a"], {
                                 email: t.email,
                                 key: t.email
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "plus"
-                            }), " Gán đơn hàng"))), 
-                            
-                            
-                            g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " \u5206\u914d\u8ba2\u5355"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>Object(L["a"])(t.subscribe_url)
                             }, g.a.createElement(u["a"], {
                                 type: "copy"
-                            }), " Sao chép URL đăng ký")),
-
-                            g.a.createElement(c["a"].Item, {
-                                onContextMenu: e=>{
-                                    e.stopPropagation()
-                                }
-                            }, g.a.createElement(Q["a"], {
-                                uid: t.id,
-                                qrUrl: t.subscribe_url
-                            }, g.a.createElement("a", null, g.a.createElement(u["a"], {
-                                type: "qrcode"
-                            }), " Lấy QR code"))),
-
-                            
-                            g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " \u590d\u5236\u8ba2\u9605URL")), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>this.resetSecret(t)
                             }, g.a.createElement(u["a"], {
                                 type: "reload"
-                            }), " Đặt lại URL đăng ký")), g.a.createElement(c["a"].Item, {
+                            }), " \u91cd\u7f6eUUID\u53ca\u8ba2\u9605URL")), g.a.createElement(c["a"].Item, {
                                 onClick: ()=>this.orderFilter("user_id", "=", t.id)
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "account-book"
-                            }), " Đơn hàng")), g.a.createElement(c["a"].Item, {
+                            }), " TA\u7684\u8ba2\u5355")), g.a.createElement(c["a"].Item, {
                                 onClick: ()=>this.userFilter("invite_user_id", "=", t.id, !0)
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "usergroup-add"
-                            }), " User đã mời")), g.a.createElement(c["a"].Item, {
+                            }), " TA\u7684\u9080\u8bf7")), g.a.createElement(c["a"].Item, {
                                 onContextMenu: e=>{
                                     e.stopPropagation()
                                 }
@@ -70997,22 +70961,20 @@
                                 key: null === t || void 0 === t ? void 0 : t.email
                             }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                                 type: "solution"
-                            }), " Lịch sử dung lượng"))), 
-                            
-                            g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
+                            }), " TA\u7684\u6d41\u91cf\u8bb0\u5f55"))), g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                                 onClick: ()=>this.delUser(t)
                             }, g.a.createElement(u["a"], {
                                 type: "delete"
-                            }), " Xóa người dùng")))
+                            }), " \u5220\u9664\u7528\u6237")))
                         }, g.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Chỉnh Sửa ", g.a.createElement(u["a"], {
+                        }, "\u64cd\u4f5c ", g.a.createElement(u["a"], {
                             type: "caret-down"
                         }))))
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
-                    title: "Quản lý người dùng"
+                    title: "\u7528\u6237\u7ba1\u7406"
                 }), g.a.createElement(P["a"], {
                     loading: _
                 }, g.a.createElement("div", {
@@ -71025,7 +70987,7 @@
                         padding: 15
                     }
                 }, g.a.createElement(f["a"], {
-                    title: "💡 Mẹo: Bạn có thể sử dụng bộ lọc để lọc người dùng, sau đó thao tác với các người dùng đã được lọc.",
+                    title: "Tips\uff1a\u53ef\u4ee5\u4f7f\u7528\u8fc7\u6ee4\u5668\u8fc7\u6ee4\u540e\u518d\u4f7f\u7528\u64cd\u4f5c\u5bf9\u8fc7\u6ee4\u7684\u7528\u6237\u8fdb\u884c\u64cd\u4f5c\u3002",
                     placement: "right"
                 }, g.a.createElement(C["a"], null, g.a.createElement(O["a"], {
                     key: E.length,
@@ -71036,26 +70998,26 @@
                     }),
                     keys: [{
                         key: "email",
-                        title: "Email",
-                        condition: ["Gần đúng"]
+                        title: "\u90ae\u7bb1",
+                        condition: ["\u6a21\u7cca"]
                     }, {
                         key: "id",
-                        title: "User ID",
+                        title: "\u7528\u6237ID",
                         condition: ["=", ">=", ">", "<", "<="]
                     }, {
                         key: "plan_id",
-                        title: "Đăng Ký",
+                        title: "\u8ba2\u9605",
                         condition: ["="],
                         type: "select",
                         options:[{
-                            key: "Gói đăng ký",
+                            key: "\u65e0\u8ba2\u9605",
                             value: "null" }, ...R.map(e=>({
                             key: e.name,
                             value: e.id
                         }))]
                     }, {
                         key: "transfer_enable",
-                        title: "Data",
+                        title: "\u6d41\u91cf",
                         condition: [">=", ">", "<", "<="]
                     }, {
                         key: "d",
@@ -71063,7 +71025,7 @@
                         condition: [">=", ">", "<", "<="]
                     }, {
                         key: "expired_at",
-                        title: "Hạn dùng",
+                        title: "\u5230\u671f\u65f6\u95f4",
                         condition: [">=", ">", "<", "<="],
                         type: "date"
                     }, {
@@ -71076,38 +71038,38 @@
                         condition: ["="]
                     }, {
                         key: "banned",
-                        title: "Trạng thái User",
+                        title: "\u8d26\u53f7\u72b6\u6001",
                         condition: ["="],
                         type: "select",
                         options: [{
-                            key: "Bình Thường",
+                            key: "\u6b63\u5e38",
                             value: 0
                         }, {
-                            key: "Bị khóa",
+                            key: "\u5c01\u7981",
                             value: 1
                         }]
                     }, {
                         key: "invite_by_email",
-                        title: "Email người mời",
-                        condition: ["Gần đúng"]
+                        title: "\u9080\u8bf7\u4eba\u90ae\u7bb1",
+                        condition: ["\u6a21\u7cca"]
                     }, {
                         key: "invite_user_id",
-                        title: "ID người mời",
+                        title: "\u9080\u8bf7\u4ebaID",
                         condition: ["="]
                     }, {
                         key: "remarks",
-                        title: "Ghi chú",
-                        condition: ["Gần đúng"]
+                        title: "\u5907\u6ce8",
+                        condition: ["\u6a21\u7cca"]
                     }, {
                         key: "is_admin",
-                        title: "Quyền Admin",
+                        title: "\u7ba1\u7406\u5458",
                         condition: ["="],
                         type: "select",
                         options: [{
-                            key: "Đúng",
+                            key: "\u662f",
                             value: 1
                         }, {
-                            key: "Không",
+                            key: "\u5426",
                             value: 0
                         }]
                     }]
@@ -71115,31 +71077,31 @@
                     type: E.length > 0 ? "primary" : ""
                 }, g.a.createElement(u["a"], {
                     type: "filter"
-                }), " Bộ lọc")), g.a.createElement(l["a"], {
+                }), " \u8fc7\u6ee4\u5668")), g.a.createElement(l["a"], {
                     overlay: g.a.createElement(c["a"], null, g.a.createElement(c["a"].Item, null, g.a.createElement("a", {
                         onClick: ()=>this.dumpCSV()
                     }, g.a.createElement(u["a"], {
                         type: "file-excel"
-                    }), " Xuất CSV")), g.a.createElement(c["a"].Item, null, g.a.createElement(y["a"], null, g.a.createElement("a", null, g.a.createElement(u["a"], {
+                    }), " \u5bfc\u51faCSV")), g.a.createElement(c["a"].Item, null, g.a.createElement(y["a"], null, g.a.createElement("a", null, g.a.createElement(u["a"], {
                         type: "mail"
-                    }), " Gửi email"))), g.a.createElement(c["a"].Item, {
+                    }), " \u53d1\u9001\u90ae\u4ef6"))), g.a.createElement(c["a"].Item, {
                         disabled: !E.length
                     }, g.a.createElement("a", {
                         disabled: !E.length,
                         onClick: ()=>this.ban()
                     }, g.a.createElement(u["a"], {
                         type: "stop"
-                    }), " Khoá hàng loạt")), g.a.createElement(c["a"].Item, {
+                    }), " \u6279\u91cf\u5c01\u7981")), g.a.createElement(c["a"].Item, {
                         disabled: !E.length
                     }, g.a.createElement("a", {
                         disabled: !E.length,
                         onClick: ()=>this.allDel()
                     }, g.a.createElement(u["a"], {
                         type: "delete"
-                    }), " Xoá hàng loạt")))
+                    }), " \u6279\u91cf\u5220\u9664")))
                 }, g.a.createElement(s["a"], null, g.a.createElement(u["a"], {
                     type: "select"
-                }), "Chỉnh Sửa")))), g.a.createElement(T["a"], null, g.a.createElement(s["a"], {
+                }), "\u64cd\u4f5c")))), g.a.createElement(T["a"], null, g.a.createElement(s["a"], {
                     className: "ml-2"
                 }, g.a.createElement(u["a"], {
                     type: "user-add"
@@ -71171,14 +71133,14 @@
                     key: null === (t = this.record) || void 0 === t ? void 0 : t.id
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "edit"
-                }), " Chỉnh Sửa"))), g.a.createElement("li", {
+                }), " \u7f16\u8f91"))), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement(S["a"], {
                     email: null === (n = this.record) || void 0 === n ? void 0 : n.email,
                     key: null === (r = this.record) || void 0 === r ? void 0 : r.email
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "plus"
-                }), " Gán đơn hàng"))), g.a.createElement("li", {
+                }), " \u5206\u914d\u8ba2\u5355"))), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement("a", {
                     onClick: ()=>{
@@ -71187,7 +71149,7 @@
                     }
                 }, g.a.createElement(u["a"], {
                     type: "copy"
-                }), " Sao chép URL đăng ký")), g.a.createElement("li", {
+                }), " \u590d\u5236\u8ba2\u9605URL")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement("a", {
                     style: {
@@ -71196,7 +71158,7 @@
                     onClick: ()=>this.resetSecret(this.record)
                 }, g.a.createElement(u["a"], {
                     type: "reload"
-                }), " Đặt lại URL đăng ký")), g.a.createElement("li", {
+                }), " \u91cd\u7f6eUUID\u53ca\u8ba2\u9605URL")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item",
                     onClick: ()=>{
                         var e;
@@ -71204,7 +71166,7 @@
                     }
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "account-book"
-                }), " Đơn hàng User")), g.a.createElement("li", {
+                }), " TA\u7684\u8ba2\u5355")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item",
                     onClick: ()=>{
                         var e;
@@ -71212,20 +71174,20 @@
                     }
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "usergroup-add"
-                }), " Lời mời User")), g.a.createElement("li", {
+                }), " TA\u7684\u9080\u8bf7")), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement(j["a"], {
                     userId: null === (o = this.record) || void 0 === o ? void 0 : o.id,
                     key: null === (p = this.record) || void 0 === p ? void 0 : p.email
                 }, g.a.createElement("a", null, g.a.createElement(u["a"], {
                     type: "solution"
-                }), " Lịch sử dung lượng"))), g.a.createElement("li", {
+                }), " TA\u7684\u6d41\u91cf\u8bb0\u5f55"))), g.a.createElement("li", {
                     className: "ant-dropdown-menu-item"
                 }, g.a.createElement("a", {
                     onClick: ()=>this.delUser(this.record)
                 }, g.a.createElement(u["a"], {
                     type: "delete"
-                }), " Xóa User"))))))))
+                }), " \u5220\u9664\u7528\u6237"))))))))
             }
         }
         t["default"] = Object(E["c"])(e=>{
@@ -73723,39 +73685,39 @@
                 return d.a.createElement(d.a.Fragment, null, d.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
                 }), d.a.createElement(s["a"], {
-                    title: this.state.submit.id ? "Chỉnh sửa phương thức thanh toán" : "Thêm phương thức thanh toán",
+                    title: this.state.submit.id ? "\u7f16\u8f91\u652f\u4ed8\u65b9\u5f0f" : "\u6dfb\u52a0\u652f\u4ed8\u65b9\u5f0f",
                     visible: this.state.visible,
-                    onCancel: () => this.setState({
+                    onCancel: ()=>this.setState({
                         visible: !1
                     }),
-                    onOk: () => this.save(),
-                    okText: this.state.submit.id ? "Lưu" : "Thêm",
+                    onOk: ()=>this.save(),
+                    okText: this.state.submit.id ? "\u4fdd\u5b58" : "\u6dfb\u52a0",
                     okButtonProps: {
                         loading: e
                     },
-                    cancelText: "Hủy bỏ"
+                    cancelText: "\u53d6\u6d88"
                 }, d.a.createElement("div", null, d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Hiển thị tên"), d.a.createElement(v["a"], {
-                    placeholder: "Sử dụng để hiển thị trên frontend",
+                }, "\u663e\u793a\u540d\u79f0"), d.a.createElement(v["a"], {
+                    placeholder: "\u7528\u4e8e\u524d\u7aef\u663e\u793a\u4f7f\u7528",
                     defaultValue: a.name,
-                    onChange: e => this.submitOnChange("name", e.target.value)
+                    onChange: e=>this.submitOnChange("name", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "URL biểu tượng (tùy chọn)"), d.a.createElement(v["a"], {
-                    placeholder: "Sử dụng để hiển thị trên frontend (https://x.com/icon.svg)",
+                }, "\u56fe\u6807URL(\u9009\u586b)"), d.a.createElement(v["a"], {
+                    placeholder: "\u7528\u4e8e\u524d\u7aef\u663e\u793a\u4f7f\u7528(https://x.com/icon.svg)",
                     defaultValue: a.icon,
-                    onChange: e => this.submitOnChange("icon", e.target.value)
+                    onChange: e=>this.submitOnChange("icon", e.target.value)
                 })), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Tùy chỉnh tên miền thông báo (tùy chọn)"), d.a.createElement(v["a"], {
-                    placeholder: "Thông báo liên quan đến trang web sẽ được gửi đến tên miền này (https://x.com)",
+                }, "\u81ea\u5b9a\u4e49\u901a\u77e5\u57df\u540d(\u9009\u586b)"), d.a.createElement(v["a"], {
+                    placeholder: "\u7f51\u5173\u7684\u901a\u77e5\u5c06\u4f1a\u53d1\u9001\u5230\u8be5\u57df\u540d(https://x.com)",
                     defaultValue: a.notify_domain,
                     onChange: e=>this.submitOnChange("notify_domain", e.target.value)
                 })), d.a.createElement("div", {
@@ -73766,10 +73728,10 @@
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Phần trăm phí xử lý (tùy chọn)"), d.a.createElement(v["a"], {
+                }, "\u767e\u5206\u6bd4\u624b\u7eed\u8d39(\u9009\u586b)"), d.a.createElement(v["a"], {
                     suffix: "%",
                     type: "number",
-                    placeholder: "Một khoản phí xử lý sẽ được thêm vào số tiền đặt hàng.",
+                    placeholder: "\u5728\u8ba2\u5355\u91d1\u989d\u57fa\u7840\u4e0a\u9644\u52a0\u624b\u7eed\u8d39",
                     defaultValue: a.handling_fee_percent,
                     onChange: e=>this.submitOnChange("handling_fee_percent", e.target.value)
                 }))), d.a.createElement("div", {
@@ -73778,16 +73740,16 @@
                     className: "form-group"
                 }, d.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Phí xử lý cố định (tùy chọn)"), d.a.createElement(v["a"], {
+                }, "\u56fa\u5b9a\u624b\u7eed\u8d39(\u9009\u586b)"), d.a.createElement(v["a"], {
                     type: "number",
-                    placeholder: "Một khoản phí xử lý sẽ được thêm vào số tiền đặt hàng.",
+                    placeholder: "\u5728\u8ba2\u5355\u91d1\u989d\u57fa\u7840\u4e0a\u9644\u52a0\u624b\u7eed\u8d39",
                     defaultValue: a.handling_fee_fixed / 100,
                     onChange: e=>this.submitOnChange("handling_fee_fixed", 100 * e.target.value)
                 })))), d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "tập tin giao diện"), d.a.createElement("div", null, d.a.createElement(g["a"], {
+                }, "\u63a5\u53e3\u6587\u4ef6"), d.a.createElement("div", null, d.a.createElement(g["a"], {
                     style: {
                         width: "100%"
                     },
@@ -73874,7 +73836,7 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "Hiện",
+                    title: "\u542f\u7528",
                     dataIndex: "enable",
                     key: "enable",
                     render: (e,t)=>d.a.createElement(u["a"], {
@@ -73883,24 +73845,24 @@
                         onChange: e=>this.show(t.id)
                     })
                 }, {
-                    title: "Tên",
+                    title: "\u663e\u793a\u540d\u79f0",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "Giao Diện",
+                    title: "\u652f\u4ed8\u63a5\u53e3",
                     dataIndex: "payment",
                     key: "payment"
                 }, {
-                    title: d.a.createElement("span", null, "URL thông báo ", d.a.createElement(c["a"], {
+                    title: d.a.createElement("span", null, "\u901a\u77e5\u5730\u5740 ", d.a.createElement(c["a"], {
                         placement: "top",
-                        title: "Cổng thanh toán sẽ thông báo dữ liệu về địa chỉ này. Vui lòng cho phép địa chỉ này thông qua tường lửa."
+                        title: "\u652f\u4ed8\u7f51\u5173\u5c06\u4f1a\u628a\u6570\u636e\u901a\u77e5\u5230\u672c\u5730\u5740\uff0c\u8bf7\u901a\u8fc7\u9632\u706b\u5899\u653e\u884c\u672c\u5730\u5740\u3002"
                     }, d.a.createElement(h["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "notify_url",
                     key: "notify_url"
                 }, {
-                    title: "Chỉnh Sủa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -73910,26 +73872,26 @@
                         record: t
                     }, d.a.createElement("a", {
                         href: "javascript:void(0);"
-                    }, "Biên Tập")), d.a.createElement(l["a"], {
+                    }, "\u7f16\u8f91")), d.a.createElement(l["a"], {
                         type: "vertical"
                     }), d.a.createElement("a", {
                         href: "javascript:void(0)",
                         onClick: ()=>{
                             s["a"].confirm({
-                                title: "Cảnh Báo",
-                                content: "Bạn có chắc chắn muốn xóa mục này?",
+                                title: "\u8b66\u544a",
+                                content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                 onOk: ()=>this.props.dispatch({
                                     type: "payment/drop",
                                     id: t.id
                                 }),
-                                okText: "Chắc chắn",
-                                cancelText: "Hủy bỏ"
+                                okText: "\u786e\u5b9a",
+                                cancelText: "\u53d6\u6d88"
                             })
                         }
-                    }, "Xóa bỏ"))
+                    }, "\u5220\u9664"))
                 }];
                 return d.a.createElement(p["a"], i()({}, this.props, {
-                    title: "Cấu hình thanh toán"
+                    title: "\u652f\u4ed8\u914d\u7f6e"
                 }), d.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), d.a.createElement(_["a"], {
@@ -73946,7 +73908,7 @@
                     key: 0
                 }, d.a.createElement(a["a"], null, d.a.createElement(h["a"], {
                     type: "plus"
-                }), " Thêm phương thức thanh toán"))), d.a.createElement(E["a"], {
+                }), " \u6dfb\u52a0\u652f\u4ed8\u65b9\u5f0f"))), d.a.createElement(E["a"], {
                     onDragEnd: (t,n)=>{
                         e.props.dispatch({
                             type: "payment/sort",
@@ -78216,7 +78178,7 @@
                         selectIndex: 0
                     })
                 }
-                )) : h["a"].error("Giá trị không thể trống")
+                )) : h["a"].error("\u503c\u4e0d\u80fd\u4e3a\u7a7a")
             }
             onChange(e, t, n, r) {
                 var i = this.state.filter;
@@ -78233,8 +78195,8 @@
                 var e = !0;
                 this.state.filter.forEach(t=>{
                     "" === t.value && (u["a"].error({
-                        message: "Lọc",
-                        description: "Nội dung cần lấy không được để trống",
+                        message: "\u8fc7\u6ee4\u5668",
+                        description: "\u6b32\u68c0\u7d22\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a",
                         duration: 1.5
                     }),
                     e = !1)
@@ -78273,7 +78235,7 @@
                     onClick: ()=>this.show()
                 }), m.a.createElement(r["a"], {
                     onOk: ()=>this.onOk(),
-                    title: "Lọc",
+                    title: "\u8fc7\u6ee4\u5668",
                     visible: this.state.visible,
                     onClose: ()=>this.hide(),
                     className: "v2board-filter-drawer",
@@ -78282,7 +78244,7 @@
                     var n = this.props.keys.find(e=>e.key === this.state.filter[t].key);
                     return m.a.createElement(m.a.Fragment, null, m.a.createElement(l["a"], {
                         type: "horizontal"
-                    }, "Tình Trạng".concat(t + 1), " ", m.a.createElement(c["a"], {
+                    }, "\u6761\u4ef6".concat(t + 1), " ", m.a.createElement(c["a"], {
                         type: "delete",
                         style: {
                             color: "#ff4d4f"
@@ -78290,7 +78252,7 @@
                         onClick: ()=>this.onDelete(t)
                     })), m.a.createElement("div", {
                         className: "form-group"
-                    }, m.a.createElement("label", null, "Tên trường"), m.a.createElement("div", null, m.a.createElement(s["a"], {
+                    }, m.a.createElement("label", null, "\u5b57\u6bb5\u540d"), m.a.createElement("div", null, m.a.createElement(s["a"], {
                         value: this.state.filter[t].key,
                         style: {
                             width: "100%"
@@ -78304,7 +78266,7 @@
                     }
                     )))), m.a.createElement("div", {
                         className: "form-group"
-                    }, m.a.createElement("label", null, "Tình Trạng"), m.a.createElement("div", null, m.a.createElement(s["a"], {
+                    }, m.a.createElement("label", null, "\u6761\u4ef6"), m.a.createElement("div", null, m.a.createElement(s["a"], {
                         value: this.state.filter[t].condition,
                         style: {
                             width: "100%"
@@ -78318,12 +78280,12 @@
                     }
                     )))), m.a.createElement("div", {
                         className: "form-group"
-                    }, m.a.createElement("label", null, "Để tìm kiếm nội dung"), m.a.createElement("div", null, "select" === n.type && m.a.createElement(s["a"], {
+                    }, m.a.createElement("label", null, "\u6b32\u68c0\u7d22\u5185\u5bb9"), m.a.createElement("div", null, "select" === n.type && m.a.createElement(s["a"], {
                         defaultValue: this.state.filter[t].value || void 0,
                         style: {
                             width: "100%"
                         },
-                        placeholder: "Vui lòng chọn một giá trị",
+                        placeholder: "\u8bf7\u9009\u62e9\u503c",
                         onChange: e=>this.onChange("value", e, t)
                     }, n.options.map((e,t)=>{
                         return m.a.createElement(s["a"].Option, {
@@ -78343,7 +78305,7 @@
                             width: "100%"
                         },
                         defaultValue: this.state.filter[t].value || void 0,
-                        placeholder: "giá trị",
+                        placeholder: "\u503c",
                         onChange: e=>this.onChange("value", e.target.value, t)
                     }))))
                 }
@@ -78355,7 +78317,7 @@
                     onClick: ()=>this.add()
                 }, m.a.createElement(c["a"], {
                     type: "plus"
-                }), " Thêm điều kiện"), m.a.createElement("div", {
+                }), " \u6dfb\u52a0\u6761\u4ef6"), m.a.createElement("div", {
                     className: "v2board-drawer-action"
                 }, m.a.createElement(i["a"], {
                     disabled: !this.state.filter.length,
@@ -78364,16 +78326,16 @@
                     style: {
                         float: "left"
                     }
-                }, "Cài lại"), m.a.createElement(i["a"], {
+                }, "\u91cd\u7f6e"), m.a.createElement(i["a"], {
                     style: {
                         marginRight: 8
                     },
                     onClick: ()=>this.hide()
-                }, "Hủy bỏ"), m.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), m.a.createElement(i["a"], {
                     disabled: !this.state.filter.length,
                     onClick: ()=>this.onOk(),
                     type: "primary"
-                }, "Tìm kiếm"))))
+                }, "\u68c0\u7d22"))))
             }
         }
     },
@@ -79145,6 +79107,1190 @@
                                 case 2:
                                     return e.next = 4,
                                     Object(o["b"])("/" + window.settings.secure_path + "/server/hysteria/save", n);
+                                case 4:
+                                    return t = e.sent,
+                                    e.next = 7,
+                                    i({
+                                        type: "setState",
+                                        payload: {
+                                            saveLoading: !1
+                                        }
+                                    });
+                                case 7:
+                                    if (200 === t.code) {
+                                        e.next = 9;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 9:
+                                    return e.next = 11,
+                                    i({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 11:
+                                    "function" === typeof r && r();
+                                case 12:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                }
+            }
+        }
+    },
+    callTuic: function(e, t, n) {
+        "use strict";
+        n.r(t);
+        var r = n("p0pE")
+          , i = n.n(r)
+          , o = n("t3Un");
+        function a() {
+            a = function() {
+                return e
+            }
+            ;
+            var e = {}
+              , t = Object.prototype
+              , n = t.hasOwnProperty
+              , r = Object.defineProperty || function(e, t, n) {
+                e[t] = n.value
+            }
+              , i = "function" == typeof Symbol ? Symbol : {}
+              , o = i.iterator || "@@iterator"
+              , s = i.asyncIterator || "@@asyncIterator"
+              , l = i.toStringTag || "@@toStringTag";
+            function c(e, t, n) {
+                return Object.defineProperty(e, t, {
+                    value: n,
+                    enumerable: !0,
+                    configurable: !0,
+                    writable: !0
+                }),
+                e[t]
+            }
+            try {
+                c({}, "")
+            } catch (e) {
+                c = function(e, t, n) {
+                    return e[t] = n
+                }
+            }
+            function u(e, t, n, i) {
+                var o = t && t.prototype instanceof d ? t : d
+                  , a = Object.create(o.prototype)
+                  , s = new C(i || []);
+                return r(a, "_invoke", {
+                    value: _(e, n, s)
+                }),
+                a
+            }
+            function h(e, t, n) {
+                try {
+                    return {
+                        type: "normal",
+                        arg: e.call(t, n)
+                    }
+                } catch (e) {
+                    return {
+                        type: "throw",
+                        arg: e
+                    }
+                }
+            }
+            e.wrap = u;
+            var f = {};
+            function d() {}
+            function p() {}
+            function m() {}
+            var g = {};
+            c(g, o, function() {
+                return this
+            });
+            var v = Object.getPrototypeOf
+              , y = v && v(v(O([])));
+            y && y !== t && n.call(y, o) && (g = y);
+            var b = m.prototype = d.prototype = Object.create(g);
+            function w(e) {
+                ["next", "throw", "return"].forEach(function(t) {
+                    c(e, t, function(e) {
+                        return this._invoke(t, e)
+                    })
+                })
+            }
+            function x(e, t) {
+                function i(r, o, a, s) {
+                    var l = h(e[r], e, o);
+                    if ("throw" !== l.type) {
+                        var c = l.arg
+                          , u = c.value;
+                        return u && "object" == typeof u && n.call(u, "__await") ? t.resolve(u.__await).then(function(e) {
+                            i("next", e, a, s)
+                        }, function(e) {
+                            i("throw", e, a, s)
+                        }) : t.resolve(u).then(function(e) {
+                            c.value = e,
+                            a(c)
+                        }, function(e) {
+                            return i("throw", e, a, s)
+                        })
+                    }
+                    s(l.arg)
+                }
+                var o;
+                r(this, "_invoke", {
+                    value: function(e, n) {
+                        function r() {
+                            return new t(function(t, r) {
+                                i(e, n, t, r)
+                            }
+                            )
+                        }
+                        return o = o ? o.then(r, r) : r()
+                    }
+                })
+            }
+            function _(e, t, n) {
+                var r = "suspendedStart";
+                return function(i, o) {
+                    if ("executing" === r)
+                        throw new Error("Generator is already running");
+                    if ("completed" === r) {
+                        if ("throw" === i)
+                            throw o;
+                        return T()
+                    }
+                    for (n.method = i,
+                    n.arg = o; ; ) {
+                        var a = n.delegate;
+                        if (a) {
+                            var s = E(a, n);
+                            if (s) {
+                                if (s === f)
+                                    continue;
+                                return s
+                            }
+                        }
+                        if ("next" === n.method)
+                            n.sent = n._sent = n.arg;
+                        else if ("throw" === n.method) {
+                            if ("suspendedStart" === r)
+                                throw r = "completed",
+                                n.arg;
+                            n.dispatchException(n.arg)
+                        } else
+                            "return" === n.method && n.abrupt("return", n.arg);
+                        r = "executing";
+                        var l = h(e, t, n);
+                        if ("normal" === l.type) {
+                            if (r = n.done ? "completed" : "suspendedYield",
+                            l.arg === f)
+                                continue;
+                            return {
+                                value: l.arg,
+                                done: n.done
+                            }
+                        }
+                        "throw" === l.type && (r = "completed",
+                        n.method = "throw",
+                        n.arg = l.arg)
+                    }
+                }
+            }
+            function E(e, t) {
+                var n = t.method
+                  , r = e.iterator[n];
+                if (void 0 === r)
+                    return t.delegate = null,
+                    "throw" === n && e.iterator.return && (t.method = "return",
+                    t.arg = void 0,
+                    E(e, t),
+                    "throw" === t.method) || "return" !== n && (t.method = "throw",
+                    t.arg = new TypeError("The iterator does not provide a '" + n + "' method")),
+                    f;
+                var i = h(r, e.iterator, t.arg);
+                if ("throw" === i.type)
+                    return t.method = "throw",
+                    t.arg = i.arg,
+                    t.delegate = null,
+                    f;
+                var o = i.arg;
+                return o ? o.done ? (t[e.resultName] = o.value,
+                t.next = e.nextLoc,
+                "return" !== t.method && (t.method = "next",
+                t.arg = void 0),
+                t.delegate = null,
+                f) : o : (t.method = "throw",
+                t.arg = new TypeError("iterator result is not an object"),
+                t.delegate = null,
+                f)
+            }
+            function S(e) {
+                var t = {
+                    tryLoc: e[0]
+                };
+                1 in e && (t.catchLoc = e[1]),
+                2 in e && (t.finallyLoc = e[2],
+                t.afterLoc = e[3]),
+                this.tryEntries.push(t)
+            }
+            function k(e) {
+                var t = e.completion || {};
+                t.type = "normal",
+                delete t.arg,
+                e.completion = t
+            }
+            function C(e) {
+                this.tryEntries = [{
+                    tryLoc: "root"
+                }],
+                e.forEach(S, this),
+                this.reset(!0)
+            }
+            function O(e) {
+                if (e) {
+                    var t = e[o];
+                    if (t)
+                        return t.call(e);
+                    if ("function" == typeof e.next)
+                        return e;
+                    if (!isNaN(e.length)) {
+                        var r = -1
+                          , i = function t() {
+                            for (; ++r < e.length; )
+                                if (n.call(e, r))
+                                    return t.value = e[r],
+                                    t.done = !1,
+                                    t;
+                            return t.value = void 0,
+                            t.done = !0,
+                            t
+                        };
+                        return i.next = i
+                    }
+                }
+                return {
+                    next: T
+                }
+            }
+            function T() {
+                return {
+                    value: void 0,
+                    done: !0
+                }
+            }
+            return p.prototype = m,
+            r(b, "constructor", {
+                value: m,
+                configurable: !0
+            }),
+            r(m, "constructor", {
+                value: p,
+                configurable: !0
+            }),
+            p.displayName = c(m, l, "GeneratorFunction"),
+            e.isGeneratorFunction = function(e) {
+                var t = "function" == typeof e && e.constructor;
+                return !!t && (t === p || "GeneratorFunction" === (t.displayName || t.name))
+            }
+            ,
+            e.mark = function(e) {
+                return Object.setPrototypeOf ? Object.setPrototypeOf(e, m) : (e.__proto__ = m,
+                c(e, l, "GeneratorFunction")),
+                e.prototype = Object.create(b),
+                e
+            }
+            ,
+            e.awrap = function(e) {
+                return {
+                    __await: e
+                }
+            }
+            ,
+            w(x.prototype),
+            c(x.prototype, s, function() {
+                return this
+            }),
+            e.AsyncIterator = x,
+            e.async = function(t, n, r, i, o) {
+                void 0 === o && (o = Promise);
+                var a = new x(u(t, n, r, i),o);
+                return e.isGeneratorFunction(n) ? a : a.next().then(function(e) {
+                    return e.done ? e.value : a.next()
+                })
+            }
+            ,
+            w(b),
+            c(b, l, "Generator"),
+            c(b, o, function() {
+                return this
+            }),
+            c(b, "toString", function() {
+                return "[object Generator]"
+            }),
+            e.keys = function(e) {
+                var t = Object(e)
+                  , n = [];
+                for (var r in t)
+                    n.push(r);
+                return n.reverse(),
+                function e() {
+                    for (; n.length; ) {
+                        var r = n.pop();
+                        if (r in t)
+                            return e.value = r,
+                            e.done = !1,
+                            e
+                    }
+                    return e.done = !0,
+                    e
+                }
+            }
+            ,
+            e.values = O,
+            C.prototype = {
+                constructor: C,
+                reset: function(e) {
+                    if (this.prev = 0,
+                    this.next = 0,
+                    this.sent = this._sent = void 0,
+                    this.done = !1,
+                    this.delegate = null,
+                    this.method = "next",
+                    this.arg = void 0,
+                    this.tryEntries.forEach(k),
+                    !e)
+                        for (var t in this)
+                            "t" === t.charAt(0) && n.call(this, t) && !isNaN(+t.slice(1)) && (this[t] = void 0)
+                },
+                stop: function() {
+                    this.done = !0;
+                    var e = this.tryEntries[0].completion;
+                    if ("throw" === e.type)
+                        throw e.arg;
+                    return this.rval
+                },
+                dispatchException: function(e) {
+                    if (this.done)
+                        throw e;
+                    var t = this;
+                    function r(n, r) {
+                        return a.type = "throw",
+                        a.arg = e,
+                        t.next = n,
+                        r && (t.method = "next",
+                        t.arg = void 0),
+                        !!r
+                    }
+                    for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+                        var o = this.tryEntries[i]
+                          , a = o.completion;
+                        if ("root" === o.tryLoc)
+                            return r("end");
+                        if (o.tryLoc <= this.prev) {
+                            var s = n.call(o, "catchLoc")
+                              , l = n.call(o, "finallyLoc");
+                            if (s && l) {
+                                if (this.prev < o.catchLoc)
+                                    return r(o.catchLoc, !0);
+                                if (this.prev < o.finallyLoc)
+                                    return r(o.finallyLoc)
+                            } else if (s) {
+                                if (this.prev < o.catchLoc)
+                                    return r(o.catchLoc, !0)
+                            } else {
+                                if (!l)
+                                    throw new Error("try statement without catch or finally");
+                                if (this.prev < o.finallyLoc)
+                                    return r(o.finallyLoc)
+                            }
+                        }
+                    }
+                },
+                abrupt: function(e, t) {
+                    for (var r = this.tryEntries.length - 1; r >= 0; --r) {
+                        var i = this.tryEntries[r];
+                        if (i.tryLoc <= this.prev && n.call(i, "finallyLoc") && this.prev < i.finallyLoc) {
+                            var o = i;
+                            break
+                        }
+                    }
+                    o && ("break" === e || "continue" === e) && o.tryLoc <= t && t <= o.finallyLoc && (o = null);
+                    var a = o ? o.completion : {};
+                    return a.type = e,
+                    a.arg = t,
+                    o ? (this.method = "next",
+                    this.next = o.finallyLoc,
+                    f) : this.complete(a)
+                },
+                complete: function(e, t) {
+                    if ("throw" === e.type)
+                        throw e.arg;
+                    return "break" === e.type || "continue" === e.type ? this.next = e.arg : "return" === e.type ? (this.rval = this.arg = e.arg,
+                    this.method = "return",
+                    this.next = "end") : "normal" === e.type && t && (this.next = t),
+                    f
+                },
+                finish: function(e) {
+                    for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                        var n = this.tryEntries[t];
+                        if (n.finallyLoc === e)
+                            return this.complete(n.completion, n.afterLoc),
+                            k(n),
+                            f
+                    }
+                },
+                catch: function(e) {
+                    for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                        var n = this.tryEntries[t];
+                        if (n.tryLoc === e) {
+                            var r = n.completion;
+                            if ("throw" === r.type) {
+                                var i = r.arg;
+                                k(n)
+                            }
+                            return i
+                        }
+                    }
+                    throw new Error("illegal catch attempt")
+                },
+                delegateYield: function(e, t, n) {
+                    return this.delegate = {
+                        iterator: O(e),
+                        resultName: t,
+                        nextLoc: n
+                    },
+                    "next" === this.method && (this.arg = void 0),
+                    f
+                }
+            },
+            e
+        }
+        var s = {
+            switchLoading: {},
+            saveLoading: !1
+        };
+        t["default"] = {
+            name: "serverTuic",
+            state: i()({}, s),
+            reducers: {
+                setState(e, t) {
+                    var n = t.payload;
+                    return i()({}, e, n)
+                }
+            },
+            effects: {
+                update(e, t) {
+                    var n = e.id
+                      , r = e.key
+                      , i = e.value
+                      , s = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/tuic/update", {
+                                        id: n,
+                                        [r]: i
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    s({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                drop(e, t) {
+                    var n = e.id
+                      , r = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/tuic/drop", {
+                                        id: n
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    r({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                copy(e, t) {
+                    var n = e.id
+                      , r = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/tuic/copy", {
+                                        id: n
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    r({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                save(e, t) {
+                    var n = e.params
+                      , r = e.callback
+                      , i = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    i({
+                                        type: "setState",
+                                        payload: {
+                                            saveLoading: !0
+                                        }
+                                    });
+                                case 2:
+                                    return e.next = 4,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/tuic/save", n);
+                                case 4:
+                                    return t = e.sent,
+                                    e.next = 7,
+                                    i({
+                                        type: "setState",
+                                        payload: {
+                                            saveLoading: !1
+                                        }
+                                    });
+                                case 7:
+                                    if (200 === t.code) {
+                                        e.next = 9;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 9:
+                                    return e.next = 11,
+                                    i({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 11:
+                                    "function" === typeof r && r();
+                                case 12:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                }
+            }
+        }
+    },
+    callAnyTLS: function(e, t, n) {
+        "use strict";
+        n.r(t);
+        var r = n("p0pE")
+          , i = n.n(r)
+          , o = n("t3Un");
+        function a() {
+            a = function() {
+                return e
+            }
+            ;
+            var e = {}
+              , t = Object.prototype
+              , n = t.hasOwnProperty
+              , r = Object.defineProperty || function(e, t, n) {
+                e[t] = n.value
+            }
+              , i = "function" == typeof Symbol ? Symbol : {}
+              , o = i.iterator || "@@iterator"
+              , s = i.asyncIterator || "@@asyncIterator"
+              , l = i.toStringTag || "@@toStringTag";
+            function c(e, t, n) {
+                return Object.defineProperty(e, t, {
+                    value: n,
+                    enumerable: !0,
+                    configurable: !0,
+                    writable: !0
+                }),
+                e[t]
+            }
+            try {
+                c({}, "")
+            } catch (e) {
+                c = function(e, t, n) {
+                    return e[t] = n
+                }
+            }
+            function u(e, t, n, i) {
+                var o = t && t.prototype instanceof d ? t : d
+                  , a = Object.create(o.prototype)
+                  , s = new C(i || []);
+                return r(a, "_invoke", {
+                    value: _(e, n, s)
+                }),
+                a
+            }
+            function h(e, t, n) {
+                try {
+                    return {
+                        type: "normal",
+                        arg: e.call(t, n)
+                    }
+                } catch (e) {
+                    return {
+                        type: "throw",
+                        arg: e
+                    }
+                }
+            }
+            e.wrap = u;
+            var f = {};
+            function d() {}
+            function p() {}
+            function m() {}
+            var g = {};
+            c(g, o, function() {
+                return this
+            });
+            var v = Object.getPrototypeOf
+              , y = v && v(v(O([])));
+            y && y !== t && n.call(y, o) && (g = y);
+            var b = m.prototype = d.prototype = Object.create(g);
+            function w(e) {
+                ["next", "throw", "return"].forEach(function(t) {
+                    c(e, t, function(e) {
+                        return this._invoke(t, e)
+                    })
+                })
+            }
+            function x(e, t) {
+                function i(r, o, a, s) {
+                    var l = h(e[r], e, o);
+                    if ("throw" !== l.type) {
+                        var c = l.arg
+                          , u = c.value;
+                        return u && "object" == typeof u && n.call(u, "__await") ? t.resolve(u.__await).then(function(e) {
+                            i("next", e, a, s)
+                        }, function(e) {
+                            i("throw", e, a, s)
+                        }) : t.resolve(u).then(function(e) {
+                            c.value = e,
+                            a(c)
+                        }, function(e) {
+                            return i("throw", e, a, s)
+                        })
+                    }
+                    s(l.arg)
+                }
+                var o;
+                r(this, "_invoke", {
+                    value: function(e, n) {
+                        function r() {
+                            return new t(function(t, r) {
+                                i(e, n, t, r)
+                            }
+                            )
+                        }
+                        return o = o ? o.then(r, r) : r()
+                    }
+                })
+            }
+            function _(e, t, n) {
+                var r = "suspendedStart";
+                return function(i, o) {
+                    if ("executing" === r)
+                        throw new Error("Generator is already running");
+                    if ("completed" === r) {
+                        if ("throw" === i)
+                            throw o;
+                        return T()
+                    }
+                    for (n.method = i,
+                    n.arg = o; ; ) {
+                        var a = n.delegate;
+                        if (a) {
+                            var s = E(a, n);
+                            if (s) {
+                                if (s === f)
+                                    continue;
+                                return s
+                            }
+                        }
+                        if ("next" === n.method)
+                            n.sent = n._sent = n.arg;
+                        else if ("throw" === n.method) {
+                            if ("suspendedStart" === r)
+                                throw r = "completed",
+                                n.arg;
+                            n.dispatchException(n.arg)
+                        } else
+                            "return" === n.method && n.abrupt("return", n.arg);
+                        r = "executing";
+                        var l = h(e, t, n);
+                        if ("normal" === l.type) {
+                            if (r = n.done ? "completed" : "suspendedYield",
+                            l.arg === f)
+                                continue;
+                            return {
+                                value: l.arg,
+                                done: n.done
+                            }
+                        }
+                        "throw" === l.type && (r = "completed",
+                        n.method = "throw",
+                        n.arg = l.arg)
+                    }
+                }
+            }
+            function E(e, t) {
+                var n = t.method
+                  , r = e.iterator[n];
+                if (void 0 === r)
+                    return t.delegate = null,
+                    "throw" === n && e.iterator.return && (t.method = "return",
+                    t.arg = void 0,
+                    E(e, t),
+                    "throw" === t.method) || "return" !== n && (t.method = "throw",
+                    t.arg = new TypeError("The iterator does not provide a '" + n + "' method")),
+                    f;
+                var i = h(r, e.iterator, t.arg);
+                if ("throw" === i.type)
+                    return t.method = "throw",
+                    t.arg = i.arg,
+                    t.delegate = null,
+                    f;
+                var o = i.arg;
+                return o ? o.done ? (t[e.resultName] = o.value,
+                t.next = e.nextLoc,
+                "return" !== t.method && (t.method = "next",
+                t.arg = void 0),
+                t.delegate = null,
+                f) : o : (t.method = "throw",
+                t.arg = new TypeError("iterator result is not an object"),
+                t.delegate = null,
+                f)
+            }
+            function S(e) {
+                var t = {
+                    tryLoc: e[0]
+                };
+                1 in e && (t.catchLoc = e[1]),
+                2 in e && (t.finallyLoc = e[2],
+                t.afterLoc = e[3]),
+                this.tryEntries.push(t)
+            }
+            function k(e) {
+                var t = e.completion || {};
+                t.type = "normal",
+                delete t.arg,
+                e.completion = t
+            }
+            function C(e) {
+                this.tryEntries = [{
+                    tryLoc: "root"
+                }],
+                e.forEach(S, this),
+                this.reset(!0)
+            }
+            function O(e) {
+                if (e) {
+                    var t = e[o];
+                    if (t)
+                        return t.call(e);
+                    if ("function" == typeof e.next)
+                        return e;
+                    if (!isNaN(e.length)) {
+                        var r = -1
+                          , i = function t() {
+                            for (; ++r < e.length; )
+                                if (n.call(e, r))
+                                    return t.value = e[r],
+                                    t.done = !1,
+                                    t;
+                            return t.value = void 0,
+                            t.done = !0,
+                            t
+                        };
+                        return i.next = i
+                    }
+                }
+                return {
+                    next: T
+                }
+            }
+            function T() {
+                return {
+                    value: void 0,
+                    done: !0
+                }
+            }
+            return p.prototype = m,
+            r(b, "constructor", {
+                value: m,
+                configurable: !0
+            }),
+            r(m, "constructor", {
+                value: p,
+                configurable: !0
+            }),
+            p.displayName = c(m, l, "GeneratorFunction"),
+            e.isGeneratorFunction = function(e) {
+                var t = "function" == typeof e && e.constructor;
+                return !!t && (t === p || "GeneratorFunction" === (t.displayName || t.name))
+            }
+            ,
+            e.mark = function(e) {
+                return Object.setPrototypeOf ? Object.setPrototypeOf(e, m) : (e.__proto__ = m,
+                c(e, l, "GeneratorFunction")),
+                e.prototype = Object.create(b),
+                e
+            }
+            ,
+            e.awrap = function(e) {
+                return {
+                    __await: e
+                }
+            }
+            ,
+            w(x.prototype),
+            c(x.prototype, s, function() {
+                return this
+            }),
+            e.AsyncIterator = x,
+            e.async = function(t, n, r, i, o) {
+                void 0 === o && (o = Promise);
+                var a = new x(u(t, n, r, i),o);
+                return e.isGeneratorFunction(n) ? a : a.next().then(function(e) {
+                    return e.done ? e.value : a.next()
+                })
+            }
+            ,
+            w(b),
+            c(b, l, "Generator"),
+            c(b, o, function() {
+                return this
+            }),
+            c(b, "toString", function() {
+                return "[object Generator]"
+            }),
+            e.keys = function(e) {
+                var t = Object(e)
+                  , n = [];
+                for (var r in t)
+                    n.push(r);
+                return n.reverse(),
+                function e() {
+                    for (; n.length; ) {
+                        var r = n.pop();
+                        if (r in t)
+                            return e.value = r,
+                            e.done = !1,
+                            e
+                    }
+                    return e.done = !0,
+                    e
+                }
+            }
+            ,
+            e.values = O,
+            C.prototype = {
+                constructor: C,
+                reset: function(e) {
+                    if (this.prev = 0,
+                    this.next = 0,
+                    this.sent = this._sent = void 0,
+                    this.done = !1,
+                    this.delegate = null,
+                    this.method = "next",
+                    this.arg = void 0,
+                    this.tryEntries.forEach(k),
+                    !e)
+                        for (var t in this)
+                            "t" === t.charAt(0) && n.call(this, t) && !isNaN(+t.slice(1)) && (this[t] = void 0)
+                },
+                stop: function() {
+                    this.done = !0;
+                    var e = this.tryEntries[0].completion;
+                    if ("throw" === e.type)
+                        throw e.arg;
+                    return this.rval
+                },
+                dispatchException: function(e) {
+                    if (this.done)
+                        throw e;
+                    var t = this;
+                    function r(n, r) {
+                        return a.type = "throw",
+                        a.arg = e,
+                        t.next = n,
+                        r && (t.method = "next",
+                        t.arg = void 0),
+                        !!r
+                    }
+                    for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+                        var o = this.tryEntries[i]
+                          , a = o.completion;
+                        if ("root" === o.tryLoc)
+                            return r("end");
+                        if (o.tryLoc <= this.prev) {
+                            var s = n.call(o, "catchLoc")
+                              , l = n.call(o, "finallyLoc");
+                            if (s && l) {
+                                if (this.prev < o.catchLoc)
+                                    return r(o.catchLoc, !0);
+                                if (this.prev < o.finallyLoc)
+                                    return r(o.finallyLoc)
+                            } else if (s) {
+                                if (this.prev < o.catchLoc)
+                                    return r(o.catchLoc, !0)
+                            } else {
+                                if (!l)
+                                    throw new Error("try statement without catch or finally");
+                                if (this.prev < o.finallyLoc)
+                                    return r(o.finallyLoc)
+                            }
+                        }
+                    }
+                },
+                abrupt: function(e, t) {
+                    for (var r = this.tryEntries.length - 1; r >= 0; --r) {
+                        var i = this.tryEntries[r];
+                        if (i.tryLoc <= this.prev && n.call(i, "finallyLoc") && this.prev < i.finallyLoc) {
+                            var o = i;
+                            break
+                        }
+                    }
+                    o && ("break" === e || "continue" === e) && o.tryLoc <= t && t <= o.finallyLoc && (o = null);
+                    var a = o ? o.completion : {};
+                    return a.type = e,
+                    a.arg = t,
+                    o ? (this.method = "next",
+                    this.next = o.finallyLoc,
+                    f) : this.complete(a)
+                },
+                complete: function(e, t) {
+                    if ("throw" === e.type)
+                        throw e.arg;
+                    return "break" === e.type || "continue" === e.type ? this.next = e.arg : "return" === e.type ? (this.rval = this.arg = e.arg,
+                    this.method = "return",
+                    this.next = "end") : "normal" === e.type && t && (this.next = t),
+                    f
+                },
+                finish: function(e) {
+                    for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                        var n = this.tryEntries[t];
+                        if (n.finallyLoc === e)
+                            return this.complete(n.completion, n.afterLoc),
+                            k(n),
+                            f
+                    }
+                },
+                catch: function(e) {
+                    for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                        var n = this.tryEntries[t];
+                        if (n.tryLoc === e) {
+                            var r = n.completion;
+                            if ("throw" === r.type) {
+                                var i = r.arg;
+                                k(n)
+                            }
+                            return i
+                        }
+                    }
+                    throw new Error("illegal catch attempt")
+                },
+                delegateYield: function(e, t, n) {
+                    return this.delegate = {
+                        iterator: O(e),
+                        resultName: t,
+                        nextLoc: n
+                    },
+                    "next" === this.method && (this.arg = void 0),
+                    f
+                }
+            },
+            e
+        }
+        var s = {
+            switchLoading: {},
+            saveLoading: !1
+        };
+        t["default"] = {
+            name: "serverAnyTLS",
+            state: i()({}, s),
+            reducers: {
+                setState(e, t) {
+                    var n = t.payload;
+                    return i()({}, e, n)
+                }
+            },
+            effects: {
+                update(e, t) {
+                    var n = e.id
+                      , r = e.key
+                      , i = e.value
+                      , s = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/anytls/update", {
+                                        id: n,
+                                        [r]: i
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    s({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                drop(e, t) {
+                    var n = e.id
+                      , r = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/anytls/drop", {
+                                        id: n
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    r({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                copy(e, t) {
+                    var n = e.id
+                      , r = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/anytls/copy", {
+                                        id: n
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    r({
+                                        type: "serverManage/getNodes"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                save(e, t) {
+                    var n = e.params
+                      , r = e.callback
+                      , i = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    i({
+                                        type: "setState",
+                                        payload: {
+                                            saveLoading: !0
+                                        }
+                                    });
+                                case 2:
+                                    return e.next = 4,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/server/anytls/save", n);
                                 case 4:
                                     return t = e.sent,
                                     e.next = 7,
@@ -80708,15 +81854,15 @@
                     onClose: ()=>this.setState({
                         visible: !1
                     }),
-                    title: "".concat(this.state.record.id ? "Chỉnh sửa gói đăng ký" : "Tạo mới gói đăng ký"),
+                    title: "".concat(this.state.record.id ? "\u7f16\u8f91\u8ba2\u9605" : "\u65b0\u5efa\u8ba2\u9605"),
                     visible: this.state.visible,
                     width: "80%"
                 }, m.a.createElement("div", null, m.a.createElement("div", {
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Tên Gói"), m.a.createElement(C["a"], {
-                    placeholder: "Vui long nhập tên gói",
+                }, "\u5957\u9910\u540d\u79f0"), m.a.createElement(C["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u5957\u9910\u540d\u79f0",
                     value: this.state.record.name,
                     onChange: e=>{
                         this.setState({
@@ -80729,10 +81875,10 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Mô tả"), m.a.createElement(C["a"].TextArea, {
+                }, "\u5957\u9910\u63cf\u8ff0"), m.a.createElement(C["a"].TextArea, {
                     rows: 4,
                     value: this.state.record.content,
-                    placeholder: "Vui lòng nhập mô tả. có hỗ trợ html",
+                    placeholder: "\u8bf7\u8f93\u5165\u5957\u9910\u63cf\u8ff0\uff0c\u652f\u6301HTML",
                     onChange: e=>{
                         this.setState({
                             record: d()({}, this.state.record, {
@@ -80742,9 +81888,9 @@
                     }
                 })), m.a.createElement(k["a"], {
                     orientation: "center"
-                }, "Thiết lập giá bán ", m.a.createElement(c["a"], {
+                }, "\u552e\u4ef7\u8bbe\u7f6e ", m.a.createElement(c["a"], {
                     placement: "top",
-                    title: "Nếu để trống số tiền, chu kỳ đó sẽ không được bán"
+                    title: "\u5c06\u91d1\u989d\u7559\u7a7a\u5219\u4e0d\u4f1a\u8fdb\u884c\u51fa\u552e"
                 }, m.a.createElement(h["a"], {
                     type: "info-circle"
                 }))), m.a.createElement(E["a"], {
@@ -80755,7 +81901,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "1 Tháng"), m.a.createElement(C["a"], {
+                }, "\u6708\u4ed8"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.month_price ? this.state.record.month_price : void 0,
                     onChange: e=>this.priceOnChange("month_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80764,7 +81910,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "3 Tháng"), m.a.createElement(C["a"], {
+                }, "\u5b63\u4ed8"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.quarter_price ? this.state.record.quarter_price : void 0,
                     onChange: e=>this.priceOnChange("quarter_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80773,7 +81919,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "6 Tháng"), m.a.createElement(C["a"], {
+                }, "\u534a\u5e74"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.half_year_price ? this.state.record.half_year_price : void 0,
                     onChange: e=>this.priceOnChange("half_year_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80782,7 +81928,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "1 Năm"), m.a.createElement(C["a"], {
+                }, "\u5e74\u4ed8"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.year_price ? this.state.record.year_price : void 0,
                     onChange: e=>this.priceOnChange("year_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80791,7 +81937,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "2 Năm"), m.a.createElement(C["a"], {
+                }, "\u4e24\u5e74\u4ed8"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.two_year_price ? this.state.record.two_year_price : void 0,
                     onChange: e=>this.priceOnChange("two_year_price", e.target.value)
                 }))), m.a.createElement(S["a"], {
@@ -80800,7 +81946,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "3 Năm"), m.a.createElement(C["a"], {
+                }, "\u4e09\u5e74\u4ed8"), m.a.createElement(C["a"], {
                     value: null !== this.state.record.three_year_price ? this.state.record.three_year_price : void 0,
                     onChange: e=>this.priceOnChange("three_year_price", e.target.value)
                 })))), m.a.createElement(E["a"], {
@@ -80811,7 +81957,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Vĩnh Viễn"), m.a.createElement(C["a"], {
+                }, "\u4e00\u6b21\u6027"), m.a.createElement(C["a"], {
                     addonAfter: e.currency_symbol,
                     value: null !== this.state.record.onetime_price ? this.state.record.onetime_price : void 0,
                     onChange: e=>this.priceOnChange("onetime_price", e.target.value)
@@ -80821,7 +81967,7 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Đặt lại data"), m.a.createElement(C["a"], {
+                }, "\u91cd\u7f6e\u5305"), m.a.createElement(C["a"], {
                     addonAfter: e.currency_symbol,
                     value: null !== this.state.record.reset_price ? this.state.record.reset_price : void 0,
                     onChange: e=>this.priceOnChange("reset_price", e.target.value)
@@ -80829,9 +81975,9 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Dung Lượng"), m.a.createElement(C["a"], {
+                }, "\u5957\u9910\u6d41\u91cf"), m.a.createElement(C["a"], {
                     addonAfter: "GB",
-                    placeholder: "Vui lòng nhập dung lượng gói cước",
+                    placeholder: "\u8bf7\u8f93\u5165\u5957\u9910\u6d41\u91cf",
                     value: this.state.record.transfer_enable,
                     onChange: e=>{
                         this.setState({
@@ -80844,8 +81990,8 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Limit Thiết Bị"), m.a.createElement(C["a"], {
-                    placeholder: "Để trống sẽ không giới hạn",
+                }, "\u8bbe\u5907\u6570\u9650\u5236"), m.a.createElement(C["a"], {
+                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
                     value: this.state.record.device_limit,
                     onChange: e=>{
                         this.setState({
@@ -80858,10 +82004,10 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Nhóm quyền ", m.a.createElement(O["a"], null, m.a.createElement("a", {
+                }, "\u6743\u9650\u7ec4 ", m.a.createElement(O["a"], null, m.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), m.a.createElement(_["a"], {
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), m.a.createElement(_["a"], {
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -80883,8 +82029,8 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Phương thức reset lưu lượng"), m.a.createElement(_["a"], {
-                    placeholder: "Vui lòng chọn",
+                }, "\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f"), m.a.createElement(_["a"], {
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -80899,27 +82045,27 @@
                 }, m.a.createElement(_["a"].Option, {
                     key: null,
                     value: null
-                }, "Theo thiết lập hệ thống"), m.a.createElement(_["a"].Option, {
+                }, "\u8ddf\u968f\u7cfb\u7edf\u8bbe\u7f6e"), m.a.createElement(_["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Ngày 1 mỗi tháng"), m.a.createElement(_["a"].Option, {
+                }, "\u6bcf\u67081\u53f7"), m.a.createElement(_["a"].Option, {
                     key: 1,
                     value: 1
-                }, "Reset theo tháng"), m.a.createElement(_["a"].Option, {
+                }, "\u6309\u6708\u91cd\u7f6e"), m.a.createElement(_["a"].Option, {
                     key: 2,
                     value: 2
-                }, "Không reset"), m.a.createElement(_["a"].Option, {
+                }, "\u4e0d\u91cd\u7f6e"), m.a.createElement(_["a"].Option, {
                     key: 3,
                     value: 3
-                }, "Ngày 1 tháng 1 hàng năm"), m.a.createElement(_["a"].Option, {
+                }, "\u6bcf\u5e741\u67081\u65e5"), m.a.createElement(_["a"].Option, {
                     key: 4,
                     value: 4
-                }, "Reset theo năm")))), m.a.createElement("div", {
+                }, "\u6309\u5e74\u91cd\u7f6e")))), m.a.createElement("div", {
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Giới hạn số lượng người mua gói"), m.a.createElement(C["a"], {
-                    placeholder: "Để trống sẽ không giới hạn",
+                }, "\u6700\u5927\u5bb9\u7eb3\u7528\u6237\u91cf"), m.a.createElement(C["a"], {
+                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
                     value: this.state.record.capacity_limit,
                     onChange: e=>{
                         this.setState({
@@ -80932,9 +82078,9 @@
                     className: "form-group"
                 }, m.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Speed limit"), m.a.createElement(C["a"], {
+                }, "\u9650\u901f"), m.a.createElement(C["a"], {
                     addonAfter: "Mbps",
-                    placeholder: "Để trống sẽ không giới hạn",
+                    placeholder: "\u7559\u7a7a\u5219\u4e0d\u9650\u5236",
                     value: this.state.record.speed_limit,
                     onChange: e=>{
                         this.setState({
@@ -80951,7 +82097,7 @@
                         marginTop: 5
                     }
                 }, m.a.createElement(c["a"], {
-                    title: "Sau khi chọn, các thay đổi về lưu lượng, giới hạn tốc độ và nhóm quyền sẽ được áp dụng cho người dùng thuộc gói này",
+                    title: "\u52fe\u9009\u540e\u53d8\u66f4\u7684\u6d41\u91cf\u3001\u9650\u901f\u3001\u6743\u9650\u7ec4\u5c06\u5e94\u7528\u5230\u8be5\u5957\u9910\u4e0b\u7684\u7528\u6237",
                     placement: "top"
                 }, m.a.createElement(x["a"], {
                     onChange: e=>this.setState({
@@ -80959,18 +82105,18 @@
                             force_update: e.target.checked
                         })
                     })
-                }, "Cập nhật bắt buộc đến người dùng"))), m.a.createElement(o["a"], {
+                }, "\u5f3a\u5236\u66f4\u65b0\u5230\u7528\u6237"))), m.a.createElement(o["a"], {
                     style: {
                         marginRight: 8
                     },
                     onClick: ()=>this.setState({
                         visible: !1
                     })
-                }, "Hủy bỏ"), m.a.createElement(o["a"], {
+                }, "\u53d6\u6d88"), m.a.createElement(o["a"], {
                     loading: t,
                     onClick: ()=>t || this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         var L = Object(v["c"])(e=>{
@@ -81038,7 +82184,7 @@
             }
             render() {
                 var e, t = this.props.plan, n = t.plans, r = t.fetchLoading, f = this.props.serverGroup.groups, d = [{
-                    title: "Loại",
+                    title: "\u6392\u5e8f",
                     dataIndex: "sort",
                     key: "sort",
                     render: (e,t)=>{
@@ -81050,7 +82196,7 @@
                         }))
                     }
                 }, {
-                    title: "Mở bán",
+                    title: "\u9500\u552e\u72b6\u6001",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -81061,9 +82207,9 @@
                         })
                     }
                 }, {
-                    title: m.a.createElement("span", null, "Gia Hạn ", m.a.createElement(c["a"], {
+                    title: m.a.createElement("span", null, "\u7eed\u8d39 ", m.a.createElement(c["a"], {
                         placement: "top",
-                        title: "Khi gói đăng ký ngừng bán, người dùng đã mua có thể gia hạn hay không"
+                        title: "\u5728\u8ba2\u9605\u505c\u6b62\u9500\u552e\u65f6\uff0c\u5df2\u8d2d\u7528\u6237\u662f\u5426\u53ef\u4ee5\u7eed\u8d39"
                     }, m.a.createElement(h["a"], {
                         type: "question-circle"
                     }))),
@@ -81077,11 +82223,11 @@
                         })
                     }
                 }, {
-                    title: "Tên",
+                    title: "\u540d\u79f0",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "Tổng",
+                    title: "\u7edf\u8ba1",
                     dataIndex: "count",
                     key: "count",
                     render: e=>{
@@ -81093,101 +82239,77 @@
                         }), " ", e)
                     }
                 }, {
-                    title: "Data",
+                    title: "\u6d41\u91cf",
                     dataIndex: "transfer_enable",
                     key: "transfer_enable",
                     render: e=>{
                         return m.a.createElement(m.a.Fragment, null, e, " GB")
                     }
                 }, {
-                    title: "Limit Thiết Bị",
+                    title: "\u8bbe\u5907\u6570\u9650\u5236",
                     dataIndex: "device_limit",
                     key: "device_limit",
                     render: e=>{
                         return null !== e ? e : "-"
                     }
                 }, {
-                    title: "1 Tháng",
+                    title: "\u6708\u4ed8",
                     dataIndex: "month_price",
                     key: "month_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "3 Tháng",
+                    title: "\u5b63\u4ed8",
                     dataIndex: "quarter_price",
                     key: "quarter_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "6 Tháng",
+                    title: "\u534a\u5e74\u4ed8",
                     dataIndex: "half_year_price",
                     key: "half_year_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "1 Năm",
+                    title: "\u5e74\u4ed8",
                     dataIndex: "year_price",
                     key: "year_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "2 Năm",
+                    title: "\u4e24\u5e74\u4ed8",
                     dataIndex: "two_year_price",
                     key: "two_year_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "3 Năm",
+                    title: "\u4e09\u5e74\u4ed8",
                     dataIndex: "three_year_price",
                     key: "three_year_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Vĩnh Viễn",
+                    title: "\u4e00\u6b21\u6027",
                     dataIndex: "onetime_price",
                     key: "onetime_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Đặt là data",
+                    title: "\u91cd\u7f6e\u5305",
                     dataIndex: "reset_price",
                     key: "reset_price",
                     render: e=>{
-                        return null !== e ? e.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        }) : "-"
+                        return null !== e ? e.toFixed(2) : "-"
                     }
                 }, {
-                    title: "Group ID",
+                    title: "\u6743\u9650\u7ec4",
                     dataIndex: "group_id",
                     key: "group_id",
                     render: (e,t)=>{
@@ -81199,7 +82321,7 @@
                         n
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     fixed: "right",
@@ -81216,23 +82338,23 @@
                                 key: null === t || void 0 === t ? void 0 : t.id
                             }, m.a.createElement("a", null, m.a.createElement(h["a"], {
                                 type: "edit"
-                            }), " Chỉnh Sửa"))), m.a.createElement(s["a"].Item, {
+                            }), " \u7f16\u8f91"))), m.a.createElement(s["a"].Item, {
                                 style: {
                                     color: "#ff4d4f"
                                 },
                                 onClick: ()=>this.drop(t.id)
                             }, m.a.createElement(h["a"], {
                                 type: "delete"
-                            }), " Xóa bỏ"))
+                            }), " \u5220\u9664"))
                         }, m.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Chỉnh Sửa ", m.a.createElement(h["a"], {
+                        }, "\u64cd\u4f5c ", m.a.createElement(h["a"], {
                             type: "caret-down"
                         }))))
                     }
                 }], p = this;
                 return m.a.createElement(g["a"], i()({}, this.props, {
-                    title: "Quản lý gói đăng ký"
+                    title: "\u8ba2\u9605\u7ba1\u7406"
                 }), m.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), m.a.createElement(P["a"], {
@@ -81247,7 +82369,7 @@
                     }
                 }, m.a.createElement(L, null, m.a.createElement(o["a"], null, m.a.createElement(h["a"], {
                     type: "plus"
-                }), " Thêm gói đăng ký"))), m.a.createElement(b["a"], {
+                }), " \u6dfb\u52a0\u8ba2\u9605"))), m.a.createElement(b["a"], {
                     onDragEnd: (e,t)=>{
                         p.props.dispatch({
                             type: "plan/sort",
@@ -81280,7 +82402,7 @@
                     key: null === (e = this.record) || void 0 === e ? void 0 : e.id
                 }, m.a.createElement("a", null, m.a.createElement(h["a"], {
                     type: "edit"
-                }), " Chỉnh Sửa"))), m.a.createElement("li", {
+                }), " \u7f16\u8f91"))), m.a.createElement("li", {
                     className: "ant-dropdown-menu-item",
                     onClick: ()=>{
                         var e;
@@ -81292,7 +82414,7 @@
                     }
                 }, m.a.createElement(h["a"], {
                     type: "delete"
-                }), " Xóa bỏ")))))))))
+                }), " \u5220\u9664")))))))))
             }
         }
         t["default"] = Object(v["c"])(e=>{
@@ -81970,7 +83092,7 @@
                 this.props.dispatch({
                     type: "knowledge/save",
                     callback: ()=>{
-                        x["a"].success("Lưu thành công")
+                        x["a"].success("\u4fdd\u5b58\u6210\u529f")
                     }
                 })
             }
@@ -81987,7 +83109,7 @@
                 }), f.a.createElement(y["a"], {
                     width: "80%",
                     visible: e,
-                    title: o ? "Chỉnh sửa kiến thức" : "Thêm kiến thức mới",
+                    title: o ? "\u7f16\u8f91\u77e5\u8bc6" : "\u65b0\u589e\u77e5\u8bc6",
                     id: "knowledge",
                     onClose: ()=>this.hide()
                 }, r ? f.a.createElement(u["a"], {
@@ -81996,24 +83118,24 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Tiêu đề"), f.a.createElement(w["a"], {
-                    placeholder: "Vui lòng nhập tiêu đề kiến thức",
+                }, "\u6807\u9898"), f.a.createElement(w["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u77e5\u8bc6\u6807\u9898",
                     value: n.title,
                     onChange: e=>this.formChange("title", e.target.value)
                 })), f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Phân loại"), f.a.createElement(w["a"], {
-                    placeholder: "Vui lòng nhập phân loại, phân loại sẽ được tự động gom nhóm",
+                }, "\u5206\u7c7b"), f.a.createElement(w["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u5206\u7c7b\uff0c\u5206\u7c7b\u5c06\u4f1a\u81ea\u52a8\u5f52\u96c6",
                     value: n.category,
                     onChange: e=>this.formChange("category", e.target.value)
                 })), f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Ngôn ngữ"), f.a.createElement(b["a"], {
-                    placeholder: "Vui lòng chọn ngôn ngữ của kiến thức",
+                }, "\u8bed\u8a00"), f.a.createElement(b["a"], {
+                    placeholder: "\u8bf7\u9009\u62e9\u77e5\u8bc6\u8bed\u8a00",
                     defaultValue: n.language || 1,
                     style: {
                         width: "100%"
@@ -82029,7 +83151,7 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Nội dung"), f.a.createElement(L, {
+                }, "\u5185\u5bb9"), f.a.createElement(L, {
                     key: this.key,
                     style: {
                         height: "500px"
@@ -82052,11 +83174,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.hide()
-                }, "Hủy bỏ"), f.a.createElement(a["a"], {
+                }, "\u53d6\u6d88"), f.a.createElement(a["a"], {
                     loading: i,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         var j = Object(g["c"])(e=>{
@@ -82115,7 +83237,7 @@
                   , n = e.fetchLoading
                   , r = (e.categorys,
                 [{
-                    title: "Loại",
+                    title: "\u6392\u5e8f",
                     dataIndex: "sort",
                     key: "sort",
                     render: e=>{
@@ -82127,11 +83249,11 @@
                         }))
                     }
                 }, {
-                    title: "ID",
+                    title: "\u6587\u7ae0ID",
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Hiện",
+                    title: "\u663e\u793a",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -82142,23 +83264,23 @@
                         })
                     }
                 }, {
-                    title: "Tiêu Đề",
+                    title: "\u6807\u9898",
                     dataIndex: "title",
                     key: "title"
                 }, {
-                    title: "Thư Mục",
+                    title: "\u5206\u7c7b",
                     dataIndex: "category",
                     key: "category"
                 }, {
-                    title: "Cập nhật",
+                    title: "\u66f4\u65b0\u65f6\u95f4",
                     dataIndex: "updated_at",
                     key: "updated_at",
                     align: "right",
                     render: e=>{
-                        return m()(1e3 * e).format("DD/MM/YYYY HH:mm")
+                        return m()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -82168,25 +83290,25 @@
                             id: t.id
                         }, f.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Biên Tập")), f.a.createElement(l["a"], {
+                        }, "\u7f16\u8f91")), f.a.createElement(l["a"], {
                             type: "vertical"
                         }), f.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>{
                                 s["a"].confirm({
-                                    title: "Cảnh Báo",
-                                    content: "Bạn có chắc chắn muốn xóa mục này?",
+                                    title: "\u8b66\u544a",
+                                    content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                     onOk: ()=>this.drop(t),
-                                    okText: "Chắc chắn",
-                                    cancelText: "Hủy bỏ"
+                                    okText: "\u786e\u5b9a",
+                                    cancelText: "\u53d6\u6d88"
                                 })
                             }
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }])
                   , h = this;
                 return f.a.createElement(d["a"], i()({}, this.props, {
-                    title: "Quản lý hướng dẫn"
+                    title: "\u77e5\u8bc6\u5e93\u7ba1\u7406"
                 }), f.a.createElement(M["a"], {
                     loading: n
                 }, f.a.createElement("div", {
@@ -82199,7 +83321,7 @@
                     }
                 }, f.a.createElement(j, null, f.a.createElement(a["a"], null, f.a.createElement(u["a"], {
                     type: "plus"
-                }), " Thêm mới"))), f.a.createElement(v["a"], {
+                }), "\u65b0\u589e"))), f.a.createElement(v["a"], {
                     onDragEnd: (e,t)=>{
                         h.props.dispatch({
                             type: "knowledge/sort",
@@ -84823,32 +85945,32 @@
                 return u.a.createElement(u.a.Fragment, null, u.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
                 }), u.a.createElement(r["a"], {
-                    title: "Phân phối đơn hàng",
+                    title: "\u8ba2\u5355\u5206\u914d",
                     visible: t,
                     onCancel: ()=>this.show(),
                     onOk: ()=>this.ok(),
                     okText: l ? u.a.createElement(a["a"], {
                         type: "loading"
-                    }) : "Chắc chắn",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u786e\u5b9a",
+                    cancelText: "\u53d6\u6d88"
                 }, u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Email người dùng"), u.a.createElement(o["a"], {
-                    placeholder: "Vui lòng nhập email người dùng",
+                }, "\u7528\u6237\u90ae\u7bb1"), u.a.createElement(o["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u7528\u6237\u90ae\u7bb1",
                     value: n.email,
                     onChange: e=>this.setSubmit("email", e.target.value)
                 })), u.a.createElement("div", {
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Vui lòng chọn gói đăng ký"), u.a.createElement("div", null, u.a.createElement(i["a"], {
+                }, "\u8bf7\u9009\u62e9\u8ba2\u9605"), u.a.createElement("div", null, u.a.createElement(i["a"], {
                     value: n.plan_id,
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Vui lòng chọn gói đăng ký",
+                    placeholder: "\u8bf7\u9009\u62e9\u8ba2\u9605",
                     onChange: e=>this.setSubmit("plan_id", e)
                 }, s.map(e=>{
                     return u.a.createElement(i["a"].Option, {
@@ -84860,12 +85982,12 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Vui lòng chọn chu kỳ"), u.a.createElement("div", null, u.a.createElement(i["a"], {
+                }, "\u8bf7\u9009\u62e9\u5468\u671f"), u.a.createElement("div", null, u.a.createElement(i["a"], {
                     value: n.period,
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Vui lòng chọn chu kỳ",
+                    placeholder: "\u8bf7\u9009\u62e9\u5468\u671f",
                     onChange: e=>this.setSubmit("period", e)
                 }, Object.keys(f["a"].periodText).map(e=>{
                     return u.a.createElement(i["a"].Option, {
@@ -84877,9 +85999,9 @@
                     className: "form-group"
                 }, u.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Số Tiền"), u.a.createElement(o["a"], {
-                    placeholder: "Vui lòng nhập số tiền cần thanh toán",
-                    addonAfter: "₫",
+                }, "\u652f\u4ed8\u91d1\u989d"), u.a.createElement(o["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u9700\u8981\u652f\u4ed8\u7684\u91d1\u989d",
+                    addonAfter: "\xa5",
                     value: n.total_amount,
                     onChange: e=>this.setSubmit("total_amount", e.target.value)
                 }))))
@@ -84895,75 +86017,6 @@
         }
         )(d)
     },
-    "qrc/": function(e, t, n) {
-        "use strict";
-        n("2qtc");
-        var r = n("kLXV"),
-            i = (n("OaEy"), n("2fM7")),
-            o = (n("5NDa"), n("5rEg")),
-            a = (n("Pwec"), n("CtXQ")),
-            s = n("p0pE"),
-            l = n.n(s),
-            c = n("q1tI"),
-            u = n.n(c),
-            h = n("/MKj");
-
-        class d extends u.a.Component {
-            constructor(e) {
-                super(e),
-                this.state = {
-                    visible: !1
-                };
-            }
-
-            show() {
-                this.setState({
-                    visible: !this.state.visible
-                });
-            }
-
-            render() {
-                var e = this.state,
-                    t = e.visible,
-                    z = this.props.uid,
-                    n = this.props.qrUrl;
-
-                return u.a.createElement(u.a.Fragment, null,
-                    u.a.cloneElement(this.props.children, {
-                        onClick: () => this.show()
-                    }),
-                    u.a.createElement(r["a"], {
-                        title: "QR VPN ID: " + z,
-                        visible: t,
-                        onCancel: () => this.show(),
-                        footer: [
-                            u.a.createElement("button", {
-                                key: "cancel",
-                                onClick: () => this.show(),
-                                className: "ant-btn"
-                            }, "Đóng")
-                        ]
-                    }, n ? u.a.createElement("div", {
-                        style: { textAlign: "center" }
-                    }, u.a.createElement("img", {
-                        src: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+ n,
-                        alt: "QR Code",
-                        style: { maxWidth: "100%", height: "auto" }
-                    })) : u.a.createElement("p", null, "Không có mã QR để hiển thị."))
-                );
-            }
-        }
-
-        t["a"] = Object(h["c"])(e => {
-            var t = e.plan,
-                n = e.order;
-            return {
-                plan: t,
-                order: n
-            };
-        })(d);
-    },
-
     mFDi: function(e, t, n) {
         "use strict";
         var r = n("Fofx")
@@ -93805,7 +94858,7 @@
                     onClick: ()=>this.getOrderInfo()
                 }, this.props.children), g.a.createElement(x["a"], {
                     visible: this.state.visible,
-                    title: "Thông tin đơn hàng",
+                    title: "\u8ba2\u5355\u4fe1\u606f",
                     onCancel: ()=>this.onShow(),
                     footer: !1
                 }, this.state.user.email ? g.a.createElement("div", null, g.a.createElement(E["a"], {
@@ -93813,148 +94866,127 @@
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Email"), g.a.createElement(S["a"], {
+                }, "\u90ae\u7bb1"), g.a.createElement(S["a"], {
                     span: 18
                 }, g.a.createElement("a", {
-                    onClick: ()=>this.jumpUserFilter("email", "Gần đúng", this.state.user.email),
+                    onClick: ()=>this.jumpUserFilter("email", "\u6a21\u7cca", this.state.user.email),
                     href: "javascript:void(0);"
                 }, this.state.user.email))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Mã đơn hàng"), g.a.createElement(S["a"], {
+                }, "\u8ba2\u5355\u53f7"), g.a.createElement(S["a"], {
                     span: 18
                 }, this.state.order.trade_no)), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Chu kỳ"), g.a.createElement(S["a"], {
+                }, "\u8ba2\u5355\u5468\u671f"), g.a.createElement(S["a"], {
                     span: 18
                 }, y["a"].periodText[this.state.order.period])), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Trạng thái"), g.a.createElement(S["a"], {
+                }, "\u8ba2\u5355\u72b6\u6001"), g.a.createElement(S["a"], {
                     span: 18
                 }, y["a"].orderStatusText[this.state.order.status])), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Gói"), g.a.createElement(S["a"], {
+                }, "\u8ba2\u9605\u8ba1\u5212"), g.a.createElement(S["a"], {
                     span: 18
                 }, null === (e = t.find(e=>e.id === this.state.order.plan_id)) || void 0 === e ? void 0 : e.name)), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Callback No"), g.a.createElement(S["a"], {
+                }, "\u56de\u8c03\u5355\u53f7"), g.a.createElement(S["a"], {
                     span: 18
                 }, this.state.order.callback_no ? this.state.order.callback_no : "-")), g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Số Tiền"), g.a.createElement(S["a"], {
+                }, "\u652f\u4ed8\u91d1\u989d"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.total_amount / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }))), g.a.createElement(E["a"], {
+                }, (this.state.order.total_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "TT bằng số dư"), g.a.createElement(S["a"], {
+                }, "\u4f59\u989d\u652f\u4ed8"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.balance_amount / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }))), g.a.createElement(E["a"], {
+                }, (this.state.order.balance_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Số tiền ưu đãi"), g.a.createElement(S["a"], {
+                }, "\u4f18\u60e0\u91d1\u989d"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.discount_amount / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }))), g.a.createElement(E["a"], {
+                }, (this.state.order.discount_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Số tiền hoàn lại"), g.a.createElement(S["a"], {
+                }, "\u9000\u56de\u91d1\u989d"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.refund_amount / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }))), g.a.createElement(E["a"], {
+                }, (this.state.order.refund_amount / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Số tiền khấu trừ"), g.a.createElement(S["a"], {
+                }, "\u6298\u62b5\u91d1\u989d"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.surplus_amount / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }))), g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
+                }, (this.state.order.surplus_amount / 100).toFixed(2))), g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Thời gian tạo"), g.a.createElement(S["a"], {
+                }, "\u521b\u5efa\u65f6\u95f4"), g.a.createElement(S["a"], {
                     span: 18
                 }, w()(1e3 * this.state.order.created_at).format("YYYY-MM-DD HH:mm:ss"))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Thời gian cập nhật"), g.a.createElement(S["a"], {
+                }, "\u66f4\u65b0\u65f6\u95f4"), g.a.createElement(S["a"], {
                     span: 18
                 }, w()(1e3 * this.state.order.updated_at).format("YYYY-MM-DD HH:mm:ss"))), this.state.order.invite_user_id && 3 === this.state.order.status ? g.a.createElement("div", null, g.a.createElement(_["a"], null), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Người mời"), g.a.createElement(S["a"], {
+                }, "\u9080\u8bf7\u4eba"), g.a.createElement(S["a"], {
                     span: 18
                 }, g.a.createElement(f["a"], {
-                    title: "Xem những người họ đã mời"
+                    title: "\u67e5\u770bTA\u9080\u8bf7\u7684\u4eba"
                 }, g.a.createElement("a", {
-                    onClick: ()=>this.jumpUserFilter("invite_by_email", "Gần đúng", this.state.invite_user.email),
+                    onClick: ()=>this.jumpUserFilter("invite_by_email", "\u6a21\u7cca", this.state.invite_user.email),
                     href: "javascript:void(0);"
                 }, this.state.invite_user.email)))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Số tiền hoa hồng"), g.a.createElement(S["a"], {
+                }, "\u4f63\u91d1\u91d1\u989d"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.commission_balance / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }))), this.state.order.actual_commission_balance && g.a.createElement(E["a"], {
+                }, (this.state.order.commission_balance / 100).toFixed(2))), this.state.order.actual_commission_balance && g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Hoa hồng thực tế"), g.a.createElement(S["a"], {
+                }, "\u5b9e\u9645\u53d1\u653e"), g.a.createElement(S["a"], {
                     span: 18
-                }, (this.state.order.actual_commission_balance / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }))), g.a.createElement(E["a"], {
+                }, (this.state.order.actual_commission_balance / 100).toFixed(2))), g.a.createElement(E["a"], {
                     gutter: [16, 16],
                     style: n
                 }, g.a.createElement(S["a"], {
                     span: 6
-                }, "Trạng thái hoa hồng"), g.a.createElement(S["a"], {
+                }, "\u4f63\u91d1\u72b6\u6001"), g.a.createElement(S["a"], {
                     span: 18
                 }, y["a"].commissionStatusText[this.state.order.commission_status]))) : "") : g.a.createElement(d["a"], {
                     type: "loading",
@@ -94021,7 +95053,7 @@
                   , r = e.pagination
                   , a = e.filter
                   , m = [{
-                    title: "# Mã đơn",
+                    title: "# \u8ba2\u5355\u53f7",
                     dataIndex: "trade_no",
                     key: "trade_no",
                     render: (e,t)=>{
@@ -94031,31 +95063,26 @@
                             href: "javascript:void(0);"
                         }, e.substr(0, 3), "...", e.substr(-3)))
                     }
-                },
-                {
-                    title: "ID",
-                    dataIndex: "id",
-                    key: "id"
                 }, {
-                    title: "Loại",
+                    title: "\u7c7b\u578b",
                     dataIndex: "type",
                     key: "type",
                     render: e=>{
                         var t = {
-                            1: "Mua mới",
-                            2: "Gia hạn",
-                            3: "Thay đổi",
-                            4: "Gói lưu lượng",
-                            9: "Nạp tiền"
+                            1: "\u65b0\u8d2d",
+                            2: "\u7eed\u8d39",
+                            3: "\u53d8\u66f4",
+                            4: "\u6d41\u91cf\u5305",
+                            9: "\u5145\u503c"
                         };
                         return t[e]
                     }
                 }, {
-                    title: "Gói",
+                    title: "\u8ba2\u9605\u8ba1\u5212",
                     dataIndex: "plan_name",
                     key: "plan_name"
                 }, {
-                    title: "Chu kỳ",
+                    title: "\u5468\u671f",
                     dataIndex: "period",
                     key: "period",
                     align: "center",
@@ -94063,19 +95090,18 @@
                         return g.a.createElement(p["a"], null, y["a"].periodText[t.period])
                     }
                 }, {
-                    title: "Số Tiền",
+                    title: "\u652f\u4ed8\u91d1\u989d",
                     dataIndex: "total_amount",
                     key: "total_amount",
                     align: "right",
-                    render: e => null !== e ? (e / 100).toLocaleString('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                      }) : "0"
+                    render: e=>{
+                        return (e / 100).toFixed(2)
+                    }
                 }, {
                     title: g.a.createElement("span", null, g.a.createElement(f["a"], {
                         placement: "top",
-                        title: "Được đánh dấu là [Đã thanh toán] thì hệ thống sẽ tiến hành kích hoạt và hoàn tất sau đó."
-                    }, "Trạng thái đơn hàng ", g.a.createElement(d["a"], {
+                        title: "\u6807\u8bb0\u4e3a[\u5df2\u652f\u4ed8]\u540e\u5c06\u4f1a\u7531\u7cfb\u7edf\u8fdb\u884c\u5f00\u901a\u540e\u5e76\u5b8c\u6210"
+                    }, "\u8ba2\u5355\u72b6\u6001 ", g.a.createElement(d["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "status",
@@ -94093,7 +95119,7 @@
                                         tradeNo: t.trade_no
                                     })
                                 }
-                            }, "Đã thanh toán"), g.a.createElement(h["a"].Item, {
+                            }, "\u5df2\u652f\u4ed8"), g.a.createElement(h["a"].Item, {
                                 key: "2",
                                 onClick: e=>{
                                     this.props.dispatch({
@@ -94101,32 +95127,27 @@
                                         tradeNo: t.trade_no
                                     })
                                 }
-                            }, "Hủy bỏ"))
+                            }, "\u53d6\u6d88"))
                         }, g.a.createElement("div", null, g.a.createElement(u["a"], {
                             status: n[e]
                         }), g.a.createElement("span", null, y["a"].orderStatusText[e], " "), 0 === e && g.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Đánh dấu là ", g.a.createElement(d["a"], {
+                        }, "\u6807\u8bb0\u4e3a ", g.a.createElement(d["a"], {
                             type: "caret-down"
                         })))))
                     }
                 }, {
-                    title: "Hoa Hồng",
+                    title: "\u4f63\u91d1\u91d1\u989d",
                     dataIndex: "commission_balance",
                     key: "commission_balance",
                     align: "right",
                     render: (e,t)=>{
-                        return 0 === t.status || 2 === t.status ? "-" : e
-                        ? (e / 100).toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        })
-                        : "-"
+                        return 0 === t.status || 2 === t.status ? "-" : e ? (e / 100).toFixed(2) : "-"
                     }
                 }, {
-                    title: g.a.createElement("span", null, "Thạng thái hoa hồng ", g.a.createElement(f["a"], {
+                    title: g.a.createElement("span", null, "\u4f63\u91d1\u72b6\u6001 ", g.a.createElement(f["a"], {
                         placement: "top",
-                        title: "Sau khi được đánh dấu là [Hợp lệ], hệ thống sẽ xử lý và phân phát cho người dùng, sau đó hoàn tất."
+                        title: "\u6807\u8bb0\u4e3a[\u6709\u6548]\u540e\u5c06\u4f1a\u7531\u7cfb\u7edf\u5904\u7406\u540e\u53d1\u653e\u5230\u7528\u6237\u5e76\u5b8c\u6210"
                     }, g.a.createElement(d["a"], {
                         type: "question-circle"
                     }))),
@@ -94148,38 +95169,38 @@
                                 onClick: e=>{
                                     this.update(t.trade_no, "commission_status", e.key)
                                 }
-                            }, "Chờ xác nhận"), g.a.createElement(h["a"].Item, {
+                            }, "\u5f85\u786e\u8ba4"), g.a.createElement(h["a"].Item, {
                                 key: "1",
                                 disabled: 1 === e,
                                 onClick: e=>{
                                     this.update(t.trade_no, "commission_status", e.key)
                                 }
-                            }, "Hợp lệ"), g.a.createElement(h["a"].Item, {
+                            }, "\u6709\u6548"), g.a.createElement(h["a"].Item, {
                                 key: "3",
                                 disabled: 3 === e,
                                 onClick: e=>{
                                     this.update(t.trade_no, "commission_status", e.key)
                                 }
-                            }, "Không hợp lệ"))
+                            }, "\u65e0\u6548"))
                         }, g.a.createElement("div", null, g.a.createElement(u["a"], {
                             status: n[e]
                         }), g.a.createElement("span", null, y["a"].commissionStatusText[e], " "), g.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Đánh dấu là ", g.a.createElement(d["a"], {
+                        }, "\u6807\u8bb0\u4e3a ", g.a.createElement(d["a"], {
                             type: "caret-down"
                         })))))
                     }
                 }, {
-                    title: "Tạo",
+                    title: "\u521b\u5efa\u65f6\u95f4",
                     dataIndex: "created_at",
                     key: "created_at",
                     align: "right",
                     render: e=>{
-                        return w()(1e3 * e).format("DD/MM/YYYY HH:mm")
+                        return w()(1e3 * e).format("YYYY/MM/DD HH:mm")
                     }
                 }];
                 return g.a.createElement(v["a"], i()({}, this.props, {
-                    title: " Quản lý đơn hàng"
+                    title: "\u8ba2\u5355\u7ba1\u7406"
                 }), g.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), g.a.createElement(I["a"], {
@@ -94200,75 +95221,75 @@
                     }),
                     keys: [{
                         key: "trade_no",
-                        title: "Trade no",
-                        condition: ["Gần đúng", "="]
+                        title: "\u8ba2\u5355\u53f7",
+                        condition: ["\u6a21\u7cca", "="]
                     }, {
                         key: "status",
-                        title: "Trạng thái",
+                        title: "\u8ba2\u5355\u72b6\u6001",
                         type: "select",
                         condition: ["="],
                         options: [{
-                            key: "Chờ thanh toán",
+                            key: "\u672a\u652f\u4ed8",
                             value: 0
                         }, {
-                            key: "Đã thanh toán",
+                            key: "\u5df2\u652f\u4ed8",
                             value: 1
                         }, {
-                            key: "Đã hủy",
+                            key: "\u5df2\u53d6\u6d88",
                             value: 2
                         }, {
-                            key: "Đã hoàn thành",
+                            key: "\u5df2\u5b8c\u6210",
                             value: 3
                         },{
-                            key: "Đã chiết khấu",
+                            key: "\u5df2\u6298\u62b5",
                             value: 4
                         }]
                     }, {
                         key: "commission_status",
-                        title: "Trạng thái hoa hồng",
+                        title: "\u4f63\u91d1\u72b6\u6001",
                         type: "select",
                         condition: ["="],
                         options: [{
-                            key: "Chờ xác nhận",
+                            key: "\u5f85\u786e\u8ba4",
                             value: 0
                         }, {
-                            key: "Đang phát hành",
+                            key: "\u53d1\u653e\u4e2d",
                             value: 1
                         }, {
-                            key: "Đã hoàn thành",
+                            key: "\u5df2\u53d1\u653e",
                             value: 2
                         }, {
-                            key: "Vô hiệu",
+                            key: "\u65e0\u6548",
                             value: 3
                         }]
                     }, {
                         key: "user_id",
-                        title: "ID người dùng",
+                        title: "\u7528\u6237ID",
                         condition: ["="]
                     }, {
                         key: "invite_user_id",
-                        title: "ID người mời",
+                        title: "\u9080\u8bf7\u4ebaID",
                         condition: ["=", "!="]
                     }, {
                         key: "callback_no",
-                        title: "Callback No",
-                        condition: ["Gần đúng"]
+                        title: "\u56de\u8c03\u5355\u53f7",
+                        condition: ["\u6a21\u7cca"]
                     }, {
                         key: "commission_balance",
-                        title: "Hoa hồng",
+                        title: "\u4f63\u91d1\u91d1\u989d",
                         condition: [">", "<", "=", "!=", ">=", "<="]
                     }]
                 }, g.a.createElement(l["a"], {
                     type: a.length > 0 ? "primary" : ""
                 }, g.a.createElement(d["a"], {
                     type: "filter"
-                }), " Bộ lọc"))), g.a.createElement(R["a"], null, g.a.createElement(l["a"], {
+                }), " \u8fc7\u6ee4\u5668"))), g.a.createElement(R["a"], null, g.a.createElement(l["a"], {
                     style: {
                         marginLeft: 10
                     }
                 }, g.a.createElement(d["a"], {
                     type: "plus"
-                }), " Thêm đơn hàng"))), g.a.createElement(o["a"], {
+                }), " \u6dfb\u52a0\u8ba2\u5355"))), g.a.createElement(o["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     pagination: s()({}, r, {
@@ -96672,17 +97693,17 @@
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Có ", t.ticket_pending_total, " ticket chưa xử lý ", l.a.createElement("a", {
+                }, "\u6709 ", t.ticket_pending_total, " \u6761\u5de5\u5355\u7b49\u5f85\u5904\u7406 ", l.a.createElement("a", {
                     className: "alert-link",
                     href: "javascript:void(0)",
                     onClick: ()=>f.a.push("/ticket")
-                }, "Xem Ngay")))),
+                }, "\u7acb\u5373\u5904\u7406")))),
                 t.commission_pending_total && r.push(l.a.createElement("div", {
                     className: "alert alert-danger",
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Có ", t.commission_pending_total, " đơn hoa hồng cần xác nhận ", l.a.createElement("a", {
+                }, "\u6709 ", t.commission_pending_total, " \u7b14\u4f63\u91d1\u7b49\u5f85\u786e\u8ba4 ", l.a.createElement("a", {
                     className: "alert-link",
                     href: "javascript:void(0)",
                     onClick: ()=>{
@@ -96706,9 +97727,9 @@
                         }),
                         f.a.push("/order")
                     }
-                }, "Xem Ngay")))),
+                }, "\u7acb\u5373\u5904\u7406")))),
                 l.a.createElement(c["a"], i()({}, this.props, {
-                    title: "Bảng Điều Khiển"
+                    title: "\u4eea\u8868\u76d8"
                 }), this.state.queueStatus && "running" !== this.state.queueStatus && l.a.createElement("div", {
                     className: "row"
                 }, l.a.createElement("div", {
@@ -96718,7 +97739,7 @@
                     role: "alert"
                 }, l.a.createElement("p", {
                     className: "mb-0"
-                }, "Dịch vụ xếp hàng hiện tại đang chạy bất thường, có thể khiến doanh nghiệp không hoạt động được.")))), r.map(e=>e), l.a.createElement("div", {
+                }, "\u5f53\u524d\u961f\u5217\u670d\u52a1\u8fd0\u884c\u5f02\u5e38\uff0c\u53ef\u80fd\u4f1a\u5bfc\u81f4\u4e1a\u52a1\u65e0\u6cd5\u4f7f\u7528\u3002")))), r.map(e=>e), l.a.createElement("div", {
                     className: "mb-0 block border-bottom js-classic-nav d-none d-sm-block"
                 }, l.a.createElement("div", {
                     className: "block-content block-content-full"
@@ -96736,7 +97757,7 @@
                     className: "fa-2x si si-equalizer text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Cài đặt hệ thống")))), l.a.createElement("div", {
+                }, "\u7cfb\u7edf\u8bbe\u7f6e")))), l.a.createElement("div", {
                     className: "col-sm-6 col-xl-3 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("a", {
@@ -96748,7 +97769,7 @@
                     className: "fa-2x si si-list text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Quản lý đơn hàng")))), l.a.createElement("div", {
+                }, "\u8ba2\u5355\u7ba1\u7406")))), l.a.createElement("div", {
                     className: "col-sm-6 col-xl-3 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("a", {
@@ -96760,7 +97781,7 @@
                     className: "fa-2x si si-bag text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Quản lý đăng ký")))), l.a.createElement("div", {
+                }, "\u8ba2\u9605\u7ba1\u7406")))), l.a.createElement("div", {
                     className: "col-sm-6 col-xl-3 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("a", {
@@ -96772,41 +97793,46 @@
                     className: "fa-2x si si-users text-primary d-none d-sm-inline-block mb-3"
                 }), l.a.createElement("div", {
                     className: "font-w600 text-uppercase"
-                }, "Quản lý người dùng"))))))), l.a.createElement("div", {
+                }, "\u7528\u6237\u7ba1\u7406"))))))), l.a.createElement("div", {
                     className: "row no-gutters"
                 }, l.a.createElement("div", {
                     className: "col-lg-12 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("div", {
-                    className: "block border-bottom mb-0"
+                    className: "block border-bottom mb-0 v2board-stats-bar"
                 }, l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
-                    className: "px-sm-3 clearfix"
-                }, l.a.createElement("div", { 
-                    className: "d-inline-block "
+                    className: "d-flex align-items-center"
+                }, l.a.createElement("div", {
+                    className: "pr-4 pr-sm-5 pl-0 pl-sm-3 "
                 }, l.a.createElement("i", {
                     className: "fa fa-users fa-2x text-gray-light float-right"
                 }), l.a.createElement("div", {
                     className: "text-muted mb-1",
                     style: { width: '120px' }
-                }, "Đang Online"), 
-                l.a.createElement("div", {
-                    className: "display-4 text-black font-w300"
-                }, t.online_user ? t.online_user : "0")) ,l.a.createElement("div", {
-                    className: "pl-5 d-inline-block"
+                }, "\u5728\u7ebf\u4eba\u6570"), l.a.createElement("div", {
+                    className: "display-4 text-black font-w300 mb-2"
+                }, t.online_user ? t.online_user : "0")), l.a.createElement("div", {
+                    className: "pr-4 pr-sm-5 pl-0 pl-sm-3 "
                 }, l.a.createElement("i", {
                     className: "fa fa-chart-line fa-2x text-gray-light float-right"
                 }), l.a.createElement("p", {
                     className: "text-muted w-75 mb-1"
-                }, "Thu nhập hôm nay"), l.a.createElement("p", {
+                }, "\u4eca\u65e5\u6536\u5165"), l.a.createElement("p", {
                     className: "display-4 text-black font-w300 mb-2"
-                }, t.day_income ? (t.day_income / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                  }) : "0", l.a.createElement("span", {
+                }, t.day_income ? (t.day_income / 100).toFixed(2) : "0.00", l.a.createElement("span", {
                     className: "font-size-h5 font-w600 text-muted"
-                }, n.site.currency))))))), l.a.createElement("div", {
+                }, n.site.currency))) , l.a.createElement("div", {
+                    className: "pr-4 pr-sm-5 pl-0 pl-sm-3 "
+                }, l.a.createElement("i", {
+                    className: "fa fa-user fa-2x text-gray-light float-right"
+                }), l.a.createElement("div", {
+                    className: "text-muted mb-1",
+                    style: { width: '120px' }
+                }, "\u5b9e\u65f6\u6ce8\u518c"), l.a.createElement("div", {
+                    className: "display-4 text-black font-w300 mb-2"
+                }, t.day_register_total ? t.day_register_total : "0")))))), l.a.createElement("div", {
                     className: "col-lg-12 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("div", {
@@ -96820,36 +97846,27 @@
                     class: "pr-4 pr-sm-5 pl-0 pl-sm-3"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
-                }, t.month_income ? (t.month_income / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                  }) : "0", " ", n.site.currency), l.a.createElement("p", {
+                }, t.month_income ? (t.month_income / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Thu nhập tháng này")), l.a.createElement("div", {
+                }, "\u672c\u6708\u6536\u5165")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
-                }, t.last_month_income ? (t.last_month_income / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                  }) : "0", " ", n.site.currency), l.a.createElement("p", {
+                }, t.last_month_income ? (t.last_month_income / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Thu nhập tháng trước")), l.a.createElement("div", {
+                }, "\u4e0a\u6708\u6536\u5165")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
-                }, t.commission_last_month_payout ? (t.commission_last_month_payout / 100).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                  }) : "0", " ", n.site.currency), l.a.createElement("p", {
+                }, t.commission_last_month_payout ? (t.commission_last_month_payout / 100).toFixed(2) : "0.00", " ", n.site.currency), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Tiền hoa hồng tháng trước")), l.a.createElement("div", {
+                }, "\u4e0a\u6708\u4f63\u91d1\u652f\u51fa")), l.a.createElement("div", {
                     class: "px-4 px-sm-5 border-start"
                 }, l.a.createElement("p", {
                     class: "fs-3 text-dark mb-0"
                 }, t.month_register_total || "-"), l.a.createElement("p", {
                     class: "text-muted mb-0"
-                }, "Người dùng mới tháng này")))))), l.a.createElement("div", {
+                }, "\u672c\u6708\u65b0\u589e\u7528\u6237")))))), l.a.createElement("div", {
                     className: "col-lg-12 js-appear-enabled animated",
                     "data-toggle": "appear"
                 }, l.a.createElement("div", {
@@ -96872,7 +97889,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập nút ngày hôm nay")), l.a.createElement("div", {
+                }, "\u4eca\u65e5\u8282\u70b9\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -96890,7 +97907,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập nút của ngày hôm qua")), l.a.createElement("div", {
+                }, "\u6628\u65e5\u8282\u70b9\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -96908,7 +97925,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập của người dùng ngày hôm nay")), l.a.createElement("div", {
+                }, "\u4eca\u65e5\u7528\u6237\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -96926,7 +97943,7 @@
                     class: "block-header block-header-default"
                 }, l.a.createElement("h3", {
                     class: "block-title"
-                }, "Xếp hạng lưu lượng truy cập của người dùng hôm qua")), l.a.createElement("div", {
+                }, "\u6628\u65e5\u7528\u6237\u6d41\u91cf\u6392\u884c")), l.a.createElement("div", {
                     className: "block-content"
                 }, l.a.createElement("div", {
                     className: "px-sm-3 pt-sm-3 py-3 clearfix",
@@ -98736,7 +99753,7 @@
                                 break
                             }
                             return o["a"].error({
-                                message: "Yêu cầu không thành công",
+                                message: "\u8bf7\u6c42\u5931\u8d25",
                                 description: Object.values(s.errors)[0][0],
                                 duration: 1.5
                             }),
@@ -98746,7 +99763,7 @@
                             });
                         case 28:
                             return o["a"].error({
-                                message: "Yêu cầu không thành công",
+                                message: "\u8bf7\u6c42\u5931\u8d25",
                                 description: s.message,
                                 duration: 1.5
                             }),
@@ -99001,14 +100018,14 @@
                 "ko-KR": "\ud55c\uad6d\uc5b4"
             },
             periodText: {
-                month_price: "1 Tháng",
-                quarter_price: "3 Tháng",
-                half_year_price: "6 Tháng",
-                year_price: "1 Năm",
-                two_year_price: "2 Năm",
-                three_year_price: "3 Năm",
-                onetime_price: "Vĩnh Viễn",
-                reset_price: "Đặt lại data"
+                month_price: "\u6708\u4ed8",
+                quarter_price: "\u5b63\u4ed8",
+                half_year_price: "\u534a\u5e74\u4ed8",
+                year_price: "\u5e74\u4ed8",
+                two_year_price: "\u4e24\u5e74\u4ed8",
+                three_year_price: "\u4e09\u5e74\u4ed8",
+                onetime_price: "\u4e00\u6b21\u6027",
+                reset_price: "\u6d41\u91cf\u91cd\u7f6e\u5305"
             },
             tutorialCategoryText: {
                 1: "Windows",
@@ -99016,7 +100033,7 @@
                 3: "iOS",
                 4: "Android",
                 5: "Linux",
-                6: "Bộ định tuyến"
+                6: "\u8def\u7531\u5668"
             },
             tutorialCategoryIcon: {
                 1: "fab fa-2x fa-windows",
@@ -99027,27 +100044,27 @@
                 6: "fa fa-2x fa-wifi"
             },
             orderStatusText: {
-                0: "Chờ thanh toán",
-                1: "Đang xử lý",
-                2: "Đã hủy",
-                3: "Đã hoàn thành",
-                4: "Đã giảm giá"
+                0: "\u5f85\u652f\u4ed8",
+                1: "\u5f00\u901a\u4e2d",
+                2: "\u5df2\u53d6\u6d88",
+                3: "\u5df2\u5b8c\u6210",
+                4: "\u5df2\u6298\u62b5"
             },
             commissionStatusText: {
-                0: "Chờ xác nhận",
-                1: "Đang phát hành",
-                2: "Đã phát hành",
-                3: "Đã thu hồi"
+                0: "\u5f85\u786e\u8ba4",
+                1: "\u53d1\u653e\u4e2d",
+                2: "\u5df2\u53d1\u653e",
+                3: "\u5df2\u9a73\u56de"
             },
             ticketStatusText: {
-                0: "Đã mở",
-                1: "Chờ phản hồi",
-                2: "Chờ trả lời",
-                3: "Đóng"
+                0: "\u5f00\u542f",
+                1: "\u5f85\u56de\u590d",
+                2: "\u5f85\u7b54\u590d",
+                3: "\u5173\u95ed"
             },
             routeActionText: {
-                block: "Chặn truy cập",
-                dns: "Chỉ định máy chủ DNS để phân giải"
+                block: "\u7981\u6b62\u8bbf\u95ee",
+                dns: "\u6307\u5b9aDNS\u670d\u52a1\u5668\u8fdb\u884c\u89e3\u6790"
             }
         }
     },
@@ -102722,7 +103739,7 @@
                 }), y.a.createElement(R["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -102730,35 +103747,35 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-8"
-                }, y.a.createElement("label", null, "Tên Nút"), y.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group col-4"
-                }, y.a.createElement("label", null, "Phóng đại"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u500d\u7387"), y.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhãn nút"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), y.a.createElement(N["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "Nhóm quyền ", y.a.createElement(B["a"], null, y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u6743\u9650\u7ec4 ", y.a.createElement(B["a"], null, y.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), y.a.createElement(N["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -102772,7 +103789,7 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-3 col-xs-12"
-                }, y.a.createElement("label", null, "Phiên bản"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "HYSTERIA\u7248\u672c"), y.a.createElement(N["a"], {
                     value: parseInt(e.version) ? parseInt(e.version) : 1,
                     style: {
                         width: "100%"
@@ -102788,24 +103805,24 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, y.a.createElement("label", null, "Địa chỉ nút"), y.a.createElement(s["a"], {
-                    placeholder: "Địa chỉ hoặc IP",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), y.a.createElement(s["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, y.a.createElement("label", null, "Cổng kết nối"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, y.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), y.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, y.a.createElement("label", null, "Cảng dịch vụ"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng mở máy chủ",
+                }, y.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>{
                         this.formChange("server_port", e.target.value)
@@ -102814,12 +103831,12 @@
                     className: "form-group col-md-4 col-xs-12"
                 }, y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top",
-                    title: "Sử dụng chứng chỉ tự ký yêu cầu phải cho phép sự không an toàn trước khi người dùng có thể kết nối"
-                }, "Cho phép không an toàn", y.a.createElement(m["a"], {
+                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
+                }, "\u5141\u8bb8\u4e0d\u5b89\u5168 ", y.a.createElement(m["a"], {
                     type: "question-circle"
                 }))), y.a.createElement(N["a"], {
                     value: parseInt(e.insecure) ? 1 : 0,
-                    placeholder: "cho phép không an toàn",
+                    placeholder: "\u5141\u8bb8\u4e0d\u5b89\u5168",
                     style: {
                         width: "100%"
                     },
@@ -102827,20 +103844,20 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u5426"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: 1
-                }, "Đúng")))), y.a.createElement("div", {
+                }, "\u662f")))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "Chỉ định tên máy chủ (sni)"), y.a.createElement(s["a"], {
-                    placeholder: "Được sử dụng để xác minh chứng chỉ khi địa chỉ nút không nhất quán với chứng chỉ",
+                }, y.a.createElement("label", null, "\u670d\u52a1\u5668\u540d\u79f0\u6307\u793a(sni)"), y.a.createElement(s["a"], {
+                    placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
                     value: e.server_name,
                     onChange: e=>this.formChange("server_name", e.target.value)
                 })), y.a.createElement("div", {
                     className: "row"
                 }, (parseInt(e.version) == 1) && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Phương pháp làm xáo trộn obfs"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u65b9\u5f0fobfs"), y.a.createElement(N["a"], {
                     value: e.obfs,
                     style: {
                         width: "100%"
@@ -102849,18 +103866,18 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: null
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: "xplus"
                 }, "xplus"))), (parseInt(e.version) == 1 && e.obfs === "xplus") && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Mật khẩu bị xáo trộn obfsParam"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u5bc6\u7801obfsParam"), y.a.createElement(s["a"], {
                     value: e.obfs_password,
-                    placeholder: "Để trống để tự động tạo",
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210",
                     onChange: e=>this.formChange("obfs_password", e.target.value)
                 })), (parseInt(e.version) == 2) && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Phương pháp làm xáo trộn obfs"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u65b9\u5f0fobfs"), y.a.createElement(N["a"], {
                     value: e.obfs,
                     style: {
                         width: "100%"
@@ -102869,38 +103886,38 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: null
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: "salamander"
                 }, "salamander"))), (parseInt(e.version) == 2 && e.obfs === "salamander") && y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "mật khẩu bị xáo trộn obfs_password"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u6df7\u6dc6\u5bc6\u7801obfs_password"), y.a.createElement(s["a"], {
                     value: e.obfs_password,
-                    placeholder: "Để trống để tự động tạo",
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210",
                     onChange: e=>this.formChange("obfs_password", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "băng thông ngược dòng"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u4e0a\u884c\u5e26\u5bbd"), y.a.createElement(s["a"], {
                     addonAfter: "Mbps",
-                    placeholder: "Máy chủ gửi băng thông, để trống hoặc điền 0 để sử dụng BBR",
+                    placeholder: "\u670d\u52a1\u7aef\u53d1\u9001\u5e26\u5bbd,\u7559\u7a7a\u6216\u586b0\u4f7f\u7528BBR",
                     value: e.up_mbps,
                     onChange: e=>this.formChange("up_mbps", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "băng thông hạ lưu"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u4e0b\u884c\u5e26\u5bbd"), y.a.createElement(s["a"], {
                     addonAfter: "Mbps",
-                    placeholder: "Server nhận băng thông, để trống hoặc điền số 0 để sử dụng BBR",
+                    placeholder: "\u670d\u52a1\u7aef\u63a5\u6536\u5e26\u5bbd,\u7559\u7a7a\u6216\u586b0\u4f7f\u7528BBR",
                     value: e.down_mbps,
                     onChange: e=>this.formChange("down_mbps", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top"
-                }, "Nút cha ", y.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", y.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
-                }, "Tìm hiểu thêm"))), y.a.createElement(N["a"], {
+                }, "\u66f4\u591a\u89e3\u7b54"))), y.a.createElement(N["a"], {
                     value: e.parent_id || "",
                     onChange: e=>this.formChange("parent_id", e),
                     style: {
@@ -102908,7 +103925,7 @@
                     }
                 }, y.a.createElement(N["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("hysteria" === t.type && t.id !== e.id)
                         return y.a.createElement(N["a"].Option, {
                             key: Math.random(),
@@ -102917,10 +103934,10 @@
                 }
                 ))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhóm định tuyến"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8def\u7531\u7ec4"), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -102937,11 +103954,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), y.a.createElement(l["a"], {
+                }, "\u53d6\u6d88"), y.a.createElement(l["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi"))))
+                }, "\u63d0\u4ea4"))))
             }
         }
         var W = Object(_["c"])(e=>{
@@ -102997,19 +104014,19 @@
                 }, y.a.createElement("label", null, "Server Name(SNI)"), y.a.createElement(s["a"], {
                     value: t,
                     onChange: e=>this.change("server_name", e.target.value),
-                    placeholder: tls == 2 ? "REALITY là bắt buộc và phù hợp với phần phụ trợ" : ""
+                    placeholder: tls == 2 ? "REALITY\u5fc5\u586b\uff0c\u4e0e\u540e\u7aef\u4fdd\u6301\u4e00\u81f4" : ""
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Server Address"), y.a.createElement(s["a"], {
                     value: ds,
                     onChange: e=>this.change("dest", e.target.value),
-                    placeholder: "Địa chỉ mục tiêu REALITY, SNI được sử dụng theo mặc định"
+                    placeholder: "REALITY\u76ee\u6807\u5730\u5740\u002c\u9ed8\u8ba4\u4f7f\u7528SNI"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Server Port"), y.a.createElement(s["a"], {
                     value: pt,
                     onChange: e=>this.change("server_port", e.target.value),
-                    placeholder: "Cổng mục tiêu REALITY, mặc định 443"
+                    placeholder: "REALITY\u76ee\u6807\u7aef\u53e3,\u9ed8\u8ba4443"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Proxy Protocol"), y.a.createElement(N["a"], {
@@ -103032,19 +104049,19 @@
                 }, y.a.createElement("label", null, "Private Key"), y.a.createElement(s["a"], {
                     value: pv,
                     onChange: e=>this.change("private_key", e.target.value),
-                    placeholder: "Để trống để tự động tạo"
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Public Key"), y.a.createElement(s["a"], {
                     value: pb,
                     onChange: e=>this.change("public_key", e.target.value),
-                    placeholder: "Để trống để tự động tạo"
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "ShortId"), y.a.createElement(s["a"], {
                     value: sd,
                     onChange: e=>this.change("short_id", e.target.value),
-                    placeholder: "Để trống để tự động tạo"
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
                 })), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "FingerPrint"), y.a.createElement(N["a"], {
@@ -103053,7 +104070,7 @@
                         width: "100%"
                     },
                     onChange: e=>this.change("fingerprint", e),
-                    placeholder: "TLS vân tay mặc định Chrome"
+                    placeholder: "TLS\u6307\u7eb9\u9ed8\u8ba4Chrome"
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: "chrome"
@@ -103126,8 +104143,8 @@
                     })
                 } catch (e) {
                     H["a"].error({
-                        message: "Yêu cầu không thành công",
-                        description: "Định dạng cấu hình giao thức truyền tải không chính xác"
+                        message: "\u8bf7\u6c42\u5931\u8d25",
+                        description: "\u4f20\u8f93\u534f\u8bae\u914d\u7f6e\u683c\u5f0f\u6709\u8bef"
                     })
                 }
             }
@@ -103197,11 +104214,11 @@
                         id: "v2ray-protocol"
                     }, y.a.createElement("div", {
                         className: "form-group"
-                    }, y.a.createElement("label", null, "Cấu hình chi tiết giao thức", y.a.createElement("a", {
+                    }, y.a.createElement("label", null, "\u534f\u8bae\u8be6\u7ec6\u914d\u7f6e", y.a.createElement("a", {
                         href: "https://www.v2ray.com/chapter_02/05_transport.html"
                     }, y.a.createElement(m["a"], {
                         type: "link"
-                    }),  "thẩm quyền giải quyết")), y.a.createElement(F.a, {
+                    }), "\u53c2\u8003")), y.a.createElement(F.a, {
                         placeholder: (null === r || void 0 === r ? void 0 : r[this.state.server.network]) || "",
                         mode: "json",
                         theme: "github",
@@ -103247,7 +104264,7 @@
                 }), y.a.createElement(R["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -103255,35 +104272,35 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-8"
-                }, y.a.createElement("label", null, "Tên Nút"), y.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group col-4"
-                }, y.a.createElement("label", null, "Phóng đại"), y.a.createElement(s["a"], {
+                }, y.a.createElement("label", null, "\u500d\u7387"), y.a.createElement(s["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhãn nút"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), y.a.createElement(N["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "Nhóm quyền ", y.a.createElement(B["a"], null, y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u6743\u9650\u7ec4 ", y.a.createElement(B["a"], null, y.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), y.a.createElement(N["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -103297,16 +104314,16 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-8 col-xs-12"
-                }, y.a.createElement("label", null, "Địa chỉ nút"), y.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập địa chỉ kết nối",
+                }, y.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8fde\u63a5\u5730\u5740",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 })), y.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, y.a.createElement("label", null, "Bảo vệ ", parseInt(e.tls) != 0 && y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u5b89\u5168\u6027 ", parseInt(e.tls) != 0 && y.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình bảo mật", "tls_settings")
-                }, "Chỉnh sửa cấu hình")), y.a.createElement(N["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u5b89\u5168\u6027\u914d\u7f6e", "tls_settings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), y.a.createElement(N["a"], {
                     value: parseInt(e.tls) || 0,
                     style: {
                         width: "100%"
@@ -103315,7 +104332,7 @@
                 }, y.a.createElement(N["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"), y.a.createElement(N["a"].Option, {
                     key: 1,
                     value: 1
                 }, "TLS"), y.a.createElement(N["a"].Option, {
@@ -103325,28 +104342,28 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Cổng kết nối"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, y.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), y.a.createElement("div", {
                     className: "form-group col-md-6 col-xs-12"
-                }, y.a.createElement("label", null, "Cảng dịch vụ"), y.a.createElement(s["a"], {
-                    placeholder: "Cổng kết nối không giống NAT",
+                }, y.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u975eNAT\u540c\u8fde\u63a5\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>this.formChange("server_port", e.target.value)
                 }))), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, y.a.createElement("label", null, "Giao thức vận chuyển ", y.a.createElement("a", {
+                }, y.a.createElement("label", null, "\u4f20\u8f93\u534f\u8bae ", y.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình giao thức", "network_settings")
-                }, "Chỉnh sửa cấu hình")), y.a.createElement(N["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u534f\u8bae\u914d\u7f6e", "network_settings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), y.a.createElement(N["a"], {
                     value: e.network,
-                    placeholder: "Chọn giao thức vận chuyển",
+                    placeholder: "\u9009\u62e9\u4f20\u8f93\u534f\u8bae",
                     style: {
                         width: "100%"
                     },
@@ -103367,22 +104384,22 @@
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, y.a.createElement("label", null, "Thuật toán điều khiển luồng XTLS"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "XTLS\u6d41\u63a7\u7b97\u6cd5"), y.a.createElement(N["a"], {
                     value: e.flow,
-                    placeholder: "Chọn thuật toán điều khiển luồng XTLS",
+                    placeholder: "\u9009\u62e9XTLS\u6d41\u63a7\u7b97\u6cd5",
                     style: {
                         width: "100%"
                     },
                     onChange: e=>this.formChange("flow", e)
                 }, y.a.createElement(N["a"].Option, {
                     value: null
-                }, "Không"),e.network == "tcp" && y.a.createElement(N["a"].Option, {
+                }, "\u65e0"),e.network == "tcp" && y.a.createElement(N["a"].Option, {
                     value: "xtls-rprx-vision"
                 }, "xtls-rprx-vision")))), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top"
-                }, "Nút cha ", y.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", y.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
@@ -103396,7 +104413,7 @@
                     }
                 }, y.a.createElement(N["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("vless" === t.type && t.id !== e.id)
                         return y.a.createElement(N["a"].Option, {
                             key: Math.random(),
@@ -103405,10 +104422,10 @@
                 }
                 ))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "nhóm định tuyến"), y.a.createElement(N["a"], {
+                }, y.a.createElement("label", null, "\u8def\u7531\u7ec4"), y.a.createElement(N["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -103425,11 +104442,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), y.a.createElement(l["a"], {
+                }, "\u53d6\u6d88"), y.a.createElement(l["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi")), y.a.createElement(R["a"], {
+                }, "\u63d0\u4ea4")), y.a.createElement(R["a"], {
                     closable: !1,
                     id: "server",
                     width: "80%",
@@ -103452,6 +104469,635 @@
             }
         }
         )(z);
+        class wTuic extends y.a.Component {
+            constructor(e) {
+                super(e),
+                this.state = {
+                    server: this.props.record || {
+                        insecure: 0,
+                        disable_sni: 0,
+                        udp_relay_mode: "native",
+                        zero_rtt_handshake: 0,
+                        congestion_control: "cubic",
+                        rate: 1
+                    },
+                    visible: !1,
+                    childDrawer: {
+                        visible: !1
+                    }
+                }
+            }
+            onShow() {
+                this.setState({
+                    visible: !this.state.visible
+                })
+            }
+            save() {
+                var e = this.state.server;
+                this.props.dispatch({
+                    type: "serverTuic/save",
+                    params: e,
+                    callback: ()=>{
+                        this.onShow()
+                    }
+                })
+            }
+            showChildDrawer(e, t) {
+                this.setState({
+                    childDrawer: I()({},
+                    this.state.childDrawer, {
+                        visible: !this.state.childDrawer.visible,
+                        title: e,
+                        type: t
+                    })
+                })
+            }
+            formChange(e, t) {
+                this.setState({
+                    server: I()({},
+                    this.state.server, { [e] : t
+                    })
+                })
+            }
+            render() {
+                var e = this.state.server,
+                t = this.props.serverTuic.saveLoading,
+                n = this.props.serverManage.servers,
+                r = this.props.serverGroup.groups,
+                i = this.props.serverRoute.routes;
+                return y.a.createElement(y.a.Fragment, null, y.a.cloneElement(this.props.children, {
+                    onClick: ()=>this.setState({
+                        visible: !0
+                    })
+                }), y.a.createElement(R["a"], {
+                    id: "server",
+                    maskClosable: !0,
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9": "\u65b0\u5efa\u8282\u70b9",
+                    width: "80%",
+                    visible: this.state.visible,
+                    onClose: ()=>this.onShow()
+                },
+                y.a.createElement("div", null, y.a.createElement("div", {
+                    className: "row"
+                },
+                y.a.createElement("div", {
+                    className: "form-group col-8"
+                },
+                y.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
+                    value: e.name,
+                    onChange: e=>this.formChange("name", e.target.value)
+                })), y.a.createElement("div", {
+                    className: "form-group col-4"
+                },
+                y.a.createElement("label", null, "\u500d\u7387"), y.a.createElement(s["a"], {
+                    addonAfter: "x",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
+                    value: e.rate,
+                    onChange: e=>this.formChange("rate", e.target.value)
+                }))), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), y.a.createElement(N["a"], {
+                    mode: "tags",
+                    value: e.tags || [],
+                    style: {
+                        width: "100%"
+                    },
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
+                    onChange: e=>this.formChange("tags", e.length > 0 ? e: null)
+                })), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u6743\u9650\u7ec4 ", y.a.createElement(B["a"], null, y.a.createElement("a", {
+                    href: "javascript:(0);"
+                },
+                "\u6dfb\u52a0\u6743\u9650\u7ec4"))), y.a.createElement(N["a"], {
+                    mode: "multiple",
+                    value: e.group_id,
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("group_id", e)
+                },
+                r.map(e=>{
+                    return y.a.createElement(N["a"].Option, {
+                        key: e.id
+                    },
+                    e.name)
+                }))), y.a.createElement("div", {
+                    className: "row"
+                },
+                y.a.createElement("div", {
+                    className: "form-group col-md-12 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), y.a.createElement(s["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
+                    value: e.host,
+                    onChange: e=>this.formChange("host", e.target.value)
+                }))), y.a.createElement("div", {
+                    className: "row"
+                },
+                y.a.createElement("div", {
+                    className: "form-group col-md-4 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
+                    value: e.port,
+                    onChange: e=>{
+                        this.formChange("port", e.target.value)
+                    }
+                })), y.a.createElement("div", {
+                    className: "form-group col-md-4 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
+                    value: e.server_port,
+                    onChange: e=>{
+                        this.formChange("server_port", e.target.value)
+                    }
+                })), y.a.createElement("div", {
+                    className: "form-group col-md-4 col-xs-12"
+                },
+                y.a.createElement("label", null, y.a.createElement(u["a"], {
+                    placement: "top",
+                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
+                },
+                "\u5141\u8bb8\u4e0d\u5b89\u5168 ", y.a.createElement(m["a"], {
+                    type: "question-circle"
+                }))), y.a.createElement(N["a"], {
+                    value: parseInt(e.insecure) ? 1 : 0,
+                    placeholder: "\u5141\u8bb8\u4e0d\u5b89\u5168",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("insecure", e)
+                },
+                y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: 0
+                },
+                "\u5426"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: 1
+                },
+                "\u662f")))), y.a.createElement("div", {
+                    className: "row"
+                }, y.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u7981\u7528SNI"), y.a.createElement(N["a"], {
+                    value: parseInt(e.disable_sni) ? 1 : 0,
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("disable_sni", e)
+                },
+                y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: 0
+                },
+                "\u5426"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: 1
+                },
+                "\u662f"))), y.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u6570\u636e\u5305\u4e2d\u7ee7\u6a21\u5f0f"), y.a.createElement(N["a"], {
+                    value: e.udp_relay_mode ? e.udp_relay_mode : "native",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("udp_relay_mode", e)
+                },
+                y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: "native"
+                },
+                "native"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: "quic"
+                },
+                "quic")))), !parseInt(e.disable_sni) && y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u670d\u52a1\u5668\u540d\u79f0\u6307\u793a(sni)"), y.a.createElement(s["a"], {
+                    placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
+                    value: e.server_name,
+                    onChange: e=>this.formChange("server_name", e.target.value)
+                })), y.a.createElement("div", {
+                    className: "row"
+                }, y.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u62e5\u585e\u63a7\u5236\u7b97\u6cd5"), y.a.createElement(N["a"], {
+                    value: e.congestion_control ? e.congestion_control : "cubic",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("congestion_control", e)
+                },
+                y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: "cubic"
+                },
+                "cubic"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: "new_reno"
+                },
+                "new_reno"), y.a.createElement(N["a"].Option, {
+                    key: 2,
+                    value: "bbr"
+                },
+                "bbr"))), y.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u5ba2\u6237\u7aef\u542f\u7528 0-RTT"), y.a.createElement(N["a"], {
+                    value: parseInt(e.zero_rtt_handshake) ? 1 : 0,
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("zero_rtt_handshake", e)
+                },
+                y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: 0
+                },
+                "\u5426"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: 1
+                },
+                "\u662f")))), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, y.a.createElement(u["a"], {
+                    placement: "top"
+                },
+                "\u7236\u8282\u70b9 ", y.a.createElement("a", {
+                    target: "_blank",
+                    href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
+                    rel: "noreferrer"
+                },
+                "\u66f4\u591a\u89e3\u7b54"))), y.a.createElement(N["a"], {
+                    value: e.parent_id || "",
+                    onChange: e=>this.formChange("parent_id", e),
+                    style: {
+                        width: "100%"
+                    }
+                },
+                y.a.createElement(N["a"].Option, {
+                    value: ""
+                },
+                "\u65e0"), n.map(t=>{
+                    if ("tuic" === t.type && t.id !== e.id) return y.a.createElement(N["a"].Option, {
+                        key: Math.random(),
+                        value: t.id
+                    },
+                    t.name)
+                }))), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u8def\u7531\u7ec4"), y.a.createElement(N["a"], {
+                    mode: "multiple",
+                    value: e.route_id || [],
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("route_id", e.length > 0 ? e: null)
+                },
+                i.map(e=>{
+                    return y.a.createElement(N["a"].Option, {
+                        key: e.id
+                    },
+                    e.remarks)
+                })))), y.a.createElement("div", {
+                    className: "v2board-drawer-action"
+                },
+                y.a.createElement(l["a"], {
+                    style: {
+                        marginRight: 8
+                    },
+                    onClick: ()=>this.onShow()
+                },
+                "\u53d6\u6d88"), y.a.createElement(l["a"], {
+                    loading: t,
+                    onClick: ()=>this.save(),
+                    type: "primary"
+                },
+                "\u63d0\u4ea4"))))
+            }
+        }
+        var mTuic = Object(_["c"])(e=>{
+            var t = e.serverTuic,
+            n = e.serverGroup,
+            r = e.serverManage,
+            i = e.serverRoute;
+            return {
+                serverTuic: t,
+                serverGroup: n,
+                serverManage: r,
+                serverRoute: i
+            }
+        })(wTuic);
+        class wAnyTLS extends y.a.Component {
+            constructor(e) {
+                super(e),
+                this.state = {
+                    server: this.props.record || {
+                        insecure: 0,
+                        rate: 1
+                    },
+                    visible: !1,
+                    childDrawer: {
+                        visible: !1
+                    }
+                }
+            }
+            onShow() {
+                this.setState({
+                    visible: !this.state.visible
+                })
+            }
+            save() {
+                var e = this.state.server;
+                this.props.dispatch({
+                    type: "serverAnyTLS/save",
+                    params: e,
+                    callback: ()=>{
+                        this.onShow()
+                    }
+                })
+            }
+            showChildDrawer(e, t) {
+                this.setState({
+                    childDrawer: I()({},
+                    this.state.childDrawer, {
+                        visible: !this.state.childDrawer.visible,
+                        title: e,
+                        type: t
+                    })
+                })
+            }
+            renderChildDrawer() {
+                var e = this.state.server
+                  , t = e.padding_scheme;
+                var r = {
+                    default: JSON.stringify([
+                        "stop=8",
+                        "0=30-30",
+                        "1=100-400",
+                        "2=400-500,c,500-1000,c,500-1000,c,500-1000,c,500-1000",
+                        "3=9-9,500-1000",
+                        "4=500-1000",
+                        "5=500-1000",
+                        "6=500-1000",
+                        "7=500-1000"
+                    ], null, 4)
+                };
+                return y.a.createElement("div", {
+                    id: "anytls-padding-scheme"
+                }, y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement(F.a, {
+                    placeholder: (null === r || void 0 === r ? void 0 : r["default"]) || "",
+                    mode: "json",
+                    theme: "github",
+                    fontSize: 14,
+                    showPrintMargin: !0,
+                    showGutter: !0,
+                    highlightActiveLine: !0,
+                    value: t || "",
+                    onChange: e=>this.formChange("padding_scheme", e),
+                    setOptions: {
+                        enableBasicAutocompletion: !1,
+                        enableLiveAutocompletion: !1,
+                        enableSnippets: !1,
+                        showLineNumbers: !0,
+                        tabSize: 2
+                    },
+                    ref: "editor"
+                })));
+            }
+            formChange(e, t) {
+                this.setState({
+                    server: I()({},
+                    this.state.server, { [e] : t
+                    })
+                })
+            }
+            render() {
+                var e = this.state.server,
+                t = this.props.serverAnyTLS.saveLoading,
+                n = this.props.serverManage.servers,
+                r = this.props.serverGroup.groups,
+                i = this.props.serverRoute.routes;
+                return y.a.createElement(y.a.Fragment, null, y.a.cloneElement(this.props.children, {
+                    onClick: ()=>this.setState({
+                        visible: !0
+                    })
+                }), y.a.createElement(R["a"], {
+                    id: "server",
+                    maskClosable: !0,
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9": "\u65b0\u5efa\u8282\u70b9",
+                    width: "80%",
+                    visible: this.state.visible,
+                    onClose: ()=>this.onShow()
+                },
+                y.a.createElement("div", null, y.a.createElement("div", {
+                    className: "row"
+                },
+                y.a.createElement("div", {
+                    className: "form-group col-8"
+                },
+                y.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), y.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
+                    value: e.name,
+                    onChange: e=>this.formChange("name", e.target.value)
+                })), y.a.createElement("div", {
+                    className: "form-group col-4"
+                },
+                y.a.createElement("label", null, "\u500d\u7387"), y.a.createElement(s["a"], {
+                    addonAfter: "x",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
+                    value: e.rate,
+                    onChange: e=>this.formChange("rate", e.target.value)
+                }))), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), y.a.createElement(N["a"], {
+                    mode: "tags",
+                    value: e.tags || [],
+                    style: {
+                        width: "100%"
+                    },
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
+                    onChange: e=>this.formChange("tags", e.length > 0 ? e: null)
+                })), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u6743\u9650\u7ec4 ", y.a.createElement(B["a"], null, y.a.createElement("a", {
+                    href: "javascript:(0);"
+                },
+                "\u6dfb\u52a0\u6743\u9650\u7ec4"))), y.a.createElement(N["a"], {
+                    mode: "multiple",
+                    value: e.group_id,
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("group_id", e)
+                },
+                r.map(e=>{
+                    return y.a.createElement(N["a"].Option, {
+                        key: e.id
+                    },
+                    e.name)
+                }))), y.a.createElement("div", {
+                    className: "row"
+                },
+                y.a.createElement("div", {
+                    className: "form-group col-md-12 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), y.a.createElement(s["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
+                    value: e.host,
+                    onChange: e=>this.formChange("host", e.target.value)
+                }))), y.a.createElement("div", {
+                    className: "row"
+                },
+                y.a.createElement("div", {
+                    className: "form-group col-md-4 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
+                    value: e.port,
+                    onChange: e=>{
+                        this.formChange("port", e.target.value)
+                    }
+                })), y.a.createElement("div", {
+                    className: "form-group col-md-4 col-xs-12"
+                },
+                y.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), y.a.createElement(s["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
+                    value: e.server_port,
+                    onChange: e=>{
+                        this.formChange("server_port", e.target.value)
+                    }
+                })), y.a.createElement("div", {
+                    className: "form-group col-md-4 col-xs-12"
+                },
+                y.a.createElement("label", null, y.a.createElement(u["a"], {
+                    placement: "top",
+                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
+                },
+                "\u5141\u8bb8\u4e0d\u5b89\u5168 ", y.a.createElement(m["a"], {
+                    type: "question-circle"
+                }))), y.a.createElement(N["a"], {
+                    value: parseInt(e.insecure) ? 1 : 0,
+                    placeholder: "\u5141\u8bb8\u4e0d\u5b89\u5168",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("insecure", e)
+                },
+                y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: 0
+                },
+                "\u5426"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: 1
+                },
+                "\u662f")))), y.a.createElement("div", {
+                    className: "row"
+                }, y.a.createElement("div", {
+                    className: "form-group col-md-12 col-xs-12"
+                }, y.a.createElement("label", null, y.a.createElement("a", {
+                    href: "javascript:void(0);",
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u586b\u5145\u65b9\u6848", "padding_scheme")
+                }, "\u7f16\u8f91\u586b\u5145\u65b9\u6848")))), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, y.a.createElement(u["a"], {
+                    placement: "top"
+                },
+                "\u7236\u8282\u70b9 ", y.a.createElement("a", {
+                    target: "_blank",
+                    href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
+                    rel: "noreferrer"
+                },
+                "\u66f4\u591a\u89e3\u7b54"))), y.a.createElement(N["a"], {
+                    value: e.parent_id || "",
+                    onChange: e=>this.formChange("parent_id", e),
+                    style: {
+                        width: "100%"
+                    }
+                },
+                y.a.createElement(N["a"].Option, {
+                    value: ""
+                },
+                "\u65e0"), n.map(t=>{
+                    if ("anytls" === t.type && t.id !== e.id) return y.a.createElement(N["a"].Option, {
+                        key: Math.random(),
+                        value: t.id
+                    },
+                    t.name)
+                }))), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u8def\u7531\u7ec4"), y.a.createElement(N["a"], {
+                    mode: "multiple",
+                    value: e.route_id || [],
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("route_id", e.length > 0 ? e: null)
+                },
+                i.map(e=>{
+                    return y.a.createElement(N["a"].Option, {
+                        key: e.id
+                    },
+                    e.remarks)
+                })))), y.a.createElement("div", {
+                    className: "v2board-drawer-action"
+                },
+                y.a.createElement(l["a"], {
+                    style: {
+                        marginRight: 8
+                    },
+                    onClick: ()=>this.onShow()
+                },
+                "\u53d6\u6d88"), y.a.createElement(l["a"], {
+                    loading: t,
+                    onClick: ()=>this.save(),
+                    type: "primary"
+                },
+                "\u63d0\u4ea4")), y.a.createElement(R["a"], {
+                    closable: !1,
+                    id: "server",
+                    width: "80%",
+                    title: this.state.childDrawer.title,
+                    visible: this.state.childDrawer.visible,
+                    onClose: ()=>this.showChildDrawer()
+                }, this.renderChildDrawer())))
+            }
+        }
+        var mAnyTLS = Object(_["c"])(e=>{
+            var t = e.serverAnyTLS,
+            n = e.serverGroup,
+            r = e.serverManage,
+            i = e.serverRoute;
+            return {
+                serverAnyTLS: t,
+                serverGroup: n,
+                serverManage: r,
+                serverRoute: i
+            }
+        })(wAnyTLS);
         class q extends y.a.Component {
             constructor(e) {
                 super(e),
@@ -103490,9 +105136,17 @@
                     return y.a.createElement(g["a"], {
                         color: "#1A1A1A"
                     }, t);
+                case "tuic":
+                    return y.a.createElement(g["a"], {
+                        color: "#9400D3"
+                    }, t);
                 case "vless":
                     return y.a.createElement(g["a"], {
                         color: "#4080FF"
+                    }, t)
+                case "anytls":
+                    return y.a.createElement(g["a"], {
+                        color: "#FF8C00"
                     }, t)
                 }
             }
@@ -103506,8 +105160,12 @@
                     return "serverTrojan/".concat(t);
                 case "hysteria":
                     return "serverHysteria/".concat(t);
+                case "tuic":
+                    return "serverTuic/".concat(t);
                 case "vless":
-                    return "serverVless/".concat(t)
+                    return "serverVless/".concat(t);
+                case "anytls":
+                    return "serverAnyTLS/".concat(t);
                 }
             }
             copy(e) {
@@ -103546,48 +105204,58 @@
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "vmess" === e.type && y.a.createElement(k["a"], {
+                    }), " \u7f16\u8f91")), "vmess" === e.type && y.a.createElement(k["a"], {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "trojan" === e.type && y.a.createElement(C["a"], {
+                    }), " \u7f16\u8f91")), "trojan" === e.type && y.a.createElement(C["a"], {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "hysteria" === e.type && y.a.createElement(W, {
+                    }), " \u7f16\u8f91")), "hysteria" === e.type && y.a.createElement(W, {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa")), "vless" === e.type && y.a.createElement(G, {
+                    }), " \u7f16\u8f91")), "tuic" === e.type && y.a.createElement(mTuic, {
                         key: e.id,
                         record: e
                     }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                         type: "edit"
-                    }), " Chỉnh Sửa"))), y.a.createElement(p["a"].Item, {
+                    }), " \u7f16\u8f91")), "vless" === e.type && y.a.createElement(G, {
+                        key: e.id,
+                        record: e
+                    }, y.a.createElement("a", null, y.a.createElement(m["a"], {
+                        type: "edit"
+                    }), " \u7f16\u8f91")), "anytls" === e.type && y.a.createElement(mAnyTLS, {
+                        key: e.id,
+                        record: e
+                    }, y.a.createElement("a", null, y.a.createElement(m["a"], {
+                        type: "edit"
+                    }), " \u7f16\u8f91"))), y.a.createElement(p["a"].Item, {
                         onClick: ()=>this.copy(e)
                     }, y.a.createElement(m["a"], {
                         type: "copy"
-                    }), " Sao chép"), y.a.createElement(p["a"].Item, {
+                    }), " \u590d\u5236"), y.a.createElement(p["a"].Item, {
                         style: {
                             color: "#ff4d4f"
                         },
                         onClick: ()=>this.drop(e)
                     }, y.a.createElement(m["a"], {
                         type: "delete"
-                    }), " Xóa bỏ"))
+                    }), " \u5220\u9664"))
                 }, t || y.a.createElement("a", {
                     href: "javascript:void(0);"
-                }, "Chỉnh Sửa ", y.a.createElement(m["a"], {
+                }, "\u64cd\u4f5c ", y.a.createElement(m["a"], {
                     type: "caret-down"
                 }))), $ = [{
-                    title: "Nút ID",
+                    title: "\u8282\u70b9ID",
                     dataIndex: "id",
                     key: "id",
                     width: 150,
-                    filters: ["Shadowsocks", "Vmess", "Trojan", "Hysteria", "Vless"].map(e=>({
+                    filters: ["Shadowsocks", "Vmess", "Trojan", "Hysteria", "Tuic", "Vless", "AnyTLS"].map(e=>({
                         text: e,
                         value: e
                     })),
@@ -103596,7 +105264,7 @@
                         return y.a.createElement("span", null, this.getTypeTag(t.type, t.parent_id ? e + " => " + t.parent_id : e))
                     }
                 }, {
-                    title: "Hiện",
+                    title: "\u663e\u9690",
                     dataIndex: "show",
                     key: "show",
                     render: (e,t)=>{
@@ -103611,12 +105279,12 @@
                         placement: "top",
                         title: y.a.createElement("div", null, y.a.createElement(h["a"], {
                             status: "error"
-                        }), " Không chạy", y.a.createElement("br", null), y.a.createElement(h["a"], {
+                        }), " \u672a\u8fd0\u884c", y.a.createElement("br", null), y.a.createElement(h["a"], {
                             status: "warning"
-                        }), " Không ai sử dụng nó hoặc máy chủ báo cáo một ngoại lệ.", y.a.createElement("br", null), y.a.createElement(h["a"], {
+                        }), " \u65e0\u4eba\u4f7f\u7528\u6216\u670d\u52a1\u7aef\u4e0a\u62a5\u5f02\u5e38", y.a.createElement("br", null), y.a.createElement(h["a"], {
                             status: "processing"
-                        }), " Chạy bình thường", y.a.createElement("br", null))
-                    }, "Nút ", y.a.createElement(m["a"], {
+                        }), " \u8fd0\u884c\u6b63\u5e38", y.a.createElement("br", null))
+                    }, "\u8282\u70b9 ", y.a.createElement(m["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "name",
@@ -103627,7 +105295,7 @@
                         }), y.a.createElement("span", null, e))
                     }
                 }, {
-                    title: "Host",
+                    title: "\u5730\u5740",
                     dataIndex: "host",
                     key: "host",
                     render: (e,t)=>{
@@ -103637,15 +105305,15 @@
                             },
                             onClick: ()=>{
                                 S()(t.host),
-                                c["a"].success("Sao chép thành công")
+                                c["a"].success("\u590d\u5236\u6210\u529f")
                             }
                         }, t.host + ":" + t.port)
                     }
                 }, {
                     title: y.a.createElement("span", null, y.a.createElement(u["a"], {
                         placement: "top",
-                        title: "Phụ thuộc vào tần suất báo cáo của máy chủ"
-                    }, "Online ", y.a.createElement(m["a"], {
+                        title: "\u6839\u636e\u670d\u52a1\u7aef\u4e0a\u62a5\u9891\u7387\u800c\u5b9a"
+                    }, "\u4eba\u6570 ", y.a.createElement(m["a"], {
                         type: "question-circle"
                     }))),
                     dataIndex: "online",
@@ -103661,8 +105329,8 @@
                 }, {
                     title: y.a.createElement(u["a"], {
                         placement: "top",
-                        title: "Lưu lượng truy cập được sử dụng sẽ được nhân với hệ số nhân để khấu trừ."
-                    }, "Phóng đại ", y.a.createElement(m["a"], {
+                        title: "\u4f7f\u7528\u7684\u6d41\u91cf\u5c06\u4e58\u4ee5\u500d\u7387\u8fdb\u884c\u6263\u9664"
+                    }, "\u500d\u7387 ", y.a.createElement(m["a"], {
                         type: "question-circle"
                     })),
                     dataIndex: "rate",
@@ -103676,7 +105344,7 @@
                         }, e + " x")
                     }
                 }, {
-                    title: "Group",
+                    title: "\u6743\u9650\u7ec4",
                     dataIndex: "group_id",
                     key: "group_id",
                     filters: R.map(e=>({
@@ -103694,7 +105362,7 @@
                         y.a.createElement(y.a.Fragment, null, n)
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -103705,11 +105373,11 @@
                     }
                 }], F = this;
                 return y.a.createElement(b["a"], i()({}, this.props, {
-                    title: "Quản Lý Node"
+                    title: "\u8282\u70b9\u7ba1\u7406"
                 }), y.a.createElement(P.a, {
                     when: A,
                     message: e=>{
-                        return window.confirm("Việc sắp xếp nút chưa được lưu. Bạn có muốn rời đi không?")
+                        return window.confirm("\u8282\u70b9\u6392\u5e8f\u8fd8\u6ca1\u6709\u4fdd\u5b58\uff0c\u662f\u5426\u79bb\u5f00")
                     }
                 }), y.a.createElement(M["a"], {
                     loading: O
@@ -103731,13 +105399,17 @@
                         key: Math.random()
                     }, y.a.createElement("a", null, this.getTypeTag("trojan", "Trojan")))), y.a.createElement(p["a"].Item, null, y.a.createElement(W, {
                         key: Math.random()
-                    }, y.a.createElement("a", null, this.getTypeTag("hysteria", "Hysteria")))), y.a.createElement(p["a"].Item, null, y.a.createElement(G, {
+                    }, y.a.createElement("a", null, this.getTypeTag("hysteria", "Hysteria")))), y.a.createElement(p["a"].Item, null, y.a.createElement(mTuic, {
                         key: Math.random()
-                    }, y.a.createElement("a", null, this.getTypeTag("vless", "VLess")))))
+                    }, y.a.createElement("a", null, this.getTypeTag("tuic", "Tuic")))), y.a.createElement(p["a"].Item, null, y.a.createElement(G, {
+                        key: Math.random()
+                    }, y.a.createElement("a", null, this.getTypeTag("vless", "VLess")))), y.a.createElement(p["a"].Item, null, y.a.createElement(mAnyTLS, {
+                        key: Math.random()
+                    }, y.a.createElement("a", null, this.getTypeTag("anytls", "AnyTLS")))))
                 }, y.a.createElement(l["a"], null, y.a.createElement(m["a"], {
                     type: "plus"
                 }))), y.a.createElement(s["a"], {
-                    placeholder: "Nhập từ khóa bất kỳ để tìm kiếm",
+                    placeholder: "\u8f93\u5165\u4efb\u610f\u5173\u952e\u5b57\u641c\u7d22",
                     style: {
                         width: 200
                     },
@@ -103760,7 +105432,7 @@
                             }
                         })
                     }
-                }, A ? "Lưu sắp xếp" : "Chỉnh sửa sắp xếp")), Object(L["f"])() ? y.a.createElement(o["a"], {
+                }, A ? "\u4fdd\u5b58\u6392\u5e8f" : "\u7f16\u8f91\u6392\u5e8f")), Object(L["f"])() ? y.a.createElement(o["a"], {
                     className: "v2board-table",
                     itemLayout: "vertical",
                     dataSource: N ? E.filter(e=>-1 !== JSON.stringify(e).indexOf(N)) : E,
@@ -103804,7 +105476,7 @@
                     tableLayout: "auto",
                     dataSource: N ? E.filter(e=>-1 !== JSON.stringify(e).indexOf(N)) : E,
                     columns: A ? [{
-                        title: "Loại",
+                        title: "\u6392\u5e8f",
                         dataIndex: "sort",
                         key: "sort",
                         align: "left",
@@ -103815,11 +105487,11 @@
                                 style: {
                                     cursor: "move"
                                 },
-                                title: "Kéo để sắp xếp"
+                                title: "\u62d6\u52a8\u6392\u5e8f"
                             }))
                         }
                     }, {
-                        title: "Node ID",
+                        title: "\u8282\u70b9ID",
                         dataIndex: "id",
                         key: "id",
                         width: 150,
@@ -103827,7 +105499,7 @@
                             return y.a.createElement("span", null, this.getTypeTag(t.type, t.parent_id ? e + " => " + t.parent_id : e))
                         }
                     }, {
-                        title: "Node",
+                        title: "\u8282\u70b9",
                         dataIndex: "name",
                         key: "name"
                     }] : $,
@@ -103857,32 +105529,42 @@
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "vmess" === (null === (t = this.record) || void 0 === t ? void 0 : t.type) && y.a.createElement(k["a"], {
+                }), " \u7f16\u8f91")), "vmess" === (null === (t = this.record) || void 0 === t ? void 0 : t.type) && y.a.createElement(k["a"], {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "trojan" === (null === (n = this.record) || void 0 === n ? void 0 : n.type) && y.a.createElement(C["a"], {
+                }), " \u7f16\u8f91")), "trojan" === (null === (n = this.record) || void 0 === n ? void 0 : n.type) && y.a.createElement(C["a"], {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "hysteria" === (null === (r = this.record) || void 0 === r ? void 0 : r.type) && y.a.createElement(W, {
+                }), " \u7f16\u8f91")), "tuic" === (null === (r = this.record) || void 0 === r ? void 0 : r.type) && y.a.createElement(mTuic, {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa")), "vless" === (null === (v = this.record) || void 0 === v ? void 0 : v.type) && y.a.createElement(G, {
+                }), " \u7f16\u8f91")), "anytls" === (null === (r = this.record) || void 0 === r ? void 0 : r.type) && y.a.createElement(mAnyTLS, {
                     key: Math.random(),
                     record: this.record
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "form"
-                }), " Chỉnh Sửa"))), y.a.createElement("li", {
+                }), " \u7f16\u8f91")), "hysteria" === (null === (r = this.record) || void 0 === r ? void 0 : r.type) && y.a.createElement(W, {
+                    key: Math.random(),
+                    record: this.record
+                }, y.a.createElement("a", null, y.a.createElement(m["a"], {
+                    type: "form"
+                }), " \u7f16\u8f91")), "vless" === (null === (v = this.record) || void 0 === v ? void 0 : v.type) && y.a.createElement(G, {
+                    key: Math.random(),
+                    record: this.record
+                }, y.a.createElement("a", null, y.a.createElement(m["a"], {
+                    type: "form"
+                }), " \u7f16\u8f91"))), y.a.createElement("li", {
                     onClick: ()=>this.copy(this.record),
                     className: "ant-dropdown-menu-item"
                 }, y.a.createElement("a", null, y.a.createElement(m["a"], {
                     type: "copy"
-                }), " Sao chép")), y.a.createElement("li", {
+                }), " \u590d\u5236")), y.a.createElement("li", {
                     onClick: ()=>this.drop(this.record),
                     className: "ant-dropdown-menu-item"
                 }, y.a.createElement("a", {
@@ -103891,7 +105573,7 @@
                     }
                 }, y.a.createElement(m["a"], {
                     type: "delete"
-                }), " Xóa bỏ")))))))))
+                }), " \u5220\u9664")))))))))
             }
         }
         t["default"] = Object(_["c"])(e=>{
@@ -107944,7 +109626,7 @@
                         visible: !0
                     })
                 }), f.a.createElement(g["a"], {
-                    title: "".concat(this.state.route.id ? "Chỉnh sửa route" : "Tạo route"),
+                    title: "".concat(this.state.route.id ? "\u7f16\u8f91\u8def\u7531" : "\u521b\u5efa\u8def\u7531"),
                     visible: this.state.visible,
                     onCancel: ()=>this.setState({
                         visible: !1
@@ -107952,14 +109634,14 @@
                     onOk: ()=>r || this.save(),
                     okText: r ? f.a.createElement(s["a"], {
                         type: "loading"
-                    }) : "Gửi",
-                    cancelText: "Hủy bỏ"
+                    }) : "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88"
                 }, f.a.createElement("div", null, f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Ghi chú"), f.a.createElement(y["a"], {
-                    placeholder: "Vui lòng nhập ghi chú",
+                }, "\u5907\u6ce8"), f.a.createElement(y["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u5907\u6ce8",
                     value: this.state.route.remarks,
                     onChange: e=>{
                         this.setState({
@@ -107972,7 +109654,7 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Giá trị phù hợp"), f.a.createElement(y["a"].TextArea, {
+                }, "\u5339\u914d\u503c"), f.a.createElement(y["a"].TextArea, {
                     rows: 5,
                     placeholder: "example.com\n*.example.com",
                     value: "object" === typeof this.state.route.match ? null === (e = this.state.route.match) || void 0 === e ? void 0 : e.join("\n") : null === (t = this.state.route.match) || void 0 === t ? void 0 : null === (n = t.split(",")) || void 0 === n ? void 0 : n.join("\n"),
@@ -107988,9 +109670,9 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Hành động"), f.a.createElement("div", null, f.a.createElement(v["a"], {
+                }, "\u52a8\u4f5c"), f.a.createElement("div", null, f.a.createElement(v["a"], {
                     value: this.state.route.action,
-                    placeholder: "Vui lòng chọn hành động",
+                    placeholder: "\u8bf7\u9009\u62e9\u52a8\u4f5c",
                     style: {
                         width: "100%"
                     },
@@ -108007,8 +109689,8 @@
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Máy chủ DNS"), f.a.createElement(y["a"], {
-                    placeholder: "Vui lòng nhập địa chỉ máy chủ DNS dùng để phân giải",
+                }, "DNS\u670d\u52a1\u5668"), f.a.createElement(y["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u7528\u4e8e\u89e3\u6790\u7684DNS\u670d\u52a1\u5668\u5730\u5740",
                     value: this.state.route.action_value,
                     onChange: e=>{
                         this.setState({
@@ -108064,26 +109746,26 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Ghi chú",
+                    title: "\u5907\u6ce8",
                     dataIndex: "remarks",
                     key: "remarks"
                 }, {
-                    title: "Số lượng khớp",
+                    title: "\u5339\u914d\u6570\u91cf",
                     dataIndex: "match",
                     key: "match",
                     render: e=>{
                         var t;
-                        return "Khớp ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " quy tắc")
+                        return "\u5339\u914d ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " \u6761\u89c4\u5219")
                     }
                 }, {
-                    title: "Hành động",
+                    title: "\u52a8\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     render: e=>{
                         return b["a"].routeActionText[e]
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action2",
                     key: "action2",
                     align: "right",
@@ -108093,16 +109775,16 @@
                             key: t.id
                         }, f.a.createElement("a", {
                             href: "javascript:void(0);"
-                        }, "Biên Tập")), f.a.createElement(l["a"], {
+                        }, "\u7f16\u8f91")), f.a.createElement(l["a"], {
                             type: "vertical"
                         }), f.a.createElement("a", {
                             href: "javascript:void(0);",
                             onClick: ()=>this.drop(t.id)
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return f.a.createElement(d["a"], i()({}, this.props, {
-                    title: "Quản lý route"
+                    title: "\u8def\u7531\u7ba1\u7406"
                 }), f.a.createElement("div", {
                     className: "d-flex justify-content-between align-items-center"
                 }), f.a.createElement(m["a"], {
@@ -108119,7 +109801,7 @@
                     onClick: ()=>this.modalVisible()
                 }, f.a.createElement(s["a"], {
                     type: "plus"
-                }), " Thêm route"))), f.a.createElement(o["a"], {
+                }), " \u6dfb\u52a0\u8def\u7531"))), f.a.createElement(o["a"], {
                     tableLayout: "auto",
                     columns: r,
                     dataSource: t,
@@ -108586,7 +110268,7 @@
         }
     },
     xWCP: function(e) {
-        e.exports = JSON.parse('{"Aacute":"\xc1","aacute":"\xe1","Abreve":"\u0102","abreve":"\u0103","ac":"\u223e","acd":"\u223f","acE":"\u223e\u0333","Acirc":"\xc2","acirc":"\xe2","acute":"\xb4","Acy":"\u0410","acy":"\u0430","AElig":"\xc6","aelig":"\xe6","af":"\u2061","Afr":"\ud835\udd04","afr":"\ud835\udd1e","Agrave":"\xc0","agrave":"\xe0","alefsym":"\u2135","aleph":"\u2135","Alpha":"\u0391","alpha":"\u03b1","Amacr":"\u0100","amacr":"\u0101","amalg":"\u2a3f","amp":"&","AMP":"&","andand":"\u2a55","And":"\u2a53","and":"\u2227","andd":"\u2a5c","andslope":"\u2a58","andv":"\u2a5a","ang":"\u2220","ange":"\u29a4","angle":"\u2220","angmsdaa":"\u29a8","angmsdab":"\u29a9","angmsdac":"\u29aa","angmsdad":"\u29ab","angmsdae":"\u29ac","angmsdaf":"\u29ad","angmsdag":"\u29ae","angmsdah":"\u29af","angmsd":"\u2221","angrt":"\u221f","angrtvb":"\u22be","angrtvbd":"\u299d","angsph":"\u2222","angst":"\xc5","angzarr":"\u237c","Aogon":"\u0104","aogon":"\u0105","Aopf":"\ud835\udd38","aopf":"\ud835\udd52","apacir":"\u2a6f","ap":"\u2248","apE":"\u2a70","ape":"\u224a","apid":"\u224b","apos":"\'","ApplyFunction":"\u2061","approx":"\u2248","approxeq":"\u224a","Aring":"\xc5","aring":"\xe5","Ascr":"\ud835\udc9c","ascr":"\ud835\udcb6","Assign":"\u2254","ast":"*","asymp":"\u2248","asympeq":"\u224d","Atilde":"\xc3","atilde":"\xe3","Auml":"\xc4","auml":"\xe4","awconint":"\u2233","awint":"\u2a11","backcong":"\u224c","backepsilon":"\u03f6","backprime":"\u2035","backsim":"\u223d","backsimeq":"\u22cd","Backslash":"\u2216","Barv":"\u2ae7","barvee":"\u22bd","barwed":"\u2305","Barwed":"\u2306","barwedge":"\u2305","bbrk":"\u23b5","bbrktbrk":"\u23b6","bcong":"\u224c","Bcy":"\u0411","bcy":"\u0431","bdquo":"\u201e","becaus":"\u2235","because":"\u2235","Because":"\u2235","bemptyv":"\u29b0","bepsi":"\u03f6","bernou":"\u212c","Bernoullis":"\u212c","Beta":"\u0392","beta":"\u03b2","beth":"\u2136","between":"\u226c","Bfr":"\ud835\udd05","bfr":"\ud835\udd1f","bigcap":"\u22c2","bigcirc":"\u25ef","bigcup":"\u22c3","bigodot":"\u2a00","bigoplus":"\u2a01","bigotimes":"\u2a02","bigsqcup":"\u2a06","bigstar":"\u2605","bigtriangledown":"\u25bd","bigtriangleup":"\u25b3","biguplus":"\u2a04","bigvee":"\u22c1","bigwedge":"\u22c0","bkarow":"\u290d","blacklozenge":"\u29eb","blacksquare":"\u25aa","blacktriangle":"\u25b4","blacktriangledown":"\u25be","blacktriangleleft":"\u25c2","blacktriangleright":"\u25b8","blank":"\u2423","blk12":"\u2592","blk14":"\u2591","blk34":"\u2593","block":"\u2588","bne":"=\u20e5","bnequiv":"\u2261\u20e5","bNot":"\u2aed","bnot":"\u2310","Bopf":"\ud835\udd39","bopf":"\ud835\udd53","bot":"\u22a5","bottom":"\u22a5","bowtie":"\u22c8","boxbox":"\u29c9","boxdl":"\u2510","boxdL":"\u2555","boxDl":"\u2556","boxDL":"\u2557","boxdr":"\u250c","boxdR":"\u2552","boxDr":"\u2553","boxDR":"\u2554","boxh":"\u2500","boxH":"\u2550","boxhd":"\u252c","boxHd":"\u2564","boxhD":"\u2565","boxHD":"\u2566","boxhu":"\u2534","boxHu":"\u2567","boxhU":"\u2568","boxHU":"\u2569","boxminus":"\u229f","boxplus":"\u229e","boxtimes":"\u22a0","boxul":"\u2518","boxuL":"\u255b","boxUl":"\u255c","boxUL":"\u255d","boxur":"\u2514","boxuR":"\u2558","boxUr":"\u2559","boxUR":"\u255a","boxv":"\u2502","boxV":"\u2551","boxvh":"\u253c","boxvH":"\u256a","boxVh":"\u256b","boxVH":"\u256c","boxvl":"\u2524","boxvL":"\u2561","boxVl":"\u2562","boxVL":"\u2563","boxvr":"\u251c","boxvR":"\u255e","boxVr":"\u255f","boxVR":"\u2560","bprime":"\u2035","breve":"\u02d8","Breve":"\u02d8","brvbar":"\xa6","bscr":"\ud835\udcb7","Bscr":"\u212c","bsemi":"\u204f","bsim":"\u223d","bsime":"\u22cd","bsolb":"\u29c5","bsol":"\\\\","bsolhsub":"\u27c8","bull":"\u2022","bullet":"\u2022","bump":"\u224e","bumpE":"\u2aae","bumpe":"\u224f","Bumpeq":"\u224e","bumpeq":"\u224f","Cacute":"\u0106","cacute":"\u0107","capand":"\u2a44","capbrcup":"\u2a49","capcap":"\u2a4b","cap":"\u2229","Cap":"\u22d2","capcup":"\u2a47","capdot":"\u2a40","CapitalDifferentialD":"\u2145","caps":"\u2229\ufe00","caret":"\u2041","caron":"\u02c7","Cayleys":"\u212d","ccaps":"\u2a4d","Ccaron":"\u010c","ccaron":"\u010d","Ccedil":"\xc7","ccedil":"\xe7","Ccirc":"\u0108","ccirc":"\u0109","Cconint":"\u2230","ccups":"\u2a4c","ccupssm":"\u2a50","Cdot":"\u010a","cdot":"\u010b","cedil":"\xb8","Cedilla":"\xb8","cemptyv":"\u29b2","cent":"\xa2","centerdot":"\xb7","CenterDot":"\xb7","cfr":"\ud835\udd20","Cfr":"\u212d","CHcy":"\u0427","chcy":"\u0447","check":"\u2713","checkmark":"\u2713","Chi":"\u03a7","chi":"\u03c7","circ":"\u02c6","circeq":"\u2257","circlearrowleft":"\u21ba","circlearrowright":"\u21bb","circledast":"\u229b","circledcirc":"\u229a","circleddash":"\u229d","CircleDot":"\u2299","circledR":"\xae","circledS":"\u24c8","CircleMinus":"\u2296","CirclePlus":"\u2295","CircleTimes":"\u2297","cir":"\u25cb","cirE":"\u29c3","cire":"\u2257","cirfnint":"\u2a10","cirmid":"\u2aef","cirscir":"\u29c2","ClockwiseContourIntegral":"\u2232","CloseCurlyDoubleQuote":"\u201d","CloseCurlyQuote":"\u2019","clubs":"\u2663","clubsuit":"\u2663","colon":":","Colon":"\u2237","Colone":"\u2a74","colone":"\u2254","coloneq":"\u2254","comma":",","commat":"@","comp":"\u2201","compfn":"\u2218","complement":"\u2201","complexes":"\u2102","cong":"\u2245","congdot":"\u2a6d","Congruent":"\u2261","conint":"\u222e","Conint":"\u222f","ContourIntegral":"\u222e","copf":"\ud835\udd54","Copf":"\u2102","coprod":"\u2210","Coproduct":"\u2210","copy":"\xa9","COPY":"\xa9","copysr":"\u2117","CounterClockwiseContourIntegral":"\u2233","crarr":"\u21b5","cross":"\u2717","Cross":"\u2a2f","Cscr":"\ud835\udc9e","cscr":"\ud835\udcb8","csub":"\u2acf","csube":"\u2ad1","csup":"\u2ad0","csupe":"\u2ad2","ctdot":"\u22ef","cudarrl":"\u2938","cudarrr":"\u2935","cuepr":"\u22de","cuesc":"\u22df","cularr":"\u21b6","cularrp":"\u293d","cupbrcap":"\u2a48","cupcap":"\u2a46","CupCap":"\u224d","cup":"\u222a","Cup":"\u22d3","cupcup":"\u2a4a","cupdot":"\u228d","cupor":"\u2a45","cups":"\u222a\ufe00","curarr":"\u21b7","curarrm":"\u293c","curlyeqprec":"\u22de","curlyeqsucc":"\u22df","curlyvee":"\u22ce","curlywedge":"\u22cf","curren":"\xa4","curvearrowleft":"\u21b6","curvearrowright":"\u21b7","cuvee":"\u22ce","cuwed":"\u22cf","cwconint":"\u2232","cwint":"\u2231","cylcty":"\u232d","dagger":"\u2020","Dagger":"\u2021","daleth":"\u2138","darr":"\u2193","Darr":"\u21a1","dArr":"\u21d3","dash":"\u2010","Dashv":"\u2ae4","dashv":"\u22a3","dbkarow":"\u290f","dblac":"\u02dd","Dcaron":"\u010e","dcaron":"\u010f","Dcy":"\u0414","dcy":"\u0434","ddagger":"\u2021","ddarr":"\u21ca","DD":"\u2145","dd":"\u2146","DDotrahd":"\u2911","ddotseq":"\u2a77","deg":"\xb0","Del":"\u2207","Delta":"\u0394","delta":"\u03b4","demptyv":"\u29b1","dfisht":"\u297f","Dfr":"\ud835\udd07","dfr":"\ud835\udd21","dHar":"\u2965","dharl":"\u21c3","dharr":"\u21c2","DiacriticalAcute":"\xb4","DiacriticalDot":"\u02d9","DiacriticalDoubleAcute":"\u02dd","DiacriticalGrave":"`","DiacriticalTilde":"\u02dc","diam":"\u22c4","diamond":"\u22c4","Diamond":"\u22c4","diamondsuit":"\u2666","diams":"\u2666","die":"\xa8","DifferentialD":"\u2146","digamma":"\u03dd","disin":"\u22f2","div":"\xf7","divide":"\xf7","divideontimes":"\u22c7","divonx":"\u22c7","DJcy":"\u0402","djcy":"\u0452","dlcorn":"\u231e","dlcrop":"\u230d","dollar":"$","Dopf":"\ud835\udd3b","dopf":"\ud835\udd55","Dot":"\xa8","dot":"\u02d9","DotDot":"\u20dc","doteq":"\u2250","doteqdot":"\u2251","DotEqual":"\u2250","dotminus":"\u2238","dotplus":"\u2214","dotsquare":"\u22a1","doublebarwedge":"\u2306","DoubleContourIntegral":"\u222f","DoubleDot":"\xa8","DoubleDownArrow":"\u21d3","DoubleLeftArrow":"\u21d0","DoubleLeftRightArrow":"\u21d4","DoubleLeftTee":"\u2ae4","DoubleLongLeftArrow":"\u27f8","DoubleLongLeftRightArrow":"\u27fa","DoubleLongRightArrow":"\u27f9","DoubleRightArrow":"\u21d2","DoubleRightTee":"\u22a8","DoubleUpArrow":"\u21d1","DoubleUpDownArrow":"\u21d5","DoubleVerticalBar":"\u2225","DownArrowBar":"\u2913","downarrow":"\u2193","DownArrow":"\u2193","Downarrow":"\u21d3","DownArrowUpArrow":"\u21f5","DownBreve":"\u0311","downdownarrows":"\u21ca","downharpoonleft":"\u21c3","downharpoonright":"\u21c2","DownLeftRightVector":"\u2950","DownLeftTeeVector":"\u295e","DownLeftVectorBar":"\u2956","DownLeftVector":"\u21bd","DownRightTeeVector":"\u295f","DownRightVectorBar":"\u2957","DownRightVector":"\u21c1","DownTeeArrow":"\u21a7","DownTee":"\u22a4","drbkarow":"\u2910","drcorn":"\u231f","drcrop":"\u230c","Dscr":"\ud835\udc9f","dscr":"\ud835\udcb9","DScy":"\u0405","dscy":"\u0455","dsol":"\u29f6","Dstrok":"\u0110","dstrok":"\u0111","dtdot":"\u22f1","dtri":"\u25bf","dtrif":"\u25be","duarr":"\u21f5","duhar":"\u296f","dwangle":"\u29a6","DZcy":"\u040f","dzcy":"\u045f","dzigrarr":"\u27ff","Eacute":"\xc9","eacute":"\xe9","easter":"\u2a6e","Ecaron":"\u011a","ecaron":"\u011b","Ecirc":"\xca","ecirc":"\xea","ecir":"\u2256","ecolon":"\u2255","Ecy":"\u042d","ecy":"\u044d","eDDot":"\u2a77","Edot":"\u0116","edot":"\u0117","eDot":"\u2251","ee":"\u2147","efDot":"\u2252","Efr":"\ud835\udd08","efr":"\ud835\udd22","eg":"\u2a9a","Egrave":"\xc8","egrave":"\xe8","egs":"\u2a96","egsdot":"\u2a98","el":"\u2a99","Element":"\u2208","elinters":"\u23e7","ell":"\u2113","els":"\u2a95","elsdot":"\u2a97","Emacr":"\u0112","emacr":"\u0113","empty":"\u2205","emptyset":"\u2205","EmptySmallSquare":"\u25fb","emptyv":"\u2205","EmptyVerySmallSquare":"\u25ab","emsp13":"\u2004","emsp14":"\u2005","emsp":"\u2003","ENG":"\u014a","eng":"\u014b","ensp":"\u2002","Eogon":"\u0118","eogon":"\u0119","Eopf":"\ud835\udd3c","eopf":"\ud835\udd56","epar":"\u22d5","eparsl":"\u29e3","eplus":"\u2a71","epsi":"\u03b5","Epsilon":"\u0395","epsilon":"\u03b5","epsiv":"\u03f5","eqcirc":"\u2256","eqcolon":"\u2255","eqsim":"\u2242","eqslantgtr":"\u2a96","eqslantless":"\u2a95","Equal":"\u2a75","equals":"=","EqualTilde":"\u2242","equest":"\u225f","Equilibrium":"\u21cc","equiv":"\u2261","equivDD":"\u2a78","eqvparsl":"\u29e5","erarr":"\u2971","erDot":"\u2253","escr":"\u212f","Escr":"\u2130","esdot":"\u2250","Esim":"\u2a73","esim":"\u2242","Eta":"\u0397","eta":"\u03b7","ETH":"\xd0","eth":"\xf0","Euml":"\xcb","euml":"\xeb","euro":"\u20ac","excl":"!","exist":"\u2203","Exists":"\u2203","expectation":"\u2130","exponentiale":"\u2147","ExponentialE":"\u2147","fallingdotseq":"\u2252","Fcy":"\u0424","fcy":"\u0444","female":"\u2640","ffilig":"\ufb03","fflig":"\ufb00","ffllig":"\ufb04","Ffr":"\ud835\udd09","ffr":"\ud835\udd23","filig":"\ufb01","FilledSmallSquare":"\u25fc","FilledVerySmallSquare":"\u25aa","fjlig":"fj","flat":"\u266d","fllig":"\ufb02","fltns":"\u25b1","fnof":"\u0192","Fopf":"\ud835\udd3d","fopf":"\ud835\udd57","forall":"\u2200","ForAll":"\u2200","fork":"\u22d4","forkv":"\u2ad9","Fouriertrf":"\u2131","fpartint":"\u2a0d","frac12":"\xbd","frac13":"\u2153","frac14":"\xbc","frac15":"\u2155","frac16":"\u2159","frac18":"\u215b","frac23":"\u2154","frac25":"\u2156","frac34":"\xbe","frac35":"\u2157","frac38":"\u215c","frac45":"\u2158","frac56":"\u215a","frac58":"\u215d","frac78":"\u215e","frasl":"\u2044","frown":"\u2322","fscr":"\ud835\udcbb","Fscr":"\u2131","gacute":"\u01f5","Gamma":"\u0393","gamma":"\u03b3","Gammad":"\u03dc","gammad":"\u03dd","gap":"\u2a86","Gbreve":"\u011e","gbreve":"\u011f","Gcedil":"\u0122","Gcirc":"\u011c","gcirc":"\u011d","Gcy":"\u0413","gcy":"\u0433","Gdot":"\u0120","gdot":"\u0121","ge":"\u2265","gE":"\u2267","gEl":"\u2a8c","gel":"\u22db","geq":"\u2265","geqq":"\u2267","geqslant":"\u2a7e","gescc":"\u2aa9","ges":"\u2a7e","gesdot":"\u2a80","gesdoto":"\u2a82","gesdotol":"\u2a84","gesl":"\u22db\ufe00","gesles":"\u2a94","Gfr":"\ud835\udd0a","gfr":"\ud835\udd24","gg":"\u226b","Gg":"\u22d9","ggg":"\u22d9","gimel":"\u2137","GJcy":"\u0403","gjcy":"\u0453","gla":"\u2aa5","gl":"\u2277","glE":"\u2a92","glj":"\u2aa4","gnap":"\u2a8a","gnapprox":"\u2a8a","gne":"\u2a88","gnE":"\u2269","gneq":"\u2a88","gneqq":"\u2269","gnsim":"\u22e7","Gopf":"\ud835\udd3e","gopf":"\ud835\udd58","grave":"`","GreaterEqual":"\u2265","GreaterEqualLess":"\u22db","GreaterFullEqual":"\u2267","GreaterGreater":"\u2aa2","GreaterLess":"\u2277","GreaterSlantEqual":"\u2a7e","GreaterTilde":"\u2273","Gscr":"\ud835\udca2","gscr":"\u210a","gsim":"\u2273","gsime":"\u2a8e","gsiml":"\u2a90","gtcc":"\u2aa7","gtcir":"\u2a7a","gt":">","GT":">","Gt":"\u226b","gtdot":"\u22d7","gtlPar":"\u2995","gtquest":"\u2a7c","gtrapprox":"\u2a86","gtrarr":"\u2978","gtrdot":"\u22d7","gtreqless":"\u22db","gtreqqless":"\u2a8c","gtrless":"\u2277","gtrsim":"\u2273","gvertneqq":"\u2269\ufe00","gvnE":"\u2269\ufe00","Hacek":"\u02c7","hairsp":"\u200a","half":"\xbd","hamilt":"\u210b","HARDcy":"\u042a","hardcy":"\u044a","harrcir":"\u2948","harr":"\u2194","hArr":"\u21d4","harrw":"\u21ad","Hat":"^","hbar":"\u210f","Hcirc":"\u0124","hcirc":"\u0125","hearts":"\u2665","heartsuit":"\u2665","hellip":"\u2026","hercon":"\u22b9","hfr":"\ud835\udd25","Hfr":"\u210c","HilbertSpace":"\u210b","hksearow":"\u2925","hkswarow":"\u2926","hoarr":"\u21ff","homtht":"\u223b","hookleftarrow":"\u21a9","hookrightarrow":"\u21aa","hopf":"\ud835\udd59","Hopf":"\u210d","horbar":"\u2015","HorizontalLine":"\u2500","hscr":"\ud835\udcbd","Hscr":"\u210b","hslash":"\u210f","Hstrok":"\u0126","hstrok":"\u0127","HumpDownHump":"\u224e","HumpEqual":"\u224f","hybull":"\u2043","hyphen":"\u2010","Iacute":"\xcd","iacute":"\xed","ic":"\u2063","Icirc":"\xce","icirc":"\xee","Icy":"\u0418","icy":"\u0438","Idot":"\u0130","IEcy":"\u0415","iecy":"\u0435","iexcl":"\xa1","iff":"\u21d4","ifr":"\ud835\udd26","Ifr":"\u2111","Igrave":"\xcc","igrave":"\xec","ii":"\u2148","iiiint":"\u2a0c","iiint":"\u222d","iinfin":"\u29dc","iiota":"\u2129","IJlig":"\u0132","ijlig":"\u0133","Imacr":"\u012a","imacr":"\u012b","image":"\u2111","ImaginaryI":"\u2148","imagline":"\u2110","imagpart":"\u2111","imath":"\u0131","Im":"\u2111","imof":"\u22b7","imped":"\u01b5","Implies":"\u21d2","incare":"\u2105","in":"\u2208","infin":"\u221e","infintie":"\u29dd","inodot":"\u0131","intcal":"\u22ba","int":"\u222b","Int":"\u222c","integers":"\u2124","Integral":"\u222b","intercal":"\u22ba","Intersection":"\u22c2","intlarhk":"\u2a17","intprod":"\u2a3c","InvisibleComma":"\u2063","InvisibleTimes":"\u2062","IOcy":"\u0401","iocy":"\u0451","Iogon":"\u012e","iogon":"\u012f","Iopf":"\ud835\udd40","iopf":"\ud835\udd5a","Iota":"\u0399","iota":"\u03b9","iprod":"\u2a3c","iquest":"\xbf","iscr":"\ud835\udcbe","Iscr":"\u2110","isin":"\u2208","isindot":"\u22f5","isinE":"\u22f9","isins":"\u22f4","isinsv":"\u22f3","isinv":"\u2208","it":"\u2062","Itilde":"\u0128","itilde":"\u0129","Iukcy":"\u0406","iukcy":"\u0456","Iuml":"\xcf","iuml":"\xef","Jcirc":"\u0134","jcirc":"\u0135","Jcy":"\u0419","jcy":"\u0439","Jfr":"\ud835\udd0d","jfr":"\ud835\udd27","jmath":"\u0237","Jopf":"\ud835\udd41","jopf":"\ud835\udd5b","Jscr":"\ud835\udca5","jscr":"\ud835\udcbf","Jsercy":"\u0408","jsercy":"\u0458","Jukcy":"\u0404","jukcy":"\u0454","Kappa":"\u039a","kappa":"\u03ba","kappav":"\u03f0","Kcedil":"\u0136","kcedil":"\u0137","Kcy":"\u041a","kcy":"\u043a","Kfr":"\ud835\udd0e","kfr":"\ud835\udd28","kgreen":"\u0138","KHcy":"\u0425","khcy":"\u0445","KJcy":"\u040c","kjcy":"\u045c","Kopf":"\ud835\udd42","kopf":"\ud835\udd5c","Kscr":"\ud835\udca6","kscr":"\ud835\udcc0","lAarr":"\u21da","Lacute":"\u0139","lacute":"\u013a","laemptyv":"\u29b4","lagran":"\u2112","Lambda":"\u039b","lambda":"\u03bb","lang":"\u27e8","Lang":"\u27ea","langd":"\u2991","langle":"\u27e8","lap":"\u2a85","Laplacetrf":"\u2112","laquo":"\xab","larrb":"\u21e4","larrbfs":"\u291f","larr":"\u2190","Larr":"\u219e","lArr":"\u21d0","larrfs":"\u291d","larrhk":"\u21a9","larrlp":"\u21ab","larrpl":"\u2939","larrsim":"\u2973","larrtl":"\u21a2","latail":"\u2919","lAtail":"\u291b","lat":"\u2aab","late":"\u2aad","lates":"\u2aad\ufe00","lbarr":"\u290c","lBarr":"\u290e","lbbrk":"\u2772","lbrace":"{","lbrack":"[","lbrke":"\u298b","lbrksld":"\u298f","lbrkslu":"\u298d","Lcaron":"\u013d","lcaron":"\u013e","Lcedil":"\u013b","lcedil":"\u013c","lceil":"\u2308","lcub":"{","Lcy":"\u041b","lcy":"\u043b","ldca":"\u2936","ldquo":"\u201c","ldquor":"\u201e","ldrdhar":"\u2967","ldrushar":"\u294b","ldsh":"\u21b2","le":"\u2264","lE":"\u2266","LeftAngleBracket":"\u27e8","LeftArrowBar":"\u21e4","leftarrow":"\u2190","LeftArrow":"\u2190","Leftarrow":"\u21d0","LeftArrowRightArrow":"\u21c6","leftarrowtail":"\u21a2","LeftCeiling":"\u2308","LeftDoubleBracket":"\u27e6","LeftDownTeeVector":"\u2961","LeftDownVectorBar":"\u2959","LeftDownVector":"\u21c3","LeftFloor":"\u230a","leftharpoondown":"\u21bd","leftharpoonup":"\u21bc","leftleftarrows":"\u21c7","leftrightarrow":"\u2194","LeftRightArrow":"\u2194","Leftrightarrow":"\u21d4","leftrightarrows":"\u21c6","leftrightharpoons":"\u21cb","leftrightsquigarrow":"\u21ad","LeftRightVector":"\u294e","LeftTeeArrow":"\u21a4","LeftTee":"\u22a3","LeftTeeVector":"\u295a","leftthreetimes":"\u22cb","LeftTriangleBar":"\u29cf","LeftTriangle":"\u22b2","LeftTriangleEqual":"\u22b4","LeftUpDownVector":"\u2951","LeftUpTeeVector":"\u2960","LeftUpVectorBar":"\u2958","LeftUpVector":"\u21bf","LeftVectorBar":"\u2952","LeftVector":"\u21bc","lEg":"\u2a8b","leg":"\u22da","leq":"\u2264","leqq":"\u2266","leqslant":"\u2a7d","lescc":"\u2aa8","les":"\u2a7d","lesdot":"\u2a7f","lesdoto":"\u2a81","lesdotor":"\u2a83","lesg":"\u22da\ufe00","lesges":"\u2a93","lessapprox":"\u2a85","lessdot":"\u22d6","lesseqgtr":"\u22da","lesseqqgtr":"\u2a8b","LessEqualGreater":"\u22da","LessFullEqual":"\u2266","LessGreater":"\u2276","lessgtr":"\u2276","LessLess":"\u2aa1","lesssim":"\u2272","LessSlantEqual":"\u2a7d","LessTilde":"\u2272","lfisht":"\u297c","lfloor":"\u230a","Lfr":"\ud835\udd0f","lfr":"\ud835\udd29","lg":"\u2276","lgE":"\u2a91","lHar":"\u2962","lhard":"\u21bd","lharu":"\u21bc","lharul":"\u296a","lhblk":"\u2584","LJcy":"\u0409","ljcy":"\u0459","llarr":"\u21c7","ll":"\u226a","Ll":"\u22d8","llcorner":"\u231e","Lleftarrow":"\u21da","llhard":"\u296b","lltri":"\u25fa","Lmidot":"\u013f","lmidot":"\u0140","lmoustache":"\u23b0","lmoust":"\u23b0","lnap":"\u2a89","lnapprox":"\u2a89","lne":"\u2a87","lnE":"\u2268","lneq":"\u2a87","lneqq":"\u2268","lnsim":"\u22e6","loang":"\u27ec","loarr":"\u21fd","lobrk":"\u27e6","longleftarrow":"\u27f5","LongLeftArrow":"\u27f5","Longleftarrow":"\u27f8","longleftrightarrow":"\u27f7","LongLeftRightArrow":"\u27f7","Longleftrightarrow":"\u27fa","longmapsto":"\u27fc","longrightarrow":"\u27f6","LongRightArrow":"\u27f6","Longrightarrow":"\u27f9","looparrowleft":"\u21ab","looparrowright":"\u21ac","lopar":"\u2985","Lopf":"\ud835\udd43","lopf":"\ud835\udd5d","loplus":"\u2a2d","lotimes":"\u2a34","lowast":"\u2217","lowbar":"_","LowerLeftArrow":"\u2199","LowerRightArrow":"\u2198","loz":"\u25ca","lozenge":"\u25ca","lozf":"\u29eb","lpar":"(","lparlt":"\u2993","lrarr":"\u21c6","lrcorner":"\u231f","lrhar":"\u21cb","lrhard":"\u296d","lrm":"\u200e","lrtri":"\u22bf","lsaquo":"\u2039","lscr":"\ud835\udcc1","Lscr":"\u2112","lsh":"\u21b0","Lsh":"\u21b0","lsim":"\u2272","lsime":"\u2a8d","lsimg":"\u2a8f","lsqb":"[","lsquo":"\u2018","lsquor":"\u201a","Lstrok":"\u0141","lstrok":"\u0142","ltcc":"\u2aa6","ltcir":"\u2a79","lt":"<","LT":"<","Lt":"\u226a","ltdot":"\u22d6","lthree":"\u22cb","ltimes":"\u22c9","ltlarr":"\u2976","ltquest":"\u2a7b","ltri":"\u25c3","ltrie":"\u22b4","ltrif":"\u25c2","ltrPar":"\u2996","lurdshar":"\u294a","luruhar":"\u2966","lvertneqq":"\u2268\ufe00","lvnE":"\u2268\ufe00","macr":"\xaf","male":"\u2642","malt":"\u2720","maltese":"\u2720","Map":"\u2905","map":"\u21a6","mapsto":"\u21a6","mapstodown":"\u21a7","mapstoleft":"\u21a4","mapstoup":"\u21a5","marker":"\u25ae","mcomma":"\u2a29","Mcy":"\u041c","mcy":"\u043c","mdash":"\u2014","mDDot":"\u223a","measuredangle":"\u2221","MediumSpace":"\u205f","Mellintrf":"\u2133","Mfr":"\ud835\udd10","mfr":"\ud835\udd2a","mho":"\u2127","micro":"\xb5","midast":"*","midcir":"\u2af0","mid":"\u2223","middot":"\xb7","minusb":"\u229f","minus":"\u2212","minusd":"\u2238","minusdu":"\u2a2a","MinusPlus":"\u2213","mlcp":"\u2adb","mldr":"\u2026","mnplus":"\u2213","models":"\u22a7","Mopf":"\ud835\udd44","mopf":"\ud835\udd5e","mp":"\u2213","mscr":"\ud835\udcc2","Mscr":"\u2133","mstpos":"\u223e","Mu":"\u039c","mu":"\u03bc","multimap":"\u22b8","mumap":"\u22b8","nabla":"\u2207","Nacute":"\u0143","nacute":"\u0144","nang":"\u2220\u20d2","nap":"\u2249","napE":"\u2a70\u0338","napid":"\u224b\u0338","napos":"\u0149","napprox":"\u2249","natural":"\u266e","naturals":"\u2115","natur":"\u266e","nbsp":"\xa0","nbump":"\u224e\u0338","nbumpe":"\u224f\u0338","ncap":"\u2a43","Ncaron":"\u0147","ncaron":"\u0148","Ncedil":"\u0145","ncedil":"\u0146","ncong":"\u2247","ncongdot":"\u2a6d\u0338","ncup":"\u2a42","Ncy":"\u041d","ncy":"\u043d","ndash":"\u2013","nearhk":"\u2924","nearr":"\u2197","neArr":"\u21d7","nearrow":"\u2197","ne":"\u2260","nedot":"\u2250\u0338","NegativeMediumSpace":"\u200b","NegativeThickSpace":"\u200b","NegativeThinSpace":"\u200b","NegativeVeryThinSpace":"\u200b","nequiv":"\u2262","nesear":"\u2928","nesim":"\u2242\u0338","NestedGreaterGreater":"\u226b","NestedLessLess":"\u226a","NewLine":"\\n","nexist":"\u2204","nexists":"\u2204","Nfr":"\ud835\udd11","nfr":"\ud835\udd2b","ngE":"\u2267\u0338","nge":"\u2271","ngeq":"\u2271","ngeqq":"\u2267\u0338","ngeqslant":"\u2a7e\u0338","nges":"\u2a7e\u0338","nGg":"\u22d9\u0338","ngsim":"\u2275","nGt":"\u226b\u20d2","ngt":"\u226f","ngtr":"\u226f","nGtv":"\u226b\u0338","nharr":"\u21ae","nhArr":"\u21ce","nhpar":"\u2af2","ni":"\u220b","nis":"\u22fc","nisd":"\u22fa","niv":"\u220b","NJcy":"\u040a","njcy":"\u045a","nlarr":"\u219a","nlArr":"\u21cd","nldr":"\u2025","nlE":"\u2266\u0338","nle":"\u2270","nleftarrow":"\u219a","nLeftarrow":"\u21cd","nleftrightarrow":"\u21ae","nLeftrightarrow":"\u21ce","nleq":"\u2270","nleqq":"\u2266\u0338","nleqslant":"\u2a7d\u0338","nles":"\u2a7d\u0338","nless":"\u226e","nLl":"\u22d8\u0338","nlsim":"\u2274","nLt":"\u226a\u20d2","nlt":"\u226e","nltri":"\u22ea","nltrie":"\u22ec","nLtv":"\u226a\u0338","nmid":"\u2224","NoBreak":"\u2060","NonBreakingSpace":"\xa0","nopf":"\ud835\udd5f","Nopf":"\u2115","Not":"\u2aec","not":"\xac","NotCongruent":"\u2262","NotCupCap":"\u226d","NotDoubleVerticalBar":"\u2226","NotElement":"\u2209","NotEqual":"\u2260","NotEqualTilde":"\u2242\u0338","NotExists":"\u2204","NotGreater":"\u226f","NotGreaterEqual":"\u2271","NotGreaterFullEqual":"\u2267\u0338","NotGreaterGreater":"\u226b\u0338","NotGreaterLess":"\u2279","NotGreaterSlantEqual":"\u2a7e\u0338","NotGreaterTilde":"\u2275","NotHumpDownHump":"\u224e\u0338","NotHumpEqual":"\u224f\u0338","notin":"\u2209","notindot":"\u22f5\u0338","notinE":"\u22f9\u0338","notinva":"\u2209","notinvb":"\u22f7","notinvc":"\u22f6","NotLeftTriangleBar":"\u29cf\u0338","NotLeftTriangle":"\u22ea","NotLeftTriangleEqual":"\u22ec","NotLess":"\u226e","NotLessEqual":"\u2270","NotLessGreater":"\u2278","NotLessLess":"\u226a\u0338","NotLessSlantEqual":"\u2a7d\u0338","NotLessTilde":"\u2274","NotNestedGreaterGreater":"\u2aa2\u0338","NotNestedLessLess":"\u2aa1\u0338","notni":"\u220c","notniva":"\u220c","notnivb":"\u22fe","notnivc":"\u22fd","NotPrecedes":"\u2280","NotPrecedesEqual":"\u2aaf\u0338","NotPrecedesSlantEqual":"\u22e0","NotReverseElement":"\u220c","NotRightTriangleBar":"\u29d0\u0338","NotRightTriangle":"\u22eb","NotRightTriangleEqual":"\u22ed","NotSquareSubset":"\u228f\u0338","NotSquareSubsetEqual":"\u22e2","NotSquareSuperset":"\u2290\u0338","NotSquareSupersetEqual":"\u22e3","NotSubset":"\u2282\u20d2","NotSubsetEqual":"\u2288","NotSucceeds":"\u2281","NotSucceedsEqual":"\u2ab0\u0338","NotSucceedsSlantEqual":"\u22e1","NotSucceedsTilde":"\u227f\u0338","NotSuperset":"\u2283\u20d2","NotSupersetEqual":"\u2289","NotTilde":"\u2241","NotTildeEqual":"\u2244","NotTildeFullEqual":"\u2247","NotTildeTilde":"\u2249","NotVerticalBar":"\u2224","nparallel":"\u2226","npar":"\u2226","nparsl":"\u2afd\u20e5","npart":"\u2202\u0338","npolint":"\u2a14","npr":"\u2280","nprcue":"\u22e0","nprec":"\u2280","npreceq":"\u2aaf\u0338","npre":"\u2aaf\u0338","nrarrc":"\u2933\u0338","nrarr":"\u219b","nrArr":"\u21cf","nrarrw":"\u219d\u0338","nrightarrow":"\u219b","nRightarrow":"\u21cf","nrtri":"\u22eb","nrtrie":"\u22ed","nsc":"\u2281","nsccue":"\u22e1","nsce":"\u2ab0\u0338","Nscr":"\ud835\udca9","nscr":"\ud835\udcc3","nshortmid":"\u2224","nshortparallel":"\u2226","nsim":"\u2241","nsime":"\u2244","nsimeq":"\u2244","nsmid":"\u2224","nspar":"\u2226","nsqsube":"\u22e2","nsqsupe":"\u22e3","nsub":"\u2284","nsubE":"\u2ac5\u0338","nsube":"\u2288","nsubset":"\u2282\u20d2","nsubseteq":"\u2288","nsubseteqq":"\u2ac5\u0338","nsucc":"\u2281","nsucceq":"\u2ab0\u0338","nsup":"\u2285","nsupE":"\u2ac6\u0338","nsupe":"\u2289","nsupset":"\u2283\u20d2","nsupseteq":"\u2289","nsupseteqq":"\u2ac6\u0338","ntgl":"\u2279","Ntilde":"\xd1","ntilde":"\xf1","ntlg":"\u2278","ntriangleleft":"\u22ea","ntrianglelefteq":"\u22ec","ntriangleright":"\u22eb","ntrianglerighteq":"\u22ed","Nu":"\u039d","nu":"\u03bd","num":"#","numero":"\u2116","numsp":"\u2007","nvap":"\u224d\u20d2","nvdash":"\u22ac","nvDash":"\u22ad","nVdash":"\u22ae","nVDash":"\u22af","nvge":"\u2265\u20d2","nvgt":">\u20d2","nvHarr":"\u2904","nvinfin":"\u29de","nvlArr":"\u2902","nvle":"\u2264\u20d2","nvlt":"<\u20d2","nvltrie":"\u22b4\u20d2","nvrArr":"\u2903","nvrtrie":"\u22b5\u20d2","nvsim":"\u223c\u20d2","nwarhk":"\u2923","nwarr":"\u2196","nwArr":"\u21d6","nwarrow":"\u2196","nwnear":"\u2927","Oacute":"\xd3","oacute":"\xf3","oast":"\u229b","Ocirc":"\xd4","ocirc":"\xf4","ocir":"\u229a","Ocy":"\u041e","ocy":"\u043e","odash":"\u229d","Odblac":"\u0150","odblac":"\u0151","odiv":"\u2a38","odot":"\u2299","odsold":"\u29bc","OElig":"\u0152","oelig":"\u0153","ofcir":"\u29bf","Ofr":"\ud835\udd12","ofr":"\ud835\udd2c","ogon":"\u02db","Ograve":"\xd2","ograve":"\xf2","ogt":"\u29c1","ohbar":"\u29b5","ohm":"\u03a9","oint":"\u222e","olarr":"\u21ba","olcir":"\u29be","olcross":"\u29bb","oline":"\u203e","olt":"\u29c0","Omacr":"\u014c","omacr":"\u014d","Omega":"\u03a9","omega":"\u03c9","Omicron":"\u039f","omicron":"\u03bf","omid":"\u29b6","ominus":"\u2296","Oopf":"\ud835\udd46","oopf":"\ud835\udd60","opar":"\u29b7","OpenCurlyDoubleQuote":"\u201c","OpenCurlyQuote":"\u2018","operp":"\u29b9","oplus":"\u2295","orarr":"\u21bb","Or":"\u2a54","or":"\u2228","ord":"\u2a5d","order":"\u2134","orderof":"\u2134","ordf":"\xaa","ordm":"\xba","origof":"\u22b6","oror":"\u2a56","orslope":"\u2a57","orv":"\u2a5b","oS":"\u24c8","Oscr":"\ud835\udcaa","oscr":"\u2134","Oslash":"\xd8","oslash":"\xf8","osol":"\u2298","Otilde":"\xd5","otilde":"\xf5","otimesas":"\u2a36","Otimes":"\u2a37","otimes":"\u2297","Ouml":"\xd6","ouml":"\xf6","ovbar":"\u233d","OverBar":"\u203e","OverBrace":"\u23de","OverBracket":"\u23b4","OverParenthesis":"\u23dc","para":"\xb6","parallel":"\u2225","par":"\u2225","parsim":"\u2af3","parsl":"\u2afd","part":"\u2202","PartialD":"\u2202","Pcy":"\u041f","pcy":"\u043f","percnt":"%","period":".","permil":"\u2030","perp":"\u22a5","pertenk":"\u2031","Pfr":"\ud835\udd13","pfr":"\ud835\udd2d","Phi":"\u03a6","phi":"\u03c6","phiv":"\u03d5","phmmat":"\u2133","phone":"\u260e","Pi":"\u03a0","pi":"\u03c0","pitchfork":"\u22d4","piv":"\u03d6","planck":"\u210f","planckh":"\u210e","plankv":"\u210f","plusacir":"\u2a23","plusb":"\u229e","pluscir":"\u2a22","plus":"+","plusdo":"\u2214","plusdu":"\u2a25","pluse":"\u2a72","PlusMinus":"\xb1","plusmn":"\xb1","plussim":"\u2a26","plustwo":"\u2a27","pm":"\xb1","Poincareplane":"\u210c","pointint":"\u2a15","popf":"\ud835\udd61","Popf":"\u2119","pound":"\xa3","prap":"\u2ab7","Pr":"\u2abb","pr":"\u227a","prcue":"\u227c","precapprox":"\u2ab7","prec":"\u227a","preccurlyeq":"\u227c","Precedes":"\u227a","PrecedesEqual":"\u2aaf","PrecedesSlantEqual":"\u227c","PrecedesTilde":"\u227e","preceq":"\u2aaf","precnapprox":"\u2ab9","precneqq":"\u2ab5","precnsim":"\u22e8","pre":"\u2aaf","prE":"\u2ab3","precsim":"\u227e","prime":"\u2032","Prime":"\u2033","primes":"\u2119","prnap":"\u2ab9","prnE":"\u2ab5","prnsim":"\u22e8","prod":"\u220f","Product":"\u220f","profalar":"\u232e","profline":"\u2312","profsurf":"\u2313","prop":"\u221d","Proportional":"\u221d","Proportion":"\u2237","propto":"\u221d","prsim":"\u227e","prurel":"\u22b0","Pscr":"\ud835\udcab","pscr":"\ud835\udcc5","Psi":"\u03a8","psi":"\u03c8","puncsp":"\u2008","Qfr":"\ud835\udd14","qfr":"\ud835\udd2e","qint":"\u2a0c","qopf":"\ud835\udd62","Qopf":"\u211a","qprime":"\u2057","Qscr":"\ud835\udcac","qscr":"\ud835\udcc6","quaternions":"\u210d","quatint":"\u2a16","quest":"?","questeq":"\u225f","quot":"\\"","QUOT":"\\"","rAarr":"\u21db","race":"\u223d\u0331","Racute":"\u0154","racute":"\u0155","radic":"\u221a","raemptyv":"\u29b3","rang":"\u27e9","Rang":"\u27eb","rangd":"\u2992","range":"\u29a5","rangle":"\u27e9","raquo":"\xbb","rarrap":"\u2975","rarrb":"\u21e5","rarrbfs":"\u2920","rarrc":"\u2933","rarr":"\u2192","Rarr":"\u21a0","rArr":"\u21d2","rarrfs":"\u291e","rarrhk":"\u21aa","rarrlp":"\u21ac","rarrpl":"\u2945","rarrsim":"\u2974","Rarrtl":"\u2916","rarrtl":"\u21a3","rarrw":"\u219d","ratail":"\u291a","rAtail":"\u291c","ratio":"\u2236","rationals":"\u211a","rbarr":"\u290d","rBarr":"\u290f","RBarr":"\u2910","rbbrk":"\u2773","rbrace":"}","rbrack":"]","rbrke":"\u298c","rbrksld":"\u298e","rbrkslu":"\u2990","Rcaron":"\u0158","rcaron":"\u0159","Rcedil":"\u0156","rcedil":"\u0157","rceil":"\u2309","rcub":"}","Rcy":"\u0420","rcy":"\u0440","rdca":"\u2937","rdldhar":"\u2969","rdquo":"\u201d","rdquor":"\u201d","rdsh":"\u21b3","real":"\u211c","realine":"\u211b","realpart":"\u211c","reals":"\u211d","Re":"\u211c","rect":"\u25ad","reg":"\xae","REG":"\xae","ReverseElement":"\u220b","ReverseEquilibrium":"\u21cb","ReverseUpEquilibrium":"\u296f","rfisht":"\u297d","rfloor":"\u230b","rfr":"\ud835\udd2f","Rfr":"\u211c","rHar":"\u2964","rhard":"\u21c1","rharu":"\u21c0","rharul":"\u296c","Rho":"\u03a1","rho":"\u03c1","rhov":"\u03f1","RightAngleBracket":"\u27e9","RightArrowBar":"\u21e5","rightarrow":"\u2192","RightArrow":"\u2192","Rightarrow":"\u21d2","RightArrowLeftArrow":"\u21c4","rightarrowtail":"\u21a3","RightCeiling":"\u2309","RightDoubleBracket":"\u27e7","RightDownTeeVector":"\u295d","RightDownVectorBar":"\u2955","RightDownVector":"\u21c2","RightFloor":"\u230b","rightharpoondown":"\u21c1","rightharpoonup":"\u21c0","rightleftarrows":"\u21c4","rightleftharpoons":"\u21cc","rightrightarrows":"\u21c9","rightsquigarrow":"\u219d","RightTeeArrow":"\u21a6","RightTee":"\u22a2","RightTeeVector":"\u295b","rightthreetimes":"\u22cc","RightTriangleBar":"\u29d0","RightTriangle":"\u22b3","RightTriangleEqual":"\u22b5","RightUpDownVector":"\u294f","RightUpTeeVector":"\u295c","RightUpVectorBar":"\u2954","RightUpVector":"\u21be","RightVectorBar":"\u2953","RightVector":"\u21c0","ring":"\u02da","risingdotseq":"\u2253","rlarr":"\u21c4","rlhar":"\u21cc","rlm":"\u200f","rmoustache":"\u23b1","rmoust":"\u23b1","rnmid":"\u2aee","roang":"\u27ed","roarr":"\u21fe","robrk":"\u27e7","ropar":"\u2986","ropf":"\ud835\udd63","Ropf":"\u211d","roplus":"\u2a2e","rotimes":"\u2a35","RoundImplies":"\u2970","rpar":")","rpargt":"\u2994","rppolint":"\u2a12","rrarr":"\u21c9","Rrightarrow":"\u21db","rsaquo":"\u203a","rscr":"\ud835\udcc7","Rscr":"\u211b","rsh":"\u21b1","Rsh":"\u21b1","rsqb":"]","rsquo":"\u2019","rsquor":"\u2019","rthree":"\u22cc","rtimes":"\u22ca","rtri":"\u25b9","rtrie":"\u22b5","rtrif":"\u25b8","rtriltri":"\u29ce","RuleDelayed":"\u29f4","ruluhar":"\u2968","rx":"\u211e","Sacute":"\u015a","sacute":"\u015b","sbquo":"\u201a","scap":"\u2ab8","Scaron":"\u0160","scaron":"\u0161","Sc":"\u2abc","sc":"\u227b","sccue":"\u227d","sce":"\u2ab0","scE":"\u2ab4","Scedil":"\u015e","scedil":"\u015f","Scirc":"\u015c","scirc":"\u015d","scnap":"\u2aba","scnE":"\u2ab6","scnsim":"\u22e9","scpolint":"\u2a13","scsim":"\u227f","Scy":"\u0421","scy":"\u0441","sdotb":"\u22a1","sdot":"\u22c5","sdote":"\u2a66","searhk":"\u2925","searr":"\u2198","seArr":"\u21d8","searrow":"\u2198","sect":"\xa7","semi":";","seswar":"\u2929","setminus":"\u2216","setmn":"\u2216","sext":"\u2736","Sfr":"\ud835\udd16","sfr":"\ud835\udd30","sfrown":"\u2322","sharp":"\u266f","SHCHcy":"\u0429","shchcy":"\u0449","SHcy":"\u0428","shcy":"\u0448","ShortDownArrow":"\u2193","ShortLeftArrow":"\u2190","shortmid":"\u2223","shortparallel":"\u2225","ShortRightArrow":"\u2192","ShortUpArrow":"\u2191","shy":"\xad","Sigma":"\u03a3","sigma":"\u03c3","sigmaf":"\u03c2","sigmav":"\u03c2","sim":"\u223c","simdot":"\u2a6a","sime":"\u2243","simeq":"\u2243","simg":"\u2a9e","simgE":"\u2aa0","siml":"\u2a9d","simlE":"\u2a9f","simne":"\u2246","simplus":"\u2a24","simrarr":"\u2972","slarr":"\u2190","SmallCircle":"\u2218","smallsetminus":"\u2216","smashp":"\u2a33","smeparsl":"\u29e4","smid":"\u2223","smile":"\u2323","smt":"\u2aaa","smte":"\u2aac","smtes":"\u2aac\ufe00","SOFTcy":"\u042c","softcy":"\u044c","solbar":"\u233f","solb":"\u29c4","sol":"/","Sopf":"\ud835\udd4a","sopf":"\ud835\udd64","spades":"\u2660","spadesuit":"\u2660","spar":"\u2225","sqcap":"\u2293","sqcaps":"\u2293\ufe00","sqcup":"\u2294","sqcups":"\u2294\ufe00","Sqrt":"\u221a","sqsub":"\u228f","sqsube":"\u2291","sqsubset":"\u228f","sqsubseteq":"\u2291","sqsup":"\u2290","sqsupe":"\u2292","sqsupset":"\u2290","sqsupseteq":"\u2292","square":"\u25a1","Square":"\u25a1","SquareIntersection":"\u2293","SquareSubset":"\u228f","SquareSubsetEqual":"\u2291","SquareSuperset":"\u2290","SquareSupersetEqual":"\u2292","SquareUnion":"\u2294","squarf":"\u25aa","squ":"\u25a1","squf":"\u25aa","srarr":"\u2192","Sscr":"\ud835\udcae","sscr":"\ud835\udcc8","ssetmn":"\u2216","ssmile":"\u2323","sstarf":"\u22c6","Star":"\u22c6","star":"\u2606","starf":"\u2605","straightepsilon":"\u03f5","straightphi":"\u03d5","strns":"\xaf","sub":"\u2282","Sub":"\u22d0","subdot":"\u2abd","subE":"\u2ac5","sube":"\u2286","subedot":"\u2ac3","submult":"\u2ac1","subnE":"\u2acb","subne":"\u228a","subplus":"\u2abf","subrarr":"\u2979","subset":"\u2282","Subset":"\u22d0","subseteq":"\u2286","subseteqq":"\u2ac5","SubsetEqual":"\u2286","subsetneq":"\u228a","subsetneqq":"\u2acb","subsim":"\u2ac7","subsub":"\u2ad5","subsup":"\u2ad3","succapprox":"\u2ab8","succ":"\u227b","succcurlyeq":"\u227d","Succeeds":"\u227b","SucceedsEqual":"\u2ab0","SucceedsSlantEqual":"\u227d","SucceedsTilde":"\u227f","succeq":"\u2ab0","succnapprox":"\u2aba","succneqq":"\u2ab6","succnsim":"\u22e9","succsim":"\u227f","SuchThat":"\u220b","sum":"\u2211","Sum":"\u2211","sung":"\u266a","sup1":"\xb9","sup2":"\xb2","sup3":"\xb3","sup":"\u2283","Sup":"\u22d1","supdot":"\u2abe","supdsub":"\u2ad8","supE":"\u2ac6","supe":"\u2287","supedot":"\u2ac4","Superset":"\u2283","SupersetEqual":"\u2287","suphsol":"\u27c9","suphsub":"\u2ad7","suplarr":"\u297b","supmult":"\u2ac2","supnE":"\u2acc","supne":"\u228b","supplus":"\u2ac0","supset":"\u2283","Supset":"\u22d1","supseteq":"\u2287","supseteqq":"\u2ac6","supsetneq":"\u228b","supsetneqq":"\u2acc","supsim":"\u2ac8","supsub":"\u2ad4","supsup":"\u2ad6","swarhk":"\u2926","swarr":"\u2199","swArr":"\u21d9","swarrow":"\u2199","swnwar":"\u292a","szlig":"\xdf","Tab":"\\t","target":"\u2316","Tau":"\u03a4","tau":"\u03c4","tbrk":"\u23b4","Tcaron":"\u0164","tcaron":"\u0165","Tcedil":"\u0162","tcedil":"\u0163","Tcy":"\u0422","tcy":"\u0442","tdot":"\u20db","telrec":"\u2315","Tfr":"\ud835\udd17","tfr":"\ud835\udd31","there4":"\u2234","therefore":"\u2234","Therefore":"\u2234","Theta":"\u0398","theta":"\u03b8","thetasym":"\u03d1","thetav":"\u03d1","thickapprox":"\u2248","thicksim":"\u223c","ThickSpace":"\u205f\u200a","ThinSpace":"\u2009","thinsp":"\u2009","thkap":"\u2248","thksim":"\u223c","THORN":"\xde","thorn":"\xfe","tilde":"\u02dc","Tilde":"\u223c","TildeEqual":"\u2243","TildeFullEqual":"\u2245","TildeTilde":"\u2248","timesbar":"\u2a31","timesb":"\u22a0","times":"\xd7","timesd":"\u2a30","tint":"\u222d","toea":"\u2928","topbot":"\u2336","topcir":"\u2af1","top":"\u22a4","Topf":"\ud835\udd4b","topf":"\ud835\udd65","topfork":"\u2ada","tosa":"\u2929","tprime":"\u2034","trade":"\u2122","TRADE":"\u2122","triangle":"\u25b5","triangledown":"\u25bf","triangleleft":"\u25c3","trianglelefteq":"\u22b4","triangleq":"\u225c","triangleright":"\u25b9","trianglerighteq":"\u22b5","tridot":"\u25ec","trie":"\u225c","triminus":"\u2a3a","TripleDot":"\u20db","triplus":"\u2a39","trisb":"\u29cd","tritime":"\u2a3b","trpezium":"\u23e2","Tscr":"\ud835\udcaf","tscr":"\ud835\udcc9","TScy":"\u0426","tscy":"\u0446","TSHcy":"\u040b","tshcy":"\u045b","Tstrok":"\u0166","tstrok":"\u0167","twixt":"\u226c","twoheadleftarrow":"\u219e","twoheadrightarrow":"\u21a0","Uacute":"\xda","uacute":"\xfa","uarr":"\u2191","Uarr":"\u219f","uArr":"\u21d1","Uarrocir":"\u2949","Ubrcy":"\u040e","ubrcy":"\u045e","Ubreve":"\u016c","ubreve":"\u016d","Ucirc":"\xdb","ucirc":"\xfb","Ucy":"\u0423","ucy":"\u0443","udarr":"\u21c5","Udblac":"\u0170","udblac":"\u0171","udhar":"\u296e","ufisht":"\u297e","Ufr":"\ud835\udd18","ufr":"\ud835\udd32","Ugrave":"\xd9","ugrave":"\xf9","uHar":"\u2963","uharl":"\u21bf","uharr":"\u21be","uhblk":"\u2580","ulcorn":"\u231c","ulcorner":"\u231c","ulcrop":"\u230f","ultri":"\u25f8","Umacr":"\u016a","umacr":"\u016b","uml":"\xa8","UnderBar":"_","UnderBrace":"\u23df","UnderBracket":"\u23b5","UnderParenthesis":"\u23dd","Union":"\u22c3","UnionPlus":"\u228e","Uogon":"\u0172","uogon":"\u0173","Uopf":"\ud835\udd4c","uopf":"\ud835\udd66","UpArrowBar":"\u2912","uparrow":"\u2191","UpArrow":"\u2191","Uparrow":"\u21d1","UpArrowDownArrow":"\u21c5","updownarrow":"\u2195","UpDownArrow":"\u2195","Updownarrow":"\u21d5","UpEquilibrium":"\u296e","upharpoonleft":"\u21bf","upharpoonright":"\u21be","uplus":"\u228e","UpperLeftArrow":"\u2196","UpperRightArrow":"\u2197","upsi":"\u03c5","Upsi":"\u03d2","upsih":"\u03d2","Upsilon":"\u03a5","upsilon":"\u03c5","UpTeeArrow":"\u21a5","UpTee":"\u22a5","upuparrows":"\u21c8","urcorn":"\u231d","urcorner":"\u231d","urcrop":"\u230e","Uring":"\u016e","uring":"\u016f","urtri":"\u25f9","Uscr":"\ud835\udcb0","uscr":"\ud835\udcca","utdot":"\u22f0","Utilde":"\u0168","utilde":"\u0169","utri":"\u25b5","utrif":"\u25b4","uuarr":"\u21c8","Uuml":"\xdc","uuml":"\xfc","uwangle":"\u29a7","vangrt":"\u299c","varepsilon":"\u03f5","varkappa":"\u03f0","varnothing":"\u2205","varphi":"\u03d5","varpi":"\u03d6","varpropto":"\u221d","varr":"\u2195","vArr":"\u21d5","varrho":"\u03f1","varsigma":"\u03c2","varsubsetneq":"\u228a\ufe00","varsubsetneqq":"\u2acb\ufe00","varsupsetneq":"\u228b\ufe00","varsupsetneqq":"\u2acc\ufe00","vartheta":"\u03d1","vartriangleleft":"\u22b2","vartriangleright":"\u22b3","vBar":"\u2ae8","Vbar":"\u2aeb","vBarv":"\u2ae9","Vcy":"\u0412","vcy":"\u0432","vdash":"\u22a2","vDash":"\u22a8","Vdash":"\u22a9","VDash":"\u22ab","Vdashl":"\u2ae6","veebar":"\u22bb","vee":"\u2228","Vee":"\u22c1","veeeq":"\u225a","vellip":"\u22ee","verbar":"|","Verbar":"\u2016","vert":"|","Vert":"\u2016","VerticalBar":"\u2223","VerticalLine":"|","VerticalSeparator":"\u2758","VerticalTilde":"\u2240","VeryThinSpace":"\u200a","Vfr":"\ud835\udd19","vfr":"\ud835\udd33","vltri":"\u22b2","vnsub":"\u2282\u20d2","vnsup":"\u2283\u20d2","Vopf":"\ud835\udd4d","vopf":"\ud835\udd67","vprop":"\u221d","vrtri":"\u22b3","Vscr":"\ud835\udcb1","vscr":"\ud835\udccb","vsubnE":"\u2acb\ufe00","vsubne":"\u228a\ufe00","vsupnE":"\u2acc\ufe00","vsupne":"\u228b\ufe00","Vvdash":"\u22aa","vzigzag":"\u299a","Wcirc":"\u0174","wcirc":"\u0175","wedbar":"\u2a5f","wedge":"\u2227","Wedge":"\u22c0","wedgeq":"\u2259","weierp":"\u2118","Wfr":"\ud835\udd1a","wfr":"\ud835\udd34","Wopf":"\ud835\udd4e","wopf":"\ud835\udd68","wp":"\u2118","wr":"\u2240","wreath":"\u2240","Wscr":"\ud835\udcb2","wscr":"\ud835\udccc","xcap":"\u22c2","xcirc":"\u25ef","xcup":"\u22c3","xdtri":"\u25bd","Xfr":"\ud835\udd1b","xfr":"\ud835\udd35","xharr":"\u27f7","xhArr":"\u27fa","Xi":"\u039e","xi":"\u03be","xlarr":"\u27f5","xlArr":"\u27f8","xmap":"\u27fc","xnis":"\u22fb","xodot":"\u2a00","Xopf":"\ud835\udd4f","xopf":"\ud835\udd69","xoplus":"\u2a01","xotime":"\u2a02","xrarr":"\u27f6","xrArr":"\u27f9","Xscr":"\ud835\udcb3","xscr":"\ud835\udccd","xsqcup":"\u2a06","xuplus":"\u2a04","xutri":"\u25b3","xvee":"\u22c1","xwedge":"\u22c0","Yacute":"\xdd","yacute":"\xfd","YAcy":"\u042f","yacy":"\u044f","Ycirc":"\u0176","ycirc":"\u0177","Ycy":"\u042b","ycy":"\u044b","yen":"₫","Yfr":"\ud835\udd1c","yfr":"\ud835\udd36","YIcy":"\u0407","yicy":"\u0457","Yopf":"\ud835\udd50","yopf":"\ud835\udd6a","Yscr":"\ud835\udcb4","yscr":"\ud835\udcce","YUcy":"\u042e","yucy":"\u044e","yuml":"\xff","Yuml":"\u0178","Zacute":"\u0179","zacute":"\u017a","Zcaron":"\u017d","zcaron":"\u017e","Zcy":"\u0417","zcy":"\u0437","Zdot":"\u017b","zdot":"\u017c","zeetrf":"\u2128","ZeroWidthSpace":"\u200b","Zeta":"\u0396","zeta":"\u03b6","zfr":"\ud835\udd37","Zfr":"\u2128","ZHcy":"\u0416","zhcy":"\u0436","zigrarr":"\u21dd","zopf":"\ud835\udd6b","Zopf":"\u2124","Zscr":"\ud835\udcb5","zscr":"\ud835\udccf","zwj":"\u200d","zwnj":"\u200c"}')
+        e.exports = JSON.parse('{"Aacute":"\xc1","aacute":"\xe1","Abreve":"\u0102","abreve":"\u0103","ac":"\u223e","acd":"\u223f","acE":"\u223e\u0333","Acirc":"\xc2","acirc":"\xe2","acute":"\xb4","Acy":"\u0410","acy":"\u0430","AElig":"\xc6","aelig":"\xe6","af":"\u2061","Afr":"\ud835\udd04","afr":"\ud835\udd1e","Agrave":"\xc0","agrave":"\xe0","alefsym":"\u2135","aleph":"\u2135","Alpha":"\u0391","alpha":"\u03b1","Amacr":"\u0100","amacr":"\u0101","amalg":"\u2a3f","amp":"&","AMP":"&","andand":"\u2a55","And":"\u2a53","and":"\u2227","andd":"\u2a5c","andslope":"\u2a58","andv":"\u2a5a","ang":"\u2220","ange":"\u29a4","angle":"\u2220","angmsdaa":"\u29a8","angmsdab":"\u29a9","angmsdac":"\u29aa","angmsdad":"\u29ab","angmsdae":"\u29ac","angmsdaf":"\u29ad","angmsdag":"\u29ae","angmsdah":"\u29af","angmsd":"\u2221","angrt":"\u221f","angrtvb":"\u22be","angrtvbd":"\u299d","angsph":"\u2222","angst":"\xc5","angzarr":"\u237c","Aogon":"\u0104","aogon":"\u0105","Aopf":"\ud835\udd38","aopf":"\ud835\udd52","apacir":"\u2a6f","ap":"\u2248","apE":"\u2a70","ape":"\u224a","apid":"\u224b","apos":"\'","ApplyFunction":"\u2061","approx":"\u2248","approxeq":"\u224a","Aring":"\xc5","aring":"\xe5","Ascr":"\ud835\udc9c","ascr":"\ud835\udcb6","Assign":"\u2254","ast":"*","asymp":"\u2248","asympeq":"\u224d","Atilde":"\xc3","atilde":"\xe3","Auml":"\xc4","auml":"\xe4","awconint":"\u2233","awint":"\u2a11","backcong":"\u224c","backepsilon":"\u03f6","backprime":"\u2035","backsim":"\u223d","backsimeq":"\u22cd","Backslash":"\u2216","Barv":"\u2ae7","barvee":"\u22bd","barwed":"\u2305","Barwed":"\u2306","barwedge":"\u2305","bbrk":"\u23b5","bbrktbrk":"\u23b6","bcong":"\u224c","Bcy":"\u0411","bcy":"\u0431","bdquo":"\u201e","becaus":"\u2235","because":"\u2235","Because":"\u2235","bemptyv":"\u29b0","bepsi":"\u03f6","bernou":"\u212c","Bernoullis":"\u212c","Beta":"\u0392","beta":"\u03b2","beth":"\u2136","between":"\u226c","Bfr":"\ud835\udd05","bfr":"\ud835\udd1f","bigcap":"\u22c2","bigcirc":"\u25ef","bigcup":"\u22c3","bigodot":"\u2a00","bigoplus":"\u2a01","bigotimes":"\u2a02","bigsqcup":"\u2a06","bigstar":"\u2605","bigtriangledown":"\u25bd","bigtriangleup":"\u25b3","biguplus":"\u2a04","bigvee":"\u22c1","bigwedge":"\u22c0","bkarow":"\u290d","blacklozenge":"\u29eb","blacksquare":"\u25aa","blacktriangle":"\u25b4","blacktriangledown":"\u25be","blacktriangleleft":"\u25c2","blacktriangleright":"\u25b8","blank":"\u2423","blk12":"\u2592","blk14":"\u2591","blk34":"\u2593","block":"\u2588","bne":"=\u20e5","bnequiv":"\u2261\u20e5","bNot":"\u2aed","bnot":"\u2310","Bopf":"\ud835\udd39","bopf":"\ud835\udd53","bot":"\u22a5","bottom":"\u22a5","bowtie":"\u22c8","boxbox":"\u29c9","boxdl":"\u2510","boxdL":"\u2555","boxDl":"\u2556","boxDL":"\u2557","boxdr":"\u250c","boxdR":"\u2552","boxDr":"\u2553","boxDR":"\u2554","boxh":"\u2500","boxH":"\u2550","boxhd":"\u252c","boxHd":"\u2564","boxhD":"\u2565","boxHD":"\u2566","boxhu":"\u2534","boxHu":"\u2567","boxhU":"\u2568","boxHU":"\u2569","boxminus":"\u229f","boxplus":"\u229e","boxtimes":"\u22a0","boxul":"\u2518","boxuL":"\u255b","boxUl":"\u255c","boxUL":"\u255d","boxur":"\u2514","boxuR":"\u2558","boxUr":"\u2559","boxUR":"\u255a","boxv":"\u2502","boxV":"\u2551","boxvh":"\u253c","boxvH":"\u256a","boxVh":"\u256b","boxVH":"\u256c","boxvl":"\u2524","boxvL":"\u2561","boxVl":"\u2562","boxVL":"\u2563","boxvr":"\u251c","boxvR":"\u255e","boxVr":"\u255f","boxVR":"\u2560","bprime":"\u2035","breve":"\u02d8","Breve":"\u02d8","brvbar":"\xa6","bscr":"\ud835\udcb7","Bscr":"\u212c","bsemi":"\u204f","bsim":"\u223d","bsime":"\u22cd","bsolb":"\u29c5","bsol":"\\\\","bsolhsub":"\u27c8","bull":"\u2022","bullet":"\u2022","bump":"\u224e","bumpE":"\u2aae","bumpe":"\u224f","Bumpeq":"\u224e","bumpeq":"\u224f","Cacute":"\u0106","cacute":"\u0107","capand":"\u2a44","capbrcup":"\u2a49","capcap":"\u2a4b","cap":"\u2229","Cap":"\u22d2","capcup":"\u2a47","capdot":"\u2a40","CapitalDifferentialD":"\u2145","caps":"\u2229\ufe00","caret":"\u2041","caron":"\u02c7","Cayleys":"\u212d","ccaps":"\u2a4d","Ccaron":"\u010c","ccaron":"\u010d","Ccedil":"\xc7","ccedil":"\xe7","Ccirc":"\u0108","ccirc":"\u0109","Cconint":"\u2230","ccups":"\u2a4c","ccupssm":"\u2a50","Cdot":"\u010a","cdot":"\u010b","cedil":"\xb8","Cedilla":"\xb8","cemptyv":"\u29b2","cent":"\xa2","centerdot":"\xb7","CenterDot":"\xb7","cfr":"\ud835\udd20","Cfr":"\u212d","CHcy":"\u0427","chcy":"\u0447","check":"\u2713","checkmark":"\u2713","Chi":"\u03a7","chi":"\u03c7","circ":"\u02c6","circeq":"\u2257","circlearrowleft":"\u21ba","circlearrowright":"\u21bb","circledast":"\u229b","circledcirc":"\u229a","circleddash":"\u229d","CircleDot":"\u2299","circledR":"\xae","circledS":"\u24c8","CircleMinus":"\u2296","CirclePlus":"\u2295","CircleTimes":"\u2297","cir":"\u25cb","cirE":"\u29c3","cire":"\u2257","cirfnint":"\u2a10","cirmid":"\u2aef","cirscir":"\u29c2","ClockwiseContourIntegral":"\u2232","CloseCurlyDoubleQuote":"\u201d","CloseCurlyQuote":"\u2019","clubs":"\u2663","clubsuit":"\u2663","colon":":","Colon":"\u2237","Colone":"\u2a74","colone":"\u2254","coloneq":"\u2254","comma":",","commat":"@","comp":"\u2201","compfn":"\u2218","complement":"\u2201","complexes":"\u2102","cong":"\u2245","congdot":"\u2a6d","Congruent":"\u2261","conint":"\u222e","Conint":"\u222f","ContourIntegral":"\u222e","copf":"\ud835\udd54","Copf":"\u2102","coprod":"\u2210","Coproduct":"\u2210","copy":"\xa9","COPY":"\xa9","copysr":"\u2117","CounterClockwiseContourIntegral":"\u2233","crarr":"\u21b5","cross":"\u2717","Cross":"\u2a2f","Cscr":"\ud835\udc9e","cscr":"\ud835\udcb8","csub":"\u2acf","csube":"\u2ad1","csup":"\u2ad0","csupe":"\u2ad2","ctdot":"\u22ef","cudarrl":"\u2938","cudarrr":"\u2935","cuepr":"\u22de","cuesc":"\u22df","cularr":"\u21b6","cularrp":"\u293d","cupbrcap":"\u2a48","cupcap":"\u2a46","CupCap":"\u224d","cup":"\u222a","Cup":"\u22d3","cupcup":"\u2a4a","cupdot":"\u228d","cupor":"\u2a45","cups":"\u222a\ufe00","curarr":"\u21b7","curarrm":"\u293c","curlyeqprec":"\u22de","curlyeqsucc":"\u22df","curlyvee":"\u22ce","curlywedge":"\u22cf","curren":"\xa4","curvearrowleft":"\u21b6","curvearrowright":"\u21b7","cuvee":"\u22ce","cuwed":"\u22cf","cwconint":"\u2232","cwint":"\u2231","cylcty":"\u232d","dagger":"\u2020","Dagger":"\u2021","daleth":"\u2138","darr":"\u2193","Darr":"\u21a1","dArr":"\u21d3","dash":"\u2010","Dashv":"\u2ae4","dashv":"\u22a3","dbkarow":"\u290f","dblac":"\u02dd","Dcaron":"\u010e","dcaron":"\u010f","Dcy":"\u0414","dcy":"\u0434","ddagger":"\u2021","ddarr":"\u21ca","DD":"\u2145","dd":"\u2146","DDotrahd":"\u2911","ddotseq":"\u2a77","deg":"\xb0","Del":"\u2207","Delta":"\u0394","delta":"\u03b4","demptyv":"\u29b1","dfisht":"\u297f","Dfr":"\ud835\udd07","dfr":"\ud835\udd21","dHar":"\u2965","dharl":"\u21c3","dharr":"\u21c2","DiacriticalAcute":"\xb4","DiacriticalDot":"\u02d9","DiacriticalDoubleAcute":"\u02dd","DiacriticalGrave":"`","DiacriticalTilde":"\u02dc","diam":"\u22c4","diamond":"\u22c4","Diamond":"\u22c4","diamondsuit":"\u2666","diams":"\u2666","die":"\xa8","DifferentialD":"\u2146","digamma":"\u03dd","disin":"\u22f2","div":"\xf7","divide":"\xf7","divideontimes":"\u22c7","divonx":"\u22c7","DJcy":"\u0402","djcy":"\u0452","dlcorn":"\u231e","dlcrop":"\u230d","dollar":"$","Dopf":"\ud835\udd3b","dopf":"\ud835\udd55","Dot":"\xa8","dot":"\u02d9","DotDot":"\u20dc","doteq":"\u2250","doteqdot":"\u2251","DotEqual":"\u2250","dotminus":"\u2238","dotplus":"\u2214","dotsquare":"\u22a1","doublebarwedge":"\u2306","DoubleContourIntegral":"\u222f","DoubleDot":"\xa8","DoubleDownArrow":"\u21d3","DoubleLeftArrow":"\u21d0","DoubleLeftRightArrow":"\u21d4","DoubleLeftTee":"\u2ae4","DoubleLongLeftArrow":"\u27f8","DoubleLongLeftRightArrow":"\u27fa","DoubleLongRightArrow":"\u27f9","DoubleRightArrow":"\u21d2","DoubleRightTee":"\u22a8","DoubleUpArrow":"\u21d1","DoubleUpDownArrow":"\u21d5","DoubleVerticalBar":"\u2225","DownArrowBar":"\u2913","downarrow":"\u2193","DownArrow":"\u2193","Downarrow":"\u21d3","DownArrowUpArrow":"\u21f5","DownBreve":"\u0311","downdownarrows":"\u21ca","downharpoonleft":"\u21c3","downharpoonright":"\u21c2","DownLeftRightVector":"\u2950","DownLeftTeeVector":"\u295e","DownLeftVectorBar":"\u2956","DownLeftVector":"\u21bd","DownRightTeeVector":"\u295f","DownRightVectorBar":"\u2957","DownRightVector":"\u21c1","DownTeeArrow":"\u21a7","DownTee":"\u22a4","drbkarow":"\u2910","drcorn":"\u231f","drcrop":"\u230c","Dscr":"\ud835\udc9f","dscr":"\ud835\udcb9","DScy":"\u0405","dscy":"\u0455","dsol":"\u29f6","Dstrok":"\u0110","dstrok":"\u0111","dtdot":"\u22f1","dtri":"\u25bf","dtrif":"\u25be","duarr":"\u21f5","duhar":"\u296f","dwangle":"\u29a6","DZcy":"\u040f","dzcy":"\u045f","dzigrarr":"\u27ff","Eacute":"\xc9","eacute":"\xe9","easter":"\u2a6e","Ecaron":"\u011a","ecaron":"\u011b","Ecirc":"\xca","ecirc":"\xea","ecir":"\u2256","ecolon":"\u2255","Ecy":"\u042d","ecy":"\u044d","eDDot":"\u2a77","Edot":"\u0116","edot":"\u0117","eDot":"\u2251","ee":"\u2147","efDot":"\u2252","Efr":"\ud835\udd08","efr":"\ud835\udd22","eg":"\u2a9a","Egrave":"\xc8","egrave":"\xe8","egs":"\u2a96","egsdot":"\u2a98","el":"\u2a99","Element":"\u2208","elinters":"\u23e7","ell":"\u2113","els":"\u2a95","elsdot":"\u2a97","Emacr":"\u0112","emacr":"\u0113","empty":"\u2205","emptyset":"\u2205","EmptySmallSquare":"\u25fb","emptyv":"\u2205","EmptyVerySmallSquare":"\u25ab","emsp13":"\u2004","emsp14":"\u2005","emsp":"\u2003","ENG":"\u014a","eng":"\u014b","ensp":"\u2002","Eogon":"\u0118","eogon":"\u0119","Eopf":"\ud835\udd3c","eopf":"\ud835\udd56","epar":"\u22d5","eparsl":"\u29e3","eplus":"\u2a71","epsi":"\u03b5","Epsilon":"\u0395","epsilon":"\u03b5","epsiv":"\u03f5","eqcirc":"\u2256","eqcolon":"\u2255","eqsim":"\u2242","eqslantgtr":"\u2a96","eqslantless":"\u2a95","Equal":"\u2a75","equals":"=","EqualTilde":"\u2242","equest":"\u225f","Equilibrium":"\u21cc","equiv":"\u2261","equivDD":"\u2a78","eqvparsl":"\u29e5","erarr":"\u2971","erDot":"\u2253","escr":"\u212f","Escr":"\u2130","esdot":"\u2250","Esim":"\u2a73","esim":"\u2242","Eta":"\u0397","eta":"\u03b7","ETH":"\xd0","eth":"\xf0","Euml":"\xcb","euml":"\xeb","euro":"\u20ac","excl":"!","exist":"\u2203","Exists":"\u2203","expectation":"\u2130","exponentiale":"\u2147","ExponentialE":"\u2147","fallingdotseq":"\u2252","Fcy":"\u0424","fcy":"\u0444","female":"\u2640","ffilig":"\ufb03","fflig":"\ufb00","ffllig":"\ufb04","Ffr":"\ud835\udd09","ffr":"\ud835\udd23","filig":"\ufb01","FilledSmallSquare":"\u25fc","FilledVerySmallSquare":"\u25aa","fjlig":"fj","flat":"\u266d","fllig":"\ufb02","fltns":"\u25b1","fnof":"\u0192","Fopf":"\ud835\udd3d","fopf":"\ud835\udd57","forall":"\u2200","ForAll":"\u2200","fork":"\u22d4","forkv":"\u2ad9","Fouriertrf":"\u2131","fpartint":"\u2a0d","frac12":"\xbd","frac13":"\u2153","frac14":"\xbc","frac15":"\u2155","frac16":"\u2159","frac18":"\u215b","frac23":"\u2154","frac25":"\u2156","frac34":"\xbe","frac35":"\u2157","frac38":"\u215c","frac45":"\u2158","frac56":"\u215a","frac58":"\u215d","frac78":"\u215e","frasl":"\u2044","frown":"\u2322","fscr":"\ud835\udcbb","Fscr":"\u2131","gacute":"\u01f5","Gamma":"\u0393","gamma":"\u03b3","Gammad":"\u03dc","gammad":"\u03dd","gap":"\u2a86","Gbreve":"\u011e","gbreve":"\u011f","Gcedil":"\u0122","Gcirc":"\u011c","gcirc":"\u011d","Gcy":"\u0413","gcy":"\u0433","Gdot":"\u0120","gdot":"\u0121","ge":"\u2265","gE":"\u2267","gEl":"\u2a8c","gel":"\u22db","geq":"\u2265","geqq":"\u2267","geqslant":"\u2a7e","gescc":"\u2aa9","ges":"\u2a7e","gesdot":"\u2a80","gesdoto":"\u2a82","gesdotol":"\u2a84","gesl":"\u22db\ufe00","gesles":"\u2a94","Gfr":"\ud835\udd0a","gfr":"\ud835\udd24","gg":"\u226b","Gg":"\u22d9","ggg":"\u22d9","gimel":"\u2137","GJcy":"\u0403","gjcy":"\u0453","gla":"\u2aa5","gl":"\u2277","glE":"\u2a92","glj":"\u2aa4","gnap":"\u2a8a","gnapprox":"\u2a8a","gne":"\u2a88","gnE":"\u2269","gneq":"\u2a88","gneqq":"\u2269","gnsim":"\u22e7","Gopf":"\ud835\udd3e","gopf":"\ud835\udd58","grave":"`","GreaterEqual":"\u2265","GreaterEqualLess":"\u22db","GreaterFullEqual":"\u2267","GreaterGreater":"\u2aa2","GreaterLess":"\u2277","GreaterSlantEqual":"\u2a7e","GreaterTilde":"\u2273","Gscr":"\ud835\udca2","gscr":"\u210a","gsim":"\u2273","gsime":"\u2a8e","gsiml":"\u2a90","gtcc":"\u2aa7","gtcir":"\u2a7a","gt":">","GT":">","Gt":"\u226b","gtdot":"\u22d7","gtlPar":"\u2995","gtquest":"\u2a7c","gtrapprox":"\u2a86","gtrarr":"\u2978","gtrdot":"\u22d7","gtreqless":"\u22db","gtreqqless":"\u2a8c","gtrless":"\u2277","gtrsim":"\u2273","gvertneqq":"\u2269\ufe00","gvnE":"\u2269\ufe00","Hacek":"\u02c7","hairsp":"\u200a","half":"\xbd","hamilt":"\u210b","HARDcy":"\u042a","hardcy":"\u044a","harrcir":"\u2948","harr":"\u2194","hArr":"\u21d4","harrw":"\u21ad","Hat":"^","hbar":"\u210f","Hcirc":"\u0124","hcirc":"\u0125","hearts":"\u2665","heartsuit":"\u2665","hellip":"\u2026","hercon":"\u22b9","hfr":"\ud835\udd25","Hfr":"\u210c","HilbertSpace":"\u210b","hksearow":"\u2925","hkswarow":"\u2926","hoarr":"\u21ff","homtht":"\u223b","hookleftarrow":"\u21a9","hookrightarrow":"\u21aa","hopf":"\ud835\udd59","Hopf":"\u210d","horbar":"\u2015","HorizontalLine":"\u2500","hscr":"\ud835\udcbd","Hscr":"\u210b","hslash":"\u210f","Hstrok":"\u0126","hstrok":"\u0127","HumpDownHump":"\u224e","HumpEqual":"\u224f","hybull":"\u2043","hyphen":"\u2010","Iacute":"\xcd","iacute":"\xed","ic":"\u2063","Icirc":"\xce","icirc":"\xee","Icy":"\u0418","icy":"\u0438","Idot":"\u0130","IEcy":"\u0415","iecy":"\u0435","iexcl":"\xa1","iff":"\u21d4","ifr":"\ud835\udd26","Ifr":"\u2111","Igrave":"\xcc","igrave":"\xec","ii":"\u2148","iiiint":"\u2a0c","iiint":"\u222d","iinfin":"\u29dc","iiota":"\u2129","IJlig":"\u0132","ijlig":"\u0133","Imacr":"\u012a","imacr":"\u012b","image":"\u2111","ImaginaryI":"\u2148","imagline":"\u2110","imagpart":"\u2111","imath":"\u0131","Im":"\u2111","imof":"\u22b7","imped":"\u01b5","Implies":"\u21d2","incare":"\u2105","in":"\u2208","infin":"\u221e","infintie":"\u29dd","inodot":"\u0131","intcal":"\u22ba","int":"\u222b","Int":"\u222c","integers":"\u2124","Integral":"\u222b","intercal":"\u22ba","Intersection":"\u22c2","intlarhk":"\u2a17","intprod":"\u2a3c","InvisibleComma":"\u2063","InvisibleTimes":"\u2062","IOcy":"\u0401","iocy":"\u0451","Iogon":"\u012e","iogon":"\u012f","Iopf":"\ud835\udd40","iopf":"\ud835\udd5a","Iota":"\u0399","iota":"\u03b9","iprod":"\u2a3c","iquest":"\xbf","iscr":"\ud835\udcbe","Iscr":"\u2110","isin":"\u2208","isindot":"\u22f5","isinE":"\u22f9","isins":"\u22f4","isinsv":"\u22f3","isinv":"\u2208","it":"\u2062","Itilde":"\u0128","itilde":"\u0129","Iukcy":"\u0406","iukcy":"\u0456","Iuml":"\xcf","iuml":"\xef","Jcirc":"\u0134","jcirc":"\u0135","Jcy":"\u0419","jcy":"\u0439","Jfr":"\ud835\udd0d","jfr":"\ud835\udd27","jmath":"\u0237","Jopf":"\ud835\udd41","jopf":"\ud835\udd5b","Jscr":"\ud835\udca5","jscr":"\ud835\udcbf","Jsercy":"\u0408","jsercy":"\u0458","Jukcy":"\u0404","jukcy":"\u0454","Kappa":"\u039a","kappa":"\u03ba","kappav":"\u03f0","Kcedil":"\u0136","kcedil":"\u0137","Kcy":"\u041a","kcy":"\u043a","Kfr":"\ud835\udd0e","kfr":"\ud835\udd28","kgreen":"\u0138","KHcy":"\u0425","khcy":"\u0445","KJcy":"\u040c","kjcy":"\u045c","Kopf":"\ud835\udd42","kopf":"\ud835\udd5c","Kscr":"\ud835\udca6","kscr":"\ud835\udcc0","lAarr":"\u21da","Lacute":"\u0139","lacute":"\u013a","laemptyv":"\u29b4","lagran":"\u2112","Lambda":"\u039b","lambda":"\u03bb","lang":"\u27e8","Lang":"\u27ea","langd":"\u2991","langle":"\u27e8","lap":"\u2a85","Laplacetrf":"\u2112","laquo":"\xab","larrb":"\u21e4","larrbfs":"\u291f","larr":"\u2190","Larr":"\u219e","lArr":"\u21d0","larrfs":"\u291d","larrhk":"\u21a9","larrlp":"\u21ab","larrpl":"\u2939","larrsim":"\u2973","larrtl":"\u21a2","latail":"\u2919","lAtail":"\u291b","lat":"\u2aab","late":"\u2aad","lates":"\u2aad\ufe00","lbarr":"\u290c","lBarr":"\u290e","lbbrk":"\u2772","lbrace":"{","lbrack":"[","lbrke":"\u298b","lbrksld":"\u298f","lbrkslu":"\u298d","Lcaron":"\u013d","lcaron":"\u013e","Lcedil":"\u013b","lcedil":"\u013c","lceil":"\u2308","lcub":"{","Lcy":"\u041b","lcy":"\u043b","ldca":"\u2936","ldquo":"\u201c","ldquor":"\u201e","ldrdhar":"\u2967","ldrushar":"\u294b","ldsh":"\u21b2","le":"\u2264","lE":"\u2266","LeftAngleBracket":"\u27e8","LeftArrowBar":"\u21e4","leftarrow":"\u2190","LeftArrow":"\u2190","Leftarrow":"\u21d0","LeftArrowRightArrow":"\u21c6","leftarrowtail":"\u21a2","LeftCeiling":"\u2308","LeftDoubleBracket":"\u27e6","LeftDownTeeVector":"\u2961","LeftDownVectorBar":"\u2959","LeftDownVector":"\u21c3","LeftFloor":"\u230a","leftharpoondown":"\u21bd","leftharpoonup":"\u21bc","leftleftarrows":"\u21c7","leftrightarrow":"\u2194","LeftRightArrow":"\u2194","Leftrightarrow":"\u21d4","leftrightarrows":"\u21c6","leftrightharpoons":"\u21cb","leftrightsquigarrow":"\u21ad","LeftRightVector":"\u294e","LeftTeeArrow":"\u21a4","LeftTee":"\u22a3","LeftTeeVector":"\u295a","leftthreetimes":"\u22cb","LeftTriangleBar":"\u29cf","LeftTriangle":"\u22b2","LeftTriangleEqual":"\u22b4","LeftUpDownVector":"\u2951","LeftUpTeeVector":"\u2960","LeftUpVectorBar":"\u2958","LeftUpVector":"\u21bf","LeftVectorBar":"\u2952","LeftVector":"\u21bc","lEg":"\u2a8b","leg":"\u22da","leq":"\u2264","leqq":"\u2266","leqslant":"\u2a7d","lescc":"\u2aa8","les":"\u2a7d","lesdot":"\u2a7f","lesdoto":"\u2a81","lesdotor":"\u2a83","lesg":"\u22da\ufe00","lesges":"\u2a93","lessapprox":"\u2a85","lessdot":"\u22d6","lesseqgtr":"\u22da","lesseqqgtr":"\u2a8b","LessEqualGreater":"\u22da","LessFullEqual":"\u2266","LessGreater":"\u2276","lessgtr":"\u2276","LessLess":"\u2aa1","lesssim":"\u2272","LessSlantEqual":"\u2a7d","LessTilde":"\u2272","lfisht":"\u297c","lfloor":"\u230a","Lfr":"\ud835\udd0f","lfr":"\ud835\udd29","lg":"\u2276","lgE":"\u2a91","lHar":"\u2962","lhard":"\u21bd","lharu":"\u21bc","lharul":"\u296a","lhblk":"\u2584","LJcy":"\u0409","ljcy":"\u0459","llarr":"\u21c7","ll":"\u226a","Ll":"\u22d8","llcorner":"\u231e","Lleftarrow":"\u21da","llhard":"\u296b","lltri":"\u25fa","Lmidot":"\u013f","lmidot":"\u0140","lmoustache":"\u23b0","lmoust":"\u23b0","lnap":"\u2a89","lnapprox":"\u2a89","lne":"\u2a87","lnE":"\u2268","lneq":"\u2a87","lneqq":"\u2268","lnsim":"\u22e6","loang":"\u27ec","loarr":"\u21fd","lobrk":"\u27e6","longleftarrow":"\u27f5","LongLeftArrow":"\u27f5","Longleftarrow":"\u27f8","longleftrightarrow":"\u27f7","LongLeftRightArrow":"\u27f7","Longleftrightarrow":"\u27fa","longmapsto":"\u27fc","longrightarrow":"\u27f6","LongRightArrow":"\u27f6","Longrightarrow":"\u27f9","looparrowleft":"\u21ab","looparrowright":"\u21ac","lopar":"\u2985","Lopf":"\ud835\udd43","lopf":"\ud835\udd5d","loplus":"\u2a2d","lotimes":"\u2a34","lowast":"\u2217","lowbar":"_","LowerLeftArrow":"\u2199","LowerRightArrow":"\u2198","loz":"\u25ca","lozenge":"\u25ca","lozf":"\u29eb","lpar":"(","lparlt":"\u2993","lrarr":"\u21c6","lrcorner":"\u231f","lrhar":"\u21cb","lrhard":"\u296d","lrm":"\u200e","lrtri":"\u22bf","lsaquo":"\u2039","lscr":"\ud835\udcc1","Lscr":"\u2112","lsh":"\u21b0","Lsh":"\u21b0","lsim":"\u2272","lsime":"\u2a8d","lsimg":"\u2a8f","lsqb":"[","lsquo":"\u2018","lsquor":"\u201a","Lstrok":"\u0141","lstrok":"\u0142","ltcc":"\u2aa6","ltcir":"\u2a79","lt":"<","LT":"<","Lt":"\u226a","ltdot":"\u22d6","lthree":"\u22cb","ltimes":"\u22c9","ltlarr":"\u2976","ltquest":"\u2a7b","ltri":"\u25c3","ltrie":"\u22b4","ltrif":"\u25c2","ltrPar":"\u2996","lurdshar":"\u294a","luruhar":"\u2966","lvertneqq":"\u2268\ufe00","lvnE":"\u2268\ufe00","macr":"\xaf","male":"\u2642","malt":"\u2720","maltese":"\u2720","Map":"\u2905","map":"\u21a6","mapsto":"\u21a6","mapstodown":"\u21a7","mapstoleft":"\u21a4","mapstoup":"\u21a5","marker":"\u25ae","mcomma":"\u2a29","Mcy":"\u041c","mcy":"\u043c","mdash":"\u2014","mDDot":"\u223a","measuredangle":"\u2221","MediumSpace":"\u205f","Mellintrf":"\u2133","Mfr":"\ud835\udd10","mfr":"\ud835\udd2a","mho":"\u2127","micro":"\xb5","midast":"*","midcir":"\u2af0","mid":"\u2223","middot":"\xb7","minusb":"\u229f","minus":"\u2212","minusd":"\u2238","minusdu":"\u2a2a","MinusPlus":"\u2213","mlcp":"\u2adb","mldr":"\u2026","mnplus":"\u2213","models":"\u22a7","Mopf":"\ud835\udd44","mopf":"\ud835\udd5e","mp":"\u2213","mscr":"\ud835\udcc2","Mscr":"\u2133","mstpos":"\u223e","Mu":"\u039c","mu":"\u03bc","multimap":"\u22b8","mumap":"\u22b8","nabla":"\u2207","Nacute":"\u0143","nacute":"\u0144","nang":"\u2220\u20d2","nap":"\u2249","napE":"\u2a70\u0338","napid":"\u224b\u0338","napos":"\u0149","napprox":"\u2249","natural":"\u266e","naturals":"\u2115","natur":"\u266e","nbsp":"\xa0","nbump":"\u224e\u0338","nbumpe":"\u224f\u0338","ncap":"\u2a43","Ncaron":"\u0147","ncaron":"\u0148","Ncedil":"\u0145","ncedil":"\u0146","ncong":"\u2247","ncongdot":"\u2a6d\u0338","ncup":"\u2a42","Ncy":"\u041d","ncy":"\u043d","ndash":"\u2013","nearhk":"\u2924","nearr":"\u2197","neArr":"\u21d7","nearrow":"\u2197","ne":"\u2260","nedot":"\u2250\u0338","NegativeMediumSpace":"\u200b","NegativeThickSpace":"\u200b","NegativeThinSpace":"\u200b","NegativeVeryThinSpace":"\u200b","nequiv":"\u2262","nesear":"\u2928","nesim":"\u2242\u0338","NestedGreaterGreater":"\u226b","NestedLessLess":"\u226a","NewLine":"\\n","nexist":"\u2204","nexists":"\u2204","Nfr":"\ud835\udd11","nfr":"\ud835\udd2b","ngE":"\u2267\u0338","nge":"\u2271","ngeq":"\u2271","ngeqq":"\u2267\u0338","ngeqslant":"\u2a7e\u0338","nges":"\u2a7e\u0338","nGg":"\u22d9\u0338","ngsim":"\u2275","nGt":"\u226b\u20d2","ngt":"\u226f","ngtr":"\u226f","nGtv":"\u226b\u0338","nharr":"\u21ae","nhArr":"\u21ce","nhpar":"\u2af2","ni":"\u220b","nis":"\u22fc","nisd":"\u22fa","niv":"\u220b","NJcy":"\u040a","njcy":"\u045a","nlarr":"\u219a","nlArr":"\u21cd","nldr":"\u2025","nlE":"\u2266\u0338","nle":"\u2270","nleftarrow":"\u219a","nLeftarrow":"\u21cd","nleftrightarrow":"\u21ae","nLeftrightarrow":"\u21ce","nleq":"\u2270","nleqq":"\u2266\u0338","nleqslant":"\u2a7d\u0338","nles":"\u2a7d\u0338","nless":"\u226e","nLl":"\u22d8\u0338","nlsim":"\u2274","nLt":"\u226a\u20d2","nlt":"\u226e","nltri":"\u22ea","nltrie":"\u22ec","nLtv":"\u226a\u0338","nmid":"\u2224","NoBreak":"\u2060","NonBreakingSpace":"\xa0","nopf":"\ud835\udd5f","Nopf":"\u2115","Not":"\u2aec","not":"\xac","NotCongruent":"\u2262","NotCupCap":"\u226d","NotDoubleVerticalBar":"\u2226","NotElement":"\u2209","NotEqual":"\u2260","NotEqualTilde":"\u2242\u0338","NotExists":"\u2204","NotGreater":"\u226f","NotGreaterEqual":"\u2271","NotGreaterFullEqual":"\u2267\u0338","NotGreaterGreater":"\u226b\u0338","NotGreaterLess":"\u2279","NotGreaterSlantEqual":"\u2a7e\u0338","NotGreaterTilde":"\u2275","NotHumpDownHump":"\u224e\u0338","NotHumpEqual":"\u224f\u0338","notin":"\u2209","notindot":"\u22f5\u0338","notinE":"\u22f9\u0338","notinva":"\u2209","notinvb":"\u22f7","notinvc":"\u22f6","NotLeftTriangleBar":"\u29cf\u0338","NotLeftTriangle":"\u22ea","NotLeftTriangleEqual":"\u22ec","NotLess":"\u226e","NotLessEqual":"\u2270","NotLessGreater":"\u2278","NotLessLess":"\u226a\u0338","NotLessSlantEqual":"\u2a7d\u0338","NotLessTilde":"\u2274","NotNestedGreaterGreater":"\u2aa2\u0338","NotNestedLessLess":"\u2aa1\u0338","notni":"\u220c","notniva":"\u220c","notnivb":"\u22fe","notnivc":"\u22fd","NotPrecedes":"\u2280","NotPrecedesEqual":"\u2aaf\u0338","NotPrecedesSlantEqual":"\u22e0","NotReverseElement":"\u220c","NotRightTriangleBar":"\u29d0\u0338","NotRightTriangle":"\u22eb","NotRightTriangleEqual":"\u22ed","NotSquareSubset":"\u228f\u0338","NotSquareSubsetEqual":"\u22e2","NotSquareSuperset":"\u2290\u0338","NotSquareSupersetEqual":"\u22e3","NotSubset":"\u2282\u20d2","NotSubsetEqual":"\u2288","NotSucceeds":"\u2281","NotSucceedsEqual":"\u2ab0\u0338","NotSucceedsSlantEqual":"\u22e1","NotSucceedsTilde":"\u227f\u0338","NotSuperset":"\u2283\u20d2","NotSupersetEqual":"\u2289","NotTilde":"\u2241","NotTildeEqual":"\u2244","NotTildeFullEqual":"\u2247","NotTildeTilde":"\u2249","NotVerticalBar":"\u2224","nparallel":"\u2226","npar":"\u2226","nparsl":"\u2afd\u20e5","npart":"\u2202\u0338","npolint":"\u2a14","npr":"\u2280","nprcue":"\u22e0","nprec":"\u2280","npreceq":"\u2aaf\u0338","npre":"\u2aaf\u0338","nrarrc":"\u2933\u0338","nrarr":"\u219b","nrArr":"\u21cf","nrarrw":"\u219d\u0338","nrightarrow":"\u219b","nRightarrow":"\u21cf","nrtri":"\u22eb","nrtrie":"\u22ed","nsc":"\u2281","nsccue":"\u22e1","nsce":"\u2ab0\u0338","Nscr":"\ud835\udca9","nscr":"\ud835\udcc3","nshortmid":"\u2224","nshortparallel":"\u2226","nsim":"\u2241","nsime":"\u2244","nsimeq":"\u2244","nsmid":"\u2224","nspar":"\u2226","nsqsube":"\u22e2","nsqsupe":"\u22e3","nsub":"\u2284","nsubE":"\u2ac5\u0338","nsube":"\u2288","nsubset":"\u2282\u20d2","nsubseteq":"\u2288","nsubseteqq":"\u2ac5\u0338","nsucc":"\u2281","nsucceq":"\u2ab0\u0338","nsup":"\u2285","nsupE":"\u2ac6\u0338","nsupe":"\u2289","nsupset":"\u2283\u20d2","nsupseteq":"\u2289","nsupseteqq":"\u2ac6\u0338","ntgl":"\u2279","Ntilde":"\xd1","ntilde":"\xf1","ntlg":"\u2278","ntriangleleft":"\u22ea","ntrianglelefteq":"\u22ec","ntriangleright":"\u22eb","ntrianglerighteq":"\u22ed","Nu":"\u039d","nu":"\u03bd","num":"#","numero":"\u2116","numsp":"\u2007","nvap":"\u224d\u20d2","nvdash":"\u22ac","nvDash":"\u22ad","nVdash":"\u22ae","nVDash":"\u22af","nvge":"\u2265\u20d2","nvgt":">\u20d2","nvHarr":"\u2904","nvinfin":"\u29de","nvlArr":"\u2902","nvle":"\u2264\u20d2","nvlt":"<\u20d2","nvltrie":"\u22b4\u20d2","nvrArr":"\u2903","nvrtrie":"\u22b5\u20d2","nvsim":"\u223c\u20d2","nwarhk":"\u2923","nwarr":"\u2196","nwArr":"\u21d6","nwarrow":"\u2196","nwnear":"\u2927","Oacute":"\xd3","oacute":"\xf3","oast":"\u229b","Ocirc":"\xd4","ocirc":"\xf4","ocir":"\u229a","Ocy":"\u041e","ocy":"\u043e","odash":"\u229d","Odblac":"\u0150","odblac":"\u0151","odiv":"\u2a38","odot":"\u2299","odsold":"\u29bc","OElig":"\u0152","oelig":"\u0153","ofcir":"\u29bf","Ofr":"\ud835\udd12","ofr":"\ud835\udd2c","ogon":"\u02db","Ograve":"\xd2","ograve":"\xf2","ogt":"\u29c1","ohbar":"\u29b5","ohm":"\u03a9","oint":"\u222e","olarr":"\u21ba","olcir":"\u29be","olcross":"\u29bb","oline":"\u203e","olt":"\u29c0","Omacr":"\u014c","omacr":"\u014d","Omega":"\u03a9","omega":"\u03c9","Omicron":"\u039f","omicron":"\u03bf","omid":"\u29b6","ominus":"\u2296","Oopf":"\ud835\udd46","oopf":"\ud835\udd60","opar":"\u29b7","OpenCurlyDoubleQuote":"\u201c","OpenCurlyQuote":"\u2018","operp":"\u29b9","oplus":"\u2295","orarr":"\u21bb","Or":"\u2a54","or":"\u2228","ord":"\u2a5d","order":"\u2134","orderof":"\u2134","ordf":"\xaa","ordm":"\xba","origof":"\u22b6","oror":"\u2a56","orslope":"\u2a57","orv":"\u2a5b","oS":"\u24c8","Oscr":"\ud835\udcaa","oscr":"\u2134","Oslash":"\xd8","oslash":"\xf8","osol":"\u2298","Otilde":"\xd5","otilde":"\xf5","otimesas":"\u2a36","Otimes":"\u2a37","otimes":"\u2297","Ouml":"\xd6","ouml":"\xf6","ovbar":"\u233d","OverBar":"\u203e","OverBrace":"\u23de","OverBracket":"\u23b4","OverParenthesis":"\u23dc","para":"\xb6","parallel":"\u2225","par":"\u2225","parsim":"\u2af3","parsl":"\u2afd","part":"\u2202","PartialD":"\u2202","Pcy":"\u041f","pcy":"\u043f","percnt":"%","period":".","permil":"\u2030","perp":"\u22a5","pertenk":"\u2031","Pfr":"\ud835\udd13","pfr":"\ud835\udd2d","Phi":"\u03a6","phi":"\u03c6","phiv":"\u03d5","phmmat":"\u2133","phone":"\u260e","Pi":"\u03a0","pi":"\u03c0","pitchfork":"\u22d4","piv":"\u03d6","planck":"\u210f","planckh":"\u210e","plankv":"\u210f","plusacir":"\u2a23","plusb":"\u229e","pluscir":"\u2a22","plus":"+","plusdo":"\u2214","plusdu":"\u2a25","pluse":"\u2a72","PlusMinus":"\xb1","plusmn":"\xb1","plussim":"\u2a26","plustwo":"\u2a27","pm":"\xb1","Poincareplane":"\u210c","pointint":"\u2a15","popf":"\ud835\udd61","Popf":"\u2119","pound":"\xa3","prap":"\u2ab7","Pr":"\u2abb","pr":"\u227a","prcue":"\u227c","precapprox":"\u2ab7","prec":"\u227a","preccurlyeq":"\u227c","Precedes":"\u227a","PrecedesEqual":"\u2aaf","PrecedesSlantEqual":"\u227c","PrecedesTilde":"\u227e","preceq":"\u2aaf","precnapprox":"\u2ab9","precneqq":"\u2ab5","precnsim":"\u22e8","pre":"\u2aaf","prE":"\u2ab3","precsim":"\u227e","prime":"\u2032","Prime":"\u2033","primes":"\u2119","prnap":"\u2ab9","prnE":"\u2ab5","prnsim":"\u22e8","prod":"\u220f","Product":"\u220f","profalar":"\u232e","profline":"\u2312","profsurf":"\u2313","prop":"\u221d","Proportional":"\u221d","Proportion":"\u2237","propto":"\u221d","prsim":"\u227e","prurel":"\u22b0","Pscr":"\ud835\udcab","pscr":"\ud835\udcc5","Psi":"\u03a8","psi":"\u03c8","puncsp":"\u2008","Qfr":"\ud835\udd14","qfr":"\ud835\udd2e","qint":"\u2a0c","qopf":"\ud835\udd62","Qopf":"\u211a","qprime":"\u2057","Qscr":"\ud835\udcac","qscr":"\ud835\udcc6","quaternions":"\u210d","quatint":"\u2a16","quest":"?","questeq":"\u225f","quot":"\\"","QUOT":"\\"","rAarr":"\u21db","race":"\u223d\u0331","Racute":"\u0154","racute":"\u0155","radic":"\u221a","raemptyv":"\u29b3","rang":"\u27e9","Rang":"\u27eb","rangd":"\u2992","range":"\u29a5","rangle":"\u27e9","raquo":"\xbb","rarrap":"\u2975","rarrb":"\u21e5","rarrbfs":"\u2920","rarrc":"\u2933","rarr":"\u2192","Rarr":"\u21a0","rArr":"\u21d2","rarrfs":"\u291e","rarrhk":"\u21aa","rarrlp":"\u21ac","rarrpl":"\u2945","rarrsim":"\u2974","Rarrtl":"\u2916","rarrtl":"\u21a3","rarrw":"\u219d","ratail":"\u291a","rAtail":"\u291c","ratio":"\u2236","rationals":"\u211a","rbarr":"\u290d","rBarr":"\u290f","RBarr":"\u2910","rbbrk":"\u2773","rbrace":"}","rbrack":"]","rbrke":"\u298c","rbrksld":"\u298e","rbrkslu":"\u2990","Rcaron":"\u0158","rcaron":"\u0159","Rcedil":"\u0156","rcedil":"\u0157","rceil":"\u2309","rcub":"}","Rcy":"\u0420","rcy":"\u0440","rdca":"\u2937","rdldhar":"\u2969","rdquo":"\u201d","rdquor":"\u201d","rdsh":"\u21b3","real":"\u211c","realine":"\u211b","realpart":"\u211c","reals":"\u211d","Re":"\u211c","rect":"\u25ad","reg":"\xae","REG":"\xae","ReverseElement":"\u220b","ReverseEquilibrium":"\u21cb","ReverseUpEquilibrium":"\u296f","rfisht":"\u297d","rfloor":"\u230b","rfr":"\ud835\udd2f","Rfr":"\u211c","rHar":"\u2964","rhard":"\u21c1","rharu":"\u21c0","rharul":"\u296c","Rho":"\u03a1","rho":"\u03c1","rhov":"\u03f1","RightAngleBracket":"\u27e9","RightArrowBar":"\u21e5","rightarrow":"\u2192","RightArrow":"\u2192","Rightarrow":"\u21d2","RightArrowLeftArrow":"\u21c4","rightarrowtail":"\u21a3","RightCeiling":"\u2309","RightDoubleBracket":"\u27e7","RightDownTeeVector":"\u295d","RightDownVectorBar":"\u2955","RightDownVector":"\u21c2","RightFloor":"\u230b","rightharpoondown":"\u21c1","rightharpoonup":"\u21c0","rightleftarrows":"\u21c4","rightleftharpoons":"\u21cc","rightrightarrows":"\u21c9","rightsquigarrow":"\u219d","RightTeeArrow":"\u21a6","RightTee":"\u22a2","RightTeeVector":"\u295b","rightthreetimes":"\u22cc","RightTriangleBar":"\u29d0","RightTriangle":"\u22b3","RightTriangleEqual":"\u22b5","RightUpDownVector":"\u294f","RightUpTeeVector":"\u295c","RightUpVectorBar":"\u2954","RightUpVector":"\u21be","RightVectorBar":"\u2953","RightVector":"\u21c0","ring":"\u02da","risingdotseq":"\u2253","rlarr":"\u21c4","rlhar":"\u21cc","rlm":"\u200f","rmoustache":"\u23b1","rmoust":"\u23b1","rnmid":"\u2aee","roang":"\u27ed","roarr":"\u21fe","robrk":"\u27e7","ropar":"\u2986","ropf":"\ud835\udd63","Ropf":"\u211d","roplus":"\u2a2e","rotimes":"\u2a35","RoundImplies":"\u2970","rpar":")","rpargt":"\u2994","rppolint":"\u2a12","rrarr":"\u21c9","Rrightarrow":"\u21db","rsaquo":"\u203a","rscr":"\ud835\udcc7","Rscr":"\u211b","rsh":"\u21b1","Rsh":"\u21b1","rsqb":"]","rsquo":"\u2019","rsquor":"\u2019","rthree":"\u22cc","rtimes":"\u22ca","rtri":"\u25b9","rtrie":"\u22b5","rtrif":"\u25b8","rtriltri":"\u29ce","RuleDelayed":"\u29f4","ruluhar":"\u2968","rx":"\u211e","Sacute":"\u015a","sacute":"\u015b","sbquo":"\u201a","scap":"\u2ab8","Scaron":"\u0160","scaron":"\u0161","Sc":"\u2abc","sc":"\u227b","sccue":"\u227d","sce":"\u2ab0","scE":"\u2ab4","Scedil":"\u015e","scedil":"\u015f","Scirc":"\u015c","scirc":"\u015d","scnap":"\u2aba","scnE":"\u2ab6","scnsim":"\u22e9","scpolint":"\u2a13","scsim":"\u227f","Scy":"\u0421","scy":"\u0441","sdotb":"\u22a1","sdot":"\u22c5","sdote":"\u2a66","searhk":"\u2925","searr":"\u2198","seArr":"\u21d8","searrow":"\u2198","sect":"\xa7","semi":";","seswar":"\u2929","setminus":"\u2216","setmn":"\u2216","sext":"\u2736","Sfr":"\ud835\udd16","sfr":"\ud835\udd30","sfrown":"\u2322","sharp":"\u266f","SHCHcy":"\u0429","shchcy":"\u0449","SHcy":"\u0428","shcy":"\u0448","ShortDownArrow":"\u2193","ShortLeftArrow":"\u2190","shortmid":"\u2223","shortparallel":"\u2225","ShortRightArrow":"\u2192","ShortUpArrow":"\u2191","shy":"\xad","Sigma":"\u03a3","sigma":"\u03c3","sigmaf":"\u03c2","sigmav":"\u03c2","sim":"\u223c","simdot":"\u2a6a","sime":"\u2243","simeq":"\u2243","simg":"\u2a9e","simgE":"\u2aa0","siml":"\u2a9d","simlE":"\u2a9f","simne":"\u2246","simplus":"\u2a24","simrarr":"\u2972","slarr":"\u2190","SmallCircle":"\u2218","smallsetminus":"\u2216","smashp":"\u2a33","smeparsl":"\u29e4","smid":"\u2223","smile":"\u2323","smt":"\u2aaa","smte":"\u2aac","smtes":"\u2aac\ufe00","SOFTcy":"\u042c","softcy":"\u044c","solbar":"\u233f","solb":"\u29c4","sol":"/","Sopf":"\ud835\udd4a","sopf":"\ud835\udd64","spades":"\u2660","spadesuit":"\u2660","spar":"\u2225","sqcap":"\u2293","sqcaps":"\u2293\ufe00","sqcup":"\u2294","sqcups":"\u2294\ufe00","Sqrt":"\u221a","sqsub":"\u228f","sqsube":"\u2291","sqsubset":"\u228f","sqsubseteq":"\u2291","sqsup":"\u2290","sqsupe":"\u2292","sqsupset":"\u2290","sqsupseteq":"\u2292","square":"\u25a1","Square":"\u25a1","SquareIntersection":"\u2293","SquareSubset":"\u228f","SquareSubsetEqual":"\u2291","SquareSuperset":"\u2290","SquareSupersetEqual":"\u2292","SquareUnion":"\u2294","squarf":"\u25aa","squ":"\u25a1","squf":"\u25aa","srarr":"\u2192","Sscr":"\ud835\udcae","sscr":"\ud835\udcc8","ssetmn":"\u2216","ssmile":"\u2323","sstarf":"\u22c6","Star":"\u22c6","star":"\u2606","starf":"\u2605","straightepsilon":"\u03f5","straightphi":"\u03d5","strns":"\xaf","sub":"\u2282","Sub":"\u22d0","subdot":"\u2abd","subE":"\u2ac5","sube":"\u2286","subedot":"\u2ac3","submult":"\u2ac1","subnE":"\u2acb","subne":"\u228a","subplus":"\u2abf","subrarr":"\u2979","subset":"\u2282","Subset":"\u22d0","subseteq":"\u2286","subseteqq":"\u2ac5","SubsetEqual":"\u2286","subsetneq":"\u228a","subsetneqq":"\u2acb","subsim":"\u2ac7","subsub":"\u2ad5","subsup":"\u2ad3","succapprox":"\u2ab8","succ":"\u227b","succcurlyeq":"\u227d","Succeeds":"\u227b","SucceedsEqual":"\u2ab0","SucceedsSlantEqual":"\u227d","SucceedsTilde":"\u227f","succeq":"\u2ab0","succnapprox":"\u2aba","succneqq":"\u2ab6","succnsim":"\u22e9","succsim":"\u227f","SuchThat":"\u220b","sum":"\u2211","Sum":"\u2211","sung":"\u266a","sup1":"\xb9","sup2":"\xb2","sup3":"\xb3","sup":"\u2283","Sup":"\u22d1","supdot":"\u2abe","supdsub":"\u2ad8","supE":"\u2ac6","supe":"\u2287","supedot":"\u2ac4","Superset":"\u2283","SupersetEqual":"\u2287","suphsol":"\u27c9","suphsub":"\u2ad7","suplarr":"\u297b","supmult":"\u2ac2","supnE":"\u2acc","supne":"\u228b","supplus":"\u2ac0","supset":"\u2283","Supset":"\u22d1","supseteq":"\u2287","supseteqq":"\u2ac6","supsetneq":"\u228b","supsetneqq":"\u2acc","supsim":"\u2ac8","supsub":"\u2ad4","supsup":"\u2ad6","swarhk":"\u2926","swarr":"\u2199","swArr":"\u21d9","swarrow":"\u2199","swnwar":"\u292a","szlig":"\xdf","Tab":"\\t","target":"\u2316","Tau":"\u03a4","tau":"\u03c4","tbrk":"\u23b4","Tcaron":"\u0164","tcaron":"\u0165","Tcedil":"\u0162","tcedil":"\u0163","Tcy":"\u0422","tcy":"\u0442","tdot":"\u20db","telrec":"\u2315","Tfr":"\ud835\udd17","tfr":"\ud835\udd31","there4":"\u2234","therefore":"\u2234","Therefore":"\u2234","Theta":"\u0398","theta":"\u03b8","thetasym":"\u03d1","thetav":"\u03d1","thickapprox":"\u2248","thicksim":"\u223c","ThickSpace":"\u205f\u200a","ThinSpace":"\u2009","thinsp":"\u2009","thkap":"\u2248","thksim":"\u223c","THORN":"\xde","thorn":"\xfe","tilde":"\u02dc","Tilde":"\u223c","TildeEqual":"\u2243","TildeFullEqual":"\u2245","TildeTilde":"\u2248","timesbar":"\u2a31","timesb":"\u22a0","times":"\xd7","timesd":"\u2a30","tint":"\u222d","toea":"\u2928","topbot":"\u2336","topcir":"\u2af1","top":"\u22a4","Topf":"\ud835\udd4b","topf":"\ud835\udd65","topfork":"\u2ada","tosa":"\u2929","tprime":"\u2034","trade":"\u2122","TRADE":"\u2122","triangle":"\u25b5","triangledown":"\u25bf","triangleleft":"\u25c3","trianglelefteq":"\u22b4","triangleq":"\u225c","triangleright":"\u25b9","trianglerighteq":"\u22b5","tridot":"\u25ec","trie":"\u225c","triminus":"\u2a3a","TripleDot":"\u20db","triplus":"\u2a39","trisb":"\u29cd","tritime":"\u2a3b","trpezium":"\u23e2","Tscr":"\ud835\udcaf","tscr":"\ud835\udcc9","TScy":"\u0426","tscy":"\u0446","TSHcy":"\u040b","tshcy":"\u045b","Tstrok":"\u0166","tstrok":"\u0167","twixt":"\u226c","twoheadleftarrow":"\u219e","twoheadrightarrow":"\u21a0","Uacute":"\xda","uacute":"\xfa","uarr":"\u2191","Uarr":"\u219f","uArr":"\u21d1","Uarrocir":"\u2949","Ubrcy":"\u040e","ubrcy":"\u045e","Ubreve":"\u016c","ubreve":"\u016d","Ucirc":"\xdb","ucirc":"\xfb","Ucy":"\u0423","ucy":"\u0443","udarr":"\u21c5","Udblac":"\u0170","udblac":"\u0171","udhar":"\u296e","ufisht":"\u297e","Ufr":"\ud835\udd18","ufr":"\ud835\udd32","Ugrave":"\xd9","ugrave":"\xf9","uHar":"\u2963","uharl":"\u21bf","uharr":"\u21be","uhblk":"\u2580","ulcorn":"\u231c","ulcorner":"\u231c","ulcrop":"\u230f","ultri":"\u25f8","Umacr":"\u016a","umacr":"\u016b","uml":"\xa8","UnderBar":"_","UnderBrace":"\u23df","UnderBracket":"\u23b5","UnderParenthesis":"\u23dd","Union":"\u22c3","UnionPlus":"\u228e","Uogon":"\u0172","uogon":"\u0173","Uopf":"\ud835\udd4c","uopf":"\ud835\udd66","UpArrowBar":"\u2912","uparrow":"\u2191","UpArrow":"\u2191","Uparrow":"\u21d1","UpArrowDownArrow":"\u21c5","updownarrow":"\u2195","UpDownArrow":"\u2195","Updownarrow":"\u21d5","UpEquilibrium":"\u296e","upharpoonleft":"\u21bf","upharpoonright":"\u21be","uplus":"\u228e","UpperLeftArrow":"\u2196","UpperRightArrow":"\u2197","upsi":"\u03c5","Upsi":"\u03d2","upsih":"\u03d2","Upsilon":"\u03a5","upsilon":"\u03c5","UpTeeArrow":"\u21a5","UpTee":"\u22a5","upuparrows":"\u21c8","urcorn":"\u231d","urcorner":"\u231d","urcrop":"\u230e","Uring":"\u016e","uring":"\u016f","urtri":"\u25f9","Uscr":"\ud835\udcb0","uscr":"\ud835\udcca","utdot":"\u22f0","Utilde":"\u0168","utilde":"\u0169","utri":"\u25b5","utrif":"\u25b4","uuarr":"\u21c8","Uuml":"\xdc","uuml":"\xfc","uwangle":"\u29a7","vangrt":"\u299c","varepsilon":"\u03f5","varkappa":"\u03f0","varnothing":"\u2205","varphi":"\u03d5","varpi":"\u03d6","varpropto":"\u221d","varr":"\u2195","vArr":"\u21d5","varrho":"\u03f1","varsigma":"\u03c2","varsubsetneq":"\u228a\ufe00","varsubsetneqq":"\u2acb\ufe00","varsupsetneq":"\u228b\ufe00","varsupsetneqq":"\u2acc\ufe00","vartheta":"\u03d1","vartriangleleft":"\u22b2","vartriangleright":"\u22b3","vBar":"\u2ae8","Vbar":"\u2aeb","vBarv":"\u2ae9","Vcy":"\u0412","vcy":"\u0432","vdash":"\u22a2","vDash":"\u22a8","Vdash":"\u22a9","VDash":"\u22ab","Vdashl":"\u2ae6","veebar":"\u22bb","vee":"\u2228","Vee":"\u22c1","veeeq":"\u225a","vellip":"\u22ee","verbar":"|","Verbar":"\u2016","vert":"|","Vert":"\u2016","VerticalBar":"\u2223","VerticalLine":"|","VerticalSeparator":"\u2758","VerticalTilde":"\u2240","VeryThinSpace":"\u200a","Vfr":"\ud835\udd19","vfr":"\ud835\udd33","vltri":"\u22b2","vnsub":"\u2282\u20d2","vnsup":"\u2283\u20d2","Vopf":"\ud835\udd4d","vopf":"\ud835\udd67","vprop":"\u221d","vrtri":"\u22b3","Vscr":"\ud835\udcb1","vscr":"\ud835\udccb","vsubnE":"\u2acb\ufe00","vsubne":"\u228a\ufe00","vsupnE":"\u2acc\ufe00","vsupne":"\u228b\ufe00","Vvdash":"\u22aa","vzigzag":"\u299a","Wcirc":"\u0174","wcirc":"\u0175","wedbar":"\u2a5f","wedge":"\u2227","Wedge":"\u22c0","wedgeq":"\u2259","weierp":"\u2118","Wfr":"\ud835\udd1a","wfr":"\ud835\udd34","Wopf":"\ud835\udd4e","wopf":"\ud835\udd68","wp":"\u2118","wr":"\u2240","wreath":"\u2240","Wscr":"\ud835\udcb2","wscr":"\ud835\udccc","xcap":"\u22c2","xcirc":"\u25ef","xcup":"\u22c3","xdtri":"\u25bd","Xfr":"\ud835\udd1b","xfr":"\ud835\udd35","xharr":"\u27f7","xhArr":"\u27fa","Xi":"\u039e","xi":"\u03be","xlarr":"\u27f5","xlArr":"\u27f8","xmap":"\u27fc","xnis":"\u22fb","xodot":"\u2a00","Xopf":"\ud835\udd4f","xopf":"\ud835\udd69","xoplus":"\u2a01","xotime":"\u2a02","xrarr":"\u27f6","xrArr":"\u27f9","Xscr":"\ud835\udcb3","xscr":"\ud835\udccd","xsqcup":"\u2a06","xuplus":"\u2a04","xutri":"\u25b3","xvee":"\u22c1","xwedge":"\u22c0","Yacute":"\xdd","yacute":"\xfd","YAcy":"\u042f","yacy":"\u044f","Ycirc":"\u0176","ycirc":"\u0177","Ycy":"\u042b","ycy":"\u044b","yen":"\xa5","Yfr":"\ud835\udd1c","yfr":"\ud835\udd36","YIcy":"\u0407","yicy":"\u0457","Yopf":"\ud835\udd50","yopf":"\ud835\udd6a","Yscr":"\ud835\udcb4","yscr":"\ud835\udcce","YUcy":"\u042e","yucy":"\u044e","yuml":"\xff","Yuml":"\u0178","Zacute":"\u0179","zacute":"\u017a","Zcaron":"\u017d","zcaron":"\u017e","Zcy":"\u0417","zcy":"\u0437","Zdot":"\u017b","zdot":"\u017c","zeetrf":"\u2128","ZeroWidthSpace":"\u200b","Zeta":"\u0396","zeta":"\u03b6","zfr":"\ud835\udd37","Zfr":"\u2128","ZHcy":"\u0416","zhcy":"\u0436","zigrarr":"\u21dd","zopf":"\ud835\udd6b","Zopf":"\u2124","Zscr":"\ud835\udcb5","zscr":"\ud835\udccf","zwj":"\u200d","zwnj":"\u200c"}')
     },
     xg5P: function(e, t, n) {
         "use strict";
@@ -108661,6 +110343,9 @@
                 namespace: "serverHysteria"
             }, n("hjwd").default)),
             u.model(i()({
+                namespace: "serverTuic"
+            }, n("callTuic").default)),
+            u.model(i()({
                 namespace: "serverManage"
             }, n("1dD/").default)),
             u.model(i()({
@@ -108678,6 +110363,9 @@
             u.model(i()({
                 namespace: "serverVmess"
             }, n("wtDr").default)),
+            u.model(i()({
+                namespace: "serverAnyTLS"
+            }, n("callAnyTLS").default)),
             u.model(i()({
                 namespace: "stat"
             }, n("T4gb").default)),
@@ -110129,7 +111817,7 @@
         }
         function f(e) {
             o()(e),
-            r["a"].success("Sao chép thành công")
+            r["a"].success("\u590d\u5236\u6210\u529f")
         }
         function d(e) {
             return window.localStorage.setItem("authorization", e)
@@ -110282,7 +111970,7 @@
                 }), f.a.createElement(r["a"], {
                     id: "server",
                     maskClosable: !0,
-                    title: e.id ? "Chỉnh sửa nút" : "Nút mới",
+                    title: e.id ? "\u7f16\u8f91\u8282\u70b9" : "\u65b0\u5efa\u8282\u70b9",
                     width: "80%",
                     visible: this.state.visible,
                     onClose: ()=>this.onShow()
@@ -110290,35 +111978,35 @@
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-8"
-                }, f.a.createElement("label", null, "Tên Nút"), f.a.createElement(l["a"], {
-                    placeholder: "Vui lòng nhập tên nút",
+                }, f.a.createElement("label", null, "\u8282\u70b9\u540d\u79f0"), f.a.createElement(l["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u540d\u79f0",
                     value: e.name,
                     onChange: e=>this.formChange("name", e.target.value)
                 })), f.a.createElement("div", {
                     className: "form-group col-4"
-                }, f.a.createElement("label", null, "Phóng đại"), f.a.createElement(l["a"], {
+                }, f.a.createElement("label", null, "\u500d\u7387"), f.a.createElement(l["a"], {
                     addonAfter: "x",
-                    placeholder: "Vui lòng nhập độ phóng đại của nút",
+                    placeholder: "\u8bf7\u8f93\u5165\u8282\u70b9\u500d\u7387",
                     value: e.rate,
                     onChange: e=>this.formChange("rate", e.target.value)
                 }))), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "nhãn nút"), f.a.createElement(s["a"], {
+                }, f.a.createElement("label", null, "\u8282\u70b9\u6807\u7b7e"), f.a.createElement(s["a"], {
                     mode: "tags",
                     value: e.tags || [],
                     style: {
                         width: "100%"
                     },
-                    placeholder: "Nhập và nhấn Enter để thêm thẻ",
+                    placeholder: "\u8f93\u5165\u540e\u56de\u8f66\u6dfb\u52a0\u6807\u7b7e",
                     onChange: e=>this.formChange("tags", e.length > 0 ? e : null)
                 })), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "Nhóm quyền ", f.a.createElement(p["a"], null, f.a.createElement("a", {
+                }, f.a.createElement("label", null, "\u6743\u9650\u7ec4 ", f.a.createElement(p["a"], null, f.a.createElement("a", {
                     href: "javascript:(0);"
-                }, "Thêm nhóm quyền"))), f.a.createElement(s["a"], {
+                }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), f.a.createElement(s["a"], {
                     mode: "multiple",
                     value: e.group_id,
-                    placeholder: "Vui lòng chọn nhóm quyền",
+                    placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -110332,24 +112020,24 @@
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, f.a.createElement("label", null, "Địa chỉ nút"), f.a.createElement(l["a"], {
-                    placeholder: "Địa chỉ hoặc IP",
+                }, f.a.createElement("label", null, "\u8282\u70b9\u5730\u5740"), f.a.createElement(l["a"], {
+                    placeholder: "\u5730\u5740\u6216IP",
                     value: e.host,
                     onChange: e=>this.formChange("host", e.target.value)
                 }))), f.a.createElement("div", {
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, f.a.createElement("label", null, "Cổng kết nối"), f.a.createElement(l["a"], {
-                    placeholder: "Cổng kết nối người dùng",
+                }, f.a.createElement("label", null, "\u8fde\u63a5\u7aef\u53e3"), f.a.createElement(l["a"], {
+                    placeholder: "\u7528\u6237\u8fde\u63a5\u7aef\u53e3",
                     value: e.port,
                     onChange: e=>{
                         this.formChange("port", e.target.value)
                     }
                 })), f.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, f.a.createElement("label", null, "Cảng dịch vụ"), f.a.createElement(l["a"], {
-                    placeholder: "Cổng mở máy chủ",
+                }, f.a.createElement("label", null, "\u670d\u52a1\u7aef\u53e3"), f.a.createElement(l["a"], {
+                    placeholder: "\u670d\u52a1\u7aef\u5f00\u653e\u7aef\u53e3",
                     value: e.server_port,
                     onChange: e=>{
                         this.formChange("server_port", e.target.value)
@@ -110358,12 +112046,12 @@
                     className: "form-group col-md-4 col-xs-12"
                 }, f.a.createElement("label", null, f.a.createElement(o["a"], {
                     placement: "top",
-                    title: "Sử dụng chứng chỉ tự ký yêu cầu phải cho phép sự không an toàn trước khi người dùng có thể kết nối"
-                }, "Cho phép không an toàn", f.a.createElement(a["a"], {
+                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
+                }, "\u5141\u8bb8\u4e0d\u5b89\u5168 ", f.a.createElement(a["a"], {
                     type: "question-circle"
                 }))), f.a.createElement(s["a"], {
                     value: parseInt(e.allow_insecure) ? 1 : 0,
-                    placeholder: "cho phép không an toàn",
+                    placeholder: "\u5141\u8bb8\u4e0d\u5b89\u5168",
                     style: {
                         width: "100%"
                     },
@@ -110371,25 +112059,25 @@
                 }, f.a.createElement(s["a"].Option, {
                     key: 0,
                     value: 0
-                }, "Không"), f.a.createElement(s["a"].Option, {
+                }, "\u5426"), f.a.createElement(s["a"].Option, {
                     key: 1,
                     value: 1
-                }, "Đúng")))), f.a.createElement("div", {
+                }, "\u662f")))), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "Chỉ định tên máy chủ (sni)"), f.a.createElement(l["a"], {
-                    placeholder: "Được sử dụng để xác minh chứng chỉ khi địa chỉ nút không nhất quán với chứng chỉ",
+                }, f.a.createElement("label", null, "\u670d\u52a1\u5668\u540d\u79f0\u6307\u793a(sni)"), f.a.createElement(l["a"], {
+                    placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
                     value: e.server_name,
                     onChange: e=>this.formChange("server_name", e.target.value)
                 })), f.a.createElement("div", {
                     className: "row"
                 }, f.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
-                }, f.a.createElement("label", null, "Giao thức vận chuyển ", f.a.createElement("a", {
+                }, f.a.createElement("label", null, "\u4f20\u8f93\u534f\u8bae ", f.a.createElement("a", {
                     href: "javascript:void(0);",
-                    onClick: ()=>this.showChildDrawer("Chỉnh sửa cấu hình giao thức", "network_settings")
-                }, "Chỉnh sửa cấu hình")), f.a.createElement(s["a"], {
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u534f\u8bae\u914d\u7f6e", "network_settings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), f.a.createElement(s["a"], {
                     value: e.network,
-                    placeholder: "Chọn giao thức vận chuyển",
+                    placeholder: "\u9009\u62e9\u4f20\u8f93\u534f\u8bae",
                     style: {
                         width: "100%"
                     },
@@ -110404,11 +112092,11 @@
                     className: "form-group"
                 }, f.a.createElement("label", null, f.a.createElement(o["a"], {
                     placement: "top"
-                }, "Nút cha ", f.a.createElement("a", {
+                }, "\u7236\u8282\u70b9 ", f.a.createElement("a", {
                     target: "_blank",
                     href: "https://docs.v2board.com/use/node.html#\u7236\u8282\u70b9\u4e0e\u5b50\u8282\u70b9\u5173\u7cfb",
                     rel: "noreferrer"
-                }, "Tìm hiểu thêm"))), f.a.createElement(s["a"], {
+                }, "\u66f4\u591a\u89e3\u7b54"))), f.a.createElement(s["a"], {
                     value: e.parent_id || "",
                     onChange: e=>this.formChange("parent_id", e),
                     style: {
@@ -110416,7 +112104,7 @@
                     }
                 }, f.a.createElement(s["a"].Option, {
                     value: ""
-                }, "Không"), n.map(t=>{
+                }, "\u65e0"), n.map(t=>{
                     if ("trojan" === t.type && t.id !== e.id)
                         return f.a.createElement(s["a"].Option, {
                             key: Math.random(),
@@ -110425,10 +112113,10 @@
                 }
                 ))), f.a.createElement("div", {
                     className: "form-group"
-                }, f.a.createElement("label", null, "nhóm định tuyến"), f.a.createElement(s["a"], {
+                }, f.a.createElement("label", null, "\u8def\u7531\u7ec4"), f.a.createElement(s["a"], {
                     mode: "multiple",
                     value: e.route_id || [],
-                    placeholder: "Vui lòng chọn nhóm định tuyến",
+                    placeholder: "\u8bf7\u9009\u62e9\u8def\u7531\u7ec4",
                     style: {
                         width: "100%"
                     },
@@ -110445,11 +112133,11 @@
                         marginRight: 8
                     },
                     onClick: ()=>this.onShow()
-                }, "Hủy bỏ"), f.a.createElement(i["a"], {
+                }, "\u53d6\u6d88"), f.a.createElement(i["a"], {
                     loading: t,
                     onClick: ()=>this.save(),
                     type: "primary"
-                }, "Gửi")), f.a.createElement(r["a"], {
+                }, "\u63d0\u4ea4")), f.a.createElement(r["a"], {
                     closable: !1,
                     id: "server",
                     width: "80%",
@@ -111210,54 +112898,51 @@
                     dataIndex: "id",
                     key: "id"
                 }, {
-                    title: "Tên",
+                    title: "\u540d\u79f0",
                     dataIndex: "name",
                     key: "name"
                 }, {
-                    title: "Loại",
+                    title: "\u7c7b\u578b",
                     dataIndex: "type",
                     key: "type",
                     render: e=>{
                         switch (e) {
                             case 1:
-                                return "Số tiền";
+                                return "\u91d1\u989d";
                             case 2:
-                                return "Thời gian";
+                                return "\u65f6\u957f";
                             case 3:
-                                return "Dung lượng";
+                                return "\u6d41\u91cf";
                             case 4:
-                                return "Đặt lại";
+                                return "\u91cd\u7f6e";
                             case 5:
-                                return "Gói cước";
+                                return "\u5957\u9910";
                             default:
                                 return "";
                         }
                     }
                 }, {
-                    title: "Giá trị",
+                    title: "\u6570\u503c",
                     dataIndex: "value",
                     key: "value",
                     render: (e,t)=>{
                         switch (t.type) {
                             case 1:
-                                return e.toLocaleString('vi-VN', {
-                                    style: 'currency',
-                                    currency: 'VND'
-                                });
+                                return e.toFixed(2) + " \xa5";
                             case 2:
-                                return e + " Ngày";
+                                return e + " \u5929";
                             case 3:
                                 return e + " GB";
                             case 4:
                                 return "-";
                             case 5:
-                                return e + " Ngày";
+                                return e + " \u5929";
                             default:
                                 return e;
                         }
                     }
                 }, {
-                    title: "Gói",
+                    title: "\u5957\u9910",
                     dataIndex: "plan_id",
                     key: "plan_id",
                     render: e=>{
@@ -111266,7 +112951,7 @@
                         return name;
                     }
                 }, {
-                    title: "Mã",
+                    title: "\u5361\u5bc6",
                     dataIndex: "code",
                     key: "code",
                     render: e=>{
@@ -111276,27 +112961,27 @@
                             },
                             onClick: ()=>{
                                 S()(e),
-                                p["a"].success("Sao chép thành công")
+                                p["a"].success("\u590d\u5236\u6210\u529f")
                             }
                         }, e)
                     }
                 }, {
-                    title: "Còn lại",
+                    title: "\u5269\u4f59\u6b21\u6570",
                     dataIndex: "limit_use",
                     key: "limit_use",
                     render: e=>{
-                        return b.a.createElement(d["a"], null, null !== e ? e : "Không giới hạn")
+                        return b.a.createElement(d["a"], null, null !== e ? e : "\u65e0\u9650")
                     }
                 }, {
-                    title: "Áp dụng từ",
+                    title: "\u6709\u6548\u671f",
                     dataIndex: "started_at",
                     key: "started_at",
                     align: "left",
                     render: (e,t)=>{
-                        return "".concat(_()(1e3 * t.started_at).format("DD/MM/YYYY HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("DD/MM/YYYY HH:mm"))
+                        return "".concat(_()(1e3 * t.started_at).format("YYYY/MM/DD HH:mm"), " ~ ").concat(_()(1e3 * t.ended_at).format("YYYY/MM/DD HH:mm"))
                     }
                 }, {
-                    title: "Chỉnh Sửa",
+                    title: "\u64cd\u4f5c",
                     dataIndex: "action",
                     key: "action",
                     align: "right",
@@ -111313,25 +112998,25 @@
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Biên Tập"), b.a.createElement(f["a"], {
+                        }, "\u7f16\u8f91"), b.a.createElement(f["a"], {
                             type: "vertical"
                         }), b.a.createElement("a", {
                             onClick: ()=>{
                                 h["a"].confirm({
-                                    title: "Cảnh Báo",
-                                    content: "Bạn có chắc chắn muốn xóa mục này?",
+                                    title: "\u8b66\u544a",
+                                    content: "\u786e\u5b9a\u8981\u5220\u9664\u8be5\u6761\u9879\u76ee\u5417\uff1f",
                                     onOk: ()=>this.drop(n),
-                                    okText: "Chắc chắn",
-                                    cancelText: "Hủy bỏ"
+                                    okText: "\u786e\u5b9a",
+                                    cancelText: "\u53d6\u6d88"
                                 })
                             }
                             ,
                             href: "javascript:void(0);"
-                        }, "Xóa bỏ"))
+                        }, "\u5220\u9664"))
                     }
                 }];
                 return b.a.createElement(w["a"], i()({}, this.props, {
-                    title: "Quản lý thẻ quà tặng"
+                    title: "\u793c\u54c1\u5361\u7ba1\u7406"
                 }), b.a.createElement(O["a"], {
                     loading: n
                 }, b.a.createElement("div", {
@@ -111346,7 +113031,7 @@
                     onClick: ()=>this.modalVisible()
                 }, b.a.createElement(u["a"], {
                     type: "plus"
-                }), " Thêm thẻ quà tặng")), b.a.createElement(l["a"], {
+                }), "\u6dfb\u52a0\u793c\u54c1\u5361")), b.a.createElement(l["a"], {
                     tableLayout: "auto",
                     dataSource: t,
                     columns: x,
@@ -111360,12 +113045,12 @@
                     }),
                     onChange: (e,t,n)=>this.tableOnChange(e, n)
                 })))), b.a.createElement(h["a"], {
-                    title: "".concat(this.state.submit.id ? "Chỉnh sửa thẻ quà tặng" : "Tạo thẻ quà tặng mới"),
+                    title: "".concat(this.state.submit.id ? "\u7f16\u8f91\u793c\u54c1\u5361" : "\u65b0\u5efa\u793c\u54c1\u5361"),
                     visible: this.state.visible,
                     onCancel: ()=>this.modalVisible(),
                     onOk: ()=>this.generate(),
-                    okText: "Gửi",
-                    cancelText: "Hủy bỏ",
+                    okText: "\u63d0\u4ea4",
+                    cancelText: "\u53d6\u6d88",
                     okButtonProps: {
                         loading: r
                     },
@@ -111374,8 +113059,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Tên"), b.a.createElement(s["a"], {
-                    placeholder: "Vui lòng nhập tên",
+                }, "\u540d\u79f0"), b.a.createElement(s["a"], {
+                    placeholder: "\u8bf7\u8f93\u5165\u793c\u54c1\u5361\u540d\u79f0",
                     value: this.state.submit.name,
                     onChange: e=>{
                         this.setState({
@@ -111388,8 +113073,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Mã thẻ quà"), b.a.createElement(s["a"], {
-                    placeholder: "Tùy chỉnh mã thẻ quà tặng (để trống sẽ tạo ngẫu nhiên).",
+                }, "\u81ea\u5b9a\u4e49\u793c\u54c1\u5361\u5361\u5bc6"), b.a.createElement(s["a"], {
+                    placeholder: "\u81ea\u5b9a\u4e49\u793c\u54c1\u5361\u5361\u5bc6(\u7559\u7a7a\u968f\u673a\u751f\u6210)",
                     value: this.state.submit.code,
                     onChange: e=>{
                         this.setState({
@@ -111403,7 +113088,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Loại thẻ quà tặng"), b.a.createElement(s["a"], {
+                }, "\u793c\u54c1\u5361\u7c7b\u578b"), b.a.createElement(s["a"], {
                     type: "number",
                     addonBefore: b.a.createElement(a["a"], {
                         style: {
@@ -111419,33 +113104,33 @@
                         }
                     }, b.a.createElement(a["a"].Option, {
                         value: 1
-                    }, "Tăng số dư tài khoản"), b.a.createElement(a["a"].Option, {
+                    }, "\u589e\u52a0\u8d26\u6237\u4f59\u989d"), b.a.createElement(a["a"].Option, {
                         value: 2
-                    }, "Tăng thời gian đăng ký"), b.a.createElement(a["a"].Option, {
+                    }, "\u589e\u52a0\u8ba2\u9605\u65f6\u957f"), b.a.createElement(a["a"].Option, {
                         value: 3
-                    }, "Tăng lưu lượng gói đăng ký"), b.a.createElement(a["a"].Option, {
+                    }, "\u589e\u52a0\u5957\u9910\u6d41\u91cf"), b.a.createElement(a["a"].Option, {
                         value: 4
-                    }, "Đặt lại lưu lượng gói đăng ký"), b.a.createElement(a["a"].Option, {
+                    }, "\u91cd\u7f6e\u5957\u9910\u6d41\u91cf"), b.a.createElement(a["a"].Option, {
                         value: 5
-                    }, "Đổi gói đăng ký")),
+                    }, "\u5151\u6362\u8ba2\u9605\u5957\u9910")),
                     addonAfter: (() => {
                         switch (this.state.submit.type) {
                             case 1:
-                                return "₫";
+                                return "\xa5";
                             case 2:
-                                return "Ngày";
+                                return "\u5929";
                             case 3:
                                 return "GB";
                             case 4:
                                 return "";
                             case 5:
-                                return "Ngày";
+                                return "\u5929";
                             default:
                                 return "";
                         }
                     })(),
                     disabled: this.state.submit.type === 4,
-                    placeholder: this.state.submit.type === 5 ? "Gói vĩnh viễn thì nhập 0" : "Vui lòng nhập giá trị",
+                    placeholder: this.state.submit.type === 5 ? "\u4e00\u6b21\u6027\u5957\u9910\u8f93\u51650" : "\u8bf7\u8f93\u5165\u503c",
                     value: this.state.submit.type === 4 ? 0 : this.state.submit.value,
                     onChange: e=>{
                         this.setState({
@@ -111458,7 +113143,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Chỉ định gói đăng ký"), b.a.createElement("div", null, b.a.createElement(a["a"], {
+                }, "\u6307\u5b9a\u8ba2\u9605"), b.a.createElement("div", null, b.a.createElement(a["a"], {
                     value: this.state.submit.plan_id,
                     onChange: e=>{
                         this.setState({
@@ -111468,7 +113153,7 @@
                         })
                     },
                     mode: "single",
-                    placeholder: "Chỉ định gói đăng ký",
+                    placeholder: "\u6307\u5b9a\u8ba2\u9605",
                     style: {
                         width: "100%"
                     }
@@ -111482,7 +113167,7 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Thời hạn hiệu lực của thẻ quà tặng"), b.a.createElement(o["a"].RangePicker, {
+                }, "\u793c\u54c1\u5361\u6709\u6548\u671f"), b.a.createElement(o["a"].RangePicker, {
                     style: {
                         width: "100%"
                     },
@@ -111508,8 +113193,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     for: "example-text-input-alt"
-                }, "Số lần sử dụng tối đa"), b.a.createElement(s["a"], {
-                    placeholder: "Giới hạn số lần sử dụng tối đa, khi dùng hết sẽ không thể sử dụng tiếp (để trống nếu không giới hạn)",
+                }, "\u6700\u5927\u4f7f\u7528\u6b21\u6570"), b.a.createElement(s["a"], {
+                    placeholder: "\u9650\u5236\u6700\u5927\u4f7f\u7528\u6b21\u6570\uff0c\u7528\u5b8c\u5219\u65e0\u6cd5\u4f7f\u7528(\u4e3a\u7a7a\u5219\u4e0d\u9650\u5236)",
                     value: this.state.submit.limit_use,
                     onChange: e=>{
                         this.setState({
@@ -111522,8 +113207,8 @@
                     className: "form-group"
                 }, b.a.createElement("label", {
                     htmlFor: "example-text-input-alt"
-                }, "Số lượng tạo"), b.a.createElement(s["a"], {
-                    placeholder: "Nhập số lượng để tạo hàng loạt",
+                }, "\u751f\u6210\u6570\u91cf"), b.a.createElement(s["a"], {
+                    placeholder: "\u8f93\u5165\u6570\u91cf\u6279\u91cf\u751f\u6210",
                     value: this.state.submit.generate_count,
                     onChange: e=>{
                         this.setState({
