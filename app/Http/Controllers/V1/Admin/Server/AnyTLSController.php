@@ -23,8 +23,12 @@ class AnyTLSController extends Controller
             'rate' => 'required|numeric',
             'server_name' => 'nullable',
             'insecure' => 'required|in:0,1',
-            'padding_scheme' => 'nullable|array',
+            'padding_scheme' => 'nullable',
         ]);
+
+        if (isset($params['padding_scheme'])) {
+            $params['padding_scheme'] = json_decode($params['padding_scheme']);
+        }
 
         if ($request->input('id')) {
             $server = ServerAnytls::find($request->input('id'));
