@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\ThemeService;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 
 /*
@@ -20,21 +21,34 @@ Route::get('/', function (Request $request) {
             abort(403);
         }
     }
-    $renderParams = [
-        'title' => config('v2board.app_name', 'V2Board'),
-        'theme' => config('v2board.frontend_theme', 'default'),
-        'version' => config('app.version'),
-        'description' => config('v2board.app_description', 'V2Board is best'),
-        'logo' => config('v2board.logo')
-    ];
 
-    if (!config("theme.{$renderParams['theme']}")) {
-        $themeService = new ThemeService($renderParams['theme']);
+    $host = $request->server('HTTP_HOST');
+    $staff = Staff::where('domain', $host)->where('status', 1)->first();
+
+    $theme = config('v2board.frontend_theme', 'default');
+
+    if (!config("theme.{$theme}")) {
+        $themeService = new ThemeService($theme);
         $themeService->init();
     }
 
-    $renderParams['theme_config'] = config('theme.' . config('v2board.frontend_theme', 'default'));
-    return view('theme::' . config('v2board.frontend_theme', 'default') . '.dashboard', $renderParams);
+    $themeConfig = config("theme.{$theme}", []);
+
+    if ($staff) {
+        $themeConfig['background_url'] = $staff->background_url ?? '';
+        $themeConfig['custom_html'] = $staff->custom_html ?? '';
+    }
+
+    $renderParams = [
+        'title' => $staff->title ?? config('v2board.app_name', 'V2Board'),
+        'logo' => $staff ? $staff->logo : config('v2board.logo'),
+        'theme' => $theme,
+        'version' => config('app.version'),
+        'description' => $staff->description ?? config('v2board.app_description', 'V2Board is best'),
+        'theme_config' => $themeConfig,
+    ];
+
+    return view("theme::{$theme}.dashboard", $renderParams);
 });
 
 //TODO:: 兼容
@@ -50,6 +64,12 @@ Route::get('/' . config('v2board.secure_path', config('v2board.frontend_admin_pa
         'secure_path' => config('v2board.secure_path', config('v2board.frontend_admin_path', hash('crc32b', config('app.key'))))
     ]);
 });
+
+$staffPath = config('v2board.staff_path', 'webctv');
+
+Route::get("/{$staffPath}/{any?}", function () use ($staffPath) {
+    return view('staff.home', ['staff_path' => $staffPath]);
+})->where('any', '.*');
 
 if (!empty(config('v2board.subscribe_path'))) {
     Route::get(config('v2board.subscribe_path'), 'V1\\Client\\ClientController@subscribe')->middleware('client');

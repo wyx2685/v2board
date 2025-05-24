@@ -220,6 +220,22 @@ CREATE TABLE `v2_plan` (
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `v2_staff`;
+CREATE TABLE `v2_staff` (
+                            `id` int(11) NOT NULL,
+                            `status` tinyint(1) NOT NULL DEFAULT '1',
+                            `user_id` int(11) NOT NULL,
+                            `domain` varchar(255) NOT NULL,
+                            `title` varchar(255) DEFAULT NULL,
+                            `description` varchar(255) DEFAULT NULL,
+                            `logo` varchar(255) DEFAULT NULL,
+                            `background_url` varchar(255) DEFAULT NULL,
+                            `custom_html` text,
+                            `created_at` int(11) NOT NULL,
+                            `updated_at` int(11) NOT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `v2_server_group`;
 CREATE TABLE `v2_server_group` (

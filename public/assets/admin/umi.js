@@ -5823,6 +5823,15 @@
                     defaultValue: _.secure_path,
                     onChange: e=>this.set("safe", "secure_path", e.target.value)
                 })), f.a.createElement(m, {
+                    title: "Link web cộng tác viên",
+                    description: "nó dùng để cho ctv đăng nhập trang quản lý"
+                }, f.a.createElement("input", {
+                    type: "text",
+                    className: "form-control",
+                    placeholder: "webctv",
+                    defaultValue: _.staff_path,
+                    onChange: e=>this.set("safe", "staff_path", e.target.value)
+                })), f.a.createElement(m, {
                     title: "\u90ae\u7bb1\u540e\u7f00\u767d\u540d\u5355",
                     description: "\u5f00\u542f\u540e\u5728\u540d\u5355\u4e2d\u7684\u90ae\u7bb1\u540e\u7f00\u624d\u5141\u8bb8\u8fdb\u884c\u6ce8\u518c\u3002"
                 }, f.a.createElement(l["a"], {
@@ -21029,6 +21038,13 @@
                             className: "nav-main-link-icon si si-users"
                         })
                     }, {
+                        title: "Quản lý web con",
+                        type: "item",
+                        href: "/webcon",
+                        icon: o.a.createElement("i", {
+                            className: "nav-main-link-icon si si-users"
+                        })
+                    }, {
                         title: "\u516c\u544a\u7ba1\u7406",
                         type: "item",
                         href: "/notice",
@@ -31400,6 +31416,293 @@
             var t = e.notice;
             return {
                 notice: t
+            }
+        }
+        )(_)
+    },
+    WEBc: function(e, t, n) {
+        "use strict";
+        n.r(t);
+        var r = n("jehZ")
+          , i = n.n(r)
+          , o = (n("2qtc"),
+        n("kLXV"))
+          , a = (n("OaEy"),
+        n("2fM7"))
+          , s = (n("5NDa"),
+        n("5rEg"))
+          , l = (n("g9YV"),
+        n("wCAj"))
+          , c = (n("+L6B"),
+        n("2/Rp"))
+          , u = (n("Pwec"),
+        n("CtXQ"))
+          , h = (n("/zsF"),
+        n("PArb"))
+          , f = (n("BoS7"),
+        n("Sdc0"))
+          , d = n("p0pE")
+          , p = n.n(d)
+          , m = n("q1tI")
+          , g = n.n(m)
+          , v = n("Bl7J")
+          , y = n("wd/R")
+          , b = n.n(y)
+          , w = n("/MKj")
+          , x = n("v32e");
+        class _ extends g.a.Component {
+            constructor(e) {
+                super(e),
+                this.state = {
+                    visible: !1,
+                    submit: {},
+                    webcons: []
+                }
+            }
+            componentDidMount() {
+                this.props.dispatch({
+                    type: "webcon/fetch"
+                })
+            }
+            modalVisible() {
+                this.setState({
+                    visible: !this.state.visible
+                }, ()=>{
+                    this.state.visible || this.setState({
+                        submit: {}
+                    })
+                }
+                )
+            }
+            save() {
+                this.props.dispatch({
+                    type: "webcon/save",
+                    params: p()({}, this.state.submit),
+                    callback: ()=>{
+                        this.modalVisible()
+                    }
+                })
+            }
+            drop(e) {
+                this.props.dispatch({
+                    type: "webcon/drop",
+                    id: e.id
+                })
+            }
+            render() {
+                var e = this.props.webcon
+                  , t = e.webcons
+                  , n = e.fetchLoading
+                  , r = [{
+                    title: "#",
+                    dataIndex: "id",
+                    key: "id"
+                }, {
+                    title: "Kích Hoạt",
+                    dataIndex: "status",
+                    key: "status",
+                    render: (e,t)=>{
+                        return g.a.createElement(f["a"], {
+                            size: "small",
+                            onChange: ()=>this.props.dispatch({
+                                type: "webcon/show",
+                                id: t.id
+                            }),
+                            checked: e
+                        })
+                    }
+                }, {
+                    title: "Email",
+                    dataIndex: "email",
+                    key: "email",
+                    render: (e, t) => {
+                        const dotClass = t.staff === 1 ? 'ant-badge-status-dot ant-badge-status-success' : 'ant-badge-status-dot ant-badge-status-default';
+                        return g.a.createElement("span", { className: "ant-badge ant-badge-status ant-badge-not-a-wrapper" }, 
+                            g.a.createElement("span", { className: dotClass }),
+                            g.a.createElement("span", null, " " + e)
+                        );
+                    }
+                }, {
+                    title: "Domain",
+                    dataIndex: "domain",
+                    key: "domain"
+                }, {
+                    title: "Tiêu đề",
+                    dataIndex: "title",
+                    key: "title"
+                }, {
+                    title: "Ngày tạo",
+                    dataIndex: "created_at",
+                    key: "created_at",
+                    align: "right",
+                    render: e=>{
+                        return b()(1e3 * e).format("YYYY/MM/DD HH:mm")
+                    }
+                }, {
+                    title: "\u64cd\u4f5c",
+                    dataIndex: "action",
+                    key: "action",
+                    align: "right",
+                    fixed: "right",
+                    render: (e,n,r)=>{
+                        return g.a.createElement("div", null, g.a.createElement("a", {
+                            onClick: ()=>this.setState({
+                                submit: t[r]
+                            }, ()=>this.modalVisible()),
+                            href: "javascript:void(0);"
+                        }, "\u7f16\u8f91"), g.a.createElement(h["a"], {
+                            type: "vertical"
+                        }), g.a.createElement("a", {
+                            onClick: ()=>this.drop(n),
+                            href: "javascript:void(0);"
+                        }, "\u5220\u9664"))
+                    }
+                }];
+                return g.a.createElement(v["a"], i()({}, this.props, {
+                    title: "Quản Lý Web Con"
+                }), g.a.createElement("div", {
+                    className: "d-flex justify-content-between align-items-center"
+                }), g.a.createElement(x["a"], {
+                    loading: n
+                }, g.a.createElement("div", {
+                    className: "block block-rounded"
+                }, g.a.createElement("div", {
+                    className: "bg-white"
+                }, g.a.createElement("div", {
+                    style: {
+                        padding: 15
+                    }
+                }, g.a.createElement(c["a"], {
+                    onClick: ()=>this.modalVisible()
+                }, g.a.createElement(u["a"], {
+                    type: "plus"
+                }), " Thêm webcon")), g.a.createElement(l["a"], {
+                    tableLayout: "auto",
+                    dataSource: t,
+                    pagination: !1,
+                    columns: r,
+                    scroll: {
+                        x: 950
+                    }
+                })))), g.a.createElement(o["a"], {
+                    title: "".concat(this.state.submit.id ? "Chỉnh sửa webcon" : "Tạo webcon"),
+                    visible: this.state.visible,
+                    onCancel: ()=>this.modalVisible(),
+                    onOk: ()=>this.state.saveLoading || this.save(),
+                    okText: this.state.saveLoading ? g.a.createElement(u["a"], {
+                        type: "loading"
+                    }) : "Tạo",
+                    cancelText: "Hủy"
+                }, 
+                
+                g.a.createElement("div", null, g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "Email admin webcon"), g.a.createElement(s["a"], {
+                    placeholder: "Nhập email admin webcon",
+                    value: this.state.submit.email,
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                email: e.target.value
+                            })
+                        })
+                    }
+                })), g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "domain"), g.a.createElement(s["a"], {
+                    placeholder: "Nhập domain webcon",
+                    value: this.state.submit.domain,
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                domain: e.target.value
+                            })
+                        })
+                    }
+                })), g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "Tiêu đề web"), g.a.createElement(s["a"], {
+                    placeholder: "Nhập tiêu đề web",
+                    value: this.state.submit.title,
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                title: e.target.value
+                            })
+                        })
+                    }
+                })), g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "mô tả web"), g.a.createElement(s["a"], {
+                    placeholder: "Nhập mô tả web",
+                    value: this.state.submit.description,
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                description: e.target.value
+                            })
+                        })
+                    }
+                })), g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "Link Logo"), g.a.createElement(s["a"], {
+                    placeholder: "Nhập link logo",
+                    value: this.state.submit.logo,
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                logo: e.target.value
+                            })
+                        })
+                    }
+                })) ,g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "link hình nền"), g.a.createElement(s["a"], {
+                    placeholder: "nhập link hình nền",
+                    value: this.state.submit.background_url,
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                background_url: e.target.value
+                            })
+                        })
+                    }
+                })), g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "Html chân trang"), g.a.createElement(s["a"].TextArea, {
+                    rows: 12,
+                    value: this.state.submit.custom_html,
+                    placeholder: "Nhập html chân trang",
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                custom_html: e.target.value
+                            })
+                        })
+                    }
+                })),  )
+                
+                ))
+            }
+        }
+        t["default"] = Object(w["c"])(e=>{
+            var t = e.webcon;
+            return {
+                webcon: t
             }
         }
         )(_)
@@ -81681,6 +81984,10 @@
             exact: !0,
             component: n("JZE9").default
         }, {
+            path: "/webcon",
+            exact: !0,
+            component: n("WEBc").default
+        }, {
             path: "/order",
             exact: !0,
             component: n("pi3A").default
@@ -85066,6 +85373,611 @@
                                 case 0:
                                     return e.next = 2,
                                     Object(o["b"])("/" + window.settings.secure_path + "/notice/show", {
+                                        id: n
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    r({
+                                        type: "fetch"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                }
+            }
+        }
+    },
+    wCON: function(e, t, n) {
+        "use strict";
+        n.r(t);
+        var r = n("p0pE")
+          , i = n.n(r)
+          , o = n("t3Un");
+        function a() {
+            a = function() {
+                return e
+            }
+            ;
+            var e = {}
+              , t = Object.prototype
+              , n = t.hasOwnProperty
+              , r = Object.defineProperty || function(e, t, n) {
+                e[t] = n.value
+            }
+              , i = "function" == typeof Symbol ? Symbol : {}
+              , o = i.iterator || "@@iterator"
+              , s = i.asyncIterator || "@@asyncIterator"
+              , l = i.toStringTag || "@@toStringTag";
+            function c(e, t, n) {
+                return Object.defineProperty(e, t, {
+                    value: n,
+                    enumerable: !0,
+                    configurable: !0,
+                    writable: !0
+                }),
+                e[t]
+            }
+            try {
+                c({}, "")
+            } catch (e) {
+                c = function(e, t, n) {
+                    return e[t] = n
+                }
+            }
+            function u(e, t, n, i) {
+                var o = t && t.prototype instanceof d ? t : d
+                  , a = Object.create(o.prototype)
+                  , s = new C(i || []);
+                return r(a, "_invoke", {
+                    value: _(e, n, s)
+                }),
+                a
+            }
+            function h(e, t, n) {
+                try {
+                    return {
+                        type: "normal",
+                        arg: e.call(t, n)
+                    }
+                } catch (e) {
+                    return {
+                        type: "throw",
+                        arg: e
+                    }
+                }
+            }
+            e.wrap = u;
+            var f = {};
+            function d() {}
+            function p() {}
+            function m() {}
+            var g = {};
+            c(g, o, function() {
+                return this
+            });
+            var v = Object.getPrototypeOf
+              , y = v && v(v(O([])));
+            y && y !== t && n.call(y, o) && (g = y);
+            var b = m.prototype = d.prototype = Object.create(g);
+            function w(e) {
+                ["next", "throw", "return"].forEach(function(t) {
+                    c(e, t, function(e) {
+                        return this._invoke(t, e)
+                    })
+                })
+            }
+            function x(e, t) {
+                function i(r, o, a, s) {
+                    var l = h(e[r], e, o);
+                    if ("throw" !== l.type) {
+                        var c = l.arg
+                          , u = c.value;
+                        return u && "object" == typeof u && n.call(u, "__await") ? t.resolve(u.__await).then(function(e) {
+                            i("next", e, a, s)
+                        }, function(e) {
+                            i("throw", e, a, s)
+                        }) : t.resolve(u).then(function(e) {
+                            c.value = e,
+                            a(c)
+                        }, function(e) {
+                            return i("throw", e, a, s)
+                        })
+                    }
+                    s(l.arg)
+                }
+                var o;
+                r(this, "_invoke", {
+                    value: function(e, n) {
+                        function r() {
+                            return new t(function(t, r) {
+                                i(e, n, t, r)
+                            }
+                            )
+                        }
+                        return o = o ? o.then(r, r) : r()
+                    }
+                })
+            }
+            function _(e, t, n) {
+                var r = "suspendedStart";
+                return function(i, o) {
+                    if ("executing" === r)
+                        throw new Error("Generator is already running");
+                    if ("completed" === r) {
+                        if ("throw" === i)
+                            throw o;
+                        return T()
+                    }
+                    for (n.method = i,
+                    n.arg = o; ; ) {
+                        var a = n.delegate;
+                        if (a) {
+                            var s = E(a, n);
+                            if (s) {
+                                if (s === f)
+                                    continue;
+                                return s
+                            }
+                        }
+                        if ("next" === n.method)
+                            n.sent = n._sent = n.arg;
+                        else if ("throw" === n.method) {
+                            if ("suspendedStart" === r)
+                                throw r = "completed",
+                                n.arg;
+                            n.dispatchException(n.arg)
+                        } else
+                            "return" === n.method && n.abrupt("return", n.arg);
+                        r = "executing";
+                        var l = h(e, t, n);
+                        if ("normal" === l.type) {
+                            if (r = n.done ? "completed" : "suspendedYield",
+                            l.arg === f)
+                                continue;
+                            return {
+                                value: l.arg,
+                                done: n.done
+                            }
+                        }
+                        "throw" === l.type && (r = "completed",
+                        n.method = "throw",
+                        n.arg = l.arg)
+                    }
+                }
+            }
+            function E(e, t) {
+                var n = t.method
+                  , r = e.iterator[n];
+                if (void 0 === r)
+                    return t.delegate = null,
+                    "throw" === n && e.iterator.return && (t.method = "return",
+                    t.arg = void 0,
+                    E(e, t),
+                    "throw" === t.method) || "return" !== n && (t.method = "throw",
+                    t.arg = new TypeError("The iterator does not provide a '" + n + "' method")),
+                    f;
+                var i = h(r, e.iterator, t.arg);
+                if ("throw" === i.type)
+                    return t.method = "throw",
+                    t.arg = i.arg,
+                    t.delegate = null,
+                    f;
+                var o = i.arg;
+                return o ? o.done ? (t[e.resultName] = o.value,
+                t.next = e.nextLoc,
+                "return" !== t.method && (t.method = "next",
+                t.arg = void 0),
+                t.delegate = null,
+                f) : o : (t.method = "throw",
+                t.arg = new TypeError("iterator result is not an object"),
+                t.delegate = null,
+                f)
+            }
+            function S(e) {
+                var t = {
+                    tryLoc: e[0]
+                };
+                1 in e && (t.catchLoc = e[1]),
+                2 in e && (t.finallyLoc = e[2],
+                t.afterLoc = e[3]),
+                this.tryEntries.push(t)
+            }
+            function k(e) {
+                var t = e.completion || {};
+                t.type = "normal",
+                delete t.arg,
+                e.completion = t
+            }
+            function C(e) {
+                this.tryEntries = [{
+                    tryLoc: "root"
+                }],
+                e.forEach(S, this),
+                this.reset(!0)
+            }
+            function O(e) {
+                if (e) {
+                    var t = e[o];
+                    if (t)
+                        return t.call(e);
+                    if ("function" == typeof e.next)
+                        return e;
+                    if (!isNaN(e.length)) {
+                        var r = -1
+                          , i = function t() {
+                            for (; ++r < e.length; )
+                                if (n.call(e, r))
+                                    return t.value = e[r],
+                                    t.done = !1,
+                                    t;
+                            return t.value = void 0,
+                            t.done = !0,
+                            t
+                        };
+                        return i.next = i
+                    }
+                }
+                return {
+                    next: T
+                }
+            }
+            function T() {
+                return {
+                    value: void 0,
+                    done: !0
+                }
+            }
+            return p.prototype = m,
+            r(b, "constructor", {
+                value: m,
+                configurable: !0
+            }),
+            r(m, "constructor", {
+                value: p,
+                configurable: !0
+            }),
+            p.displayName = c(m, l, "GeneratorFunction"),
+            e.isGeneratorFunction = function(e) {
+                var t = "function" == typeof e && e.constructor;
+                return !!t && (t === p || "GeneratorFunction" === (t.displayName || t.name))
+            }
+            ,
+            e.mark = function(e) {
+                return Object.setPrototypeOf ? Object.setPrototypeOf(e, m) : (e.__proto__ = m,
+                c(e, l, "GeneratorFunction")),
+                e.prototype = Object.create(b),
+                e
+            }
+            ,
+            e.awrap = function(e) {
+                return {
+                    __await: e
+                }
+            }
+            ,
+            w(x.prototype),
+            c(x.prototype, s, function() {
+                return this
+            }),
+            e.AsyncIterator = x,
+            e.async = function(t, n, r, i, o) {
+                void 0 === o && (o = Promise);
+                var a = new x(u(t, n, r, i),o);
+                return e.isGeneratorFunction(n) ? a : a.next().then(function(e) {
+                    return e.done ? e.value : a.next()
+                })
+            }
+            ,
+            w(b),
+            c(b, l, "Generator"),
+            c(b, o, function() {
+                return this
+            }),
+            c(b, "toString", function() {
+                return "[object Generator]"
+            }),
+            e.keys = function(e) {
+                var t = Object(e)
+                  , n = [];
+                for (var r in t)
+                    n.push(r);
+                return n.reverse(),
+                function e() {
+                    for (; n.length; ) {
+                        var r = n.pop();
+                        if (r in t)
+                            return e.value = r,
+                            e.done = !1,
+                            e
+                    }
+                    return e.done = !0,
+                    e
+                }
+            }
+            ,
+            e.values = O,
+            C.prototype = {
+                constructor: C,
+                reset: function(e) {
+                    if (this.prev = 0,
+                    this.next = 0,
+                    this.sent = this._sent = void 0,
+                    this.done = !1,
+                    this.delegate = null,
+                    this.method = "next",
+                    this.arg = void 0,
+                    this.tryEntries.forEach(k),
+                    !e)
+                        for (var t in this)
+                            "t" === t.charAt(0) && n.call(this, t) && !isNaN(+t.slice(1)) && (this[t] = void 0)
+                },
+                stop: function() {
+                    this.done = !0;
+                    var e = this.tryEntries[0].completion;
+                    if ("throw" === e.type)
+                        throw e.arg;
+                    return this.rval
+                },
+                dispatchException: function(e) {
+                    if (this.done)
+                        throw e;
+                    var t = this;
+                    function r(n, r) {
+                        return a.type = "throw",
+                        a.arg = e,
+                        t.next = n,
+                        r && (t.method = "next",
+                        t.arg = void 0),
+                        !!r
+                    }
+                    for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+                        var o = this.tryEntries[i]
+                          , a = o.completion;
+                        if ("root" === o.tryLoc)
+                            return r("end");
+                        if (o.tryLoc <= this.prev) {
+                            var s = n.call(o, "catchLoc")
+                              , l = n.call(o, "finallyLoc");
+                            if (s && l) {
+                                if (this.prev < o.catchLoc)
+                                    return r(o.catchLoc, !0);
+                                if (this.prev < o.finallyLoc)
+                                    return r(o.finallyLoc)
+                            } else if (s) {
+                                if (this.prev < o.catchLoc)
+                                    return r(o.catchLoc, !0)
+                            } else {
+                                if (!l)
+                                    throw new Error("try statement without catch or finally");
+                                if (this.prev < o.finallyLoc)
+                                    return r(o.finallyLoc)
+                            }
+                        }
+                    }
+                },
+                abrupt: function(e, t) {
+                    for (var r = this.tryEntries.length - 1; r >= 0; --r) {
+                        var i = this.tryEntries[r];
+                        if (i.tryLoc <= this.prev && n.call(i, "finallyLoc") && this.prev < i.finallyLoc) {
+                            var o = i;
+                            break
+                        }
+                    }
+                    o && ("break" === e || "continue" === e) && o.tryLoc <= t && t <= o.finallyLoc && (o = null);
+                    var a = o ? o.completion : {};
+                    return a.type = e,
+                    a.arg = t,
+                    o ? (this.method = "next",
+                    this.next = o.finallyLoc,
+                    f) : this.complete(a)
+                },
+                complete: function(e, t) {
+                    if ("throw" === e.type)
+                        throw e.arg;
+                    return "break" === e.type || "continue" === e.type ? this.next = e.arg : "return" === e.type ? (this.rval = this.arg = e.arg,
+                    this.method = "return",
+                    this.next = "end") : "normal" === e.type && t && (this.next = t),
+                    f
+                },
+                finish: function(e) {
+                    for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                        var n = this.tryEntries[t];
+                        if (n.finallyLoc === e)
+                            return this.complete(n.completion, n.afterLoc),
+                            k(n),
+                            f
+                    }
+                },
+                catch: function(e) {
+                    for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                        var n = this.tryEntries[t];
+                        if (n.tryLoc === e) {
+                            var r = n.completion;
+                            if ("throw" === r.type) {
+                                var i = r.arg;
+                                k(n)
+                            }
+                            return i
+                        }
+                    }
+                    throw new Error("illegal catch attempt")
+                },
+                delegateYield: function(e, t, n) {
+                    return this.delegate = {
+                        iterator: O(e),
+                        resultName: t,
+                        nextLoc: n
+                    },
+                    "next" === this.method && (this.arg = void 0),
+                    f
+                }
+            },
+            e
+        }
+        var s = {
+            webcons: [],
+            fetchLoading: !1
+        };
+        t["default"] = {
+            name: "webcon",
+            state: i()({}, s),
+            reducers: {
+                setState(e, t) {
+                    var n = t.payload;
+                    return i()({}, e, n)
+                }
+            },
+            effects: {
+                fetch(e, t) {
+                    var n = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    n({
+                                        type: "setState",
+                                        payload: {
+                                            fetchLoading: !0
+                                        }
+                                    });
+                                case 2:
+                                    return e.next = 4,
+                                    Object(o["a"])("/" + window.settings.secure_path + "/webcon/fetch");
+                                case 4:
+                                    return t = e.sent,
+                                    e.next = 7,
+                                    n({
+                                        type: "setState",
+                                        payload: {
+                                            fetchLoading: !1
+                                        }
+                                    });
+                                case 7:
+                                    if (200 === t.code) {
+                                        e.next = 9;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 9:
+                                    return e.next = 11,
+                                    n({
+                                        type: "setState",
+                                        payload: {
+                                            webcons: t.data
+                                        }
+                                    });
+                                case 11:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                save(e, t) {
+                    var n = e.params
+                      , r = e.callback
+                      , i = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    i({
+                                        type: "setState",
+                                        payload: {
+                                            saveLoading: !0
+                                        }
+                                    });
+                                case 2:
+                                    return e.next = 4,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/webcon/save", n);
+                                case 4:
+                                    return t = e.sent,
+                                    e.next = 7,
+                                    i({
+                                        type: "setState",
+                                        payload: {
+                                            saveLoading: !1
+                                        }
+                                    });
+                                case 7:
+                                    if (200 === t.code) {
+                                        e.next = 9;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 9:
+                                    return e.next = 11,
+                                    i({
+                                        type: "fetch"
+                                    });
+                                case 11:
+                                    "function" === typeof r && r();
+                                case 12:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                drop(e, t) {
+                    var n = e.id
+                      , r = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/webcon/drop", {
+                                        id: n
+                                    });
+                                case 2:
+                                    if (t = e.sent,
+                                    200 === t.code) {
+                                        e.next = 5;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 5:
+                                    return e.next = 7,
+                                    r({
+                                        type: "fetch"
+                                    });
+                                case 7:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
+                    })()
+                },
+                show(e, t) {
+                    var n = e.id
+                      , r = t.put;
+                    return a().mark(function e() {
+                        var t;
+                        return a().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return e.next = 2,
+                                    Object(o["b"])("/" + window.settings.secure_path + "/webcon/show", {
                                         id: n
                                     });
                                 case 2:
@@ -110406,6 +111318,9 @@
             u.model(i()({
                 namespace: "notice"
             }, n("lETv").default)),
+            u.model(i()({
+                namespace: "webcon"
+            }, n("wCON").default)),
             u.model(i()({
                 namespace: "order"
             }, n("3moC").default)),

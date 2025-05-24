@@ -125,6 +125,12 @@ class AdminRoute
             $router->post('/notice/update', 'V1\\Admin\\NoticeController@update');
             $router->post('/notice/drop', 'V1\\Admin\\NoticeController@drop');
             $router->post('/notice/show', 'V1\\Admin\\NoticeController@show');
+            // Webcon
+            $router->get ('/webcon/fetch', 'V1\\Admin\\WebconController@fetch');
+            $router->post('/webcon/save', 'V1\\Admin\\WebconController@save');
+            $router->post('/webcon/update', 'V1\\Admin\\WebconController@update');
+            $router->post('/webcon/drop', 'V1\\Admin\\WebconController@drop');
+            $router->post('/webcon/show', 'V1\\Admin\\WebconController@show');
             // Ticket
             $router->get ('/ticket/fetch', 'V1\\Admin\\TicketController@fetch');
             $router->post('/ticket/reply', 'V1\\Admin\\TicketController@reply');

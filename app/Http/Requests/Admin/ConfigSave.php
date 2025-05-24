@@ -95,6 +95,7 @@ class ConfigSave extends FormRequest
         'register_limit_count' => 'integer',
         'register_limit_expire' => 'integer',
         'secure_path' => 'min:8|regex:/^[\w-]*$/',
+        'staff_path' => 'min:5|regex:/^[\w-]*$/',
         'password_limit_enable' => 'in:0,1',
         'password_limit_count' => 'integer',
         'password_limit_expire' => 'integer',
@@ -134,6 +135,8 @@ class ConfigSave extends FormRequest
             'logo.url' => 'LOGO URL格式不正确，必须携带https(s)://',
             'secure_path.min' => '后台路径长度最小为8位',
             'secure_path.regex' => '后台路径只能为字母或数字',
+            'staff_path.min' => 'link web con ít nhất 5 ký tự',
+            'staff_path.regex' => 'link webcon có vấn đề',
         ];
     }
 }

@@ -27,6 +27,12 @@ class StaffRoute
             $router->post('/notice/save', 'V1\\Admin\\NoticeController@save');
             $router->post('/notice/update', 'V1\\Admin\\NoticeController@update');
             $router->post('/notice/drop', 'V1\\Admin\\NoticeController@drop');
+            // home
+            $router->get ('/info', 'V1\\Staff\\HomeController@info');
+            $router->get ('/stat', 'V1\\Staff\\HomeController@stat');
+            $router->get ('/config', 'V1\\Staff\\HomeController@config');
+            $router->post('/configsave', 'V1\\Staff\\HomeController@configsave');
+            $router->get ('/finduser', 'V1\\Staff\\HomeController@finduser');
         });
     }
 }

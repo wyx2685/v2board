@@ -131,7 +131,12 @@ class AuthController extends Controller
         $user->password = password_hash($password, PASSWORD_DEFAULT);
         $user->uuid = Helper::guid(true);
         $user->token = Helper::guid();
-        if ($request->input('invite_code')) {
+        $host = $request->getHost();
+        $staff = Staff::where('domain', $host)->first();
+        if ($staff && $staff->status == 1) {
+            $user->invite_user_id = $staff->user_id;
+        }
+        if (!$user->invite_user_id && $request->input('invite_code')) {
             $inviteCode = InviteCode::where('code', $request->input('invite_code'))
                 ->where('status', 0)
                 ->first();
