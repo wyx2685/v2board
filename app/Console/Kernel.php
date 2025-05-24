@@ -42,11 +42,13 @@ class Kernel extends ConsoleKernel
         })->everyMinute(); // می‌توانید زمان‌بندی اجرای این تابع را تغییر دهید
 
         Cache::put(CacheKey::get('SCHEDULE_LAST_CHECK_AT', null), time());
+        // traffic
+        $schedule->command('traffic:update')->everyMinute()->withoutOverlapping();
         // v2board
         $schedule->command('v2board:statistics')->dailyAt('0:10');
         // check
-        $schedule->command('check:order')->everyMinute();
-        $schedule->command('check:commission')->everyMinute();
+        $schedule->command('check:order')->everyMinute()->withoutOverlapping();
+        $schedule->command('check:commission')->everyFifteenMinutes();
         $schedule->command('check:ticket')->everyMinute();
         $schedule->command('check:renewal')->dailyAt('22:30');
         // reset
