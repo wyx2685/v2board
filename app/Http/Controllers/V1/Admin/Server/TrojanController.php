@@ -88,12 +88,4 @@ class TrojanController extends Controller
             'data' => true
         ]);
     }
-    public function viewConfig(Request $request)
-    {
-        $serverService = new ServerService();
-        $config = $serverService->getTrojanConfig($request->input('node_id'), 23333);
-        return response([
-            'data' => $config
-        ]);
-    }
 }

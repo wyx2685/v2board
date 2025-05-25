@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\ServerVmess;
 use App\Models\ServerTrojan;
 use App\Models\ServerTuic;
+use App\Models\ServerAnytls;
 use App\Utils\CacheKey;
 use App\Utils\Helper;
 use Illuminate\Support\Facades\Cache;
@@ -106,7 +107,6 @@ class ServerService
                 $servers[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_TUIC_LAST_CHECK_AT', $v['parent_id']));
                 $servers[$key]['created_at'] = $servers[$v['parent_id']]['created_at'];
             }
-            $servers[$key]['server_key'] = Helper::getServerKey($servers[$key]['created_at'], 16);
             $availableServers[] = $servers[$key]->toArray();
         }
         return $availableServers;
@@ -159,6 +159,28 @@ class ServerService
         return $servers;
     }
 
+    public function getAvailableAnyTLS(User $user)
+    {
+        $servers = [];
+        $model = ServerAnytls::orderBy('sort', 'ASC');
+        $anytls = $model->get()->keyBy('id');
+        foreach ($anytls as $key => $v) {
+            if (!$v['show']) continue;
+            $anytls[$key]['type'] = 'anytls';
+            $anytls[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_ANYTLS_LAST_CHECK_AT', $v['id']));
+            if (!in_array($user->group_id, $v['group_id'])) continue;
+            if (strpos($v['port'], '-') !== false) {
+                $anytls[$key]['port'] = Helper::randomPort($v['port']);
+            }
+            if (isset($anytls[$v['parent_id']])) {
+                $anytls[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_ANYTLS_LAST_CHECK_AT', $v['parent_id']));
+                $anytls[$key]['created_at'] = $anytls[$v['parent_id']]['created_at'];
+            }
+            $servers[] = $anytls[$key]->toArray();
+        }
+        return $servers;
+    }
+
     public function getAvailableServers(User $user)
     {
         $servers = array_merge(
@@ -167,7 +189,8 @@ class ServerService
             $this->getAvailableTrojan($user),
             $this->getAvailableTuic($user),
             $this->getAvailableHysteria($user),
-            $this->getAvailableVless($user)
+            $this->getAvailableVless($user),
+            $this->getAvailableAnyTLS($user)
         );
         $tmp = array_column($servers, 'sort');
         array_multisort($tmp, SORT_ASC, $servers);
@@ -299,6 +322,20 @@ class ServerService
         return $servers;
     }
 
+    public function getAllAnyTLS()
+    {
+        $servers = ServerAnytls::orderBy('sort', 'ASC')
+            ->get()
+            ->toArray();
+        foreach ($servers as $k => $v) {
+            $servers[$k]['type'] = 'anytls';
+            if (isset($v['padding_scheme'])) {
+                $servers[$k]['padding_scheme'] = json_encode($v['padding_scheme']);
+            }
+        }
+        return $servers;
+    }
+
     private function mergeData(&$servers)
     {
         foreach ($servers as $k => $v) {
@@ -324,7 +361,8 @@ class ServerService
             $this->getAllTrojan(),
             $this->getAllTuic(),
             $this->getAllHysteria(),
-            $this->getAllVLess()
+            $this->getAllVLess(),
+            $this->getAllAnyTLS()
         );
         $this->mergeData($servers);
         $tmp = array_column($servers, 'sort');
@@ -359,6 +397,8 @@ class ServerService
                 return ServerHysteria::find($serverId);
             case 'vless':
                 return ServerVless::find($serverId);
+            case 'anytls':
+                return ServerAnytls::find($serverId);
             default:
                 return false;
         }
