@@ -1,0 +1,13 @@
+services:
+  v2board:
+    # build: 
+    #   context: .
+    image: ghcr.io/rebecca554owen/v2board:latest
+    volumes:
+      - ./.docker/.data/redis/:/data/ 
+      - ./:/www/
+      # - ./.env:/www/.env
+    network_mode: host
+    restart: always
+    # ports:
+    #   - 7002:7002
