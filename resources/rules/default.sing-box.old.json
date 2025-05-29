@@ -12,7 +12,7 @@
                 "server": "remote"
             },
             {
-                "clash_mode": "بدون پراکسی",
+                "clash_mode": "خاموش کردن پروکسی",
                 "server": "local"
             },
             {
@@ -123,7 +123,7 @@
 				"action": "hijack-dns"
 			},
 			{
-                "clash_mode": "غیرفعال کردن پراکسی",
+                "clash_mode": "خاموش کردن پروکسی",
                 "outbound": "direct"
             },
             {
