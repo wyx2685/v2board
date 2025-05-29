@@ -11,7 +11,7 @@ external-controller: 127.0.0.1:9090
 
 tun:
   enable: true
-  stack: mixed
+  stack: gvisor
   mtu: 1500
   strict-route: false
   auto-route: true
@@ -21,15 +21,14 @@ tun:
     - tcp://any:53
 
 dns:
-  enable: false
-  listen: 0.0.0.0:53
-  ipv6: false
-  prefer-h3: false
+  enable: true
+  ipv6: true
+  prefer-h3: true
   default-nameserver:
-    - 85.15.1.14
+    - 8.8.8.8
+    - 1.1.1.1
     - 185.51.200.2
     - 62.193.0.130
-    - 217.218.155.155
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
