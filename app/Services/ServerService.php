@@ -329,6 +329,7 @@ class ServerService
             ->toArray();
         foreach ($servers as $k => $v) {
             $servers[$k]['type'] = 'anytls';
+            $servers[$k]['padding_scheme'] = json_encode($v['padding_scheme']);
         }
         return $servers;
     }
