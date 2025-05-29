@@ -122,7 +122,8 @@
 				"protocol": "dns",
 				"action": "hijack-dns"
 			},
-			{   "clash_mode": "غیرفعال کردن پراکسی",
+			{
+                "clash_mode": "غیرفعال کردن پراکسی",
                 "outbound": "direct"
             },
             {
