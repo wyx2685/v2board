@@ -68,6 +68,10 @@ class Singbox
                     $tuicConfig = $this->buildTuic($this->user['uuid'], $item);
                     $proxies[] = $tuicConfig;
                     break;
+                case 'anytls':
+                    $anytlsConfig = $this->buildAnyTLS($this->user['uuid'], $item);
+                    $proxies[] = $anytlsConfig;
+                    break;
                 case 'hysteria':
                     $hysteriaConfig = $this->buildHysteria($this->user['uuid'], $item, $this->user);
                     $proxies[] = $hysteriaConfig;
@@ -302,6 +306,30 @@ class Singbox
             $array['tls']['server_name'] = $server['server_name'];
         }
 
+        return $array;
+    }
+
+    protected function buildAnyTLS($password, $server)
+    {
+        $array = [];
+        $array['tag'] = $server['name'];
+        $array['type'] = 'anytls';
+        $array['server'] = $server['host'];
+        $array['server_port'] = $server['port'];
+        $array['password'] = $password;
+        $array['domain_resolver'] = 'local';
+
+        $array['tls'] = [
+            'enabled' => true,
+            'insecure' => $server['insecure'] ? true : false,
+            'alpn' => [
+                'h2',
+                'http/1.1',
+            ],
+        ];
+        if (isset($server['server_name'])) {
+            $array['tls']['server_name'] = $server['server_name'];
+        }
         return $array;
     }
 

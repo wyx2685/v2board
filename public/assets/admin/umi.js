@@ -106006,6 +106006,13 @@
                     value: 1
                 },
                 "\u662f")))), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, "\u670d\u52a1\u5668\u540d\u79f0\u6307\u793a(sni)"), y.a.createElement(s["a"], {
+                    placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
+                    value: e.server_name,
+                    onChange: e=>this.formChange("server_name", e.target.value)
+                })), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"
