@@ -10,6 +10,7 @@ use App\Jobs\SendEmailJob;
 use App\Models\InviteCode;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Staff;
 use App\Services\AuthService;
 use App\Utils\CacheKey;
 use App\Utils\Dict;

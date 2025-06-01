@@ -45061,7 +45061,7 @@
             constructor() {
                 super(...arguments),
                 this.state = {
-                    locale: "zh-CN"
+                    locale: "vi-VN"
                 },
                 this.reloadAppLocale = (()=>{
                     var e = this.getAppLocale();
@@ -45073,14 +45073,14 @@
             }
             getAppLocale() {
                 var e = {
-                    locale: "zh-CN",
+                    locale: "vi-VN",
                     messages: {},
-                    data: n("dVHv"),
-                    momentLocale: "zh-cn"
+                    data: n("kEdy"),
+                    momentLocale: "vi-vn"
                 }
                   , t = n("PszG").mergeConfig("locale") || {}
                   , r = "function" === typeof t.default ? t.default() : t.default;
-                e = g && "undefined" !== typeof localStorage && localStorage.getItem("umi_locale") && w[localStorage.getItem("umi_locale")] ? w[localStorage.getItem("umi_locale")] : "undefined" !== typeof navigator && w[navigator.language] && v ? w[navigator.language] : w[r] ? w[r] : w["zh-CN"] || e,
+                e = g && "undefined" !== typeof localStorage && localStorage.getItem("umi_locale") && w[localStorage.getItem("umi_locale")] ? w[localStorage.getItem("umi_locale")] : "undefined" !== typeof navigator && w[navigator.language] && v ? w[navigator.language] : w[r] ? w[r] : w["vi-VN"] || e,
                 window.g_lang = e.locale,
                 window.g_langSeparator = y || "-",
                 e.data && Object(h["addLocaleData"])(e.data);
