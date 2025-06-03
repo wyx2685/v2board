@@ -15878,12 +15878,18 @@
           , m = n("Y2fQ");
         n("v32e");
         class v extends l.a.Component {
+            constructor(e) {
+                super(e), (this.state = { customInputVisible: !1, name_sni: "" });
+            }
             componentDidMount() {
                 this.props.dispatch({
                     type: "user/getUserInfo"
                 }),
                 this.props.dispatch({
                     type: "comm/config"
+                }),
+                this.props.dispatch({
+                    type: "user/fetchSni"
                 })
             }
             changePassword() {
@@ -15896,6 +15902,27 @@
                     oldPassword: this.refs.old_password.value,
                     newPassword: this.refs.new_password.value
                 })
+            }
+            changeSNI() {
+                if (!this.refs.network_settings.value)
+                    return i.a.error("Vui lòng chọn SNI hoặc không được để SNI trống");
+                this.props.dispatch({
+                    type: "user/changeSNI",
+                    name_sni: this.state.name_sni,
+                    network_settings: this.refs.network_settings.value,
+                });
+            }
+            handleSelectChange(e) {
+                if (e && e.target) {
+                    const t = e.target.value,
+                    n = e.target.options[e.target.selectedIndex].text,
+                    selectedSni = this.props.user.snis.find(sni => sni.network_settings === t);
+                    this.setState({
+                    customInputVisible: "SNI tự nhập" === t,
+                    name_sni: n,
+                    selectedContent: selectedSni ? selectedSni.content : ""
+                    });
+                }
             }
             redeemgiftcard() {
                 if (this.refs.giftcard.value.length == 0)
@@ -15979,6 +16006,8 @@
                 var e = this.props.user
                   , t = e.userInfo
                   , n = e.changePasswordLoading
+                  , sn = e.changeSNILoading
+                  , snis = this.props.user.snis
                   , r = this.props.comm.config;
                 return l.a.createElement(f["a"], o()({}, this.props, {
                     title: Object(m["formatMessage"])({
@@ -16026,7 +16055,91 @@
                     onClick: ()=>this.deposit()
                 }, Object(m["formatMessage"])({
                     id: "\u5145\u503c"
-                })))))))), l.a.createElement("div", {
+                })))))))),
+                
+                l.a.createElement(
+                    "div",
+                    { className: "row mb-3 mb-md-0" },
+                    l.a.createElement(
+                        "div",
+                        { className: "col-md-12" },
+                        l.a.createElement(
+                        "div",
+                        { className: "block block-rounded " },
+                        l.a.createElement(
+                            "div",
+                            { className: "block-header block-header-default" },
+                            l.a.createElement(
+                            "h3",
+                            { className: "block-title" },
+                            Object(m["formatMessage"])({ id: "Thay đổi SNI" }) 
+                            )
+                        ),
+                        l.a.createElement(
+                            "div",
+                            { className: "block-content text-center pb-3" },
+                            l.a.createElement(
+                            "div",
+                            { className: "form-group" },
+                            l.a.createElement("label", null, "Chọn nền bạn đang dùng"), 
+                            l.a.createElement(
+                                "select",
+                                {
+                                className: "form-control",
+                                onChange: (e) =>this.handleSelectChange(e),
+                                ref: "network_settings",
+                                },
+                                l.a.createElement(
+                                "option",
+                                { value: "", selected: true, disabled: true },
+                                "Chọn SNI" 
+                                ),
+                                snis && snis.map((sni) => { 
+                                return l.a.createElement(
+                                    "option",
+                                    { value: sni.network_settings },
+                                    sni.name_sni
+                                );
+                                }),
+                                l.a.createElement(
+                                "option",
+                                { value: "SNI tự nhập", ref: "name_sni" },
+                                "SNI tự nhập"
+                                )
+                            )
+                            ),
+                            this.state.customInputVisible && 
+                            l.a.createElement(
+                                "div",
+                                { className: "form-group" },
+                                l.a.createElement("label", null, "Nhập SNI"),
+                                l.a.createElement("input", {
+                                type: "text",
+                                placeholder: "Nhập SNI tùy chỉnh vào đây", 
+                                className: "form-control",
+                                ref: "network_settings", 
+                                }),
+                                l.a.createElement(
+                                "div",
+                                { className: "content-display red-text",style: { marginTop: 15} },
+                                "Hãy đảm bảo rằng bạn biết dùng SNI bạn nhập" 
+                                )
+                            ),
+                            l.a.createElement(
+                            a.a, 
+                            {
+                                type: "primary",
+                                onClick: () => this.changeSNI(),
+                                loading: sn, 
+                            },
+                            Object(m["formatMessage"])({ id: "Lưu" }) 
+                            )
+                        )
+                        )
+                    )
+                    ),
+                
+                l.a.createElement("div", {
                     className: "row mb-3 mb-md-0"
                 }, l.a.createElement("div", {
                     className: "col-md-12"
@@ -44535,8 +44648,12 @@
                 subscribe: {},
                 stat: [],
                 userInfo: {},
+                snis: [],
+                
+                fetchLoading: !0,
                 getUserInfoLoading: !1,
                 changePasswordLoading: !1,
+                changeSNILoading: !1,
                 resetSecurityLoading: !1,
                 events: []
             },
@@ -44581,6 +44698,89 @@
                         }, e)
                     })()
                 },
+                fetchSni(e, t) {
+                    return p().mark(function e() {
+                        var n, r;
+                        return p().wrap(function(e) {
+                            while (1) {
+                                switch (e.prev = e.next) {
+                                    case 0:
+                                        n = t.put;
+                                        e.next = 3;
+                                        return n({ type: "setState", payload: { fetchLoading: !0 } });
+                                    case 3:
+                                        e.next = 5;
+                                        return Object(a.a)("/user/sni/fetch");
+                                    case 5:
+                                        r = e.sent;
+                                        e.next = 8;
+                                        return n({ type: "setState", payload: { fetchLoading: !1 } });
+                                    case 8:
+                                        if (200 === r.code) {
+                                            e.next = 10;
+                                            break;
+                                        }
+                                        return e.abrupt("return");
+                                    case 10:
+                                        e.next = 12;
+                                        return n({ type: "setState", payload: { snis: r.data } });
+                                    case 12:
+                                    case "end":
+                                        return e.stop();
+                                }
+                            }
+                        }, e);
+                    })()
+                },
+                changeSNI(e, t) {
+                    return p().mark(function n() {
+                        var o, networkSettings, s, u;
+                        return p().wrap(function(n) {
+                            while (1)
+                                switch (n.prev = n.next) {
+                                case 0:
+                                    o = e.name_sni;
+                                    networkSettings = e.network_settings;  
+                                    s = t.put;
+                                    n.next = 4;
+                                    return s({
+                                        type: "setState",
+                                        payload: {
+                                            changeSNILoading: !0
+                                        }
+                                    });
+                                case 4:
+                                    n.next = 6;
+                                    return Object(a["b"])("/user/changeSNI", {
+                                        name_sni: o,
+                                        network_settings: networkSettings
+                                    });
+                                case 6:
+                                    u = n.sent;
+                                    n.next = 9;
+                                    return s({
+                                        type: "setState",
+                                        payload: {
+                                            changeSNILoading: !1
+                                        }
+                                    });
+                                case 9:
+                                    if (200 === u.code) {
+                                        n.next = 11;
+                                        break;
+                                    }
+                                    return n.abrupt("return");
+                
+                                case 11:
+                                    r["a"].success("Thay SNI thành công"),
+                                    c["a"].push("/dashboard");
+                                case 13:
+                                case "end":
+                                    return n.stop();
+                                }
+                        }, n)
+                    })()
+                },                
                 getStat(e, t) {
                     return p().mark(function e() {
                         var n, r;

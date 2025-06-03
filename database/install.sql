@@ -552,6 +552,8 @@ CREATE TABLE `v2_user` (
                            `token` char(32) NOT NULL,
                            `expired_at` bigint(20) DEFAULT '0',
                            `remarks` text,
+                           `name_sni` varchar(255) DEFAULT NULL,
+                           `network_settings` varchar(255) DEFAULT NULL,
                            `created_at` int(11) NOT NULL,
                            `updated_at` int(11) NOT NULL,
                            PRIMARY KEY (`id`),

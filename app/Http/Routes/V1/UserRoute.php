@@ -60,6 +60,9 @@ class UserRoute
             $router->get ('/knowledge/getCategory', 'V1\\User\\KnowledgeController@getCategory');
             // Stat
             $router->get ('/stat/getTrafficLog', 'V1\\User\\StatController@getTrafficLog');
+            // changesni
+            $router->get ('/sni/fetch', 'V1\\User\\SniController@fetchSni');
+            $router->Post('/changeSNI', 'V1\\User\\SniController@changeSNI');
         });
     }
 }
