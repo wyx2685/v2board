@@ -222,7 +222,7 @@ CREATE TABLE `v2_plan` (
 
 DROP TABLE IF EXISTS `v2_staff`;
 CREATE TABLE `v2_staff` (
-                            `id` int(11) NOT NULL,
+                            `id` int(11) NOT NULL AUTO_INCREMENT,
                             `status` tinyint(1) NOT NULL DEFAULT '1',
                             `user_id` int(11) NOT NULL,
                             `domain` varchar(255) NOT NULL,
