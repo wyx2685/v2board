@@ -10,9 +10,8 @@
 
 按以下步骤进行面板文件迁移：
 
-    git remote set-url origin https://github.com/kutycma/v2b-zic  
-    git checkout master  
-    ./update.sh  
+    git clone https://github.com/v2board/v2board.git ./  
+    sh init.sh
 
 
 按以下步骤刷新设置缓存，重启队列:
