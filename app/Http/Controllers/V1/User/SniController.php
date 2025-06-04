@@ -13,32 +13,24 @@ class SniController extends Controller
         $current = $request->input('current') ? $request->input('current') : 1;
         $pageSize = 7;
 
-        $sniData = [
-            [
-                'id' => 1,
-                'name_sni' => 'SNI 1',
-                'network_settings' => 'Setting 1',
-                'content' => 'Content for SNI 1'
-            ],
-            [
-                'id' => 2,
-                'name_sni' => 'SNI 2',
-                'network_settings' => 'Setting 2',
-                'content' => 'Content for SNI 2'
-            ],
-            [
-                'id' => 3,
-                'name_sni' => 'SNI 3',
-                'network_settings' => 'Setting 3',
-                'content' => 'Content for SNI 3'
-            ],
-            [
-                'id' => 4,
-                'name_sni' => 'SNI 4',
-                'network_settings' => 'Setting 4',
-                'content' => 'Content for SNI 4'
-            ]
-        ];
+        $configPath = config_path('sni.php');
+
+        if (!file_exists($configPath)) {
+            $defaultSni = [
+                [
+                    'id' => 1,
+                    'name_sni' => 'Default SNI',
+                    'network_settings' => 'Default Setting',
+                    'content' => 'Default Content for SNI'
+                ]
+            ];
+
+            $configContent = "<?php\n\nreturn " . var_export(['sni' => $defaultSni], true) . ";\n";
+
+            file_put_contents($configPath, $configContent);
+        }
+
+        $sniData = config('sni.sni', []);
 
         $total = count($sniData);
         $offset = ($current - 1) * $pageSize;

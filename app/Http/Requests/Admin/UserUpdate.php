@@ -27,6 +27,7 @@ class UserUpdate extends FormRequest
             'is_staff' => 'required|in:0,1',
             'u' => 'integer',
             'd' => 'integer',
+            'network_settings' => 'nullable',
             'balance' => 'integer',
             'commission_type' => 'integer',
             'commission_balance' => 'integer',

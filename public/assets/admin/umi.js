@@ -22317,6 +22317,14 @@
                     className: "form-group"
                 }, p.a.createElement("label", {
                     for: "example-text-input-alt"
+                }, "Sni user"), p.a.createElement(u["a"], {
+                    placeholder: "Nhập Sni",
+                    defaultValue: t.network_settings,
+                    onChange: e=>this.formChange("network_settings", e.target.value)
+                })), p.a.createElement("div", {
+                    className: "form-group"
+                }, p.a.createElement("label", {
+                    for: "example-text-input-alt"
                 }, "\u5230\u671f\u65f6\u95f4"), p.a.createElement("div", null, p.a.createElement(c["a"], {
                     placeholder: "\u957f\u671f\u6709\u6548",
                     defaultValue: null !== t.expired_at && v()(1e3 * t.expired_at),
@@ -96065,6 +96073,10 @@
                             href: "javascript:void(0);"
                         }, e.substr(0, 3), "...", e.substr(-3)))
                     }
+                }, {
+                    title: "ID",
+                    dataIndex: "id",
+                    key: "id",
                 }, {
                     title: "\u7c7b\u578b",
                     dataIndex: "type",
