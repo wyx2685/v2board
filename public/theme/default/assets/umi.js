@@ -31112,7 +31112,40 @@
                 }, {
                     alive_ip: d.alive_ip,
                     device_limit: d.device_limit == null ? "∞" : d.device_limit
-                })))), y >= 80 && !Object(p["h"])(d.expired_at) && (null === d || void 0 === d ? void 0 : null === (e = d.plan) || void 0 === e ? void 0 : e.reset_price) && l.a.createElement("div", {
+                })),
+                l.a.createElement("br"),
+                l.a.createElement("span",{
+                    className: "font-w700"
+                },"  "), l.a.createElement("span", {
+                    className: "font-w700"
+                }, Object(b["formatMessage"])({
+                    id: "Email: {email}"
+                }, {
+                    email: d.email
+                })),
+                l.a.createElement("br"),
+                l.a.createElement("span",{
+                    className: "font-w700"
+                },"  "), l.a.createElement("span", {
+                    className: "font-w700"
+                }, Object(b["formatMessage"])({
+                    id: "ID định danh: {iduser}"
+                }, {
+                    iduser: d.id == null ? "null" : d.id
+                })),
+                l.a.createElement("br"),
+                l.a.createElement("span",{
+                    className: "font-w700"
+                },"  "), l.a.createElement("span", {
+                    className: "font-w700"
+                }, Object(b["formatMessage"])({
+                    id: "SNI user: {name_sni}"
+                }, {
+                    name_sni: d.name_sni == null ? "SNI mặc định theo Server" : d.name_sni
+                }))
+            
+            
+            )), y >= 80 && !Object(p["h"])(d.expired_at) && (null === d || void 0 === d ? void 0 : null === (e = d.plan) || void 0 === e ? void 0 : e.reset_price) && l.a.createElement("div", {
                     className: "mb-4"
                 }, l.a.createElement(i["a"], {
                     type: "primary",
