@@ -289,5 +289,7 @@ window.settings.i18n['vi-VN'] = {
   '请输入充值金额': 'Nhập số tiền cần nạp (đơn vị VNĐ)',
   '人': 'Người',
   '充值奖励':'Thưởng nạp tiền',
+  '待处理':'Chờ giải quyết',
+  '已答复':'Đã trả lời',
   '实际到账':'Số tiền thực nhận'
 };
