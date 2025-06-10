@@ -566,7 +566,7 @@ window.zhViDictionary = {
   '高' : 'Cao',
   '已回复' : 'Đã trả lời',
   '复制成功' : 'Sao chép thành công',
-  'zzzzz' : 'zzzzzz',
+  '保存成功' : 'Đã lưu thành công',
   'zzzzz' : 'zzzzzz',
   'zzzzz' : 'zzzzzz',
   'zzzzz' : 'zzzzzz',
