@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\Order;
 use App\Models\Staff;
 use App\Utils\Helper;
 use Illuminate\Http\Request;
@@ -34,10 +35,19 @@ class HomeController extends Controller
 
     public function stat(Request $request)
     {
+        $id = $request->input('user.id');
         return response()->json([
-            'today_income' => '1',
-            'month_income' => '2',
-            'new_users' => '3',
+            'today_income' => Order::where('created_at', '>=', strtotime(date('Y-m-d')))
+                    ->where('created_at', '<', time())
+                    ->whereNotIn('status', [0, 2])
+                    ->where('invite_user_id', $id)
+                    ->sum('total_amount'),
+            'month_income' => Order::where('created_at', '>=', strtotime(date('Y-m-1')))
+                    ->where('created_at', '<', time())
+                    ->whereNotIn('status', [0, 2])
+                    ->where('invite_user_id', $id)
+                    ->sum('total_amount'),
+            'new_users' => (int)User::where('invite_user_id', $request->user['id'])->count(),
         ]);
     }
     

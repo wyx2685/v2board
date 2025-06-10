@@ -30748,20 +30748,6 @@
                     align: "right",
                     render: (e,t)=>t.server_rate ? Object(p["b"])(parseInt(e)) : 0
                 }, {
-                    title: Object(v["formatMessage"])({
-                        id: "\u6263\u8d39\u500d\u7387"
-                    }),
-                    dataIndex: "server_rate",
-                    key: "server_rate",
-                    align: "center",
-                    render: e=>{
-                        return l.a.createElement(c["a"], {
-                            style: {
-                                minWidth: 60
-                            }
-                        }, parseFloat(e) ? parseFloat(e).toFixed(2) + " x" : "-")
-                    }
-                }, {
                     title: l.a.createElement(a["a"], {
                         placement: "topRight",
                         title: Object(v["formatMessage"])({
@@ -31142,10 +31128,7 @@
                     id: "SNI user: {name_sni}"
                 }, {
                     name_sni: d.name_sni == null ? "SNI mặc định theo Server" : d.name_sni
-                }))
-            
-            
-            )), y >= 80 && !Object(p["h"])(d.expired_at) && (null === d || void 0 === d ? void 0 : null === (e = d.plan) || void 0 === e ? void 0 : e.reset_price) && l.a.createElement("div", {
+                })))), y >= 80 && !Object(p["h"])(d.expired_at) && (null === d || void 0 === d ? void 0 : null === (e = d.plan) || void 0 === e ? void 0 : e.reset_price) && l.a.createElement("div", {
                     className: "mb-4"
                 }, l.a.createElement(i["a"], {
                     type: "primary",
@@ -32599,27 +32582,6 @@
                         return f.a.createElement(s["a"], {
                             status: parseInt(e) ? "processing" : "error"
                         })
-                    }
-                }, {
-                    title: f.a.createElement("span", null, f.a.createElement(c["a"], {
-                        placement: "top",
-                        title: Object(y["formatMessage"])({
-                            id: "\u4f7f\u7528\u7684\u6d41\u91cf\u5c06\u4e58\u4ee5\u500d\u7387\u8fdb\u884c\u6263\u9664"
-                        })
-                    }, Object(y["formatMessage"])({
-                        id: "\u500d\u7387"
-                    }), " ", f.a.createElement(u["a"], {
-                        type: "question-circle"
-                    }))),
-                    dataIndex: "rate",
-                    key: "rate",
-                    align: "center",
-                    render: e=>{
-                        return f.a.createElement(a["a"], {
-                            style: {
-                                minWidth: 60
-                            }
-                        }, e + " x")
                     }
                 }, {
                     title: Object(y["formatMessage"])({

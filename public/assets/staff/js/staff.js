@@ -24,13 +24,13 @@ function renderDashboard() {
         <div class="col-md-4">
           <div class="card bg-primary text-white p-3">
             <h5>Số dư</h5>
-            <p>${data.balance} VNĐ</p>
+            <p>${(data.balance / 100).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card bg-success text-white p-3">
-            <h5>Hoa hồng</h5>
-            <p>${data.commission_balance} VNĐ</p>
+            <h5>Hoa hồng có thể rút</h5>
+            <p>${(data.commission_balance / 100).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -57,25 +57,25 @@ function renderDashboard() {
     .then(res => res.json())
     .then(data => {
       document.getElementById('stat-cards').innerHTML = `
-        <div class="col-md-4">
-          <div class="card bg-secondary text-white p-3">
-            <h5>Thu nhập hôm nay</h5>
-            <p>${data.today_income} VNĐ</p>
-          </div>
+      <div class="col-md-4">
+        <div class="card bg-secondary text-white p-3">
+          <h5>Thu nhập hôm nay</h5>
+          <p>${(data.today_income / 100).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
         </div>
-        <div class="col-md-4">
-          <div class="card bg-dark text-white p-3">
-            <h5>Thu nhập tháng này</h5>
-            <p>${data.month_income} VNĐ</p>
-          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-dark text-white p-3">
+          <h5>Thu nhập tháng này</h5>
+          <p>${(data.month_income / 100).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
         </div>
-        <div class="col-md-4">
-          <div class="card bg-light text-dark p-3">
-            <h5>Người dùng mới tháng này</h5>
-            <p>${data.new_users}</p>
-          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-light text-dark p-3">
+          <h5>Người dùng mới tháng này</h5>
+          <p>${data.new_users}</p>
         </div>
-      `;
+      </div>
+    `;
     })
     .catch(() => Swal.fire({
           icon: 'error',
