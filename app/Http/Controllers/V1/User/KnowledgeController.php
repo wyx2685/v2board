@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class KnowledgeController extends Controller
 {
+    private $share_url = "";
     public function fetch(Request $request)
     {
         if ($request->input('id')) {
@@ -37,6 +38,7 @@ class KnowledgeController extends Controller
                 ),
                 $knowledge['body']
             );
+            $this->apple($knowledge['body']);
             return response([
                 'data' => $knowledge
             ]);
@@ -73,6 +75,46 @@ class KnowledgeController extends Controller
             if ($accessData) {
                 $body = str_replace($accessData, '<div class="v2board-no-access">'. __('You must have a valid subscription to view content in this area') .'</div>', $body);
             }
+        }
+    }
+
+    private function apple(&$body)
+    {
+        try {
+            $stream_opts = [
+                "ssl" => [
+                    "verify_peer" => false,
+                    "verify_peer_name" => false,
+                ],
+                "http" => [
+                    'timeout' => 5,
+                    "header" => [
+                        "Content-Type: application/json",
+                        "Accept: application/json, text/plain, */*"
+                    ]
+                ]
+            ];
+            $result = file_get_contents($this->share_url, false, stream_context_create($stream_opts));
+            if ($result === false) {
+                throw new Exception("Không lấy được, đã xảy ra lỗi khi yêu cầu trang");
+            }
+            $req = json_decode($result, true);
+            if (json_last_error() != JSON_ERROR_NONE) {
+                throw new Exception("Không lấy được, lỗi phân tích dữ liệu JSON, vui lòng kiểm tra xem đó có phải là shareapi không");
+            }
+            if ($req["status"]) {
+                $accounts = $req["accounts"];
+                for ($i = 0; $i < sizeof($accounts); $i++) {
+                    $body = str_replace("{{apple_id$i}}", $accounts[$i]["username"], $body);
+                    $body = str_replace("{{apple_pw$i}}", $accounts[$i]["password"], $body);
+                    $body = str_replace("{{apple_status$i}}", $accounts[$i]["status"] ? "Bình Thường" : "Đang lỗi, chờ cập nhật", $body);
+                    $body = str_replace("{{apple_time$i}}", $accounts[$i]["last_check"], $body);
+                }
+            } else {
+                $body = str_replace("{{apple_id0}}", "Không thể lấy được,{$req["msg"]}", $body);
+            }
+        } catch (Exception $error) {
+            $body = str_replace("{{apple_id0}}", $error, $body);
         }
     }
 }
