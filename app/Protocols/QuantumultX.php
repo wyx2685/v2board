@@ -4,7 +4,6 @@ namespace App\Protocols;
 
 use App\Utils\Helper;
 
-
 class QuantumultX
 {
     public $flag = 'quantumult%20x';
@@ -29,6 +28,10 @@ class QuantumultX
             }
             if ($item['type'] === 'vmess') {
                 $uri .= self::buildVmess($user['uuid'], $item);
+            }
+            // QX does not support the XTLS feature and needs to be excluded
+            if ($item['type'] === 'vless' && !$item['flow'] ) {
+                $uri .= self::buildVless($user['uuid'], $item);
             }
             if ($item['type'] === 'trojan') {
                 $uri .= self::buildTrojan($user['uuid'], $item);
@@ -85,33 +88,131 @@ class QuantumultX
             "tag={$server['name']}"
         ];
 
+        if ($server['network'] === 'tcp') {
+            if ($server['networkSettings']) {
+                $tcpSettings = $server['networkSettings'];
+                if (isset($tcpSettings['header']['type']) && !empty($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
+                    array_push($config, 'obfs=http');
+                }
+                if (isset($tcpSettings['header']['request']['path'][0]) && !empty($tcpSettings['header']['request']['path'][0])) {
+                    array_push($config, "obfs-uri={$tcpSettings['header']['request']['path'][0]}");
+                }
+                if (isset($tcpSettings['header']['request']['headers']['Host'][0]) && !empty($tcpSettings['header']['request']['headers']['Host'][0])) {
+                    array_push($config, "obfs-host={$tcpSettings['header']['request']['headers']['Host'][0]}");
+                }
+            }
+        }
+
         if ($server['tls']) {
-            if ($server['network'] === 'tcp')
+            array_push($config, 'tls13=true');
+            if ($server['network'] === 'tcp') {
                 array_push($config, 'obfs=over-tls');
+            }
             if ($server['tlsSettings']) {
                 $tlsSettings = $server['tlsSettings'];
-                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
+                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure'])) {
                     array_push($config, 'tls-verification=' . ($tlsSettings['allowInsecure'] ? 'false' : 'true'));
-                if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
+                }
+                if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName'])) {
                     $host = $tlsSettings['serverName'];
+                }
             }
         }
 
         if ($server['network'] === 'ws') {
             if ($server['tls']) {
                 array_push($config, 'obfs=wss');
-            } else {                
+            } else {
                 array_push($config, 'obfs=ws');
             }
             if ($server['networkSettings']) {
                 $wsSettings = $server['networkSettings'];
-                if (isset($wsSettings['path']) && !empty($wsSettings['path']))
+                if (isset($wsSettings['path']) && !empty($wsSettings['path'])) {
                     array_push($config, "obfs-uri={$wsSettings['path']}");
-                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']) && !isset($host))
+                }
+                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']) && !isset($host)) {
                     $host = $wsSettings['headers']['Host'];
-                if (isset($wsSettings['security'])) {
+                }
+                // QX WS does not support auto encryption. If the security value is auto, chacha20-poly1305 is still used as the default.
+                if (isset($wsSettings['security']) && ($wsSettings['security']) !== 'auto') {
                     array_splice($config, 1, 1, "method={$wsSettings['security']}");
                 }
+            }
+        }
+
+        if (isset($host)) {
+            array_push($config, "obfs-host={$host}");
+        }
+
+        $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+
+    public static function buildVless($uuid, $server)
+    {
+        $config = [
+            "vless={$server['host']}:{$server['port']}",
+            'method=none',
+            "password={$uuid}",
+            'fast-open=true',
+            'udp-relay=true',
+            "tag={$server['name']}"
+        ];
+
+        if ($server['network'] === 'tcp') {
+            if ($server['network_settings']) {
+                $tcpSettings = $server['network_settings'];
+                if (isset($tcpSettings['header']['type']) && !empty($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
+                    array_push($config, 'obfs=http');
+                }
+                if (isset($tcpSettings['header']['request']['path'][0]) && !empty($tcpSettings['header']['request']['path'][0])) {
+                    array_push($config, "obfs-uri={$tcpSettings['header']['request']['path'][0]}");
+                }
+                if (isset($tcpSettings['header']['request']['headers']['Host'][0]) && !empty($tcpSettings['header']['request']['headers']['Host'][0])) {
+                    array_push($config, "obfs-host={$tcpSettings['header']['request']['headers']['Host'][0]}");
+                }
+            }
+        }
+
+        if ($server['tls'] === 1) {
+            array_push($config, 'tls13=true');
+            if ($server['network'] === 'tcp') {
+                array_push($config, 'obfs=over-tls');
+            }
+
+            if ($server['tls_settings']) {
+                $tlsSettings = $server['tls_settings'];
+                if (isset($tlsSettings['allow_insecure']) && !empty($tlsSettings['allow_insecure'])) {
+                    array_push($config, 'tls-verification=' . ($tlsSettings['allow_insecure'] ? 'false' : 'true'));
+                }
+                if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name'])) {
+                    $host = $tlsSettings['server_name'];
+                }
+            }
+        } elseif ($server['tls'] === 2) {
+            // QX does not support Reality
+            return '';
+        }
+
+        if ($server['network'] === 'ws') {
+            if ($server['tls']) {
+                array_push($config, 'obfs=wss');
+            } else {
+                array_push($config, 'obfs=ws');
+            }
+            if ($server['network_settings']) {
+                $wsSettings = $server['network_settings'];
+                if (isset($wsSettings['path']) && !empty($wsSettings['path'])) {
+                    array_push($config, "obfs-uri={$wsSettings['path']}");
+                }
+                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']) && !isset($host)) {
+                    $host = $wsSettings['headers']['Host'];
+                }
+                // VLESS WS only supports none encryption
+                // if (isset($wsSettings['security']) && ($wsSettings['security']) !== 'auto') {
+                //     array_splice($config, 1, 1, "method={$wsSettings['security']}");
+                // }
             }
         }
 

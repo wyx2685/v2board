@@ -339,6 +339,23 @@ class Helper
         return "tuic://{$password}:{$password}@{$remote}:{$port}?{$query}#{$name}\r\n";
     }
 
+    public static function buildAnytlsUri($password, $server)
+    {
+        $config = [
+            'insecure' => $server['insecure'],
+        ];
+        if (isset($server['server_name'])) {
+            $config['sni'] = $server['server_name'];
+        }
+
+        $remote = self::formatHost($server['host']);
+        $port = $server['port'];
+        $name = self::encodeURIComponent($server['name']);
+
+        $query = http_build_query($config);
+        return "anytls://{$password}@{$remote}:{$port}/?{$query}#{$name}\r\n";
+    }
+
     public static function configureNetworkSettings($server, &$config)
     {
         $network = $server['network'];

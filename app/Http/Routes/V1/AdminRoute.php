@@ -81,6 +81,14 @@ class AdminRoute
                 $router->post('update', 'V1\\Admin\\Server\\VlessController@update');
                 $router->post('copy', 'V1\\Admin\\Server\\VlessController@copy');
             });
+            $router->group([
+                'prefix' => 'server/anytls'
+            ], function ($router) {
+                $router->post('save', 'V1\\Admin\\Server\\AnyTLSController@save');
+                $router->post('drop', 'V1\\Admin\\Server\\AnyTLSController@drop');
+                $router->post('update', 'V1\\Admin\\Server\\AnyTLSController@update');
+                $router->post('copy', 'V1\\Admin\\Server\\AnyTLSController@copy');
+            });
             // Order
             $router->get ('/order/fetch', 'V1\\Admin\\OrderController@fetch');
             $router->post('/order/update', 'V1\\Admin\\OrderController@update');

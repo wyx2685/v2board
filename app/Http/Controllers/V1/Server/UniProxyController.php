@@ -226,6 +226,13 @@ class UniProxyController extends Controller
                    $response['obfs-password'] = $this->nodeInfo->obfs_password ?? null;
                 }
                 break;
+            case 'anytls':
+                $response = [
+                    'server_port' => $this->nodeInfo->server_port,
+                    'server_name' => $this->nodeInfo->server_name,
+                    'padding_scheme' => $this->nodeInfo->padding_scheme
+                ];
+                break;
         }
         $response['base_config'] = [
             'push_interval' => (int)config('v2board.server_push_interval', 60),
