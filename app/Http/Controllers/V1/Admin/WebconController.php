@@ -34,6 +34,7 @@ class WebconController extends Controller
             'email',
             'domain',
             'title',
+            'plan_id',
             'description',
             'logo',
             'background_url',
