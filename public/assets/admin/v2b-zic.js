@@ -1,7 +1,6 @@
 (function() {
   'use strict';
   const ATTRS = ['placeholder', 'value', 'title', 'alt'];
-  const DICT_URL = '/path/to/zhViDictionary.json';
 
   function translateText(text) {
     if (!window.zhViDictionary) return text;
