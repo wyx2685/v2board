@@ -4,273 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خطا در پرداخت</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v26.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/irancell-font@v2.0.0/dist/font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        body {
-            font-family: 'Vazir', sans-serif;
-            background: linear-gradient(to right, #f85032, #e73827);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(to right, #434343, #000000);
-        }
-
-        .payment-result {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            text-align: center;
-            max-width: 80%;
-            transition: background-color 0.3s, color 0.3s;
-            animation: fadeIn 1s ease-in-out;
-            color: #333;
-        }
-
-        .dark-mode .payment-result {
-            background-color: rgba(68, 68, 68, 0.9);
-            color: #f0f0f0;
-        }
-
-        .icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            color: #F44336;
-            animation: bounce 1s infinite;
-        }
-
-        h1 {
-            color: #F44336;
-            margin-bottom: 10px;
-            animation: fadeInDown 0.5s ease-in-out;
-        }
-
-        .dark-mode h1 {
-            color: #FF7043;
-        }
-
-        p {
-            font-size: 20px;
-            margin-bottom: 5px;
-            animation: fadeInUp 0.5s ease-in-out;
-        }
-
-        .order-info {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            animation: fadeInUp 0.5s ease-in-out;
-        }
-
-        .dark-mode .order-info {
-            border-top: 1px solid #666;
-        }
-
-        .button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 20px;
-            color: white;
-            background: linear-gradient(to right, #F44336, #D32F2F);
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s, transform 0.3s;
-            animation: fadeInUp 0.5s ease-in-out;
-        }
-
-        .dark-mode .button {
-            background: linear-gradient(to right, #FF7043, #D32F2F);
-        }
-
-        .button:hover {
-            background: linear-gradient(to right, #D32F2F, #C62828);
-            transform: translateY(-2px);
-        }
-
-        .toggle-dark-mode {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            cursor: pointer;
-        }
-
-        .progress-bar {
-            width: 100%;
-            background-color: #eee;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 20px;
-            animation: fadeInUp 0.5s ease-in-out;
-        }
-
-        .progress {
-            height: 20px;
-            background-color: #F44336;
-            width: 0; /* شروع از 0 درصد */
-            transform-origin: right;
-            transition: width 0.1s ease; /* اضافه کردن transition */
-        }
-
-        .progress-percentage {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #333;
-            animation: fadeInUp 0.5s ease-in-out;
-        }
-
-        .dark-mode .progress-percentage {
-            color: #f0f0f0;
-        }
-
-        .countdown-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-            animation: fadeInUp 0.5s ease-in-out;
-        }
-
-        .countdown {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #F44336;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-left: 10px;
-            animation: pulse 1s infinite;
-        }
-
-        .dark-mode .countdown {
-            background-color: #FF7043;
-        }
-
-        @keyframes progress-animation {
-            from {
-                transform: scaleX(0);
-            }
-            to {
-                transform: scaleX(1);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-30px);
-            }
-            60% {
-                transform: translateY(-15px);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Irancell','Tahoma',sans-serif;background:radial-gradient(circle at center,#f8f9fa 0%,#e9ecef 50%,#dee2e6 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px;position:relative;}
+        body.dark-mode{background:radial-gradient(circle at center,#2c3e50 0%,#34495e 50%,#2c3e50 100%);}
+        .receipt-container{background:linear-gradient(to bottom,#fff 0%,#fff 70%,#f8f9fa 100%);width:100%;max-width:340px;position:relative;box-shadow:0 15px 35px rgba(0,0,0,0.1),0 5px 15px rgba(0,0,0,0.07);transform:rotate(-1.5deg);transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);animation:receiptFloat 0.8s ease-out;border-radius:8px 8px 0 0;}
+        .receipt-container:hover{transform:rotate(0deg) scale(1.02);}
+        body.dark-mode .receipt-container{background:linear-gradient(to bottom,#34495e 0%,#34495e 70%,#2c3e50 100%);color:#ecf0f1;}
+        .receipt-header{background:linear-gradient(135deg,#e74c3c 0%,#c0392b 100%);color:#fff;padding:20px;text-align:center;position:relative;border-radius:8px 8px 0 0;}
+        .receipt-header::after{content:'';position:absolute;bottom:-10px;left:0;right:0;height:10px;background:radial-gradient(circle at 5px 0,transparent 5px,#e74c3c 5px),linear-gradient(to right,#e74c3c,#c0392b);background-size:10px 10px,100% 10px;}
+        .store-name{font-size:14px;font-weight:600;margin-bottom:5px;opacity:0.9;}
+        .error-title{font-size:20px;font-weight:700;margin:8px 0;animation:titleShake 2s infinite;}
+        .receipt-number{font-size:10px;opacity:0.8;margin-top:5px;font-family:'Courier New',monospace;}
+        .receipt-body{padding:20px;background:#fff;position:relative;}
+        body.dark-mode .receipt-body{background:#34495e;}
+        .receipt-body::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:repeating-linear-gradient(to bottom,#e74c3c 0px,#e74c3c 8px,transparent 8px,transparent 16px);opacity:0.3;}
+        .error-icon{font-size:40px;margin:15px 0;color:#e74c3c;animation:errorPulse 2s infinite;text-align:center;}
+        .error-message{background:linear-gradient(135deg,#ffebee 0%,#ffcdd2 100%);border:2px solid #ffab91;border-radius:8px;padding:15px;margin:15px 0;font-size:13px;color:#c62828;text-align:center;font-weight:600;position:relative;overflow:hidden;}
+        .error-message::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s infinite;}
+        body.dark-mode .error-message{background:linear-gradient(135deg,#8d6e63 0%,#5d4037 100%);border-color:#a1887f;color:#ffcdd2;}
+        .receipt-section{margin:15px 0;padding:12px 0;border-bottom:1px dashed #ddd;}
+        .receipt-section:last-child{border-bottom:none;}
+        body.dark-mode .receipt-section{border-bottom-color:#7f8c8d;}
+        .receipt-item{display:flex;justify-content:space-between;align-items:center;margin:8px 0;font-size:13px;line-height:1.4;}
+        .receipt-label{font-weight:600;color:#2c3e50;display:flex;align-items:center;}
+        .receipt-label::before{content:'●';color:#e74c3c;margin-left:6px;font-size:6px;}
+        body.dark-mode .receipt-label{color:#ecf0f1;}
+        .receipt-value{color:#7f8c8d;font-weight:500;}
+        body.dark-mode .receipt-value{color:#bdc3c7;}
+        .error-status{color:#e74c3c !important;font-weight:700;animation:errorBlink 1.5s infinite;}
+        .progress-section{text-align:center;margin:20px 0;}
+        .progress-bar{width:100%;height:6px;background:#ecf0f1;border-radius:3px;margin:10px 0;overflow:hidden;}
+        body.dark-mode .progress-bar{background:#34495e;}
+        .progress-fill{height:100%;background:linear-gradient(90deg,#e74c3c 0%,#c0392b 50%,#e74c3c 100%);width:0%;transition:width 0.3s;border-radius:3px;}
+        .countdown-section{display:flex;align-items:center;justify-content:center;gap:8px;margin:15px 0;}
+        .countdown-number{background:linear-gradient(135deg,#e74c3c 0%,#c0392b 100%);color:#fff;width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;animation:countdownPulse 1s infinite;}
+        .countdown-text{font-size:12px;color:#7f8c8d;font-weight:500;}
+        body.dark-mode .countdown-text{color:#bdc3c7;}
+        .receipt-footer{background:linear-gradient(to bottom,#fff 0%,#f8f9fa 100%);padding:20px;position:relative;border-radius:0 0 8px 8px;}
+        body.dark-mode .receipt-footer{background:linear-gradient(to bottom,#34495e 0%,#2c3e50 100%);}
+        .receipt-button{background:linear-gradient(135deg,#27ae60 0%,#229954 100%);color:#fff;border:none;padding:12px 25px;border-radius:8px;font-size:14px;cursor:pointer;text-decoration:none;display:block;text-align:center;font-family:'Irancell',sans-serif;font-weight:700;transition:all 0.3s;position:relative;overflow:hidden;}
+        .receipt-button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);transition:left 0.5s;}
+        .receipt-button:hover::before{left:100%;}
+        .receipt-button:hover{transform:translateY(-2px);}
+        .receipt-torn{position:absolute;bottom:-6px;left:0;right:0;height:6px;background:radial-gradient(circle at 6px 0,transparent 6px,#fff 6px),linear-gradient(to right,#fff,#f8f9fa);background-size:12px 6px,100% 6px;}
+        body.dark-mode .receipt-torn{background:radial-gradient(circle at 6px 0,transparent 6px,#2c3e50 6px),linear-gradient(to right,#2c3e50,#34495e);background-size:12px 6px,100% 6px;}
+        .dark-toggle{position:fixed;top:20px;left:20px;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:40px;height:40px;font-size:16px;cursor:pointer;transition:all 0.3s;z-index:100;}
+        body.dark-mode .dark-toggle{background:rgba(52,73,94,0.9);color:#ecf0f1;}
+        .dark-toggle:hover{transform:scale(1.1);}
+        @keyframes receiptFloat{0%{transform:translateY(-100px) rotate(10deg);opacity:0;}60%{transform:translateY(10px) rotate(-2deg);opacity:0.8;}100%{transform:translateY(0) rotate(-1.5deg);opacity:1;}}
+        @keyframes titleShake{0%,100%{transform:translateX(0);}25%{transform:translateX(-1px);}75%{transform:translateX(1px);}}
+        @keyframes errorPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.08);opacity:0.8;}}
+        @keyframes errorBlink{0%,50%{opacity:1;}51%,100%{opacity:0.5;}}
+        @keyframes shimmer{0%{left:-100%;}100%{left:100%;}}
+        @keyframes countdownPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+        @media (max-width:480px){.receipt-container{max-width:300px;transform:rotate(-1deg);}.receipt-header{padding:15px;}.receipt-body{padding:15px;}.error-title{font-size:18px;}.error-icon{font-size:36px;}.dark-toggle{top:15px;left:15px;width:36px;height:36px;font-size:14px;}}
+        @media (max-width:320px){.receipt-container{max-width:280px;}.receipt-header{padding:12px;}.receipt-body{padding:12px;}.receipt-button{padding:10px 20px;font-size:13px;}}
     </style>
 </head>
 <body>
-    <div class="toggle-dark-mode">
-        <i class="fas fa-moon" aria-label="Toggle Dark Mode"></i>
-    </div>
-    <div class="payment-result" role="alert">
-        <div class="icon" aria-hidden="true">✘</div>
-        <h1>خطا در پرداخت</h1>
-        <p>{{ $message }}</p>
-        <a href="https://drmobjay.com/index2332.html#/dashboard/order" class="button" role="button">رفتن به سفارشات</a>
-        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress"></div>
+    <button class="dark-toggle" onclick="toggleDarkMode()" aria-label="تغییر حالت">🌙</button>
+    <div class="receipt-container">
+        <div class="receipt-header">
+            <div class="store-name">سیستم پرداخت آنلاین</div>
+            <h1 class="error-title">خطا در تراکنش</h1>
+            <div class="receipt-number">شماره: #ERR-<span id="receiptNumber"></span></div>
         </div>
-        <div class="progress-percentage" id="progress-percentage">در حال برگشت به سایت: ۰٪</div>
-        <div class="countdown-wrapper">
-            <div class="countdown" id="countdown" aria-live="polite">10</div>
-            <p>ثانیه دیگر به صورت خودکار به صفحه هدایت می‌شوید</p>
+        <div class="receipt-body">
+            <div class="error-icon">❌</div>
+            <div class="error-message">
+                ⚠️ متأسفانه پرداخت شما با خطا مواجه شد
+                <br>لطفاً مجدداً تلاش کنید یا با پشتیبانی تماس بگیرید
+            </div>
+            <div class="receipt-section">
+                <div class="receipt-item">
+                    <span class="receipt-label">تاریخ</span>
+                    <span class="receipt-value" id="currentDate"></span>
+                </div>
+                <div class="receipt-item">
+                    <span class="receipt-label">زمان</span>
+                    <span class="receipt-value" id="currentTime"></span>
+                </div>
+                <div class="receipt-item">
+                    <span class="receipt-label">وضعیت</span>
+                    <span class="receipt-value error-status">ناموفق</span>
+                </div>
+                <div class="receipt-item">
+                    <span class="receipt-label">کد خطا</span>
+                    <span class="receipt-value">PAYMENT_FAILED</span>
+                </div>
+            </div>
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="countdown-section">
+                    <span class="countdown-number" id="countdown">5</span>
+                    <span class="countdown-text">ثانیه تا انتقال</span>
+                </div>
+            </div>
+        </div>
+        <div class="receipt-footer">
+            <a href="https://drmobjay.com/index2332.html#/dashboard/store" class="receipt-button">🛒 برگشت به صفحه خرید اشتراک</a>
+            <div class="receipt-torn"></div>
         </div>
     </div>
     <script>
-        const toggleDarkMode = document.querySelector('.toggle-dark-mode');
-        const icon = toggleDarkMode.querySelector('i');
-
-        toggleDarkMode.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            icon.classList.toggle('fa-moon');
-            icon.classList.toggle('fa-sun');
-        });
-
-        // هدایت خودکار بعد از 10 ثانیه
-        let countdown = 10;
-        const countdownElement = document.getElementById('countdown');
-        const countdownInterval = setInterval(() => {
-            countdown--;
-            countdownElement.textContent = countdown;
-            if (countdown === 0) {
-                clearInterval(countdownInterval);
-                window.location.href = "https://drmobjay.com/index2332.html#/dashboard/order";
-            }
-        }, 1000);
-
-        // به‌روزرسانی درصد پیشرفت
-        const progressPercentage = document.getElementById('progress-percentage');
-        const progressBar = document.querySelector('.progress');
-        let progressValue = 0;
-        const updateProgressInterval = setInterval(() => {
-            progressValue += 1; // افزایش 1 درصد در هر 0.1 ثانیه
-            progressPercentage.textContent = `در حال برگشت به سایت: ${progressValue}%`;
-            progressBar.style.width = `${progressValue}%`;
-            if (progressValue === 100) {
-                clearInterval(updateProgressInterval);
-            }
-        }, 100); // به‌روزرسانی هر 100 میلی‌ثانیه
+        function generateReceiptNumber(){return Date.now().toString().slice(-6)+Math.floor(Math.random()*1000).toString().padStart(3,'0');}
+        function updateDateTime(){const now=new Date();try{const date=now.toLocaleDateString('fa-IR',{year:'numeric',month:'2-digit',day:'2-digit'});const time=now.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});document.getElementById('currentDate').textContent=date;document.getElementById('currentTime').textContent=time;}catch(e){const date=now.getFullYear()+'/'+(now.getMonth()+1).toString().padStart(2,'0')+'/'+now.getDate().toString().padStart(2,'0');const time=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');document.getElementById('currentDate').textContent=date;document.getElementById('currentTime').textContent=time;}}
+        document.getElementById('receiptNumber').textContent=generateReceiptNumber();updateDateTime();
+        let countdown=5,progress=0;const countdownEl=document.getElementById('countdown'),progressEl=document.getElementById('progressFill');
+        function updateCountdown(){countdown--;countdownEl.textContent=countdown;progress+=20;progressEl.style.width=progress+'%';if(countdown<=0)window.location.href='https://drmobjay.com/index2332.html#/dashboard/store';}
+        const timer=setInterval(updateCountdown,1000);
+        function toggleDarkMode(){document.body.classList.toggle('dark-mode');const toggle=document.querySelector('.dark-toggle');toggle.textContent=document.body.classList.contains('dark-mode')?'☀️':'🌙';try{localStorage.setItem('darkMode',document.body.classList.contains('dark-mode'));}catch(e){}}
+        function loadUserPreferences(){try{const isDarkMode=localStorage.getItem('darkMode')==='true';if(isDarkMode||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&!localStorage.getItem('darkMode'))){document.body.classList.add('dark-mode');document.querySelector('.dark-toggle').textContent='☀️';}}catch(e){}}
+        loadUserPreferences();
+        const link=document.createElement('link');link.rel='prefetch';link.href='https://drmobjay.com/index2332.html#/dashboard/store';document.head.appendChild(link);
+        document.addEventListener('keydown',function(e){if(e.key==='Escape')window.location.href='https://drmobjay.com/index2332.html#/dashboard/store';if(e.key==='d'||e.key==='D')toggleDarkMode();});
+        document.addEventListener('contextmenu',function(e){e.preventDefault();});
     </script>
 </body>
 </html>
