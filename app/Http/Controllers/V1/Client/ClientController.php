@@ -124,6 +124,11 @@ class ClientController extends Controller
         $v2Plan = Plan::find($userPlanId);
         $UserID = $user['id'];
         $planName = $v2Plan->name;
+        if ($totalTraffic - $useTraffic <= 0) {
+            $dataStatus = 'Đã hết data';
+        } else {
+            $dataStatus = $remainingTraffic;
+        }
         array_unshift($servers, array_merge($servers[0], [
             'name' => "⏳ Hạn SD: {$expiredDate}",
         ]));
@@ -133,7 +138,7 @@ class ClientController extends Controller
             ]));
         }
         array_unshift($servers, array_merge($servers[0], [
-            'name' => "📨 Data: {$remainingTraffic}",
+            'name' => "📨 Data: {$dataStatus}",
         ]));
         array_unshift($servers, array_merge($servers[0], [
             'name' => "📝 Gói: {$planName}",
