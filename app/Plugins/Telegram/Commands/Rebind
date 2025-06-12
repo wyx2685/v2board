@@ -1,0 +1,131 @@
+<?php
+
+namespace App\Plugins\Telegram\Commands;
+
+use App\Models\User;
+use App\Plugins\Telegram\Telegram;
+
+class Rebind extends Telegram {
+   public $command = '/rebind';
+   public $description = '重新绑定Telegram账户到网站';
+
+   public function handle($message, $match = []) {
+       if (!$message->is_private) return;
+       
+       if (!isset($message->args[0])) {
+           $this->telegramService->sendMessage($message->chat_id, 
+               "📝 命令格式：\n\n" .
+               "🔹 用户 → 用户（无需验证）：\n" .
+               "/rebind [订阅地址]\n\n" .
+               "🔹 用户 → 管理员（需要密码）：\n" .
+               "/rebind [订阅地址] [管理员密码]\n\n" .
+               "🔹 管理员 → 管理员（需要密码）：\n" .
+               "/rebind [订阅地址] [管理员密码]\n\n" .
+               "🔹 管理员 → 用户（无需验证）：\n" .
+               "/rebind [订阅地址]\n\n" .
+               "示例：\n" .
+               "/rebind https://site.com/subscribe?token=abc123\n" .
+               "/rebind https://site.com/subscribe?token=xyz789 admin_password", 
+               'markdown');
+           return;
+       }
+       
+       $subscribeUrl = $message->args[0];
+       $password = $message->args[1] ?? null;
+       
+       $parsedUrl = parse_url($subscribeUrl);
+       if (!isset($parsedUrl['query'])) {
+           $this->telegramService->sendMessage($message->chat_id, '❌ 订阅地址格式无效', 'markdown');
+           return;
+       }
+       
+       parse_str($parsedUrl['query'], $query);
+       $token = $query['token'] ?? null;
+       
+       if (!$token) {
+           $this->telegramService->sendMessage($message->chat_id, '❌ 订阅地址中未找到有效令牌', 'markdown');
+           return;
+       }
+       
+       $targetUser = User::where('token', $token)->first();
+       if (!$targetUser) {
+           $this->telegramService->sendMessage($message->chat_id, '❌ 用户不存在，请检查订阅地址', 'markdown');
+           return;
+       }
+       
+       $currentUser = User::where('telegram_id', $message->chat_id)->first();
+       
+       $isCurrentUserAdmin = $currentUser ? $currentUser->is_admin : false;
+       
+       $isTargetUserAdmin = $targetUser->is_admin;
+       
+       if ($this->needsPasswordVerification($isCurrentUserAdmin, $isTargetUserAdmin)) {
+           if (!$password) {
+               $this->telegramService->sendMessage($message->chat_id, 
+                   "🔐 绑定管理员账户需要密码\n\n" .
+                   "格式：/rebind [订阅地址] [密码]\n\n" .
+                   "示例：/rebind {$subscribeUrl} admin_password", 
+                   'markdown');
+               return;
+           }
+           
+           if (!password_verify($password, $targetUser->password)) {
+               $this->telegramService->sendMessage($message->chat_id, '❌ 密码错误', 'markdown');
+               return;
+           }
+       }
+       
+       $existingUser = User::where('telegram_id', $message->chat_id)->first();
+       if ($existingUser && $existingUser->id !== $targetUser->id) {
+           $this->telegramService->sendMessage($message->chat_id, 
+               "❌ 当前Telegram账户已绑定到其他用户\n\n" .
+               "📧 当前账户：{$existingUser->email}\n" .
+               "📧 请求账户：{$targetUser->email}\n\n" .
+               "发送 /unbind 解除绑定", 
+               'markdown');
+           return;
+       }
+       
+       $targetUser->telegram_id = $message->chat_id;
+       if (!$targetUser->save()) {
+           $this->telegramService->sendMessage($message->chat_id, '❌ 重新绑定失败，请重试', 'markdown');
+           return;
+       }
+       
+       $targetUserType = $targetUser->is_admin ? '👑 管理员' : '👤 用户';
+       $currentUserType = $isCurrentUserAdmin ? '👑 管理员' : '👤 用户';
+       
+       $this->telegramService->sendMessage($message->chat_id, 
+           "✅ 重新绑定成功！\n\n" .
+           "🔄 {$currentUserType} → {$targetUserType}\n\n" .
+           "📧 邮箱：{$targetUser->email}\n" .
+           "🆔 ID：{$targetUser->id}\n" .
+           "🔰 用户类型：{$targetUserType}\n\n" .
+           "现在您可以发送频道加入请求。", 
+           'markdown');
+   }
+   
+   /**
+    * 确定是否需要密码验证
+    */
+   private function needsPasswordVerification($isCurrentUserAdmin, $isTargetUserAdmin)
+   {
+       if (!$isCurrentUserAdmin && !$isTargetUserAdmin) {
+           return false;
+       }
+       
+       if (!$isCurrentUserAdmin && $isTargetUserAdmin) {
+           return true;
+       }
+       
+       if ($isCurrentUserAdmin && $isTargetUserAdmin) {
+           return true;
+       }
+       
+       if ($isCurrentUserAdmin && !$isTargetUserAdmin) {
+           return false;
+       }
+       
+       return false;
+   }
+}
