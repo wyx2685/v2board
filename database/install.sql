@@ -231,7 +231,7 @@ CREATE TABLE `v2_staff` (
                             `description` varchar(255) DEFAULT NULL,
                             `logo` varchar(255) DEFAULT NULL,
                             `background_url` varchar(255) DEFAULT NULL,
-                            `custom_html` text,
+                            `custom_html` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                             `created_at` int(11) NOT NULL,
                             `updated_at` int(11) NOT NULL,
                             PRIMARY KEY (`id`)

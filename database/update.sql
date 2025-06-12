@@ -808,3 +808,7 @@ CREATE TABLE `v2_server_anytls` (
 
 ALTER TABLE `v2_staff`
     ADD `plan_id` JSON NULL AFTER `domain`;
+
+ALTER TABLE `v2_staff`
+    MODIFY `custom_html` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL;
+
