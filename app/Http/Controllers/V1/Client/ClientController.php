@@ -26,11 +26,12 @@ class ClientController extends Controller
         if ($custom_sni === null && isset($user['network_settings'])) {
             $custom_sni = $user['network_settings'] ?? null;
         }
-        // account not expired and is not banned.
+
         $userService = new UserService();
         if ($userService->isAvailable($user)) {
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
+            \Log::info($servers);
             if($flag) {
                 if (!strpos($flag, 'sing')) {
                     $this->setSubscribeInfoToServers($servers, $user, $custom_sni);
@@ -57,6 +58,8 @@ class ClientController extends Controller
             }
             $class = new General($user, $servers);
             return $class->handle();
+        } else {
+            return $this->handleExpiredUser($request, $flag, $user, $custom_sni);
         }
     }
 
@@ -139,4 +142,74 @@ class ClientController extends Controller
             'name' => "👤 User ID: {$UserID}",
         ]));
     }
+    private function handleExpiredUser($request, $flag, $user, $custom_sni)
+    {
+    
+        $servers = [
+            [
+                'id' => 9991,
+                'name' => 'User ID: ' . $user['id'],
+                'type' => 'vmess',
+                'host' => 'expired.example.com',
+                'port' => 80,
+                'server_port' => 80,
+                'tls' => 0,
+                'network' => 'ws',
+                'networkSettings' => [
+                    'path' => '/expired',
+                    'headers' => [
+                        'Host' => 'expired.example.com',
+                    ],
+                ],
+                'show' => 1,
+                'is_online' => 1,
+            ],
+            [
+                'id' => 9992,
+                'name' => 'Gói của bạn đã hết hạn',
+                'type' => 'vmess',
+                'host' => 'expired.example.com',
+                'port' => 80,
+                'server_port' => 80,
+                'tls' => 0,
+                'network' => 'ws',
+                'networkSettings' => [
+                    'path' => '/expired',
+                    'headers' => [
+                        'Host' => 'expired.example.com',
+                    ],
+                ],
+                'show' => 1,
+                'is_online' => 1,
+            ],
+        ];
+    
+    
+        if ($flag) {
+            if (!strpos($flag, 'sing')) {
+                foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
+                    $file = 'App\\Protocols\\' . basename($file, '.php');
+                    $class = new $file($user, $servers);
+                    if (strpos($flag, $class->flag) !== false) {
+                        return $class->handle();
+                    }
+                }
+            }
+            if (strpos($flag, 'sing') !== false) {
+                $version = null;
+                if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
+                    $version = $matches[1];
+                }
+                if (!is_null($version) && $version >= '1.12.0') {
+                    $class = new Singbox($user, $servers);
+                } else {
+                    $class = new SingboxOld($user, $servers);
+                }
+                return $class->handle();
+            }
+        }
+        $class = new General($user, $servers);
+        return $class->handle();
+    }
+
 }
