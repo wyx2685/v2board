@@ -226,6 +226,7 @@ CREATE TABLE `v2_staff` (
                             `status` tinyint(1) NOT NULL DEFAULT '1',
                             `user_id` int(11) NOT NULL,
                             `domain` varchar(255) NOT NULL,
+                            `plan_id` JSON DEFAULT NULL,
                             `title` varchar(255) DEFAULT NULL,
                             `description` varchar(255) DEFAULT NULL,
                             `logo` varchar(255) DEFAULT NULL,

@@ -21,7 +21,7 @@ class WebconController extends Controller
             $staff->staff = $user ? $user->is_staff : 0;
             return $staff;
         });
-    
+        
         return response([
             'data' => $staffs
         ]);
@@ -30,16 +30,18 @@ class WebconController extends Controller
 
     public function save(WebconSave $request)
     {
+        
         $data = $request->only([
             'email',
             'domain',
             'title',
-            'plan_id',
             'description',
             'logo',
             'background_url',
             'custom_html'
         ]);
+        $planIds = $request->input('plan_ids', []);
+        $data['plan_id'] = array_map('intval', (array)$planIds);
 
         $user = User::where('email', $data['email'])->first();
         if (!$user) {

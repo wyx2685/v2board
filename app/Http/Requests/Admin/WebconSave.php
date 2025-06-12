@@ -15,7 +15,9 @@ class WebconSave extends FormRequest
     {
         return [
             'email' => 'required',
-            'domain' => 'nullable',
+            'domain' => 'required',
+            'plan_id' => 'nullable',
+            'plan_ids' => 'nullable',
             'title' => 'nullable',
             'description' => 'nullable',
             'logo' => 'nullable|url',
@@ -28,6 +30,7 @@ class WebconSave extends FormRequest
     {
         return [
             'email.required' => 'Email admin không được bỏ trống',
+            'domain.required' => 'domain không được bỏ trống',
             'logo.url' => 'Logo phải là url',
             'background_url.url' => 'Hình nền phải là Url'
         ];

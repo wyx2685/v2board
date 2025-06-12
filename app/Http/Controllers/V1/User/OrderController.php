@@ -76,10 +76,7 @@ class OrderController extends Controller
 
     public function save(OrderSave $request)
     {
-        $domain = $request->header('host');
-        $staff = Staff::where('domain', $domain)->first();
-        $staffPlanIds = $staff && !empty($staff->plan_id) ? $staff->plan_id : [];
-        $isStaffPlan = in_array($plan->id, $staffPlanIds);
+        
 
         $userService = new UserService();
         if ($userService->isNotCompleteOrderByUserId($request->user['id'])) {
@@ -118,6 +115,10 @@ class OrderController extends Controller
 
         $plan = $planService->plan;
         $user = User::find($request->user['id']);
+        $domain = $request->header('host');
+        $staff = Staff::where('domain', $domain)->first();
+        $staffPlanIds = $staff && !empty($staff->plan_id) ? $staff->plan_id : [];
+        $isStaffPlan = in_array($plan->id, $staffPlanIds);
 
         if (!$plan) {
             abort(500, __('Subscription plan does not exist'));
@@ -147,22 +148,15 @@ class OrderController extends Controller
                     abort(500, __('This subscription has been sold out, please choose another subscription'));
                 }
             }
+            if (!$plan->show && $plan->renew && !$userService->isAvailable($user)) {
+                abort(500, __('This subscription has expired, please change to another subscription'));
+            }
         }
         
 
         if (!$plan->renew && $user->plan_id == $plan->id && $request->input('period') !== 'reset_price') {
             abort(500, __('This subscription cannot be renewed, please change to another subscription'));
         }
-
-        if ($isStaffPlan) {
-            if ($plan->renew && !$userService->isAvailable($user)) {
-                abort(500, __('This subscription has expired, please change to another subscription'));
-            }
-        } else {
-            if (!$plan->show && $plan->renew && !$userService->isAvailable($user)) {
-                abort(500, __('This subscription has expired, please change to another subscription'));
-            }
-        } 
 
         DB::beginTransaction();
         $order = new Order();

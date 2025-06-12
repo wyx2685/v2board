@@ -31470,6 +31470,9 @@
             componentDidMount() {
                 this.props.dispatch({
                     type: "webcon/fetch"
+                }),
+                this.props.dispatch({
+                    type: "plan/fetch"
                 })
             }
             modalVisible() {
@@ -31500,6 +31503,7 @@
             render() {
                 var e = this.props.webcon
                   , t = e.webcons
+                  , y = this.props.plan.plans
                   , n = e.fetchLoading
                   , r = [{
                     title: "#",
@@ -31555,7 +31559,11 @@
                     render: (e,n,r)=>{
                         return g.a.createElement("div", null, g.a.createElement("a", {
                             onClick: ()=>this.setState({
-                                submit: t[r]
+                                submit: p()({}, t[r], {
+                                    plan_ids: Array.isArray(t[r].plan_id)
+                                        ? t[r].plan_id.map(x => String(x))
+                                        : []
+                                })
                             }, ()=>this.modalVisible()),
                             href: "javascript:void(0);"
                         }, "\u7f16\u8f91"), g.a.createElement(h["a"], {
@@ -31631,7 +31639,30 @@
                             })
                         })
                     }
-                })), g.a.createElement("div", {
+                })),g.a.createElement("div", {
+                    className: "form-group"
+                }, g.a.createElement("label", {
+                    for: "example-text-input-alt"
+                }, "Chọn gói (plan)"), g.a.createElement(a["a"], {
+                    value: this.state.submit.plan_ids || [],
+                    onChange: e=>{
+                        this.setState({
+                            submit: p()({}, this.state.submit, {
+                                plan_ids: e.length ? e : null
+                            })
+                        })
+                    },
+                    mode: "multiple",
+                    placeholder: "Chọn các gói áp dụng cho webcon (để trống là không giới hạn)",
+                    style: {
+                        width: "100%"
+                    }
+                }, y.map(e=>{
+                    return g.a.createElement(a["a"].Option, {
+                        key: Math.random(),
+                        value: "".concat(e.id)
+                    }, e.name)
+                }))), g.a.createElement("div", {
                     className: "form-group"
                 }, g.a.createElement("label", {
                     for: "example-text-input-alt"
@@ -31708,9 +31739,11 @@
             }
         }
         t["default"] = Object(w["c"])(e=>{
-            var t = e.webcon;
+            var t = e.webcon,
+                n = e.plan;
             return {
-                webcon: t
+                webcon: t,
+                plan: n
             }
         }
         )(_)
