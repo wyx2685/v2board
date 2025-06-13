@@ -38,7 +38,12 @@ class KnowledgeController extends Controller
                 ),
                 $knowledge['body']
             );
-            $this->apple($knowledge['body']);
+
+            $this->share_url = config('v2board.apple_share_api');
+            if (!empty($this->share_url)) {
+                $this->apple($knowledge['body']);
+            }
+
             return response([
                 'data' => $knowledge
             ]);

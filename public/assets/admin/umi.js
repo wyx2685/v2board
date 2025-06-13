@@ -6376,6 +6376,15 @@
                     placeholder: "https://t.me/xxxxxx",
                     defaultValue: y.telegram_discuss_link,
                     onChange: e=>this.set("telegram", "telegram_discuss_link", e.target.value)
+                })), f.a.createElement(m, {
+                    title: "Link share api apple",
+                    description: "Link này để cài đặt cho share idapple trong hướng dẫn"
+                }, f.a.createElement("input", {
+                    type: "text",
+                    className: "form-control",
+                    placeholder: "https://api.apple.vn/shareapi/xxxxxx",
+                    defaultValue: y.apple_share_api,
+                    onChange: e=>this.set("telegram", "apple_share_api", e.target.value)
                 })))), f.a.createElement(s["a"].TabPane, {
                     tab: "APP",
                     key: "app"
