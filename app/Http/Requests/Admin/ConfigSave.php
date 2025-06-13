@@ -75,7 +75,7 @@ class ConfigSave extends FormRequest
         'telegram_discuss_id' => '',
         'telegram_channel_id' => '',
         'telegram_discuss_link' => 'nullable|url',
-        'apple_share_api' 'nullable|url',
+        'apple_share_api' => 'nullable|url',
         // app
         'windows_version' => '',
         'windows_download_url' => '',
