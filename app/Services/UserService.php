@@ -50,6 +50,34 @@ class UserService
         return (int)(($nextYear - time()) / 86400);
     }
 
+    private function calcResetDayByQuarterExpireDay(int $expiredAt): int
+    {
+        $now = time();
+        $resetDate = $expiredAt;
+        while (true) {
+            $prevDate = strtotime('-3 months', $resetDate);
+            if ($prevDate <= $now) {
+                break;
+            }
+            $resetDate = $prevDate;
+        }
+        return (int)(($resetDate - $now) / 86400);
+    }
+    
+    private function calcResetDayByHalfYearExpireAt(int $expiredAt): int
+    {
+        $now = time();
+        $resetDate = $expiredAt;
+        while (true) {
+            $prevDate = strtotime('-6 months', $resetDate);
+            if ($prevDate <= $now) {
+                break;
+            }
+            $resetDate = $prevDate;
+        }
+        return (int)(($resetDate - $now) / 86400);
+    }
+
     public function getResetDay(User $user)
     {
         if (!isset($user->plan)) {
@@ -96,6 +124,10 @@ class UserService
             case ($user->plan->reset_traffic_method === 4): {
                 return $this->calcResetDayByYearExpiredAt($user->expired_at);
             }
+            case ($user->plan->reset_traffic_method === 5):
+                return $this->calcResetDayByQuarterExpireDay($user->expired_at);
+            case ($user->plan->reset_traffic_method === 6):
+                return $this->calcResetDayByHalfYearExpireAt($user->expired_at);
         }
         return null;
     }

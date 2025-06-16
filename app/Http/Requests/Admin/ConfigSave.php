@@ -44,7 +44,7 @@ class ConfigSave extends FormRequest
         'currency_symbol' => '',
         // subscribe
         'plan_change_enable' => 'in:0,1',
-        'reset_traffic_method' => 'in:0,1,2,3,4',
+        'reset_traffic_method' => 'in:0,1,2,3,4,5,6',
         'surplus_enable' => 'in:0,1',
         'new_order_event_id' => 'in:0,1',
         'renew_order_event_id' => 'in:0,1',
