@@ -18,8 +18,12 @@ class CouponController extends Controller
         $pageSize = $request->input('pageSize') >= 10 ? $request->input('pageSize') : 10;
         $sortType = in_array($request->input('sort_type'), ['ASC', 'DESC']) ? $request->input('sort_type') : 'DESC';
         $sort = $request->input('sort') ? $request->input('sort') : 'id';
+        $search = $request->input('search');
         $builder = Coupon::orderBy($sort, $sortType);
         $total = $builder->count();
+        if ($search) {
+            $builder->where('code', 'like', "%{$search}%");
+        }
         $coupons = $builder->forPage($current, $pageSize)
             ->get();
         return response([
