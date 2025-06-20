@@ -12,19 +12,20 @@ class StatController extends Controller
     public function getTrafficLog(Request $request)
     {
         $userId = $request->user['id'];
-
-        $builder = StatUser::selectRaw(
-            'u * server_rate AS u',
-            'd * server_rate AS d',
-            'record_at',
-            'user_id',
-            DB::raw('1 AS server_rate')
-        )
-        ->where('user_id', $userId)
-        ->where('record_at', '>=', strtotime(date('Y-m-1')))
-        ->orderBy('record_at', 'DESC');
-
-        $data = $builder->get();
+    
+        $data = StatUser::where('user_id', $userId)
+            ->where('record_at', '>=', strtotime(date('Y-m-1')))
+            ->orderBy('record_at', 'DESC')
+            ->selectRaw('
+                CAST(u * server_rate AS UNSIGNED)   AS u,
+                CAST(d * server_rate AS UNSIGNED)   AS d,
+                record_at,
+                user_id,
+                1                                   AS server_rate
+            ')
+            ->get();
+    
         return response(['data' => $data]);
     }
+
 }
