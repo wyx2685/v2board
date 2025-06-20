@@ -63,6 +63,10 @@ class SingboxOld
                 $vlessConfig = $this->buildVless($this->user['uuid'], $item);
                 $proxies[] = $vlessConfig;
             }
+            if ($item['type'] === 'tuic') {
+                $tuicConfig = $this->buildTuic($this->user['uuid'], $item);
+                $proxies[] = $tuicConfig;
+            }
             if ($item['type'] === 'hysteria') {
                 $hysteriaConfig = $this->buildHysteria($this->user['uuid'], $item, $this->user);
                 $proxies[] = $hysteriaConfig;
@@ -75,11 +79,7 @@ class SingboxOld
     protected function addProxies($proxies)
     {
         foreach ($this->config['outbounds'] as &$outbound) {
-            if (
-                ($outbound['type'] === 'selector' && $outbound['tag'] === 'chọn node')
-                || ($outbound['type'] === 'urltest' && $outbound['tag'] === 'tự động chọn')
-                || ($outbound['type'] === 'selector' && strpos($outbound['tag'], '#') === 0)
-            ) {
+            if (($outbound['type'] === 'selector' && $outbound['tag'] === 'auto_proxy') || ($outbound['type'] === 'urltest' && $outbound['tag'] === 'auto_test') || ($outbound['type'] === 'selector' && strpos($outbound['tag'], '#') === 0 )) {
                 array_push($outbound['outbounds'], ...array_column($proxies, 'tag'));
             }
         }
@@ -103,9 +103,21 @@ class SingboxOld
         $array['server_port'] = $server['port'];
         $array['method'] = $server['cipher'];
         $array['password'] = $password;
-
+        if (isset($server['obfs']) && $server['obfs'] === 'http') {
+            $array['plugin'] = 'obfs-local';
+            $plugin_opts_parts = [];
+            $plugin_opts_parts[] = "obfs=" . $server['obfs'];
+            if (isset($server['obfs-host'])) {
+                $plugin_opts_parts[] = "obfs-host=" . $server['obfs-host'];
+            }
+            if (isset($server['obfs-path'])) {
+                $plugin_opts_parts[] = "path=" . $server['obfs-path'];
+            }
+            $array['plugin_opts'] = implode(';', $plugin_opts_parts);
+        }
         return $array;
     }
+
 
     protected function buildVmess($uuid, $server)
     {
@@ -131,37 +143,25 @@ class SingboxOld
         }
         if ($server['network'] === 'tcp') {
             $tcpSettings = $server['networkSettings'];
-            if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
-                $array['transport']['type'] = $tcpSettings['header']['type'];
-            }
-            if (isset($tcpSettings['header']['request']['headers']['Host'])) {
-                $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
-            }
-            if (isset($tcpSettings['header']['request']['path'][0])) {
-                $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
-            }
+            if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') $array['transport']['type'] = $tcpSettings['header']['type'];
+            if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
+            if (isset($tcpSettings['header']['request']['path'][0])) $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
         }
         if ($server['network'] === 'ws') {
-            $array['transport']['type'] = 'ws';
+            $array['transport']['type'] ='ws';
             if ($server['networkSettings']) {
                 $wsSettings = $server['networkSettings'];
-                if (isset($wsSettings['path']) && !empty($wsSettings['path'])) {
-                    $array['transport']['path'] = $wsSettings['path'];
-                }
-                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) {
-                    $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
-                }
+                if (isset($wsSettings['path']) && !empty($wsSettings['path'])) $array['transport']['path'] = $wsSettings['path'];
+                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
                 $array['transport']['max_early_data'] = 2048;
                 $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
             }
         }
         if ($server['network'] === 'grpc') {
-            $array['transport']['type'] = 'grpc';
+            $array['transport']['type'] ='grpc';
             if ($server['networkSettings']) {
                 $grpcSettings = $server['networkSettings'];
-                if (isset($grpcSettings['serviceName'])) {
-                    $array['transport']['service_name'] = $grpcSettings['serviceName'];
-                }
+                if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
             }
         }
 
@@ -207,37 +207,25 @@ class SingboxOld
 
         if ($server['network'] === 'tcp') {
             $tcpSettings = $server['network_settings'];
-            if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
-                $array['transport']['type'] = $tcpSettings['header']['type'];
-            }
-            if (isset($tcpSettings['header']['request']['headers']['Host'])) {
-                $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
-            }
-            if (isset($tcpSettings['header']['request']['path'][0])) {
-                $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
-            }
+            if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') $array['transport']['type'] = $tcpSettings['header']['type'];
+            if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
+            if (isset($tcpSettings['header']['request']['path'][0])) $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
         }
         if ($server['network'] === 'ws') {
-            $array['transport']['type'] = 'ws';
+            $array['transport']['type'] ='ws';
             if ($server['network_settings']) {
                 $wsSettings = $server['network_settings'];
-                if (isset($wsSettings['path']) && !empty($wsSettings['path'])) {
-                    $array['transport']['path'] = $wsSettings['path'];
-                }
-                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) {
-                    $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
-                }
+                if (isset($wsSettings['path']) && !empty($wsSettings['path'])) $array['transport']['path'] = $wsSettings['path'];
+                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
                 $array['transport']['max_early_data'] = 2048;
                 $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
             }
         }
         if ($server['network'] === 'grpc') {
-            $array['transport']['type'] = 'grpc';
+            $array['transport']['type'] ='grpc';
             if ($server['network_settings']) {
                 $grpcSettings = $server['network_settings'];
-                if (isset($grpcSettings['serviceName'])) {
-                    $array['transport']['service_name'] = $grpcSettings['serviceName'];
-                }
+                if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
             }
         }
 
@@ -259,18 +247,18 @@ class SingboxOld
             'server_name' => $server['server_name']
         ];
 
-        if (isset($server['network']) && in_array($server['network'], ["grpc", "ws"])) {
+        if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
             $array['transport']['type'] = $server['network'];
-            // cấu hình gRPC
-            if ($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
+            // grpc配置
+            if($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
                 $array['transport']['service_name'] = $server['network_settings']['serviceName'];
             }
-            // cấu hình WebSocket
-            if ($server['network'] === "ws") {
-                if (isset($server['network_settings']['path'])) {
+            // ws配置
+            if($server['network'] === "ws") {
+                if(isset($server['network_settings']['path'])) {
                     $array['transport']['path'] = $server['network_settings']['path'];
                 }
-                if (isset($server['network_settings']['headers']['Host'])) {
+                if(isset($server['network_settings']['headers']['Host'])){
                     $array['transport']['headers'] = ['Host' => array($server['network_settings']['headers']['Host'])];
                 }
                 $array['transport']['max_early_data'] = 2048;
@@ -281,9 +269,35 @@ class SingboxOld
         return $array;
     }
 
+    protected function buildTuic($password, $server)
+    {
+        $array = [];
+        $array['tag'] = $server['name'];
+        $array['type'] = 'tuic';
+        $array['server'] = $server['host'];
+        $array['server_port'] = $server['port'];
+        $array['uuid'] = $password;
+        $array['password'] = $password;
+        $array['congestion_control'] = $server['congestion_control'] ?? 'cubic';
+        $array['udp_relay_mode'] = $server['udp_relay_mode'] ?? 'native';
+        $array['zero_rtt_handshake'] = $server['zero_rtt_handshake'] ? true : false;
+
+        $array['tls'] = [
+            'enabled' => true,
+            'insecure' => $server['insecure'] ? true : false,
+            'alpn' => ['h3'],
+            'disable_sni' => $server['disable_sni'] ? true : false,
+        ];
+        if (isset($server['server_name'])) {
+            $array['tls']['server_name'] = $server['server_name'];
+        }
+
+        return $array;
+    }
+
     protected function buildHysteria($password, $server, $user)
     {
-        $parts = explode(",", $server['port']);
+        $parts = explode(",",$server['port']);
         $firstPart = $parts[0];
         if (strpos($firstPart, '-') !== false) {
             $range = explode('-', $firstPart);

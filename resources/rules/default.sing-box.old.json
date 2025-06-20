@@ -1,50 +1,23 @@
 {
   "dns": {
+    "servers": [
+      {
+        "tag": "local",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "direct"
+      },
+      {
+        "tag": "block",
+        "address": "rcode://refused"
+      }
+    ],
     "rules": [
       {
-        "outbound": [
-          "any"
-        ],
-        "server": "local"
-      },
-      {
-        "clash_mode": "proxy toàn cục",
-        "server": "remote"
-      },
-      {
-        "clash_mode": "kết nối trực tiếp toàn cục",
-        "server": "local"
-      },
-      {
-        "rule_set": [
-          "geosite-cn"
-        ],
-        "server": "local"
-      },
-      {
-        "rule_set": [
-          "category-ads-all"
-        ],
+        "rule_set": "category-ads-all",
         "server": "block"
       }
     ],
-    "servers": [
-      {
-        "address": "114.114.114.114",
-        "detour": "chọn node",
-        "tag": "remote"
-      },
-      {
-        "address": "https://223.5.5.5/dns-query",
-        "detour": "direct",
-        "tag": "local"
-      },
-      {
-        "address": "rcode://refused",
-        "tag": "block"
-      }
-    ],
-    "final": "remote",
+    "final": "local",
     "strategy": "ipv4_only",
     "disable_cache": false
   },
@@ -53,57 +26,36 @@
       "enabled": true
     },
     "clash_api": {
-      "default_mode": "proxy nước ngoài",
+      "default_mode": "proxy",
       "external_controller": "127.0.0.1:9090",
       "secret": ""
     }
   },
   "inbounds": [
     {
+      "type": "tun",
+      "tag": "tun-in",
       "auto_route": true,
       "domain_strategy": "prefer_ipv4",
-      "endpoint_independent_nat": true,
-      "inet4_address": "172.19.0.1/30",
-      "inet6_address": "2001:0470:f9da:fdfa::1/64",
-      "mtu": 9000,
-      "sniff": true,
-      "sniff_override_destination": true,
       "stack": "system",
       "strict_route": true,
-      "type": "tun"
-    },
-    {
-      "domain_strategy": "prefer_ipv4",
-      "listen": "127.0.0.1",
-      "listen_port": 2333,
       "sniff": true,
       "sniff_override_destination": true,
-      "tag": "socks-in",
-      "type": "socks",
-      "users": []
-    },
-    {
-      "domain_strategy": "prefer_ipv4",
-      "listen": "127.0.0.1",
-      "listen_port": 2334,
-      "sniff": true,
-      "sniff_override_destination": true,
-      "tag": "mixed-in",
-      "type": "mixed",
-      "users": []
+      "inet4_address": "172.19.0.1/30",
+      "inet6_address": "2001:470:f9da:fdfa::1/64",
+      "mtu": 9000,
+      "endpoint_independent_nat": true
     }
   ],
   "outbounds": [
     {
       "type": "selector",
-      "tag": "chọn node",
-      "outbounds": [
-        "tự động chọn"
-      ]
+      "tag": "auto_proxy",
+      "outbounds": ["auto_test"]
     },
     {
       "type": "urltest",
-      "tag": "tự động chọn",
+      "tag": "auto_test",
       "outbounds": []
     },
     {
@@ -123,55 +75,23 @@
     "auto_detect_interface": true,
     "rules": [
       {
-        "outbound": "dns-out",
-        "protocol": "dns"
+        "protocol": "dns",
+        "outbound": "dns-out"
       },
       {
-        "clash_mode": "tắt proxy",
-        "outbound": "direct"
-      },
-      {
-        "clash_mode": "proxy toàn cục",
-        "outbound": "chọn node"
-      },
-      {
-        "rule_set": [
-          "geosite-cn",
-          "geoip-cn"
-        ],
-        "outbound": "direct"
-      },
-      {
-        "ip_is_private": true,
-        "outbound": "direct"
-      },
-      {
-        "rule_set": [
-          "category-ads-all"
-        ],
+        "rule_set": "category-ads-all",
         "outbound": "block"
+      },
+      {
+        "outbound": "auto_proxy"
       }
     ],
     "rule_set": [
-      {
-        "tag": "geosite-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-        "download_detour": "direct"
-      },
       {
         "tag": "category-ads-all",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geoip-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/srs/cn.srs",
         "download_detour": "direct"
       }
     ]
