@@ -47,7 +47,10 @@ class PlanController extends Controller
         if ($isWebCon) {
             $plans = Plan::whereIn('id', $staff->plan_id)
                 ->orderBy('sort', 'ASC')
-                ->get();
+                ->get()->map(function ($plan) {
+                    $plan->show = 1;
+                    return $plan;
+                });
         } else {
             $plans = Plan::where('show', 1)
                 ->orderBy('sort', 'ASC')
