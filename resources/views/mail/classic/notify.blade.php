@@ -102,7 +102,7 @@
                             <td class="alert alert-warning"
                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 22px; font-weight: bold; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #0073ba; margin: 0; padding: 20px;"
                                 align="center" bgcolor="#0073ba" valign="top">
-                                网站通知
+                                Thông Báo
                             </td>
                         </tr>
                         <tr
@@ -117,7 +117,7 @@
                                         <td class="content-block"
                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 34px; vertical-align: top; line-height: 1em; margin: 0; padding: 20px 0 30px;"
                                             valign="top">
-                                            Dear Customer
+                                            Kính Gửi Quý Khách
                                         </td>
                                     </tr>
                                     <tr
@@ -133,7 +133,7 @@
                                         <td class="content-block"
                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #757575; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                             valign="top">
-                                            (本邮件由系统自动发出，请勿直接回复)
+                                            (Email này được gửi tự động, vui lòng không trả lời trực tiếp)
                                         </td>
                                     </tr>
                                     <tr
@@ -168,9 +168,9 @@
                                     style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;"
                                     align="center" valign="top">
                                     <a href="{{$url}}/#/subscribe"
-                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: none; margin: 0;">我的订阅</a> |
+                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: none; margin: 0;">subscribe</a> |
                                     <a href="{{$url}}/#/knowledge"
-                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: none; margin: 0;">使用教程</a>
+                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: none; margin: 0;">Hướng dẫn</a>
                                 </td>
                             </tr>
                         </table>
