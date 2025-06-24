@@ -44,10 +44,16 @@ class PaymentService
             $parseUrl = parse_url($notifyUrl);
             $notifyUrl = $this->config['notify_domain'] . $parseUrl['path'];
         }
-
+        $xForwardedHost = request()->headers->get('x-forwarded-host');
+        $xForwardedProto = request()->headers->get('x-forwarded-proto');
+        if ($xForwardedHost && $xForwardedProto) {
+            $returnUrl = $xForwardedProto . '://' . $xForwardedHost . '/#/order/' . $order['trade_no'];
+        } else {
+            $returnUrl = url('/#/order/' . $order['trade_no']);
+        }
         return $this->payment->pay([
             'notify_url' => $notifyUrl,
-            'return_url' => url('/#/order/' . $order['trade_no']),
+            'return_url' => $returnUrl,
             'trade_no' => $order['trade_no'],
             'total_amount' => $order['total_amount'],
             'user_id' => $order['user_id'],
