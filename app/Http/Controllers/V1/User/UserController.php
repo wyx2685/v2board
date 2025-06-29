@@ -286,6 +286,20 @@ class UserController extends Controller
         ]);
     }
 
+    public function unbindTelegram(Request $request)
+    {
+        $user = User::find($request->user['id']);
+        if (!$user) {
+            abort(500, __('The user does not exist'));
+        }
+        if (!$user->update(['telegram_id' => null])) {
+            abort(500, __('Unbind telegram failed'));
+        }
+        return response([
+            'data' => true
+        ]);
+    }
+
     public function resetSecurity(Request $request)
     {
         $user = User::find($request->user['id']);

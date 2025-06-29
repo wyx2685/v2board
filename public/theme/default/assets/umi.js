@@ -15930,8 +15930,40 @@
                                 id: "\u91cd\u7f6e\u6210\u529f"
                             })),
                             e.fetchData())
-                        }
-                        )
+                        })
+                    },
+                    onCancel() {},
+                    okText: Object(m["formatMessage"])({
+                        id: "\u786e\u8ba4"
+                    }),
+                    cancelText: Object(m["formatMessage"])({
+                        id: "\u53d6\u6d88"
+                    })
+                })
+            }
+            unbindTelegram() {
+                var e = this;
+                s["a"].confirm({
+                    title: Object(m["formatMessage"])({
+                        id: "\u786e\u5b9a\u8981\u89e3\u9664\u7ed1\u5b9aTelegram\uff1f"
+                    }),
+                    content: Object(m["formatMessage"])({
+                        id: "\u5982\u679c\u4f60\u7684Telegram ID\u5df2\u5931\u6548\u53ef\u4ee5\u8fdb\u884c\u6b64\u64cd\u4f5c\u3002\u91cd\u7f6e\u540e\u4f60\u9700\u8981\u91cd\u65b0\u8fdb\u884c\u7ed1\u5b9a\u3002"
+                    }),
+                    onOk() {
+                        Object(d["a"])("/user/unbindTelegram").then(t=>{
+                            if(200 === t.code) {
+                                c["a"].success(Object(m["formatMessage"])({
+                                    id: "\u91cd\u7f6e\u6210\u529f"
+                                }));
+                                e.props.dispatch({
+                                    type: "user/getUserInfo"
+                                });
+                                e.props.dispatch({
+                                    type: "user/getSubscribe"
+                                });
+                            }
+                        });
                     },
                     onCancel() {},
                     okText: Object(m["formatMessage"])({
@@ -16156,7 +16188,7 @@
                     className: "row mb-3 mb-md-0"
                 }, l.a.createElement("div", {
                     className: "col-md-12"
-                }, r.is_telegram ? l.a.createElement("div", {
+                }, r.is_telegram ? (!t.telegram_id ? l.a.createElement("div", {
                     className: "block block-rounded bind_telegram"
                 }, l.a.createElement("div", {
                     className: "block-header block-header-default"
@@ -16171,7 +16203,26 @@
                     className: "btn btn-primary btn-sm btn-primary btn-rounded px-3"
                 }, Object(m["formatMessage"])({
                     id: "\u7acb\u5373\u5f00\u59cb"
-                })))))) : l.a.createElement(l.a.Fragment, null), r.telegram_discuss_link ? l.a.createElement("div", {
+                })))))) : l.a.createElement("div", {
+                    className: "block block-rounded unbind_telegram"
+                }, l.a.createElement("div", {
+                    className: "block-header block-header-default"
+                }, l.a.createElement("h3", {
+                    className: "block-title"
+                }, Object(m["formatMessage"])({
+                    id: "\u7ed1\u5b9aTelegram"
+                })), l.a.createElement("div", {
+                    className: "block-options"
+                }, l.a.createElement(a["a"], {
+                    type: "danger",
+                    onClick: ()=>this.unbindTelegram()
+                }, Object(m["formatMessage"])({
+                    id: "\u89e3\u9664\u7ed1\u5b9a"
+                })))), l.a.createElement("div", {
+                    className: "block-options"
+                }, Object(m["formatMessage"])({
+                    id: "Telegram ID: " + String(t.telegram_id)
+                })))) : l.a.createElement(l.a.Fragment, null), r.telegram_discuss_link ? l.a.createElement("div", {
                     className: "block block-rounded join_telegram_disscuss"
                 }, l.a.createElement("div", {
                     className: "block-header block-header-default"
@@ -44532,6 +44583,7 @@
                 getUserInfoLoading: !1,
                 changePasswordLoading: !1,
                 resetSecurityLoading: !1,
+                unbindTelegramLoading: !1,
                 events: []
             },
             reducers: {

@@ -47,7 +47,7 @@ class UniProxyController extends Controller
         $response['users'] = $users;
 
         $eTag = sha1(json_encode($response));
-        if (strpos($request->header('If-None-Match'), $eTag) !== false ) {
+        if (strpos($request->header('If-None-Match'), $eTag) !== false) {
             abort(304);
         }
 
@@ -57,8 +57,10 @@ class UniProxyController extends Controller
     // 后端提交数据
     public function push(Request $request)
     {
-        $data = request()->getContent() ?: json_encode($_POST);
-        $data = json_decode($data, true);
+        $data = $request->json()->all();
+        if (empty($data)) {
+            $data = $_POST;
+        }
         if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
             // JSON decoding error
             return response([
@@ -78,22 +80,27 @@ class UniProxyController extends Controller
     // 后端获取在线数据
     public function alivelist(Request $request)
     {
-        $userService = new UserService();
-        $users = $userService->getDeviceLimitedUsers();
-        if ($users->isEmpty()) {
-            return response()->json(['alive' => (object)[]]);        }
-        $cacheKeys = [];
-        foreach ($users as $user) {
-            $cacheKeys['ALIVE_IP_USER_' . $user->id] = $user->id;
-        }
+        $alive = Cache::remember('ALIVE_LIST', 60, function () {
+            $userService = new UserService();
+            $users = $userService->getDeviceLimitedUsers();
 
-        $alive = Cache::remember('ALIVE_LIST', 60, function () use ($cacheKeys) {
+            if ($users->isEmpty()) {
+                return [];
+            }
+
+            $keys = [];
+            $idMap = [];
+            foreach ($users as $user) {
+                $key = 'ALIVE_IP_USER_' . $user->id;
+                $keys[] = $key;
+                $idMap[$key] = $user->id;
+            }
+
+            $results = Cache::many($keys);
             $alive = [];
-            $ips_arrays = Cache::many(array_keys($cacheKeys));
-
-            foreach ($ips_arrays as $key => $data) {
-                if ($data && isset($data['alive_ip'])) {
-                    $alive[$cacheKeys[$key]] = $data['alive_ip'];
+            foreach ($results as $key => $data) {
+                if (is_array($data) && isset($data['alive_ip'])) {
+                    $alive[$idMap[$key]] = $data['alive_ip'];
                 }
             }
             return $alive;
@@ -104,8 +111,10 @@ class UniProxyController extends Controller
     // 后端提交在线数据
     public function alive(Request $request)
     {
-        $data = request()->getContent() ?: json_encode($_POST);
-        $data = json_decode($data, true);
+        $data = $request->json()->all();
+        if (empty($data)) {
+            $data = $_POST;
+        }
         if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
             // JSON decoding error
             return response([
@@ -114,21 +123,21 @@ class UniProxyController extends Controller
         }
         $updateAt = time();
         foreach ($data as $uid => $ips) {
-            $ips_array = Cache::get('ALIVE_IP_USER_'. $uid) ?? [];
+            $ips_array = Cache::get('ALIVE_IP_USER_' . $uid) ?? [];
             // 更新节点数据
             $ips_array[$this->nodeType . $this->nodeId] = ['aliveips' => $ips, 'lastupdateAt' => $updateAt];
             // 清理过期数据
-            foreach($ips_array as $nodetypeid => $oldips) { 
-                if (!is_int($oldips) && ($updateAt - $oldips['lastupdateAt'] > 100)) { 
-                    unset($ips_array[$nodetypeid]); 
-                } 
-            } 
+            foreach ($ips_array as $nodetypeid => $oldips) {
+                if (!is_int($oldips) && ($updateAt - $oldips['lastupdateAt'] > 100)) {
+                    unset($ips_array[$nodetypeid]);
+                }
+            }
             $count = 0;
             if (config('v2board.device_limit_mode', 0) == 1) {
                 $ipmap = [];
-                foreach($ips_array as $nodetypeid => $newdata) {
+                foreach ($ips_array as $nodetypeid => $newdata) {
                     if (!is_int($newdata) && isset($newdata['aliveips'])) {
-                        foreach($newdata['aliveips'] as $ip_NodeId) {
+                        foreach ($newdata['aliveips'] as $ip_NodeId) {
                             $ip = explode("_", $ip_NodeId)[0];
                             $ipmap[$ip] = 1;
                         }
@@ -136,14 +145,14 @@ class UniProxyController extends Controller
                 }
                 $count = count($ipmap);
             } else {
-                foreach($ips_array as $nodetypeid => $newdata) {
+                foreach ($ips_array as $nodetypeid => $newdata) {
                     if (!is_int($newdata) && isset($newdata['aliveips'])) {
                         $count += count($newdata['aliveips']);
                     }
                 }
             }
             $ips_array['alive_ip'] = $count;
-            Cache::put('ALIVE_IP_USER_'. $uid, $ips_array, 120);
+            Cache::put('ALIVE_IP_USER_' . $uid, $ips_array, 120);
         }
 
         return response([
@@ -215,15 +224,15 @@ class UniProxyController extends Controller
                     'down_mbps' => $this->nodeInfo->down_mbps
                 ];
                 if ($this->nodeInfo->version == 1) {
-                   $response['obfs'] = $this->nodeInfo->obfs_password ?? null;
+                    $response['obfs'] = $this->nodeInfo->obfs_password ?? null;
                 } elseif ($this->nodeInfo->version == 2) {
-                   if ($this->nodeInfo->up_mbps == 0 && $this->nodeInfo->down_mbps == 0) {
+                    if ($this->nodeInfo->up_mbps == 0 && $this->nodeInfo->down_mbps == 0) {
                         $response['ignore_client_bandwidth'] = true;
-                   } else {
+                    } else {
                         $response['ignore_client_bandwidth'] = false;
-                   }
-                   $response['obfs'] = $this->nodeInfo->obfs ?? null;
-                   $response['obfs-password'] = $this->nodeInfo->obfs_password ?? null;
+                    }
+                    $response['obfs'] = $this->nodeInfo->obfs ?? null;
+                    $response['obfs-password'] = $this->nodeInfo->obfs_password ?? null;
                 }
                 break;
             case 'anytls':
@@ -242,7 +251,7 @@ class UniProxyController extends Controller
             $response['routes'] = $this->serverService->getRoutes($this->nodeInfo['route_id']);
         }
         $eTag = sha1(json_encode($response));
-        if (strpos($request->header('If-None-Match'), $eTag) !== false ) {
+        if (strpos($request->header('If-None-Match'), $eTag) !== false) {
             abort(304);
         }
 
