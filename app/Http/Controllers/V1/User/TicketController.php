@@ -240,27 +240,27 @@ class TicketController extends Controller
 					$ip_address = $_SERVER['REMOTE_ADDR'];
 				}
 				
-				$api_url = "http://ip-api.com/json/{$ip_address}?fields=520191&lang=zh-CN";
+				$api_url = "http://ip-api.com/json/{$ip_address}?fields=520191&lang=en";
 				$response = file_get_contents($api_url);
 				$user_location = json_decode($response, true);
 				if ($user_location && $user_location['status'] === 'success') {
 					$location =  $user_location['city'] . ", " . $user_location['country'];
 				} else {
-					$location =  "无法确定用户地址";
+					$location =  "Không xác định";
 				}
 				
 				$plan = Plan::where('id', $user->plan_id)->first();
-				$planName = $plan ? $plan->name : '未找到套餐信息'; // Check if plan data is available
+				$planName = $plan ? $plan->name : 'Chưa xác định'; 
 				
 				$money = $user->balance / 100;
 				$affmoney = $user->commission_balance / 100;
-				$telegramService->sendMessageWithAdmin("📮工单提醒 #{$ticket->id}\n———————————————\n邮箱：\n`{$user->email}`\n用户位置：\n`{$location}`\nIP:\n{$ip_address}\n套餐与流量：\n`{$planName} of {$transfer_enable}/{$remaining_traffic}`\n上传/下载：\n`{$u}/{$d}`\n到期时间：\n`{$expired_at}`\n余额/佣金余额：\n`{$money}/{$affmoney}`\n主题：\n`{$ticket->subject}`\n内容：\n`{$message}`", true);
+				$telegramService->sendMessageWithAdmin("📮Thông báo phiếu hỗ trợ #{$ticket->id}\n———————————————\nEmail:\n`{$user->email}`\nVị trí người dùng:\n`{$location}`\nIP:\n{$ip_address}\nGói cước và dung lượng:\n`{$planName} of {$transfer_enable}/{$remaining_traffic}`\nUpload/Download:\n`{$u}/{$d}`\nThời gian hết hạn:\n`{$expired_at}`\nSố dư/Số dư hoa hồng:\n`{$money}/{$affmoney}`\nChủ đề:\n`{$ticket->subject}`\nNội dung:\n`{$message}`", true);
 			} else {
 				// Handle case where user data is not found
 				$telegramService->sendMessageWithAdmin("User data not found for user ID: {$userid}", true);
 			}
 		} else {
-			$telegramService->sendMessageWithAdmin("📮工单提醒 #{$ticket->id}\n———————————————\n主题：\n`{$ticket->subject}`\n内容：\n`{$message}`", true);
+			$telegramService->sendMessageWithAdmin("📮Thông báo phiếu hỗ trợ #{$ticket->id}\n———————————————\nChủ đề:\n`{$ticket->subject}`\nNội dung:\n`{$message}`", true);
 		}
 	}
 
