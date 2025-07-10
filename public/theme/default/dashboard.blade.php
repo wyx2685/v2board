@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg"/>
     <link rel="stylesheet" href="/theme/{{$theme}}/assets/components.chunk.css?v={{$version}}">
     <link rel="stylesheet" href="/theme/{{$theme}}/assets/umi.css?v={{$version}}">
     @if (file_exists(public_path("/theme/{$theme}/assets/custom.css")))
