@@ -10,7 +10,7 @@
 
 按以下步骤进行面板代码文件迁移：
 
-    git clone https://github.com/v2board/v2board.git ./  
+    git clone https://github.com/kutycma/v2b-zic.git ./  
     sh init.sh
 
 
