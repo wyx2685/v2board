@@ -23,6 +23,7 @@
         "linfo/linfo": "^4.0",
         "paragonie/sodium_compat": "^1.20",
         "php-curl-class/php-curl-class": "^8.6",
+        "rybakit/msgpack": "^0.9.1",
         "stripe/stripe-php": "^v14.9.0",
         "symfony/yaml": "^4.3"
     },

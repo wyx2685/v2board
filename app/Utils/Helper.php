@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Utils;
+use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class Helper
 {
@@ -97,15 +99,47 @@ class Helper
 
     public static function getSubscribeUrl($token)
     {
+        $submethod = (int)config('v2board.show_subscribe_method', 0);
         $path = config('v2board.subscribe_path', '/api/v1/client/subscribe');
         if (empty($path)) {
             $path = '/api/v1/client/subscribe';
         } 
-        $path = "{$path}?token={$token}";
         $subscribeUrls = explode(',', config('v2board.subscribe_url'));
         $subscribeUrl = $subscribeUrls[rand(0, count($subscribeUrls) - 1)];
-        if ($subscribeUrl) return $subscribeUrl . $path;
-        return url($path);
+        switch ($submethod) {
+            case 0:
+                $path = "{$path}?token={$token}";
+                if ($subscribeUrl) return $subscribeUrl . $path;
+                return url($path);
+                break;
+            case 1:
+                $newtoken = Cache::get("otp_{$token}");
+                if (!$newtoken) {
+                    $newtoken = self::base64EncodeUrlSafe(random_bytes(24));
+                    $added = Cache::add("otp_{$token}", $newtoken, 86400);
+                    if ($added) {
+                        Cache::put("otpn_{$newtoken}", $token, 86400);
+                    } else {
+                        $newtoken = Cache::get("otp_{$token}");
+                    }
+                }
+                $path = "{$path}?token={$newtoken}";
+                if ($subscribeUrl) return $subscribeUrl . $path;
+                return url($path);
+                break;
+            case 2:
+                $timestep = (int)config('v2board.show_subscribe_expire', 5) * 60;
+                $counter = floor(time() / $timestep);
+                $counterBytes = pack('N*', 0) . pack('N*', $counter);
+                $hash = hash_hmac('sha1', $counterBytes, $token, false);
+                $user = User::where('token', $token)->select('id')->first();
+                $newtoken = self::base64EncodeUrlSafe("{$user->id}:{$hash}");
+
+                $path = "{$path}?token={$newtoken}";
+                if ($subscribeUrl) return $subscribeUrl . $path;
+                return url($path);
+                break;
+        }
     }
 
     public static function randomPort($range) {
@@ -117,6 +151,16 @@ class Helper
     {
         $encoded = base64_encode($data);
         return str_replace(['+', '/', '='], ['-', '_', ''], $encoded);
+    }
+
+    public static function base64DecodeUrlSafe($data)
+    {
+        $b64 = str_replace(['-', '_'], ['+', '/'], $data);
+        $pad = 4 - (strlen($b64) % 4);
+        if ($pad < 4) {
+            $b64 .= str_repeat('=', $pad);
+        }
+        return base64_decode($b64);
     }
 
     public static function encodeURIComponent($str) {

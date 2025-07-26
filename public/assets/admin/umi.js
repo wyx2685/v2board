@@ -5962,6 +5962,12 @@
                     checked: parseInt(r.surplus_enable),
                     onChange: e=>this.set("subscribe", "surplus_enable", e ? 1 : 0)
                 })), f.a.createElement(m, {
+                    title: "\u5141\u8bb8\u63d0\u524d\u5f00\u542f\u6d41\u91cf\u5468\u671f",
+                    description: "\u5f00\u542f\u540e\u7528\u6237\u6d41\u91cf\u7528\u5c3d\u65f6\u53ef\u4ee5\u9009\u62e9\u6263\u9664\u8ba2\u9605\u65f6\u957f\u4e3a\u4ee3\u4ef7\u91cd\u7f6e\u6d41\u91cf\uff0c\u6309\u6708\u91cd\u7f6e\u65f6\u6263\u9664\u672c\u5468\u671f\u5269\u4f59\u8ba2\u9605\u65f6\u957f\uff0c\u6bcf\u6708\u0031\u53f7\u91cd\u7f6e\u65f6\u6263\u9664\u6574\u6708\u65f6\u95f4\u0033\u0030\u5929\u3002"
+                }, f.a.createElement(l["a"], {
+                    checked: parseInt(r.allow_new_period),
+                    onChange: e=>this.set("subscribe", "allow_new_period", e ? 1 : 0)
+                })), f.a.createElement(m, {
                     title: "\u5f53\u8ba2\u9605\u65b0\u8d2d\u65f6\u89e6\u53d1\u4e8b\u4ef6",
                     description: "\u65b0\u8d2d\u8ba2\u9605\u5b8c\u6210\u65f6\u5c06\u89e6\u53d1\u8be5\u4efb\u52a1\u3002"
                 }, f.a.createElement("select", {
@@ -6003,7 +6009,31 @@
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(r.show_info_to_server_enable),
                     onChange: e=>this.set("subscribe", "show_info_to_server_enable", e ? 1 : 0)
-                })))), f.a.createElement(s["a"].TabPane, {
+                })), f.a.createElement(m, {
+                    title: "\u8ba2\u9605\u94fe\u63a5\u751f\u6548\u6a21\u5f0f",
+                    description: "\u7528\u6237\u83b7\u53d6\u8ba2\u9605\u94fe\u63a5\u540e\u7684\u6709\u6548\u671f\u3002"
+                }, f.a.createElement("select", {
+                    onChange: e=>this.set("subscribe", "show_subscribe_method", e.target.value),
+                    className: "form-control",
+                    value: r.show_subscribe_method,
+                    placeholder: "\u8bf7\u9009\u62e9"
+                }, f.a.createElement("option", {
+                    value: 0
+                }, "\u6c38\u4e45\u6709\u6548"), f.a.createElement("option", {
+                    value: 1
+                }, "\u4e00\u6b21\u6027\u6709\u6548"), f.a.createElement("option", {
+                    value: 2
+                }, "\u9650\u65f6\u6709\u6548"))), r.show_subscribe_method == 2 ? f.a.createElement(m, {
+                    isChildren: !0,
+                    title: "\u8ba2\u9605\u94fe\u63a5\u6709\u6548\u65f6\u95f4\u0028\u5206\u949f\u0029",
+                    description: "\u8ba2\u9605\u94fe\u63a5\u83b7\u53d6\u540e\u7ecf\u8fc7\u8be5\u65f6\u95f4\u5c06\u5931\u6548\u3002"
+                }, f.a.createElement("input", {
+                    type: "text",
+                    className: "form-control",
+                    placeholder: "\u8bf7\u8f93\u5165",
+                    defaultValue: r.show_subscribe_expire,
+                    onChange: e=>this.set("safe", "show_subscribe_expire", e.target.value)
+                })) : "")), f.a.createElement(s["a"].TabPane, {
                     tab: "\u5145\u503c",
                     key: "deposit"
                 }, f.a.createElement("div", {

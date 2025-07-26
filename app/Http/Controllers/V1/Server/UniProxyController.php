@@ -9,7 +9,7 @@ use App\Utils\CacheKey;
 use App\Utils\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use App\Models\User;
+use MessagePack\Packer;
 
 class UniProxyController extends Controller
 {
@@ -41,17 +41,29 @@ class UniProxyController extends Controller
     {
         ini_set('memory_limit', -1);
         Cache::put(CacheKey::get('SERVER_' . strtoupper($this->nodeType) . '_LAST_CHECK_AT', $this->nodeInfo->id), time(), 3600);
-        $users = $this->serverService->getAvailableUsers($this->nodeInfo->group_id);
-        $users = $users->toArray();
+        $users = $this->serverService->getAvailableUsers($this->nodeInfo->group_id)
+            ->map(function ($user) {
+                return array_filter($user->toArray(), fn($v) => !is_null($v));
+            })->toArray();
 
         $response['users'] = $users;
+        if (strpos($request->header('X-Response-Format'), 'msgpack') !== false ) {
+            $packer = new Packer();
+            $response = $packer->pack($response);
+            $eTag = sha1($response);
+            if (strpos($request->header('If-None-Match'), $eTag) !== false) {
+                abort(304);
+            }
 
-        $eTag = sha1(json_encode($response));
-        if (strpos($request->header('If-None-Match'), $eTag) !== false) {
-            abort(304);
+            return response($response, 200, ['Content-Type' => 'application/x-msgpack'])->header('ETag', "\"{$eTag}\"");
+        } else {
+            $eTag = sha1(json_encode($response));
+            if (strpos($request->header('If-None-Match'), $eTag) !== false) {
+                abort(304);
+            }
+
+            return response($response)->header('ETag', "\"{$eTag}\"");
         }
-
-        return response($response)->header('ETag', "\"{$eTag}\"");
     }
 
     // 后端提交数据

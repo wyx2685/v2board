@@ -44,6 +44,8 @@ class KnowledgeController extends Controller
                 $this->apple($knowledge['body']);
             }
 
+            $knowledge['body'] = str_replace('{{subscribeToken}}', $user['token'], $knowledge['body']);
+
             return response([
                 'data' => $knowledge
             ]);

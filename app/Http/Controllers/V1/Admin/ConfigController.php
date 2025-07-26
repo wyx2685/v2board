@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Mail;
 
 class ConfigController extends Controller
 {
@@ -110,10 +109,13 @@ class ConfigController extends Controller
                 'plan_change_enable' => (int)config('v2board.plan_change_enable', 1),
                 'reset_traffic_method' => (int)config('v2board.reset_traffic_method', 0),
                 'surplus_enable' => (int)config('v2board.surplus_enable', 1),
+                'allow_new_period' => (int)config('v2board.allow_new_period', 0),
                 'new_order_event_id' => (int)config('v2board.new_order_event_id', 0),
                 'renew_order_event_id' => (int)config('v2board.renew_order_event_id', 0),
                 'change_order_event_id' => (int)config('v2board.change_order_event_id', 0),
-                'show_info_to_server_enable' => (int)config('v2board.show_info_to_server_enable', 0)
+                'show_info_to_server_enable' => (int)config('v2board.show_info_to_server_enable', 0),
+                'show_subscribe_method' => (int)config('v2board.show_subscribe_method', 0),
+                'show_subscribe_expire' => (int)config('v2board.show_subscribe_expire', 5),
             ],
             'frontend' => [
                 'frontend_theme' => config('v2board.frontend_theme', 'v2board'),

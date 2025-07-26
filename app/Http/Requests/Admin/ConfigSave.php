@@ -46,10 +46,13 @@ class ConfigSave extends FormRequest
         'plan_change_enable' => 'in:0,1',
         'reset_traffic_method' => 'in:0,1,2,3,4',
         'surplus_enable' => 'in:0,1',
+        'allow_new_period' => 'in:0,1',
         'new_order_event_id' => 'in:0,1',
         'renew_order_event_id' => 'in:0,1',
         'change_order_event_id' => 'in:0,1',
         'show_info_to_server_enable' => 'in:0,1',
+        'show_subscribe_method' => 'in:0,1,2',
+        'show_subscribe_expire' => 'nullable|integer',
         // server
         'server_token' => 'nullable|min:16',
         'server_pull_interval' => 'integer',

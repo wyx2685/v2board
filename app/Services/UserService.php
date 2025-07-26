@@ -100,6 +100,54 @@ class UserService
         return null;
     }
 
+    public function getResetPeriod(User $user)
+    {
+        if ($user->plan_id === NULL) return null;
+        $plan = Plan::find($user->plan_id);
+        if ($user->expired_at <= time() || $user->expired_at === NULL) return null;
+        // if reset method is not reset
+        if ($plan->reset_traffic_method === 2) return null;
+        switch (true) {
+            case ($plan->reset_traffic_method === NULL) : {
+                $resetTrafficMethod = config('v2board.reset_traffic_method', 0);
+                switch ((int)$resetTrafficMethod) {
+                    // month first day
+                    case 0:
+                        return 30;
+                    // expire day
+                    case 1:
+                        return 1;
+                    // no action
+                    case 2:
+                        return null;
+                    // year first day
+                    case 3:
+                        return 365;
+                    // year expire day
+                    case 4:
+                        return 12;
+                }
+                break;
+            }
+            case ($plan->reset_traffic_method === 0): {
+                return 30;
+            }
+            case ($plan->reset_traffic_method === 1): {
+                return 1;
+            }
+            case ($plan->reset_traffic_method === 2): {
+                return null;
+            }
+            case ($plan->reset_traffic_method === 3): {
+                return 365;
+            }
+            case ($plan->reset_traffic_method === 4): {
+                return 12;
+            }
+        }    
+        return null;
+    }
+
     public function isAvailable(User $user)
     {
         if (!$user->banned && $user->transfer_enable && ($user->expired_at > time() || $user->expired_at === NULL)) {

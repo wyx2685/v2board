@@ -23,3 +23,5 @@ yarn.lock
 docker-compose.yml
 .DS_Store
 public/clients/*
+workerman.webman.php.pid
+workerman.log
