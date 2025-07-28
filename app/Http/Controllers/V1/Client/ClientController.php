@@ -117,7 +117,7 @@ class ClientController extends Controller
         $useTraffic = $user['u'] + $user['d'];
         $totalTraffic = $user['transfer_enable'];
         $remainingTraffic = Helper::trafficConvert($totalTraffic - $useTraffic);
-        $expiredDate = $user['expired_at'] ? date('d-m-Y H:i:s', $user['expired_at']) : '长期有效';
+        $expiredDate = $user['expired_at'] ? date('d-m-Y H:i:s', $user['expired_at']) : 'Vĩnh Viễn';
         $userService = new UserService();
         $resetDay = $userService->getResetDay($user);
         $userPlanId = $user['plan_id'];
