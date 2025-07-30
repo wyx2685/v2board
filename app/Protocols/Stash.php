@@ -4,6 +4,7 @@ namespace App\Protocols;
 
 use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
+use App\Services\UserService;
 
 class Stash
 {
@@ -21,6 +22,7 @@ class Stash
     {
         $servers = $this->servers;
         $user = $this->user;
+        $userService = new UserService();
         $appName = config('v2board.app_name', 'V2Board');
         header("subscription-userinfo: upload={$user['u']}; download={$user['d']}; total={$user['transfer_enable']}; expire={$user['expired_at']}");
         header('profile-update-interval: 24');
@@ -28,11 +30,19 @@ class Stash
         // 暂时使用clash配置文件，后续根据Stash更新情况更新
         $defaultConfig = base_path() . '/resources/rules/default.stash.yaml';
         $customConfig = base_path() . '/resources/rules/custom.stash.yaml';
-        if (\File::exists($customConfig)) {
+        if ($userService->isAvailable($user) && \File::exists($customConfig)) {
             $config = Yaml::parseFile($customConfig);
         } else {
             $config = Yaml::parseFile($defaultConfig);
+            $config['proxy-groups'] = [
+                [
+                    'name' => $appName,
+                    'type' => 'select',
+                    'proxies' => [],
+                ],
+            ];
         }
+
         $proxy = [];
         $proxies = [];
 
