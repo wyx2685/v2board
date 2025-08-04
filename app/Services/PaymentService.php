@@ -36,6 +36,12 @@ class PaymentService
         return $this->payment->notify($params);
     }
 
+    /**
+     * 发起支付
+     *
+     * @param array $order 订单信息，包含可选的 return_url 参数
+     * @return mixed
+     */
     public function pay($order)
     {
         // custom notify domain name
@@ -45,9 +51,14 @@ class PaymentService
             $notifyUrl = $this->config['notify_domain'] . $parseUrl['path'];
         }
 
+        // 使用自定义返回地址或默认返回地址
+        $returnUrl = isset($order['return_url']) && !empty($order['return_url'])
+            ? $order['return_url']
+            : url('/#/order/' . $order['trade_no']);
+
         return $this->payment->pay([
             'notify_url' => $notifyUrl,
-            'return_url' => url('/#/order/' . $order['trade_no']),
+            'return_url' => $returnUrl,
             'trade_no' => $order['trade_no'],
             'total_amount' => $order['total_amount'],
             'user_id' => $order['user_id'],

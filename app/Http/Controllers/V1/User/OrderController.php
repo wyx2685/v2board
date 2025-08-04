@@ -96,7 +96,7 @@ class OrderController extends Controller
             $order->period = 'deposit';
             $order->trade_no = Helper::generateOrderNo();
             $order->total_amount = $amount;
-            
+
             $orderService->setOrderType($user);
             $orderService->setInvite($user);
 
@@ -104,9 +104,9 @@ class OrderController extends Controller
                 DB::rollback();
                 abort(500, __('Failed to create order'));
             }
-    
+
             DB::commit();
-    
+
             return response([
                 'data' => $order->trade_no
             ]);
@@ -204,10 +204,18 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * 订单结账
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function checkout(Request $request)
     {
         $tradeNo = $request->input('trade_no');
         $method = $request->input('method');
+        $returnUrl = $request->input('return_url'); // 新增可选的返回地址参数
+
         $order = Order::where('trade_no', $tradeNo)
             ->where('user_id', $request->user['id'])
             ->where('status', 0)
@@ -237,7 +245,8 @@ class OrderController extends Controller
             'trade_no' => $tradeNo,
             'total_amount' => isset($order->handling_amount) ? ($order->total_amount + $order->handling_amount) : $order->total_amount,
             'user_id' => $order->user_id,
-            'stripe_token' => $request->input('token')
+            'stripe_token' => $request->input('token'),
+            'return_url' => $returnUrl // 传递自定义返回地址
         ]);
         return response([
             'type' => $result['type'],
