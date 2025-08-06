@@ -43,6 +43,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('send:remindMail')->dailyAt('11:30');
         // horizon metrics
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
+        //payment
+        $schedule->command('customFunction:GetStatPaymentMethodMoney')->dailyAt('0:00');
     }
 
     /**
