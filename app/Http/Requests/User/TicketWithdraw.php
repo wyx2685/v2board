@@ -15,6 +15,7 @@ class TicketWithdraw  extends FormRequest
     {
         return [
             'withdraw_method' => 'required',
+            'withdraw_amount' => 'required|numeric',
             'withdraw_account' => 'required'
         ];
     }
@@ -23,7 +24,9 @@ class TicketWithdraw  extends FormRequest
     {
         return [
             'withdraw_method.required' => __('The withdrawal method cannot be empty'),
-            'withdraw_account.required' => __('The withdrawal account cannot be empty')
+            'withdraw_account.required' => __('The withdrawal account cannot be empty'),
+            'withdraw_amount.required' => __('The withdrawal amount cannot be empty'),
+            'withdraw_amount.numeric' => __('The withdrawal amount must be a number')
         ];
     }
 }
