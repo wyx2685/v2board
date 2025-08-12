@@ -82,7 +82,10 @@ class OrderController extends Controller
         if ($request->input('plan_id') == 0) {
             $amount = $request->input('deposit_amount');
             if ($amount <= 0) {
-                abort(500, __('Failed to create order'));
+                abort(500, __('Failed to create order, deposit amount must be greater than 0'));
+            }
+            if ($amount >= 9999999 ) {
+                abort(500, __('Deposit amount too large, please contact the administrator'));
             }
             $user = User::find($request->user['id']);
             DB::beginTransaction();

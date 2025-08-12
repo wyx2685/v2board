@@ -49,8 +49,62 @@ class TelegramService {
 
     public function setWebhook(string $url)
     {
+        $commands = $this->discoverCommands(base_path('app/Plugins/Telegram/Commands'));
+        $this->setMyCommands($commands);
         return $this->request('setWebhook', [
             'url' => $url
+        ]);
+    }
+
+    public function discoverCommands(string $directory): array
+    {
+        $commands = [];
+
+        foreach (glob($directory . '/*.php') as $file) {
+            $className = 'App\\Plugins\\Telegram\\Commands\\' . basename($file, '.php');
+
+            if (!class_exists($className)) {
+                require_once $file;
+            }
+
+            if (!class_exists($className)) {
+                continue;
+            }
+
+            try {
+                $ref = new \ReflectionClass($className);
+
+                if (
+                    $ref->hasProperty('command') &&
+                    $ref->hasProperty('description')
+                ) {
+                    $commandProp = $ref->getProperty('command');
+                    $descProp = $ref->getProperty('description');
+
+                    $command = $commandProp->isStatic()
+                        ? $commandProp->getValue()
+                        : $ref->newInstanceWithoutConstructor()->command;
+
+                    $description = $descProp->isStatic()
+                        ? $descProp->getValue()
+                        : $ref->newInstanceWithoutConstructor()->description;
+
+                    $commands[] = [
+                        'command' => $command,
+                        'description' => $description,
+                    ];
+                }
+            } catch (\ReflectionException $e) {
+                continue;
+            }
+        }
+        return $commands;
+    }
+    
+    public function setMyCommands(array $commands)
+    {
+        $this->request('setMyCommands', [
+            'commands' => json_encode($commands),
         ]);
     }
 
