@@ -25,9 +25,12 @@ class ServerController extends Controller
         if (strpos($request->header('If-None-Match'), $eTag) !== false ) {
             abort(304);
         }
-
+        
         return response([
-            'data' => $servers
+            'data' => array_map(function ($server) {
+                $server['rate'] = 1;
+                return $server;
+            }, $servers)
         ])->header('ETag', "\"{$eTag}\"");
     }
 }
