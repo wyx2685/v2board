@@ -266,6 +266,7 @@ class UserController extends Controller
     {
         $user = User::where('id', $request->user['id'])
             ->select([
+                'id',
                 'email',
                 'transfer_enable',
                 'device_limit',
