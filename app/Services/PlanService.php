@@ -12,7 +12,7 @@ class PlanService
 
     public function __construct(int $planId)
     {
-        $this->plan = Plan::lockForUpdate()->find($planId);
+        $this->plan = Plan::find($planId);
     }
 
     public function haveCapacity(): bool

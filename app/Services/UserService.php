@@ -111,38 +111,33 @@ class UserService
             case ($plan->reset_traffic_method === NULL) : {
                 $resetTrafficMethod = config('v2board.reset_traffic_method', 0);
                 switch ((int)$resetTrafficMethod) {
-                    // month first day
                     case 0:
-                        return 30;
-                    // expire day
-                    case 1:
                         return 1;
-                    // no action
+                    case 1:
+                        return 30;
                     case 2:
                         return null;
-                    // year first day
                     case 3:
-                        return 365;
-                    // year expire day
-                    case 4:
                         return 12;
+                    case 4:
+                        return 365;
                 }
                 break;
             }
             case ($plan->reset_traffic_method === 0): {
-                return 30;
+                return 1;
             }
             case ($plan->reset_traffic_method === 1): {
-                return 1;
+                return 30;
             }
             case ($plan->reset_traffic_method === 2): {
                 return null;
             }
             case ($plan->reset_traffic_method === 3): {
-                return 365;
+                return 12;
             }
             case ($plan->reset_traffic_method === 4): {
-                return 12;
+                return 365;
             }
         }    
         return null;
