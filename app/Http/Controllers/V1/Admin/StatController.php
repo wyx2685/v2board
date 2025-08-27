@@ -49,6 +49,10 @@ class StatController extends Controller
                 'day_income' => Order::where('created_at', '>=', strtotime(date('Y-m-d')))
                     ->where('created_at', '<', time())
                     ->whereNotIn('status', [0, 2])
+                    ->where(function($query) {
+                        $query->where('type', '!=', 9)
+                            ->orWhereNotNull('callback_no');
+                    })
                     ->sum('total_amount'),
                 'last_month_income' => Order::where('created_at', '>=', strtotime('-1 month', strtotime(date('Y-m-1'))))
                     ->where('created_at', '<', strtotime(date('Y-m-1')))
