@@ -22,36 +22,49 @@ class ClientController extends Controller
         $user = $request->user;
         // account not expired and is not banned.
         $userService = new UserService();
+        $templateNode = !empty($servers) ? $servers[0] : [
+            'name' => 'TEMPLATE',
+            'type' => 'shadowsocks',
+            'host' => '1.1.1.1',
+            'port' => 22,
+            'cipher' => 'aes-256-gcm',
+            'password' => $user->uuid,
+        ];
         if ($userService->isAvailable($user)) {
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
-            if($flag) {
-                if (!strpos($flag, 'sing')) {
-                    $this->setSubscribeInfoToServers($servers, $user);
-                    foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
-                        $file = 'App\\Protocols\\' . basename($file, '.php');
-                        $class = new $file($user, $servers);
-                        if (strpos($flag, $class->flag) !== false) {
-                            return $class->handle();
-                        }
+        } else {
+            $servers = [
+                array_merge($templateNode, ['name' => '您的订阅套餐已到期，请及时续费！']),
+                array_merge($templateNode, ['name' => '官网：' . config('v2board.app_url')])];
+        }
+        if($flag) {
+            if (!strpos($flag, 'sing')) {
+                $this->setSubscribeInfoToServers($servers, $user);
+                foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
+                    $file = 'App\\Protocols\\' . basename($file, '.php');
+                    $class = new $file($user, $servers);
+                    if (strpos($flag, $class->flag) !== false) {
+                        return $class->handle();
                     }
-                }
-                if (strpos($flag, 'sing') !== false) {
-                    $version = null;
-                    if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
-                        $version = $matches[1];
-                    }
-                    if (!is_null($version) && $version >= '1.12.0') {
-                        $class = new Singbox($user, $servers);
-                    } else {
-                        $class = new SingboxOld($user, $servers);
-                    }
-                    return $class->handle();
                 }
             }
-            $class = new General($user, $servers);
-            return $class->handle();
+            if (strpos($flag, 'sing') !== false) {
+                $version = null;
+                if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
+                    $version = $matches[1];
+                }
+                if (!is_null($version) && $version >= '1.12.0') {
+                    $class = new Singbox($user, $servers);
+                } else {
+                    $class = new SingboxOld($user, $servers);
+                }
+                return $class->handle();
+            }
         }
+        $class = new General($user, $servers);
+        return $class->handle();
+        
     }
 
     private function setSubscribeInfoToServers(&$servers, $user)
