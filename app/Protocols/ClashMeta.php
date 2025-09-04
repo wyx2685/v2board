@@ -85,7 +85,7 @@ class ClashMeta
             $config['proxy-groups'][$k]['proxies'] = array_merge($config['proxy-groups'][$k]['proxies'], $proxies);
         }
         $config['proxy-groups'] = array_filter($config['proxy-groups'], function($group) {
-            return $group['proxies'];
+            return isset($group['proxies']) && is_array($group['proxies']);
         });
         $config['proxy-groups'] = array_values($config['proxy-groups']);
         // Force the current subscription domain to be a direct rule
@@ -151,17 +151,22 @@ class ClashMeta
 
         if ($server['tls']) {
             $array['tls'] = true;
-            if ($server['tlsSettings']) {
-                $tlsSettings = $server['tlsSettings'];
-                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
+            $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? null;
+            if ($tlsSettings) {
+                if (isset($tlsSettings['allow_insecure']) && !empty($tlsSettings['allow_insecure']))
+                    $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ? true : false);
+                elseif (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
                     $array['skip-cert-verify'] = ($tlsSettings['allowInsecure'] ? true : false);
-                if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
+                
+                if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
+                    $array['servername'] = $tlsSettings['server_name'];
+                elseif (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
                     $array['servername'] = $tlsSettings['serverName'];
             }
         }
         if ($server['network'] === 'tcp') {
-            $tcpSettings = $server['networkSettings'];
-            if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
+            $tcpSettings = $server['network_settings'] ?? $server['networkSettings'] ?? null;
+            if ($tcpSettings && isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') {
                 $array['network'] = $tcpSettings['header']['type'];
                 if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['http-opts']['headers']['Host'] = $tcpSettings['header']['request']['headers']['Host'];
                 if (isset($tcpSettings['header']['request']['path'])) $array['http-opts']['path'] = $tcpSettings['header']['request']['path'];
@@ -169,8 +174,8 @@ class ClashMeta
         }
         if ($server['network'] === 'ws') {
             $array['network'] = 'ws';
-            if ($server['networkSettings']) {
-                $wsSettings = $server['networkSettings'];
+            $wsSettings = $server['network_settings'] ?? $server['networkSettings'] ?? null;
+            if ($wsSettings) {
                 $array['ws-opts'] = [];
                 if (isset($wsSettings['path']) && !empty($wsSettings['path']))
                     $array['ws-opts']['path'] = $wsSettings['path'];
@@ -182,8 +187,8 @@ class ClashMeta
         }
         if ($server['network'] === 'grpc') {
             $array['network'] = 'grpc';
-            if ($server['networkSettings']) {
-                $grpcSettings = $server['networkSettings'];
+            $grpcSettings = $server['network_settings'] ?? $server['networkSettings'] ?? null;
+            if ($grpcSettings) {
                 $array['grpc-opts'] = [];
                 if (isset($grpcSettings['serviceName'])) $array['grpc-opts']['grpc-service-name'] = $grpcSettings['serviceName'];
             }
