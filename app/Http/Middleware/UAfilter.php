@@ -50,7 +50,7 @@ HTML;
         }
 
         if (strpos($request->header('User-Agent'), 'python-requests')) {
-            return response('', 200);
+            return response('', 200)->header('Content-Type', 'text/plain');
         }
 
         return $next($request);

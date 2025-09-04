@@ -26,6 +26,7 @@ class Clash
         header('profile-update-interval: 24');
         header("content-disposition:attachment;filename*=UTF-8''".rawurlencode($appName));
         header("profile-web-page-url:" . config('v2board.app_url'));
+        header('Content-Type: text/yaml; charset=utf-8');
         $defaultConfig = base_path() . '/resources/rules/default.clash.yaml';
         $customConfig = base_path() . '/resources/rules/custom.clash.yaml';
         if (\File::exists($customConfig)) {

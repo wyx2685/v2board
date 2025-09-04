@@ -23,6 +23,7 @@ class Surge
 
         $appName = config('v2board.app_name', 'V2Board');
         header("content-disposition:attachment;filename*=UTF-8''".rawurlencode($appName).".conf");
+        header('Content-Type: text/plain; charset=utf-8');
 
         $proxies = '';
         $proxyGroup = '';
