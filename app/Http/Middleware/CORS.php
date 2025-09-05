@@ -16,11 +16,20 @@ class CORS
             }
         }
         $response = $next($request);
+        
+        // 保存原有的 Content-Type（如果存在）
+        $originalContentType = $response->headers->get('Content-Type');
+        
         $response->header('Access-Control-Allow-Origin', trim($origin, '/'));
         $response->header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,HEAD');
         $response->header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization,X-Request-With');
         $response->header('Access-Control-Allow-Credentials', 'true');
         $response->header('Access-Control-Max-Age', 10080);
+        
+        // 恢复原有的 Content-Type（如果被覆盖了）
+        if ($originalContentType && $originalContentType !== 'text/html; charset=UTF-8') {
+            $response->header('Content-Type', $originalContentType);
+        }
 
         return $response;
     }
