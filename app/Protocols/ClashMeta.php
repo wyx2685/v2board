@@ -94,11 +94,13 @@ class ClashMeta
         $yaml = Yaml::dump($config, 2, 4, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
         $yaml = str_replace('$app_name', config('v2board.app_name', 'V2Board'), $yaml);
         
-        return response($yaml, 200)
-            ->header('Content-Type', 'text/yaml; charset=utf-8')
-            ->header('subscription-userinfo', "upload={$user['u']}; download={$user['d']}; total={$user['transfer_enable']}; expire={$user['expired_at']}")
-            ->header('profile-update-interval', '24')
-            ->header('content-disposition', "attachment;filename*=UTF-8''" . rawurlencode($appName));
+        // 直接返回字符串并使用原生 header
+        header('Content-Type: text/yaml; charset=utf-8', true);
+        header("subscription-userinfo: upload={$user['u']}; download={$user['d']}; total={$user['transfer_enable']}; expire={$user['expired_at']}", true);
+        header('profile-update-interval: 24', true);
+        header("content-disposition: attachment;filename*=UTF-8''" . rawurlencode($appName), true);
+        
+        return $yaml;
     }
 
     public static function buildShadowsocks($password, $server)
