@@ -35539,13 +35539,17 @@
             constructor(e) {
                 super(e),
                 this.state = {
-                    sendEmailVerifyTimeout: 60
+                    sendEmailVerifyTimeout: 60,
+                    captchaImage: null,
+                    captchaKey: null,
+                    tosChecked: !1
                 }
             }
             componentDidMount() {
                 this.props.dispatch({
                     type: "guest/getCommConfig"
-                })
+                }),
+                this.refreshCaptcha()
             }
             sendEmailVerify(e) {
                 var t = this;
@@ -35570,6 +35574,38 @@
                     }
                 })
             }
+            refreshCaptcha() {
+                var t = this;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/api/v1/passport/captcha/generate', true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        try {
+                            var responseText = xhr.responseText;
+                            // 过滤掉PHP错误信息，只保留JSON部分
+                            var jsonStart = responseText.indexOf('{');
+                            if (jsonStart > 0) {
+                                responseText = responseText.substring(jsonStart);
+                            }
+                            
+                            var data = JSON.parse(responseText);
+                            if (data.data && data.data.img && data.data.key) {
+                                console.log("Captcha loaded successfully, key:", data.data.key);
+                                t.setState({
+                                    captchaImage: data.data.img,
+                                    captchaKey: data.data.key
+                                });
+                            } else {
+                                console.error("Invalid captcha response:", data);
+                            }
+                        } catch (error) {
+                            console.error("Error parsing captcha response:", error);
+                            console.error("Response text:", xhr.responseText);
+                        }
+                    }
+                };
+                xhr.send();
+            }
             getEmail() {
                 var e = this.props.guest
                   , t = e.commConfig
@@ -35578,12 +35614,22 @@
             }
             register(e) {
                 var t = this.props.guest.commConfig;
+                
+                // 调试信息
+                console.log("Register called with:", {
+                    captcha: this.refs.captcha ? this.refs.captcha.value : "NO_REF",
+                    captchaKey: this.state.captchaKey,
+                    state: this.state
+                });
+                
                 !t.tos_url || this.state.tosChecked ? this.refs.password.value === this.refs.repassword.value ? this.props.dispatch({
                     type: "passport/register",
                     email: this.getEmail(),
                     password: this.refs.password.value,
                     inviteCode: this.refs.invite.value,
                     emailCode: this.refs.email_code ? this.refs.email_code.value : "",
+                    captcha: this.refs.captcha ? this.refs.captcha.value : "",
+                    captcha_key: this.state.captchaKey || "",
                     recaptchaData: e
                 }) : Object(p["r"])("error", Object(l["formatMessage"])({
                     id: "\u8bf7\u6c42\u5931\u8d25"
@@ -35732,7 +35778,33 @@
                         id: c.is_invite_force ? "\u9080\u8bf7\u7801" : "\u9080\u8bf7\u7801(\u9009\u586b)"
                     }),
                     ref: "invite"
-                })), c.tos_url && i.a.createElement("div", {
+                })), i.a.createElement("div", {
+                    className: "form-group form-row"
+                }, i.a.createElement("div", {
+                    className: "col-8"
+                }, i.a.createElement("input", {
+                    type: "text",
+                    className: "form-control form-control-alt",
+                    placeholder: Object(l["formatMessage"])({
+                        id: "\u9a8c\u8bc1\u7801"
+                    }),
+                    ref: "captcha",
+                    maxLength: "4"
+                })), i.a.createElement("div", {
+                    className: "col-4"
+                }, i.a.createElement("img", {
+                    src: this.state.captchaImage || "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAoAgMAAABIhNa2AAAADFBMVEX///8AAADIyMiWlpaoQiTIAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABUElEQVQ4jaVUO26EMBR8NrKE0Jam3zLrIuIIZE9AJIiSLaKUu7ewIqVJnQPQRHJ8hK04T06RZ8BgY3ubTIHt95kZ4AGAjwoiuIsFV9A+EnSICoDMrFlCQNmNnJYB3DVb6Pd+eqGXE2/uBodVSEzLmqbKrYSJntrjvfL9T/TGG/qnV7l1/zt7Q1vCEo/Nw27cK3NCcaqD1lG3H8WF6ylz9gXEW60/ha1RYkQH5bFryy6SQgnyUL8+nyTPwyzeCzD6UvNGcBqmTcXhUgN/bL7aQNy4LySKNi0vP+Qu1o7apAYGhzcvrOcbZdAwcyXnzesW+qp7k+ZYwcmx37CjdqF/LucGOGcMPk2s2oxc1pHu6ftEWpAqam62ovV7n0wjcoEl6QpqJq/QKpWXdvIsfC/7ZfKiwLQdbAt3asZ3etPbv5B+bAGiP5Q0Qypehd/9DQzwBxCbQFlo3VF3AAAAAElFTkSuQmCC",
+                    alt: Object(l["formatMessage"])({
+                        id: "\u70b9\u51fb\u5237\u65b0"
+                    }),
+                    style: {
+                        width: "100%",
+                        height: "38px",
+                        cursor: "pointer",
+                        borderRadius: "0.25rem"
+                    },
+                    onClick: () => this.refreshCaptcha()
+                }))), c.tos_url && i.a.createElement("div", {
                     className: "form-group"
                 }, i.a.createElement("div", {
                     className: "custom-control custom-checkbox custom-control-primary"
@@ -57525,7 +57597,7 @@
                 },
                 register(e, t) {
                     return u().mark(function n() {
-                        var r, o, a, c, l, f, p, d;
+                        var r, o, a, c, l, h, m, f, p, d;
                         return u().wrap(function(n) {
                             while (1)
                                 switch (n.prev = n.next) {
@@ -57535,6 +57607,8 @@
                                     a = e.inviteCode,
                                     c = e.emailCode,
                                     l = e.recaptchaData,
+                                    h = e.captcha,
+                                    m = e.captcha_key,
                                     f = t.put,
                                     n.next = 4,
                                     f({
@@ -57550,6 +57624,8 @@
                                         invite_code: a,
                                         email_code: c
                                     },
+                                    h && (p["captcha"] = h),
+                                    m && (p["captcha_key"] = m),
                                     l && (p["recaptcha_data"] = l),
                                     n.next = 8,
                                     Object(i["b"])("/passport/auth/register", p);

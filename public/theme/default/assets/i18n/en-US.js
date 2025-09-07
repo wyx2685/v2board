@@ -135,6 +135,8 @@ window.settings.i18n['en-US'] = {
   '邮箱': 'Email',
   '邮箱验证码': 'Email verification code',
   '发送': 'Send',
+  '验证码': 'Captcha',
+  '点击刷新': 'Click to refresh',
   '邀请码': 'Invitation Code',
   '邀请码(选填)': 'Invitation code (Optional)',
   '注册': 'Register',

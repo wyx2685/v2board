@@ -75,6 +75,18 @@ class AuthController extends Controller
 
     public function register(AuthRegister $request)
     {
+        // 验证图形验证码
+        $captcha = strtolower($request->input('captcha'));
+        $captchaKey = $request->input('captcha_key');
+        $storedCaptcha = Cache::get($captchaKey);
+        
+        if (!$storedCaptcha || $captcha !== $storedCaptcha) {
+            abort(500, __('Captcha is incorrect or expired'));
+        }
+        
+        // 验证成功后删除验证码
+        Cache::forget($captchaKey);
+        
         if ((int)config('v2board.register_limit_by_ip_enable', 0)) {
             $registerCountByIP = Cache::get(CacheKey::get('REGISTER_IP_RATE_LIMIT', $request->ip())) ?? 0;
             if ((int)$registerCountByIP >= (int)config('v2board.register_limit_count', 3)) {

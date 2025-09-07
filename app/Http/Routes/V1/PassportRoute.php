@@ -20,6 +20,9 @@ class PassportRoute
             // Comm
             $router->post('/comm/sendEmailVerify', 'V1\\Passport\\CommController@sendEmailVerify');
             $router->post('/comm/pv', 'V1\\Passport\\CommController@pv');
+            // Captcha
+            $router->get('/captcha/generate', 'V1\\Passport\\CaptchaController@generate');
+            $router->post('/captcha/verify', 'V1\\Passport\\CaptchaController@verify');
         });
     }
 }
