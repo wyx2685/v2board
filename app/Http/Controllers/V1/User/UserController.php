@@ -112,17 +112,17 @@ class UserController extends Controller
                 abort(500, __('You do not allow to renew the subscription'));
             }
             switch ($reset_period) {
-                case 30:
-                    break;
                 case 1:
                     $reset_day = 30;
                     $reset_period = 30;
                     break;
-                case 365:
+                case 30:
                     break;
                 case 12:
                     $reset_day = 365;
                     $reset_period = 365;
+                    break;
+                case 365:
                     break;
                 default:
                     abort(500, __('Invalid reset period'));

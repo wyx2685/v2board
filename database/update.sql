@@ -808,3 +808,7 @@ CREATE TABLE `v2_server_anytls` (
 
 ALTER TABLE `v2_user`
 ADD UNIQUE `token` (`token`);
+
+ALTER TABLE `v2_order` 
+ADD INDEX idx_user (`user_id`),
+ADD INDEX idx_user_status (`user_id`, `status`);
