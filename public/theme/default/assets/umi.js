@@ -30912,8 +30912,33 @@
                     }
                 })
             }
+            newPeriod() {
+                var e = this.props.user.subscribe
+                  , t = this;
+                c["a"].confirm({
+                    maskClosable: !0,
+                    title: Object(b["formatMessage"])({
+                        id: "\u786e\u5b9a\u5f00\u542f\u4e0b\u4e00\u4e2a\u6d41\u91cf\u5468\u671f\uff1f"
+                    }),
+                    content: Object(b["formatMessage"])({
+                        id: "\u70b9\u51fb\u300c\u786e\u5b9a\u300d\u5c06\u4f1a\u6263\u9664\u5f53\u524d\u6d41\u91cf\u5468\u671f\u5269\u4f59\u8ba2\u9605\u65f6\u957f\uff08\u6309\u6708\u91cd\u7f6e\u65f6\u6263\u9664\u672c\u5468\u671f\u5269\u4f59\u8ba2\u9605\u65f6\u957f\uff0c\u6bcf\u6708\u0031\u53f7\u91cd\u7f6e\u65f6\u6263\u9664\u6574\u6708\u65f6\u95f4\u0033\u0030\u5929\uff0c\u5e74\u5468\u671f\u540c\u7406\uff09\uff0c\u7cfb\u7edf\u5c06\u4f1a\u91cd\u7f6e\u60a8\u7684\u5df2\u4f7f\u7528\u6d41\u91cf\u3002"
+                    }),
+                    onOk() {
+                        t.props.dispatch({
+                            type: "user/newPeriod"
+                        })
+                    },
+                    onCancel() {},
+                    okText: Object(b["formatMessage"])({
+                        id: "\u786e\u5b9a"
+                    }),
+                    cancelText: Object(b["formatMessage"])({
+                        id: "\u53d6\u6d88"
+                    })
+                })
+            }
             render() {
-                var e, t, n, r, s = this.props.user, u = s.stat, d = s.subscribe, m = this.props.notice.notices, y = Object(p["f"])(d.u + d.d, d.transfer_enable), x = [];
+                var e, t, n, r, s = this.props.user, u = s.stat, d = s.subscribe, m = this.props.notice.notices, y = Math.round(Object(p["f"])(d.u + d.d, d.transfer_enable) * 100) / 100, x = [];
                 (void 0 !== u[0] && u[0] && x.push(l.a.createElement("div", {
                     className: "alert alert-danger",
                     role: "alert"
@@ -30942,7 +30967,7 @@
                 }, Object(b["formatMessage"])({
                     id: "\u7acb\u5373\u67e5\u770b"
                 }))))),
-                y >= 80 && !Object(p["h"])(d.expired_at)) && x.push(l.a.createElement("div", {
+                y >= 80 && y < 100 && !Object(p["h"])(d.expired_at)) && x.push(l.a.createElement("div", {
                     className: "alert alert-info",
                     role: "alert"
                 }, l.a.createElement("p", {
@@ -30953,7 +30978,7 @@
                     rate: y
                 }), " ", (null === (r = d.plan) || void 0 === r ? void 0 : r.reset_price) && l.a.createElement("a", {
                     onClick: ()=>this.resetPackage()
-                }, l.a.createElement("strong", null, "\u91cd\u7f6e\u5df2\u7528\u6d41\u91cf")))));
+                }, l.a.createElement("strong", null, "\u8d2d\u4e70\u6d41\u91cf\u91cd\u7f6e\u5305")))));
                 return l.a.createElement(f["a"], o()({}, this.props, {
                     title: Object(b["formatMessage"])({
                         id: "\u4eea\u8868\u76d8"
@@ -31050,8 +31075,15 @@
                     type: "primary",
                     onClick: ()=>this.resetPackage()
                 }, Object(b["formatMessage"])({
-                    id: "\u91cd\u7f6e\u5df2\u7528\u6d41\u91cf"
-                }))), Object(p["h"])(d.expired_at) && l.a.createElement("div", {
+                    id: "\u8d2d\u4e70\u6d41\u91cf\u91cd\u7f6e\u5305"
+                }))), d.allow_new_period && y >= 100 && !Object(p["h"])(d.expired_at) ? l.a.createElement("div", {
+                    className: "mb-4"
+                }, l.a.createElement(i["a"], {
+                    type: "primary",
+                    onClick: ()=>this.newPeriod()
+                }, Object(b["formatMessage"])({
+                    id: "\u63d0\u524d\u5f00\u542f\u6d41\u91cf\u5468\u671f"
+                }))) : "", Object(p["h"])(d.expired_at) && l.a.createElement("div", {
                     className: "mb-4"
                 }, l.a.createElement(i["a"], {
                     type: "primary",
@@ -44583,6 +44615,7 @@
                 getUserInfoLoading: !1,
                 changePasswordLoading: !1,
                 resetSecurityLoading: !1,
+                newPeriodLoading: !1,
                 unbindTelegramLoading: !1,
                 events: []
             },
@@ -44809,6 +44842,54 @@
                                     return n.stop()
                                 }
                         }, n)
+                    })()
+                },
+                newPeriod(e, t) {
+                    return p().mark(function e() {
+                        var n, o;
+                        return p().wrap(function(e) {
+                            while (1)
+                                switch (e.prev = e.next) {
+                                case 0:
+                                    return n = t.put,
+                                    e.next = 3,
+                                    n({
+                                        type: "setState",
+                                        payload: {
+                                            newPeriodLoading: !0
+                                        }
+                                    });
+                                case 3:
+                                    return e.next = 5,
+                                    Object(a["b"])("/user/newPeriod");
+                                case 5:
+                                    return o = e.sent,
+                                    e.next = 8,
+                                    n({
+                                        type: "setState",
+                                        payload: {
+                                            newPeriodLoading: !1
+                                        }
+                                    });
+                                case 8:
+                                    if (200 === o.code) {
+                                        e.next = 9;
+                                        break
+                                    }
+                                    return e.abrupt("return");
+                                case 9:
+                                    return e.next = 10,
+                                    n({
+                                        type: "user/getSubscribe"
+                                    });
+                                case 10:
+                                    r["a"].success("\u63d0\u524d\u5f00\u542f\u6d41\u91cf\u5468\u671f\u6210\u529f"),
+                                    c.a.push("/dashboard");
+                                case 11:
+                                case "end":
+                                    return e.stop()
+                                }
+                        }, e)
                     })()
                 },
                 redeemgiftcard(e, t) {

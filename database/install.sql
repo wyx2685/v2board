@@ -170,7 +170,9 @@ CREATE TABLE `v2_order` (
                             `created_at` int(11) NOT NULL,
                             `updated_at` int(11) NOT NULL,
                             PRIMARY KEY (`id`),
-                            UNIQUE KEY `trade_no` (`trade_no`)
+                            UNIQUE KEY `trade_no` (`trade_no`),
+                            INDEX idx_user (`user_id`),
+                            INDEX idx_user_status (`user_id`, `status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -539,7 +541,8 @@ CREATE TABLE `v2_user` (
                            `created_at` int(11) NOT NULL,
                            `updated_at` int(11) NOT NULL,
                            PRIMARY KEY (`id`),
-                           UNIQUE KEY `email` (`email`)
+                           UNIQUE KEY `email` (`email`),
+                           UNIQUE KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
