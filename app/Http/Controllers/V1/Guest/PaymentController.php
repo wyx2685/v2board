@@ -43,7 +43,7 @@ class PaymentController extends Controller
             $order->total_amount / 100,
             $order->trade_no
         );
-        $telegramService->sendMessageWithAdmin($message);
+        #$telegramService->sendMessageWithAdmin($message);
         return true;
     }
 }
