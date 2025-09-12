@@ -17,6 +17,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "google/recaptcha": "^1.2",
         "guzzlehttp/guzzle": "^7.4.3",
+        "joanhey/adapterman": "^0.7.1",
         "laravel/framework": "^8.0",
         "laravel/horizon": "^5.9.6",
         "laravel/tinker": "^2.5",
