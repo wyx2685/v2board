@@ -361,6 +361,8 @@ CREATE TABLE `v2_server_vless` (
                                    `flow` varchar(64) DEFAULT NULL,
                                    `network` varchar(11) NOT NULL,
                                    `network_settings` text,
+                                   `encryption` varchar(64) DEFAULT NULL,
+                                   `encryption_settings` text,
                                    `tags` text,
                                    `rate` varchar(11) NOT NULL,
                                    `show` tinyint(1) NOT NULL DEFAULT '0',
@@ -546,4 +548,4 @@ CREATE TABLE `v2_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- 2023-07-17 07:38:59
+-- 2025-09-12 10:05:00
