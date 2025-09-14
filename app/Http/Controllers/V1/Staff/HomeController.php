@@ -25,11 +25,33 @@ class HomeController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
+        // Check if user is staff
+        if (!$user->is_staff) {
+            return response()->json(['message' => 'Access denied: Not a staff member'], 403);
+        }
+
+        // Check if staff record exists and is active
+        $staff = Staff::where('user_id', $user->id)->where('status', 1)->first();
+        if (!$staff) {
+            return response()->json(['message' => 'Staff account not activated'], 403);
+        }
+
         return response()->json([
-            'balance' => $user->balance,
-            'commission_balance' => $user->commission_balance,
-            'commission_rate' => $user->commission_rate ?? config('v2board.invite_commission', 10),
-            'discount' => $user->discount ?? "0",
+            'status' => 'success',
+            'data' => [
+                'id' => $user->id,
+                'email' => $user->email,
+                'is_staff' => $user->is_staff,
+                'balance' => $user->balance,
+                'commission_balance' => $user->commission_balance,
+                'commission_rate' => $user->commission_rate ?? config('v2board.invite_commission', 10),
+                'discount' => $user->discount ?? "0",
+                'staff' => [
+                    'domain' => $staff->domain,
+                    'title' => $staff->title,
+                    'status' => $staff->status
+                ]
+            ]
         ]);
     }
 

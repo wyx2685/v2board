@@ -65,11 +65,20 @@ Route::get('/' . config('v2board.secure_path', config('v2board.frontend_admin_pa
     ]);
 });
 
-$staffPath = config('v2board.staff_path', 'webctv');
+// Staff routes
+$staffPath = config('v2board.staff_path', 'staff');
 
-Route::get("/{$staffPath}/{any?}", function () use ($staffPath) {
-    return view('staff.home', ['staff_path' => $staffPath]);
-})->where('any', '.*');
+Route::get("/{$staffPath}/login", function () use ($staffPath) {
+    return view('staff.login', ['staff_path' => $staffPath]);
+});
+
+Route::get("/{$staffPath}", function () use ($staffPath) {
+    return view('staff.index', ['staff_path' => $staffPath]);
+});
+
+Route::get("/{$staffPath}/", function () use ($staffPath) {
+    return view('staff.index', ['staff_path' => $staffPath]);
+});
 
 if (!empty(config('v2board.subscribe_path'))) {
     Route::get(config('v2board.subscribe_path'), 'V1\\Client\\ClientController@subscribe')->middleware('client');

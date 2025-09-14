@@ -1,0 +1,442 @@
+/**
+ * Orders Management Module
+ */
+
+const Orders = {
+    currentPage: 1,
+    pageSize: 20,
+    filters: {},
+    
+    /**
+     * Render orders page
+     */
+    async render() {
+        const content = document.getElementById('pageContent');
+        
+        content.innerHTML = `
+            <div class="stats-grid mb-3" id="orderStats">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Danh sách đơn hàng</h3>
+                </div>
+                <div class="card-body">
+                    <div class="filters mb-3">
+                        <div class="d-flex gap-2" style="flex-wrap: wrap;">
+                            <select class="form-control" id="filterStatus" style="width: 150px;">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="0">Chờ thanh toán</option>
+                                <option value="1">Đang xử lý</option>
+                                <option value="2">Đã hủy</option>
+                                <option value="3">Hoàn thành</option>
+                                <option value="4">Đã giảm giá</option>
+                            </select>
+                            
+                            <input type="text" class="form-control" id="filterTradeNo" 
+                                   placeholder="Mã đơn hàng" style="width: 200px;">
+                            
+                            <input type="text" class="form-control" id="filterUserId" 
+                                   placeholder="User ID" style="width: 120px;">
+                            
+                            <input type="date" class="form-control" id="filterStartDate" style="width: 150px;">
+                            <input type="date" class="form-control" id="filterEndDate" style="width: 150px;">
+                            
+                            <button class="btn btn-primary" onclick="Orders.applyFilters()">
+                                <i class="fas fa-filter"></i> Lọc
+                            </button>
+                            <button class="btn btn-outline" onclick="Orders.resetFilters()">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="ordersTable">
+                        <div class="loading-container">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        await Orders.loadStats();
+        await Orders.loadOrders();
+    },
+    
+    /**
+     * Load order statistics
+     */
+    async loadStats() {
+        try {
+            const stats = await API.orders.getStats();
+            
+            const statsHtml = `
+                <div class="stat-card">
+                    <div class="stat-icon primary">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Doanh thu hôm nay</div>
+                        <div class="stat-value">${App.formatCurrency(stats.today.amount)}</div>
+                        <div class="stat-change">${stats.today.count} đơn</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Doanh thu tháng</div>
+                        <div class="stat-value">${App.formatCurrency(stats.month.amount)}</div>
+                        <div class="stat-change">${stats.month.count} đơn</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon info">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Tổng doanh thu</div>
+                        <div class="stat-value">${App.formatCurrency(stats.total.amount)}</div>
+                        <div class="stat-change">${stats.total.count} đơn</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon warning">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Đơn chờ xử lý</div>
+                        <div class="stat-value">${stats.pending_count}</div>
+                        <div class="stat-change">Cần xử lý</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('orderStats').innerHTML = statsHtml;
+        } catch (error) {
+            console.error('Failed to load order stats:', error);
+            document.getElementById('orderStats').innerHTML = '';
+        }
+    },
+    
+    /**
+     * Load orders list
+     */
+    async     loadOrders(page = 1) {
+        Orders.currentPage = page;
+        
+        try {
+            const params = {
+                page: Orders.currentPage,
+                limit: Orders.pageSize,
+                ...Orders.filters
+            };
+            
+            const response = await API.orders.fetch(params);
+            Orders.renderTable(response);
+        } catch (error) {
+            console.error('Failed to load orders:', error);
+            document.getElementById('ordersTable').innerHTML = `
+                <div class="alert alert-danger">
+                    Không thể tải danh sách đơn hàng
+                </div>
+            `;
+        }
+    },
+    
+    /**
+     * Render orders table
+     */
+    renderTable(response) {
+        const { data, total, current, pageSize } = response;
+        const totalPages = Math.ceil(total / pageSize);
+        
+        if (!data || data.length === 0) {
+            document.getElementById('ordersTable').innerHTML = `
+                <div class="alert alert-info">
+                    Không tìm thấy đơn hàng nào
+                </div>
+            `;
+            return;
+        }
+        
+        let html = `
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Người dùng</th>
+                            <th>Gói dịch vụ</th>
+                            <th>Chu kỳ</th>
+                            <th>Loại</th>
+                            <th>Số tiền</th>
+                            <th>Hoa hồng</th>
+                            <th>Trạng thái</th>
+                            <th>Thời gian</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        data.forEach(order => {
+            const statusClass = Orders.getStatusClass(order.status);
+            const statusText = Orders.getStatusText(order.status);
+            const typeText = Orders.getTypeText(order.type);
+            const periodText = Orders.getPeriodText(order.period);
+            
+            html += `
+                <tr>
+                    <td>#${order.trade_no}</td>
+                    <td>${order.user_email || `ID: ${order.user_id}`}</td>
+                    <td>${order.plan_name || '-'}</td>
+                    <td>${periodText}</td>
+                    <td>${typeText}</td>
+                    <td>${App.formatCurrency(order.total_amount)}</td>
+                    <td>${App.formatCurrency(order.commission_balance || 0)}</td>
+                    <td><span class="${statusClass}">${statusText}</span></td>
+                    <td>${App.formatDate(order.created_at)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="Orders.viewDetail(${order.id})" title="Chi tiết">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        html += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+        
+        // Add pagination
+        if (totalPages > 1) {
+            html += App.createPagination(current, totalPages, 'Orders.loadOrders');
+        }
+        
+        // Show total records
+        html += `
+            <div class="mt-3 text-muted">
+                Hiển thị ${(current - 1) * pageSize + 1} - ${Math.min(current * pageSize, total)} trong tổng số ${total} đơn hàng
+            </div>
+        `;
+        
+        document.getElementById('ordersTable').innerHTML = html;
+    },
+    
+    /**
+     * Apply filters
+     */
+    applyFilters() {
+        Orders.filters = {};
+        
+        const status = document.getElementById('filterStatus').value;
+        if (status !== '') {
+            Orders.filters.status = status;
+        }
+        
+        const tradeNo = document.getElementById('filterTradeNo').value.trim();
+        if (tradeNo) {
+            Orders.filters.trade_no = tradeNo;
+        }
+        
+        const userId = document.getElementById('filterUserId').value.trim();
+        if (userId) {
+            Orders.filters.user_id = userId;
+        }
+        
+        const startDate = document.getElementById('filterStartDate').value;
+        if (startDate) {
+            Orders.filters.start_date = startDate;
+        }
+        
+        const endDate = document.getElementById('filterEndDate').value;
+        if (endDate) {
+            Orders.filters.end_date = endDate;
+        }
+        
+        Orders.loadOrders(1);
+    },
+    
+    /**
+     * Reset filters
+     */
+    resetFilters() {
+        document.getElementById('filterStatus').value = '';
+        document.getElementById('filterTradeNo').value = '';
+        document.getElementById('filterUserId').value = '';
+        document.getElementById('filterStartDate').value = '';
+        document.getElementById('filterEndDate').value = '';
+        
+        Orders.filters = {};
+        Orders.loadOrders(1);
+    },
+    
+    /**
+     * View order detail
+     */
+    async viewDetail(orderId) {
+        try {
+            const order = await API.orders.getDetail(orderId);
+            const orderData = order.data;
+            
+            const content = `
+                <div class="order-details">
+                    <h4>Thông tin đơn hàng</h4>
+                    <table class="detail-table">
+                        <tr>
+                            <td><strong>Mã đơn hàng:</strong></td>
+                            <td>${orderData.trade_no}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Người dùng:</strong></td>
+                            <td>${orderData.user_email || `ID: ${orderData.user_id}`}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gói dịch vụ:</strong></td>
+                            <td>${orderData.plan_name || '-'}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chu kỳ:</strong></td>
+                            <td>${Orders.getPeriodText(orderData.period)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Loại:</strong></td>
+                            <td>${Orders.getTypeText(orderData.type)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Số tiền:</strong></td>
+                            <td>${App.formatCurrency(orderData.total_amount)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Giảm giá:</strong></td>
+                            <td>${App.formatCurrency(orderData.discount_amount || 0)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thặng dư:</strong></td>
+                            <td>${App.formatCurrency(orderData.surplus_amount || 0)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hoàn tiền:</strong></td>
+                            <td>${App.formatCurrency(orderData.refund_amount || 0)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Số dư sử dụng:</strong></td>
+                            <td>${App.formatCurrency(orderData.balance_amount || 0)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hoa hồng:</strong></td>
+                            <td>${App.formatCurrency(orderData.commission_balance || 0)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phương thức thanh toán:</strong></td>
+                            <td>${orderData.payment_id || '-'}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mã coupon:</strong></td>
+                            <td>${orderData.coupon_id || '-'}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trạng thái:</strong></td>
+                            <td><span class="${Orders.getStatusClass(orderData.status)}">${Orders.getStatusText(orderData.status)}</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ngày tạo:</strong></td>
+                            <td>${App.formatDate(orderData.created_at)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ngày cập nhật:</strong></td>
+                            <td>${App.formatDate(orderData.updated_at)}</td>
+                        </tr>
+                        ${orderData.callback_no ? `
+                        <tr>
+                            <td><strong>Callback No:</strong></td>
+                            <td>${orderData.callback_no}</td>
+                        </tr>
+                        ` : ''}
+                    </table>
+                </div>
+                <style>
+                    .order-details { padding: 20px; }
+                    .order-details h4 { margin-bottom: 20px; color: var(--dark-color); }
+                    .detail-table { width: 100%; }
+                    .detail-table td { padding: 10px; border-bottom: 1px solid #eee; }
+                    .detail-table tr:last-child td { border-bottom: none; }
+                </style>
+            `;
+            
+            App.showModal(`Chi tiết đơn hàng #${orderData.trade_no}`, content);
+        } catch (error) {
+            App.showToast('error', 'Lỗi', 'Không thể tải chi tiết đơn hàng');
+        }
+    },
+    
+    /**
+     * Get status class
+     */
+    getStatusClass(status) {
+        const classes = {
+            0: 'text-warning',
+            1: 'text-info',
+            2: 'text-danger',
+            3: 'text-success',
+            4: 'text-primary'
+        };
+        return classes[status] || 'text-muted';
+    },
+    
+    /**
+     * Get status text
+     */
+    getStatusText(status) {
+        const texts = {
+            0: 'Chờ thanh toán',
+            1: 'Đang xử lý',
+            2: 'Đã hủy',
+            3: 'Hoàn thành',
+            4: 'Đã giảm giá'
+        };
+        return texts[status] || 'Không xác định';
+    },
+    
+    /**
+     * Get type text
+     */
+    getTypeText(type) {
+        const types = {
+            1: 'Mua mới',
+            2: 'Gia hạn',
+            3: 'Nâng cấp',
+            4: 'Đặt lại lưu lượng'
+        };
+        return types[type] || 'Khác';
+    },
+    
+    /**
+     * Get period text
+     */
+    getPeriodText(period) {
+        const periods = {
+            'month_price': '1 Tháng',
+            'quarter_price': '3 Tháng',
+            'half_year_price': '6 Tháng',
+            'year_price': '1 Năm',
+            'two_year_price': '2 Năm',
+            'three_year_price': '3 Năm',
+            'onetime_price': 'Một lần',
+            'reset_price': 'Đặt lại'
+        };
+        return periods[period] || period || '-';
+    }
+};

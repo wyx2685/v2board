@@ -104,4 +104,41 @@ class UserController extends Controller
             'data' => true
         ]);
     }
+
+    /**
+     * Apply filters to user query
+     */
+    private function filter(Request $request, $builder)
+    {
+        if ($request->input('filter')) {
+            foreach ($request->input('filter') as $filter) {
+                if (empty($filter['key']) || empty($filter['condition']) || $filter['value'] === null) continue;
+                
+                $key = $filter['key'];
+                $condition = $filter['condition'];
+                $value = $filter['value'];
+                
+                switch ($condition) {
+                    case '~':
+                        $builder->where($key, 'LIKE', "%{$value}%");
+                        break;
+                    case '=':
+                        $builder->where($key, $value);
+                        break;
+                    case '>=':
+                        $builder->where($key, '>=', $value);
+                        break;
+                    case '<=':
+                        $builder->where($key, '<=', $value);
+                        break;
+                    case '>':
+                        $builder->where($key, '>', $value);
+                        break;
+                    case '<':
+                        $builder->where($key, '<', $value);
+                        break;
+                }
+            }
+        }
+    }
 }
