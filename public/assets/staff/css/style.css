@@ -869,3 +869,30 @@ body {
     margin-top: 0;
     margin-bottom: 10px;
 }
+
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+/* Input group */
+.input-group {
+    display: flex;
+    width: 100%;
+}
+
+.input-group input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-group button {
+    flex-shrink: 0;
+}

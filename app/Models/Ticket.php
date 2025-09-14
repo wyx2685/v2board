@@ -13,4 +13,12 @@ class Ticket extends Model
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp'
     ];
+    
+    /**
+     * Relationship with User
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

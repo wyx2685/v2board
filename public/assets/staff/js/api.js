@@ -91,7 +91,8 @@ const API = {
         getById: (id) => API.get('/api/v1/staff/user/getUserInfoById', { id }),
         update: (data) => API.post('/api/v1/staff/user/update', data),
         sendMail: (data) => API.post('/api/v1/staff/user/sendMail', data),
-        ban: (params) => API.post('/api/v1/staff/user/ban', params)
+        ban: (params) => API.post('/api/v1/staff/user/ban', params),
+        resetSecurity: (userId) => API.post('/api/v1/staff/user/resetSecurity', { target_user_id: userId })
     },
     
     orders: {

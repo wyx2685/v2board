@@ -41,12 +41,12 @@
                             <span>Support Tickets</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#/notices" class="nav-link" data-route="notices">
                             <i class="fas fa-bullhorn"></i>
                             <span>Thông báo</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="#/config" class="nav-link" data-route="config">
                             <i class="fas fa-cog"></i>

@@ -130,7 +130,7 @@ const Router = {
         this.register('/users', () => Users.render());
         this.register('/orders', () => Orders.render());
         this.register('/tickets', () => Tickets.render());
-        this.register('/notices', () => Notices.render());
+        // this.register('/notices', () => Notices.render()); // Tạm ẩn notices
         this.register('/config', () => Config.render());
         
         // Handle hash change

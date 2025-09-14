@@ -131,6 +131,9 @@ const Users = {
                         <button class="btn btn-sm btn-warning" onclick="App.showQRCode('${user.subscribe_url}')" title="QR Code">
                             <i class="fas fa-qrcode"></i>
                         </button>
+                        <button class="btn btn-sm btn-danger" onclick="Users.resetSecurity(${user.id})" title="Reset Security">
+                            <i class="fas fa-shield-alt"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -271,6 +274,71 @@ const Users = {
             App.showToast('error', 'Lỗi', 'Không thể tải thông tin người dùng');
         }
     },
+    
+    /**
+     * Reset user security (UUID, token)
+     */
+    async resetSecurity(userId) {
+        if (!confirm('Bạn có chắc chắn muốn reset security cho user này?\n\nViệc này sẽ tạo mới UUID và token, làm mất hiệu lực tất cả subscription URLs cũ.')) {
+            return;
+        }
+        
+        try {
+            const result = await API.users.resetSecurity(userId);
+            
+            if (result.data && result.data.success) {
+                const newUrl = result.data.new_subscribe_url;
+                
+                // Show success modal with new URL
+                const content = `
+                    <div class="reset-success">
+                        <div class="alert alert-success">
+                            <h5><i class="fas fa-check-circle"></i> Reset Security thành công!</h5>
+                            <p>UUID và token mới đã được tạo. Subscription URL cũ không còn hiệu lực.</p>
+                        </div>
+                        
+                        <div class="new-url-section">
+                            <label class="form-label"><strong>Subscription URL mới:</strong></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="newSubscribeUrl" value="${newUrl}" readonly>
+                                <button class="btn btn-primary" onclick="App.copyToClipboard('${newUrl}')">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="qr-section mt-3">
+                            <label class="form-label"><strong>QR Code mới:</strong></label>
+                            <div class="text-center">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(newUrl)}" 
+                                     alt="QR Code" style="border: 1px solid #ddd; border-radius: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <style>
+                        .reset-success { padding: 20px; }
+                        .input-group { display: flex; }
+                        .input-group input { flex: 1; margin-right: 10px; }
+                        .new-url-section, .qr-section { margin: 20px 0; }
+                    </style>
+                `;
+                
+                const footer = `
+                    <button class="btn btn-primary" onclick="App.closeModal(this)">Đóng</button>
+                    <button class="btn btn-outline" onclick="Users.loadUsers(Users.currentPage)">
+                        <i class="fas fa-sync"></i> Tải lại danh sách
+                    </button>
+                `;
+                
+                App.showModal(`Reset Security thành công - User #${userId}`, content, footer);
+            } else {
+                App.showToast('error', 'Lỗi', 'Reset security thất bại');
+            }
+        } catch (error) {
+            App.showToast('error', 'Lỗi', error.message || 'Không thể reset security');
+        }
+    }
     
     // editUser() and saveUser() methods removed
     // Staff users can only view user details, not edit them
