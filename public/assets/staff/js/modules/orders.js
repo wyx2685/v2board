@@ -24,7 +24,7 @@ const Orders = {
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Danh sách đơn hàng</h3>
                     <button class="btn btn-success" onclick="Orders.showAssignModal()">
-                        <i class="fas fa-plus"></i> Assign Order
+                        <i class="fas fa-plus"></i> Gán đơn hàng
                     </button>
                 </div>
                 <div class="card-body">
@@ -464,7 +464,7 @@ const Orders = {
             });
             
             const modalContent = `
-                <form id="assignOrderForm" onsubmit="Orders.submitAssignOrder(event)">
+                <form id="assignOrderForm" onsubmit="return Orders.submitAssignOrder(event)">
                     <div class="form-group mb-3">
                         <label for="assignEmail">Email người dùng *</label>
                         <input type="email" class="form-control" id="assignEmail" 
@@ -530,17 +530,17 @@ const Orders = {
                     Hủy
                 </button>
                 <button type="submit" form="assignOrderForm" class="btn btn-success">
-                    <i class="fas fa-check"></i> Assign Order
+                    <i class="fas fa-check"></i> Gán đơn hàng
                 </button>
             `;
             
             // Store plans data for later use
             Orders.availablePlans = plansData;
             
-            App.showModal('Assign Order cho User', modalContent, footer);
+            App.showModal('Gán đơn hàng cho User', modalContent, footer);
         } catch (error) {
             console.error('Failed to load assign modal:', error);
-            App.showToast('error', 'Lỗi', 'Không thể tải form assign order');
+            App.showToast('error', 'Lỗi', 'Không thể tải form gán đơn hàng');
         }
     },
     
@@ -589,9 +589,19 @@ const Orders = {
      * Submit assign order form  
      */
     async submitAssignOrder(event) {
+        console.log('submitAssignOrder called', event);
         event.preventDefault();
         
-        const submitBtn = event.target.querySelector('button[type="submit"]');
+        // Find the submit button - may be outside the form
+        const submitBtn = document.querySelector('#assignOrderForm').closest('.modal').querySelector('button[type="submit"]') || 
+                          document.querySelector('button[form="assignOrderForm"]');
+        console.log('Submit button found:', submitBtn);
+        
+        if (!submitBtn) {
+            console.error('Submit button not found');
+            return false;
+        }
+        
         const originalText = submitBtn.innerHTML;
         
         try {
@@ -603,8 +613,11 @@ const Orders = {
             const planId = parseInt(document.getElementById('assignPlan').value);
             const period = document.getElementById('assignPeriod').value;
             
+            console.log('Form data:', { email, planId, period });
+            
             // Validate form
             if (!email || !planId || !period) {
+                console.error('Form validation failed:', { email, planId, period });
                 throw new Error('Vui lòng điền đầy đủ thông tin');
             }
             
@@ -613,11 +626,13 @@ const Orders = {
             }
             
             // Submit assign order
+            console.log('Calling API.orders.assign with:', { email, plan_id: planId, period });
             const response = await API.orders.assign({
                 email: email,
                 plan_id: planId,
                 period: period
             });
+            console.log('API response:', response);
             
             // Close modal
             const modal = document.querySelector('.modal-overlay');
@@ -631,7 +646,7 @@ const Orders = {
             
         } catch (error) {
             console.error('Assign order failed:', error);
-            App.showToast('error', 'Lỗi', error.message || 'Không thể assign order');
+            App.showToast('error', 'Lỗi', error.message || 'Không thể gán đơn hàng');
         } finally {
             // Re-enable submit button
             if (submitBtn) {
@@ -639,5 +654,7 @@ const Orders = {
                 submitBtn.innerHTML = originalText;
             }
         }
+        
+        return false; // Prevent default form submission
     }
 };
