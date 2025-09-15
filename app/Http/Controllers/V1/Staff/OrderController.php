@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\V1\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\OrderAssign;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\Staff;
+use App\Services\OrderService;
+use App\Services\UserService;
+use App\Utils\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -196,6 +201,82 @@ class OrderController extends Controller
 
         return response()->json([
             'data' => $result
+        ]);
+    }
+
+    /**
+     * Assign order to user (staff can only assign orders for plans they have access to)
+     */
+    public function assign(OrderAssign $request)
+    {
+        $staffUserId = $request->input('user.id');
+        $plan = Plan::find($request->input('plan_id'));
+        $user = User::where('email', $request->input('email'))->first();
+
+        if (!$user) {
+            abort(500, 'User does not exist');
+        }
+
+        if (!$plan) {
+            abort(500, 'Plan does not exist');
+        }
+
+        // Get staff info to check plan access
+        $staff = Staff::where('user_id', $staffUserId)->first();
+        if (!$staff) {
+            abort(500, 'Staff not found');
+        }
+
+        // Check if staff has access to this plan
+        $staffPlanIds = $staff->plan_id ?: [];
+        if (!empty($staffPlanIds) && !in_array($plan->id, $staffPlanIds)) {
+            abort(500, 'You do not have permission to assign this plan');
+        }
+
+        // Validate period has pricing
+        $period = $request->input('period');
+        if ($plan[$period] === null || $plan[$period] <= 0) {
+            abort(500, 'This plan does not have pricing for the selected period');
+        }
+
+        $userService = new UserService();
+        if ($userService->isNotCompleteOrderByUserId($user->id)) {
+            abort(500, 'This user has pending orders, cannot assign new order');
+        }
+
+        DB::beginTransaction();
+        $order = new Order();
+        $orderService = new OrderService($order);
+        $order->user_id = $user->id;
+        $order->plan_id = $plan->id;
+        $order->period = $period;
+        $order->trade_no = Helper::guid();
+        
+        // Auto-calculate total_amount from plan period pricing
+        $order->total_amount = $plan[$period];
+
+        // Set order type based on user status and plan
+        if ($order->period === 'reset_price') {
+            $order->type = 4;
+        } else if ($user->plan_id !== NULL && $order->plan_id !== $user->plan_id) {
+            $order->type = 3;
+        } else if ($user->expired_at > time() && $order->plan_id == $user->plan_id) {
+            $order->type = 2;
+        } else {
+            $order->type = 1;
+        }
+
+        $orderService->setInvite($user);
+
+        if (!$order->save()) {
+            DB::rollback();
+            abort(500, 'Failed to create order');
+        }
+
+        DB::commit();
+
+        return response([
+            'data' => $order->trade_no
         ]);
     }
 }

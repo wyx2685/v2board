@@ -39,6 +39,7 @@ class StaffRoute
             $router->get ('/order/detail', 'V1\\Staff\\OrderController@detail');
             $router->get ('/order/stat', 'V1\\Staff\\OrderController@stat');
             $router->get ('/order/summary', 'V1\\Staff\\OrderController@summary');
+            $router->post('/order/assign', 'V1\\Staff\\OrderController@assign');
         });
     }
 }

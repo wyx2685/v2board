@@ -99,7 +99,8 @@ const API = {
         fetch: (params) => API.get('/api/v1/staff/order/fetch', params),
         getDetail: (id) => API.get('/api/v1/staff/order/detail', { id }),
         getStats: () => API.get('/api/v1/staff/order/stat'),
-        getSummary: () => API.get('/api/v1/staff/order/summary')
+        getSummary: () => API.get('/api/v1/staff/order/summary'),
+        assign: (data) => API.post('/api/v1/staff/order/assign', data)
     },
     
     tickets: {

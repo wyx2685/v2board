@@ -42,23 +42,8 @@ const App = {
      * Initialize UI components
      */
     initializeUI() {
-        // Menu toggle for mobile
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-        
-        menuToggle?.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            sidebar.classList.toggle('collapsed');
-        });
-        
-        // Close sidebar on mobile when clicking outside
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
-                    sidebar.classList.remove('active');
-                }
-            }
-        });
+        // Initialize mobile sidebar
+        this.initMobileSidebar();
         
         // Logout button
         document.getElementById('btnLogout')?.addEventListener('click', () => {
@@ -69,6 +54,217 @@ const App = {
         document.getElementById('btnRefresh')?.addEventListener('click', () => {
             Router.handleRoute();
         });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                this.closeMobileSidebar();
+            }
+        });
+
+        // Add swipe from edge to open sidebar
+        this.initEdgeSwipe();
+    },
+
+    /**
+     * Initialize mobile sidebar functionality
+     */
+    initMobileSidebar() {
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        // Create backdrop element
+        const backdrop = document.createElement('div');
+        backdrop.className = 'sidebar-backdrop';
+        backdrop.id = 'sidebarBackdrop';
+        document.body.appendChild(backdrop);
+
+        if (!menuToggle || !sidebar) return;
+        
+        // Menu toggle click handler
+        menuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleMobileSidebar();
+        });
+        
+        // Backdrop click handler
+        backdrop.addEventListener('click', () => {
+            this.closeMobileSidebar();
+        });
+
+        // Touch events for sidebar
+        let startX, startY, currentX, currentY, isDragging = false;
+        
+        sidebar.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = false;
+        }, { passive: true });
+        
+        sidebar.addEventListener('touchmove', (e) => {
+            if (!startX) return;
+            
+            currentX = e.touches[0].clientX;
+            currentY = e.touches[0].clientY;
+            
+            const deltaX = startX - currentX;
+            const deltaY = Math.abs(startY - currentY);
+            
+            // Only handle horizontal swipes
+            if (deltaY < 50 && Math.abs(deltaX) > 10) {
+                isDragging = true;
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        sidebar.addEventListener('touchend', (e) => {
+            if (isDragging && startX && currentX) {
+                const deltaX = startX - currentX;
+                
+                // Swipe left to close (only if sidebar is open)
+                if (deltaX > 50 && sidebar.classList.contains('mobile-open')) {
+                    this.closeMobileSidebar();
+                }
+            }
+            
+            startX = null;
+            startY = null;
+            currentX = null;
+            currentY = null;
+            isDragging = false;
+        });
+
+        // Close sidebar when clicking nav links on mobile
+        const navLinks = sidebar.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => this.closeMobileSidebar(), 150);
+                }
+            });
+        });
+
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && window.innerWidth <= 768) {
+                this.closeMobileSidebar();
+            }
+        });
+    },
+
+    /**
+     * Toggle mobile sidebar
+     */
+    toggleMobileSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        const menuToggle = document.getElementById('menuToggle');
+        
+        if (!sidebar || !backdrop) return;
+        
+        const isOpen = sidebar.classList.contains('mobile-open');
+        
+        if (isOpen) {
+            this.closeMobileSidebar();
+        } else {
+            this.openMobileSidebar();
+        }
+    },
+
+    /**
+     * Open mobile sidebar
+     */
+    openMobileSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        const menuToggle = document.getElementById('menuToggle');
+        
+        if (!sidebar || !backdrop) return;
+        
+        // Add classes with slight delay for smooth animation
+        sidebar.classList.add('mobile-open');
+        backdrop.classList.add('show');
+        menuToggle?.classList.add('active');
+        
+        // Prevent body scroll when sidebar is open
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('mobile-menu-open');
+        
+        // Focus first nav item for accessibility
+        setTimeout(() => {
+            const firstNavLink = sidebar.querySelector('.nav-link');
+            firstNavLink?.focus();
+        }, 300);
+    },
+
+    /**
+     * Close mobile sidebar
+     */
+    closeMobileSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        const menuToggle = document.getElementById('menuToggle');
+        
+        if (!sidebar || !backdrop) return;
+        
+        sidebar.classList.remove('mobile-open');
+        backdrop.classList.remove('show');
+        menuToggle?.classList.remove('active');
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        document.body.classList.remove('mobile-menu-open');
+    },
+
+    /**
+     * Initialize edge swipe to open sidebar
+     */
+    initEdgeSwipe() {
+        let startX, startY, startTime;
+        const edgeThreshold = 20; // pixels from edge
+        const minSwipeDistance = 100;
+        const maxSwipeTime = 300;
+
+        document.addEventListener('touchstart', (e) => {
+            if (window.innerWidth > 768) return;
+            
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+            startTime = Date.now();
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (window.innerWidth > 768 || !startX) return;
+            
+            const touch = e.changedTouches[0];
+            const endX = touch.clientX;
+            const endY = touch.clientY;
+            const endTime = Date.now();
+            
+            const deltaX = endX - startX;
+            const deltaY = Math.abs(endY - startY);
+            const deltaTime = endTime - startTime;
+            
+            // Check if it's a valid edge swipe
+            const isFromLeftEdge = startX <= edgeThreshold;
+            const isRightSwipe = deltaX >= minSwipeDistance;
+            const isFastEnough = deltaTime <= maxSwipeTime;
+            const isHorizontal = deltaY <= 50;
+            const sidebar = document.getElementById('sidebar');
+            const isNotOpen = !sidebar?.classList.contains('mobile-open');
+            
+            if (isFromLeftEdge && isRightSwipe && isFastEnough && isHorizontal && isNotOpen) {
+                e.preventDefault();
+                this.openMobileSidebar();
+            }
+            
+            // Reset
+            startX = null;
+            startY = null;
+            startTime = null;
+        }, { passive: false });
     },
     
     /**

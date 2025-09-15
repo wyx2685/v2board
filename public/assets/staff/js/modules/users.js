@@ -122,18 +122,22 @@ const Users = {
                     <td>${user.alive_ip || 0}</td>
                     <td><span class="${expiredClass}">${expiredAt}</span></td>
                     <td>
-                        <button class="btn btn-sm btn-primary" onclick="Users.viewDetails(${user.id})" title="Chi tiết">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-info" onclick="Users.copySubscribe('${user.subscribe_url}')" title="Copy link">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <button class="btn btn-sm btn-warning" onclick="App.showQRCode('${user.subscribe_url}')" title="QR Code">
-                            <i class="fas fa-qrcode"></i>
-                        </button>
-                        <button class="btn btn-sm btn-danger" onclick="Users.resetSecurity(${user.id})" title="Reset Security">
-                            <i class="fas fa-shield-alt"></i>
-                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" 
+                                    data-user-id="${user.id}" 
+                                    data-user-email="${user.email.replace(/"/g, '&quot;')}" 
+                                    data-subscribe-url="${user.subscribe_url}" 
+                                    onclick="Users.toggleDropdown(this)">
+                                <i class="fas fa-cog"></i> Chỉnh sửa
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" onclick="Users.viewDetails(${user.id})"><i class="fas fa-eye"></i> Chi tiết</a></li>
+                                <li><a class="dropdown-item" onclick="Users.showAssignModalForUser(${user.id})"><i class="fas fa-plus"></i> Gán đơn hàng</a></li>
+                                <li><a class="dropdown-item" onclick="Users.copySubscribe(this.closest('tr').querySelector('[data-subscribe-url]').dataset.subscribeUrl)"><i class="fas fa-copy"></i> Copy link</a></li>
+                                <li><a class="dropdown-item" onclick="App.showQRCode(this.closest('tr').querySelector('[data-subscribe-url]').dataset.subscribeUrl)"><i class="fas fa-qrcode"></i> QR Code</a></li>
+                                <li><a class="dropdown-item" onclick="Users.resetSecurity(${user.id})"><i class="fas fa-shield-alt"></i> Reset Security</a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             `;
@@ -337,6 +341,206 @@ const Users = {
             }
         } catch (error) {
             App.showToast('error', 'Lỗi', error.message || 'Không thể reset security');
+        }
+    },
+
+    /**
+     * Toggle dropdown menu
+     */
+    toggleDropdown(button) {
+        // Close all other dropdowns first
+        document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+            if (menu.parentNode !== button.parentNode) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Toggle current dropdown
+        const menu = button.nextElementSibling;
+        menu.classList.toggle('show');
+
+        // Close dropdown when clicking outside
+        if (menu.classList.contains('show')) {
+            setTimeout(() => {
+                document.addEventListener('click', function closeDropdown(e) {
+                    if (!button.contains(e.target) && !menu.contains(e.target)) {
+                        menu.classList.remove('show');
+                        document.removeEventListener('click', closeDropdown);
+                    }
+                });
+            }, 0);
+        }
+    },
+
+    /**
+     * Show assign modal for specific user
+     */
+    async showAssignModalForUser(userId) {
+        // Get user email from the dropdown button's data attribute
+        const dropdownButton = document.querySelector(`[data-user-id="${userId}"]`);
+        const userEmail = dropdownButton ? dropdownButton.dataset.userEmail : '';
+        
+        if (!userEmail) {
+            App.showToast('error', 'Lỗi', 'Không thể lấy thông tin email người dùng');
+            return;
+        }
+        
+        try {
+            // Load available plans
+            const plans = await API.plans.fetch();
+            const plansData = plans.data || [];
+            
+            if (plansData.length === 0) {
+                App.showToast('warning', 'Thông báo', 'Không có gói dịch vụ nào khả dụng');
+                return;
+            }
+            
+            // Generate plans options
+            let plansOptions = '<option value="">-- Chọn gói dịch vụ --</option>';
+            plansData.forEach(plan => {
+                plansOptions += `<option value="${plan.id}">${plan.name}</option>`;
+            });
+            
+            const modalContent = `
+                <form id="assignUserOrderForm" onsubmit="Users.submitAssignOrderForUser(event, ${userId})">
+                    <div class="form-group mb-3">
+                        <label for="assignUserEmail">Email người dùng</label>
+                        <input type="email" class="form-control" id="assignUserEmail" 
+                               value="${userEmail}" readonly style="background-color: #f8f9fa;">
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="assignUserPlan">Gói dịch vụ *</label>
+                        <select class="form-control" id="assignUserPlan" onchange="Users.updateUserPeriodOptions()" required>
+                            ${plansOptions}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="assignUserPeriod">Chu kỳ thanh toán *</label>
+                        <select class="form-control" id="assignUserPeriod" required>
+                            <option value="">-- Chọn gói dịch vụ trước --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Lưu ý:</strong> Số tiền sẽ được tự động tính dựa trên gói và chu kỳ được chọn.
+                        </div>
+                    </div>
+                </form>
+            `;
+            
+            const footer = `
+                <button type="button" class="btn btn-secondary" onclick="App.closeModal(this)">
+                    Hủy
+                </button>
+                <button type="submit" form="assignUserOrderForm" class="btn btn-success">
+                    <i class="fas fa-check"></i> Gán đơn hàng
+                </button>
+            `;
+            
+            // Store plans data for later use
+            Users.availablePlans = plansData;
+            
+            App.showModal(`Gán đơn hàng cho: ${userEmail}`, modalContent, footer);
+        } catch (error) {
+            console.error('Failed to load assign modal:', error);
+            App.showToast('error', 'Lỗi', 'Không thể tải form gán đơn hàng');
+        }
+    },
+
+    /**
+     * Update period options based on selected plan for user
+     */
+    updateUserPeriodOptions() {
+        const planSelect = document.getElementById('assignUserPlan');
+        const periodSelect = document.getElementById('assignUserPeriod');
+        
+        if (!planSelect || !periodSelect) return;
+        
+        const selectedPlanId = parseInt(planSelect.value);
+        if (!selectedPlanId) {
+            periodSelect.innerHTML = '<option value="">-- Chọn gói dịch vụ trước --</option>';
+            return;
+        }
+        
+        const plan = Users.availablePlans.find(p => p.id === selectedPlanId);
+        if (!plan) return;
+        
+        // Generate period options based on plan pricing
+        const periods = [
+            { key: 'month_price', label: '1 Tháng', value: plan.month_price },
+            { key: 'quarter_price', label: '3 Tháng', value: plan.quarter_price },
+            { key: 'half_year_price', label: '6 Tháng', value: plan.half_year_price },
+            { key: 'year_price', label: '1 Năm', value: plan.year_price },
+            { key: 'two_year_price', label: '2 Năm', value: plan.two_year_price },
+            { key: 'three_year_price', label: '3 Năm', value: plan.three_year_price },
+            { key: 'onetime_price', label: 'Một lần', value: plan.onetime_price },
+            { key: 'reset_price', label: 'Đặt lại lưu lượng', value: plan.reset_price }
+        ];
+        
+        let options = '<option value="">-- Chọn chu kỳ --</option>';
+        periods.forEach(period => {
+            if (period.value !== null && period.value > 0) {
+                const priceText = App.formatCurrency(period.value);
+                options += `<option value="${period.key}">${period.label} - ${priceText}</option>`;
+            }
+        });
+        
+        periodSelect.innerHTML = options;
+    },
+
+    /**
+     * Submit assign order form for user
+     */
+    async submitAssignOrderForUser(event, userId) {
+        event.preventDefault();
+        
+        const submitBtn = event.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        try {
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+            
+            const email = document.getElementById('assignUserEmail').value.trim();
+            const planId = parseInt(document.getElementById('assignUserPlan').value);
+            const period = document.getElementById('assignUserPeriod').value;
+            
+            // Validate form
+            if (!planId || !period) {
+                throw new Error('Vui lòng chọn gói dịch vụ và chu kỳ thanh toán');
+            }
+            
+            // Submit assign order
+            const response = await API.orders.assign({
+                email: email,
+                plan_id: planId,
+                period: period
+            });
+            
+            // Close modal
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) modal.remove();
+            
+            // Show success message
+            App.showToast('success', 'Thành công', `Đơn hàng đã được gán thành công cho ${email}. Trade No: ${response.data}`);
+            
+            // Refresh users list
+            await Users.loadUsers(Users.currentPage);
+            
+        } catch (error) {
+            console.error('Assign order failed:', error);
+            App.showToast('error', 'Lỗi', error.message || 'Không thể gán đơn hàng');
+        } finally {
+            // Re-enable submit button
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
         }
     }
     

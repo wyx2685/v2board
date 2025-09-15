@@ -21,8 +21,11 @@ const Orders = {
             </div>
             
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Danh sách đơn hàng</h3>
+                    <button class="btn btn-success" onclick="Orders.showAssignModal()">
+                        <i class="fas fa-plus"></i> Assign Order
+                    </button>
                 </div>
                 <div class="card-body">
                     <div class="filters mb-3">
@@ -438,5 +441,203 @@ const Orders = {
             'reset_price': 'Đặt lại'
         };
         return periods[period] || period || '-';
+    },
+
+    /**
+     * Show assign order modal
+     */
+    async showAssignModal() {
+        try {
+            // Load available plans
+            const plans = await API.plans.fetch();
+            const plansData = plans.data || [];
+            
+            if (plansData.length === 0) {
+                App.showToast('warning', 'Thông báo', 'Không có plans nào available');
+                return;
+            }
+            
+            // Generate plans options
+            let plansOptions = '<option value="">-- Chọn gói dịch vụ --</option>';
+            plansData.forEach(plan => {
+                plansOptions += `<option value="${plan.id}">${plan.name}</option>`;
+            });
+            
+            const modalContent = `
+                <form id="assignOrderForm" onsubmit="Orders.submitAssignOrder(event)">
+                    <div class="form-group mb-3">
+                        <label for="assignEmail">Email người dùng *</label>
+                        <input type="email" class="form-control" id="assignEmail" 
+                               placeholder="Nhập email người dùng" required>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="assignPlan">Gói dịch vụ *</label>
+                        <select class="form-control" id="assignPlan" onchange="Orders.updatePeriodOptions()" required>
+                            ${plansOptions}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="assignPeriod">Chu kỳ thanh toán *</label>
+                        <select class="form-control" id="assignPeriod" required>
+                            <option value="">-- Chọn gói dịch vụ trước --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Lưu ý:</strong> Số tiền sẽ được tự động tính dựa trên gói và chu kỳ được chọn.
+                        </div>
+                    </div>
+                </form>
+                
+                <style>
+                    .form-group { margin-bottom: 1rem; }
+                    .form-group label { 
+                        display: block; 
+                        margin-bottom: 0.5rem; 
+                        font-weight: 500; 
+                        color: #333;
+                    }
+                    .form-control { 
+                        width: 100%; 
+                        padding: 0.5rem; 
+                        border: 1px solid #ddd; 
+                        border-radius: 4px; 
+                        font-size: 14px;
+                    }
+                    .form-control:focus { 
+                        border-color: #007bff; 
+                        box-shadow: 0 0 0 2px rgba(0,123,255,0.25); 
+                        outline: none;
+                    }
+                    .alert { 
+                        padding: 12px 16px; 
+                        border-radius: 4px; 
+                        background-color: #d1ecf1; 
+                        border: 1px solid #bee5eb; 
+                        color: #0c5460;
+                        font-size: 14px;
+                    }
+                    .alert i { margin-right: 8px; }
+                </style>
+            `;
+            
+            const footer = `
+                <button type="button" class="btn btn-secondary" onclick="App.closeModal(this)">
+                    Hủy
+                </button>
+                <button type="submit" form="assignOrderForm" class="btn btn-success">
+                    <i class="fas fa-check"></i> Assign Order
+                </button>
+            `;
+            
+            // Store plans data for later use
+            Orders.availablePlans = plansData;
+            
+            App.showModal('Assign Order cho User', modalContent, footer);
+        } catch (error) {
+            console.error('Failed to load assign modal:', error);
+            App.showToast('error', 'Lỗi', 'Không thể tải form assign order');
+        }
+    },
+    
+    /**
+     * Update period options based on selected plan
+     */
+    updatePeriodOptions() {
+        const planSelect = document.getElementById('assignPlan');
+        const periodSelect = document.getElementById('assignPeriod');
+        
+        if (!planSelect || !periodSelect) return;
+        
+        const selectedPlanId = parseInt(planSelect.value);
+        if (!selectedPlanId) {
+            periodSelect.innerHTML = '<option value="">-- Chọn gói dịch vụ trước --</option>';
+            return;
+        }
+        
+        const plan = Orders.availablePlans.find(p => p.id === selectedPlanId);
+        if (!plan) return;
+        
+        // Generate period options based on plan pricing
+        const periods = [
+            { key: 'month_price', label: '1 Tháng', value: plan.month_price },
+            { key: 'quarter_price', label: '3 Tháng', value: plan.quarter_price },
+            { key: 'half_year_price', label: '6 Tháng', value: plan.half_year_price },
+            { key: 'year_price', label: '1 Năm', value: plan.year_price },
+            { key: 'two_year_price', label: '2 Năm', value: plan.two_year_price },
+            { key: 'three_year_price', label: '3 Năm', value: plan.three_year_price },
+            { key: 'onetime_price', label: 'Một lần', value: plan.onetime_price },
+            { key: 'reset_price', label: 'Đặt lại lưu lượng', value: plan.reset_price }
+        ];
+        
+        let options = '<option value="">-- Chọn chu kỳ --</option>';
+        periods.forEach(period => {
+            if (period.value !== null && period.value > 0) {
+                const priceText = App.formatCurrency(period.value);
+                options += `<option value="${period.key}">${period.label} - ${priceText}</option>`;
+            }
+        });
+        
+        periodSelect.innerHTML = options;
+    },
+    
+    /**
+     * Submit assign order form  
+     */
+    async submitAssignOrder(event) {
+        event.preventDefault();
+        
+        const submitBtn = event.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        try {
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+            
+            const email = document.getElementById('assignEmail').value.trim();
+            const planId = parseInt(document.getElementById('assignPlan').value);
+            const period = document.getElementById('assignPeriod').value;
+            
+            // Validate form
+            if (!email || !planId || !period) {
+                throw new Error('Vui lòng điền đầy đủ thông tin');
+            }
+            
+            if (!email.includes('@')) {
+                throw new Error('Email không hợp lệ');
+            }
+            
+            // Submit assign order
+            const response = await API.orders.assign({
+                email: email,
+                plan_id: planId,
+                period: period
+            });
+            
+            // Close modal
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) modal.remove();
+            
+            // Show success message
+            App.showToast('success', 'Thành công', `Order đã được assign thành công. Trade No: ${response.data}`);
+            
+            // Refresh orders list
+            await Orders.loadOrders(Orders.currentPage);
+            
+        } catch (error) {
+            console.error('Assign order failed:', error);
+            App.showToast('error', 'Lỗi', error.message || 'Không thể assign order');
+        } finally {
+            // Re-enable submit button
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }
     }
 };
