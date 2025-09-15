@@ -13,12 +13,25 @@ const Users = {
     async render() {
         const content = document.getElementById('pageContent');
         
+        // Create mobile search
+        const mobileSearch = App.createMobileSearch({
+            searchTypes: [
+                { value: 'email', text: 'Email' },
+                { value: 'id', text: 'ID' }
+            ],
+            placeholder: 'Nhập từ khóa tìm kiếm...',
+            onSearch: 'Users.mobileSearch',
+            onReset: 'Users.mobileReset'
+        });
+        
         content.innerHTML = `
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Quản lý người dùng</h3>
                 </div>
                 <div class="card-body">
+                    ${mobileSearch}
+                    
                     <div class="search-box mb-3">
                         <select class="form-control" id="searchType" style="width: 150px;">
                             <option value="email">Email</option>
@@ -87,6 +100,71 @@ const Users = {
             return;
         }
         
+        // Generate mobile card table with dropdown actions
+        let mobileCardsHtml = '<div class="mobile-card-table">';
+        
+        data.forEach(user => {
+            const usedData = App.formatBytes((user.u || 0) + (user.d || 0));
+            const totalData = App.formatBytes(user.transfer_enable || 0);
+            const planName = user.plan_name || '<span class="text-muted">Không có</span>';
+            const expiredAt = user.expired_at ? App.formatDate(user.expired_at) : '-';
+            const expiredClass = user.expired_at && user.expired_at > Date.now()/1000 ? 'text-success' : 'text-danger';
+            
+            mobileCardsHtml += `
+                <div class="mobile-card-item">
+                    <div class="mobile-card-header">
+                        <div class="mobile-card-title">${user.email}</div>
+                        <div class="mobile-card-id">#${user.id}</div>
+                    </div>
+                    <div class="mobile-card-body">
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">GÓI DỊCH VỤ</div>
+                            <div class="mobile-card-value">${planName}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">ĐÃ DÙNG</div>
+                            <div class="mobile-card-value">${usedData}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">GIỚI HẠN</div>
+                            <div class="mobile-card-value">${totalData}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">THIẾT BỊ</div>
+                            <div class="mobile-card-value">${user.alive_ip || 0}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">HẠN DÙNG</div>
+                            <div class="mobile-card-value"><span class="${expiredClass}">${expiredAt}</span></div>
+                        </div>
+                    </div>
+                    <div class="mobile-card-actions">
+                        <div class="dropdown" style="width: 100%;">
+                            <button class="btn btn-primary dropdown-toggle" type="button" 
+                                    data-user-id="${user.id}" 
+                                    data-user-email="${user.email.replace(/"/g, '&quot;')}" 
+                                    data-subscribe-url="${user.subscribe_url}" 
+                                    onclick="Users.toggleDropdown(this)"
+                                    style="width: 100%;">
+                                <i class="fas fa-cog"></i> Hành động
+                            </button>
+                            <ul class="dropdown-menu" style="width: 100%;">
+                                <li><a class="dropdown-item" onclick="Users.closeDropdown(this); Users.viewDetails(${user.id})"><i class="fas fa-eye"></i> Chi tiết</a></li>
+                                <li><a class="dropdown-item" onclick="Users.closeDropdown(this); Users.showAssignModalForUser(${user.id})"><i class="fas fa-plus"></i> Gán đơn hàng</a></li>
+                                <li><a class="dropdown-item" onclick="Users.closeDropdown(this); Users.copySubscribe('${user.subscribe_url}')"><i class="fas fa-copy"></i> Copy link</a></li>
+                                <li><a class="dropdown-item" onclick="Users.closeDropdown(this); App.showQRCode('${user.subscribe_url}')"><i class="fas fa-qrcode"></i> QR Code</a></li>
+                                <li><a class="dropdown-item" onclick="Users.closeDropdown(this); Users.resetSecurity(${user.id})"><i class="fas fa-shield-alt"></i> Reset Security</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        mobileCardsHtml += '</div>';
+        const mobileCards = mobileCardsHtml;
+        
+        // Generate desktop table
         let html = `
             <div class="table-responsive">
                 <table class="data-table">
@@ -149,19 +227,22 @@ const Users = {
             </div>
         `;
         
+        // Combine mobile and desktop views
+        let combinedHtml = mobileCards + html;
+        
         // Add pagination
         if (totalPages > 1) {
-            html += App.createPagination(current, totalPages, 'Users.loadUsers');
+            combinedHtml += App.createPagination(current, totalPages, 'Users.loadUsers');
         }
         
         // Show total records
-        html += `
+        combinedHtml += `
             <div class="mt-3 text-muted">
                 Hiển thị ${(current - 1) * pageSize + 1} - ${Math.min(current * pageSize, total)} trong tổng số ${total} người dùng
             </div>
         `;
         
-        document.getElementById('usersTable').innerHTML = html;
+        document.getElementById('usersTable').innerHTML = combinedHtml;
     },
     
     /**
@@ -185,6 +266,45 @@ const Users = {
      */
     reset() {
         document.getElementById('searchInput').value = '';
+        Users.searchParams = {};
+        Users.loadUsers(1);
+    },
+    
+    /**
+     * Mobile search
+     */
+    mobileSearch() {
+        const searchType = document.getElementById('mobileSearchType').value;
+        const searchInput = document.getElementById('mobileSearchInput').value.trim();
+        
+        // Sync desktop search
+        const desktopType = document.getElementById('searchType');
+        const desktopInput = document.getElementById('searchInput');
+        
+        if (desktopType && desktopInput) {
+            desktopType.value = searchType;
+            desktopInput.value = searchInput;
+        }
+        
+        if (searchInput) {
+            Users.searchParams = { [searchType]: searchInput };
+        } else {
+            Users.searchParams = {};
+        }
+        
+        Users.loadUsers(1);
+    },
+    
+    /**
+     * Mobile reset
+     */
+    mobileReset() {
+        const mobileInput = document.getElementById('mobileSearchInput');
+        const desktopInput = document.getElementById('searchInput');
+        
+        if (mobileInput) mobileInput.value = '';
+        if (desktopInput) desktopInput.value = '';
+        
         Users.searchParams = {};
         Users.loadUsers(1);
     },
@@ -345,6 +465,24 @@ const Users = {
     },
 
     /**
+     * Close dropdown (called when clicking on dropdown items)
+     */
+    closeDropdown(element) {
+        const dropdown = element.closest('.dropdown');
+        if (dropdown) {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const card = dropdown.closest('.mobile-card-item');
+            
+            if (menu) {
+                menu.classList.remove('show');
+            }
+            if (card) {
+                card.classList.remove('dropdown-active');
+            }
+        }
+    },
+
+    /**
      * Toggle dropdown menu
      */
     toggleDropdown(button) {
@@ -352,12 +490,30 @@ const Users = {
         document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
             if (menu.parentNode !== button.parentNode) {
                 menu.classList.remove('show');
+                // Remove dropdown-active class from other cards
+                const otherCard = menu.closest('.mobile-card-item');
+                if (otherCard) {
+                    otherCard.classList.remove('dropdown-active');
+                }
             }
         });
 
         // Toggle current dropdown
         const menu = button.nextElementSibling;
+        const card = button.closest('.mobile-card-item');
+        
         menu.classList.toggle('show');
+
+        // Handle z-index for mobile cards
+        if (menu.classList.contains('show')) {
+            if (card) {
+                card.classList.add('dropdown-active');
+            }
+        } else {
+            if (card) {
+                card.classList.remove('dropdown-active');
+            }
+        }
 
         // Close dropdown when clicking outside
         if (menu.classList.contains('show')) {
@@ -365,6 +521,9 @@ const Users = {
                 document.addEventListener('click', function closeDropdown(e) {
                     if (!button.contains(e.target) && !menu.contains(e.target)) {
                         menu.classList.remove('show');
+                        if (card) {
+                            card.classList.remove('dropdown-active');
+                        }
                         document.removeEventListener('click', closeDropdown);
                     }
                 });

@@ -45,6 +45,11 @@ const App = {
         // Initialize mobile sidebar
         this.initMobileSidebar();
         
+        // Enable mobile enhancements
+        if (window.innerWidth <= 768) {
+            this.enableMobileEnhancements();
+        }
+        
         // Logout button
         document.getElementById('btnLogout')?.addEventListener('click', () => {
             this.confirmLogout();
@@ -59,6 +64,9 @@ const App = {
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 this.closeMobileSidebar();
+                document.body.classList.remove('mobile-enhanced');
+            } else {
+                this.enableMobileEnhancements();
             }
         });
 
@@ -490,6 +498,390 @@ const App = {
         
         html += '</div>';
         return html;
+    },
+    
+    /**
+     * Create mobile-friendly search box
+     */
+    createMobileSearch(options) {
+        const {
+            searchTypes = [{ value: 'email', text: 'Email' }],
+            placeholder = 'Nhập từ khóa tìm kiếm...',
+            onSearch,
+            onReset
+        } = options;
+        
+        const searchTypeOptions = searchTypes.map(type => 
+            `<option value="${type.value}">${type.text}</option>`
+        ).join('');
+        
+        return `
+            <div class="mobile-search-container">
+                <div class="mobile-search-row">
+                    <select class="form-control" id="mobileSearchType">
+                        ${searchTypeOptions}
+                    </select>
+                    <input type="text" class="form-control" id="mobileSearchInput" 
+                           placeholder="${placeholder}">
+                </div>
+                <div class="mobile-search-actions">
+                    <button class="btn btn-primary" onclick="${onSearch}()">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </button>
+                    <button class="btn btn-outline" onclick="${onReset}()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+            </div>
+        `;
+    },
+    
+    /**
+     * Create mobile-friendly filter box
+     */
+    createMobileFilters(options) {
+        const {
+            filters = [],
+            onApply,
+            onReset,
+            additionalActions = []
+        } = options;
+        
+        let filtersHtml = '';
+        
+        filters.forEach((filter, index) => {
+            if (filter.type === 'select') {
+                const options = filter.options.map(opt => 
+                    `<option value="${opt.value}">${opt.text}</option>`
+                ).join('');
+                
+                filtersHtml += `
+                    <div class="mobile-search-row" style="flex-direction: column; align-items: stretch; gap: 6px;">
+                        <label class="form-label">${filter.label}:</label>
+                        <select class="form-control" id="${filter.id}">
+                            ${options}
+                        </select>
+                    </div>
+                `;
+            } else if (filter.type === 'text') {
+                filtersHtml += `
+                    <div class="mobile-search-row" style="flex-direction: column; align-items: stretch; gap: 6px;">
+                        <label class="form-label">${filter.label}:</label>
+                        <input type="text" class="form-control" id="${filter.id}" 
+                               placeholder="${filter.placeholder || ''}">
+                    </div>
+                `;
+            } else if (filter.type === 'date') {
+                filtersHtml += `
+                    <div class="mobile-search-row" style="flex-direction: column; align-items: stretch; gap: 6px;">
+                        <label class="form-label">${filter.label}:</label>
+                        <input type="date" class="form-control" id="${filter.id}">
+                    </div>
+                `;
+            }
+        });
+        
+        let actionsHtml = `
+            <button class="btn btn-primary" onclick="${onApply}()">
+                <i class="fas fa-filter"></i> Áp dụng
+            </button>
+            <button class="btn btn-outline" onclick="${onReset}()">
+                <i class="fas fa-redo"></i> Reset
+            </button>
+        `;
+        
+        additionalActions.forEach(action => {
+            actionsHtml += `
+                <button class="btn ${action.class || 'btn-secondary'}" onclick="${action.onclick}">
+                    ${action.icon ? `<i class="${action.icon}"></i>` : ''} ${action.text}
+                </button>
+            `;
+        });
+        
+        return `
+            <div class="mobile-search-container">
+                ${filtersHtml}
+                <div class="mobile-search-actions">
+                    ${actionsHtml}
+                </div>
+            </div>
+        `;
+    },
+    
+    /**
+     * Create mobile card table
+     */
+    createMobileCardTable(data, config) {
+        const { 
+            idField = 'id',
+            titleField = 'email',
+            fields = [],
+            actions = [],
+            formatters = {}
+        } = config;
+        
+        if (!data || data.length === 0) {
+            return `
+                <div class="mobile-card-table">
+                    <div class="alert alert-info">
+                        Không có dữ liệu để hiển thị
+                    </div>
+                </div>
+            `;
+        }
+        
+        let html = '<div class="mobile-card-table">';
+        
+        data.forEach(item => {
+            const id = item[idField];
+            const title = item[titleField] || `#${id}`;
+            
+            html += `
+                <div class="mobile-card-item">
+                    <div class="mobile-card-header">
+                        <div class="mobile-card-title">${title}</div>
+                        <div class="mobile-card-id">#${id}</div>
+                    </div>
+                    <div class="mobile-card-body">
+            `;
+            
+            // Render fields
+            fields.forEach(field => {
+                let value = item[field.key];
+                
+                // Apply formatter if exists
+                if (formatters[field.key]) {
+                    value = formatters[field.key](value, item);
+                } else if (typeof value === 'boolean') {
+                    value = value ? '✓' : '✗';
+                } else if (value === null || value === undefined) {
+                    value = '-';
+                }
+                
+                html += `
+                    <div class="mobile-card-field">
+                        <div class="mobile-card-label">${field.label}</div>
+                        <div class="mobile-card-value">${value}</div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            
+            // Render actions
+            if (actions && actions.length > 0) {
+                html += '<div class="mobile-card-actions">';
+                
+                // If more than 3 actions, use dropdown, otherwise use individual buttons
+                if (actions.length > 3) {
+                    html += `
+                        <div class="dropdown" style="width: 100%;">
+                            <button class="btn btn-primary dropdown-toggle" type="button" 
+                                    onclick="App.toggleMobileDropdown(this)"
+                                    style="width: 100%;">
+                                <i class="fas fa-cog"></i> Hành động
+                            </button>
+                            <ul class="dropdown-menu" style="width: 100%;">
+                    `;
+                    
+                    actions.forEach(action => {
+                        const onclick = typeof action.onclick === 'function' 
+                            ? action.onclick(item) 
+                            : action.onclick.replace('{id}', id);
+                            
+                        html += `
+                            <li><a class="dropdown-item" onclick="App.closeMobileDropdown(this); ${onclick}">
+                                ${action.icon ? `<i class="${action.icon}"></i>` : ''} 
+                                ${action.text}
+                            </a></li>
+                        `;
+                    });
+                    
+                    html += '</ul></div>';
+                } else {
+                    // Use individual buttons for 3 or fewer actions
+                    actions.forEach(action => {
+                        const onclick = typeof action.onclick === 'function' 
+                            ? action.onclick(item) 
+                            : action.onclick.replace('{id}', id);
+                            
+                        html += `
+                            <button class="btn ${action.class || 'btn-primary'}" 
+                                    onclick="${onclick}" style="flex: 1; margin: 0 2px;">
+                                ${action.icon ? `<i class="${action.icon}"></i>` : ''} 
+                                ${action.text}
+                            </button>
+                        `;
+                    });
+                }
+                
+                html += '</div>';
+            }
+            
+            html += '</div>';
+        });
+        
+        html += '</div>';
+        return html;
+    },
+    
+    /**
+     * Enable mobile-enhanced features
+     */
+    enableMobileEnhancements() {
+        // Add mobile classes to containers
+        document.body.classList.add('mobile-enhanced');
+        
+        const statsGrid = document.querySelector('.stats-grid');
+        if (statsGrid) {
+            statsGrid.classList.add('mobile-stats-enhanced');
+        }
+        
+        // Enable pull-to-refresh
+        this.initPullToRefresh();
+        
+        // Enhanced modal behavior
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.modal-overlay')) {
+                const overlay = e.target.closest('.modal-overlay');
+                overlay.classList.add('mobile-modal-enhanced');
+            }
+        });
+    },
+    
+    /**
+     * Initialize pull-to-refresh
+     */
+    initPullToRefresh() {
+        let startY = 0;
+        let currentY = 0;
+        let pullDistance = 0;
+        let isPulling = false;
+        let indicator = null;
+        
+        // Create indicator if not exists
+        if (!document.getElementById('pullRefreshIndicator')) {
+            indicator = document.createElement('div');
+            indicator.id = 'pullRefreshIndicator';
+            indicator.className = 'pull-refresh-indicator';
+            indicator.textContent = 'Kéo để làm mới';
+            document.body.appendChild(indicator);
+        } else {
+            indicator = document.getElementById('pullRefreshIndicator');
+        }
+        
+        const pageContent = document.getElementById('pageContent');
+        if (!pageContent) return;
+        
+        pageContent.addEventListener('touchstart', (e) => {
+            if (pageContent.scrollTop === 0) {
+                startY = e.touches[0].clientY;
+                isPulling = false;
+            }
+        }, { passive: true });
+        
+        pageContent.addEventListener('touchmove', (e) => {
+            if (startY === 0 || pageContent.scrollTop > 0) return;
+            
+            currentY = e.touches[0].clientY;
+            pullDistance = currentY - startY;
+            
+            if (pullDistance > 50 && !isPulling) {
+                isPulling = true;
+                indicator.classList.add('show');
+                indicator.textContent = 'Thả để làm mới';
+            } else if (pullDistance < 50 && isPulling) {
+                isPulling = false;
+                indicator.classList.remove('show');
+                indicator.textContent = 'Kéo để làm mới';
+            }
+        }, { passive: true });
+        
+        pageContent.addEventListener('touchend', () => {
+            if (isPulling && pullDistance > 80) {
+                indicator.textContent = 'Đang làm mới...';
+                
+                // Trigger refresh
+                setTimeout(() => {
+                    indicator.classList.remove('show');
+                    Router.handleRoute(); // Refresh current page
+                }, 1000);
+            } else {
+                indicator.classList.remove('show');
+            }
+            
+            startY = 0;
+            currentY = 0;
+            pullDistance = 0;
+            isPulling = false;
+        }, { passive: true });
+    },
+    
+    /**
+     * Close mobile dropdown (called when clicking on dropdown items)
+     */
+    closeMobileDropdown(element) {
+        const dropdown = element.closest('.dropdown');
+        if (dropdown) {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const card = dropdown.closest('.mobile-card-item');
+            
+            if (menu) {
+                menu.classList.remove('show');
+            }
+            if (card) {
+                card.classList.remove('dropdown-active');
+            }
+        }
+    },
+
+    /**
+     * Toggle mobile dropdown for generic mobile card tables
+     */
+    toggleMobileDropdown(button) {
+        // Close all other dropdowns first
+        document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+            if (menu.parentNode !== button.parentNode) {
+                menu.classList.remove('show');
+                // Remove dropdown-active class from other cards
+                const otherCard = menu.closest('.mobile-card-item');
+                if (otherCard) {
+                    otherCard.classList.remove('dropdown-active');
+                }
+            }
+        });
+
+        // Toggle current dropdown
+        const menu = button.nextElementSibling;
+        const card = button.closest('.mobile-card-item');
+        
+        menu.classList.toggle('show');
+
+        // Handle z-index for mobile cards
+        if (menu.classList.contains('show')) {
+            if (card) {
+                card.classList.add('dropdown-active');
+            }
+        } else {
+            if (card) {
+                card.classList.remove('dropdown-active');
+            }
+        }
+
+        // Close dropdown when clicking outside
+        if (menu.classList.contains('show')) {
+            setTimeout(() => {
+                document.addEventListener('click', function closeDropdown(e) {
+                    if (!button.contains(e.target) && !menu.contains(e.target)) {
+                        menu.classList.remove('show');
+                        if (card) {
+                            card.classList.remove('dropdown-active');
+                        }
+                        document.removeEventListener('click', closeDropdown);
+                    }
+                });
+            }, 0);
+        }
     }
 };
 

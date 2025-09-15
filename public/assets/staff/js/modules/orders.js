@@ -13,6 +13,57 @@ const Orders = {
     async render() {
         const content = document.getElementById('pageContent');
         
+        // Create mobile filters
+        const mobileFilters = App.createMobileFilters({
+            filters: [
+                {
+                    id: 'mobileFilterStatus',
+                    type: 'select',
+                    label: 'Trạng thái',
+                    options: [
+                        { value: '', text: 'Tất cả trạng thái' },
+                        { value: '0', text: 'Chờ thanh toán' },
+                        { value: '1', text: 'Đang xử lý' },
+                        { value: '2', text: 'Đã hủy' },
+                        { value: '3', text: 'Hoàn thành' },
+                        { value: '4', text: 'Đã giảm giá' }
+                    ]
+                },
+                {
+                    id: 'mobileFilterTradeNo',
+                    type: 'text',
+                    label: 'Mã đơn hàng',
+                    placeholder: 'Nhập mã đơn hàng'
+                },
+                {
+                    id: 'mobileFilterUserId',
+                    type: 'text',
+                    label: 'User ID',
+                    placeholder: 'Nhập User ID'
+                },
+                {
+                    id: 'mobileFilterStartDate',
+                    type: 'date',
+                    label: 'Từ ngày'
+                },
+                {
+                    id: 'mobileFilterEndDate',
+                    type: 'date',
+                    label: 'Đến ngày'
+                }
+            ],
+            onApply: 'Orders.mobileApplyFilters',
+            onReset: 'Orders.mobileResetFilters',
+            additionalActions: [
+                {
+                    text: 'Gán đơn hàng',
+                    icon: 'fas fa-plus',
+                    class: 'btn-success',
+                    onclick: 'Orders.showAssignModal()'
+                }
+            ]
+        });
+        
         content.innerHTML = `
             <div class="stats-grid mb-3" id="orderStats">
                 <div class="loading-container">
@@ -28,6 +79,8 @@ const Orders = {
                     </button>
                 </div>
                 <div class="card-body">
+                    ${mobileFilters}
+                    
                     <div class="filters mb-3">
                         <div class="d-flex gap-2" style="flex-wrap: wrap;">
                             <select class="form-control" id="filterStatus" style="width: 150px;">
@@ -171,6 +224,60 @@ const Orders = {
             return;
         }
         
+        // Generate mobile card table
+        let mobileCardsHtml = '<div class="mobile-card-table">';
+        
+        data.forEach(order => {
+            const statusClass = Orders.getStatusClass(order.status);
+            const statusText = Orders.getStatusText(order.status);
+            const typeText = Orders.getTypeText(order.type);
+            const periodText = Orders.getPeriodText(order.period);
+            
+            mobileCardsHtml += `
+                <div class="mobile-card-item">
+                    <div class="mobile-card-header">
+                        <div class="mobile-card-title">#${order.trade_no}</div>
+                        <div class="mobile-card-id"><span class="${statusClass}">${statusText}</span></div>
+                    </div>
+                    <div class="mobile-card-body">
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">NGƯỜI DÙNG</div>
+                            <div class="mobile-card-value">${order.user_email || `ID: ${order.user_id}`}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">GÓI DỊCH VỤ</div>
+                            <div class="mobile-card-value">${order.plan_name || '-'}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">CHU KỲ</div>
+                            <div class="mobile-card-value">${periodText}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">LOẠI</div>
+                            <div class="mobile-card-value">${typeText}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">SỐ TIỀN</div>
+                            <div class="mobile-card-value">${App.formatCurrency(order.total_amount)}</div>
+                        </div>
+                        <div class="mobile-card-field">
+                            <div class="mobile-card-label">THỜI GIAN</div>
+                            <div class="mobile-card-value">${App.formatDate(order.created_at)}</div>
+                        </div>
+                    </div>
+                    <div class="mobile-card-actions">
+                        <button class="btn btn-primary" onclick="Orders.viewDetail(${order.id})" style="width: 100%;">
+                            <i class="fas fa-eye"></i> Chi tiết đơn hàng
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        
+        mobileCardsHtml += '</div>';
+        const mobileCards = mobileCardsHtml;
+        
+        // Generate desktop table
         let html = `
             <div class="table-responsive">
                 <table class="data-table">
@@ -223,19 +330,22 @@ const Orders = {
             </div>
         `;
         
+        // Combine mobile and desktop views
+        let combinedHtml = mobileCards + html;
+        
         // Add pagination
         if (totalPages > 1) {
-            html += App.createPagination(current, totalPages, 'Orders.loadOrders');
+            combinedHtml += App.createPagination(current, totalPages, 'Orders.loadOrders');
         }
         
         // Show total records
-        html += `
+        combinedHtml += `
             <div class="mt-3 text-muted">
                 Hiển thị ${(current - 1) * pageSize + 1} - ${Math.min(current * pageSize, total)} trong tổng số ${total} đơn hàng
             </div>
         `;
         
-        document.getElementById('ordersTable').innerHTML = html;
+        document.getElementById('ordersTable').innerHTML = combinedHtml;
     },
     
     /**
@@ -281,6 +391,81 @@ const Orders = {
         document.getElementById('filterUserId').value = '';
         document.getElementById('filterStartDate').value = '';
         document.getElementById('filterEndDate').value = '';
+        
+        Orders.filters = {};
+        Orders.loadOrders(1);
+    },
+
+    /**
+     * Mobile apply filters
+     */
+    mobileApplyFilters() {
+        Orders.filters = {};
+        
+        const status = document.getElementById('mobileFilterStatus').value;
+        if (status !== '') {
+            Orders.filters.status = status;
+        }
+        
+        const tradeNo = document.getElementById('mobileFilterTradeNo').value.trim();
+        if (tradeNo) {
+            Orders.filters.trade_no = tradeNo;
+        }
+        
+        const userId = document.getElementById('mobileFilterUserId').value.trim();
+        if (userId) {
+            Orders.filters.user_id = userId;
+        }
+        
+        const startDate = document.getElementById('mobileFilterStartDate').value;
+        if (startDate) {
+            Orders.filters.start_date = startDate;
+        }
+        
+        const endDate = document.getElementById('mobileFilterEndDate').value;
+        if (endDate) {
+            Orders.filters.end_date = endDate;
+        }
+        
+        // Sync with desktop filters
+        const desktopStatus = document.getElementById('filterStatus');
+        const desktopTradeNo = document.getElementById('filterTradeNo');
+        const desktopUserId = document.getElementById('filterUserId');
+        const desktopStartDate = document.getElementById('filterStartDate');
+        const desktopEndDate = document.getElementById('filterEndDate');
+        
+        if (desktopStatus) desktopStatus.value = status;
+        if (desktopTradeNo) desktopTradeNo.value = tradeNo;
+        if (desktopUserId) desktopUserId.value = userId;
+        if (desktopStartDate) desktopStartDate.value = startDate;
+        if (desktopEndDate) desktopEndDate.value = endDate;
+        
+        Orders.loadOrders(1);
+    },
+
+    /**
+     * Mobile reset filters
+     */
+    mobileResetFilters() {
+        // Reset mobile filters
+        document.getElementById('mobileFilterStatus').value = '';
+        document.getElementById('mobileFilterTradeNo').value = '';
+        document.getElementById('mobileFilterUserId').value = '';
+        document.getElementById('mobileFilterStartDate').value = '';
+        document.getElementById('mobileFilterEndDate').value = '';
+        
+        // Reset desktop filters
+        const desktopStatus = document.getElementById('filterStatus');
+        const desktopTradeNo = document.getElementById('filterTradeNo');
+        const desktopUserId = document.getElementById('filterUserId');
+        const desktopStartDate = document.getElementById('filterStartDate');
+        const desktopEndDate = document.getElementById('filterEndDate');
+        
+        if (desktopStatus) desktopStatus.value = '';
+        if (desktopTradeNo) desktopTradeNo.value = '';
+        if (desktopUserId) desktopUserId.value = '';
+        if (desktopStartDate) desktopStartDate.value = '';
+        if (desktopEndDate) desktopEndDate.value = '';
         
         Orders.filters = {};
         Orders.loadOrders(1);
