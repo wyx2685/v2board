@@ -402,7 +402,7 @@ const Users = {
             });
             
             const modalContent = `
-                <form id="assignUserOrderForm" onsubmit="Users.submitAssignOrderForUser(event, ${userId})">
+                <form id="assignUserOrderForm" onsubmit="return Users.submitAssignOrderForUser(event, ${userId})">
                     <div class="form-group mb-3">
                         <label for="assignUserEmail">Email người dùng</label>
                         <input type="email" class="form-control" id="assignUserEmail" 
@@ -496,9 +496,20 @@ const Users = {
      * Submit assign order form for user
      */
     async submitAssignOrderForUser(event, userId) {
+        console.log('submitAssignOrderForUser called', event, userId);
         event.preventDefault();
         
-        const submitBtn = event.target.querySelector('button[type="submit"]');
+        // Find the submit button - it's in modal footer, not in form
+        const submitBtn = document.querySelector('#assignUserOrderForm').closest('.modal').querySelector('button[type="submit"]') || 
+                          document.querySelector('button[form="assignUserOrderForm"]');
+        console.log('Submit button found:', submitBtn);
+        
+        if (!submitBtn) {
+            console.error('Submit button not found');
+            App.showToast('error', 'Lỗi', 'Không tìm thấy nút submit');
+            return false;
+        }
+        
         const originalText = submitBtn.innerHTML;
         
         try {
@@ -510,17 +521,22 @@ const Users = {
             const planId = parseInt(document.getElementById('assignUserPlan').value);
             const period = document.getElementById('assignUserPeriod').value;
             
+            console.log('Form data:', { email, planId, period });
+            
             // Validate form
             if (!planId || !period) {
+                console.error('Form validation failed:', { email, planId, period });
                 throw new Error('Vui lòng chọn gói dịch vụ và chu kỳ thanh toán');
             }
             
             // Submit assign order
+            console.log('Calling API.orders.assign with:', { email, plan_id: planId, period });
             const response = await API.orders.assign({
                 email: email,
                 plan_id: planId,
                 period: period
             });
+            console.log('API response:', response);
             
             // Close modal
             const modal = document.querySelector('.modal-overlay');
@@ -542,6 +558,8 @@ const Users = {
                 submitBtn.innerHTML = originalText;
             }
         }
+        
+        return false; // Prevent default form submission
     }
     
     // editUser() and saveUser() methods removed
