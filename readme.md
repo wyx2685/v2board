@@ -33,7 +33,8 @@
 - Laravel
 
 ## Demo
-[Demo](https://demo.v2board.com)
+[Demo](https://v2bdemo.v-50.me/)
+邮箱和密码可随意输入
 
 ## Document
 [Click](https://v2board.com)
