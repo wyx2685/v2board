@@ -316,7 +316,7 @@ class OrderController extends Controller
 
     private function getbounus($total_amount) {
         $deposit_bounus = config('v2board.deposit_bounus', []);
-        if (empty($deposit_bounus)) {
+        if (empty($deposit_bounus) || $deposit_bounus[0] === null) {
             return 0;
         }
         $add = 0;

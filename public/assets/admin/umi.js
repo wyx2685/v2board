@@ -105205,6 +105205,109 @@
                 })))))
             }
         }
+        class EncryptionSettings extends y.a.Component {
+            constructor(e) {
+                super(e);
+                var t = this.props.settings;
+                "{}" !== JSON.stringify(t) && t || (t = {
+                    mode: "native",
+                    rtt: "0rtt",
+                    ticket: "600s",
+                    server_padding: null,
+                    client_padding: null,
+                    private_key: null,
+                    password: null
+                }),
+                this.state = {
+                    encryption: this.props.encryption,
+                    settings: t
+                },
+                this.props.onChange(this.state.settings)
+            }
+            change(e, t) {
+                var n = this.state.settings;
+                n[e] = t,
+                this.setState({
+                    settings: n
+                }),
+                this.props.onChange(this.state.settings)
+            }
+            render() {
+                var e = this.state.settings
+                  , m = e.mode
+                  , r = e.rtt
+                  , tt = e.ticket
+                  , sp = e.server_padding
+                  , cp = e.client_padding
+                  , pv = e.private_key
+                  , pwd = e.password
+                  , encryption = this.props.encryption;
+                return y.a.createElement(y.a.Fragment, null, y.a.createElement("div", null, y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "Mode"), y.a.createElement(N["a"], {
+                    value: m,
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.change("mode", e)
+                }, y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: "native"
+                }, "native"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: "xorpub"
+                }, "xorpub"), y.a.createElement(N["a"].Option, {
+                    key: 2,
+                    value: "random"
+                }, "random"))), y.a.createElement("div",{
+                    className: "row"
+                }, y.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                }, y.a.createElement("label", null, "RTT"), y.a.createElement(N["a"], {
+                    value: r,
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.change("rtt", e)
+                }, y.a.createElement(N["a"].Option, {
+                    key: 0,
+                    value: "0rtt"
+                }, "0rtt"), y.a.createElement(N["a"].Option, {
+                    key: 1,
+                    value: "1rtt"
+                }, "1rtt"))), r === "0rtt" && y.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                }, y.a.createElement("label", null, "Ticket time"), y.a.createElement(s["a"], {
+                    value: tt,
+                    onChange: e=>this.change("ticket", e.target.value),
+                    placeholder: "\u6700\u957f\u5141\u8bb8\u65f6\u95f4"
+                }))), y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "Server Padding"), y.a.createElement(s["a"], {
+                    value: sp,
+                    onChange: e=>this.change("server_padding", e.target.value),
+                    placeholder: "\u7559\u7a7a\u4f7f\u7528\u9ed8\u8ba4\u503c100-111-1111.75-0-111.50-0-3333"
+                })), y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "Private Key"), y.a.createElement(s["a"], {
+                    value: pv,
+                    onChange: e=>this.change("private_key", e.target.value),
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210\uff0c\u9700\u6297\u91cf\u5b50\u52a0\u5bc6\u8bf7\u81ea\u884c\u66ff\u6362"
+                })), y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "Client Padding"), y.a.createElement(s["a"], {
+                    value: cp,
+                    onChange: e=>this.change("client_padding", e.target.value),
+                    placeholder: "\u7559\u7a7a\u4f7f\u7528\u9ed8\u8ba4\u503c100-111-1111.75-0-111.50-0-3333"
+                })), y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "Password"), y.a.createElement(s["a"], {
+                    value: pwd,
+                    onChange: e=>this.change("password", e.target.value),
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210\uff0c\u9700\u6297\u91cf\u5b50\u52a0\u5bc6\u8bf7\u81ea\u884c\u66ff\u6362"
+                }))))
+            }
+        }
         class z extends y.a.Component {
             constructor(e) {
                 super(e),
@@ -105269,7 +105372,8 @@
             renderChildDrawer() {
                 var e = this.state.server
                   , t = e.network_settings
-                  , n = e.tls_settings;
+                  , n = e.tls_settings
+                  , enc = e.encryption_settings;
                 switch (this.state.childDrawer.type) {
                 case "network_settings":
                     var r = {
@@ -105344,6 +105448,11 @@
                         settings: n,
                         tls: e.tls,
                         onChange: e=>this.changeServer("tls_settings", e)
+                    })
+                case "encryption_settings":
+                    return y.a.createElement(EncryptionSettings, {
+                        settings: enc,
+                        onChange: e=>this.changeServer("encryption_settings", e)
                     })
                 }
             }
@@ -105483,6 +105592,24 @@
                 }, "HTTPUpgrade"), y.a.createElement(N["a"].Option, {
                     value: "xhttp"
                 }, "XHTTP")))), y.a.createElement("div", {
+                    className: "row"
+                }, y.a.createElement("div", {
+                    className: "form-group col-md-12 col-xs-12"
+                }, y.a.createElement("label", null, "\u52a0\u5bc6\u65b9\u5f0f ", e.encryption && y.a.createElement("a", {
+                    href: "javascript:void(0);",
+                    onClick: ()=>this.showChildDrawer("\u7f16\u8f91\u52a0\u5bc6\u914d\u7f6e", "encryption_settings")
+                }, "\u7f16\u8f91\u914d\u7f6e")), y.a.createElement(N["a"], {
+                    value: e.encryption,
+                    placeholder: "\u9009\u62e9\u52a0\u5bc6\u65b9\u5f0f",
+                    style: {
+                        width: "100%"
+                    },
+                    onChange: e=>this.formChange("encryption", e)
+                }, y.a.createElement(N["a"].Option, {
+                    value: null
+                }, "\u65e0"), y.a.createElement(N["a"].Option, {
+                    value: "mlkem768x25519plus"
+                }, "MLKEM768X25519PLUS")))), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"

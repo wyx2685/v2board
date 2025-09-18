@@ -208,7 +208,9 @@ class UniProxyController extends Controller
                     'networkSettings' => $this->nodeInfo->network_settings,
                     'tls' => $this->nodeInfo->tls,
                     'flow' => $this->nodeInfo->flow,
-                    'tls_settings' => $this->nodeInfo->tls_settings
+                    'tls_settings' => $this->nodeInfo->tls_settings,
+                    'encryption' => $this->nodeInfo->encryption,
+                    'encryption_settings' => $this->nodeInfo->encryption_settings
                 ];
                 break;
             case 'trojan':

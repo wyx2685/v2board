@@ -25,6 +25,8 @@ class VlessController extends Controller
             'flow' => 'nullable|in:xtls-rprx-vision',
             'network' => 'required',
             'network_settings' => 'nullable|array',
+            'encryption' => 'nullable',
+            'encryption_settings' => 'nullable|array',
             'tags' => 'nullable|array',
             'rate' => 'required',
             'show' => 'nullable|in:0,1',
@@ -81,7 +83,21 @@ class VlessController extends Controller
             }
             $params['network_settings'] = $ns;
         }
-
+        if (isset($params['encryption']) && $params['encryption'] == 'mlkem768x25519plus') {
+            $keyPair = SodiumCompat::crypto_box_keypair();
+            $params['encryption_settings'] = $params['encryption_settings'] ?? [];
+            if (isset($params['encryption_settings']['rtt'])) {
+                if ($params['encryption_settings']['rtt'] == '1rtt') {
+                    $params['encryption_settings']['ticket'] = '0s';
+                }
+            }
+            if (!isset($params['encryption_settings']['private_key'])) {
+                $params['encryption_settings']['private_key'] = Helper::base64EncodeUrlSafe(SodiumCompat::crypto_box_secretkey($keyPair));
+            }
+            if (!isset($params['encryption_settings']['password'])) {
+                $params['encryption_settings']['password'] = Helper::base64EncodeUrlSafe(SodiumCompat::crypto_box_publickey($keyPair));
+            }
+        }
         if ($request->input('id')) {
             $server = ServerVless::find($request->input('id'));
             if (!$server) {

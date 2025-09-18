@@ -41,6 +41,9 @@ class Client
                     $counter = floor(time() / $timestep);
                     $counterBytes = pack('N*', 0) . pack('N*', $counter);
                     $idhash = Helper::base64DecodeUrlSafe($token);
+                    if (strpos($idhash, ':') === false) {
+                        abort(403, 'token is error');
+                    }
                     $parts = explode(':', $idhash, 2);
                     [$userid, $clienthash] = $parts;
                     if (!$userid || !$clienthash) {
