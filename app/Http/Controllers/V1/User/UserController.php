@@ -431,6 +431,9 @@ class UserController extends Controller
         $user->commission_balance = $user->commission_balance - $request->input('transfer_amount');
         $user->balance = $user->balance + $request->input('transfer_amount');
         $order->status = 3;
+        $order->total_amount = 0;
+        $order->surplus_amount = $request->input('transfer_amount');
+        $order->callback_no = '佣金划转 Commission transfer';
         if (!$order->save()||!$user->save()) {
             DB::rollback();
             abort(500, __('Transfer failed'));
