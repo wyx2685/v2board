@@ -40,6 +40,11 @@ class ServerService
                     $server[$key]['tls_settings']=array_diff_key($server[$key]['tls_settings'],array('private_key'=>''));
                 }
             }
+            if (isset($server[$key]['encryption_settings'])) {
+                if (isset($server[$key]['encryption_settings']['private_key'])) {
+                    $server[$key]['encryption_settings']=array_diff_key($server[$key]['encryption_settings'],array('private_key'=>''));
+                }
+            }
             $servers[] = $server[$key]->toArray();
         }
 

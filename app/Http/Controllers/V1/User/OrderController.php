@@ -82,7 +82,10 @@ class OrderController extends Controller
         if ($request->input('plan_id') == 0) {
             $amount = $request->input('deposit_amount');
             if ($amount <= 0) {
-                abort(500, __('Failed to create order'));
+                abort(500, __('Failed to create order, deposit amount must be greater than 0'));
+            }
+            if ($amount >= 9999999 ) {
+                abort(500, __('Deposit amount too large, please contact the administrator'));
             }
             $user = User::find($request->user['id']);
             DB::beginTransaction();
@@ -300,7 +303,7 @@ class OrderController extends Controller
 
     private function getbounus($total_amount) {
         $deposit_bounus = config('v2board.deposit_bounus', []);
-        if (empty($deposit_bounus)) {
+        if (empty($deposit_bounus) || $deposit_bounus[0] === null) {
             return 0;
         }
         $add = 0;

@@ -154,6 +154,7 @@ class Loon
         }
         if ($server['tls'] === 1) {
             array_push($config, 'over-tls=true');
+            array_push($config, "flow={$server['flow']}");
             if ($server['network'] === 'tcp')
                 
             if ($server['tls_settings']) {
