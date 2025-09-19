@@ -189,7 +189,7 @@ class ClashNyanpasu
 
         if (isset($server['encryption']) && !empty($server['encryption']) && isset($server['encryption_settings']) && !empty($server['encryption_settings'])) {
             $encryptionSettings = $server['encryption_settings'];
-            $array['encryption'] = '';
+            $array['encryption'] = $server['encryption'] ?? 'mlkem768x25519plus';
             $array['encryption'] .= '.' . $encryptionSettings['mode'] ?? 'native';
             $array['encryption'] .= '.' . $encryptionSettings['rtt'] ?? '1rtt';
             if (isset($encryptionSettings['client_padding']) && !empty($encryptionSettings['client_padding'])) {
