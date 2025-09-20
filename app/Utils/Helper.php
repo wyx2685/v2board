@@ -379,7 +379,7 @@ class Helper
             'sni' => $server['server_name'],
             'alpn'=> 'h3',
             'congestion_control' => $server['congestion_control'],
-            'allow_insecure' => $server['insecure'],
+            'allowInsecure' => $server['insecure'],
             'disable_sni' => $server['disable_sni'],
             'udp_relay_mode' => $server['udp_relay_mode'],
         ];
@@ -395,7 +395,7 @@ class Helper
     public static function buildAnytlsUri($password, $server)
     {
         $config = [
-            'insecure' => $server['insecure'],
+            'allowInsecure' => $server['insecure'],
         ];
         if (isset($server['server_name'])) {
             $config['sni'] = $server['server_name'];
