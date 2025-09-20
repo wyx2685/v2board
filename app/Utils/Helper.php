@@ -308,7 +308,16 @@ class Helper
                 $config['sid'] = $tlsSettings['short_id'] ?? '';
             }
         }
-        
+        if (isset($server['encryption']) && $server['encryption'] == 'mlkem768x25519plus') {
+            $encSettings = $server['encryption_settings'];
+            $enc = 'mlkem768x25519plus.' . ($encSettings['mode'] ?? 'native') . '.' . ($encSettings['rtt'] ?? '1rtt');
+            if (isset($encSettings['client_padding']) && !empty($encSettings['client_padding'])) {
+                $enc .= '.' . $encSettings['client_padding'];
+            }
+            $enc .= '.' . ($encSettings['password'] ?? '');
+            $config['encryption'] = $enc;
+        }
+
         self::configureNetworkSettings($server, $config);
 
         return self::buildUriString('vless', $uuid, $server, $name, $config);

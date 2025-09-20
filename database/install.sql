@@ -170,7 +170,9 @@ CREATE TABLE `v2_order` (
                             `created_at` int(11) NOT NULL,
                             `updated_at` int(11) NOT NULL,
                             PRIMARY KEY (`id`),
-                            UNIQUE KEY `trade_no` (`trade_no`)
+                            UNIQUE KEY `trade_no` (`trade_no`),
+                            INDEX idx_user (`user_id`),
+                            INDEX idx_user_status (`user_id`, `status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -359,6 +361,8 @@ CREATE TABLE `v2_server_vless` (
                                    `flow` varchar(64) DEFAULT NULL,
                                    `network` varchar(11) NOT NULL,
                                    `network_settings` text,
+                                   `encryption` varchar(64) DEFAULT NULL,
+                                   `encryption_settings` text,
                                    `tags` text,
                                    `rate` varchar(11) NOT NULL,
                                    `show` tinyint(1) NOT NULL DEFAULT '0',
@@ -544,4 +548,4 @@ CREATE TABLE `v2_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- 2023-07-17 07:38:59
+-- 2025-09-12 10:05:00

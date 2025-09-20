@@ -214,15 +214,11 @@ class UserService
         return true;
     }
 
-    public function isNotCompleteOrderByUserId(int $userId):bool
+    public function isNotCompleteOrderByUserId(int $userId): bool
     {
-        $order = Order::whereIn('status', [0, 1])
-            ->where('user_id', $userId)
-            ->first();
-        if (!$order) {
-            return false;
-        }
-        return true;
+        return Order::where('user_id', $userId)
+            ->whereIn('status', [0, 1])
+            ->exists();
     }
 
     public function trafficFetch(array $server, string $protocol, array $data)
