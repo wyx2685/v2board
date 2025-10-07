@@ -12,6 +12,7 @@ use App\Models\ServerTrojan;
 use App\Models\ServerVmess;
 use App\Models\ServerVless;
 use App\Models\ServerAnytls;
+use App\Models\ServerV2node;
 use App\Models\Stat;
 use App\Models\StatServer;
 use App\Models\StatUser;
@@ -116,7 +117,8 @@ class StatController extends Controller
             'vless' => ServerVless::where('parent_id', null)->get()->toArray(),
             'tuic' => ServerTuic::where('parent_id', null)->get()->toArray(),
             'hysteria'=> ServerHysteria::where('parent_id', null)->get()->toArray(),
-            'anytls' => ServerAnytls::where('parent_id', null)->get()->toArray()
+            'anytls' => ServerAnytls::where('parent_id', null)->get()->toArray(),
+            'v2node' => ServerV2node::where('parent_id', null)->get()->toArray()
         ];
         $startAt = strtotime('-1 day', strtotime(date('Y-m-d')));
         $endAt = strtotime(date('Y-m-d'));
@@ -158,7 +160,8 @@ class StatController extends Controller
             'vless' => ServerVless::where('parent_id', null)->get()->toArray(),
             'tuic' => ServerTuic::where('parent_id', null)->get()->toArray(),
             'hysteria'=> ServerHysteria::where('parent_id', null)->get()->toArray(),
-            'anytls' => ServerAnytls::where('parent_id', null)->get()->toArray()
+            'anytls' => ServerAnytls::where('parent_id', null)->get()->toArray(),
+            'v2node' => ServerV2node::where('parent_id', null)->get()->toArray()
         ];
         $startAt = strtotime(date('Y-m-d'));
         $endAt = time();

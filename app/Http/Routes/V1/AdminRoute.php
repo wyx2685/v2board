@@ -89,6 +89,14 @@ class AdminRoute
                 $router->post('update', 'V1\\Admin\\Server\\AnyTLSController@update');
                 $router->post('copy', 'V1\\Admin\\Server\\AnyTLSController@copy');
             });
+            $router->group([
+                'prefix' => 'server/v2node'
+            ], function ($router) {
+                $router->post('save', 'V1\\Admin\\Server\\V2nodeController@save');
+                $router->post('drop', 'V1\\Admin\\Server\\V2nodeController@drop');
+                $router->post('update', 'V1\\Admin\\Server\\V2nodeController@update');
+                $router->post('copy', 'V1\\Admin\\Server\\V2nodeController@copy');
+            });
             // Order
             $router->get ('/order/fetch', 'V1\\Admin\\OrderController@fetch');
             $router->post('/order/update', 'V1\\Admin\\OrderController@update');

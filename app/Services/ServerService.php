@@ -7,6 +7,7 @@ use App\Models\ServerLog;
 use App\Models\ServerRoute;
 use App\Models\ServerShadowsocks;
 use App\Models\ServerVless;
+use App\Models\ServerV2node;
 use App\Models\User;
 use App\Models\ServerVmess;
 use App\Models\ServerTrojan;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Cache;
 
 class ServerService
 {
-    public function getAvailableVless(User $user):array
+    public function getAvailableVless(User $user): array
     {
         $servers = [];
         $model = ServerVless::orderBy('sort', 'ASC');
@@ -37,12 +38,12 @@ class ServerService
             }
             if (isset($server[$key]['tls_settings'])) {
                 if (isset($server[$key]['tls_settings']['private_key'])) {
-                    $server[$key]['tls_settings']=array_diff_key($server[$key]['tls_settings'],array('private_key'=>''));
+                    $server[$key]['tls_settings'] = array_diff_key($server[$key]['tls_settings'], array('private_key' => ''));
                 }
             }
             if (isset($server[$key]['encryption_settings'])) {
                 if (isset($server[$key]['encryption_settings']['private_key'])) {
-                    $server[$key]['encryption_settings']=array_diff_key($server[$key]['encryption_settings'],array('private_key'=>''));
+                    $server[$key]['encryption_settings'] = array_diff_key($server[$key]['encryption_settings'], array('private_key' => ''));
                 }
             }
             $servers[] = $server[$key]->toArray();
@@ -52,7 +53,7 @@ class ServerService
         return $servers;
     }
 
-    public function getAvailableVmess(User $user):array
+    public function getAvailableVmess(User $user): array
     {
         $servers = [];
         $model = ServerVmess::orderBy('sort', 'ASC');
@@ -76,7 +77,7 @@ class ServerService
         return $servers;
     }
 
-    public function getAvailableTrojan(User $user):array
+    public function getAvailableTrojan(User $user): array
     {
         $servers = [];
         $model = ServerTrojan::orderBy('sort', 'ASC');
@@ -186,6 +187,35 @@ class ServerService
         return $servers;
     }
 
+    public function getAvailableV2node(User $user)
+    {
+        $servers = [];
+        $model = ServerV2node::orderBy('sort', 'ASC');
+        $v2node = $model->get()->keyBy('id');
+        foreach ($v2node as $key => $v) {
+            if (!$v['show']) continue;
+            $v2node[$key]['type'] = 'v2node';
+            $v2node[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_V2NODE_LAST_CHECK_AT', $v['id']));
+            if (!in_array($user->group_id, $v['group_id'])) continue;
+            if (isset($v2node[$v['parent_id']])) {
+                $v2node[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_V2NODE_LAST_CHECK_AT', $v['parent_id']));
+                $v2node[$key]['created_at'] = $v2node[$v['parent_id']]['created_at'];
+            }
+            if (isset($v2node[$key]['tls_settings'])) {
+                if (isset($v2node[$key]['tls_settings']['private_key'])) {
+                    $v2node[$key]['tls_settings'] = array_diff_key($v2node[$key]['tls_settings'], array('private_key' => ''));
+                }
+            }
+            if (isset($v2node[$key]['encryption_settings'])) {
+                if (isset($v2node[$key]['encryption_settings']['private_key'])) {
+                    $v2node[$key]['encryption_settings'] = array_diff_key($v2node[$key]['encryption_settings'], array('private_key' => ''));
+                }
+            }
+            $servers[] = $v2node[$key]->toArray();
+        }
+        return $servers;
+    }
+
     public function getAvailableServers(User $user)
     {
         $servers = array_merge(
@@ -195,7 +225,8 @@ class ServerService
             $this->getAvailableTuic($user),
             $this->getAvailableHysteria($user),
             $this->getAvailableVless($user),
-            $this->getAvailableAnyTLS($user)
+            $this->getAvailableAnyTLS($user),
+            $this->getAvailableV2node($user)
         );
         $tmp = array_column($servers, 'sort');
         array_multisort($tmp, SORT_ASC, $servers);
@@ -341,6 +372,20 @@ class ServerService
         return $servers;
     }
 
+    public function getAllV2node()
+    {
+        $servers = ServerV2node::orderBy('sort', 'ASC')
+            ->get()
+            ->toArray();
+        foreach ($servers as $k => $v) {
+            $servers[$k]['type'] = 'v2node';
+            if (isset($v['padding_scheme'])) {
+                $servers[$k]['padding_scheme'] = json_encode($v['padding_scheme']);
+            }
+        }
+        return $servers;
+    }
+
     private function mergeData(&$servers)
     {
         foreach ($servers as $k => $v) {
@@ -367,7 +412,8 @@ class ServerService
             $this->getAllTuic(),
             $this->getAllHysteria(),
             $this->getAllVLess(),
-            $this->getAllAnyTLS()
+            $this->getAllAnyTLS(),
+            $this->getAllV2node()
         );
         $this->mergeData($servers);
         $tmp = array_column($servers, 'sort');
@@ -377,19 +423,20 @@ class ServerService
 
     public function getRoutes(array $routeIds)
     {
+        $routeIds = array_map('intval', $routeIds);
         $routes = ServerRoute::select(['id', 'match', 'action', 'action_value'])->whereIn('id', $routeIds)->get();
-        // TODO: remove on 1.8.0
         foreach ($routes as $k => $route) {
             $array = json_decode($route->match, true);
             if (is_array($array)) $routes[$k]['match'] = $array;
         }
-        // TODO: remove on 1.8.0
         return $routes;
     }
 
     public function getServer($serverId, $serverType)
     {
         switch ($serverType) {
+            case 'v2node':
+                return ServerV2node::find($serverId);
             case 'vmess':
                 return ServerVmess::find($serverId);
             case 'shadowsocks':
