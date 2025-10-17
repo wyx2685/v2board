@@ -54,6 +54,7 @@ class ConfigSave extends FormRequest
         'show_subscribe_method' => 'in:0,1,2',
         'show_subscribe_expire' => 'nullable|integer',
         // server
+        'server_api_url' => 'nullable|string',
         'server_token' => 'nullable|min:16',
         'server_pull_interval' => 'integer',
         'server_push_interval' => 'integer',

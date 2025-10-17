@@ -125,6 +125,7 @@ class ConfigController extends Controller
                 'frontend_background_url' => config('v2board.frontend_background_url'),
             ],
             'server' => [
+                'server_api_url' => config('v2board.server_api_url'),
                 'server_token' => config('v2board.server_token'),
                 'server_pull_interval' => config('v2board.server_pull_interval', 60),
                 'server_push_interval' => config('v2board.server_push_interval', 60),
