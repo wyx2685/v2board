@@ -51,13 +51,6 @@ class RouteController extends Controller
         return [
             'data' => true
         ];
-        if(Cache::has('WEBMANPID')) {
-            $pid = Cache::get('WEBMANPID');
-            Cache::forget('WEBMANPID');
-            return response([
-                'data' => posix_kill($pid, 15)
-            ]);
-        }
     }
 
     public function drop(Request $request)

@@ -197,13 +197,6 @@ class V2nodeController extends Controller
         } catch (\Exception $e) {
             abort(500, '保存失败');
         }
-        if(Cache::has('WEBMANPID')) {
-            $pid = Cache::get('WEBMANPID');
-            Cache::forget('WEBMANPID');
-            return response([
-                'data' => posix_kill($pid, 15)
-            ]);
-        }
         return response([
             'data' => true
         ]);
