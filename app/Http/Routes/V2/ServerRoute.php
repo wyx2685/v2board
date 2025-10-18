@@ -10,7 +10,10 @@ class ServerRoute
         $router->group([
             'prefix' => 'server'
         ], function ($router) {
-            $router->get ('/config', 'V2\\Server\\ServerController@config');
+            $router->any('/config', function() {
+                $ctrl = \App::make("\\App\\Http\\Controllers\\V2\\Server\\ServerController");
+                return \App::call([$ctrl, 'config']);
+            });
         });
     }
 }
