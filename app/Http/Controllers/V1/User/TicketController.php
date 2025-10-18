@@ -231,7 +231,7 @@ class TicketController extends Controller
 				$remaining_traffic = $this->getFlowData($user->transfer_enable - $user->u - $user->d); // 剩余流量
 				$u = $this->getFlowData($user->u); // 上传
 				$d = $this->getFlowData($user->d); // 下载
-				$expired_at = date("Y-m-d h:m:s", $user->expired_at); // 到期时间
+				$expired_at = date("Y-m-d H:i:s", $user->expired_at); // 到期时间
 				if (isset($_SERVER['HTTP_X_REAL_IP'])) {
 				$ip_address = $_SERVER['HTTP_X_REAL_IP'];
 				} elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
