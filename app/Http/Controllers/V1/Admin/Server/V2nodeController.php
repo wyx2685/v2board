@@ -7,6 +7,7 @@ use App\Models\ServerV2node;
 use Illuminate\Http\Request;
 use ParagonIE_Sodium_Compat as SodiumCompat;
 use App\Utils\Helper;
+use Illuminate\Support\Facades\Cache;
 
 class V2nodeController extends Controller
 {
@@ -162,7 +163,6 @@ class V2nodeController extends Controller
         if (!ServerV2node::create($params)) {
             abort(500, '创建失败');
         }
-
         return response([
             'data' => true
         ]);
@@ -197,7 +197,13 @@ class V2nodeController extends Controller
         } catch (\Exception $e) {
             abort(500, '保存失败');
         }
-
+        if(Cache::has('WEBMANPID')) {
+            $pid = Cache::get('WEBMANPID');
+            Cache::forget('WEBMANPID');
+            return response([
+                'data' => posix_kill($pid, 15)
+            ]);
+        }
         return response([
             'data' => true
         ]);

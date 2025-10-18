@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Admin\Server;
 use App\Http\Controllers\Controller;
 use App\Models\ServerRoute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class RouteController extends Controller
 {
@@ -50,6 +51,13 @@ class RouteController extends Controller
         return [
             'data' => true
         ];
+        if(Cache::has('WEBMANPID')) {
+            $pid = Cache::get('WEBMANPID');
+            Cache::forget('WEBMANPID');
+            return response([
+                'data' => posix_kill($pid, 15)
+            ]);
+        }
     }
 
     public function drop(Request $request)
