@@ -170,12 +170,10 @@ class Helper
 
     public static function buildUri($uuid, $server)
     {
-        $type = $server['type'];
-        if ($type == 'v2node') {
-            $type = $server['protocol'];
-            $server['type'] = $type;
+        if ($server['type'] == 'v2node') {
+            $server['type'] = $server['protocol'];
         } 
-        $method = "build" . ucfirst($type) . "Uri";
+        $method = "build" . ucfirst($server['type']) . "Uri";
 
         if (method_exists(self::class, $method)) {
             return self::$method($uuid, $server);
@@ -242,6 +240,7 @@ class Helper
 
         if ($server['tls']) {
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
+            $config['allowInsecure'] = (int)$tlsSettings['allow_insecure'] ?? ((int)$tlsSettings['allowInsecure'] ?? 0);
             $config['sni'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
         }
         
