@@ -231,7 +231,7 @@ class QuantumultX
             "trojan={$server['host']}:{$server['port']}",
             "password={$password}",
             // Tips: allowInsecure=false = tls-verification=true
-            $server['allow_insecure'] ? 'tls-verification=false' : 'tls-verification=true',
+            ($server['allow_insecure'] ?? 0) ? 'tls-verification=false' : 'tls-verification=true',
             'fast-open=true',
             'udp-relay=true',
             "tag={$server['name']}"

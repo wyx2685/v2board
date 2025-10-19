@@ -356,7 +356,7 @@ class Stash
 
     private function isRegex($exp)
     {
-        return @preg_match($exp, null) !== false;
+        return @preg_match($exp, '') !== false;
     }
 
     private function isMatch($exp, $str)

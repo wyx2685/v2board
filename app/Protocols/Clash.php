@@ -200,8 +200,8 @@ class Clash
                 }
             }
         };
-        $array['sni'] = $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? '');
-        $array['skip-cert-verify'] = $array['skip-cert-verify'] = ((int)$server['tls_settings']['allow_insecure'] ?? ((int)$server['allow_insecure'] ?? 0)) == 1 ? true : false;
+        $array['sni'] = $server['server_name'] ?? (($server['tls_settings'] ?? [])['server_name'] ?? '');
+        $array['skip-cert-verify'] = ((int)(($server['tls_settings'] ?? [])['allow_insecure'] ?? ($server['allow_insecure'] ?? 0))) == 1 ? true : false;
         return $array;
     }
 
@@ -212,6 +212,6 @@ class Clash
 
     private function isRegex($exp)
     {
-        return @preg_match($exp, null) !== false;
+        return @preg_match($exp, '') !== false;
     }
 }
