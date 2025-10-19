@@ -291,7 +291,7 @@ class SingboxOld
 
         $array['tls'] = [
             'enabled' => true,
-            'insecure' => ($server['insecure'] ?? ($server['tls_settings']['insecure'] ?? 0)) == 1 ? true : false,
+            'insecure' => ($server['insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false,
             'alpn' => ['h3'],
             'disable_sni' => $server['disable_sni'] ? true : false,
         ];
@@ -362,7 +362,7 @@ class SingboxOld
             'server_port' => (int)$firstPort,
             'tls' => [
                 'enabled' => true,
-                'insecure' => ($server['tls_settings']['insecure'] ?? 0) == 1 ? true : false,
+                'insecure' => ($server['tls_settings']['allow_insecure'] ?? 0) == 1 ? true : false,
                 'server_name' => $server['tls_settings']['server_name'] ?? ''
             ],
             'password' => $password,

@@ -328,7 +328,7 @@ class ClashVerge
             'reduce-rtt' => $server['zero_rtt_handshake'] ? true : false,
             'udp-relay-mode' => $server['udp_relay_mode'] ?? 'native',
             'congestion-controller' => $server['congestion_control'] ?? 'cubic',
-            'skip-cert-verify' => ($server['insecure'] ?? ($server['tls_settings']['insecure'] ?? 0)) == 1 ? true : false,
+            'skip-cert-verify' => ($server['insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false,
         ];
         $array['sni'] = $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? '');
 
@@ -350,7 +350,7 @@ class ClashVerge
                 'http/1.1',
             ],
             'sni' => $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? ''),
-            'skip-cert-verify' => ($server['insecure'] ?? ($server['tls_settings']['insecure'] ?? 0)) == 1 ? true : false,
+            'skip-cert-verify' => ($server['insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false,
         ];
         return $array;
     }
@@ -408,7 +408,7 @@ class ClashVerge
             'type' => 'hysteria2',
             'server' => $server['host'],
             'password' => $password,
-            'skip-cert-verify' => ($server['tls_settings']['insecure'] ?? 0) == 1 ? true : false,
+            'skip-cert-verify' => ($server['tls_settings']['allow_insecure'] ?? 0) == 1 ? true : false,
             'sni' => $server['tls_settings']['server_name'] ?? '',
             'udp' => true,
         ];
