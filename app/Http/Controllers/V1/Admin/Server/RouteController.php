@@ -25,17 +25,21 @@ class RouteController extends Controller
     {
         $params = $request->validate([
             'remarks' => 'required',
-            'match' => 'required|array',
-            'action' => 'required|in:block,block_ip,dns,route,route_ip',
+            'match' => 'array|required_unless:action,default_out',
+            'action' => 'required|in:block,block_ip,dns,route,route_ip,default_out',
             'action_value' => 'nullable'
         ], [
             'remarks.required' => '备注不能为空',
-            'match.required' => '匹配值不能为空',
+            'match.required_unless' => '匹配值不能为空',
             'action.required' => '动作类型不能为空',
             'action.in' => '动作类型参数有误'
         ]);
-        $params['match'] = array_filter($params['match']);
-        $params['match'] = json_encode($params['match']);
+        if (($params['action'] ?? '') === 'default_out') {
+            $normalizedMatch = [];
+        } else {
+            $normalizedMatch = array_filter((array)($params['match'] ?? []));
+        }
+        $params['match'] = json_encode($normalizedMatch);
         if ($request->input('id')) {
             try {
                 $route = ServerRoute::find($request->input('id'));
