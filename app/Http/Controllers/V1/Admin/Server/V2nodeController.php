@@ -145,6 +145,10 @@ class V2nodeController extends Controller
             $params['obfs_password'] = null;
         }
 
+        if($params['protocol'] == 'shadowsocks' && !isset($params['cipher'])) {
+            $params['cipher'] = 'aes-128-gcm';
+        }
+
         if ($request->input('id')) {
             $server = ServerV2node::find($request->input('id'));
             if (!$server) {
