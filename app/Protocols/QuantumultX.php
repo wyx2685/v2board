@@ -183,8 +183,8 @@ class QuantumultX
 
             if ($server['tls_settings']) {
                 $tlsSettings = $server['tls_settings'];
-                if (isset($tlsSettings['allow_insecure']) && !empty($tlsSettings['allow_insecure'])) {
-                    array_push($config, 'tls-verification=' . ($tlsSettings['allow_insecure'] ? 'false' : 'true'));
+                if (!empty($tlsSettings['allow_insecure'] ?? 0)) {
+                    array_push($config, 'tls-verification=false');
                 }
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name'])) {
                     $host = $tlsSettings['server_name'];

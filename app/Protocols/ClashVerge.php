@@ -227,7 +227,7 @@ class ClashVerge
         if ($server['tls']) {
             $array['tls'] = true;
             $tlsSettings = $server['tls_settings'] ?? [];
-            $array['skip-cert-verify'] = isset($tlsSettings['allow_insecure']) && $tlsSettings['allow_insecure'] == 1 ? true : false;
+            $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
             $array['flow'] = !empty($server['flow']) ? $server['flow']: "";
             $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
             if ($tlsSettings) {

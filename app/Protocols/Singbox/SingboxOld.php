@@ -196,7 +196,7 @@ class SingboxOld
             $array['flow'] = !empty($server['flow']) ? $server['flow'] : "";
             $tlsSettings = $server['tls_settings'] ?? [];
             if ($server['tls_settings']) {
-                $tlsConfig['insecure'] = isset($tlsSettings['allow_insecure']) && $tlsSettings['allow_insecure'] == 1 ? true : false;
+                $tlsConfig['insecure'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
                 $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? null;
                 if ($server['tls'] == 2) {
                     $tlsConfig['reality'] = [
@@ -205,7 +205,7 @@ class SingboxOld
                         'short_id' => $tlsSettings['short_id']
                     ];
                 }
-                $fingerprints = isset($server['tls_settings']['fingerprint']) ? $server['tls_settings']['fingerprint'] : 'chrome';
+                $fingerprints = $tlsSettings['fingerprint'] ?? 'chrome';
                 $tlsConfig['utls'] = [
                     "enabled" => true,
                     "fingerprint" => $fingerprints

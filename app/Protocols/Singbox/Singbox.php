@@ -158,7 +158,7 @@ class Singbox
             $tlsConfig = [];
             $tlsConfig['enabled'] = true;
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
-            $tlsConfig['insecure'] = $config['allowInsecure'] = (int)$tlsSettings['allow_insecure'] ?? ((int)$tlsSettings['allowInsecure'] ?? 0) == 1 ? true : false;
+            $tlsConfig['insecure'] = ($tlsSettings['allow_insecure'] ?? ($tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
             $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
             $array['tls'] = $tlsConfig;
         }

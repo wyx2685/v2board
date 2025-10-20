@@ -159,8 +159,8 @@ class Loon
                 
             if ($server['tls_settings']) {
                 $tlsSettings = $server['tls_settings'];
-                if (isset($tlsSettings['allow_insecure']) && !empty($tlsSettings['allow_insecure']))
-                    array_push($config, 'skip-cert-verify=' . ($tlsSettings['allow_insecure'] ? 'true' : 'false'));
+                if (!empty($tlsSettings['allow_insecure'] ?? 0))
+                    array_push($config, 'skip-cert-verify=true');
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
                     array_push($config, "tls-name={$tlsSettings['server_name']}");
             }
@@ -174,8 +174,8 @@ class Loon
                     array_push($config, "short-id={$tlsSettings['short_id']}");
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
                     array_push($config, "sni={$tlsSettings['server_name']}");
-                if (isset($tlsSettings['allow_insecure']) && !empty($tlsSettings['allow_insecure']))
-                    array_push($config, 'skip-cert-verify=' . ($tlsSettings['allow_insecure']? 'true' : 'false'));
+                if (!empty($tlsSettings['allow_insecure'] ?? 0))
+                    array_push($config, 'skip-cert-verify=true');
             }
         }
         if ($server['network'] === 'ws') {
