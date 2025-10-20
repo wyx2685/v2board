@@ -79,11 +79,12 @@ class Loon
 
     public static function buildVmess($uuid, $server)
     {
+        $networkSettings = $server['networkSettings'] ?? [];
         $config = [
             "{$server['name']}=vmess",
             "{$server['host']}",
             "{$server['port']}",
-            $server['networkSettings']['security'] ?? 'auto',
+            $networkSettings['security'] ?? 'auto',
             "{$uuid}",
             'fast-open=false',
             'udp=true',

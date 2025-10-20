@@ -142,7 +142,7 @@ class Clash
         if ($server['tls']) {
             $array['tls'] = true;
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
-            $array['skip-cert-verify'] = ((int)$tlsSettings['allow_insecure'] ?? ((int)$tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
+            $array['skip-cert-verify'] = ((int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
             $array['servername'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
 
         }

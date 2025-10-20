@@ -146,12 +146,13 @@ class ClashMeta
         } else if ((($server['network'] ?? null) === 'http') && isset(($server['network_settings'] ?? [])['Host'])) {
             // Fallback like Singbox: treat http obfs specified via network_settings
             $array['plugin'] = 'obfs';
+            $networkSettings = $server['network_settings'];
             $plugin_opts = [
                 'mode' => 'http',
-                'host' => ($server['network_settings']['Host'] ?? ''),
+                'host' => ($networkSettings['Host'] ?? ''),
             ];
-            if (isset($server['network_settings']['path'])) {
-                $plugin_opts['path'] = $server['network_settings']['path'];
+            if (isset($networkSettings['path'])) {
+                $plugin_opts['path'] = $networkSettings['path'];
             }
             $array['plugin-opts'] = $plugin_opts;
         }
@@ -309,8 +310,9 @@ class ClashMeta
                 }
             }
         };
-        $array['sni'] = $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? '');
-        $array['skip-cert-verify'] = ($server['allow_insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false;
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        $array['skip-cert-verify'] = ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
         return $array;
     }
 
@@ -328,9 +330,10 @@ class ClashMeta
             'reduce-rtt' => $server['zero_rtt_handshake'] ? true : false,
             'udp-relay-mode' => $server['udp_relay_mode'] ?? 'native',
             'congestion-controller' => $server['congestion_control'] ?? 'cubic',
-            'skip-cert-verify' => ($server['insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false,
         ];
-        $array['sni'] = $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? '');
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
 
         return $array;
     }
@@ -349,9 +352,10 @@ class ClashMeta
                 'h2',
                 'http/1.1',
             ],
-            'sni' => $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? ''),
-            'skip-cert-verify' => ($server['insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false,
         ];
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
         return $array;
     }
 
@@ -403,13 +407,14 @@ class ClashMeta
 
     private function buildHysteria2($password, $server)
     {
+        $tlsSettings = $server['tls_settings'] ?? [];
         $array = [
             'name' => $server['name'],
             'type' => 'hysteria2',
             'server' => $server['host'],
             'password' => $password,
-            'skip-cert-verify' => ($server['tls_settings']['allow_insecure'] ?? 0) == 1 ? true : false,
-            'sni' => $server['tls_settings']['server_name'] ?? '',
+            'skip-cert-verify' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
+            'sni' => $tlsSettings['server_name'] ?? '',
             'udp' => true,
         ];
         $parts = explode(",", $server['port']);

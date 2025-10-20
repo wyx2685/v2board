@@ -125,8 +125,9 @@ class SingboxOld
             $array['plugin'] = 'obfs-local';
             $plugin_opts_parts = [];
             $plugin_opts_parts[] = "obfs=http";
-            $plugin_opts_parts[] = "obfs-host=" . $server['network_settings']['Host'];
-            $plugin_opts_parts[] = "path=" . ($server['network_settings']['path'] ?? '/');
+            $networkSettings = $server['network_settings'];
+            $plugin_opts_parts[] = "obfs-host=" . $networkSettings['Host'];
+            $plugin_opts_parts[] = "path=" . ($networkSettings['path'] ?? '/');
 
             $array['plugin_opts'] = implode(';', $plugin_opts_parts);
         }
@@ -150,7 +151,7 @@ class SingboxOld
             $tlsConfig = [];
             $tlsConfig['enabled'] = true;
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
-            $tlsConfig['insecure'] = $config['allowInsecure'] = (int)$tlsSettings['allow_insecure'] ?? ((int)$tlsSettings['allowInsecure'] ?? 0) == 1 ? true : false;
+            $tlsConfig['insecure'] = $config['allowInsecure'] = ((int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
             $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
             $array['tls'] = $tlsConfig;
         }
@@ -250,10 +251,11 @@ class SingboxOld
         $array['server_port'] = $server['port'];
         $array['password'] = $password;
 
+        $tlsSettings = $server['tls_settings'] ?? [];
         $array['tls'] = [
             'enabled' => true,
-            'insecure' => ($server['allow_insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false,
-            'server_name' => $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? '')
+            'insecure' => ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
+            'server_name' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? '')
         ];
 
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
@@ -289,13 +291,14 @@ class SingboxOld
         $array['udp_relay_mode'] = $server['udp_relay_mode'] ?? 'native';
         $array['zero_rtt_handshake'] = $server['zero_rtt_handshake'] ? true : false;
 
+        $tlsSettings = $server['tls_settings'] ?? [];
         $array['tls'] = [
             'enabled' => true,
-            'insecure' => ($server['insecure'] ?? ($server['tls_settings']['allow_insecure'] ?? 0)) == 1 ? true : false,
+            'insecure' => ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
             'alpn' => ['h3'],
             'disable_sni' => $server['disable_sni'] ? true : false,
         ];
-        $array['tls']['server_name'] = $server['server_name'] ?? ($server['tls_settings']['server_name'] ?? '');
+        $array['tls']['server_name'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
 
         return $array;
     }
@@ -357,13 +360,14 @@ class SingboxOld
         } else {
             $firstPort = $firstPart;
         }
+        $tlsSettings = $server['tls_settings'] ?? [];
         $array = [
             'server' => $server['host'],
             'server_port' => (int)$firstPort,
             'tls' => [
                 'enabled' => true,
-                'insecure' => ($server['tls_settings']['allow_insecure'] ?? 0) == 1 ? true : false,
-                'server_name' => $server['tls_settings']['server_name'] ?? ''
+                'insecure' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
+                'server_name' => $tlsSettings['server_name'] ?? ''
             ],
             'password' => $password,
             'tag' => $server['name'],
