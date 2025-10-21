@@ -855,4 +855,4 @@ CREATE TABLE `v2_server_v2node` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `v2_server_route`
-CHANGE `action_value` `action_value` text COLLATE 'utf8mb4_general_ci' NULL AFTER `action`;
+CHANGE `action_value` `action_value` text NULL AFTER `action`;
