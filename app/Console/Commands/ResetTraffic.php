@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Services\TelegramService;
+use Illuminate\Support\Facades\Redis;
 
 class ResetTraffic extends Command
 {
@@ -45,6 +46,7 @@ class ResetTraffic extends Command
     public function handle()
     {
         ini_set('memory_limit', -1);
+        Redis::setex('traffic_reset_lock', 300, 1);
         $resetMethods = Plan::select(
             DB::raw("GROUP_CONCAT(`id`) as plan_ids"),
             DB::raw("reset_traffic_method as method")
@@ -104,6 +106,7 @@ class ResetTraffic extends Command
                 }
             }
         }
+        Redis::del('traffic_reset_lock');
     }
 
     private function resetByExpireYear($builder): void
