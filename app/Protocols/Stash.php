@@ -209,11 +209,7 @@ class Stash
                    $array['reality-opts']['public-key'] = $tlsSettings['public_key'];
                    $array['reality-opts']['short-id'] = $tlsSettings['short_id'];
                 }
-                if (isset($tlsSettings['allow_insecure']) && $tlsSettings['allow_insecure'] == '1') {
-                     $array['skip-cert-verify'] = true;
-                } else {
-                     $array['skip-cert-verify'] = false;
-                }
+                $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
                 $array['client-fingerprint'] = $tlsSettings['fingerprint'] ?? null;
             }
         }
@@ -356,7 +352,7 @@ class Stash
 
     private function isRegex($exp)
     {
-        return @preg_match($exp, null) !== false;
+        return @preg_match($exp, '') !== false;
     }
 
     private function isMatch($exp, $str)

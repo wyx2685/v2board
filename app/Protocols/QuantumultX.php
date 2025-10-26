@@ -183,8 +183,8 @@ class QuantumultX
 
             if ($server['tls_settings']) {
                 $tlsSettings = $server['tls_settings'];
-                if (isset($tlsSettings['allow_insecure']) && !empty($tlsSettings['allow_insecure'])) {
-                    array_push($config, 'tls-verification=' . ($tlsSettings['allow_insecure'] ? 'false' : 'true'));
+                if (!empty($tlsSettings['allow_insecure'] ?? 0)) {
+                    array_push($config, 'tls-verification=false');
                 }
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name'])) {
                     $host = $tlsSettings['server_name'];
@@ -231,7 +231,7 @@ class QuantumultX
             "trojan={$server['host']}:{$server['port']}",
             "password={$password}",
             // Tips: allowInsecure=false = tls-verification=true
-            $server['allow_insecure'] ? 'tls-verification=false' : 'tls-verification=true',
+            ($server['allow_insecure'] ?? 0) ? 'tls-verification=false' : 'tls-verification=true',
             'fast-open=true',
             'udp-relay=true',
             "tag={$server['name']}"
