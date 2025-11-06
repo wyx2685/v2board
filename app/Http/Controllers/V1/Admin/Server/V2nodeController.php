@@ -7,6 +7,7 @@ use App\Models\ServerV2node;
 use Illuminate\Http\Request;
 use ParagonIE_Sodium_Compat as SodiumCompat;
 use App\Utils\Helper;
+use Illuminate\Support\Facades\Cache;
 
 class V2nodeController extends Controller
 {
@@ -144,6 +145,10 @@ class V2nodeController extends Controller
             $params['obfs_password'] = null;
         }
 
+        if($params['protocol'] == 'shadowsocks' && !isset($params['cipher'])) {
+            $params['cipher'] = 'aes-128-gcm';
+        }
+
         if ($request->input('id')) {
             $server = ServerV2node::find($request->input('id'));
             if (!$server) {
@@ -162,7 +167,6 @@ class V2nodeController extends Controller
         if (!ServerV2node::create($params)) {
             abort(500, '创建失败');
         }
-
         return response([
             'data' => true
         ]);
@@ -197,7 +201,6 @@ class V2nodeController extends Controller
         } catch (\Exception $e) {
             abort(500, '保存失败');
         }
-
         return response([
             'data' => true
         ]);

@@ -6234,6 +6234,17 @@
                 }, f.a.createElement("div", {
                     className: ""
                 }, f.a.createElement(m, {
+                    title: "\u8282\u70b9\u5bf9\u63a5API\u5730\u5740",
+                    description: "v2node\u8282\u70b9\u4e00\u952e\u5bf9\u63a5\u4e13\u7528\u5730\u5740\u3002"
+                }, f.a.createElement("input", {
+                    type: "text",
+                    className: "form-control",
+                    placeholder: "\u8bf7\u8f93\u5165",
+                    defaultValue: u.server_api_url,
+                    onChange: e=>this.set("server", "server_api_url", e.target.value)
+                }))), f.a.createElement("div", {
+                    className: ""
+                }, f.a.createElement(m, {
                     title: "\u901a\u8baf\u5bc6\u94a5",
                     description: "V2board\u4e0e\u8282\u70b9\u901a\u8baf\u7684\u5bc6\u94a5\uff0c\u4ee5\u4fbf\u6570\u636e\u4e0d\u4f1a\u88ab\u4ed6\u4eba\u83b7\u53d6\u3002"
                 }, f.a.createElement("input", {
@@ -101781,9 +101792,13 @@
                 3: "\u5173\u95ed"
             },
             routeActionText: {
-                block: "\u7981\u6b62\u8bbf\u95ee",
+                block: "\u7981\u6b62\u8bbf\u95ee(\u57df\u540d\u76ee\u6807)",
+                block_ip: "\u7981\u6b62\u8bbf\u95ee(IP\u76ee\u6807)",
+                protocol: "\u7981\u6b62\u8bbf\u95ee(\u534f\u8bae)",
                 dns: "\u6307\u5b9aDNS\u670d\u52a1\u5668\u8fdb\u884c\u89e3\u6790",
-                route: "\u6307\u5b9a\u51fa\u7ad9\u670d\u52a1\u5668"
+                route: "\u6307\u5b9a\u51fa\u7ad9\u670d\u52a1\u5668(\u57df\u540d\u76ee\u6807)",
+                route_ip: "\u6307\u5b9a\u51fa\u7ad9\u670d\u52a1\u5668(IP\u76ee\u6807)",
+                default_out: "\u81ea\u5b9a\u4e49\u9ed8\u8ba4\u51fa\u7ad9"
             }
         }
     },
@@ -105754,7 +105769,9 @@
                     value: "http"
                 }, "HTTP\u7533\u8bf7"), y.a.createElement(N["a"].Option, {
                     value: "dns"
-                }, "DNS\u7533\u8bf7"))), e.cert_mode == "dns" && cert_apply && y.a.createElement("div", {
+                }, "DNS\u7533\u8bf7"), y.a.createElement(N["a"].Option, {
+                    value: "none"
+                }, "\u65e0\u8bc1\u4e66(\u5173\u95edTLS)"))), e.cert_mode == "dns" && cert_apply && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "DNS\u89e3\u6790\u63d0\u4f9b\u5546Provider ", y.a.createElement("a", {
                     target: "_blank",
@@ -105771,6 +105788,18 @@
                     value: e.dns_env,
                     onChange: e=>this.change("dns_env", e.target.value),
                     placeholder: "\u4e66\u5199\u683c\u5f0fCF_DNS_API_TOKEN=xxxxxxx\u5982\u6709\u591a\u6761\u4f7f\u7528\u9017\u53f7\u002c\u5206\u9694"
+                })), tls == 1 && e.cert_mode != "none" && cert_apply && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "\u8bc1\u4e66\u516c\u94a5\u6587\u4ef6\u5730\u5740Cert File Path"), y.a.createElement(s["a"], {
+                    value: e.cert_file,
+                    onChange: e=>this.change("cert_file", e.target.value),
+                    placeholder: "\u7559\u7a7a\u5728/etc/v2node/\u76ee\u5f55\u81ea\u52a8\u751f\u6210"
+                })), tls == 1 && e.cert_mode != "none" && cert_apply && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "\u8bc1\u4e66\u79c1\u94a5\u6587\u4ef6\u5730\u5740Key File Path"), y.a.createElement(s["a"], {
+                    value: e.key_file,
+                    onChange: e=>this.change("key_file", e.target.value),
+                    placeholder: "\u7559\u7a7a\u5728/etc/v2node/\u76ee\u5f55\u81ea\u52a8\u751f\u6210"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Server Address"), y.a.createElement(s["a"], {
@@ -107024,8 +107053,9 @@
                 }
             }
             save() {
-                var e = this.state.server;
-                e.network_settings = e.network_settings ? "string" === typeof e.network_settings && JSON.parse(e.network_settings) : null,
+                e = JSON.parse(JSON.stringify(this.state.server));
+                e.network_settings = e.network_settings ? ("string" === typeof e.network_settings ? JSON.parse(e.network_settings) : e.network_settings) : null;
+                delete e.install_command;
                 this.props.dispatch({
                     type: "serverV2node/save",
                     params: e,
@@ -107172,11 +107202,20 @@
                 }
             }
             formChange(e, t) {
-                this.setState({
-                    server: I()({},
-                    this.state.server, { [e] : t
+                if (e === "protocol" && ["anytls", "hysteria2", "trojan", "tuic"].includes(t)) {
+                    this.setState({
+                        server: I()({}, this.state.server, {
+                            protocol: t,
+                            tls: 1
+                        })
+                    });
+                } else {
+                    this.setState({
+                        server: I()({},
+                        this.state.server, { [e] : t
+                        })
                     })
-                })
+                }
             }
             changeServer(e, t) {
                 this.setState({
@@ -107522,6 +107561,8 @@
                 }, "aes-192-gcm"), y.a.createElement(N["a"].Option, {
                     value: "aes-256-gcm"
                 }, "aes-256-gcm"), y.a.createElement(N["a"].Option, {
+                    value: "chacha20-ietf-poly1305"
+                }, "chacha20-ietf-poly1305"), y.a.createElement(N["a"].Option, {
                     value: "2022-blake3-aes-128-gcm"
                 }, "2022-blake3-aes-128-gcm"), y.a.createElement(N["a"].Option, {
                     value: "2022-blake3-aes-256-gcm"
@@ -107602,7 +107643,17 @@
                         key: e.id
                     },
                     e.remarks)
-                })))), y.a.createElement("div", {
+                }))), y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "\u4e00\u952e\u5b89\u88c5\u6307\u4ee4"), y.a.createElement(s["a"].TextArea, {
+                    value: e.install_command,
+                    rows: 4,
+                    readOnly: true,
+                    style: {
+                        backgroundColor: "#f5f5f5a0",
+                        cursor: "text"
+                    }
+                }))), y.a.createElement("div", {
                     className: "v2board-drawer-action"
                 },
                 y.a.createElement(l["a"], {
@@ -112166,7 +112217,13 @@
             }
             save() {
                 var e = u()({}, this.state.route);
-                "object" === typeof e.match ? e.match = e.match.filter(e=>!!e) : e.match = e.match.split(",").filter(e=>!!e),
+                if (Array.isArray(e.match)) {
+                    e.match = e.match.filter(e=>!!e);
+                } else if (e.match && "string" === typeof e.match) {
+                    e.match = e.match.split(",").filter(e=>!!e);
+                } else {
+                    e.match = [];
+                }
                 this.props.dispatch({
                     type: "serverRoute/save",
                     params: e,
@@ -112208,7 +112265,7 @@
                             })
                         })
                     }
-                })), f.a.createElement("div", {
+                })), "default_out" != this.state.route.action && f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
@@ -112218,7 +112275,16 @@
                         type: "link"
                     }), "\u586b\u5199\u53c2\u8003")), f.a.createElement(y["a"].TextArea, {
                     rows: 5,
-                    placeholder: "example.com(\u5173\u952e\u5b57\u5339\u914d)\ndomain:example.com(\u5b50\u57df\u540d\u5339\u914d)\ngeosite:netflix(\u9884\u5b9a\u4e49\u57df\u540d\u5217\u8868)",
+                    placeholder: (()=> {
+                        const action = this.state.route.action;
+                        if (action === "protocol") {
+                            return "http\ntls\nquic\nbittorrent";
+                        }
+                        if (["route_ip", "block_ip"].includes(action)) {
+                            return "127.0.0.1(\u5355\u4e00\u5339\u914d)\n10.0.0.0/8(\u8303\u56f4\u5339\u914d)\ngeoip:cn(\u9884\u5b9a\u4e49\u5217\u8868\u5339\u914d)";
+                        }
+                        return "example.com(\u5173\u952e\u5b57\u5339\u914d)\ndomain:example.com(\u5b50\u57df\u540d\u5339\u914d)\ngeosite:netflix(\u9884\u5b9a\u4e49\u57df\u540d\u5217\u8868)";
+                    })(),
                     value: "object" === typeof this.state.route.match ? null === (e = this.state.route.match) || void 0 === e ? void 0 : e.join("\n") : null === (t = this.state.route.match) || void 0 === t ? void 0 : null === (n = t.split(",")) || void 0 === n ? void 0 : n.join("\n"),
                     onChange: e=>{
                         var t;
@@ -112246,10 +112312,18 @@
                 }, f.a.createElement(v["a"].Option, {
                     value: "block"
                 }, b["a"].routeActionText["block"]), f.a.createElement(v["a"].Option, {
+                    value: "block_ip"
+                }, b["a"].routeActionText["block_ip"]), f.a.createElement(v["a"].Option, {
+                    value: "protocol"
+                }, b["a"].routeActionText["protocol"]), f.a.createElement(v["a"].Option, {
                     value: "dns"
                 }, b["a"].routeActionText["dns"]), f.a.createElement(v["a"].Option, {
                     value: "route"
-                }, b["a"].routeActionText["route"])))), "dns" === this.state.route.action && f.a.createElement("div", {
+                }, b["a"].routeActionText["route"]), f.a.createElement(v["a"].Option, {
+                    value: "route_ip"
+                }, b["a"].routeActionText["route_ip"]), f.a.createElement(v["a"].Option, {
+                    value: "default_out"
+                }, b["a"].routeActionText["default_out"])))), "dns" === this.state.route.action && f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
@@ -112263,7 +112337,7 @@
                             })
                         })
                     }
-                })), "route" === this.state.route.action && f.a.createElement("div", {
+                })), ("route" === this.state.route.action || "route_ip"=== this.state.route.action || "default_out"=== this.state.route.action) && f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", {
                     for: "example-text-input-alt"
@@ -112273,7 +112347,19 @@
                         type: "link"
                     }), "\u586b\u5199\u53c2\u8003")), f.a.createElement(y["a"].TextArea, {
                     rows: 8,
-                    placeholder: "",
+                    placeholder: JSON.stringify({
+                        tag: "ss_out",
+                        sendThrough: "0.0.0.0",
+                        protocol: "shadowsocks",
+                        settings: {
+                            email: "love@xray.com",
+                            address: "8.8.8.8",
+                            port: 5555,
+                            method: "chacha20-ietf-poly1305",
+                            password: "abcdefghijklmnopqrstuvwxyz",
+                            level: 0
+                        }
+                    }, null, 4),
                     value: this.state.route.action_value,
                     onChange: e=>{
                         this.setState({
@@ -112338,7 +112424,7 @@
                     key: "match",
                     render: e=>{
                         var t;
-                        return "\u5339\u914d ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " \u6761\u89c4\u5219")
+                        return e.length == 0 ? "\u65e0\u89c4\u5219\u65f6\u9ed8\u8ba4" : "\u5339\u914d ".concat("string" === typeof e ? null === (t = e.split(",").filter(e=>!!e)) || void 0 === t ? void 0 : t.length : e.length, " \u6761\u89c4\u5219")
                     }
                 }, {
                     title: "\u52a8\u4f5c",

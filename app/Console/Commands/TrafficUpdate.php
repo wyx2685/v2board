@@ -41,6 +41,9 @@ class TrafficUpdate extends Command
     public function handle()
     {
         ini_set('memory_limit', -1);
+        if (Redis::exists('traffic_reset_lock')) {
+            return;
+        }
         $uploads = Redis::hgetall('v2board_upload_traffic');
         Redis::del('v2board_upload_traffic');
         $downloads = Redis::hgetall('v2board_download_traffic');
