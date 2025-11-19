@@ -101794,6 +101794,7 @@
             routeActionText: {
                 block: "\u7981\u6b62\u8bbf\u95ee(\u57df\u540d\u76ee\u6807)",
                 block_ip: "\u7981\u6b62\u8bbf\u95ee(IP\u76ee\u6807)",
+                block_port: "\u7981\u6b62\u8bbf\u95ee(\u76ee\u6807\u7aef\u53e3)",
                 protocol: "\u7981\u6b62\u8bbf\u95ee(\u534f\u8bae)",
                 dns: "\u6307\u5b9aDNS\u670d\u52a1\u5668\u8fdb\u884c\u89e3\u6790",
                 route: "\u6307\u5b9a\u51fa\u7ad9\u670d\u52a1\u5668(\u57df\u540d\u76ee\u6807)",
@@ -112283,6 +112284,9 @@
                         if (["route_ip", "block_ip"].includes(action)) {
                             return "127.0.0.1(\u5355\u4e00\u5339\u914d)\n10.0.0.0/8(\u8303\u56f4\u5339\u914d)\ngeoip:cn(\u9884\u5b9a\u4e49\u5217\u8868\u5339\u914d)";
                         }
+                        if (action === "block_port") {
+                            return "80(\u5355\u4e00\u5339\u914d)\n1000-2000(\u8303\u56f4\u5339\u914d)";
+                        }
                         return "example.com(\u5173\u952e\u5b57\u5339\u914d)\ndomain:example.com(\u5b50\u57df\u540d\u5339\u914d)\ngeosite:netflix(\u9884\u5b9a\u4e49\u57df\u540d\u5217\u8868)";
                     })(),
                     value: "object" === typeof this.state.route.match ? null === (e = this.state.route.match) || void 0 === e ? void 0 : e.join("\n") : null === (t = this.state.route.match) || void 0 === t ? void 0 : null === (n = t.split(",")) || void 0 === n ? void 0 : n.join("\n"),
@@ -112314,6 +112318,8 @@
                 }, b["a"].routeActionText["block"]), f.a.createElement(v["a"].Option, {
                     value: "block_ip"
                 }, b["a"].routeActionText["block_ip"]), f.a.createElement(v["a"].Option, {
+                    value: "block_port"
+                }, b["a"].routeActionText["block_port"]), f.a.createElement(v["a"].Option, {
                     value: "protocol"
                 }, b["a"].routeActionText["protocol"]), f.a.createElement(v["a"].Option, {
                     value: "dns"
