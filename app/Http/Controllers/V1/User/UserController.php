@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Services\AuthService;
 use App\Services\OrderService;
 use App\Services\UserService;
+use App\Services\TelegramService;
 use App\Utils\CacheKey;
 use App\Utils\Helper;
 use Illuminate\Http\Request;
@@ -250,6 +251,76 @@ class UserController extends Controller
             }
 
             DB::commit();
+            
+if (config('v2board.noti_admin_giftcard', 0) == 1) {
+$telegramService = new TelegramService();
+
+switch ($giftcard->type) {
+    case 1:
+        $typeText = "Tăng số dư";
+        break;
+    case 2:
+        $typeText = "Tăng số ngày gói";
+        break;
+    case 3:
+        $typeText = "Tăng lưu lượng gói";
+        break;
+    case 4:
+        $typeText = "Reset băng thông";
+        break;
+    case 5:
+        $typeText = "Tặng gói (Plan)";
+        break;
+    default:
+        $typeText = "Không xác định";
+        break;
+}
+
+$valueText = "";
+
+switch ($giftcard->type) {
+    case 1:
+        $displayValue = number_format(round($giftcard->value / 100));
+        $valueText = "📈 Giá trị tăng: {$displayValue}";
+        break;
+
+    case 2:
+        $valueText = "📅 Số ngày tăng: {$giftcard->value} ngày";
+        break;
+
+    case 3:
+        $bandwidth = number_format(round($giftcard->traffic)); 
+        $valueText = "📶 Băng thông tăng: {$giftcard->value} GB";
+        break;
+
+    case 4:
+    case 5:
+        $valueText = "";
+        break;
+}
+
+
+$message = sprintf(
+    "🎁 Gift Card sử dụng thành công!
+———————————————
+📧 Email: %s
+👤 User ID: %s
+———————————————
+🔑 Mã Gift Card: %s
+🗂 Loại: %s
+%s
+———————————————
+⏰ Thời gian: %s",
+    $user->email,
+    $user->id,
+    $giftcard->code,
+    $typeText,
+    $valueText ? "\n" . $valueText : "", 
+    date('Y-m-d H:i:s')
+);
+
+$telegramService->sendMessageWithAdmin($message);
+}
 
             return response([
                 'data' => true,

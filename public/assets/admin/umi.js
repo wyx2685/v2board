@@ -5937,6 +5937,12 @@
                 }, f.a.createElement(l["a"], {
                     checked: parseInt(r.plan_change_enable),
                     onChange: e=>this.set("subscribe", "plan_change_enable", e ? 1 : 0)
+                })),f.a.createElement(m, {
+                    title: "Gửi thông báo GiftCard",
+                    description: "Khi mở nó sẽ gửi thông báo telegram cho Admin nếu User sử dụng GiftCard thành công"
+                }, f.a.createElement(l["a"], {
+                    checked: parseInt(r.noti_admin_giftcard),
+                    onChange: e=>this.set("subscribe", "noti_admin_giftcard", e ? 1 : 0)
                 })), f.a.createElement(m, {
                     title: "\u6708\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f",
                     description: "\u5168\u5c40\u6d41\u91cf\u91cd\u7f6e\u65b9\u5f0f\uff0c\u9ed8\u8ba4\u6bcf\u67081\u53f7\u3002\u53ef\u4ee5\u5728\u8ba2\u9605\u7ba1\u7406\u4e3a\u8ba2\u9605\u5355\u72ec\u8bbe\u7f6e\u3002"
