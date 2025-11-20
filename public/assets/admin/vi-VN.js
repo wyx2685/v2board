@@ -624,5 +624,9 @@ window.zhViDictionary = {
   '地址或IP默认为0.0.0.0' : 'Địa chỉ hoặc IP mặc định là 0.0.0.0',
   '节点协议' : 'Giao thức nút',
   '一键安装指令' : 'Lệnh cài đặt một cú nhấp chuột',
+  '无限' : 'Không giới hạn',
+  '金额' : 'Số tiền',
+  '时长' : 'Thời gian',
+  '天' : 'Ngày',
 }
 ;
