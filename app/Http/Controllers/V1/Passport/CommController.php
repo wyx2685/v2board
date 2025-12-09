@@ -47,22 +47,25 @@ class CommController extends Controller
         $isforget = $request->input('isforget');
         $email_exists = User::where('email', $email)->exists();
         //检查是否在白名单内
-        if ((int)config('v2board.email_whitelist_enable', 0)) {
-            if (!Helper::emailSuffixVerify(
-                $request->input('email'),
-                config('v2board.email_whitelist_suffix', Dict::EMAIL_WHITELIST_SUFFIX_DEFAULT))
-            ) {
-                abort(500, __('Email suffix is not in the Whitelist'));
-            }
-        }
-        // 检查是否是gmail别名邮箱
-        if ((int)config('v2board.email_gmail_limit_enable', 0)) {
-            $prefix = explode('@', $request->input('email'))[0];
-            if (strpos($prefix, '.') !== false || strpos($prefix, '+') !== false) {
-                abort(500, __('Gmail alias is not supported'));
-            }
-        }
         if (isset($isforget)) {
+            if($isforget == 0){
+                if ((int)config('v2board.email_whitelist_enable', 0)) {
+                    if (!Helper::emailSuffixVerify(
+                        $request->input('email'),
+                        config('v2board.email_whitelist_suffix', Dict::EMAIL_WHITELIST_SUFFIX_DEFAULT))
+                    ) {
+                        abort(500, __('Email suffix is not in the Whitelist'));
+                    }
+                }
+                // 检查是否是gmail别名邮箱
+                if ((int)config('v2board.email_gmail_limit_enable', 0)) {
+                    $prefix = explode('@', $request->input('email'))[0];
+                    if (strpos($prefix, '.') !== false || strpos($prefix, '+') !== false) {
+                        abort(500, __('Gmail alias is not supported'));
+                    }
+                }
+            }
+            
             if ($isforget == 0 && $email_exists) {
                 abort(500, __('This email is registered'));
             } 
