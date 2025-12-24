@@ -1,3 +1,53 @@
+# Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+v2board
+v2board-*
+
+# Test binary
+*.test
+
+# Coverage
+*.out
+coverage.html
+
+# Dependency
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+workerman.log
+workerman.webman.php.pid
+
+# Local config
+config/config.yaml
+!config/config.yaml.example
+
+# Build
+dist/
+build/
+
+# Environment
+.env
+.env.backup
+.env.local
+.lock
+
+# PHP related (legacy)
 /node_modules
 /config/v2board.php
 /public/hot
@@ -7,11 +57,7 @@
 /public/assets/admin/custom.css
 /storage/*.key
 /vendor
-.env
-.env.backup
 .phpunit.result.cache
-.idea
-.lock
 Homestead.json
 Homestead.yaml
 npm-debug.log
@@ -19,8 +65,4 @@ yarn-error.log
 composer.phar
 composer.lock
 yarn.lock
-docker-compose.yml
-.DS_Store
 public/clients/*
-workerman.webman.php.pid
-workerman.log

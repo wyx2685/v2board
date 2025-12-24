@@ -1,0 +1,46 @@
+# V2Board Go Backend Configuration
+
+server:
+  host: "0.0.0.0"
+  port: 8080
+  mode: "release"  # debug, release, test
+  read_timeout: 30
+  write_timeout: 30
+
+database:
+  driver: "mysql"
+  host: "127.0.0.1"
+  port: 3306
+  database: "v2board"
+  username: "root"
+  password: ""
+  charset: "utf8mb4"
+  max_idle_conns: 10
+  max_open_conns: 100
+  conn_max_lifetime: 3600
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  db: 0
+  pool_size: 10
+
+log:
+  level: "info"  # debug, info, warn, error
+  output: "stdout"  # stdout, file
+  file_path: "./logs/v2board.log"
+  max_size: 100  # MB
+  max_backups: 30
+  max_age: 7  # days
+
+jwt:
+  secret: "your-jwt-secret-key-change-in-production"
+  expire: 86400  # seconds
+
+app:
+  name: "V2Board"
+  version: "2.0.0"
+  api_token: ""  # Global API token for node communication
+  traffic_log_enable: true
+  subscribe_path: "s"

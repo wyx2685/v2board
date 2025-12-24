@@ -1,0 +1,52 @@
+services:
+  v2board:
+    build: .
+    container_name: v2board
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    environment:
+      - TZ=Asia/Shanghai
+    depends_on:
+      - mysql
+      - redis
+    restart: unless-stopped
+    networks:
+      - v2board
+
+  mysql:
+    image: mysql:8.0
+    container_name: v2board-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: v2board123
+      MYSQL_DATABASE: v2board
+      MYSQL_USER: v2board
+      MYSQL_PASSWORD: v2board123
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    networks:
+      - v2board
+
+  redis:
+    image: redis:7-alpine
+    container_name: v2board-redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - v2board
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  v2board:
+    driver: bridge
