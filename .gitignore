@@ -30,8 +30,6 @@ Thumbs.db
 # Logs
 logs/
 *.log
-workerman.log
-workerman.webman.php.pid
 
 # Local config
 config/config.yaml
@@ -43,26 +41,4 @@ build/
 
 # Environment
 .env
-.env.backup
 .env.local
-.lock
-
-# PHP related (legacy)
-/node_modules
-/config/v2board.php
-/public/hot
-/public/storage
-/public/env.example.js
-/public/favicon.ico
-/public/assets/admin/custom.css
-/storage/*.key
-/vendor
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-composer.phar
-composer.lock
-yarn.lock
-public/clients/*
