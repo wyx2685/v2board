@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Services;
-
 use App\Utils\CacheKey;
 use App\Utils\Helper;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Http\Request;
 
 class AuthService
@@ -63,49 +62,60 @@ class AuthService
 
     private static function checkSession($userId, $session)
     {
-        $sessions = (array)Cache::get(CacheKey::get("USER_SESSIONS", $userId)) ?? [];
+        $sessions = self::getSessionsFromRedis($userId);
         if (!in_array($session, array_keys($sessions))) return false;
         return true;
     }
 
     private static function addSession($userId, $guid, $meta)
     {
-        $cacheKey = CacheKey::get("USER_SESSIONS", $userId);
-        $sessions = (array)Cache::get($cacheKey, []);
+        $sessions = self::getSessionsFromRedis($userId);
         $sessions[$guid] = $meta;
-        if (!Cache::put(
-            $cacheKey,
-            $sessions
-        )) return false;
-        return true;
+        return self::saveSessionsToRedis($userId, $sessions);
+    }
+
+    // مستقیم از Redis DB 2 بخون (بدون Cache facade)
+    private static function getSessionsFromRedis($userId)
+    {
+        $key = CacheKey::get("USER_SESSIONS", $userId);
+        $data = \Illuminate\Support\Facades\Redis::connection('session')->get($key);
+        return $data ? unserialize($data) : [];
+    }
+
+    // مستقیم در Redis DB 2 ذخیره کن (بدون Cache facade)
+    private static function saveSessionsToRedis($userId, $sessions)
+    {
+        $key = CacheKey::get("USER_SESSIONS", $userId);
+        return \Illuminate\Support\Facades\Redis::connection('session')->set($key, serialize($sessions));
+    }
+
+    // حذف از Redis DB 2
+    private static function deleteSessionsFromRedis($userId)
+    {
+        $key = CacheKey::get("USER_SESSIONS", $userId);
+        return \Illuminate\Support\Facades\Redis::connection('session')->del($key);
     }
 
     public function getSessions()
     {
-        return (array)Cache::get(CacheKey::get("USER_SESSIONS", $this->user->id), []);
+        return self::getSessionsFromRedis($this->user->id);
     }
 
     public function removeSession($sessionId)
     {
-        $cacheKey = CacheKey::get("USER_SESSIONS", $this->user->id);
-        $sessions = (array)Cache::get($cacheKey, []);
+        $sessions = self::getSessionsFromRedis($this->user->id);
         unset($sessions[$sessionId]);
-        if (!Cache::put(
-            $cacheKey,
-            $sessions
-        )) return false;
-        return true;
+        return self::saveSessionsToRedis($this->user->id, $sessions);
     }
 
     public function removeAllSession()
     {
-        $cacheKey = CacheKey::get("USER_SESSIONS", $this->user->id);
-        $sessions = (array)Cache::get($cacheKey, []);
+        $sessions = self::getSessionsFromRedis($this->user->id);
         foreach ($sessions as $guid => $meta) {
             if (isset($meta['auth_data'])) {
                 Cache::forget($meta['auth_data']);
             }
         }
-        return Cache::forget($cacheKey);
+        return self::deleteSessionsFromRedis($this->user->id);
     }
 }
