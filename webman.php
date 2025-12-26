@@ -152,7 +152,7 @@ class Manager {
         foreach (array_filter(explode("\n", trim($out ?: ''))) as $pid) {
             $pid = (int)$pid;
             if ($pid <= 0 || $pid === $master) continue;
-            $ppid = (int)trim(shell_exec("ps -o ppid= -p $pid 2>/dev/null"));
+            $ppid = (int)trim((string)shell_exec("ps -o ppid= -p $pid 2>/dev/null"));
             if ($ppid !== $master && $ppid !== 1) { posix_kill($pid, SIGKILL); $killed++; }
         }
         if ($killed) Logger::log("CLEANUP", "Killed {$killed} orphan(s)", "WARN");
@@ -160,7 +160,7 @@ class Manager {
     
     public function checkWorkers() {
         $master = $this->getMasterPid();
-        $count = $master > 0 ? count(array_filter(explode("\n", trim(shell_exec("pgrep -P {$master} 2>/dev/null") ?: '')))) : 0;
+        $count = $master > 0 ? count(array_filter(explode("\n", trim((string)shell_exec("pgrep -P {$master} 2>/dev/null") ?: '')))) : 0;
         
         if ($count < $this->workers - 1) {
             Logger::log("MONITOR", "Workers low: {$count}/{$this->workers}", "WARN");
@@ -176,13 +176,13 @@ class Manager {
         $cpu = (int)shell_exec('nproc') ?: 4;
         if ($load > $cpu * 2) Logger::log("RESOURCE", "HIGH CPU: {$load}", "FATAL");
         
-        $mem = explode(' ', trim(shell_exec("free -m | awk '/^Mem:/{print \$3, \$2}'")));
+        $mem = explode(' ', trim((string)shell_exec("free -m | awk '/^Mem:/{print \$3, \$2}'")));
         $pct = round(($mem[0] / $mem[1]) * 100, 1);
         if ($pct > 90) Logger::log("RESOURCE", "CRITICAL RAM: {$pct}%", "FATAL");
     }
     
     private function getMasterPid(): int {
-        return file_exists($this->pid) ? (int)trim(file_get_contents($this->pid)) : 0;
+        return file_exists($this->pid) ? (int)trim((string)file_get_contents($this->pid)) : 0;
     }
     
     private function reload() {
