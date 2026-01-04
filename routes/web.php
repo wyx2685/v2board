@@ -52,5 +52,7 @@ Route::get('/' . config('v2board.secure_path', config('v2board.frontend_admin_pa
 });
 
 if (!empty(config('v2board.subscribe_path'))) {
-    Route::get(config('v2board.subscribe_path'), 'V1\\Client\\ClientController@subscribe')->middleware('client');
+    $subscribePath = rtrim(config('v2board.subscribe_path'), '/');
+    Route::get($subscribePath, 'V1\\Client\\ClientController@subscribe')->middleware('client');
+    Route::get($subscribePath . '/encryption', 'V1\\Client\\ClientController@subscribeEncrypted')->middleware('client');
 }

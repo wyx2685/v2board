@@ -97,13 +97,17 @@ class Helper
         }
     }
 
-    public static function getSubscribeUrl($token)
+    public static function getSubscribeUrl($token, $encrypted = false)
     {
         $submethod = (int)config('v2board.show_subscribe_method', 0);
         $path = config('v2board.subscribe_path', '/api/v1/client/subscribe');
         if (empty($path)) {
             $path = '/api/v1/client/subscribe';
-        } 
+        }
+        // Use encrypted endpoint if requested
+        if ($encrypted) {
+            $path = rtrim($path, '/') . '/encryption';
+        }
         $subscribeUrls = explode(',', config('v2board.subscribe_url'));
         $subscribeUrl = $subscribeUrls[rand(0, count($subscribeUrls) - 1)];
         switch ($submethod) {
@@ -510,5 +514,31 @@ class Helper
         $config['host'] = $settings['host'] ?? '';
         $config['mode'] = $settings['mode'] ?? 'auto';
         $config['extra'] = isset($settings['extra']) ? json_encode($settings['extra'], JSON_UNESCAPED_SLASHES) : null;
+    }
+
+    /**
+     * Encrypt subscription content using AES-256-GCM
+     * @param string $data Plaintext subscription data
+     * @param string $uuid User UUID for key derivation
+     * @return string Base64 encoded ciphertext (IV || Ciphertext || Tag)
+     */
+    public static function encryptSubscription($data, $uuid)
+    {
+        // HKDF key derivation: UUID -> 256-bit key
+        $key = hash_hkdf('sha256', $uuid, 32, 'aes-256-gcm-key', 'v2board-subscribe-key');
+
+        // Random IV (12 bytes for GCM)
+        $iv = random_bytes(12);
+
+        // AES-256-GCM encryption
+        $tag = '';
+        $ciphertext = openssl_encrypt($data, 'aes-256-gcm', $key, OPENSSL_RAW_DATA, $iv, $tag, '', 16);
+
+        if ($ciphertext === false) {
+            throw new \Exception('Subscription encryption failed');
+        }
+
+        // Output: IV (12) || Ciphertext (variable) || Tag (16)
+        return base64_encode($iv . $ciphertext . $tag);
     }
 }

@@ -23,7 +23,9 @@ class CommController extends Controller
                 'commission_distribution_enable' => (int)config('v2board.commission_distribution_enable', 0),
                 'commission_distribution_l1' => config('v2board.commission_distribution_l1'),
                 'commission_distribution_l2' => config('v2board.commission_distribution_l2'),
-                'commission_distribution_l3' => config('v2board.commission_distribution_l3')
+                'commission_distribution_l3' => config('v2board.commission_distribution_l3'),
+                'subscribe_encrypted_enable' => (int)config('v2board.subscribe_encrypted_enable', 0),
+                'subscribe_force_encrypted' => (int)config('v2board.subscribe_force_encrypted', 0)
             ]
         ]);
     }

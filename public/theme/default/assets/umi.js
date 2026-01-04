@@ -1032,7 +1032,9 @@
         class g extends c.a.Component {
             constructor(e) {
                 super(e),
-                this.state = {}
+                this.state = {
+                    showCopyModal: !1
+                }
             }
             renderSubscribeBox() {
                 var e = this.props.subscribeUrl
@@ -1087,10 +1089,9 @@
                     key: "1",
                     className: "".concat(v.a.item, " subsrcibe-for-link"),
                     onClick: ()=>{
-                        f()(this.props.subscribeUrl),
-                        a["a"].success(Object(p["formatMessage"])({
-                            id: "\u590d\u5236\u6210\u529f"
-                        }))
+                        this.props.subscribeEncryptedEnable ?
+                            this.setState({ showCopyModal: !0 }) :
+                            (f()(this.props.subscribeUrl), a["a"].success(Object(p["formatMessage"])({ id: "\u590d\u5236\u6210\u529f" })))
                     }
                 }, c.a.createElement("div", null, c.a.createElement("i", {
                     className: "fa fa-copy mr-2"
@@ -1186,7 +1187,41 @@
                         padding: 0
                     },
                     centered: !0
-                }, this.renderSubscribeBox()))
+                }, this.renderSubscribeBox()), c.a.createElement(o["a"], {
+                    visible: this.state.showCopyModal,
+                    closable: !0,
+                    footer: !1,
+                    width: 320,
+                    title: "\u590d\u5236\u8ba2\u9605\u4fe1\u606f",
+                    onCancel: ()=>this.setState({ showCopyModal: !1 }),
+                    centered: !0
+                }, c.a.createElement("div", { className: v.a.oneClickSubscribe },
+                    c.a.createElement("div", {
+                        className: v.a.item,
+                        onClick: ()=>{
+                            this.props.uuid ? (f()(this.props.uuid),
+                            a["a"].success("\u5bc6\u94a5\u590d\u5236\u6210\u529f")) : a["a"].error("\u5bc6\u94a5\u4e0d\u53ef\u7528")
+                        }
+                    }, c.a.createElement("div", null, c.a.createElement("i", { className: "fa fa-key mr-2" })),
+                       c.a.createElement("div", null, "\u590d\u5236\u89e3\u5bc6\u5bc6\u94a5 (UUID)")),
+                    c.a.createElement("div", {
+                        className: v.a.item,
+                        onClick: ()=>{
+                            var e = this.props.subscribeForceEncrypted ? this.props.subscribeUrlEncrypted : this.props.subscribeUrl;
+                            e ? (f()(e),
+                            a["a"].success(this.props.subscribeForceEncrypted ? "\u52a0\u5bc6\u8ba2\u9605\u94fe\u63a5\u590d\u5236\u6210\u529f" : "\u8ba2\u9605\u94fe\u63a5\u590d\u5236\u6210\u529f")) : a["a"].error(this.props.subscribeForceEncrypted ? "\u52a0\u5bc6\u8ba2\u9605\u94fe\u63a5\u4e0d\u53ef\u7528" : "\u8ba2\u9605\u94fe\u63a5\u4e0d\u53ef\u7528")
+                        }
+                    }, c.a.createElement("div", null, c.a.createElement("i", { className: "fa fa-link mr-2" })),
+                       c.a.createElement("div", null, this.props.subscribeForceEncrypted ? "\u590d\u5236\u52a0\u5bc6\u8ba2\u9605\u94fe\u63a5" : "\u590d\u5236\u666e\u901a\u8ba2\u9605\u94fe\u63a5")),
+                    !this.props.subscribeForceEncrypted && c.a.createElement("div", {
+                        className: v.a.item,
+                        onClick: ()=>{
+                            this.props.subscribeUrlEncrypted ? (f()(this.props.subscribeUrlEncrypted),
+                            a["a"].success("\u52a0\u5bc6\u8ba2\u9605\u94fe\u63a5\u590d\u5236\u6210\u529f")) : a["a"].error("\u52a0\u5bc6\u8ba2\u9605\u94fe\u63a5\u4e0d\u53ef\u7528")
+                        }
+                    }, c.a.createElement("div", null, c.a.createElement("i", { className: "fa fa-lock mr-2" })),
+                       c.a.createElement("div", null, "\u590d\u5236\u52a0\u5bc6\u8ba2\u9605\u94fe\u63a5"))
+                )))
             }
         }
     },
@@ -31135,7 +31170,11 @@
                     },
                     className: "nav-main-link-icon si si-book-open"
                 })), l.a.createElement(g["a"], {
-                    subscribeUrl: d.subscribe_url
+                    subscribeUrl: d.subscribe_url,
+                    subscribeUrlEncrypted: d.subscribe_url_encrypted,
+                    uuid: d.uuid,
+                    subscribeEncryptedEnable: this.props.comm.config.subscribe_encrypted_enable,
+                    subscribeForceEncrypted: this.props.comm.config.subscribe_force_encrypted
                 }, l.a.createElement("div", {
                     className: "v2board-shortcuts-item"
                 }, l.a.createElement("div", null, Object(b["formatMessage"])({
