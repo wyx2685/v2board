@@ -21,6 +21,15 @@ class ServerController extends Controller
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
         }
+        $filteredServers = array_map(function ($item) {
+            return [
+                'id'        => $item['id'] ?? null,
+                'name'      => $item['name'] ?? null,
+                'rate'      => $item['rate'] ?? null,
+                'tags'      => $item['tags'] ?? [],
+                'is_online' => $item['is_online'] ?? null,
+                ];
+        }, $servers);
         $eTag = sha1(json_encode(array_column($servers, 'cache_key')));
         if (strpos($request->header('If-None-Match'), $eTag) !== false ) {
             abort(304);
