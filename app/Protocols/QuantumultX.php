@@ -29,8 +29,8 @@ class QuantumultX
             if ($item['type'] === 'vmess') {
                 $uri .= self::buildVmess($user['uuid'], $item);
             }
-            // QX does not support the XTLS feature and needs to be excluded
-            if ($item['type'] === 'vless' && !$item['flow'] ) {
+            // Allow VLESS including XTLS/Reality flows
+            if ($item['type'] === 'vless') {
                 $uri .= self::buildVless($user['uuid'], $item);
             }
             if ($item['type'] === 'trojan') {
@@ -151,11 +151,12 @@ class QuantumultX
 
     public static function buildVless($uuid, $server)
     {
+        $isReality = ($server['tls'] ?? 0) === 2;
         $config = [
             "vless={$server['host']}:{$server['port']}",
             'method=none',
             "password={$uuid}",
-            'fast-open=true',
+            $isReality ? 'fast-open=false' : 'fast-open=true',
             'udp-relay=true',
             "tag={$server['name']}"
         ];
@@ -175,8 +176,10 @@ class QuantumultX
             }
         }
 
-        if ($server['tls'] === 1) {
-            array_push($config, 'tls13=true');
+        if ($server['tls']) {
+            if (!$isReality) {
+                array_push($config, 'tls13=true');
+            }
             if ($server['network'] === 'tcp') {
                 array_push($config, 'obfs=over-tls');
             }
@@ -189,10 +192,15 @@ class QuantumultX
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name'])) {
                     $host = $tlsSettings['server_name'];
                 }
+                if ($isReality) {
+                    if (isset($tlsSettings['public_key']) && !empty($tlsSettings['public_key'])) {
+                        array_push($config, "reality-base64-pubkey={$tlsSettings['public_key']}");
+                    }
+                    if (isset($tlsSettings['short_id']) && !empty($tlsSettings['short_id'])) {
+                        array_push($config, "reality-hex-shortid={$tlsSettings['short_id']}");
+                    }
+                }
             }
-        } elseif ($server['tls'] === 2) {
-            // QX does not support Reality
-            return '';
         }
 
         if ($server['network'] === 'ws') {
@@ -214,6 +222,10 @@ class QuantumultX
                 //     array_splice($config, 1, 1, "method={$wsSettings['security']}");
                 // }
             }
+        }
+
+        if (!empty($server['flow'])) {
+            array_push($config, "vless-flow={$server['flow']}");
         }
 
         if (isset($host)) {
