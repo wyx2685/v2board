@@ -29,8 +29,8 @@ class QuantumultX
             if ($item['type'] === 'vmess') {
                 $uri .= self::buildVmess($user['uuid'], $item);
             }
-            // Allow Reality (tls = 2) even when flow is present; other XTLS flows stay excluded
-            if ($item['type'] === 'vless' && (!$item['flow'] || $item['tls'] === 2)) {
+            // Allow VLESS including XTLS/Reality flows
+            if ($item['type'] === 'vless') {
                 $uri .= self::buildVless($user['uuid'], $item);
             }
             if ($item['type'] === 'trojan') {
@@ -199,9 +199,6 @@ class QuantumultX
                     if (isset($tlsSettings['short_id']) && !empty($tlsSettings['short_id'])) {
                         array_push($config, "reality-hex-shortid={$tlsSettings['short_id']}");
                     }
-                    if (!empty($server['flow'])) {
-                        array_push($config, "vless-flow={$server['flow']}");
-                    }
                 }
             }
         }
@@ -225,6 +222,10 @@ class QuantumultX
                 //     array_splice($config, 1, 1, "method={$wsSettings['security']}");
                 // }
             }
+        }
+
+        if (!empty($server['flow'])) {
+            array_push($config, "vless-flow={$server['flow']}");
         }
 
         if (isset($host)) {
