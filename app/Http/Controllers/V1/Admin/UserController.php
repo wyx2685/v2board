@@ -144,6 +144,8 @@ class UserController extends Controller
                 abort(500, '订阅计划不存在');
             }
             $params['group_id'] = $plan->group_id;
+        } else {
+            $params['group_id'] = null;
         }
         if ($request->input('invite_user_email')) {
             $inviteUser = User::where('email', $request->input('invite_user_email'))->first();
