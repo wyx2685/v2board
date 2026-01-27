@@ -101801,6 +101801,7 @@
                 block: "\u7981\u6b62\u8bbf\u95ee(\u57df\u540d\u76ee\u6807)",
                 block_ip: "\u7981\u6b62\u8bbf\u95ee(IP\u76ee\u6807)",
                 block_port: "\u7981\u6b62\u8bbf\u95ee(\u76ee\u6807\u7aef\u53e3)",
+                block_port: "\u7981\u6b62\u8bbf\u95ee(\u7aef\u53e3\u76ee\u6807)",
                 protocol: "\u7981\u6b62\u8bbf\u95ee(\u534f\u8bae)",
                 dns: "\u6307\u5b9aDNS\u670d\u52a1\u5668\u8fdb\u884c\u89e3\u6790",
                 route: "\u6307\u5b9a\u51fa\u7ad9\u670d\u52a1\u5668(\u57df\u540d\u76ee\u6807)",
@@ -112286,6 +112287,9 @@
                         const action = this.state.route.action;
                         if (action === "protocol") {
                             return "http\ntls\nquic\nbittorrent";
+                        }
+                        if (action === "block_port") {
+                            return "53\n443\n1000-2000";
                         }
                         if (["route_ip", "block_ip"].includes(action)) {
                             return "127.0.0.1(\u5355\u4e00\u5339\u914d)\n10.0.0.0/8(\u8303\u56f4\u5339\u914d)\ngeoip:cn(\u9884\u5b9a\u4e49\u5217\u8868\u5339\u914d)";

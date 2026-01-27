@@ -26,7 +26,7 @@ class RouteController extends Controller
         $params = $request->validate([
             'remarks' => 'required',
             'match' => 'array|required_unless:action,default_out',
-            'action' => 'required|in:block,block_ip,protocol,dns,route,route_ip,default_out',
+            'action' => 'required|in:block,block_ip,block_port,protocol,dns,route,route_ip,default_out',
             'action_value' => 'nullable'
         ], [
             'remarks.required' => '备注不能为空',
