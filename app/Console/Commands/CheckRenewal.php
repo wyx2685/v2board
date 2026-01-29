@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 use App\Models\User;
 use App\Models\Order;
 use App\Utils\Helper;
+use App\Utils\Time;
 use Illuminate\Support\Facades\DB;
 
 use Exception;
@@ -117,19 +118,6 @@ class CheckRenewal extends Command
         if ($timestamp < time()) {
             $timestamp = time();
         }
-        switch ($str) {
-            case 'month_price':
-                return strtotime('+1 month', $timestamp);
-            case 'quarter_price':
-                return strtotime('+3 month', $timestamp);
-            case 'half_year_price':
-                return strtotime('+6 month', $timestamp);
-            case 'year_price':
-                return strtotime('+12 month', $timestamp);
-            case 'two_year_price':
-                return strtotime('+24 month', $timestamp);
-            case 'three_year_price':
-                return strtotime('+36 month', $timestamp);
-        }
+        return Time::addMonthsNoOverflow($timestamp, OrderService::STR_TO_TIME[$str]);
     }
 }
