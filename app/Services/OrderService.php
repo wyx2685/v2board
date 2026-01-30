@@ -6,6 +6,7 @@ use App\Jobs\OrderHandleJob;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\User;
+use App\Utils\Time;
 use Illuminate\Support\Facades\DB;
 
 class OrderService
@@ -216,7 +217,7 @@ class OrderService
         $lastValidateAt = null;
         foreach ($orders as $item) {
             $period = self::STR_TO_TIME[$item['period']];
-            $orderEndTime = strtotime("+{$period} month", $item['created_at']);
+            $orderEndTime = Time::addMonthsNoOverflow($item['created_at'], $period);
             if ($orderEndTime < time()) continue;
             $lastValidateAt = $item['created_at'] > $lastValidateAt ? $item['created_at'] : $lastValidateAt;
             $orderMonthSum += $period;
@@ -224,7 +225,7 @@ class OrderService
         }
         if ($lastValidateAt === null) return;
     
-        $expiredAtByOrder = strtotime("+{$orderMonthSum} month", $lastValidateAt);
+        $expiredAtByOrder = Time::addMonthsNoOverflow($lastValidateAt, $orderMonthSum);
         $expiredAtByUser = $user->expired_at;
         if ($expiredAtByOrder < time() || $expiredAtByUser < time()) return;
         $orderSurplusSecond = $expiredAtByUser - time();
@@ -350,20 +351,7 @@ class OrderService
         if ($timestamp < time()) {
             $timestamp = time();
         }
-        switch ($str) {
-            case 'month_price':
-                return strtotime('+1 month', $timestamp);
-            case 'quarter_price':
-                return strtotime('+3 month', $timestamp);
-            case 'half_year_price':
-                return strtotime('+6 month', $timestamp);
-            case 'year_price':
-                return strtotime('+12 month', $timestamp);
-            case 'two_year_price':
-                return strtotime('+24 month', $timestamp);
-            case 'three_year_price':
-                return strtotime('+36 month', $timestamp);
-        }
+        return Time::addMonthsNoOverflow($timestamp, self::STR_TO_TIME[$str]);
     }
 
     private function openEvent($eventId)

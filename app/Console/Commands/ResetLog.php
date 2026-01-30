@@ -9,6 +9,7 @@ use App\Models\StatUser;
 use App\Utils\Helper;
 use Illuminate\Console\Command;
 use App\Models\User;
+use App\Utils\Time;
 use Illuminate\Support\Facades\DB;
 
 class ResetLog extends Command
@@ -45,8 +46,9 @@ class ResetLog extends Command
      */
     public function handle()
     {
-        StatUser::where('record_at', '<', strtotime('-2 month', time()))->delete();
-        StatServer::where('record_at', '<', strtotime('-2 month', time()))->delete();
-        Log::where('created_at', '<', strtotime('-1 month', time()))->delete();
+        $now = time();
+        StatUser::where('record_at', '<', Time::addMonthsNoOverflow($now, -2))->delete();
+        StatServer::where('record_at', '<', Time::addMonthsNoOverflow($now, -2))->delete();
+        Log::where('created_at', '<', Time::addMonthsNoOverflow($now, -1))->delete();
     }
 }

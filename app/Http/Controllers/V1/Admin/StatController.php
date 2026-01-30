@@ -18,6 +18,7 @@ use App\Models\StatServer;
 use App\Models\StatUser;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Utils\Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,19 +26,22 @@ class StatController extends Controller
 {
     public function getOverride(Request $request)
     {
+        $monthStartAt = strtotime(date('Y-m-1'));
+        $lastMonthStartAt = Time::addMonthsNoOverflow($monthStartAt, -1);
+        $now = time();
         return [
             'data' => [
-                'online_user' => User::where('t','>=', time() - 600)
+                'online_user' => User::where('t','>=', $now - 600)
                     ->count(),
-                'month_income' => Order::where('created_at', '>=', strtotime(date('Y-m-1')))
-                    ->where('created_at', '<', time())
+                'month_income' => Order::where('created_at', '>=', $monthStartAt)
+                    ->where('created_at', '<', $now)
                     ->whereNotIn('status', [0, 2])
                     ->sum('total_amount'),
-                'month_register_total' => User::where('created_at', '>=', strtotime(date('Y-m-1')))
-                    ->where('created_at', '<', time())
+                'month_register_total' => User::where('created_at', '>=', $monthStartAt)
+                    ->where('created_at', '<', $now)
                     ->count(),
                 'day_register_total' => User::where('created_at', '>=', strtotime(date('Y-m-d')))
-                    ->where('created_at', '<', time())
+                    ->where('created_at', '<', $now)
                     ->count(),
                 'ticket_pending_total' => Ticket::where('status', 0)
                     ->where('reply_status', 0)
@@ -48,18 +52,18 @@ class StatController extends Controller
                     ->where('commission_balance', '>', 0)
                     ->count(),
                 'day_income' => Order::where('created_at', '>=', strtotime(date('Y-m-d')))
-                    ->where('created_at', '<', time())
+                    ->where('created_at', '<', $now)
                     ->whereNotIn('status', [0, 2])
                     ->sum('total_amount'),
-                'last_month_income' => Order::where('created_at', '>=', strtotime('-1 month', strtotime(date('Y-m-1'))))
-                    ->where('created_at', '<', strtotime(date('Y-m-1')))
+                'last_month_income' => Order::where('created_at', '>=', $lastMonthStartAt)
+                    ->where('created_at', '<', $monthStartAt)
                     ->whereNotIn('status', [0, 2])
                     ->sum('total_amount'),
-                'commission_month_payout' => CommissionLog::where('created_at', '>=', strtotime(date('Y-m-1')))
-                    ->where('created_at', '<', time())
+                'commission_month_payout' => CommissionLog::where('created_at', '>=', $monthStartAt)
+                    ->where('created_at', '<', $now)
                     ->sum('get_amount'),
-                'commission_last_month_payout' => CommissionLog::where('created_at', '>=', strtotime('-1 month', strtotime(date('Y-m-1'))))
-                    ->where('created_at', '<', strtotime(date('Y-m-1')))
+                'commission_last_month_payout' => CommissionLog::where('created_at', '>=', $lastMonthStartAt)
+                    ->where('created_at', '<', $monthStartAt)
                     ->sum('get_amount'),
             ]
         ];
