@@ -202,12 +202,8 @@ class Surge
             "password={$password}",
             'tfo=true',
         ];
-        if (!empty($server['allow_insecure'])) {
-            array_push($config, 'skip-cert-verify=true');
-        }
-        if (!empty($server['server_name'])) {
-            array_push($config, "sni={$server['server_name']}");
-        }
+        if ($sni = $server['server_name'] ?? $server['tls_settings']['server_name'] ?? null) $config[] = "sni={$sni}";
+        if (($server['insecure'] ?? $server['tls_settings']['allow_insecure'] ?? 0) == 1) $config[] = "skip-cert-verify=true";
         $uri = implode(',', $config);
         $uri .= "\r\n";
         return $uri;
