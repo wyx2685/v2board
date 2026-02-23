@@ -25,6 +25,7 @@ class ClientController extends Controller
         if ($userService->isAvailable($user)) {
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
+            $body = null;
             if($flag) {
                 if (!strpos($flag, 'sing')) {
                     $this->setSubscribeInfoToServers($servers, $user);
@@ -32,11 +33,12 @@ class ClientController extends Controller
                         $file = 'App\\Protocols\\' . basename($file, '.php');
                         $class = new $file($user, $servers);
                         if (strpos($flag, $class->flag) !== false) {
-                            return $class->handle();
+                            $body = $class->handle();
+                            break;
                         }
                     }
                 }
-                if (strpos($flag, 'sing') !== false) {
+                if ($body === null && strpos($flag, 'sing') !== false) {
                     $version = null;
                     if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
                         $version = $matches[1];
@@ -46,11 +48,19 @@ class ClientController extends Controller
                     } else {
                         $class = new SingboxOld($user, $servers);
                     }
-                    return $class->handle();
+                    $body = $class->handle();
                 }
             }
-            $class = new General($user, $servers);
-            return $class->handle();
+            if ($body === null) {
+                $class = new General($user, $servers);
+                $body = $class->handle();
+            }
+            // FlClash-compatible subscription encryption (AES-128-CBC, key = MD5(login password))
+            if ((int)config('v2board.subscription_encryption_enable', 0) && !empty($user->subscription_encryption_key)) {
+                $body = Helper::subscriptionEncrypt($body, $user->subscription_encryption_key);
+                header('Subscription-Encryption: true');
+            }
+            return $body;
         }
     }
 

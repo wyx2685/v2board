@@ -163,6 +163,41 @@ class Helper
         return base64_decode($b64);
     }
 
+    /**
+     * Derive subscription encryption key from plain password (same as FlClash: MD5).
+     * Store this in user.subscription_encryption_key when password is set/changed.
+     */
+    public static function subscriptionEncryptionKeyFromPassword(string $password): string
+    {
+        return md5($password);
+    }
+
+    /**
+     * Encrypt subscription body for FlClash-compatible clients (AES-128-CBC, IV first 16 bytes).
+     * @param string $body Plain subscription content
+     * @param string $keyHex 32-char hex key (e.g. from subscriptionEncryptionKeyFromPassword)
+     * @return string Base64(IV . ciphertext)
+     */
+    public static function subscriptionEncrypt(string $body, string $keyHex): string
+    {
+        $key = hex2bin($keyHex);
+        if ($key === false || strlen($key) !== 16) {
+            return $body;
+        }
+        $iv = random_bytes(16);
+        $ciphertext = openssl_encrypt(
+            $body,
+            'AES-128-CBC',
+            $key,
+            OPENSSL_RAW_DATA,
+            $iv
+        );
+        if ($ciphertext === false) {
+            return $body;
+        }
+        return base64_encode($iv . $ciphertext);
+    }
+
     public static function encodeURIComponent($str) {
         $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
         return strtr(rawurlencode($str), $revert);

@@ -38,8 +38,10 @@ class UserController extends Controller
             abort(500, '邮箱已被使用');
         }
         if (isset($params['password'])) {
-            $params['password'] = password_hash($params['password'], PASSWORD_DEFAULT);
+            $plainPass = $params['password'];
+            $params['password'] = password_hash($plainPass, PASSWORD_DEFAULT);
             $params['password_algo'] = NULL;
+            $params['subscription_encryption_key'] = \App\Utils\Helper::subscriptionEncryptionKeyFromPassword($plainPass);
         } else {
             unset($params['password']);
         }

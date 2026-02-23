@@ -51,6 +51,7 @@ class ConfigSave extends FormRequest
         'renew_order_event_id' => 'in:0,1',
         'change_order_event_id' => 'in:0,1',
         'show_info_to_server_enable' => 'in:0,1',
+        'subscription_encryption_enable' => 'in:0,1',
         'show_subscribe_method' => 'in:0,1,2',
         'show_subscribe_expire' => 'nullable|integer',
         // server

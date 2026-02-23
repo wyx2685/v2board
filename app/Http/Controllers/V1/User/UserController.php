@@ -77,6 +77,7 @@ class UserController extends Controller
         $user->password = password_hash($request->input('new_password'), PASSWORD_DEFAULT);
         $user->password_algo = NULL;
         $user->password_salt = NULL;
+        $user->subscription_encryption_key = Helper::subscriptionEncryptionKeyFromPassword($request->input('new_password'));
         if (!$user->save()) {
             abort(500, __('Save failed'));
         }

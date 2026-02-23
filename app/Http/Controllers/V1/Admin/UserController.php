@@ -133,8 +133,10 @@ class UserController extends Controller
             abort(500, '邮箱已被使用');
         }
         if (isset($params['password'])) {
-            $params['password'] = password_hash($params['password'], PASSWORD_DEFAULT);
+            $plainPassword = $params['password'];
+            $params['password'] = password_hash($plainPassword, PASSWORD_DEFAULT);
             $params['password_algo'] = NULL;
+            $params['subscription_encryption_key'] = Helper::subscriptionEncryptionKeyFromPassword($plainPassword);
         } else {
             unset($params['password']);
         }
@@ -223,7 +225,9 @@ class UserController extends Controller
             if (User::where('email', $user['email'])->first()) {
                 abort(500, '邮箱已存在于系统中');
             }
-            $user['password'] = password_hash($request->input('password') ?? $user['email'], PASSWORD_DEFAULT);
+            $plainPass = $request->input('password') ?? $user['email'];
+            $user['password'] = password_hash($plainPass, PASSWORD_DEFAULT);
+            $user['subscription_encryption_key'] = Helper::subscriptionEncryptionKeyFromPassword($plainPass);
             if (!User::create($user)) {
                 abort(500, '生成失败');
             }
@@ -258,7 +262,9 @@ class UserController extends Controller
                 'created_at' => time(),
                 'updated_at' => time()
             ];
-            $user['password'] = password_hash($request->input('password') ?? $user['email'], PASSWORD_DEFAULT);
+            $plainPass = $request->input('password') ?? $user['email'];
+            $user['password'] = password_hash($plainPass, PASSWORD_DEFAULT);
+            $user['subscription_encryption_key'] = Helper::subscriptionEncryptionKeyFromPassword($plainPass);
             array_push($users, $user);
         }
         DB::beginTransaction();

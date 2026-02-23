@@ -856,3 +856,7 @@ CREATE TABLE `v2_server_v2node` (
 
 ALTER TABLE `v2_server_route`
 CHANGE `action_value` `action_value` text NULL AFTER `action`;
+
+-- subscription encryption (FlClash compatible: AES-128-CBC, key = MD5(login password))
+ALTER TABLE `v2_user`
+ADD `subscription_encryption_key` char(32) NULL COMMENT 'MD5(plain password) hex, for subscription body encryption' AFTER `password_salt`;

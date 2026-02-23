@@ -114,6 +114,7 @@ class ConfigController extends Controller
                 'renew_order_event_id' => (int)config('v2board.renew_order_event_id', 0),
                 'change_order_event_id' => (int)config('v2board.change_order_event_id', 0),
                 'show_info_to_server_enable' => (int)config('v2board.show_info_to_server_enable', 0),
+                'subscription_encryption_enable' => (int)config('v2board.subscription_encryption_enable', 0),
                 'show_subscribe_method' => (int)config('v2board.show_subscribe_method', 0),
                 'show_subscribe_expire' => (int)config('v2board.show_subscribe_expire', 5),
             ],
