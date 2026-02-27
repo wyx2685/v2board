@@ -26,8 +26,8 @@ class Stash
         header('profile-update-interval: 24');
         header("content-disposition: filename*=UTF-8''".rawurlencode($appName));
         // 暂时使用clash配置文件，后续根据Stash更新情况更新
-        $defaultConfig = base_path() . '/resources/rules/default.stash.yaml';
-        $customConfig = base_path() . '/resources/rules/custom.stash.yaml';
+        $defaultConfig = base_path() . '/resources/rules/default.clash.yaml';
+        $customConfig = base_path() . '/resources/rules/custom.clash.yaml';
         if (\File::exists($customConfig)) {
             $config = Yaml::parseFile($customConfig);
         } else {
@@ -64,6 +64,10 @@ class Stash
                 array_push($proxy, self::buildHysteria($user['uuid'], $item));
                 array_push($proxies, $item['name']);
             }
+            if ($item['type'] === 'anytls') {
+                array_push($proxy, self::buildAnyTLS($user['uuid'], $item));
+                array_push($proxies, $item['name']);
+            }
         }
 
         $config['proxies'] = array_merge($config['proxies'] ? $config['proxies'] : [], $proxy);
@@ -89,9 +93,27 @@ class Stash
         });
         $config['proxy-groups'] = array_values($config['proxy-groups']);
         // Force the current subscription domain to be a direct rule
-        $subsDomain = $_SERVER['HTTP_HOST'];
-        if ($subsDomain) {
-            array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
+        //$subsDomain = $_SERVER['HTTP_HOST'];
+        //if ($subsDomain) {
+        //    array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
+        //}
+        // Force the current subscription domain to be a direct rule
+        $subscribeUrls = config("v2board.subscribe_url");
+        $urls = explode(',', $subscribeUrls);  // 拆分多个域名
+
+        foreach ($urls as $url) {
+            $url = trim($url);  // 去掉空格
+            $subsDomain = parse_url($url, PHP_URL_HOST);  // 解析主机部分
+            $subsPort = parse_url($url, PHP_URL_PORT);    // 解析端口部分
+
+            if ($subsDomain) {
+                // 如果有端口号，拼接域名和端口号
+                if ($subsPort) {
+                    $subsDomain = "{$subsDomain}:{$subsPort}";
+                }
+                // 将解析出的域名和端口号加入规则
+                array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
+            }
         }
 
         $yaml = Yaml::dump($config, 2, 4, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
@@ -304,6 +326,27 @@ class Stash
             $array['sni'] = $server['server_name'];
         }
 
+        return $array;
+    }
+
+    public static function buildAnyTLS($password, $server)
+    {
+        $array = [
+            'name' => $server['name'],
+            'type' => 'anytls',
+            'server' => $server['host'],
+            'port' => $server['port'],
+            'password' => $password,
+            'client-fingerprint' => 'chrome',
+            'udp' => true,
+            'alpn' => [
+                'h2',
+                'http/1.1',
+            ],
+        ];
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
         return $array;
     }
 
