@@ -64,6 +64,10 @@ class Stash
                 array_push($proxy, self::buildHysteria($user['uuid'], $item));
                 array_push($proxies, $item['name']);
             }
+            if ($item['type'] === 'anytls') {
+                array_push($proxy, self::buildAnyTLS($user['uuid'], $item));
+                array_push($proxies, $item['name']);
+            }
         }
 
         $config['proxies'] = array_merge($config['proxies'] ? $config['proxies'] : [], $proxy);
@@ -351,6 +355,22 @@ class Stash
         }
 
         return $array;
+    }
+
+    public static function buildAnyTLS($password, $server)
+    {
+        $array = [
+            'name' => $server['name'],
+            'type' => 'anytls',
+            'server' => $server['host'],
+            'port' => $server['port'],
+            'password' => $password,
+        ];
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
+        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        return $array; 
     }
 
     private function isRegex($exp)
