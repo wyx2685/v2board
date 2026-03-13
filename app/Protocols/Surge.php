@@ -193,26 +193,6 @@ class Surge
         return $uri;
     }
 
-    public static function buildAnyTLS($password, $server)
-    {
-        $config = [
-            "{$server['name']}=anytls",
-            "{$server['host']}",
-            "{$server['port']}",
-            "password={$password}",
-            'tfo=true',
-        ];
-        if (!empty($server['allow_insecure'])) {
-            array_push($config, 'skip-cert-verify=true');
-        }
-        if (!empty($server['server_name'])) {
-            array_push($config, "sni={$server['server_name']}");
-        }
-        $uri = implode(',', $config);
-        $uri .= "\r\n";
-        return $uri;
-    }
-
     //参考文档: https://manual.nssurge.com/policy/proxy.html
     public static function buildHysteria($password, $server)
     {
@@ -240,6 +220,30 @@ class Surge
         }
         $config = array_filter($config);
         $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+
+    public static function buildAnyTLS($password, $server)
+    {
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $allowInsecure = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? 'true' : 'false';
+        $sni = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+
+        $config = [
+            "{$server['name']}=anytls",
+            "{$server['host']}",
+            "{$server['port']}",
+            "password={$password}",
+            "skip-cert-verify={$allowInsecure}",
+            'tfo=true',
+        ];
+
+        if ($sni) {
+            $config[] = "sni={$sni}";
+        }
+
+        $uri = implode(', ', $config);
         $uri .= "\r\n";
         return $uri;
     }
