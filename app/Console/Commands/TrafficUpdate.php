@@ -52,7 +52,12 @@ class TrafficUpdate extends Command
             return;
         }
 
-        $users = User::whereIn('id', array_keys($downloads))->get(['id', 'u', 'd']);
+        $keys = array_unique(array_merge(array_keys($uploads), array_keys($downloads)));
+        if (empty($keys)) {
+            return;
+        }
+
+        $users = User::whereIn('id', $keys)->get(['id', 'u', 'd']);
         $time = time();
         $casesU = [];
         $casesD = [];
@@ -65,6 +70,9 @@ class TrafficUpdate extends Command
             $casesU[] = "WHEN {$user->id} THEN " . ($user->u + $upload);
             $casesD[] = "WHEN {$user->id} THEN " . ($user->d + $download);
             $idList[] = $user->id;
+        }
+        if (empty($idList)) {
+            return;
         }
         $idListStr = implode(',', $idList);
         $casesUStr = implode(' ', $casesU);

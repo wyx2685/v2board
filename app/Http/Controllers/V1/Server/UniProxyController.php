@@ -136,6 +136,7 @@ class UniProxyController extends Controller
             ], 400);
         }
         $updateAt = time();
+        $uidsToUpdate = [];
         foreach ($data as $uid => $ips) {
             $ips_array = Cache::get('ALIVE_IP_USER_' . $uid) ?? [];
             // 更新节点数据
@@ -167,6 +168,11 @@ class UniProxyController extends Controller
             }
             $ips_array['alive_ip'] = $count;
             Cache::put('ALIVE_IP_USER_' . $uid, $ips_array, 120);
+            $uidsToUpdate[] = $uid;
+        }
+
+        if (!empty($uidsToUpdate)) {
+            \App\Models\User::whereIn('id', $uidsToUpdate)->update(['t' => $updateAt]);
         }
 
         return response([
