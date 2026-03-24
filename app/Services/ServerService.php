@@ -429,9 +429,12 @@ class ServerService
     public function getRoutes(array $routeIds)
     {
         $routeIds = array_map('intval', $routeIds);
-        $routes = ServerRoute::select(['id', 'match', 'action', 'action_value'])->whereIn('id', $routeIds)->get();
+        $routes = ServerRoute::select(['id', 'remarks', 'match', 'action', 'action_value'])->whereIn('id', $routeIds)->get();
         foreach ($routes as $k => $route) {
             $array = json_decode($route->match, true);
+            if ($route->action === 'route_user' && is_array($array)) {
+                $array = User::whereIn('email', $array)->pluck('uuid')->toArray();
+            }
             if (is_array($array)) $routes[$k]['match'] = $array;
         }
         return $routes;
