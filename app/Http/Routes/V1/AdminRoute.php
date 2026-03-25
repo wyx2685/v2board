@@ -33,6 +33,9 @@ class AdminRoute
             $router->post('/server/route/drop', 'V1\\Admin\\Server\\RouteController@drop');
             $router->get ('/server/manage/getNodes', 'V1\\Admin\\Server\\ManageController@getNodes');
             $router->post('/server/manage/sort', 'V1\\Admin\\Server\\ManageController@sort');
+            $router->get ('/server/userAssign/fetch', 'V1\\Admin\\Server\\UserAssignController@fetch');
+            $router->post('/server/userAssign/save', 'V1\\Admin\\Server\\UserAssignController@save');
+            $router->get ('/server/userAssign/searchUsers', 'V1\\Admin\\Server\\UserAssignController@searchUsers');
             $router->group([
                 'prefix' => 'server/trojan'
             ], function ($router) {

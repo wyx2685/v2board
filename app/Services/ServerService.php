@@ -6,6 +6,7 @@ use App\Models\ServerHysteria;
 use App\Models\ServerLog;
 use App\Models\ServerRoute;
 use App\Models\ServerShadowsocks;
+use App\Models\ServerUser;
 use App\Models\ServerVless;
 use App\Models\ServerV2node;
 use App\Models\User;
@@ -19,15 +20,42 @@ use Illuminate\Support\Facades\Cache;
 
 class ServerService
 {
-    public function getAvailableVless(User $user): array
+    /**
+     * 批量获取用户专属节点分配（按 server_type 分组）
+     * 返回格式: ['vless' => [1, 3], 'trojan' => [2], ...]
+     */
+    private function getUserAssignedIds(int $userId): array
+    {
+        return ServerUser::where('user_id', $userId)
+            ->get(['server_id', 'server_type'])
+            ->groupBy('server_type')
+            ->map(fn($rows) => $rows->pluck('server_id')->toArray())
+            ->toArray();
+    }
+
+    /**
+     * 判断节点对该用户是否可见
+     * 优先走专属分配逻辑，没有分配时走原有 group_id 逻辑
+     */
+    private function isServerVisible(array|object $server, User $user, array $assignedIds, string $type): bool
+    {
+        $assignedForType = $assignedIds[$type] ?? [];
+        if (!empty($assignedForType) && in_array($server['id'], $assignedForType)) {
+            // 专属节点：show=1 才对该用户可见，其他用户不可见
+            return (bool)$server['show'];
+        }
+        // 原有逻辑：show=1 且 group_id 匹配
+        return $server['show'] && in_array($user->group_id, $server['group_id']);
+    }
+
+    public function getAvailableVless(User $user, array $assignedIds = []): array
     {
         $servers = [];
         $model = ServerVless::orderBy('sort', 'ASC');
         $server = $model->get();
         foreach ($server as $key => $v) {
-            if (!$v['show']) continue;
             $server[$key]['type'] = 'vless';
-            if (!in_array($user->group_id, $server[$key]['group_id'])) continue;
+            if (!$this->isServerVisible($server[$key], $user, $assignedIds, 'vless')) continue;
             if (strpos($server[$key]['port'], '-') !== false) {
                 $server[$key]['port'] = Helper::randomPort($server[$key]['port']);
             }
@@ -53,15 +81,14 @@ class ServerService
         return $servers;
     }
 
-    public function getAvailableVmess(User $user): array
+    public function getAvailableVmess(User $user, array $assignedIds = []): array
     {
         $servers = [];
         $model = ServerVmess::orderBy('sort', 'ASC');
         $vmess = $model->get();
         foreach ($vmess as $key => $v) {
-            if (!$v['show']) continue;
             $vmess[$key]['type'] = 'vmess';
-            if (!in_array($user->group_id, $vmess[$key]['group_id'])) continue;
+            if (!$this->isServerVisible($vmess[$key], $user, $assignedIds, 'vmess')) continue;
             if (strpos($vmess[$key]['port'], '-') !== false) {
                 $vmess[$key]['port'] = Helper::randomPort($vmess[$key]['port']);
             }
@@ -73,19 +100,17 @@ class ServerService
             $servers[] = $vmess[$key]->toArray();
         }
 
-
         return $servers;
     }
 
-    public function getAvailableTrojan(User $user): array
+    public function getAvailableTrojan(User $user, array $assignedIds = []): array
     {
         $servers = [];
         $model = ServerTrojan::orderBy('sort', 'ASC');
         $trojan = $model->get();
         foreach ($trojan as $key => $v) {
-            if (!$v['show']) continue;
             $trojan[$key]['type'] = 'trojan';
-            if (!in_array($user->group_id, $trojan[$key]['group_id'])) continue;
+            if (!$this->isServerVisible($trojan[$key], $user, $assignedIds, 'trojan')) continue;
             if (strpos($trojan[$key]['port'], '-') !== false) {
                 $trojan[$key]['port'] = Helper::randomPort($trojan[$key]['port']);
             }
@@ -99,16 +124,15 @@ class ServerService
         return $servers;
     }
 
-    public function getAvailableTuic(User $user)
+    public function getAvailableTuic(User $user, array $assignedIds = [])
     {
         $availableServers = [];
         $model = ServerTuic::orderBy('sort', 'ASC');
         $servers = $model->get()->keyBy('id');
         foreach ($servers as $key => $v) {
-            if (!$v['show']) continue;
             $servers[$key]['type'] = 'tuic';
             $servers[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_TUIC_LAST_CHECK_AT', $v['id']));
-            if (!in_array($user->group_id, $v['group_id'])) continue;
+            if (!$this->isServerVisible($servers[$key], $user, $assignedIds, 'tuic')) continue;
             if (isset($servers[$v['parent_id']])) {
                 $servers[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_TUIC_LAST_CHECK_AT', $v['parent_id']));
                 $servers[$key]['created_at'] = $servers[$v['parent_id']]['created_at'];
@@ -118,16 +142,15 @@ class ServerService
         return $availableServers;
     }
 
-    public function getAvailableHysteria(User $user)
+    public function getAvailableHysteria(User $user, array $assignedIds = [])
     {
         $availableServers = [];
         $model = ServerHysteria::orderBy('sort', 'ASC');
         $servers = $model->get()->keyBy('id');
         foreach ($servers as $key => $v) {
-            if (!$v['show']) continue;
             $servers[$key]['type'] = 'hysteria';
             $servers[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_HYSTERIA_LAST_CHECK_AT', $v['id']));
-            if (!in_array($user->group_id, $v['group_id'])) continue;
+            if (!$this->isServerVisible($servers[$key], $user, $assignedIds, 'hysteria')) continue;
             if (isset($servers[$v['parent_id']])) {
                 $servers[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_HYSTERIA_LAST_CHECK_AT', $v['parent_id']));
                 $servers[$key]['created_at'] = $servers[$v['parent_id']]['created_at'];
@@ -138,16 +161,15 @@ class ServerService
         return $availableServers;
     }
 
-    public function getAvailableShadowsocks(User $user)
+    public function getAvailableShadowsocks(User $user, array $assignedIds = [])
     {
         $servers = [];
         $model = ServerShadowsocks::orderBy('sort', 'ASC');
         $shadowsocks = $model->get()->keyBy('id');
         foreach ($shadowsocks as $key => $v) {
-            if (!$v['show']) continue;
             $shadowsocks[$key]['type'] = 'shadowsocks';
             $shadowsocks[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_SHADOWSOCKS_LAST_CHECK_AT', $v['id']));
-            if (!in_array($user->group_id, $v['group_id'])) continue;
+            if (!$this->isServerVisible($shadowsocks[$key], $user, $assignedIds, 'shadowsocks')) continue;
             if (strpos($v['port'], '-') !== false) {
                 $shadowsocks[$key]['port'] = Helper::randomPort($v['port']);
             }
@@ -165,16 +187,15 @@ class ServerService
         return $servers;
     }
 
-    public function getAvailableAnyTLS(User $user)
+    public function getAvailableAnyTLS(User $user, array $assignedIds = [])
     {
         $servers = [];
         $model = ServerAnytls::orderBy('sort', 'ASC');
         $anytls = $model->get()->keyBy('id');
         foreach ($anytls as $key => $v) {
-            if (!$v['show']) continue;
             $anytls[$key]['type'] = 'anytls';
             $anytls[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_ANYTLS_LAST_CHECK_AT', $v['id']));
-            if (!in_array($user->group_id, $v['group_id'])) continue;
+            if (!$this->isServerVisible($anytls[$key], $user, $assignedIds, 'anytls')) continue;
             if (strpos($v['port'], '-') !== false) {
                 $anytls[$key]['port'] = Helper::randomPort($v['port']);
             }
@@ -187,16 +208,15 @@ class ServerService
         return $servers;
     }
 
-    public function getAvailableV2node(User $user)
+    public function getAvailableV2node(User $user, array $assignedIds = [])
     {
         $servers = [];
         $model = ServerV2node::orderBy('sort', 'ASC');
         $v2node = $model->get()->keyBy('id');
         foreach ($v2node as $key => $v) {
-            if (!$v['show']) continue;
             $v2node[$key]['type'] = 'v2node';
             $v2node[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_V2NODE_LAST_CHECK_AT', $v['id']));
-            if (!in_array($user->group_id, $v['group_id'])) continue;
+            if (!$this->isServerVisible($v2node[$key], $user, $assignedIds, 'v2node')) continue;
             if (isset($v2node[$v['parent_id']])) {
                 $v2node[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_V2NODE_LAST_CHECK_AT', $v['parent_id']));
                 $v2node[$key]['created_at'] = $v2node[$v['parent_id']]['created_at'];
@@ -218,15 +238,18 @@ class ServerService
 
     public function getAvailableServers(User $user)
     {
+        // 一次性批量查出该用户的专属节点分配，避免 N+1
+        $assignedIds = $this->getUserAssignedIds($user->id);
+
         $servers = array_merge(
-            $this->getAvailableShadowsocks($user),
-            $this->getAvailableVmess($user),
-            $this->getAvailableTrojan($user),
-            $this->getAvailableTuic($user),
-            $this->getAvailableHysteria($user),
-            $this->getAvailableVless($user),
-            $this->getAvailableAnyTLS($user),
-            $this->getAvailableV2node($user)
+            $this->getAvailableShadowsocks($user, $assignedIds),
+            $this->getAvailableVmess($user, $assignedIds),
+            $this->getAvailableTrojan($user, $assignedIds),
+            $this->getAvailableTuic($user, $assignedIds),
+            $this->getAvailableHysteria($user, $assignedIds),
+            $this->getAvailableVless($user, $assignedIds),
+            $this->getAvailableAnyTLS($user, $assignedIds),
+            $this->getAvailableV2node($user, $assignedIds)
         );
         $tmp = array_column($servers, 'sort');
         array_multisort($tmp, SORT_ASC, $servers);
@@ -421,6 +444,17 @@ class ServerService
             $this->getAllV2node()
         );
         $this->mergeData($servers);
+
+        // 批量附加专属用户分配信息（按 type+id 分组）
+        $allAssignments = ServerUser::get(['server_type', 'server_id', 'user_id']);
+        $assignMap = [];
+        foreach ($allAssignments as $row) {
+            $assignMap[$row->server_type][$row->server_id][] = $row->user_id;
+        }
+        foreach ($servers as $k => $v) {
+            $servers[$k]['assigned_user_ids'] = $assignMap[$v['type']][$v['id']] ?? [];
+        }
+
         $tmp = array_column($servers, 'sort');
         array_multisort($tmp, SORT_ASC, $servers);
         return $servers;
