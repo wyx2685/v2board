@@ -48,6 +48,10 @@ class TrafficUpdate extends Command
         Redis::del('v2board_upload_traffic');
         $downloads = Redis::hgetall('v2board_download_traffic');
         Redis::del('v2board_download_traffic');
+        
+        $uploads = is_array($uploads) ? $uploads : [];
+        $downloads = is_array($downloads) ? $downloads : [];
+
         if (empty($uploads) && empty($downloads)) {
             return;
         }
