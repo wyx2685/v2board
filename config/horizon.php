@@ -169,6 +169,24 @@ return [
     */
 
     'environments' => [
+        'production' => [
+            'V2board' => [
+                'connection' => 'redis',
+                'queue' => [
+                    'order_handle',
+                    'traffic_fetch',
+                    'stat',
+                    'send_email',
+                    'send_email_mass',
+                    'send_telegram',
+                ],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => (int)ceil($parser->getRam()['total'] / 1024 / 1024 / 1024 * 6),
+                'tries' => 3,
+                'balanceCooldown' => 3,
+            ],
+        ],
         'local' => [
             'V2board' => [
                 'connection' => 'redis',
@@ -183,7 +201,7 @@ return [
                 'balance' => 'auto',
                 'minProcesses' => 1,
                 'maxProcesses' => (int)ceil($parser->getRam()['total'] / 1024 / 1024 / 1024 * 6),
-                'tries' => 1,
+                'tries' => 3,
                 'balanceCooldown' => 3,
             ],
         ],
