@@ -71,7 +71,8 @@ class BEasyPaymentUSDT {
         ksort($params);
         reset($params);
         $str = stripslashes(urldecode(http_build_query($params))) . $this->config['bepusdt_apitoken'];
-        if ($sign !== md5($str)) {
+        $generateSignature = md5($str);
+        if (!hash_equals($generateSignature, $sign)) {
             return('cannot pass verification');
         }
         $status = $params['status'];

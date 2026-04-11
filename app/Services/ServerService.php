@@ -429,7 +429,11 @@ class ServerService
     public function getRoutes(array $routeIds)
     {
         $routeIds = array_map('intval', $routeIds);
-        $routes = ServerRoute::select(['id', 'match', 'action', 'action_value'])->whereIn('id', $routeIds)->get();
+        $order = implode(',', $routeIds);
+        $routes = ServerRoute::select(['id', 'match', 'action', 'action_value'])
+            ->whereIn('id', $routeIds)
+            ->orderByRaw("FIELD(id, $order)")
+            ->get();
         foreach ($routes as $k => $route) {
             $array = json_decode($route->match, true);
             if (is_array($array)) $routes[$k]['match'] = $array;

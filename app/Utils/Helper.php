@@ -428,16 +428,24 @@ class Helper
     {
         $tlsSettings = $server['tls_settings'] ?? [];
         $config = [
+            'type' => $server['network'] ?? 'tcp',
             'insecure' => $server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0),
+            'fp' => $tlsSettings['fingerprint'] ?? 'chrome',
         ];
-        if (isset($server['server_name'])|| isset($tlsSettings['server_name'])) {
+        if (isset($server['server_name']) || isset($tlsSettings['server_name'])) {
             $config['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
         }
-
+        if (isset($server['tls']) && $server['tls'] == 2) {
+            $config['security'] = 'reality';
+            $config['pbk'] = $tlsSettings['public_key'] ?? '';
+            $config['sid'] = $tlsSettings['short_id'] ?? '';
+        }
         $remote = self::formatHost($server['host']);
         $port = $server['port'];
         $name = self::encodeURIComponent($server['name']);
-
+        if (isset($server['network']) && isset($server['network_settings'])) {
+            self::configureNetworkSettings($server, $config);
+        }
         $query = http_build_query($config);
         return "anytls://{$password}@{$remote}:{$port}/?{$query}#{$name}\r\n";
     }
