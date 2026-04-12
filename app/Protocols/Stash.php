@@ -64,6 +64,14 @@ class Stash
                 array_push($proxy, self::buildHysteria($user['uuid'], $item));
                 array_push($proxies, $item['name']);
             }
+            if ($item['type'] === 'hysteria2') {
+                array_push($proxy, self::buildHysteria2($user['uuid'], $item));
+                array_push($proxies, $item['name']);
+            }
+            if ($item['type'] === 'anytls') {
+                array_push($proxy, self::buildAnyTLS($user['uuid'], $item));
+                array_push($proxies, $item['name']);
+            }
         }
 
         $config['proxies'] = array_merge($config['proxies'] ? $config['proxies'] : [], $proxy);
@@ -351,6 +359,54 @@ class Stash
         }
 
         return $array;
+    }
+    
+    public static function buildHysteria2($password, $server)
+    {
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array = [
+            'name' => $server['name'],
+            'type' => 'hysteria2',
+            'server' => $server['host'],
+            'password' => $password,
+            'skip-cert-verify' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
+            'sni' => $tlsSettings['server_name'] ?? '',
+            'udp' => true,
+        ];
+        $parts = explode(",", $server['port']);
+        $firstPart = $parts[0];
+        if (strpos($firstPart, '-') !== false) {
+            $range = explode('-', $firstPart);
+            $firstPort = $range[0];
+        } else {
+            $firstPort = $firstPart;
+        }
+        $array['port'] = (int)$firstPort;
+        if (count($parts) !== 1 || strpos($parts[0], '-') !== false) {
+            $array['ports'] = $server['port'];
+            $array['mport'] = $server['port'];
+        }
+        if (isset($server['obfs'])){
+            $array['obfs'] = $server['obfs'];
+            $array['obfs-password'] = $server['obfs_password'];
+        }
+        return $array;
+    }
+
+    public static function buildAnyTLS($password, $server)
+    {
+        $array = [
+            'name' => $server['name'],
+            'type' => 'anytls',
+            'server' => $server['host'],
+            'port' => $server['port'],
+            'password' => $password,
+        ];
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
+        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        return $array; 
     }
 
     private function isRegex($exp)

@@ -32,12 +32,14 @@ class Loon
                 $uri .= self::buildShadowsocks($user['uuid'], $item);
             }elseif ($item['type'] === 'vmess') {
                 $uri .= self::buildVmess($user['uuid'], $item);
-            }elseif ($item['type'] === 'vless') {
+            }elseif ($item['type'] === 'vless' && (($item['network'] ?? null) === 'tcp' || ($item['network'] ?? null) === 'ws')) {
                 $uri .= self::buildVless($user['uuid'], $item);
-            }elseif ($item['type'] === 'trojan') {
+            }elseif ($item['type'] === 'trojan' && (($item['network'] ?? null) !== 'grpc')) {
                 $uri .= self::buildTrojan($user['uuid'], $item);
             }elseif ($item['type'] === 'hysteria' && $item['version'] === 2) { //loon只支持hysteria2
                 $uri .= self::buildHysteria($user['uuid'], $item);
+            }elseif ($item['type'] === 'anytls') {
+                $uri .= self::buildAnytls($user['uuid'], $item);
             }
         }
         return $uri;
@@ -159,8 +161,6 @@ class Loon
         if ($server['tls'] === 1) {
             array_push($config, 'over-tls=true');
             array_push($config, "flow={$server['flow']}");
-            if ($server['network'] === 'tcp')
-                
             if ($server['tls_settings']) {
                 $tlsSettings = $server['tls_settings'];
                 if (!empty($tlsSettings['allow_insecure'] ?? 0))
@@ -205,7 +205,7 @@ class Loon
             "{$server['host']}",
             "{$server['port']}",
             "{$password}",
-            $server['server_name'] ? "tls-name={$server['server_name']}" : "",
+            !empty($server['server_name']) ? "tls-name={$server['server_name']}" : "",
             'fast-open=false',
             'udp=true'
         ];
@@ -256,6 +256,28 @@ class Loon
             array_push($config, 'salamander-password=' . $server['obfs_password']);
         }
         $config = array_filter($config);
+        $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+
+    public static function buildAnytls($password, $server)
+    {
+        $config = [
+            "{$server['name']}=anytls",
+            "{$server['host']}",
+            "{$server['port']}",
+            "{$password}",
+            "udp=true"
+        ];
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $sni = $server['server_name'] ?? $tlsSettings['server_name'] ?? '';
+        if ($sni) {
+            $config[] = "sni={$sni}";
+        }
+        $insecure = $server['insecure'] ?? $tlsSettings['allow_insecure'] ?? 0;
+        $config[] = 'skip-cert-verify=' . ($insecure ? 'true' : 'false');
+
         $uri = implode(',', $config);
         $uri .= "\r\n";
         return $uri;
