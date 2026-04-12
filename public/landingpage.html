@@ -123,6 +123,16 @@
       }
     }
 
+    @keyframes shimmer {
+      0% {
+        background-position: 0% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+
     /* 应用动画到具体元素 */
     .logo {
       animation: fadeIn 0.8s ease;
@@ -134,7 +144,7 @@
     }
 
     .hero h2 {
-      animation: slideUp 0.8s ease 0.3s both;
+      animation: slideUp 0.8s ease 0.3s both, shimmer 4s linear infinite;
     }
 
     .hero p {
@@ -381,11 +391,20 @@
       font-size: 56px;
       font-weight: 700;
       margin-bottom: 20px;
-      background: linear-gradient(to right, var(--primary-color), var(--primary-color-light));
+      /* 流光紫色渐变 */
+      background: linear-gradient(to right,
+          #8a2be2,
+          #da70d6,
+          #9370db,
+          #da70d6,
+          #8a2be2);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1.2;
+      /* 发光效果 */
+      filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.3));
     }
 
     .hero p {
@@ -977,8 +996,8 @@
     <div class="mobile-nav-links">
       <a href="#features">特性</a>
       <a href="#download">客户端</a>
-      <a href="javascript:void(0)" onclick="navigateTo('shop'); closeMobileMenu();">价格</a>
-      <a href="javascript:void(0)" onclick="navigateTo('tickets'); closeMobileMenu();">支持</a>
+      <a href="javascript:void(0)" onclick="navigateTo('register'); closeMobileMenu();">价格</a>
+      <a href="javascript:void(0)" onclick="navigateTo('register'); closeMobileMenu();">支持</a>
     </div>
   </div>
 
@@ -986,7 +1005,7 @@
     <h2 id="heroTitle">探索全球网络的无限可能</h2>
     <p id="heroSubtitle">高速稳定、安全私密，随时随地畅享网络世界</p>
     <div class="hero-buttons">
-      <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button">立即开始</a>
+      <a href="javascript:void(0)" onclick="navigateTo('login')" class="button primary-button">立即开始</a>
       <a href="#download" class="button secondary-button">下载客户端</a>
     </div>
     <img src="./images/zhanshi.png" alt="天阙 VPN 展示" class="hero-image">
@@ -1114,7 +1133,7 @@
         </svg>
         <h4>Android</h4>
         <p>适用于安卓手机和平板的客户端</p>
-        <a href="https://play.google.com/store/apps" class="button primary-button" target="_blank"
+        <a href="https://pyxy.126581.xyz/https://github.com/tianquege/TianQueClient/releases/download/v1.0.2%2B260325/app-arm64-v8a-release.apk" class="button primary-button" target="_blank"
           rel="noopener noreferrer">下载</a>
       </div>
       <div class="client-card" id="windowsClient">
@@ -1129,7 +1148,7 @@
         </svg>
         <h4>Windows</h4>
         <p>适用于 Windows 系统的客户端</p>
-        <a href="https://github.com/releases/latest" class="button primary-button" target="_blank"
+        <a href="https://pyxy.126581.xyz/https://github.com/tianquege/TianQueClient/releases/download/v1.0.2%2B260325/TianQue-1.0.2+260325-Windows-Setup.exe" class="button primary-button" target="_blank"
           rel="noopener noreferrer">下载</a>
       </div>
       <div class="client-card" id="macosClient">
@@ -1141,7 +1160,7 @@
         </svg>
         <h4>MacOS</h4>
         <p>适用于 Mac 电脑的客户端</p>
-        <a href="https://github.com/releases/latest" class="button primary-button" target="_blank"
+        <a href="https://github.com/tianquege/TianQueClient/releases" class="button primary-button" target="_blank"
           rel="noopener noreferrer">下载</a>
       </div>
     </div>
