@@ -28,6 +28,9 @@ class Surfboard
         $proxyGroup = '';
 
         foreach ($servers as $item) {
+            if (($item['type'] ?? null) === 'v2node' && isset($item['protocol'])) {
+                $item['type'] = $item['protocol'];
+            }
             if ($item['type'] === 'shadowsocks'
                 && in_array($item['cipher'], [
                     'aes-128-gcm',
@@ -50,6 +53,12 @@ class Surfboard
             if ($item['type'] === 'trojan') {
                 // [Proxy]
                 $proxies .= self::buildTrojan($user['uuid'], $item);
+                // [Proxy Group]
+                $proxyGroup .= $item['name'] . ', ';
+            }
+            if ($item['type'] === 'anytls') {
+                // [Proxy]
+                $proxies .= self::buildAnyTLS($user['uuid'], $item);
                 // [Proxy Group]
                 $proxyGroup .= $item['name'] . ', ';
             }
@@ -166,6 +175,30 @@ class Surfboard
         }
         $config = array_filter($config);
         $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+
+    public static function buildAnyTLS($password, $server)
+    {
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $allowInsecure = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? 'true' : 'false';
+        $sni = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+
+        $config = [
+            "{$server['name']}=anytls",
+            "{$server['host']}",
+            "{$server['port']}",
+            "password={$password}",
+            "skip-cert-verify={$allowInsecure}",
+        ];
+
+        if ($sni) {
+            $config[] = "sni={$sni}";
+        }
+        $config[] = "reuse=false";
+
+        $uri = implode(', ', $config);
         $uri .= "\r\n";
         return $uri;
     }
