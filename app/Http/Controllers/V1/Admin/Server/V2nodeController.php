@@ -66,6 +66,18 @@ class V2nodeController extends Controller
                 $params['tls_settings']['server_port'] = "443";
             }
         }
+        if (isset($params['tls_settings']) && !empty($params['tls_settings']['ech']) && $params['tls_settings']['ech'] !== '0') {
+            $serverName = $params['tls_settings']['server_name'] ?? '';
+            if (empty($params['tls_settings']['ech_key']) || empty($params['tls_settings']['ech_config'])) {
+                $echPair = Helper::generateEchKeyPair($serverName);
+                if (empty($params['tls_settings']['ech_key'])) {
+                    $params['tls_settings']['ech_key'] = $echPair['ech_key'];
+                }
+                if (empty($params['tls_settings']['ech_config'])) {
+                    $params['tls_settings']['ech_config'] = $echPair['ech_config'];
+                }
+            }
+        }
         if (isset($params['network_settings'])) {
             $ns = $params['network_settings'];
             if (isset($ns['acceptProxyProtocol'])) {
