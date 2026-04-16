@@ -62,6 +62,9 @@ class VlessController extends Controller
                 if (isset($extra['noSSEHeader'])) {
                     $extra['noSSEHeader'] = filter_var($extra['noSSEHeader'], FILTER_VALIDATE_BOOLEAN);
                 }
+                if (isset($extra['xPaddingObfsMode'])) {
+                    $extra['xPaddingObfsMode'] = filter_var($extra['xPaddingObfsMode'], FILTER_VALIDATE_BOOLEAN);
+                }
                 if (isset($extra['scMaxBufferedPosts'])) {
                     $extra['scMaxBufferedPosts'] = (int)$extra['scMaxBufferedPosts'];
                 }
@@ -80,6 +83,9 @@ class VlessController extends Controller
                     $extra['downloadSettings'] = $downloadSettings;
                 }
                 $ns['extra'] = $extra;
+            }
+            if (isset($ns['xPaddingObfsMode'])) {
+                $ns['xPaddingObfsMode'] = filter_var($ns['xPaddingObfsMode'], FILTER_VALIDATE_BOOLEAN);
             }
             $params['network_settings'] = $ns;
         }

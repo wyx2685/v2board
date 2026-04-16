@@ -71,6 +71,9 @@ class V2nodeController extends Controller
             if (isset($ns['acceptProxyProtocol'])) {
                 $ns['acceptProxyProtocol'] = filter_var($ns['acceptProxyProtocol'], FILTER_VALIDATE_BOOLEAN);
             }
+            if (isset($ns['xPaddingObfsMode'])) {
+                $ns['xPaddingObfsMode'] = filter_var($ns['xPaddingObfsMode'], FILTER_VALIDATE_BOOLEAN);
+            }
             $params['network_settings'] = $ns;
         }
         if ($params['network'] != 'tcp' && isset($params['encryption']) && $params['encryption'] != 'mlkem768x25519plus') {
@@ -85,6 +88,9 @@ class V2nodeController extends Controller
                 }
                 if (isset($extra['noSSEHeader'])) {
                     $extra['noSSEHeader'] = filter_var($extra['noSSEHeader'], FILTER_VALIDATE_BOOLEAN);
+                }
+                if (isset($extra['xPaddingObfsMode'])) {
+                    $extra['xPaddingObfsMode'] = filter_var($extra['xPaddingObfsMode'], FILTER_VALIDATE_BOOLEAN);
                 }
                 if (isset($extra['scMaxBufferedPosts'])) {
                     $extra['scMaxBufferedPosts'] = (int)$extra['scMaxBufferedPosts'];
@@ -104,6 +110,9 @@ class V2nodeController extends Controller
                     $extra['downloadSettings'] = $downloadSettings;
                 }
                 $ns['extra'] = $extra;
+            }
+            if (isset($ns['xPaddingObfsMode'])) {
+                $ns['xPaddingObfsMode'] = filter_var($ns['xPaddingObfsMode'], FILTER_VALIDATE_BOOLEAN);
             }
             $params['network_settings'] = $ns;
         }
