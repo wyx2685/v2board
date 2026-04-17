@@ -454,8 +454,12 @@ class Helper
      * Generate ECH (Encrypted Client Hello) key pair for sing-box.
      * Produces ech_key (MarshalECHKeys format, for server inbound)
      * and ech_config (ECHConfigList, for client outbound).
+     *
+     * @param string $outerSni The cover/front domain for the outer ClientHello SNI (public_name).
+     *                         This is the FAKE domain visible to network observers.
+     *                         The real server_name is encrypted in the inner ClientHello.
      */
-    public static function generateEchKeyPair($serverName = '')
+    public static function generateEchKeyPair($outerSni = 'cloudflare-ech.com')
     {
         $privateKey = random_bytes(32);
         $publicKey = sodium_crypto_scalarmult_base($privateKey);
@@ -470,7 +474,7 @@ class Helper
         $suites = pack('nnnnnn', 0x0001, 0x0001, 0x0001, 0x0002, 0x0001, 0x0003);
         $configData .= pack('n', strlen($suites)) . $suites;
         $configData .= pack('C', 0);                     // maximum_name_length
-        $configData .= pack('C', strlen($serverName)) . $serverName; // public_name
+        $configData .= pack('C', strlen($outerSni)) . $outerSni; // public_name (cover domain, NOT real SNI)
         $configData .= pack('n', 0);                     // extensions (empty)
 
         // ECHConfig = version(0xfe0d) + length + data
