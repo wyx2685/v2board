@@ -62,8 +62,6 @@ dns:
 
   proxy-server-nameserver:
     - quic://154.219.104.214
-    - quic://103.20.222.133
-    - tls://103.20.222.133
     - tls://154.219.104.214
     - tls://154.219.96.225
     - quic://154.219.96.225
@@ -427,15 +425,35 @@ rule-providers:
 # 🚦 规则匹配 (Rules)
 # ==========================================
 rules:
+  # 阻断 QUIC 协议 (优先级最高)
   - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+    # --- 这一位是核心，补上它就能达到 Sing-box 的效果 ---  
+  - GEOSITE,category-ads-all,REJECT     # 全能广告大类 (这是真正的杀招)  
+  - GEOSITE,category-ads,REJECT         # 备用广告分类  
+  # ------------------------------------------------  
+  - DOMAIN-KEYWORD,volces,REJECT
+  
+  # 手动添加的广告拦截规则
+  - DOMAIN-KEYWORD,volces,REJECT        # 字节跳动火山引擎广告        
+  - DOMAIN-KEYWORD,pangle,REJECT        # 穿山甲广告        
+  - DOMAIN-KEYWORD,toutiaopage,REJECT        
+  - DOMAIN-KEYWORD,advert,REJECT
+  
+  # 基础应用分流
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yandex.ru,DIRECT
   - RULE-SET,private,DIRECT
+  
+  # 广告拦截策略组
   - RULE-SET,reject,🛑 广告拦截
   - RULE-SET,advertising,🛑 广告拦截
+  
+  # 局域网与国内直连
   - RULE-SET,lancidr,DIRECT
   - GEOIP,LAN,DIRECT
+  
+  # 特定服务分流
   - RULE-SET,icloud,DIRECT
   - RULE-SET,apple,🍎 苹果服务
   - RULE-SET,openai,🤖 人工智能
@@ -444,6 +462,10 @@ rules:
   - RULE-SET,google,🚀 节点选择
   - RULE-SET,proxy,🚀 节点选择
   - RULE-SET,gfw,🚀 节点选择
+  
+  # 国内地址段检测 (建议放在靠近底部)
   - RULE-SET,cncidr,DIRECT
   - GEOIP,CN,DIRECT
+  
+  # 兜底规则 (必须在最后)
   - MATCH,🐟 漏网之鱼
