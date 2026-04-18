@@ -225,11 +225,14 @@ class ClashMeta
         $array['uuid'] = $uuid;
         $array['udp'] = true;
 
+        if (!empty($server['flow'])) {
+            $array['flow'] = $server['flow'];
+        }
+
         if ($server['tls']) {
             $array['tls'] = true;
             $tlsSettings = $server['tls_settings'] ?? [];
             $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
-            $array['flow'] = !empty($server['flow']) ? $server['flow']: "";
             $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
             if ($tlsSettings) {
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
