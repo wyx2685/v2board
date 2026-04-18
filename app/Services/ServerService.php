@@ -37,9 +37,12 @@ class ServerService
                 $server[$key]['last_check_at'] = Cache::get(CacheKey::get('SERVER_VLESS_LAST_CHECK_AT', $server[$key]['id']));
             }
             if (isset($server[$key]['tls_settings'])) {
-                if (isset($server[$key]['tls_settings']['private_key'])) {
-                    $server[$key]['tls_settings'] = array_diff_key($server[$key]['tls_settings'], array('private_key' => ''));
-                }
+                $server[$key]['tls_settings'] = array_diff_key(
+                    $server[$key]['tls_settings'],
+                    array_flip(array_filter(['private_key', 'ech_key'], function($k) use ($server, $key) {
+                        return isset($server[$key]['tls_settings'][$k]);
+                    }))
+                );
             }
             if (isset($server[$key]['encryption_settings'])) {
                 if (isset($server[$key]['encryption_settings']['private_key'])) {
@@ -202,9 +205,12 @@ class ServerService
                 $v2node[$key]['created_at'] = $v2node[$v['parent_id']]['created_at'];
             }
             if (isset($v2node[$key]['tls_settings'])) {
-                if (isset($v2node[$key]['tls_settings']['private_key'])) {
-                    $v2node[$key]['tls_settings'] = array_diff_key($v2node[$key]['tls_settings'], array('private_key' => ''));
-                }
+                $v2node[$key]['tls_settings'] = array_diff_key(
+                    $v2node[$key]['tls_settings'],
+                    array_flip(array_filter(['private_key', 'ech_key'], function($k) use ($v2node, $key) {
+                        return isset($v2node[$key]['tls_settings'][$k]);
+                    }))
+                );
             }
             if (isset($v2node[$key]['encryption_settings'])) {
                 if (isset($v2node[$key]['encryption_settings']['private_key'])) {
