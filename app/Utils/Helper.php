@@ -473,7 +473,7 @@ class Helper
      *                         This is the FAKE domain visible to network observers.
      *                         The real server_name is encrypted in the inner ClientHello.
      */
-    public static function generateEchKeyPair($outerSni = 'cloudflare-ech.com')
+    public static function generateEchKeyPair($outerSni)
     {
         $privateKey = random_bytes(32);
         $publicKey = sodium_crypto_scalarmult_base($privateKey);

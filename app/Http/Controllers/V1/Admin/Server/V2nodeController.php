@@ -67,14 +67,18 @@ class V2nodeController extends Controller
             }
         }
         if (isset($params['tls_settings']) && !empty($params['tls_settings']['ech']) && $params['tls_settings']['ech'] === 'custom') {
-            $outerSni = $params['tls_settings']['ech_server_name'] ?? 'cloudflare-ech.com';
-            if (empty($params['tls_settings']['ech_key']) || empty($params['tls_settings']['ech_config'])) {
-                $echPair = Helper::generateEchKeyPair($outerSni);
-                if (empty($params['tls_settings']['ech_key'])) {
-                    $params['tls_settings']['ech_key'] = $echPair['ech_key'];
-                }
-                if (empty($params['tls_settings']['ech_config'])) {
-                    $params['tls_settings']['ech_config'] = $echPair['ech_config'];
+            if (empty($params['tls_settings']['ech_server_name'])) {
+                $params['tls_settings']['ech'] = '';
+            } else {
+                $outerSni = $params['tls_settings']['ech_server_name'];
+                if (empty($params['tls_settings']['ech_key']) || empty($params['tls_settings']['ech_config'])) {
+                    $echPair = Helper::generateEchKeyPair($outerSni);
+                    if (empty($params['tls_settings']['ech_key'])) {
+                        $params['tls_settings']['ech_key'] = $echPair['ech_key'];
+                    }
+                    if (empty($params['tls_settings']['ech_config'])) {
+                        $params['tls_settings']['ech_config'] = $echPair['ech_config'];
+                    }
                 }
             }
         }
