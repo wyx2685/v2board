@@ -316,6 +316,13 @@ class Helper
                 $config['sid'] = $tlsSettings['short_id'] ?? '';
             }
         }
+        if (!empty($tlsSettings['ech'])) {
+            if ($tlsSettings['ech'] === 'cloudflare') {
+                $config['ech'] = 'cloudflare-ech.com+https://1.1.1.1/dns-query';
+            } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                $config['ech'] = is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'][0] : $tlsSettings['ech_config'];
+            }
+        }
         if (isset($server['encryption']) && $server['encryption'] == 'mlkem768x25519plus') {
             $encSettings = $server['encryption_settings'];
             $enc = 'mlkem768x25519plus.' . ($encSettings['mode'] ?? 'native') . '.' . ($encSettings['rtt'] ?? '1rtt');
@@ -352,6 +359,13 @@ class Helper
                 if(isset($server['network_settings']['headers']['Host'])) {
                     $config['host'] = $server['network_settings']['headers']['Host'];
                 }
+            }
+        }
+        if (!empty($tlsSettings['ech'])) {
+            if ($tlsSettings['ech'] === 'cloudflare') {
+                $config['ech'] = 'cloudflare-ech.com+https://1.1.1.1/dns-query';
+            } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                $config['ech'] = is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'][0] : $tlsSettings['ech_config'];
             }
         }
         $query = http_build_query($config);

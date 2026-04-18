@@ -181,7 +181,10 @@ class ClashMeta
                     $array['servername'] = $tlsSettings['serverName'];
                 if (!empty($tlsSettings['ech'])) {
                     if ($tlsSettings['ech'] === 'cloudflare') {
-                        $array['ech-opts'] = ['enable' => true];
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'query-server-name' => 'cloudflare-ech.com'
+                        ];
                     } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
                         $array['ech-opts'] = [
                             'enable' => true,
@@ -251,7 +254,10 @@ class ClashMeta
                 }
                 if (!empty($tlsSettings['ech'])) {
                     if ($tlsSettings['ech'] === 'cloudflare') {
-                        $array['ech-opts'] = ['enable' => true];
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'query-server-name' => 'cloudflare-ech.com'
+                        ];
                     } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
                         $array['ech-opts'] = [
                             'enable' => true,
@@ -353,7 +359,10 @@ class ClashMeta
         $array['skip-cert-verify'] = ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
         if (!empty($tlsSettings['ech'])) {
             if ($tlsSettings['ech'] === 'cloudflare') {
-                $array['ech-opts'] = ['enable' => true];
+                $array['ech-opts'] = [
+                    'enable' => true,
+                    'query-server-name' => 'cloudflare-ech.com'
+                ];
             } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
                 $array['ech-opts'] = [
                     'enable' => true,
