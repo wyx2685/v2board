@@ -96,6 +96,9 @@ class V2nodeController extends Controller
             $ns = $params['network_settings'];
             if (isset($ns['extra']) && is_array($ns['extra'])) {
                 $extra = $ns['extra'];
+                if (isset($extra['xPaddingObfsMode'])) {
+                    $extra['xPaddingObfsMode'] = filter_var($extra['xPaddingObfsMode'], FILTER_VALIDATE_BOOLEAN);
+                }
                 if (isset($extra['noGRPCHeader'])) {
                     $extra['noGRPCHeader'] = filter_var($extra['noGRPCHeader'], FILTER_VALIDATE_BOOLEAN);
                 }
