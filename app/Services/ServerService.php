@@ -391,8 +391,15 @@ class ServerService
 
             $apiHost = config('v2board.server_api_url', config('v2board.app_url'));
             $apiKey = config('v2board.server_token', '');
-            $nodeId = $v['id'];
-            $servers[$k]['install_command'] = "wget -N https://raw.githubusercontent.com/wyx2685/v2node/master/script/install.sh && bash install.sh --api-host {$apiHost} --node-id {$nodeId} --api-key {$apiKey}";
+            $nodeId = (int) $v['id'];
+            $apiHostArg = escapeshellarg((string) $apiHost);
+            $apiKeyArg = escapeshellarg((string) $apiKey);
+            $servers[$k]['install_command'] = sprintf(
+                'wget -N https://raw.githubusercontent.com/wyx2685/v2node/master/script/install.sh && bash install.sh --api-host %s --node-id %d --api-key %s',
+                $apiHostArg,
+                $nodeId,
+                $apiKeyArg
+            );
         }
         return $servers;
     }
