@@ -179,6 +179,19 @@ class ClashVerge
                     $array['skip-cert-verify'] = ($tlsSettings['allowInsecure'] ? true : false);
                 if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
                     $array['servername'] = $tlsSettings['serverName'];
+                if (!empty($tlsSettings['ech'])) {
+                    if ($tlsSettings['ech'] === 'cloudflare') {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'query-server-name' => 'cloudflare-ech.com'
+                        ];
+                    } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'config' => is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'] : [$tlsSettings['ech_config']]
+                        ];
+                    }
+                }
             }
         }
         $network = $server['network'] ?? null;
@@ -225,11 +238,14 @@ class ClashVerge
         $array['uuid'] = $uuid;
         $array['udp'] = true;
 
+        if (!empty($server['flow'])) {
+            $array['flow'] = $server['flow'];
+        }
+
         if ($server['tls']) {
             $array['tls'] = true;
             $tlsSettings = $server['tls_settings'] ?? [];
             $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
-            $array['flow'] = !empty($server['flow']) ? $server['flow']: "";
             $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
             if ($tlsSettings) {
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
@@ -238,6 +254,19 @@ class ClashVerge
                    $array['reality-opts'] = [];
                    $array['reality-opts']['public-key'] = $tlsSettings['public_key'];
                    $array['reality-opts']['short-id'] = $tlsSettings['short_id'];
+                }
+                if (!empty($tlsSettings['ech'])) {
+                    if ($tlsSettings['ech'] === 'cloudflare') {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'query-server-name' => 'cloudflare-ech.com'
+                        ];
+                    } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'config' => is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'] : [$tlsSettings['ech_config']]
+                        ];
+                    }
                 }
             }
         }
@@ -330,6 +359,19 @@ class ClashVerge
         $tlsSettings = $server['tls_settings'] ?? [];
         $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
         $array['skip-cert-verify'] = ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        if (!empty($tlsSettings['ech'])) {
+            if ($tlsSettings['ech'] === 'cloudflare') {
+                $array['ech-opts'] = [
+                    'enable' => true,
+                    'query-server-name' => 'cloudflare-ech.com'
+                ];
+            } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                $array['ech-opts'] = [
+                    'enable' => true,
+                    'config' => is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'] : [$tlsSettings['ech_config']]
+                ];
+            }
+        }
         return $array;
     }
 

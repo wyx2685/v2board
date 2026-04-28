@@ -105897,7 +105897,35 @@
                 }, y.a.createElement("label", null, "Allow Insecure"), y.a.createElement("div", null, y.a.createElement(f["a"], {
                     checked: parseInt(n),
                     onChange: e=>this.change("allow_insecure", e ? "1" : "0")
-                })))))
+                }))), y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "ECH (Encrypted Client Hello)"), y.a.createElement(N["a"], {
+                    value: e.ech || "",
+                    style: { width: "100%" },
+                    onChange: e=>this.change("ech", e),
+                    placeholder: "\u9009\u62e9 ECH \u6a21\u5f0f"
+                }, y.a.createElement(N["a"].Option, { key: 0, value: "" }, "\u65e0"), y.a.createElement(N["a"].Option, { key: 1, value: "cloudflare" }, "Cloudflare"), y.a.createElement(N["a"].Option, { key: 2, value: "custom" }, "\u81ea\u5b9a\u4e49 SNI"))), e.ech === "cloudflare" && y.a.createElement("div", {
+                    className: "form-group",
+                    style: { background: "#f6ffed", padding: "8px 12px", borderRadius: "4px", border: "1px solid #b7eb8f" }
+                }, y.a.createElement("span", { style: { color: "#52c41a" } }, "\u2713 Cloudflare \u6258\u7ba1 ECH\uff0c\u5bc6\u94a5\u7531 Cloudflare \u81ea\u52a8\u7ba1\u7406\uff0c\u5ba2\u6237\u7aef\u4ece DNS \u81ea\u52a8\u83b7\u53d6\u914d\u7f6e\uff0c\u670d\u52a1\u7aef\u65e0\u9700\u914d\u7f6e")), e.ech === "custom" && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "ECH Server Name (\u4f2a\u88c5\u57df\u540d/\u5916\u5c42SNI)"), y.a.createElement(s["a"], {
+                    value: e.ech_server_name || "",
+                    onChange: e=>this.change("ech_server_name", e.target.value),
+                    placeholder: "\u5fc5\u586b"
+                })), e.ech === "custom" && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "ECH Key (\u670d\u52a1\u7aef\u79c1\u94a5)"), y.a.createElement(s["a"], {
+                    value: e.ech_key || "",
+                    onChange: e=>this.change("ech_key", e.target.value),
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
+                })), e.ech === "custom" && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "ECH Config (\u5ba2\u6237\u7aef\u914d\u7f6e)"), y.a.createElement(s["a"], {
+                    value: e.ech_config || "",
+                    onChange: e=>this.change("ech_config", e.target.value),
+                    placeholder: "\u7559\u7a7a\u81ea\u52a8\u751f\u6210"
+                }))))
             }
         }
         class EncryptionSettings extends y.a.Component {
