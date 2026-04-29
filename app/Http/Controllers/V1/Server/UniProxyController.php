@@ -110,7 +110,8 @@ class UniProxyController extends Controller
                 $idMap[$key] = $user->id;
             }
 
-            $results = Cache::many($keys);
+            $results = !empty($keys) ? Cache::many($keys) : [];
+            if (!is_array($results)) $results = [];
             $alive = [];
             foreach ($results as $key => $data) {
                 if (is_array($data) && isset($data['alive_ip'])) {
@@ -139,7 +140,8 @@ class UniProxyController extends Controller
             return 'ALIVE_IP_USER_' . $uid;
         }, array_keys($data));
 
-        $cachedData = Cache::many($cacheKeys);
+        $cachedData = !empty($cacheKeys) ? Cache::many($cacheKeys) : [];
+        if (!is_array($cachedData)) $cachedData = [];
         $updates = [];
 
         foreach ($data as $uid => $ips) {
