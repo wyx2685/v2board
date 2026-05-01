@@ -7,7 +7,6 @@ use App\Models\ServerV2node;
 use Illuminate\Http\Request;
 use ParagonIE_Sodium_Compat as SodiumCompat;
 use App\Utils\Helper;
-use Illuminate\Support\Facades\Cache;
 
 class V2nodeController extends Controller
 {
@@ -45,8 +44,10 @@ class V2nodeController extends Controller
             'show' => 'nullable|in:0,1',
             'sort' => 'nullable'
         ]);
-
-        if (in_array($params['protocol'], ['anytls', 'hysteria2', 'trojan', 'tuic'])) {
+        if ($params['protocol'] == 'anytls' && $params['tls'] === 0) {
+            $params['tls'] = 1;
+        }
+        if (in_array($params['protocol'], ['hysteria2', 'trojan', 'tuic'])) {
             $params['tls'] = 1;
         }
         if (isset($params['tls']) && (int)$params['tls'] === 2) {
@@ -65,6 +66,22 @@ class V2nodeController extends Controller
                 $params['tls_settings']['server_port'] = "443";
             }
         }
+        if (isset($params['tls_settings']) && !empty($params['tls_settings']['ech']) && $params['tls_settings']['ech'] === 'custom') {
+            if (empty($params['tls_settings']['ech_server_name'])) {
+                $params['tls_settings']['ech'] = '';
+            } else {
+                $outerSni = $params['tls_settings']['ech_server_name'];
+                if (empty($params['tls_settings']['ech_key']) || empty($params['tls_settings']['ech_config'])) {
+                    $echPair = Helper::generateEchKeyPair($outerSni);
+                    if (empty($params['tls_settings']['ech_key'])) {
+                        $params['tls_settings']['ech_key'] = $echPair['ech_key'];
+                    }
+                    if (empty($params['tls_settings']['ech_config'])) {
+                        $params['tls_settings']['ech_config'] = $echPair['ech_config'];
+                    }
+                }
+            }
+        }
         if (isset($params['network_settings'])) {
             $ns = $params['network_settings'];
             if (isset($ns['acceptProxyProtocol'])) {
@@ -79,6 +96,9 @@ class V2nodeController extends Controller
             $ns = $params['network_settings'];
             if (isset($ns['extra']) && is_array($ns['extra'])) {
                 $extra = $ns['extra'];
+                if (isset($extra['xPaddingObfsMode'])) {
+                    $extra['xPaddingObfsMode'] = filter_var($extra['xPaddingObfsMode'], FILTER_VALIDATE_BOOLEAN);
+                }
                 if (isset($extra['noGRPCHeader'])) {
                     $extra['noGRPCHeader'] = filter_var($extra['noGRPCHeader'], FILTER_VALIDATE_BOOLEAN);
                 }

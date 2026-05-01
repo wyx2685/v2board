@@ -179,6 +179,19 @@ class ClashNyanpasu
                     $array['skip-cert-verify'] = ($tlsSettings['allowInsecure'] ? true : false);
                 if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
                     $array['servername'] = $tlsSettings['serverName'];
+                if (!empty($tlsSettings['ech'])) {
+                    if ($tlsSettings['ech'] === 'cloudflare') {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'query-server-name' => 'cloudflare-ech.com'
+                        ];
+                    } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'config' => is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'] : [$tlsSettings['ech_config']]
+                        ];
+                    }
+                }
             }
         }
         $network = $server['network'] ?? null;
@@ -250,6 +263,19 @@ class ClashNyanpasu
                    $array['reality-opts']['public-key'] = $tlsSettings['public_key'];
                    $array['reality-opts']['short-id'] = $tlsSettings['short_id'];
                 }
+                if (!empty($tlsSettings['ech'])) {
+                    if ($tlsSettings['ech'] === 'cloudflare') {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'query-server-name' => 'cloudflare-ech.com'
+                        ];
+                    } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                        $array['ech-opts'] = [
+                            'enable' => true,
+                            'config' => is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'] : [$tlsSettings['ech_config']]
+                        ];
+                    }
+                }
             }
         }
 
@@ -281,7 +307,24 @@ class ClashNyanpasu
                 if (isset($grpcSettings['serviceName'])) $array['grpc-opts']['grpc-service-name'] = $grpcSettings['serviceName'];
             }
         }
+        if ($server['network'] === 'xhttp') {
+            $array['network'] = 'xhttp';
+            if ($server['network_settings']) {
+                $xhttpSettings = $server['network_settings'];
+                $array['xhttp-opts'] = [];
+                if (isset($xhttpSettings['path'])) $array['xhttp-opts']['path'] = $xhttpSettings['path'];
+                if (isset($xhttpSettings['host'])) $array['xhttp-opts']['host'] = $xhttpSettings['host'];
+                if (isset($xhttpSettings['mode'])) $array['xhttp-opts']['mode'] = $xhttpSettings['mode'];
+                // 暂不支持extra
+                //if (isset($xhttpSettings['extra'])) {
+                    //$array['xhttp-opts']['headers'] = $xhttpSettings['extra']['headers'] ?? [];
+                    //if (isset($xhttpSettings['extra']['xmux'])) {
+                    //    $array['xhttp-opts']['sc-max-concurrent-posts'] = $xhttpSettings['extra']['xmux']['maxConcurrency'] ?? [];
+                    //}
 
+                //}
+            }
+        }
         if (isset($server['encryption']) && !empty($server['encryption']) && isset($server['encryption_settings']) && !empty($server['encryption_settings'])) {
             $encryptionSettings = $server['encryption_settings'];
             $array['encryption'] = $server['encryption'] ?? 'mlkem768x25519plus';
@@ -324,6 +367,19 @@ class ClashNyanpasu
         $tlsSettings = $server['tls_settings'] ?? [];
         $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
         $array['skip-cert-verify'] = ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        if (!empty($tlsSettings['ech'])) {
+            if ($tlsSettings['ech'] === 'cloudflare') {
+                $array['ech-opts'] = [
+                    'enable' => true,
+                    'query-server-name' => 'cloudflare-ech.com'
+                ];
+            } elseif ($tlsSettings['ech'] === 'custom' && !empty($tlsSettings['ech_config'])) {
+                $array['ech-opts'] = [
+                    'enable' => true,
+                    'config' => is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'] : [$tlsSettings['ech_config']]
+                ];
+            }
+        }
         return $array;
     }
 
