@@ -218,7 +218,7 @@ class Singbox
             $tlsConfig['enabled'] = true;
             $array['flow'] = !empty($server['flow']) ? $server['flow'] : "";
             $tlsSettings = $server['tls_settings'] ?? [];
-            if ($server['tls_settings']) {
+            if (!empty($server['tls_settings'])) {
                 $tlsConfig['insecure'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
                 $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? null;
                 if ($server['tls'] == 2) {
@@ -376,7 +376,7 @@ class Singbox
             ],
             'server_name' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? '')
         ];
-        if ($server['tls_settings']) {
+        if (!empty($server['tls_settings'])) {
             if ($server['tls'] == 2) {
                 $tlsConfig['reality'] = [
                     'enabled' => true,
