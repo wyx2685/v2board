@@ -155,7 +155,7 @@ class Singbox
         $array['transport']= [];
         $array['domain_resolver'] = 'local';
 
-        if ($server['tls']) {
+        if (!empty($server['tls'])) {
             $tlsConfig = [];
             $tlsConfig['enabled'] = true;
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
@@ -176,13 +176,14 @@ class Singbox
             }
             $array['tls'] = $tlsConfig;
         }
-        if ($server['network'] === 'tcp') {
+        $network = $server['network'] ?? null;
+        if ($network === 'tcp') {
             $tcpSettings = $server['networkSettings'] ?? ($server['network_settings'] ?? []);
             if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') $array['transport']['type'] = $tcpSettings['header']['type'];
             if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
             if (isset($tcpSettings['header']['request']['path'][0])) $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
         }
-        if ($server['network'] === 'ws') {
+        if ($network === 'ws') {
             $array['transport']['type'] ='ws';
             $wsSettings = $server['networkSettings'] ?? ($server['network_settings'] ?? []);
             $array['transport']['path'] = $wsSettings['path'] ?? '/';
@@ -190,7 +191,7 @@ class Singbox
             $array['transport']['max_early_data'] = 2048;
             $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
         }
-        if ($server['network'] === 'grpc') {
+        if ($network === 'grpc') {
             $array['transport']['type'] ='grpc';
             $grpcSettings = $server['networkSettings'] ?? ($server['network_settings'] ?? []);
             if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
@@ -213,7 +214,7 @@ class Singbox
 
         $tlsSettings = $server['tls_settings'] ?? [];
 
-        if ($server['tls']) {
+        if (!empty($server['tls'])) {
             $tlsConfig = [];
             $tlsConfig['enabled'] = true;
             $array['flow'] = !empty($server['flow']) ? $server['flow'] : "";
@@ -221,11 +222,11 @@ class Singbox
             if (!empty($server['tls_settings'])) {
                 $tlsConfig['insecure'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
                 $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? null;
-                if ($server['tls'] == 2) {
+                if (($server['tls'] ?? 0) == 2) {
                     $tlsConfig['reality'] = [
                         'enabled' => true,
-                        'public_key' => $tlsSettings['public_key'],
-                        'short_id' => $tlsSettings['short_id']
+                        'public_key' => $tlsSettings['public_key'] ?? '',
+                        'short_id' => $tlsSettings['short_id'] ?? ''
                     ];
                 }
                 $fingerprints = $tlsSettings['fingerprint'] ?? 'chrome';
@@ -250,15 +251,16 @@ class Singbox
             $array['tls'] = $tlsConfig;
         }
 
-        if ($server['network'] === 'tcp') {
-            $tcpSettings = $server['network_settings'];
+        $network = $server['network'] ?? null;
+        if ($network === 'tcp') {
+            $tcpSettings = $server['network_settings'] ?? [];
             if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') $array['transport']['type'] = $tcpSettings['header']['type'];
             if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
             if (isset($tcpSettings['header']['request']['path'][0])) $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
         }
-        if ($server['network'] === 'ws') {
+        if ($network === 'ws') {
             $array['transport']['type'] ='ws';
-            if ($server['network_settings']) {
+            if (!empty($server['network_settings'])) {
                 $wsSettings = $server['network_settings'];
                 if (isset($wsSettings['path']) && !empty($wsSettings['path'])) $array['transport']['path'] = $wsSettings['path'];
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
@@ -266,9 +268,9 @@ class Singbox
                 $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
             }
         }
-        if ($server['network'] === 'grpc') {
+        if ($network === 'grpc') {
             $array['transport']['type'] ='grpc';
-            if ($server['network_settings']) {
+            if (!empty($server['network_settings'])) {
                 $grpcSettings = $server['network_settings'];
                 if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
             }
@@ -341,7 +343,7 @@ class Singbox
         $array['password'] = $password;
         $array['congestion_control'] = $server['congestion_control'] ?? 'cubic';
         $array['udp_relay_mode'] = $server['udp_relay_mode'] ?? 'native';
-        $array['zero_rtt_handshake'] = $server['zero_rtt_handshake'] ? true : false;
+        $array['zero_rtt_handshake'] = !empty($server['zero_rtt_handshake']);
         $array['domain_resolver'] = 'local';
 
         $tlsSettings = $server['tls_settings'] ?? [];
@@ -349,7 +351,7 @@ class Singbox
             'enabled' => true,
             'insecure' => ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
             'alpn' => ['h3'],
-            'disable_sni' => $server['disable_sni'] ? true : false,
+            'disable_sni' => !empty($server['disable_sni']),
         ];
         $array['tls']['server_name'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
 
@@ -377,11 +379,11 @@ class Singbox
             'server_name' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? '')
         ];
         if (!empty($server['tls_settings'])) {
-            if ($server['tls'] == 2) {
+            if (($server['tls'] ?? 0) == 2) {
                 $tlsConfig['reality'] = [
                     'enabled' => true,
-                    'public_key' => $tlsSettings['public_key'],
-                    'short_id' => $tlsSettings['short_id']
+                    'public_key' => $tlsSettings['public_key'] ?? '',
+                    'short_id' => $tlsSettings['short_id'] ?? ''
                 ];
             }
             $tlsConfig['utls'] = [
@@ -391,27 +393,29 @@ class Singbox
         }
         $array['tls'] = $tlsConfig;
 
-        if ($server['network'] === 'tcp') {
-            $tcpSettings = $server['network_settings'];
-            if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') $array['transport']['type'] = $tcpSettings['header']['type'];
-            if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
-            if (isset($tcpSettings['header']['request']['path'][0])) $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
-        }
-        if ($server['network'] === 'ws') {
-            $array['transport']['type'] ='ws';
-            if ($server['network_settings']) {
-                $wsSettings = $server['network_settings'];
-                if (isset($wsSettings['path']) && !empty($wsSettings['path'])) $array['transport']['path'] = $wsSettings['path'];
-                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
-                $array['transport']['max_early_data'] = 2048;
-                $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
+        if (isset($server['network'])) {
+            if ($server['network'] === 'tcp') {
+                $tcpSettings = $server['network_settings'] ?? [];
+                if (isset($tcpSettings['header']['type']) && $tcpSettings['header']['type'] == 'http') $array['transport']['type'] = $tcpSettings['header']['type'];
+                if (isset($tcpSettings['header']['request']['headers']['Host'])) $array['transport']['host'] = $tcpSettings['header']['request']['headers']['Host'];
+                if (isset($tcpSettings['header']['request']['path'][0])) $array['transport']['path'] = $tcpSettings['header']['request']['path'][0];
             }
-        }
-        if ($server['network'] === 'grpc') {
-            $array['transport']['type'] ='grpc';
-            if ($server['network_settings']) {
-                $grpcSettings = $server['network_settings'];
-                if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
+            if ($server['network'] === 'ws') {
+                $array['transport']['type'] ='ws';
+                if (!empty($server['network_settings'])) {
+                    $wsSettings = $server['network_settings'];
+                    if (isset($wsSettings['path']) && !empty($wsSettings['path'])) $array['transport']['path'] = $wsSettings['path'];
+                    if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host'])) $array['transport']['headers'] = ['Host' => array($wsSettings['headers']['Host'])];
+                    $array['transport']['max_early_data'] = 2048;
+                    $array['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol';
+                }
+            }
+            if ($server['network'] === 'grpc') {
+                $array['transport']['type'] ='grpc';
+                if (!empty($server['network_settings'])) {
+                    $grpcSettings = $server['network_settings'];
+                    if (isset($grpcSettings['serviceName'])) $array['transport']['service_name'] = $grpcSettings['serviceName'];
+                }
             }
         }
         return $array;
@@ -440,8 +444,8 @@ class Singbox
             'domain_resolver' => 'local',
             'tls' => [
                 'enabled' => true,
-                'insecure' => $server['insecure'] ? true : false,
-                'server_name' => $server['server_name']
+                'insecure' => !empty($server['insecure']),
+                'server_name' => $server['server_name'] ?? ''
             ]
         ];
 
