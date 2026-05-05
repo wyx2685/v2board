@@ -6,9 +6,12 @@
                 "tag": "local"
             },
             {
-                "type": "udp",
+                "type": "https",
                 "tag": "remote",
-                "server": "1.1.1.1"
+                "server": "1.1.1.1",
+                "server_port": 443,
+                "path": "/dns-query",
+                "detour": "节点选择"
             },
             {
                 "type": "udp",
@@ -17,6 +20,13 @@
             }
         ],
         "rules": [
+            {
+                "rule_set": [
+                    "geosite-geolocation-!cn"
+                ],
+                "action": "route",
+                "server": "remote"
+            },
             {
                 "rule_set": [
                     "geosite-cn"
@@ -32,8 +42,7 @@
             "tag": "tun-in",
             "type": "tun",
             "address": [
-                "172.19.0.1/30",
-                "2001:0470:f9da:fdfa::1/64"
+                "172.19.0.1/30"
             ],
             "auto_route": true,
             "mtu": 9000,
