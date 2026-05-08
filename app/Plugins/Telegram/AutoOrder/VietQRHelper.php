@@ -4,6 +4,14 @@ namespace App\Plugins\Telegram\AutoOrder;
 
 class VietQRHelper
 {
+    // ==========================================
+    // CẤU HÌNH NGÂN HÀNG (Sửa trực tiếp tại đây)
+    // ==========================================
+    public const BANK_CODE = 'MB';                   // Mã ngân hàng (VD: MB, VCB, TCB, ACB, ...)
+    public const BANK_ACCOUNT = '0123456789';        // Số tài khoản nhận tiền
+    public const BANK_ACCOUNT_NAME = 'NGUYEN VAN A'; // Tên chủ tài khoản (viết HOA không dấu)
+    public const TRANSFER_PREFIX = 'HD';             // Tiền tố nội dung chuyển khoản (VD: HD)
+
     /**
      * Generate the bank transfer description.
      * Format: {prefix}{order_id}, e.g. "HD1803"
@@ -13,8 +21,7 @@ class VietQRHelper
      */
     public static function getTransferContent(int $orderId): string
     {
-        $prefix = config('v2board.telegram_bank_transfer_prefix', 'HD');
-        return $prefix . $orderId;
+        return self::TRANSFER_PREFIX . $orderId;
     }
 
     /**
@@ -26,21 +33,17 @@ class VietQRHelper
      */
     public static function generateQRUrl(string $transferContent, int $amountVND): ?string
     {
-        $bankCode = config('v2board.telegram_bank_code', '');
-        $bankAccount = config('v2board.telegram_bank_account', '');
-        $bankAccountName = config('v2board.telegram_bank_account_name', '');
-
-        if (empty($bankCode) || empty($bankAccount)) {
+        if (empty(self::BANK_CODE) || empty(self::BANK_ACCOUNT)) {
             return null;
         }
 
         return sprintf(
             'https://img.vietqr.io/image/%s-%s-compact2.png?amount=%d&addInfo=%s&accountName=%s',
-            $bankCode,
-            $bankAccount,
+            self::BANK_CODE,
+            self::BANK_ACCOUNT,
             $amountVND,
             urlencode($transferContent),
-            urlencode($bankAccountName)
+            urlencode(self::BANK_ACCOUNT_NAME)
         );
     }
 
@@ -53,14 +56,11 @@ class VietQRHelper
      */
     public static function getBankInfoText(string $transferContent, int $amountVND): string
     {
-        $bankCode = config('v2board.telegram_bank_code', '');
-        $bankAccount = config('v2board.telegram_bank_account', '');
-        $bankAccountName = config('v2board.telegram_bank_account_name', '');
         $formattedAmount = number_format($amountVND, 0, ',', '.');
 
-        $text = "🏦 Ngân hàng: {$bankCode}\n";
-        $text .= "👤 Chủ TK: {$bankAccountName}\n";
-        $text .= "🔢 STK: {$bankAccount}\n";
+        $text = "🏦 Ngân hàng: " . self::BANK_CODE . "\n";
+        $text .= "👤 Chủ TK: " . self::BANK_ACCOUNT_NAME . "\n";
+        $text .= "🔢 STK: " . self::BANK_ACCOUNT . "\n";
         $text .= "📝 Nội dung CK: {$transferContent}\n";
         $text .= "💰 Số tiền: {$formattedAmount}đ";
 
@@ -74,7 +74,6 @@ class VietQRHelper
      */
     public static function isConfigured(): bool
     {
-        return !empty(config('v2board.telegram_bank_code', ''))
-            && !empty(config('v2board.telegram_bank_account', ''));
+        return !empty(self::BANK_CODE) && !empty(self::BANK_ACCOUNT) && self::BANK_ACCOUNT !== '0123456789';
     }
 }
