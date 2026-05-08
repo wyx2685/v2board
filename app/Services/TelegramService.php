@@ -26,6 +26,59 @@ class TelegramService {
         ]);
     }
 
+    public function sendMessageWithKeyboard(int $chatId, string $text, array $keyboard, string $parseMode = '')
+    {
+        $this->requestPost('sendMessage', [
+            'chat_id' => $chatId,
+            'text' => $text,
+            'parse_mode' => $parseMode,
+            'reply_markup' => [
+                'inline_keyboard' => $keyboard
+            ]
+        ]);
+    }
+
+    public function sendPhoto(int $chatId, string $photoUrl, string $caption = '', array $keyboard = [], string $parseMode = '')
+    {
+        $params = [
+            'chat_id' => $chatId,
+            'photo' => $photoUrl,
+            'caption' => $caption,
+            'parse_mode' => $parseMode
+        ];
+        if (!empty($keyboard)) {
+            $params['reply_markup'] = [
+                'inline_keyboard' => $keyboard
+            ];
+        }
+        $this->requestPost('sendPhoto', $params);
+    }
+
+    public function answerCallbackQuery(string $callbackQueryId, string $text = '', bool $showAlert = false)
+    {
+        $this->request('answerCallbackQuery', [
+            'callback_query_id' => $callbackQueryId,
+            'text' => $text,
+            'show_alert' => $showAlert ? 'true' : 'false'
+        ]);
+    }
+
+    public function editMessageText(int $chatId, int $messageId, string $text, array $keyboard = [], string $parseMode = '')
+    {
+        $params = [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'text' => $text,
+            'parse_mode' => $parseMode
+        ];
+        if (!empty($keyboard)) {
+            $params['reply_markup'] = [
+                'inline_keyboard' => $keyboard
+            ];
+        }
+        $this->requestPost('editMessageText', $params);
+    }
+
     public function approveChatJoinRequest(int $chatId, int $userId)
     {
         $this->request('approveChatJoinRequest', [
@@ -112,6 +165,20 @@ class TelegramService {
     {
         $curl = new Curl();
         $curl->get($this->api . $method . '?' . http_build_query($params));
+        $response = $curl->response;
+        $curl->close();
+        if (!isset($response->ok)) abort(500, '请求失败');
+        if (!$response->ok) {
+            abort(500, '来自TG的错误：' . $response->description);
+        }
+        return $response;
+    }
+
+    private function requestPost(string $method, array $params = [])
+    {
+        $curl = new Curl();
+        $curl->setHeader('Content-Type', 'application/json');
+        $curl->post($this->api . $method, json_encode($params));
         $response = $curl->response;
         $curl->close();
         if (!isset($response->ok)) abort(500, '请求失败');

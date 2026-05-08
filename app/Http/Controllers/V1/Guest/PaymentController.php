@@ -114,6 +114,27 @@ Mã giao dịch: %s",
             $order->trade_no
         );
         $telegramService->sendMessageWithAdmin($message);
+
+        // [AutoOrder Plugin] Notify customer directly via Telegram
+        // Only runs when AutoOrder plugin is installed
+        if (class_exists('\\App\\Plugins\\Telegram\\AutoOrder\\VietQRHelper')
+            && $user && $user->telegram_id
+        ) {
+            $userMessage = "✅ THANH TOÁN THÀNH CÔNG\n";
+            $userMessage .= "━━━━━━━━━━━━━━━━━━━━━\n";
+            $userMessage .= "📦 Gói: {$planName}\n";
+            $userMessage .= "💰 Số tiền: {$formattedAmount} đồng\n";
+            $userMessage .= "⏱️ Chu kỳ: {$periodText}\n";
+            $userMessage .= "📋 Mã đơn: {$order->trade_no}\n";
+            $userMessage .= "━━━━━━━━━━━━━━━━━━━━━\n";
+            $userMessage .= "🎉 Gói dịch vụ đã được kích hoạt!";
+            try {
+                $telegramService->sendMessage($user->telegram_id, $userMessage);
+            } catch (\Exception $e) {
+                // Silently fail - don't block the payment flow
+            }
+        }
+
         return true;
     }
 

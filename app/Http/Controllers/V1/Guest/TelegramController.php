@@ -24,6 +24,7 @@ class TelegramController extends Controller
     public function webhook(Request $request)
     {
         $this->formatMessage($request->input());
+        $this->formatCallbackQuery($request->input());
         $this->formatChatJoinRequest($request->input());
         $this->handle();
     }
@@ -32,6 +33,13 @@ class TelegramController extends Controller
     {
         if (!$this->msg) return;
         $msg = $this->msg;
+
+        // Handle callback_query (button presses)
+        if ($msg->message_type === 'callback_query') {
+            $this->handleCallbackQuery($msg);
+            return;
+        }
+
         $commandName = explode('@', $msg->command);
 
         // To reduce request, only commands contains @ will get the bot name
@@ -66,6 +74,33 @@ class TelegramController extends Controller
         }
     }
 
+    private function handleCallbackQuery($msg)
+    {
+        try {
+            // Answer callback query to dismiss loading spinner
+            $this->telegramService->answerCallbackQuery($msg->callback_query_id);
+
+            // Parse callback data: "action:param1:param2"
+            $parts = explode(':', $msg->callback_data);
+            $action = $parts[0] ?? '';
+
+            foreach (glob(base_path('app//Plugins//Telegram//Commands') . '/*.php') as $file) {
+                $command = basename($file, '.php');
+                $class = '\\App\\Plugins\\Telegram\\Commands\\' . $command;
+                if (!class_exists($class)) continue;
+                $instance = new $class();
+                if (!isset($instance->callbackAction)) continue;
+                $actions = is_array($instance->callbackAction) ? $instance->callbackAction : [$instance->callbackAction];
+                if (in_array($action, $actions)) {
+                    $instance->handleCallback($msg, $parts);
+                    return;
+                }
+            }
+        } catch (\Exception $e) {
+            $this->telegramService->sendMessage($msg->chat_id, $e->getMessage());
+        }
+    }
+
     public function getBotName()
     {
         $response = $this->telegramService->getMe();
@@ -89,6 +124,21 @@ class TelegramController extends Controller
             $obj->message_type = 'reply_message';
             $obj->reply_text = $data['message']['reply_to_message']['text'];
         }
+        $this->msg = $obj;
+    }
+
+    private function formatCallbackQuery(array $data)
+    {
+        if (!isset($data['callback_query'])) return;
+        $callback = $data['callback_query'];
+        $obj = new \StdClass();
+        $obj->message_type = 'callback_query';
+        $obj->callback_query_id = $callback['id'];
+        $obj->callback_data = $callback['data'] ?? '';
+        $obj->chat_id = $callback['message']['chat']['id'] ?? 0;
+        $obj->message_id = $callback['message']['message_id'] ?? 0;
+        $obj->from_id = $callback['from']['id'] ?? 0;
+        $obj->is_private = ($callback['message']['chat']['type'] ?? '') === 'private';
         $this->msg = $obj;
     }
 
