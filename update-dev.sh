@@ -1,30 +1,36 @@
 #!/bin/bash
 
+if [ ! -d ".git" ]; then
+  echo "Please deploy using Git."
+  exit 1
+fi
+
+if ! command -v git &> /dev/null; then
+    echo "Git is not installed! Please install git and try again."
+    exit 1
+fi
+
+git config --global --add safe.directory $(pwd)
+git fetch --all && git reset --hard origin/dev && git pull origin dev
+rm -rf composer.lock composer.phar
+wget https://github.com/composer/composer/releases/latest/download/composer.phar -O composer.phar
+php composer.phar update -vvv
+
+php_main_version=$(php -v | head -n 1 | cut -d ' ' -f 2 | cut -d '.' -f 1)
+if [ $php_main_version -ge 8 ]; then
+    php composer.phar require joanhey/adapterman
+    if ! php -m | grep -q "pcntl"; then
+        echo "Adding pcntl extension to cli-php.ini"
+        sed -i '/extension=redis.so/a extension=pcntl.so' cli-php.ini
+    fi
+    php -c cli-php.ini webman.php stop
+    echo "Webman stopped. Please restart it by yourself."
+fi
+
+if [ -f "/etc/init.d/bt" ]; then
+  chown -R www $(pwd) 2>/dev/null || true
+fi
+
 echo "========================================="
-echo "  ZicBoard - Update Dev Branch"
-echo "========================================="
-
-# Stash any uncommitted changes
-echo ">> Stashing local changes..."
-git stash
-
-# Fetch and pull latest from dev branch
-echo ">> Switching to dev branch..."
-git checkout dev
-
-echo ">> Pulling latest code..."
-git pull origin dev
-
-# Install/update composer dependencies
-echo ">> Updating composer dependencies..."
-composer install --no-dev --optimize-autoloader
-
-# Clear application cache
-echo ">> Clearing cache..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:clear
-
-echo "========================================="
-echo "  ✅ Update completed!"
+echo "  ✅ Dev branch update completed!"
 echo "========================================="
