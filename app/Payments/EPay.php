@@ -25,6 +25,11 @@ class EPay {
                 'label' => 'KEY',
                 'description' => '',
                 'type' => 'input',
+            ],
+            'type' => [
+                'label' => 'TYPE',
+                'description' => '支付类型，如: alipay, wxpay, qqpay',
+                'type' => 'input',
             ]
         ];
     }
@@ -39,6 +44,9 @@ class EPay {
             'out_trade_no' => $order['trade_no'],
             'pid' => $this->config['pid']
         ];
+        if (!empty($this->config['type'])) {
+            $params['type'] = $this->config['type'];
+        }
         ksort($params);
         reset($params);
         $str = stripslashes(urldecode(http_build_query($params))) . $this->config['key'];

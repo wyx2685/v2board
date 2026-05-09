@@ -73830,7 +73830,7 @@
                         className: "form-group"
                     }, d.a.createElement("label", {
                         for: "example-text-input-alt"
-                    }, i[e].label), "input" === i[e].type && d.a.createElement(v["a"], {
+                    }, i[e].label), ("input" === i[e].type || "text" === i[e].type || "string" === i[e].type || !i[e].type) && d.a.createElement(v["a"], {
                         placeholder: i[e].description,
                         defaultValue: o[e] || i[e].value,
                         onChange: t=>this.configOnChange(e, t.target.value)
