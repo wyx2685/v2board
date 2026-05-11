@@ -104672,20 +104672,20 @@
                   , pv = e.private_key
                   , pb = e.public_key
                   , sd = e.short_id
-                  , pt = e.server_port
-                  , ds = e.dest
-                  , xv = e.xver
-                  , fp = e.fingerprint
-                  , tls = this.state.tls
-                  , cert_apply = this.state.cert_apply;
+	                  , pt = e.server_port
+	                  , ds = e.dest
+	                  , xv = e.xver
+	                  , fp = e.fingerprint
+	                  , tls = this.state.tls
+	                  , cert_apply = this.state.cert_apply;
                 return y.a.createElement(y.a.Fragment, null, y.a.createElement("div", null, y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Server Name(SNI)"), y.a.createElement(s["a"], {
-                    value: t,
-                    onChange: e=>this.change("server_name", e.target.value),
-                    placeholder: tls == 2 ? "REALITY\u5fc5\u586b\uff0c\u4e0e\u540e\u7aef\u4fdd\u6301\u4e00\u81f4" : ""
-                })), tls == 1 && cert_apply && y.a.createElement("div", {
-                    className: "form-group"
+	                    value: t,
+	                    onChange: e=>this.change("server_name", e.target.value),
+	                    placeholder: tls == 2 ? "REALITY\u5fc5\u586b\uff0c\u4e0e\u540e\u7aef\u4fdd\u6301\u4e00\u81f4" : ""
+	                })), tls == 1 && cert_apply && y.a.createElement("div", {
+	                    className: "form-group"
                 }, y.a.createElement("label", null, "\u8bc1\u4e66\u6a21\u5f0fCert Mode"), y.a.createElement(N["a"], {
                     value: e.cert_mode ?? "self",
                     style: {
@@ -104808,8 +104808,8 @@
                     value: "360"
                 }, "360"), y.a.createElement(N["a"].Option, {
                     key: 7,
-                    value: "qq"
-                }, "QQ"))), tls == 1 && cert_apply && y.a.createElement("div", {
+	                    value: "qq"
+	                }, "QQ"))), tls == 1 && cert_apply && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Reject unknown sni"), y.a.createElement("div", null, y.a.createElement(f["a"], {
                     checked: parseInt(e.reject_unknown_sni),
@@ -105015,16 +105015,21 @@
                 })
             }
             renderChildDrawer() {
-                var e = this.state.server
-                  , t = e.network_settings
-                  , n = e.tls_settings
-                  , enc = e.encryption_settings;
+	                var e = this.state.server
+	                  , t = e.network_settings
+	                  , n = e.tls_settings
+	                  , enc = e.encryption_settings;
                 switch (this.state.childDrawer.type) {
                 case "network_settings":
-                    var r = {
-                        tcp: JSON.stringify({
-                            header: {
-                                "type": "http",
+	                    var r = {
+	                        tcp: JSON.stringify({
+	                            fallbacks: [
+	                                {
+	                                    dest: "127.0.0.1:80"
+	                                }
+	                            ],
+	                            header: {
+	                                "type": "http",
                                 "request": {
                                     "path": ["/"],
                                     "headers": {
@@ -105061,10 +105066,10 @@
                             extra: {}
                         }, null, 4)
                     };
-                    return y.a.createElement("div", {
-                        id: "v2ray-protocol"
-                    }, y.a.createElement("div", {
-                        className: "form-group"
+	                    return y.a.createElement("div", {
+	                        id: "v2ray-protocol"
+	                    }, y.a.createElement("div", {
+	                        className: "form-group"
                     }, y.a.createElement("label", null, "\u534f\u8bae\u8be6\u7ec6\u914d\u7f6e", y.a.createElement("a", {
                         href: "https://www.v2ray.com/chapter_02/05_transport.html"
                     }, y.a.createElement(m["a"], {
@@ -105089,11 +105094,11 @@
                         ref: "editor"
                     })));
                 case "tls_settings":
-                    return y.a.createElement(U, {
-                        settings: n,
-                        tls: e.tls,
-                        onChange: e=>this.changeServer("tls_settings", e)
-                    })
+	                    return y.a.createElement(U, {
+	                        settings: n,
+		                        tls: e.tls,
+		                        onChange: e=>this.changeServer("tls_settings", e)
+	                    })
                 case "encryption_settings":
                     return y.a.createElement(EncryptionSettings, {
                         settings: enc,
@@ -106033,16 +106038,21 @@
             }
             renderChildDrawer() {
                 var e = this.state.server
-                  , ps = e.padding_scheme
-                  , ns = e.network_settings != null && "object" === typeof e.network_settings ? JSON.stringify(e.network_settings, null, 2) : e.network_settings
-                  , ts = e.tls_settings
-                  , enc = e.encryption_settings;
+	                  , ps = e.padding_scheme
+	                  , ns = e.network_settings != null && "object" === typeof e.network_settings ? JSON.stringify(e.network_settings, null, 2) : e.network_settings
+	                  , ts = e.tls_settings
+	                  , enc = e.encryption_settings;
                 switch (this.state.childDrawer.type) {
                 case "network_settings":
-                    var r = {
-                        tcp: JSON.stringify({
-                            acceptProxyProtocol: false,
-                            header: {
+	                    var r = {
+	                        tcp: JSON.stringify({
+	                            acceptProxyProtocol: false,
+	                            fallbacks: [
+	                                {
+	                                    dest: "127.0.0.1:80"
+	                                }
+	                            ],
+	                            header: {
                                 "type": "http",
                                 "request": {
                                     "path": ["/"],
@@ -106080,10 +106090,10 @@
                             extra: {}
                         }, null, 4)
                     };
-                    return y.a.createElement("div", {
-                        id: "v2ray-protocol"
-                    }, y.a.createElement("div", {
-                        className: "form-group"
+	                    return y.a.createElement("div", {
+	                        id: "v2ray-protocol"
+	                    }, y.a.createElement("div", {
+	                        className: "form-group"
                     }, y.a.createElement("label", null, "\u534f\u8bae\u8be6\u7ec6\u914d\u7f6e", y.a.createElement("a", {
                         href: "https://www.v2ray.com/chapter_02/05_transport.html"
                     }, y.a.createElement(m["a"], {
@@ -106108,12 +106118,12 @@
                         ref: "editor"
                     })));
                 case "tls_settings":
-                    return y.a.createElement(U, {
-                        settings: ts,
-                        tls: e.tls,
-                        cert_apply: true,
-                        onChange: e=>this.changeServer("tls_settings", e)
-                    })
+	                    return y.a.createElement(U, {
+	                        settings: ts,
+		                        tls: e.tls,
+		                        cert_apply: true,
+		                        onChange: e=>this.changeServer("tls_settings", e)
+	                    })
                 case "encryption_settings":
                     return y.a.createElement(EncryptionSettings, {
                         settings: enc,
@@ -106554,7 +106564,7 @@
                     onChange: e=>this.formChange("flow", e)
                 }, y.a.createElement(N["a"].Option, {
                     value: null
-                }, "\u65e0"), y.a.createElement(N["a"].Option, {
+                }, "\u65e0"), e.network == "tcp" && y.a.createElement(N["a"].Option, {
                     value: "xtls-rprx-vision"
                 }, "xtls-rprx-vision")))), y.a.createElement("div", {
                     className: "form-group"
@@ -113544,11 +113554,17 @@
                 var e = this.state.server
                   , t = e.network_settings;
                 switch (this.state.childDrawer.type) {
-                case "network_settings":
-                    var o = {
-                        tcp: "",
-                        ws: JSON.stringify({
-                            path: "/",
+	                case "network_settings":
+	                    var o = {
+	                        tcp: JSON.stringify({
+	                            fallbacks: [
+	                                {
+	                                    dest: "127.0.0.1:80"
+	                                }
+	                            ]
+	                        }, null, 4),
+	                        ws: JSON.stringify({
+	                            path: "/",
                             headers: {
                                 Host: "v2ray.com"
                             }

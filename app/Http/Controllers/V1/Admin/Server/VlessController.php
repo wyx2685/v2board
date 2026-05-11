@@ -49,6 +49,46 @@ class VlessController extends Controller
                 $params['tls_settings']['server_port'] = "443";
             }
         }
+        if (isset($params['tls_settings'])) {
+            $tlsFallbacks = $params['tls_settings']['fallbacks'] ?? ($params['tls_settings']['fallback'] ?? null);
+            if ($tlsFallbacks !== null && !isset($params['network_settings']['fallbacks'])) {
+                $params['network_settings'] = $params['network_settings'] ?? [];
+                $params['network_settings']['fallbacks'] = $tlsFallbacks;
+            }
+            unset($params['tls_settings']['fallback']);
+            unset($params['tls_settings']['fallbacks']);
+        }
+        if (isset($params['network_settings']) && is_array($params['network_settings'])) {
+            if (isset($params['network_settings']['fallback']) && !isset($params['network_settings']['fallbacks'])) {
+                $params['network_settings']['fallbacks'] = $params['network_settings']['fallback'];
+            }
+            unset($params['network_settings']['fallback']);
+            if (array_key_exists('fallbacks', $params['network_settings'])) {
+                $fallbacks = $params['network_settings']['fallbacks'];
+                if (is_string($fallbacks)) {
+                    $fallbacks = trim($fallbacks);
+                    if ($fallbacks === '') {
+                        unset($params['network_settings']['fallbacks']);
+                    } elseif (in_array(substr($fallbacks, 0, 1), ['[', '{'])) {
+                        $fallbacks = json_decode($fallbacks, true);
+                        if (json_last_error() !== JSON_ERROR_NONE || !is_array($fallbacks)) {
+                            abort(500, 'fallbacks配置格式有误');
+                        }
+                        $params['network_settings']['fallbacks'] = isset($fallbacks['dest']) ? [$fallbacks] : $fallbacks;
+                    } else {
+                        $params['network_settings']['fallbacks'] = [['dest' => $fallbacks]];
+                    }
+                } elseif (is_array($fallbacks)) {
+                    if (empty($fallbacks)) {
+                        unset($params['network_settings']['fallbacks']);
+                    } else {
+                        $params['network_settings']['fallbacks'] = isset($fallbacks['dest']) ? [$fallbacks] : $fallbacks;
+                    }
+                } else {
+                    abort(500, 'fallbacks配置格式有误');
+                }
+            }
+        }
         if ($params['network'] != 'tcp') {
             $params['flow'] = null;
         }

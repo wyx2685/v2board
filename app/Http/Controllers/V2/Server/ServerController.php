@@ -52,14 +52,29 @@ class ServerController extends Controller
     // 后端获取配置
     public function config(Request $request)
     {
+        $networkSettings = $this->nodeInfo->network_settings ?? [];
+        $tlsSettings = $this->nodeInfo->tls_settings ?? [];
+        if (!is_array($networkSettings)) {
+            $networkSettings = [];
+        }
+        if (!is_array($tlsSettings)) {
+            $tlsSettings = [];
+        }
+        $tlsFallbacks = $tlsSettings['fallbacks'] ?? ($tlsSettings['fallback'] ?? null);
+        if ($tlsFallbacks !== null && !isset($networkSettings['fallbacks'])) {
+            $networkSettings['fallbacks'] = $tlsFallbacks;
+        }
+        unset($tlsSettings['fallback']);
+        unset($tlsSettings['fallbacks']);
+
         $response = [
             'listen_ip' => $this->nodeInfo->listen_ip,
             'server_port' => $this->nodeInfo->server_port,
             'network' => $this->nodeInfo->network,
-            'network_settings' => $this->nodeInfo->network_settings,
+            'network_settings' => $networkSettings,
             'protocol' => $this->nodeInfo->protocol,
             'tls' => $this->nodeInfo->tls,
-            'tls_settings' => $this->nodeInfo->tls_settings,
+            'tls_settings' => $tlsSettings,
             'encryption' => $this->nodeInfo->encryption,
             'encryption_settings' => $this->nodeInfo->encryption_settings,
             'flow' => $this->nodeInfo->flow,
