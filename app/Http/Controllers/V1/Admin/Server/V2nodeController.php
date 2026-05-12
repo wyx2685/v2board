@@ -83,34 +83,10 @@ class V2nodeController extends Controller
             }
         }
         if (isset($params['network_settings']) && is_array($params['network_settings'])) {
-            if (isset($params['network_settings']['fallback']) && !isset($params['network_settings']['fallbacks'])) {
-                $params['network_settings']['fallbacks'] = $params['network_settings']['fallback'];
-            }
-            unset($params['network_settings']['fallback']);
-            if (array_key_exists('fallbacks', $params['network_settings'])) {
-                $fallbacks = $params['network_settings']['fallbacks'];
-                if (is_string($fallbacks)) {
-                    $fallbacks = trim($fallbacks);
-                    if ($fallbacks === '') {
-                        unset($params['network_settings']['fallbacks']);
-                    } elseif (in_array(substr($fallbacks, 0, 1), ['[', '{'])) {
-                        $fallbacks = json_decode($fallbacks, true);
-                        if (json_last_error() !== JSON_ERROR_NONE || !is_array($fallbacks)) {
-                            abort(500, 'fallbacks配置格式有误');
-                        }
-                        $params['network_settings']['fallbacks'] = isset($fallbacks['dest']) ? [$fallbacks] : $fallbacks;
-                    } else {
-                        $params['network_settings']['fallbacks'] = [['dest' => $fallbacks]];
-                    }
-                } elseif (is_array($fallbacks)) {
-                    if (empty($fallbacks)) {
-                        unset($params['network_settings']['fallbacks']);
-                    } else {
-                        $params['network_settings']['fallbacks'] = isset($fallbacks['dest']) ? [$fallbacks] : $fallbacks;
-                    }
-                } else {
-                    abort(500, 'fallbacks配置格式有误');
-                }
+            try {
+                $params['network_settings'] = \App\Utils\Helper::normalizeFallbacks($params['network_settings']);
+            } catch (\Exception $e) {
+                abort(500, $e->getMessage());
             }
         }
         if (isset($params['network_settings'])) {

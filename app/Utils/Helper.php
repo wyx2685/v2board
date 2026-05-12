@@ -578,4 +578,42 @@ class Helper
         $config['mode'] = $settings['mode'] ?? 'auto';
         $config['extra'] = isset($settings['extra']) ? json_encode($settings['extra'], JSON_UNESCAPED_SLASHES) : null;
     }
+    public static function normalizeFallbacks($networkSettings)
+    {
+        if (!is_array($networkSettings)) {
+            return $networkSettings;
+        }
+
+        if (isset($networkSettings['fallback']) && !isset($networkSettings['fallbacks'])) {
+            $networkSettings['fallbacks'] = $networkSettings['fallback'];
+        }
+        unset($networkSettings['fallback']);
+
+        if (array_key_exists('fallbacks', $networkSettings)) {
+            $fallbacks = $networkSettings['fallbacks'];
+            if (is_string($fallbacks)) {
+                $fallbacks = trim($fallbacks);
+                if ($fallbacks === '') {
+                    unset($networkSettings['fallbacks']);
+                } elseif (in_array(substr($fallbacks, 0, 1), ['[', '{'])) {
+                    $fallbacks = json_decode($fallbacks, true);
+                    if (json_last_error() !== JSON_ERROR_NONE || !is_array($fallbacks)) {
+                        throw new \Exception('fallbacks配置格式有误');
+                    }
+                    $networkSettings['fallbacks'] = isset($fallbacks['dest']) ? [$fallbacks] : $fallbacks;
+                } else {
+                    $networkSettings['fallbacks'] = [['dest' => $fallbacks]];
+                }
+            } elseif (is_array($fallbacks)) {
+                if (empty($fallbacks)) {
+                    unset($networkSettings['fallbacks']);
+                } else {
+                    $networkSettings['fallbacks'] = isset($fallbacks['dest']) ? [$fallbacks] : $fallbacks;
+                }
+            } else {
+                throw new \Exception('fallbacks配置格式有误');
+            }
+        }
+        return $networkSettings;
+    }
 }

@@ -61,6 +61,13 @@ class ServerController extends Controller
             $tlsSettings = [];
         }
 
+        try {
+            $networkSettings = \App\Utils\Helper::normalizeFallbacks($networkSettings);
+        } catch (\Exception $e) {
+            // Ignore format errors for backend fetch
+            unset($networkSettings['fallbacks']);
+        }
+
         $response = [
             'listen_ip' => $this->nodeInfo->listen_ip,
             'server_port' => $this->nodeInfo->server_port,
