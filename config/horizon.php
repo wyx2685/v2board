@@ -182,7 +182,10 @@ return [
                 ],
                 'balance' => 'auto',
                 'minProcesses' => 1,
-                'maxProcesses' => (int)ceil($parser->getRam()['total'] / 1024 / 1024 / 1024 * 6),
+                'maxProcesses' => min(
+                    64,
+                    (int)ceil($parser->getRam()['total'] / 1024 / 1024 / 1024 * 6)
+                ),
                 'tries' => 1,
                 'balanceCooldown' => 3,
             ],
