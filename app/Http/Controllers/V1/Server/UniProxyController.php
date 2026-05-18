@@ -134,6 +134,12 @@ class UniProxyController extends Controller
                 'error' => 'Invalid online data format'
             ], 400);
         }
+
+    // 如果上报的在线数据为空，说明此时0人在线，直接返回成功，不去折腾 Redis
+        if (empty($data)) {
+            return response(['data' => true]);
+        }
+
         $updateAt = time();
         $cacheKeys = array_map(function ($uid) {
             return 'ALIVE_IP_USER_' . $uid;
