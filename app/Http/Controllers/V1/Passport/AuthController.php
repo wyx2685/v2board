@@ -59,15 +59,18 @@ class AuthController extends Controller
                 abort(500, __('You must use the invitation code to register'));
             }
         }
+        $email = $request->input('email');
+        $cacheKeyEmail = is_string($email) ? strtolower(trim($email)) : '';
         if ((int)config('v2board.email_verify', 0)) {
-            if (empty($request->input('email_code'))) {
-                abort(500, __('Email verification code cannot be empty'));
+            $inputCode = $request->input('email_code');
+            if (!is_string($inputCode) || !preg_match('/^\d{6}$/', $inputCode)) {
+                abort(500, __('Incorrect email verification code'));
             }
-            if ((string)Cache::get(CacheKey::get('EMAIL_VERIFY_CODE', $request->input('email'))) !== (string)$request->input('email_code')) {
+            $cachedCode = Cache::get(CacheKey::get('EMAIL_VERIFY_CODE', $cacheKeyEmail));
+            if ($cachedCode === null || $cachedCode === '' || !hash_equals((string)$cachedCode, $inputCode)) {
                 abort(500, __('Incorrect email verification code'));
             }
         }
-        $email = $request->input('email');
         $password = $request->input('password');
         $exist = User::where('email', $email)->first();
         if ($exist) {
@@ -112,7 +115,7 @@ class AuthController extends Controller
             abort(500, __('Register failed'));
         }
         if ((int)config('v2board.email_verify', 0)) {
-            Cache::forget(CacheKey::get('EMAIL_VERIFY_CODE', $request->input('email')));
+            Cache::forget(CacheKey::get('EMAIL_VERIFY_CODE', $cacheKeyEmail));
         }
 
         $user->last_login_at = time();
@@ -234,41 +237,43 @@ class AuthController extends Controller
 
     public function forget(AuthForget $request)
     {
-        $email     = strtolower(trim((string)$request->input('email')));
-        $inputCode = (string)$request->input('email_code');
-        $password  = (string)$request->input('password');
+        $email     = $request->input('email');
+        $inputCode = $request->input('email_code');
+        $password  = $request->input('password');
 
+        if (!is_string($email) || !is_string($inputCode) || !is_string($password)) {
+            abort(500, __('Incorrect email verification code'));
+        }
         if (!preg_match('/^\d{6}$/', $inputCode)) {
             abort(500, __('Incorrect email verification code'));
         }
 
-        $forgetRequestLimitKey = CacheKey::get('FORGET_REQUEST_LIMIT', $email);
+        $cacheKeyEmail         = strtolower(trim($email));
+        $forgetRequestLimitKey = CacheKey::get('FORGET_REQUEST_LIMIT', $cacheKeyEmail);
         $forgetRequestLimit    = (int)Cache::get($forgetRequestLimitKey);
         if ($forgetRequestLimit >= 3) {
             abort(500, __('Reset failed, Please try again later'));
         }
 
-        $cachedCode = Cache::get(CacheKey::get('EMAIL_VERIFY_CODE', $email));
+        $cachedCode = Cache::get(CacheKey::get('EMAIL_VERIFY_CODE', $cacheKeyEmail));
         if ($cachedCode === null || $cachedCode === '' || !hash_equals((string)$cachedCode, $inputCode)) {
             Cache::put($forgetRequestLimitKey, $forgetRequestLimit + 1, 300);
             abort(500, __('Incorrect email verification code'));
         }
-
         $user = User::where('email', $email)->first();
         if (!$user) {
             abort(500, __('This email is not registered in the system'));
         }
-
         $user->password      = password_hash($password, PASSWORD_DEFAULT);
         $user->password_algo = null;
         $user->password_salt = null;
         if (!$user->save()) {
             abort(500, __('Reset failed'));
         }
-
-        Cache::forget(CacheKey::get('EMAIL_VERIFY_CODE', $email));
+        Cache::forget(CacheKey::get('EMAIL_VERIFY_CODE', $cacheKeyEmail));
         (new AuthService($user))->removeAllSession();
-
-        return response(['data' => true]);
+        return response([
+            'data' => true
+        ]);
     }
 }

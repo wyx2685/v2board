@@ -44,6 +44,7 @@ class CommController extends Controller
             }
         }
         $email = $request->input('email');
+        $cacheKeyEmail = strtolower(trim((string)$email));
         $isforget = $request->input('isforget');
         $email_exists = User::where('email', $email)->exists();
         //检查是否在白名单内
@@ -70,10 +71,10 @@ class CommController extends Controller
                 abort(500, __('This email is not registered in the system'));
             }
         }
-        if (Cache::get(CacheKey::get('LAST_SEND_EMAIL_VERIFY_TIMESTAMP', $email))) {
+        if (Cache::get(CacheKey::get('LAST_SEND_EMAIL_VERIFY_TIMESTAMP', $cacheKeyEmail))) {
             abort(500, __('Email verification code has been sent, please request again later'));
         }
-        $code = rand(100000, 999999);
+        $code = (string)rand(100000, 999999);
         $subject = config('v2board.app_name', 'V2Board') . __('Email verification code');
 
         SendEmailJob::dispatch([
@@ -87,8 +88,8 @@ class CommController extends Controller
             ]
         ]);
 
-        Cache::put(CacheKey::get('EMAIL_VERIFY_CODE', $email), $code, 300);
-        Cache::put(CacheKey::get('LAST_SEND_EMAIL_VERIFY_TIMESTAMP', $email), time(), 60);
+        Cache::put(CacheKey::get('EMAIL_VERIFY_CODE', $cacheKeyEmail), $code, 300);
+        Cache::put(CacheKey::get('LAST_SEND_EMAIL_VERIFY_TIMESTAMP', $cacheKeyEmail), time(), 60);
         return response([
             'data' => true
         ]);
