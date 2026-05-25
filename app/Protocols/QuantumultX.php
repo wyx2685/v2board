@@ -53,6 +53,9 @@ class QuantumultX
                 case 'trojan':
                     $uri .= self::buildTrojan($uuid, $item);
                     break;
+                case 'anytls':
+                    $uri .= self::buildAnyTLS($uuid, $item);
+                    break;
             }
         }
 
@@ -369,6 +372,37 @@ class QuantumultX
             if ($allowInsecure) {
                 $config[] = 'tls-verification=false';
             }
+        }
+
+        $config = array_filter($config);
+        $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+
+    // anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=..., reality-hex-shortid=..., udp-relay=true, tag=anytls-reality-tls-01
+    public static function buildAnytls($password, $server)
+    {
+        $config = [
+            "anytls={$server['host']}:{$server['port']}",
+            "password={$password}",
+            "udp-relay=true",
+            "tag={$server['name']}"
+        ];
+
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $network = $server['network'] ?? 'tcp';
+        $sni = $tlsSettings['server_name'] ?? null;
+        $allowInsecure = $tlsSettings['allow_insecure'] ?? false;
+
+        // tcp 配置
+        if ($network === 'tcp') {
+            $config[] = 'over-tls=true';
+            if ($sni) {
+                $config[] = "tls-host={$sni}";
+            }
+            // Tips: allowInsecure=false = tls-verification=true, the value of tls-verification needs to be explicitly specified.
+            $config[] = 'tls-verification=' . ($allowInsecure ? 'false' : 'true');
         }
 
         $config = array_filter($config);
