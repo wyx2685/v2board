@@ -105865,7 +105865,7 @@
                 },
                 y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top",
-                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
+                    title: "Xray 26.5+ \u5df2\u79fb\u9664 allowInsecure\uff0c\u81ea\u7b7e\u8bc1\u4e66\u8bf7\u586b\u5199\u8bc1\u4e66\u6307\u7eb9\u5e76\u5173\u95ed\u672c\u9879"
                 },
                 "\u5141\u8bb8\u4e0d\u5b89\u5168 ", y.a.createElement(m["a"], {
                     type: "question-circle"
@@ -105892,6 +105892,19 @@
                     placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
                     value: e.server_name,
                     onChange: e=>this.formChange("server_name", e.target.value)
+                })), y.a.createElement("div", {
+                    className: "form-group"
+                },
+                y.a.createElement("label", null, y.a.createElement(u["a"], {
+                    placement: "top",
+                    title: "Xray 26.5+ \u5ba2\u6237\u7aef TLS \u8bc1\u4e66\u6307\u7eb9(pcs)\uff0c64\u4f4d\u5341\u516d\u8fdb\u5236\u3002\u81ea\u7b7e\u8bc1\u4e66\u5fc5\u586b\uff0c\u53ef\u4ece\u8282\u70b9 /etc/v2node/anytls{id}.cer \u83b7\u53d6"
+                },
+                "\u8bc1\u4e66\u6307\u7eb9(SHA256) ", y.a.createElement(m["a"], {
+                    type: "question-circle"
+                }))), y.a.createElement(s["a"], {
+                    placeholder: "2fdd6e9c1b19578975d0ad46d2d159d66cf4c337a6d5f96c1e4b6b117c203842",
+                    value: e.pinned_peer_cert_sha256 || "",
+                    onChange: e=>this.formChange("pinned_peer_cert_sha256", e.target.value)
                 })), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {

@@ -23,6 +23,7 @@ class AnyTLSController extends Controller
             'rate' => 'required|numeric',
             'server_name' => 'nullable',
             'insecure' => 'required|in:0,1',
+            'pinned_peer_cert_sha256' => 'nullable|string|max:128',
             'padding_scheme' => 'nullable',
         ]);
 

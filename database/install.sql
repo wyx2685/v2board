@@ -415,6 +415,7 @@ CREATE TABLE `v2_server_anytls` (
                                       `sort` int(11) DEFAULT NULL,
                                       `server_name` varchar(64) DEFAULT NULL,
                                       `insecure` tinyint(1) NOT NULL DEFAULT '0',
+                                      `pinned_peer_cert_sha256` varchar(128) DEFAULT NULL COMMENT 'TLS leaf cert SHA256 hex',
                                       `padding_scheme` text,
                                       `created_at` int(11) NOT NULL,
                                       `updated_at` int(11) NOT NULL,

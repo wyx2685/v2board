@@ -800,6 +800,7 @@ CREATE TABLE `v2_server_anytls` (
                                       `sort` int(11) DEFAULT NULL,
                                       `server_name` varchar(64) DEFAULT NULL,
                                       `insecure` tinyint(1) NOT NULL DEFAULT '0',
+                                      `pinned_peer_cert_sha256` varchar(128) DEFAULT NULL COMMENT 'TLS leaf cert SHA256 hex',
                                       `padding_scheme` text,
                                       `created_at` int(11) NOT NULL,
                                       `updated_at` int(11) NOT NULL,
@@ -856,3 +857,6 @@ CREATE TABLE `v2_server_v2node` (
 
 ALTER TABLE `v2_server_route`
 CHANGE `action_value` `action_value` text NULL AFTER `action`;
+
+ALTER TABLE `v2_server_anytls`
+ADD `pinned_peer_cert_sha256` varchar(128) DEFAULT NULL COMMENT 'TLS leaf cert SHA256 hex' AFTER `insecure`;
