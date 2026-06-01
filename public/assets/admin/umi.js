@@ -45553,12 +45553,14 @@
                     title: "\u8282\u70b9\u6d41\u91cf\u8bb0\u5f55"
                 }, u.a.createElement(m["a"], {
                     loading: s
-                }, u.a.createElement("div", {
-                    className: "p-2 border-bottom",
+                }, u.a.createElement(i["a"], {
+                    title: ()=>u.a.createElement("div", {
+                    className: "border-bottom",
                     style: {
                         display: "flex",
                         gap: 8,
-                        flexWrap: "wrap"
+                        flexWrap: "wrap",
+                        padding: "8px 0"
                     }
                 }, u.a.createElement("select", {
                     className: "form-control",
@@ -45606,7 +45608,7 @@
                             page: 1
                         })
                     }, ()=>this.getStatUser())
-                }, "\u91cd\u7f6e")), u.a.createElement(i["a"], {
+                }, "\u91cd\u7f6e")),
                     pagination: a()({}, o, {
                         size: "small"
                     }),
