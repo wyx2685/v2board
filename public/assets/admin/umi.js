@@ -104829,7 +104829,7 @@
                 }, "Xray 26.5+ pcs")), y.a.createElement(s["a"], {
                     value: e.pinned_peer_cert_sha256 || "",
                     onChange: e=>this.change("pinned_peer_cert_sha256", e.target.value),
-                    placeholder: "2fdd6e9c1b19578975d0ad46d2d159d66cf4c337a6d5f96c1e4b6b117c203842\uff0c\u81ea\u7b7e\u8bc1\u4e66\u5fc5\u586b"
+                    placeholder: "2fdd6e9c1b19578975d0ad46d2d159d66cf4c337a6d5f96c1e4b6b117c203842\uff0c\u81ea\u7b7e\u8bc1\u4e66\u5fc5\u586b\uff0cv2node \u542f\u52a8\u540e\u53ef\u81ea\u52a8\u540c\u6b65"
                 })), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "ECH (Encrypted Client Hello)"), y.a.createElement(N["a"], {
@@ -105908,7 +105908,7 @@
                 },
                 y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top",
-                    title: "Xray 26.5+ \u5ba2\u6237\u7aef TLS \u8bc1\u4e66\u6307\u7eb9(pcs)\uff0c64\u4f4d\u5341\u516d\u8fdb\u5236\u3002\u81ea\u7b7e\u8bc1\u4e66\u5fc5\u586b\uff0c\u53ef\u4ece\u8282\u70b9 /etc/v2node/anytls{id}.cer \u83b7\u53d6"
+                    title: "Xray 26.5+ \u5ba2\u6237\u7aef TLS \u8bc1\u4e66\u6307\u7eb9(pcs)\u3002v2node \u542f\u52a8/\u7eed\u7b7e\u540e\u4f1a\u81ea\u52a8\u4e0a\u62a5\u586b\u5145\uff0c\u4ea6\u53ef\u624b\u52a8\u586b\u5199"
                 },
                 "\u8bc1\u4e66\u6307\u7eb9(SHA256) ", y.a.createElement(m["a"], {
                     type: "question-circle"

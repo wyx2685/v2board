@@ -14,6 +14,10 @@ class ServerRoute
                 $ctrl = \App::make("\\App\\Http\\Controllers\\V2\\Server\\ServerController");
                 return \App::call([$ctrl, 'config']);
             });
+            $router->post('/cert-pin', function() {
+                $ctrl = \App::make("\\App\\Http\\Controllers\\V2\\Server\\ServerController");
+                return \App::call([$ctrl, 'certPin']);
+            });
         });
     }
 }

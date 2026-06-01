@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V2\Server;
 
 use App\Http\Controllers\Controller;
+use App\Services\CertPinService;
 use App\Services\ServerService;
 use Illuminate\Http\Request;
 use App\Utils\Helper;
@@ -107,5 +108,32 @@ class ServerController extends Controller
         }
 
         return response($response)->header('ETag', "\"{$eTag}\"");
+    }
+
+    /**
+     * v2node reports leaf TLS cert SHA256 after cert generate/renew.
+     */
+    public function certPin(Request $request)
+    {
+        $pin = $request->input('pinned_peer_cert_sha256', '');
+        if (!is_string($pin) || Helper::getTlsPinSha256(['pinned_peer_cert_sha256' => $pin]) === '') {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'invalid pinned_peer_cert_sha256'
+            ]);
+        }
+
+        $service = new CertPinService();
+        if (!$service->updateFromNodeReport($this->nodeInfo, 'v2node', $pin)) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'update cert pin failed'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => true
+        ]);
     }
 }
