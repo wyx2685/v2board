@@ -30,7 +30,7 @@ class StatController extends Controller
 
             if ($records->isNotEmpty()) {
                 $this->fillServerStatRecords($records);
-                $legacyRecords = $this->getLegacyTrafficRecords($request->user['id'], $startAt, $records->pluck('record_at')->unique()->all());
+                $legacyRecords = $this->getLegacyTrafficRecords($request->user['id'], $startAt);
                 $records = $records->concat($legacyRecords)
                     ->sortByDesc('record_at')
                     ->values();
@@ -46,7 +46,7 @@ class StatController extends Controller
         ]);
     }
 
-    private function getLegacyTrafficRecords($userId, $startAt, array $excludeRecordAts = [])
+    private function getLegacyTrafficRecords($userId, $startAt)
     {
         $builder = StatUser::select([
             'u',
@@ -58,9 +58,6 @@ class StatController extends Controller
             ->where('user_id', $userId)
             ->where('record_at', '>=', $startAt)
             ->orderBy('record_at', 'DESC');
-        if (!empty($excludeRecordAts)) {
-            $builder->whereNotIn('record_at', $excludeRecordAts);
-        }
         $records = $builder->get();
         foreach ($records as $record) {
             $record['server_name'] = '汇总';

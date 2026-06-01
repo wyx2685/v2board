@@ -45427,6 +45427,8 @@
                     visible: !1,
                     records: [],
                     loading: !1,
+                    serverType: "",
+                    serverId: "",
                     pagination: {
                         page: 1,
                         pageSize: 10,
@@ -45453,7 +45455,9 @@
                             case 0:
                                 return n.next = 2,
                                 Object(h["a"])("/" + window.settings.secure_path + "/stat/getStatUserByServer", a()({
-                                    user_id: e.props.userId
+                                    user_id: e.props.userId,
+                                    server_type: e.state.serverType,
+                                    server_id: e.state.serverId
                                 }, t));
                             case 2:
                                 if (r = n.sent,
@@ -45484,6 +45488,8 @@
                   , n = e.records
                   , o = e.pagination
                   , s = e.loading
+                  , c = e.serverType
+                  , f = e.serverId
                   , l = [{
                     title: "\u65e5\u671f",
                     dataIndex: "record_at",
@@ -45547,7 +45553,60 @@
                     title: "\u8282\u70b9\u6d41\u91cf\u8bb0\u5f55"
                 }, u.a.createElement(m["a"], {
                     loading: s
-                }, u.a.createElement(i["a"], {
+                }, u.a.createElement("div", {
+                    className: "p-2 border-bottom",
+                    style: {
+                        display: "flex",
+                        gap: 8,
+                        flexWrap: "wrap"
+                    }
+                }, u.a.createElement("select", {
+                    className: "form-control",
+                    style: {
+                        width: 160
+                    },
+                    value: c,
+                    onChange: e=>this.setState({
+                        serverType: e.target.value,
+                        pagination: a()({}, o, {
+                            current: 1,
+                            page: 1
+                        })
+                    }, ()=>this.getStatUser())
+                }, u.a.createElement("option", {
+                    value: ""
+                }, "\u5168\u90e8\u7c7b\u578b"), ["shadowsocks", "vmess", "vless", "trojan", "tuic", "hysteria", "anytls", "v2node"].map(e=>u.a.createElement("option", {
+                    key: e,
+                    value: e
+                }, e))), u.a.createElement("input", {
+                    className: "form-control",
+                    style: {
+                        width: 140
+                    },
+                    value: f,
+                    placeholder: "\u8282\u70b9ID",
+                    onChange: e=>this.setState({
+                        serverId: e.target.value
+                    })
+                }), u.a.createElement("button", {
+                    className: "btn btn-sm btn-primary",
+                    onClick: ()=>this.setState({
+                        pagination: a()({}, o, {
+                            current: 1,
+                            page: 1
+                        })
+                    }, ()=>this.getStatUser())
+                }, "\u7b5b\u9009"), u.a.createElement("button", {
+                    className: "btn btn-sm btn-secondary",
+                    onClick: ()=>this.setState({
+                        serverType: "",
+                        serverId: "",
+                        pagination: a()({}, o, {
+                            current: 1,
+                            page: 1
+                        })
+                    }, ()=>this.getStatUser())
+                }, "\u91cd\u7f6e")), u.a.createElement(i["a"], {
                     pagination: a()({}, o, {
                         size: "small"
                     }),

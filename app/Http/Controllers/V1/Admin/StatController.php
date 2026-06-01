@@ -340,7 +340,7 @@ class StatController extends Controller
 
         $records = $builder->get();
         $this->fillServerStatRecords($records);
-        $legacyRecords = $this->getLegacyStatUserRecords($request, $records->pluck('record_at')->unique()->all());
+        $legacyRecords = $this->getLegacyStatUserRecords($request);
         $records = $records->concat($legacyRecords)
             ->sortByDesc('record_at')
             ->values();
@@ -378,7 +378,7 @@ class StatController extends Controller
         ];
     }
 
-    private function getLegacyStatUserRecords(Request $request, array $excludeRecordAts = [])
+    private function getLegacyStatUserRecords(Request $request)
     {
         $builder = StatUser::orderBy('record_at', 'DESC')
             ->where('user_id', $request->input('user_id'));
@@ -389,10 +389,6 @@ class StatController extends Controller
         if ($request->input('end_at')) {
             $builder->where('record_at', '<', $request->input('end_at'));
         }
-        if (!empty($excludeRecordAts)) {
-            $builder->whereNotIn('record_at', $excludeRecordAts);
-        }
-
         $records = $builder->get();
         foreach ($records as $record) {
             $record['server_name'] = '汇总';

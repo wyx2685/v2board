@@ -4,10 +4,12 @@ namespace App\Console\Commands;
 
 use App\Models\StatServer;
 use App\Models\StatUser;
+use App\Models\StatUserServer;
 use App\Services\StatisticalService;
 use Illuminate\Console\Command;
 use App\Models\Stat;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class V2boardStatistics extends Command
 {
@@ -46,6 +48,7 @@ class V2boardStatistics extends Command
         ini_set('memory_limit', -1);
         //$this->statUser();
         //$this->statServer();
+        $this->syncStatUserSummaryFromServerStats();
         $this->stat();
         info('统计任务执行完毕。耗时:' . (microtime(true) - $startAt) / 1000);
     }
@@ -133,6 +136,55 @@ class V2boardStatistics extends Command
                 return;
             }
             Stat::create($data);
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage(), ['exception' => $e]);
+        }
+    }
+
+    private function syncStatUserSummaryFromServerStats()
+    {
+        if (!Schema::hasTable('v2_stat_user_server')) {
+            return;
+        }
+
+        try {
+            $recordAt = strtotime('-1 day', strtotime(date('Y-m-d')));
+            $createdAt = time();
+            $stats = StatUserServer::select([
+                'user_id',
+                'server_rate',
+                'record_at',
+                DB::raw('SUM(u) as u'),
+                DB::raw('SUM(d) as d')
+            ])
+                ->where('record_at', $recordAt)
+                ->where('record_type', 'd')
+                ->groupBy('user_id', 'server_rate', 'record_at')
+                ->get()
+                ->map(function ($stat) use ($createdAt) {
+                    return [
+                        'user_id' => $stat['user_id'],
+                        'server_rate' => $stat['server_rate'],
+                        'u' => $stat['u'],
+                        'd' => $stat['d'],
+                        'record_type' => 'd',
+                        'record_at' => $stat['record_at'],
+                        'created_at' => $createdAt,
+                        'updated_at' => $createdAt
+                    ];
+                });
+
+            if ($stats->isEmpty()) {
+                return;
+            }
+
+            $stats->chunk(500)->each(function ($chunk) {
+                StatUser::upsert(
+                    $chunk->toArray(),
+                    ['server_rate', 'user_id', 'record_at'],
+                    ['u', 'd', 'record_type', 'updated_at']
+                );
+            });
         } catch (\Exception $e) {
             \Log::error($e->getMessage(), ['exception' => $e]);
         }
