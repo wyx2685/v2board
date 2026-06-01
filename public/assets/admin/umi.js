@@ -104819,7 +104819,18 @@
                 }, y.a.createElement("label", null, "Allow Insecure"), y.a.createElement("div", null, y.a.createElement(f["a"], {
                     checked: parseInt(n),
                     onChange: e=>this.change("allow_insecure", e ? "1" : "0")
-                }))), y.a.createElement("div", {
+                }))), tls == 1 && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "\u8bc1\u4e66\u6307\u7eb9(SHA256) ", y.a.createElement("span", {
+                    style: {
+                        color: "#999",
+                        fontSize: "12px"
+                    }
+                }, "Xray 26.5+ pcs")), y.a.createElement(s["a"], {
+                    value: e.pinned_peer_cert_sha256 || "",
+                    onChange: e=>this.change("pinned_peer_cert_sha256", e.target.value),
+                    placeholder: "2fdd6e9c1b19578975d0ad46d2d159d66cf4c337a6d5f96c1e4b6b117c203842\uff0c\u81ea\u7b7e\u8bc1\u4e66\u5fc5\u586b"
+                })), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "ECH (Encrypted Client Hello)"), y.a.createElement(N["a"], {
                     value: e.ech || "",
