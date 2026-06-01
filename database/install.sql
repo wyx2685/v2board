@@ -516,6 +516,27 @@ CREATE TABLE `v2_stat_user` (
                                 KEY `server_rate` (`server_rate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `v2_stat_user_server`;
+CREATE TABLE `v2_stat_user_server` (
+                                `id` int(11) NOT NULL AUTO_INCREMENT,
+                                `user_id` int(11) NOT NULL,
+                                `server_id` int(11) NOT NULL,
+                                `server_type` char(11) NOT NULL,
+                                `server_rate` decimal(10,2) NOT NULL,
+                                `u` bigint(20) NOT NULL,
+                                `d` bigint(20) NOT NULL,
+                                `record_type` char(2) NOT NULL,
+                                `record_at` int(11) NOT NULL,
+                                `created_at` int(11) NOT NULL,
+                                `updated_at` int(11) NOT NULL,
+                                PRIMARY KEY (`id`),
+                                UNIQUE KEY `user_server_record_at` (`user_id`,`server_id`,`server_type`,`record_at`),
+                                KEY `user_id` (`user_id`),
+                                KEY `server_id` (`server_id`),
+                                KEY `server_type` (`server_type`),
+                                KEY `record_at` (`record_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户节点流量统计';
+
 
 DROP TABLE IF EXISTS `v2_ticket`;
 CREATE TABLE `v2_ticket` (

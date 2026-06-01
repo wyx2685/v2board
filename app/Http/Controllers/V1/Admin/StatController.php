@@ -16,10 +16,12 @@ use App\Models\ServerV2node;
 use App\Models\Stat;
 use App\Models\StatServer;
 use App\Models\StatUser;
+use App\Models\StatUserServer;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class StatController extends Controller
 {
@@ -292,5 +294,115 @@ class StatController extends Controller
         ];
     }
 
-}
+    public function getStatUserByServer(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
+            'server_id' => 'nullable|integer',
+            'server_type' => 'nullable|string',
+            'start_at' => 'nullable|integer',
+            'end_at' => 'nullable|integer'
+        ]);
 
+        $current = $request->input('current') ? (int)$request->input('current') : 1;
+        $pageSize = $request->input('pageSize') >= 10 ? (int)$request->input('pageSize') : 10;
+
+        if (!Schema::hasTable('v2_stat_user_server')) {
+            return $this->getLegacyStatUserByServer($request, $current, $pageSize);
+        }
+
+        $builder = StatUserServer::orderBy('record_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->where('user_id', $request->input('user_id'));
+
+        if ($request->input('server_id')) {
+            $builder->where('server_id', $request->input('server_id'));
+        }
+        if ($request->input('server_type')) {
+            $builder->where('server_type', $request->input('server_type'));
+        }
+        if ($request->input('start_at')) {
+            $builder->where('record_at', '>=', $request->input('start_at'));
+        }
+        if ($request->input('end_at')) {
+            $builder->where('record_at', '<', $request->input('end_at'));
+        }
+
+        $total = $builder->count();
+        if (!$total && !$request->input('server_id') && !$request->input('server_type')) {
+            return $this->getLegacyStatUserByServer($request, $current, $pageSize);
+        }
+        $records = $builder->forPage($current, $pageSize)->get();
+        $serverNames = $this->getServerNames($records);
+        foreach ($records as $record) {
+            $key = $record['server_type'] . ':' . $record['server_id'];
+            $record['server_name'] = $serverNames[$key] ?? $record['server_type'] . '#' . $record['server_id'];
+            $record['total'] = $record['u'] + $record['d'];
+            $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
+        }
+
+        return [
+            'data' => $records,
+            'total' => $total
+        ];
+    }
+
+    private function getLegacyStatUserByServer(Request $request, int $current, int $pageSize): array
+    {
+        $builder = StatUser::orderBy('record_at', 'DESC')
+            ->where('user_id', $request->input('user_id'));
+
+        if ($request->input('start_at')) {
+            $builder->where('record_at', '>=', $request->input('start_at'));
+        }
+        if ($request->input('end_at')) {
+            $builder->where('record_at', '<', $request->input('end_at'));
+        }
+
+        $total = $builder->count();
+        $records = $builder->forPage($current, $pageSize)->get();
+        foreach ($records as $record) {
+            $record['server_name'] = '汇总';
+            $record['server_type'] = '-';
+            $record['total'] = $record['u'] + $record['d'];
+            $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
+        }
+
+        return [
+            'data' => $records,
+            'total' => $total
+        ];
+    }
+
+    private function getServerNames($records): array
+    {
+        $serverModels = [
+            'shadowsocks' => ServerShadowsocks::class,
+            'v2ray' => ServerVmess::class,
+            'trojan' => ServerTrojan::class,
+            'vmess' => ServerVmess::class,
+            'vless' => ServerVless::class,
+            'tuic' => ServerTuic::class,
+            'hysteria' => ServerHysteria::class,
+            'anytls' => ServerAnytls::class,
+            'v2node' => ServerV2node::class
+        ];
+        $idsByType = [];
+        foreach ($records as $record) {
+            if (!isset($serverModels[$record['server_type']])) continue;
+            $idsByType[$record['server_type']][] = $record['server_id'];
+        }
+
+        $names = [];
+        foreach ($idsByType as $serverType => $ids) {
+            $servers = $serverModels[$serverType]::whereIn('id', array_unique($ids))
+                ->get(['id', 'name'])
+                ->keyBy('id');
+            foreach ($servers as $server) {
+                $names[$serverType . ':' . $server['id']] = $server['name'];
+            }
+        }
+        return $names;
+    }
+
+}

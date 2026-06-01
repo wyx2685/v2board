@@ -45452,7 +45452,7 @@
                             switch (n.prev = n.next) {
                             case 0:
                                 return n.next = 2,
-                                Object(h["a"])("/" + window.settings.secure_path + "/stat/getStatUser", a()({
+                                Object(h["a"])("/" + window.settings.secure_path + "/stat/getStatUserByServer", a()({
                                     user_id: e.props.userId
                                 }, t));
                             case 2:
@@ -45490,9 +45490,17 @@
                     key: "record_at",
                     render: e=>d()(1e3 * e).format("YYYY-MM-DD")
                 }, {
+                    title: "\u8282\u70b9",
+                    dataIndex: "server_name",
+                    key: "server_name"
+                }, {
+                    title: "\u7c7b\u578b",
+                    dataIndex: "server_type",
+                    key: "server_type"
+                }, {
                     title: "\u4e0a\u884c",
                     dataIndex: "u",
-                    key: "d",
+                    key: "u",
                     align: "right",
                     render: e=>Object(p["b"])(e)
                 }, {
@@ -45502,10 +45510,22 @@
                     align: "right",
                     render: e=>Object(p["b"])(e)
                 }, {
+                    title: "\u5408\u8ba1",
+                    dataIndex: "total",
+                    key: "total",
+                    align: "right",
+                    render: e=>Object(p["b"])(e)
+                }, {
                     title: "\u500d\u7387",
                     dataIndex: "server_rate",
                     key: "server_rate",
                     align: "right"
+                }, {
+                    title: "\u8ba1\u8d39\u5408\u8ba1",
+                    dataIndex: "total_with_rate",
+                    key: "total_with_rate",
+                    align: "right",
+                    render: e=>Object(p["b"])(e)
                 }];
                 return u.a.createElement(u.a.Fragment, null, u.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
@@ -45524,7 +45544,7 @@
                     },
                     footer: !1,
                     visible: t,
-                    title: "\u6d41\u91cf\u8bb0\u5f55"
+                    title: "\u8282\u70b9\u6d41\u91cf\u8bb0\u5f55"
                 }, u.a.createElement(m["a"], {
                     loading: s
                 }, u.a.createElement(i["a"], {
@@ -45532,6 +45552,9 @@
                         size: "small"
                     }),
                     columns: l,
+                    scroll: {
+                        x: 960
+                    },
                     dataSource: n,
                     onChange: e=>{
                         this.setState({
