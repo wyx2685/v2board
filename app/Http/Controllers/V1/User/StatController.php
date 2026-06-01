@@ -20,27 +20,34 @@ class StatController extends Controller
 {
     public function getTrafficLog(Request $request)
     {
+        $startAt = strtotime(date('Y-m-1'));
         if (Schema::hasTable('v2_stat_user_server')) {
             $records = StatUserServer::where('user_id', $request->user['id'])
-                ->where('record_at', '>=', strtotime(date('Y-m-1')))
+                ->where('record_at', '>=', $startAt)
                 ->orderBy('record_at', 'DESC')
                 ->orderBy('id', 'DESC')
                 ->get();
 
             if ($records->isNotEmpty()) {
-                $serverNames = $this->getServerNames($records);
-                foreach ($records as $record) {
-                    $key = $record['server_type'] . ':' . $record['server_id'];
-                    $record['server_name'] = $serverNames[$key] ?? $record['server_type'] . '#' . $record['server_id'];
-                    $record['total'] = $record['u'] + $record['d'];
-                    $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
-                }
+                $this->fillServerStatRecords($records);
+                $legacyRecords = $this->getLegacyTrafficRecords($request->user['id'], $startAt, $records->pluck('record_at')->unique()->all());
+                $records = $records->concat($legacyRecords)
+                    ->sortByDesc('record_at')
+                    ->values();
                 return response([
                     'data' => $records
                 ]);
             }
         }
 
+        $records = $this->getLegacyTrafficRecords($request->user['id'], $startAt);
+        return response([
+            'data' => $records
+        ]);
+    }
+
+    private function getLegacyTrafficRecords($userId, $startAt, array $excludeRecordAts = [])
+    {
         $builder = StatUser::select([
             'u',
             'd',
@@ -48,9 +55,12 @@ class StatController extends Controller
             'user_id',
             'server_rate'
         ])
-            ->where('user_id', $request->user['id'])
-            ->where('record_at', '>=', strtotime(date('Y-m-1')))
+            ->where('user_id', $userId)
+            ->where('record_at', '>=', $startAt)
             ->orderBy('record_at', 'DESC');
+        if (!empty($excludeRecordAts)) {
+            $builder->whereNotIn('record_at', $excludeRecordAts);
+        }
         $records = $builder->get();
         foreach ($records as $record) {
             $record['server_name'] = '汇总';
@@ -58,9 +68,18 @@ class StatController extends Controller
             $record['total'] = $record['u'] + $record['d'];
             $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
         }
-        return response([
-            'data' => $records
-        ]);
+        return $records;
+    }
+
+    private function fillServerStatRecords($records): void
+    {
+        $serverNames = $this->getServerNames($records);
+        foreach ($records as $record) {
+            $key = $record['server_type'] . ':' . $record['server_id'];
+            $record['server_name'] = $serverNames[$key] ?? $record['server_type'] . '#' . $record['server_id'];
+            $record['total'] = $record['u'] + $record['d'];
+            $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
+        }
     }
 
     private function getServerNames($records): array

@@ -328,21 +328,25 @@ class StatController extends Controller
             $builder->where('record_at', '<', $request->input('end_at'));
         }
 
-        $total = $builder->count();
-        if (!$total && !$request->input('server_id') && !$request->input('server_type')) {
-            return $this->getLegacyStatUserByServer($request, $current, $pageSize);
-        }
-        $records = $builder->forPage($current, $pageSize)->get();
-        $serverNames = $this->getServerNames($records);
-        foreach ($records as $record) {
-            $key = $record['server_type'] . ':' . $record['server_id'];
-            $record['server_name'] = $serverNames[$key] ?? $record['server_type'] . '#' . $record['server_id'];
-            $record['total'] = $record['u'] + $record['d'];
-            $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
+        if ($request->input('server_id') || $request->input('server_type')) {
+            $total = $builder->count();
+            $records = $builder->forPage($current, $pageSize)->get();
+            $this->fillServerStatRecords($records);
+            return [
+                'data' => $records,
+                'total' => $total
+            ];
         }
 
+        $records = $builder->get();
+        $this->fillServerStatRecords($records);
+        $legacyRecords = $this->getLegacyStatUserRecords($request, $records->pluck('record_at')->unique()->all());
+        $records = $records->concat($legacyRecords)
+            ->sortByDesc('record_at')
+            ->values();
+        $total = $records->count();
         return [
-            'data' => $records,
+            'data' => $records->forPage($current, $pageSize)->values(),
             'total' => $total
         ];
     }
@@ -372,6 +376,42 @@ class StatController extends Controller
             'data' => $records,
             'total' => $total
         ];
+    }
+
+    private function getLegacyStatUserRecords(Request $request, array $excludeRecordAts = [])
+    {
+        $builder = StatUser::orderBy('record_at', 'DESC')
+            ->where('user_id', $request->input('user_id'));
+
+        if ($request->input('start_at')) {
+            $builder->where('record_at', '>=', $request->input('start_at'));
+        }
+        if ($request->input('end_at')) {
+            $builder->where('record_at', '<', $request->input('end_at'));
+        }
+        if (!empty($excludeRecordAts)) {
+            $builder->whereNotIn('record_at', $excludeRecordAts);
+        }
+
+        $records = $builder->get();
+        foreach ($records as $record) {
+            $record['server_name'] = '汇总';
+            $record['server_type'] = '-';
+            $record['total'] = $record['u'] + $record['d'];
+            $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
+        }
+        return $records;
+    }
+
+    private function fillServerStatRecords($records): void
+    {
+        $serverNames = $this->getServerNames($records);
+        foreach ($records as $record) {
+            $key = $record['server_type'] . ':' . $record['server_id'];
+            $record['server_name'] = $serverNames[$key] ?? $record['server_type'] . '#' . $record['server_id'];
+            $record['total'] = $record['u'] + $record['d'];
+            $record['total_with_rate'] = ($record['u'] + $record['d']) * $record['server_rate'];
+        }
     }
 
     private function getServerNames($records): array
