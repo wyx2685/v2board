@@ -373,7 +373,7 @@ class Helper
         if ($server['tls']) {
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
             $config['sni'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
-            self::applyVmessTlsShareConfig($config, $tlsSettings);
+            self::applyVmessTlsShareConfig($config, $tlsSettings, $server);
         }
         
         $network = (string)$server['network'];
@@ -596,10 +596,13 @@ class Helper
         if (isset($server['server_name']) || isset($tlsSettings['server_name'])) {
             $config['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
         }
-        if (isset($server['tls']) && $server['tls'] == 2) {
+        if (isset($server['tls']) && (int)$server['tls'] === 2) {
             $config['security'] = 'reality';
             $config['pbk'] = $tlsSettings['public_key'] ?? '';
             $config['sid'] = $tlsSettings['short_id'] ?? '';
+        } elseif (!isset($server['tls']) || (int)$server['tls'] === 1) {
+            // standalone AnyTLS 或 v2node 普通 TLS
+            $config['security'] = 'tls';
         }
         $remote = self::formatHost($server['host']);
         $port = $server['port'];
