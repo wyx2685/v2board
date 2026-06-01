@@ -395,7 +395,7 @@ class ServerService
             $apiHostArg = escapeshellarg((string) $apiHost);
             $apiKeyArg = escapeshellarg((string) $apiKey);
             $servers[$k]['install_command'] = sprintf(
-                'wget -N https://raw.githubusercontent.com/wyx2685/v2node/master/script/install.sh && bash install.sh --api-host %s --node-id %d --api-key %s',
+                'wget -N https://raw.githubusercontent.com/kexue-aihao/v2node/master/script/install.sh && bash install.sh --api-host %s --node-id %d --api-key %s',
                 $apiHostArg,
                 $nodeId,
                 $apiKeyArg
