@@ -30665,13 +30665,25 @@
                     }),
                     dataIndex: "record_at",
                     key: "record_at",
-                    render: e=>{
-                        return e ? h()(1e3 * e).format("YYYY/MM/DD") : "-"
-                    }
-                }, {
-                    title: Object(v["formatMessage"])({
-                        id: "\u5b9e\u9645\u4e0a\u884c"
-                    }),
+	                    render: e=>{
+	                        return e ? h()(1e3 * e).format("YYYY/MM/DD") : "-"
+	                    }
+	                }, {
+	                    title: Object(v["formatMessage"])({
+	                        id: "\u8282\u70b9"
+	                    }),
+	                    dataIndex: "server_name",
+	                    key: "server_name"
+	                }, {
+	                    title: Object(v["formatMessage"])({
+	                        id: "\u7c7b\u578b"
+	                    }),
+	                    dataIndex: "server_type",
+	                    key: "server_type"
+	                }, {
+	                    title: Object(v["formatMessage"])({
+	                        id: "\u5b9e\u9645\u4e0a\u884c"
+	                    }),
                     dataIndex: "u",
                     key: "u",
                     align: "right",
@@ -30682,12 +30694,20 @@
                     }),
                     dataIndex: "d",
                     key: "d",
-                    align: "right",
-                    render: (e,t)=>t.server_rate ? Object(p["b"])(parseInt(e)) : 0
-                }, {
-                    title: Object(v["formatMessage"])({
-                        id: "\u6263\u8d39\u500d\u7387"
-                    }),
+	                    align: "right",
+	                    render: (e,t)=>t.server_rate ? Object(p["b"])(parseInt(e)) : 0
+	                }, {
+	                    title: Object(v["formatMessage"])({
+	                        id: "\u5b9e\u9645\u5408\u8ba1"
+	                    }),
+	                    dataIndex: "total",
+	                    key: "total",
+	                    align: "right",
+	                    render: (e,t)=>Object(p["b"])(parseInt(e || 0) || parseInt(t.u || 0) + parseInt(t.d || 0))
+	                }, {
+	                    title: Object(v["formatMessage"])({
+	                        id: "\u6263\u8d39\u500d\u7387"
+	                    }),
                     dataIndex: "server_rate",
                     key: "server_rate",
                     align: "center",
@@ -30706,17 +30726,17 @@
                         })
                     }, Object(v["formatMessage"])({
                         id: "\u5408\u8ba1"
-                    }), " ", l.a.createElement(s["a"], {
-                        type: "question-circle"
-                    })),
-                    dataIndex: "total",
-                    key: "total",
-                    align: "right",
-                    fixed: "right",
-                    render: (e,t)=>{
-                        return Object(p["b"])((parseInt(t.u) + parseInt(t.d)) * t.server_rate)
-                    }
-                }];
+	                    }), " ", l.a.createElement(s["a"], {
+	                        type: "question-circle"
+	                    })),
+	                    dataIndex: "total_with_rate",
+	                    key: "total_with_rate",
+	                    align: "right",
+	                    fixed: "right",
+	                    render: (e,t)=>{
+	                        return Object(p["b"])(parseInt(e || 0) || (parseInt(t.u) + parseInt(t.d)) * t.server_rate)
+	                    }
+	                }];
                 return l.a.createElement(f["a"], o()({}, this.props, {
                     title: Object(v["formatMessage"])({
                         id: "\u6d41\u91cf\u660e\u7ec6"
@@ -30747,10 +30767,10 @@
                     },
                     dataSource: t,
                     pagination: !1,
-                    columns: r,
-                    scroll: {
-                        x: 800
-                    }
+	                    columns: r,
+	                    scroll: {
+	                        x: 1100
+	                    }
                 }))))))
             }
         }
