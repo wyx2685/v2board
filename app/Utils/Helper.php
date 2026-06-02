@@ -284,11 +284,33 @@ class Helper
      */
     public static function applyClashTlsPin(array &$array, array $tlsSettings, array $server = []): void
     {
-        unset($array['skip-cert-verify']);
+        unset($array['skip-cert-verify'], $array['fingerprint']);
+
+        $certPem = $tlsSettings['tls_certificate_pem']
+            ?? $tlsSettings['certificate_pem']
+            ?? '';
+        if ($certPem !== '') {
+            $array['certificate'] = is_array($certPem) ? implode("\n", $certPem) : $certPem;
+
+            return;
+        }
 
         $pcs = self::getTlsPinSha256($tlsSettings, $server);
-        if ($pcs !== '') {
+        if ($pcs !== '' && strlen($pcs) === 64) {
             $array['fingerprint'] = $pcs;
+
+            return;
+        }
+
+        $allowInsecure = (int)(
+            $tlsSettings['allow_insecure']
+            ?? $tlsSettings['allowInsecure']
+            ?? $server['allow_insecure']
+            ?? $server['insecure']
+            ?? 0
+        );
+        if ($allowInsecure === 1) {
+            $array['skip-cert-verify'] = true;
         }
     }
 

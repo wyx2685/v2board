@@ -415,7 +415,10 @@ class ClashMeta
             ],
         ];
         $tlsSettings = Helper::normalizeTlsSettings($server);
-        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        $sni = Helper::getTlsVerifyName($tlsSettings, $server);
+        if ($sni !== '') {
+            $array['sni'] = $sni;
+        }
         Helper::applyClashTlsPin($array, $tlsSettings, $server);
         return $array;
     }
