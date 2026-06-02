@@ -349,6 +349,7 @@ class Helper
 
     /**
      * Mihomo/Clash Meta TLS pin: fingerprint = leaf cert SHA256 hex.
+     * Only emitted when {@see shouldIncludeXrayPcs()} is true (v2rayN / v2rayNG share links).
      * @see https://wiki.metacubex.one/en/config/proxies/tls/
      */
     public static function applyClashTlsPin(array &$array, array $tlsSettings, array $server = []): void
@@ -365,20 +366,13 @@ class Helper
         }
 
         $pcs = self::getTlsPinSha256($tlsSettings, $server);
-        if ($pcs !== '' && strlen($pcs) === 64) {
+        if (self::shouldIncludeXrayPcs() && $pcs !== '' && strlen($pcs) === 64) {
             $array['fingerprint'] = $pcs;
 
             return;
         }
 
-        $allowInsecure = (int)(
-            $tlsSettings['allow_insecure']
-            ?? $tlsSettings['allowInsecure']
-            ?? $server['allow_insecure']
-            ?? $server['insecure']
-            ?? 0
-        );
-        if ($allowInsecure === 1) {
+        if (self::getTlsAllowInsecure($tlsSettings, $server) === 1) {
             $array['skip-cert-verify'] = true;
         }
     }
@@ -409,11 +403,7 @@ class Helper
             return;
         }
 
-        if (self::getTlsPinSha256($tlsSettings, $server) !== '') {
-            return;
-        }
-
-        $allowInsecure = (int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? $server['allow_insecure'] ?? $server['insecure'] ?? 0);
+        $allowInsecure = self::getTlsAllowInsecure($tlsSettings, $server);
         if ($allowInsecure === 1) {
             $tlsConfig['insecure'] = true;
         }
