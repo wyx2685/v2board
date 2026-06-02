@@ -6,6 +6,24 @@ use Illuminate\Support\Facades\Cache;
 
 class Helper
 {
+    /** Whether to emit Xray 26.5+ pcs/vcn (pinSHA256) in share links for this request. */
+    private static $includeXrayPcs = false;
+
+    public static function setIncludeXrayPcs(bool $include): void
+    {
+        self::$includeXrayPcs = $include;
+    }
+
+    public static function shouldIncludeXrayPcs(): bool
+    {
+        return self::$includeXrayPcs;
+    }
+
+    public static function flagSupportsXrayPcs(string $flag): bool
+    {
+        return str_contains($flag, 'v2rayng') || str_contains($flag, 'v2rayn');
+    }
+
     public static function uuidToBase64($uuid, $length)
     {
         return base64_encode(substr($uuid, 0, $length));
@@ -220,13 +238,37 @@ class Helper
         );
     }
 
+    public static function getTlsAllowInsecure(array $tlsSettings, array $server = []): int
+    {
+        return (int)(
+            $tlsSettings['allow_insecure']
+            ?? $tlsSettings['allowInsecure']
+            ?? $server['allow_insecure']
+            ?? $server['insecure']
+            ?? 0
+        );
+    }
+
+    private static function applyLegacyXrayTlsInsecure(array &$params, array $tlsSettings, array $server = []): void
+    {
+        if (self::getTlsAllowInsecure($tlsSettings, $server) === 1) {
+            $params['allowInsecure'] = 1;
+        }
+    }
+
     /**
      * Xray 26.5+ share links: pcs/vcn replace deprecated allowInsecure/insecure.
+     * Only emitted when {@see setIncludeXrayPcs()} is true (v2rayN / v2rayNG).
      * @see https://github.com/XTLS/Xray-core/discussions/716
      */
     public static function applyXrayTlsShareParams(array &$params, array $tlsSettings, array $server = []): void
     {
-        unset($params['insecure'], $params['allowInsecure'], $params['allow_insecure']);
+        unset($params['insecure'], $params['allowInsecure'], $params['allow_insecure'], $params['pcs'], $params['vcn']);
+
+        if (!self::shouldIncludeXrayPcs()) {
+            self::applyLegacyXrayTlsInsecure($params, $tlsSettings, $server);
+            return;
+        }
 
         $pcs = self::getTlsPinSha256($tlsSettings, $server);
         if ($pcs === '') {
@@ -242,7 +284,14 @@ class Helper
 
     public static function applyVmessTlsShareConfig(array &$config, array $tlsSettings, array $server = []): void
     {
-        unset($config['allowInsecure']);
+        unset($config['allowInsecure'], $config['pcs'], $config['vcn']);
+
+        if (!self::shouldIncludeXrayPcs()) {
+            if (self::getTlsAllowInsecure($tlsSettings, $server) === 1) {
+                $config['allowInsecure'] = 1;
+            }
+            return;
+        }
 
         $pcs = self::getTlsPinSha256($tlsSettings, $server);
         if ($pcs === '') {
@@ -250,10 +299,24 @@ class Helper
         }
 
         $config['pcs'] = $pcs;
-        $sni = $config['sni'] ?? self::getTlsVerifyName($tlsSettings);
+        $sni = $config['sni'] ?? self::getTlsVerifyName($tlsSettings, $server);
         if ($sni !== '') {
             $config['vcn'] = $sni;
         }
+    }
+
+    private static function applyHysteriaTlsQuery(array &$hyQuery, array $tlsSettings, array $server = []): void
+    {
+        unset($hyQuery['pinSHA256']);
+
+        $pcs = self::getTlsPinSha256($tlsSettings, $server);
+        if (self::shouldIncludeXrayPcs() && $pcs !== '') {
+            $hyQuery['pinSHA256'] = $pcs;
+            unset($hyQuery['insecure']);
+            return;
+        }
+
+        $hyQuery['insecure'] = self::getTlsAllowInsecure($tlsSettings, $server) === 1 ? 1 : 0;
     }
 
     public static function normalizeTlsSettings(array $server): array
@@ -536,12 +599,7 @@ class Helper
 
         $tlsSettings = $server['tls_settings'] ?? [];
         $hyQuery = ['sni' => $server['server_name'] ?? ''];
-        $pcs = self::getTlsPinSha256($tlsSettings);
-        if ($pcs !== '') {
-            $hyQuery['pinSHA256'] = $pcs;
-        } else {
-            $hyQuery['insecure'] = 0;
-        }
+        self::applyHysteriaTlsQuery($hyQuery, $tlsSettings, $server);
         $hyQs = http_build_query($hyQuery);
 
         $uri = $server['version'] == 2 ?
@@ -570,12 +628,7 @@ class Helper
         $tlsSettings = $server['tls_settings'] ?? [];
         $sni = $tlsSettings['server_name'] ?? '';
         $hyQuery = ['sni' => $sni];
-        $pcs = self::getTlsPinSha256($tlsSettings);
-        if ($pcs !== '') {
-            $hyQuery['pinSHA256'] = $pcs;
-        } else {
-            $hyQuery['insecure'] = 0;
-        }
+        self::applyHysteriaTlsQuery($hyQuery, $tlsSettings, $server);
         $uri = "hysteria2://{$password}@{$remote}:{$firstPort}/?" . http_build_query($hyQuery);
 
         if (isset($server['obfs']) && isset($server['obfs_password'])) {
