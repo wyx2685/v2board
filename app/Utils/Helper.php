@@ -21,9 +21,15 @@ class Helper
 
     public static function flagSupportsXrayPcs(string $flag): bool
     {
+        $flag = strtolower($flag);
+
         return str_contains($flag, 'v2rayng') || str_contains($flag, 'v2rayn');
     }
 
+    /**
+     * PCS is only enabled inside V2rayN / V2rayNG protocol handlers.
+     * Do not infer from ?flag= or generic User-Agent here.
+     */
     public static function uuidToBase64($uuid, $length)
     {
         return base64_encode(substr($uuid, 0, $length));

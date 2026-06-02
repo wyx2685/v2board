@@ -19,7 +19,7 @@ class ClientController extends Controller
         $flag = $request->input('flag')
             ?? ($_SERVER['HTTP_USER_AGENT'] ?? '');
         $flag = strtolower($flag);
-        Helper::setIncludeXrayPcs(Helper::flagSupportsXrayPcs($flag));
+        Helper::setIncludeXrayPcs(false);
         $user = $request->user;
         // account not expired and is not banned.
         $userService = new UserService();
