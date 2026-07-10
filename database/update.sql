@@ -286,6 +286,12 @@ CHANGE `show` `show` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示' AFTE
 ALTER TABLE `v2_server_trojan`
 ADD `server_name` varchar(255) NULL AFTER `allow_insecure`;
 
+-- TLS certificate pinning support. Existing 0/1 values remain valid.
+ALTER TABLE `v2_server_trojan`
+CHANGE `allow_insecure` `allow_insecure` varchar(16) NOT NULL DEFAULT '0' COMMENT 'TLS 验证模式：0、pincert 或 1',
+ADD `pinned_peer_cert_sha256` varchar(95) NULL AFTER `allow_insecure`,
+ADD `certificate_public_key_sha256` varchar(128) NULL AFTER `pinned_peer_cert_sha256`;
+
 UPDATE `v2_server` SET
 `ruleSettings` = NULL
 WHERE `ruleSettings` = '{}';

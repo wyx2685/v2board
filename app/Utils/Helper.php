@@ -6,6 +6,92 @@ use Illuminate\Support\Facades\Cache;
 
 class Helper
 {
+    /**
+     * TLS verification policy stored on a server.  The legacy 0/1 values are
+     * deliberately kept compatible; "pincert" enables certificate pinning.
+     */
+    public static function tlsVerificationMode(array $server): string
+    {
+        $settings = $server['tls_settings'] ?? ($server['tlsSettings'] ?? []);
+        $value = $server['allow_insecure'] ?? ($server['insecure'] ?? ($settings['allow_insecure'] ?? ($settings['allowInsecure'] ?? 0)));
+
+        if (is_string($value) && strtolower($value) === 'pincert') {
+            return 'pincert';
+        }
+
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN) || (int) $value === 1 ? 'true' : 'false';
+    }
+
+    /** Full DER certificate SHA-256, used by Xray/Mihomo/Surfboard. */
+    public static function tlsCertificatePin(array $server): ?string
+    {
+        $settings = $server['tls_settings'] ?? ($server['tlsSettings'] ?? []);
+        $pin = $server['pinned_peer_cert_sha256']
+            ?? ($server['pinned_cert_sha256']
+            ?? ($settings['pinned_peer_cert_sha256']
+            ?? ($settings['pinned_cert_sha256'] ?? null)));
+        if (!is_string($pin)) {
+            return null;
+        }
+
+        $pin = trim($pin);
+        return preg_match('/^[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31}$/', $pin)
+            || preg_match('/^[A-Fa-f0-9]{64}$/', $pin) ? $pin : null;
+    }
+
+    /** SPKI SHA-256 in Base64, required by sing-box 1.13+. */
+    public static function tlsPublicKeyPin(array $server): ?string
+    {
+        $settings = $server['tls_settings'] ?? ($server['tlsSettings'] ?? []);
+        $pin = $server['certificate_public_key_sha256']
+            ?? ($settings['certificate_public_key_sha256'] ?? null);
+        if (!is_string($pin) || trim($pin) === '') {
+            return null;
+        }
+        return trim($pin);
+    }
+
+    public static function applyMihomoTlsPolicy(array &$config, array $server): void
+    {
+        $mode = self::tlsVerificationMode($server);
+        $pin = self::tlsCertificatePin($server);
+        if ($mode === 'pincert' && $pin !== null) {
+            $config['skip-cert-verify'] = false;
+            $config['fingerprint'] = $pin;
+            return;
+        }
+        // A pin mode without a usable pin must keep legacy clients working.
+        $config['skip-cert-verify'] = $mode === 'pincert' || $mode === 'true';
+    }
+
+    public static function applySingboxTlsPolicy(array &$config, array $server): void
+    {
+        $mode = self::tlsVerificationMode($server);
+        $pin = self::tlsPublicKeyPin($server);
+        if ($mode === 'pincert' && $pin !== null) {
+            $config['insecure'] = false;
+            $config['certificate_public_key_sha256'] = [$pin];
+            return;
+        }
+        $config['insecure'] = $mode === 'pincert' || $mode === 'true';
+    }
+
+    /** TLS clients without certificate-pinning support use the safe fallback. */
+    public static function legacyTlsInsecure(array $server): bool
+    {
+        return self::tlsVerificationMode($server) !== 'false';
+    }
+
+    public static function surfboardTlsOptions(array $server): array
+    {
+        $mode = self::tlsVerificationMode($server);
+        $pin = self::tlsCertificatePin($server);
+        if ($mode === 'pincert' && $pin !== null) {
+            return ['skip-cert-verify=false', 'server-cert-fingerprint-sha256=' . str_replace(':', '', strtolower($pin))];
+        }
+        return ['skip-cert-verify=' . (($mode === 'pincert' || $mode === 'true') ? 'true' : 'false')];
+    }
+
     public static function uuidToBase64($uuid, $length)
     {
         return base64_encode(substr($uuid, 0, $length));
@@ -240,7 +326,7 @@ class Helper
 
         if ($server['tls']) {
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
-            $config['allowInsecure'] = (int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0);
+            $config['allowInsecure'] = self::legacyTlsInsecure($server) ? 1 : 0;
             $config['sni'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
         }
         
@@ -305,7 +391,7 @@ class Helper
             "security" => $server['tls'] != 0 ? ($server['tls'] == 2 ? "reality" : "tls") : "",
             "flow" => $server['flow'],
             "fp" => $tlsSettings['fingerprint'] ?? 'chrome',
-            "insecure" => $tlsSettings['allow_insecure'] ?? 0,
+            "insecure" => self::legacyTlsInsecure($server) ? 1 : 0,
         ];
 
         if ($server['tls']) {
@@ -342,7 +428,7 @@ class Helper
     {
         $tlsSettings = $server['tls_settings'] ?? [];
         $config = [
-            'allowInsecure' => $server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0),
+            'allowInsecure' => self::legacyTlsInsecure($server) ? 1 : 0,
             'peer' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? ''),
             'sni' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? ''),
             'type'=> $server['network'],
@@ -404,7 +490,7 @@ class Helper
         $parts = explode(",", $server['port']);
         $firstPort = strpos($parts[0], '-') !== false ? explode('-', $parts[0])[0] : $parts[0];
         $tlsSettings = $server['tls_settings'] ?? [];
-        $insecure = $tlsSettings['allow_insecure'] ?? 0;
+        $insecure = self::legacyTlsInsecure($server) ? 1 : 0;
         $sni = $tlsSettings['server_name'] ?? '';
         $uri = "hysteria2://{$password}@{$remote}:{$firstPort}/?insecure={$insecure}&sni={$sni}";
 
@@ -425,7 +511,7 @@ class Helper
             'sni' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? ''),
             'alpn'=> 'h3',
             'congestion_control' => $server['congestion_control'],
-            'allow_insecure' => $server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0),
+            'allow_insecure' => self::legacyTlsInsecure($server) ? 1 : 0,
             'disable_sni' => $server['disable_sni'],
             'udp_relay_mode' => $server['udp_relay_mode'],
         ];
@@ -443,7 +529,7 @@ class Helper
         $tlsSettings = $server['tls_settings'] ?? [];
         $config = [
             'type' => $server['network'] ?? 'tcp',
-            'insecure' => $server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0),
+            'insecure' => self::legacyTlsInsecure($server) ? 1 : 0,
             'fp' => $tlsSettings['fingerprint'] ?? 'chrome',
         ];
         if (isset($server['server_name']) || isset($tlsSettings['server_name'])) {

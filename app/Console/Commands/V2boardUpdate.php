@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class V2boardUpdate extends Command
 {
@@ -57,7 +58,32 @@ class V2boardUpdate extends Command
             } catch (\Exception $e) {
             }
         }
+        $this->updateTlsPinningSchema();
         \Artisan::call('horizon:terminate');
         $this->info('更新完毕，队列服务已重启，你无需进行任何操作。');
+    }
+
+    /**
+     * update.sql is historical and is intentionally re-run by this project.
+     * Keep this migration idempotent so upgrades do not silently miss the new
+     * TLS pinning columns after an earlier SQL statement already exists.
+     */
+    private function updateTlsPinningSchema(): void
+    {
+        if (!Schema::hasTable('v2_server_trojan')) {
+            return;
+        }
+
+        if (!Schema::hasColumn('v2_server_trojan', 'allow_insecure')) {
+            DB::statement("ALTER TABLE \`v2_server_trojan\` ADD \`allow_insecure\` varchar(16) NOT NULL DEFAULT '0' AFTER \`server_port\`");
+        }
+        DB::statement("ALTER TABLE \`v2_server_trojan\` MODIFY \`allow_insecure\` varchar(16) NOT NULL DEFAULT '0' COMMENT 'TLS verification mode: 0, pincert, or 1'");
+
+        if (!Schema::hasColumn('v2_server_trojan', 'pinned_peer_cert_sha256')) {
+            DB::statement("ALTER TABLE \`v2_server_trojan\` ADD \`pinned_peer_cert_sha256\` varchar(95) NULL AFTER \`allow_insecure\`");
+        }
+        if (!Schema::hasColumn('v2_server_trojan', 'certificate_public_key_sha256')) {
+            DB::statement("ALTER TABLE \`v2_server_trojan\` ADD \`certificate_public_key_sha256\` varchar(128) NULL AFTER \`pinned_peer_cert_sha256\`");
+        }
     }
 }

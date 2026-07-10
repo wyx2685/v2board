@@ -193,6 +193,7 @@ class ClashMeta
                     }
                 }
             }
+            Helper::applyMihomoTlsPolicy($array, $server);
         }
         $network = $server['network'] ?? null;
         if ($network === 'tcp') {
@@ -245,7 +246,7 @@ class ClashMeta
         if ($server['tls']) {
             $array['tls'] = true;
             $tlsSettings = $server['tls_settings'] ?? [];
-            $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
+            Helper::applyMihomoTlsPolicy($array, $server);
             $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
             if ($tlsSettings) {
                 if (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
@@ -359,7 +360,7 @@ class ClashMeta
         };
         $tlsSettings = $server['tls_settings'] ?? [];
         $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
-        $array['skip-cert-verify'] = ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        Helper::applyMihomoTlsPolicy($array, $server);
         if (!empty($tlsSettings['ech'])) {
             if ($tlsSettings['ech'] === 'cloudflare') {
                 $array['ech-opts'] = [
@@ -392,7 +393,7 @@ class ClashMeta
             'congestion-controller' => $server['congestion_control'] ?? 'cubic',
         ];
         $tlsSettings = $server['tls_settings'] ?? [];
-        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        Helper::applyMihomoTlsPolicy($array, $server);
         $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
 
         return $array;
@@ -415,7 +416,7 @@ class ClashMeta
         ];
         $tlsSettings = $server['tls_settings'] ?? [];
         $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
-        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+        Helper::applyMihomoTlsPolicy($array, $server);
         return $array;
     }
 
@@ -439,7 +440,7 @@ class ClashMeta
             $array['mport'] = $server['port'];
         }
         $array['udp'] = true;
-        $array['skip-cert-verify'] = $server['insecure'] == 1 ? true : false;
+        Helper::applyMihomoTlsPolicy($array, $server);
 
         if (isset($server['server_name'])) $array['sni'] = $server['server_name'];
 
@@ -473,10 +474,11 @@ class ClashMeta
             'type' => 'hysteria2',
             'server' => $server['host'],
             'password' => $password,
-            'skip-cert-verify' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
+            'skip-cert-verify' => false,
             'sni' => $tlsSettings['server_name'] ?? '',
             'udp' => true,
         ];
+        Helper::applyMihomoTlsPolicy($array, $server);
         $parts = explode(",", $server['port']);
         $firstPart = $parts[0];
         if (strpos($firstPart, '-') !== false) {

@@ -174,6 +174,7 @@ class Singbox
                     ];
                 }
             }
+            Helper::applySingboxTlsPolicy($tlsConfig, $server);
             $array['tls'] = $tlsConfig;
         }
         if ($server['network'] === 'tcp') {
@@ -247,6 +248,7 @@ class Singbox
                     }
                 }
             }
+            Helper::applySingboxTlsPolicy($tlsConfig, $server);
             $array['tls'] = $tlsConfig;
         }
 
@@ -306,6 +308,7 @@ class Singbox
                 ];
             }
         }
+        Helper::applySingboxTlsPolicy($tlsConfig, $server);
         $array['tls'] = $tlsConfig;
 
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
@@ -352,6 +355,7 @@ class Singbox
             'disable_sni' => $server['disable_sni'] ? true : false,
         ];
         $array['tls']['server_name'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        Helper::applySingboxTlsPolicy($array['tls'], $server);
 
         return $array;
     }
@@ -389,6 +393,7 @@ class Singbox
                 "fingerprint" => $tlsSettings['fingerprint'] ?? 'chrome'
             ];
         }
+        Helper::applySingboxTlsPolicy($tlsConfig, $server);
         $array['tls'] = $tlsConfig;
 
         if ($server['network'] === 'tcp') {
@@ -444,6 +449,7 @@ class Singbox
                 'server_name' => $server['server_name']
             ]
         ];
+        Helper::applySingboxTlsPolicy($array['tls'], $server);
 
         // 设置端口配置
         if (isset($port)) {
@@ -501,6 +507,7 @@ class Singbox
             'tag' => $server['name'],
             'type' => 'hysteria2'
         ];
+        Helper::applySingboxTlsPolicy($array['tls'], $server);
         if (isset($server['obfs'])) {
             $array['obfs']['type'] = $server['obfs'];
             $array['obfs']['password'] = $server['obfs_password'];

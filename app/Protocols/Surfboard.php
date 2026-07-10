@@ -126,10 +126,11 @@ class Surfboard
             array_push($config, 'tls=true');
             if ($server['tlsSettings']) {
                 $tlsSettings = $server['tlsSettings'];
-                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
-                    array_push($config, 'skip-cert-verify=' . ($tlsSettings['allowInsecure'] ? 'true' : 'false'));
                 if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
                     array_push($config, "sni={$tlsSettings['serverName']}");
+            }
+            foreach (Helper::surfboardTlsOptions($server) as $option) {
+                $config[] = $option;
             }
         }
         if ($server['network'] === 'ws') {
@@ -161,8 +162,8 @@ class Surfboard
             'tfo=true',
             'udp-relay=true'
         ];
-        if (!empty($server['allow_insecure'])) {
-            array_push($config, $server['allow_insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
+        foreach (Helper::surfboardTlsOptions($server) as $option) {
+            $config[] = $option;
         }
         if(isset($server['network']) && $server['network'] === "ws") {
             array_push($config, "ws=true");
@@ -182,7 +183,6 @@ class Surfboard
     public static function buildAnyTLS($password, $server)
     {
         $tlsSettings = $server['tls_settings'] ?? [];
-        $allowInsecure = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? 'true' : 'false';
         $sni = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
 
         $config = [
@@ -190,11 +190,13 @@ class Surfboard
             "{$server['host']}",
             "{$server['port']}",
             "password={$password}",
-            "skip-cert-verify={$allowInsecure}",
         ];
 
         if ($sni) {
             $config[] = "sni={$sni}";
+        }
+        foreach (Helper::surfboardTlsOptions($server) as $option) {
+            $config[] = $option;
         }
         $config[] = "reuse=false";
 

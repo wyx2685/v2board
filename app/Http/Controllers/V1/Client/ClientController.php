@@ -25,6 +25,7 @@ class ClientController extends Controller
         if ($userService->isAvailable($user)) {
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
+            $this->applyUnsupportedPinFallback($servers, $flag);
             if($flag) {
                 if (!strpos($flag, 'sing')) {
                     $this->setSubscribeInfoToServers($servers, $user);
@@ -41,7 +42,10 @@ class ClientController extends Controller
                     if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
                         $version = $matches[1];
                     }
-                    if (!is_null($version) && $version >= '1.12.0') {
+                    // certificate_public_key_sha256 was added in sing-box 1.13.
+                    // Older cores must receive the legacy, insecure fallback
+                    // when a node is configured for certificate pinning.
+                    if (!is_null($version) && version_compare($version, '1.13.0', '>=')) {
                         $class = new Singbox($user, $servers);
                     } else {
                         $class = new SingboxOld($user, $servers);
@@ -52,6 +56,45 @@ class ClientController extends Controller
             $class = new General($user, $servers);
             return $class->handle();
         }
+    }
+
+    /**
+     * A pincert node must remain usable on clients that cannot consume a
+     * certificate pin. Normalize only that mode to the old insecure setting;
+     * false and true are passed through untouched.
+     */
+    private function applyUnsupportedPinFallback(&$servers, ?string $flag): void
+    {
+        $supportsPin = $flag
+            && (stripos($flag, 'meta') !== false
+                || stripos($flag, 'verge') !== false
+                || stripos($flag, 'nyanpasu') !== false
+                || stripos($flag, 'surfboard') !== false
+                || (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)
+                    && version_compare($matches[1], '1.13.0', '>=')));
+        if ($supportsPin) {
+            return;
+        }
+
+        foreach ($servers as &$server) {
+            if (Helper::tlsVerificationMode($server) !== 'pincert') {
+                continue;
+            }
+            if (array_key_exists('allow_insecure', $server)) {
+                $server['allow_insecure'] = 1;
+            }
+            if (array_key_exists('insecure', $server)) {
+                $server['insecure'] = 1;
+            }
+            foreach (['tls_settings', 'tlsSettings'] as $key) {
+                if (!isset($server[$key]) || !is_array($server[$key])) {
+                    continue;
+                }
+                $server[$key]['allow_insecure'] = 1;
+                $server[$key]['allowInsecure'] = 1;
+            }
+        }
+        unset($server);
     }
 
     private function setSubscribeInfoToServers(&$servers, $user)

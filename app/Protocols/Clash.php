@@ -3,6 +3,7 @@
 namespace App\Protocols;
 
 use phpDocumentor\Reflection\Types\Self_;
+use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
 class Clash
@@ -142,7 +143,7 @@ class Clash
         if ($server['tls']) {
             $array['tls'] = true;
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
-            $array['skip-cert-verify'] = ((int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
+            $array['skip-cert-verify'] = Helper::legacyTlsInsecure($server);
             $array['servername'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
 
         }
@@ -201,7 +202,7 @@ class Clash
             }
         };
         $array['sni'] = $server['server_name'] ?? (($server['tls_settings'] ?? [])['server_name'] ?? '');
-        $array['skip-cert-verify'] = ((int)(($server['tls_settings'] ?? [])['allow_insecure'] ?? ($server['allow_insecure'] ?? 0))) == 1 ? true : false;
+        $array['skip-cert-verify'] = Helper::legacyTlsInsecure($server);
         return $array;
     }
 

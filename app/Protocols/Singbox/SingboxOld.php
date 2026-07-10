@@ -151,7 +151,7 @@ class SingboxOld
             $tlsConfig = [];
             $tlsConfig['enabled'] = true;
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
-            $tlsConfig['insecure'] = $config['allowInsecure'] = ((int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
+            $tlsConfig['insecure'] = $config['allowInsecure'] = Helper::legacyTlsInsecure($server);
             $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
             $array['tls'] = $tlsConfig;
         }
@@ -197,7 +197,7 @@ class SingboxOld
             $array['flow'] = !empty($server['flow']) ? $server['flow'] : "";
             $tlsSettings = $server['tls_settings'] ?? [];
             if ($server['tls_settings']) {
-                $tlsConfig['insecure'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
+                $tlsConfig['insecure'] = Helper::legacyTlsInsecure($server);
                 $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? null;
                 if ($server['tls'] == 2) {
                     $tlsConfig['reality'] = [
@@ -254,7 +254,7 @@ class SingboxOld
         $tlsSettings = $server['tls_settings'] ?? [];
         $array['tls'] = [
             'enabled' => true,
-            'insecure' => ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
+            'insecure' => Helper::legacyTlsInsecure($server),
             'server_name' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? '')
         ];
 
@@ -294,7 +294,7 @@ class SingboxOld
         $tlsSettings = $server['tls_settings'] ?? [];
         $array['tls'] = [
             'enabled' => true,
-            'insecure' => ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
+            'insecure' => Helper::legacyTlsInsecure($server),
             'alpn' => ['h3'],
             'disable_sni' => $server['disable_sni'] ? true : false,
         ];
@@ -366,7 +366,7 @@ class SingboxOld
             'server_port' => (int)$firstPort,
             'tls' => [
                 'enabled' => true,
-                'insecure' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
+                'insecure' => Helper::legacyTlsInsecure($server),
                 'server_name' => $tlsSettings['server_name'] ?? ''
             ],
             'password' => $password,
