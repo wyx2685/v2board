@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Admin\Server;
 use App\Http\Controllers\Controller;
 use App\Models\ServerV2node;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use ParagonIE_Sodium_Compat as SodiumCompat;
 use App\Utils\Helper;
 
@@ -179,7 +180,11 @@ class V2nodeController extends Controller
             }
             try {
                 $server->update($params);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                Log::error('Failed to save v2node server.', [
+                    'server_id' => $request->input('id'),
+                    'exception' => $e,
+                ]);
                 abort(500, '保存失败');
             }
             return response([
