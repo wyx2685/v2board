@@ -75,15 +75,15 @@ class V2boardUpdate extends Command
         }
 
         if (!Schema::hasColumn('v2_server_trojan', 'allow_insecure')) {
-            DB::statement("ALTER TABLE \`v2_server_trojan\` ADD \`allow_insecure\` varchar(16) NOT NULL DEFAULT '0' AFTER \`server_port\`");
+            DB::statement("ALTER TABLE `v2_server_trojan` ADD `allow_insecure` varchar(16) NOT NULL DEFAULT '0' AFTER `server_port`");
         }
-        DB::statement("ALTER TABLE \`v2_server_trojan\` MODIFY \`allow_insecure\` varchar(16) NOT NULL DEFAULT '0' COMMENT 'TLS verification mode: 0, pincert, or 1'");
+        DB::statement("ALTER TABLE `v2_server_trojan` MODIFY `allow_insecure` varchar(16) NOT NULL DEFAULT '0' COMMENT 'TLS verification mode: 0, pincert, or 1'");
 
         if (!Schema::hasColumn('v2_server_trojan', 'pinned_peer_cert_sha256')) {
-            DB::statement("ALTER TABLE \`v2_server_trojan\` ADD \`pinned_peer_cert_sha256\` varchar(95) NULL AFTER \`allow_insecure\`");
+            DB::statement("ALTER TABLE `v2_server_trojan` ADD `pinned_peer_cert_sha256` varchar(95) NULL AFTER `allow_insecure`");
         }
         if (!Schema::hasColumn('v2_server_trojan', 'certificate_public_key_sha256')) {
-            DB::statement("ALTER TABLE \`v2_server_trojan\` ADD \`certificate_public_key_sha256\` varchar(128) NULL AFTER \`pinned_peer_cert_sha256\`");
+            DB::statement("ALTER TABLE `v2_server_trojan` ADD `certificate_public_key_sha256` varchar(128) NULL AFTER `pinned_peer_cert_sha256`");
         }
     }
 }
