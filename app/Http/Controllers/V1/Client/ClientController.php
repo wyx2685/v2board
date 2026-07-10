@@ -9,7 +9,6 @@ use App\Protocols\Singbox\SingboxOld;
 use App\Protocols\ClashMeta;
 use App\Services\ServerService;
 use App\Services\UserService;
-use App\Utils\Helper;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -25,76 +24,42 @@ class ClientController extends Controller
         if ($userService->isAvailable($user)) {
             $serverService = new ServerService();
             $servers = $serverService->getAvailableServers($user);
-            $this->applyUnsupportedPinFallback($servers, $flag);
-            if($flag) {
-                if (!strpos($flag, 'sing')) {
-                    $this->setSubscribeInfoToServers($servers, $user);
-                    foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
-                        $file = 'App\\Protocols\\' . basename($file, '.php');
-                        $class = new $file($user, $servers);
-                        if (strpos($flag, $class->flag) !== false) {
-                            return $class->handle();
-                        }
-                    }
-                }
-                if (strpos($flag, 'sing') !== false) {
-                    $version = null;
-                    if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)) {
-                        $version = $matches[1];
-                    }
-                    // certificate_public_key_sha256 was added in sing-box 1.13.
-                    // Older cores must receive the legacy, insecure fallback
-                    // when a node is configured for certificate pinning.
-                    if (!is_null($version) && version_compare($version, '1.13.0', '>=')) {
-                        $class = new Singbox($user, $servers);
-                    } else {
-                        $class = new SingboxOld($user, $servers);
-                    }
-                    return $class->handle();
-                }
+            $protocolClass = $this->resolveProtocolClass($flag);
+
+            if ($flag && $protocolClass !== Singbox::class && $protocolClass !== SingboxOld::class) {
+                $this->setSubscribeInfoToServers($servers, $user);
             }
-            $class = new General($user, $servers);
+
+            $class = new $protocolClass($user, $servers);
             return $class->handle();
         }
     }
 
     /**
-     * A pincert node must remain usable on clients that cannot consume a
-     * certificate pin. Normalize only that mode to the old insecure setting;
-     * false and true are passed through untouched.
+     * Resolve the output generator first. TLS pin capability belongs to the
+     * generated format, not to a guessed client name in the request.
      */
-    private function applyUnsupportedPinFallback(&$servers, ?string $flag): void
+    private function resolveProtocolClass(string $flag): string
     {
-        $supportsPin = $flag
-            && (stripos($flag, 'meta') !== false
-                || stripos($flag, 'verge') !== false
-                || stripos($flag, 'nyanpasu') !== false
-                || stripos($flag, 'surfboard') !== false
-                || (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)
-                    && version_compare($matches[1], '1.13.0', '>=')));
-        if ($supportsPin) {
-            return;
+        if (strpos($flag, 'sing') !== false) {
+            if (preg_match('/sing-box\s+([0-9.]+)/i', $flag, $matches)
+                && version_compare($matches[1], '1.13.0', '>=')) {
+                return Singbox::class;
+            }
+            return SingboxOld::class;
         }
 
-        foreach ($servers as &$server) {
-            if (Helper::tlsVerificationMode($server) !== 'pincert') {
-                continue;
-            }
-            if (array_key_exists('allow_insecure', $server)) {
-                $server['allow_insecure'] = 1;
-            }
-            if (array_key_exists('insecure', $server)) {
-                $server['insecure'] = 1;
-            }
-            foreach (['tls_settings', 'tlsSettings'] as $key) {
-                if (!isset($server[$key]) || !is_array($server[$key])) {
-                    continue;
+        if ($flag) {
+            foreach (array_reverse(glob(app_path('Protocols') . '/*.php')) as $file) {
+                $protocolClass = 'App\\Protocols\\' . basename($file, '.php');
+                $protocol = new $protocolClass([], []);
+                if (strpos($flag, $protocol->flag) !== false) {
+                    return $protocolClass;
                 }
-                $server[$key]['allow_insecure'] = 1;
-                $server[$key]['allowInsecure'] = 1;
             }
         }
-        unset($server);
+
+        return General::class;
     }
 
     private function setSubscribeInfoToServers(&$servers, $user)

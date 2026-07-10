@@ -153,10 +153,9 @@ class Stash
 
         if ($server['tls']) {
             $array['tls'] = true;
+            $array['skip-cert-verify'] = Helper::legacyTlsInsecure($server);
             if ($server['tlsSettings']) {
                 $tlsSettings = $server['tlsSettings'];
-                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
-                    $array['skip-cert-verify'] = ($tlsSettings['allowInsecure'] ? true : false);
                 if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
                     $array['servername'] = $tlsSettings['serverName'];
             }
@@ -220,7 +219,7 @@ class Stash
                    $array['reality-opts']['public-key'] = $tlsSettings['public_key'];
                    $array['reality-opts']['short-id'] = $tlsSettings['short_id'];
                 }
-                $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
+                $array['skip-cert-verify'] = Helper::legacyTlsInsecure($server);
                 $array['client-fingerprint'] = $tlsSettings['fingerprint'] ?? null;
             }
         }
@@ -287,7 +286,7 @@ class Stash
             }
         };
         if (!empty($server['server_name'])) $array['sni'] = $server['server_name'];
-        if (!empty($server['allow_insecure'])) $array['skip-cert-verify'] = ($server['allow_insecure'] ? true : false);
+        $array['skip-cert-verify'] = Helper::legacyTlsInsecure($server);
         return $array;
     }
 
@@ -306,7 +305,7 @@ class Stash
             //'reduce-rtt' => $server['zero_rtt_handshake'] ? true : false,
             //'udp-relay-mode' => $server['udp_relay_mode'] ?? 'native',
             //congestion-controller' => $server['congestion_control'] ?? 'cubic',
-            'skip-cert-verify' => $server['insecure'] ? true : false,
+            'skip-cert-verify' => Helper::legacyTlsInsecure($server),
         ];
         if (isset($server['server_name'])) {
             $array['sni'] = $server['server_name'];
@@ -335,7 +334,7 @@ class Stash
             $array['mport'] = $server['port'];   
         }
         $array['udp'] = true;
-        $array['skip-cert-verify'] = $server['insecure'] == 1 ? true : false;
+        $array['skip-cert-verify'] = Helper::legacyTlsInsecure($server);
 
         if (isset($server['server_name'])) $array['sni'] = $server['server_name'];
 
@@ -369,7 +368,7 @@ class Stash
             'type' => 'hysteria2',
             'server' => $server['host'],
             'password' => $password,
-            'skip-cert-verify' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
+            'skip-cert-verify' => Helper::legacyTlsInsecure($server),
             'sni' => $tlsSettings['server_name'] ?? '',
             'udp' => true,
         ];
@@ -407,7 +406,7 @@ class Stash
             $tlsSettings = $server['tls_settings'] ?? [];
             $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
             $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
-            $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
+            $array['skip-cert-verify'] = Helper::legacyTlsInsecure($server);
         }
         return $array; 
     }
