@@ -39,6 +39,22 @@ class Helper
             || preg_match('/^[A-Fa-f0-9]{64}$/', $pin) ? $pin : null;
     }
 
+    /** Normalized certificate pin for URI formats that require bare SHA-256 hex. */
+    public static function tlsCertificatePinHex(array $server): ?string
+    {
+        $pin = self::tlsCertificatePin($server);
+        return $pin === null ? null : strtolower(str_replace(':', '', $pin));
+    }
+
+    /** Add the Xray share-link field for pinnedPeerCertSha256 when applicable. */
+    public static function applyXrayShareTlsPin(array &$config, array $server): void
+    {
+        $pin = self::tlsCertificatePinHex($server);
+        if (self::tlsVerificationMode($server) === 'pincert' && $pin !== null) {
+            $config['pcs'] = $pin;
+        }
+    }
+
     /** SPKI SHA-256 in Base64, required by sing-box 1.13+. */
     public static function tlsPublicKeyPin(array $server): ?string
     {
@@ -328,6 +344,7 @@ class Helper
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
             $config['allowInsecure'] = self::legacyTlsInsecure($server) ? 1 : 0;
             $config['sni'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
+            self::applyXrayShareTlsPin($config, $server);
         }
         
         $network = (string)$server['network'];
@@ -397,6 +414,8 @@ class Helper
         if ($server['tls']) {
             $tlsSettings = $server['tls_settings'] ?? [];
             $config['sni'] = $tlsSettings['server_name'] ?? '';
+            // Keep insecure=1 above so older clients continue to work.
+            self::applyXrayShareTlsPin($config, $server);
             if ($server['tls'] == 2) {
                 $config['pbk'] = $tlsSettings['public_key'] ?? '';
                 $config['sid'] = $tlsSettings['short_id'] ?? '';
@@ -433,6 +452,7 @@ class Helper
             'sni' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? ''),
             'type'=> $server['network'],
         ];
+        self::applyXrayShareTlsPin($config, $server);
 
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
             if($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
@@ -476,6 +496,11 @@ class Helper
                 "&obfs={$server['obfs']}&obfs-password={$obfs_password}" :
                 "&obfs={$server['obfs']}&obfsParam{$obfs_password}";
         }
+        if ($server['version'] == 2
+            && self::tlsVerificationMode($server) === 'pincert'
+            && ($certificatePin = self::tlsCertificatePinHex($server)) !== null) {
+            $uri .= "&pinSHA256={$certificatePin}";
+        }
         if (count($parts) !== 1 || strpos($parts[0], '-') !== false) {
             $uri .= "&mport={$server['mport']}";
         }
@@ -493,6 +518,11 @@ class Helper
         $insecure = self::legacyTlsInsecure($server) ? 1 : 0;
         $sni = $tlsSettings['server_name'] ?? '';
         $uri = "hysteria2://{$password}@{$remote}:{$firstPort}/?insecure={$insecure}&sni={$sni}";
+
+        if (self::tlsVerificationMode($server) === 'pincert'
+            && ($certificatePin = self::tlsCertificatePinHex($server)) !== null) {
+            $uri .= "&pinSHA256={$certificatePin}";
+        }
 
         if (isset($server['obfs']) && isset($server['obfs_password'])) {
             $obfs_password = rawurlencode($server['obfs_password']);
@@ -515,6 +545,7 @@ class Helper
             'disable_sni' => $server['disable_sni'],
             'udp_relay_mode' => $server['udp_relay_mode'],
         ];
+        self::applyXrayShareTlsPin($config, $server);
 
         $remote = self::formatHost($server['host']);
         $port = $server['port'];
@@ -532,6 +563,7 @@ class Helper
             'insecure' => self::legacyTlsInsecure($server) ? 1 : 0,
             'fp' => $tlsSettings['fingerprint'] ?? 'chrome',
         ];
+        self::applyXrayShareTlsPin($config, $server);
         if (isset($server['server_name']) || isset($tlsSettings['server_name'])) {
             $config['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
         }
