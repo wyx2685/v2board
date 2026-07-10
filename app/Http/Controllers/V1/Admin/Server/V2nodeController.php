@@ -26,7 +26,10 @@ class V2nodeController extends Controller
             'tls' => 'required|in:0,1,2',
             'tls_settings' => 'nullable|array',
             'tls_settings.allow_insecure' => 'nullable|in:0,1,pincert',
-            'tls_settings.pinned_peer_cert_sha256' => 'required_if:tls_settings.allow_insecure,pincert|regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
+            'tls_settings.pinned_peer_cert_sha256' => [
+                'required_if:tls_settings.allow_insecure,pincert',
+                'regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
+            ],
             'tls_settings.certificate_public_key_sha256' => 'nullable|string|max:128',
             'flow' => 'nullable|in:xtls-rprx-vision',
             'network' => 'required|in:tcp,ws,grpc,http,httpupgrade,xhttp',
