@@ -12296,7 +12296,9 @@
                 var t = this.props.settings;
                 "{}" !== JSON.stringify(t) && t || (t = {
                     serverName: "",
-                    allowInsecure: 0
+                    allowInsecure: "0",
+                    pinned_peer_cert_sha256: "",
+                    certificate_public_key_sha256: ""
                 }),
                 this.state = {
                     settings: t
@@ -12313,7 +12315,9 @@
             render() {
                 var e = this.state.settings
                   , t = e.serverName
-                  , n = e.allowInsecure;
+                  , n = e.allowInsecure
+                  , p = e.pinned_peer_cert_sha256
+                  , k = e.certificate_public_key_sha256;
                 return d.a.createElement(d.a.Fragment, null, d.a.createElement("div", null, d.a.createElement("div", {
                     className: "form-group"
                 }, d.a.createElement("label", null, "Server Name"), d.a.createElement(s["a"], {
@@ -12322,10 +12326,23 @@
                     placeholder: "\u4e0d\u4f7f\u7528\u8bf7\u7559\u7a7a"
                 })), d.a.createElement("div", {
                     className: "form-group"
-                }, d.a.createElement("label", null, "Allow Insecure"), d.a.createElement("div", null, d.a.createElement(y["a"], {
-                    checked: parseInt(n),
-                    onChange: e=>this.change("allowInsecure", e ? "1" : "0")
-                })))))
+                }, d.a.createElement("label", null, "TLS \u9a8c\u8bc1\u65b9\u5f0f"), d.a.createElement(a["a"], {
+                    value: null == n ? "0" : String(n),
+                    style: { width: "100%" },
+                    onChange: e=>this.change("allowInsecure", e)
+                }, d.a.createElement(a["a"].Option, { value: "0" }, "\u9a8c\u8bc1\u8bc1\u4e66 (false)"), d.a.createElement(a["a"].Option, { value: "pincert" }, "\u56fa\u5b9a\u8bc1\u4e66 (pincert)"), d.a.createElement(a["a"].Option, { value: "1" }, "\u8df3\u8fc7\u9a8c\u8bc1 (true)"))), n === "pincert" && d.a.createElement("div", {
+                    className: "form-group"
+                }, d.a.createElement("label", null, "\u8bc1\u4e66 SHA-256"), d.a.createElement(s["a"], {
+                    value: p,
+                    onChange: e=>this.change("pinned_peer_cert_sha256", e.target.value),
+                    placeholder: "64 \u4f4d\u5341\u516d\u8fdb\u5236\uff0c\u7528\u4e8e Xray/Mihomo/Surfboard"
+                })), n === "pincert" && d.a.createElement("div", {
+                    className: "form-group"
+                }, d.a.createElement("label", null, "SPKI SHA-256 (Base64\uff0c\u53ef\u9009)"), d.a.createElement(s["a"], {
+                    value: k,
+                    onChange: e=>this.change("certificate_public_key_sha256", e.target.value),
+                    placeholder: "\u7528\u4e8e sing-box 1.13+"
+                }))))
             }
         }
         var w = n("lc5D")
@@ -104649,7 +104666,9 @@
                     provider: "",
                     dns_env: "",
                     reject_unknown_sni: "0",
-                    allow_insecure: "0"
+                    allow_insecure: "0",
+                    pinned_peer_cert_sha256: "",
+                    certificate_public_key_sha256: ""
                 }),
                 this.state = {
                     tls: this.props.tls,
@@ -104676,6 +104695,8 @@
                   , ds = e.dest
                   , xv = e.xver
                   , fp = e.fingerprint
+                  , ppc = e.pinned_peer_cert_sha256
+                  , cpk = e.certificate_public_key_sha256
                   , tls = this.state.tls
                   , cert_apply = this.state.cert_apply;
                 return y.a.createElement(y.a.Fragment, null, y.a.createElement("div", null, y.a.createElement("div", {
@@ -104816,10 +104837,23 @@
                     onChange: e=>this.change("reject_unknown_sni", e ? "1" : "0")
                 }))), y.a.createElement("div", {
                     className: "form-group"
-                }, y.a.createElement("label", null, "Allow Insecure"), y.a.createElement("div", null, y.a.createElement(f["a"], {
-                    checked: parseInt(n),
-                    onChange: e=>this.change("allow_insecure", e ? "1" : "0")
-                }))), y.a.createElement("div", {
+                }, y.a.createElement("label", null, "TLS \u9a8c\u8bc1\u65b9\u5f0f"), y.a.createElement(N["a"], {
+                    value: null == n ? "0" : String(n),
+                    style: { width: "100%" },
+                    onChange: e=>this.change("allow_insecure", e)
+                }, y.a.createElement(N["a"].Option, { value: "0" }, "\u9a8c\u8bc1\u8bc1\u4e66 (false)"), y.a.createElement(N["a"].Option, { value: "pincert" }, "\u56fa\u5b9a\u8bc1\u4e66 (pincert)"), y.a.createElement(N["a"].Option, { value: "1" }, "\u8df3\u8fc7\u9a8c\u8bc1 (true)"))), n === "pincert" && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "\u8bc1\u4e66 SHA-256"), y.a.createElement(s["a"], {
+                    value: ppc,
+                    onChange: e=>this.change("pinned_peer_cert_sha256", e.target.value),
+                    placeholder: "64 \u4f4d\u5341\u516d\u8fdb\u5236\uff0c\u7528\u4e8e Xray/Mihomo/Surfboard"
+                })), n === "pincert" && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "SPKI SHA-256 (Base64\uff0c\u53ef\u9009)"), y.a.createElement(s["a"], {
+                    value: cpk,
+                    onChange: e=>this.change("certificate_public_key_sha256", e.target.value),
+                    placeholder: "\u7528\u4e8e sing-box 1.13+"
+                })), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "ECH (Encrypted Client Hello)"), y.a.createElement(N["a"], {
                     value: e.ech || "",
@@ -113678,25 +113712,34 @@
                     }
                 })), f.a.createElement("div", {
                     className: "form-group col-md-4 col-xs-12"
-                }, f.a.createElement("label", null, f.a.createElement(o["a"], {
-                    placement: "top",
-                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
-                }, "\u5141\u8bb8\u4e0d\u5b89\u5168 ", f.a.createElement(a["a"], {
-                    type: "question-circle"
-                }))), f.a.createElement(s["a"], {
-                    value: parseInt(e.allow_insecure) ? 1 : 0,
-                    placeholder: "\u5141\u8bb8\u4e0d\u5b89\u5168",
+                }, f.a.createElement("label", null, "\u8bc1\u4e66\u9a8c\u8bc1\u65b9\u5f0f"), f.a.createElement(s["a"], {
+                    value: null == e.allow_insecure ? "0" : String(e.allow_insecure),
+                    placeholder: "\u9009\u62e9\u8bc1\u4e66\u9a8c\u8bc1\u65b9\u5f0f",
                     style: {
                         width: "100%"
                     },
                     onChange: e=>this.formChange("allow_insecure", e)
                 }, f.a.createElement(s["a"].Option, {
-                    key: 0,
-                    value: 0
-                }, "\u5426"), f.a.createElement(s["a"].Option, {
-                    key: 1,
-                    value: 1
-                }, "\u662f")))), f.a.createElement("div", {
+                    value: "0"
+                }, "\u9a8c\u8bc1\u8bc1\u4e66 (false)"), f.a.createElement(s["a"].Option, {
+                    value: "pincert"
+                }, "\u56fa\u5b9a\u8bc1\u4e66 (pincert)"), f.a.createElement(s["a"].Option, {
+                    value: "1"
+                }, "\u8df3\u8fc7\u9a8c\u8bc1 (true)")))), e.allow_insecure === "pincert" && f.a.createElement("div", {
+                    className: "row"
+                }, f.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                }, f.a.createElement("label", null, "\u8bc1\u4e66 SHA-256"), f.a.createElement(l["a"], {
+                    value: e.pinned_peer_cert_sha256,
+                    onChange: e=>this.formChange("pinned_peer_cert_sha256", e.target.value),
+                    placeholder: "64 \u4f4d\u5341\u516d\u8fdb\u5236"
+                })), f.a.createElement("div", {
+                    className: "form-group col-md-6 col-xs-12"
+                }, f.a.createElement("label", null, "SPKI SHA-256 (Base64\uff0c\u53ef\u9009)"), f.a.createElement(l["a"], {
+                    value: e.certificate_public_key_sha256,
+                    onChange: e=>this.formChange("certificate_public_key_sha256", e.target.value),
+                    placeholder: "sing-box 1.13+"
+                }))), f.a.createElement("div", {
                     className: "form-group"
                 }, f.a.createElement("label", null, "\u670d\u52a1\u5668\u540d\u79f0\u6307\u793a(sni)"), f.a.createElement(l["a"], {
                     placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
