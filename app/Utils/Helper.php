@@ -486,9 +486,10 @@ class Helper
         $parts = explode(",", $server['port']);
         $firstPort = strpos($parts[0], '-') !== false ? explode('-', $parts[0])[0] : $parts[0];
 
+        $insecure = self::legacyTlsInsecure($server) ? 1 : 0;
         $uri = $server['version'] == 2 ?
-            "hysteria2://{$password}@{$remote}:{$firstPort}/?insecure={$server['insecure']}&sni={$server['server_name']}" :
-            "hysteria://{$remote}:{$firstPort}/?protocol=udp&auth={$password}&insecure={$server['insecure']}&peer={$server['server_name']}&upmbps={$server['down_mbps']}&downmbps={$server['up_mbps']}";
+            "hysteria2://{$password}@{$remote}:{$firstPort}/?insecure={$insecure}&sni={$server['server_name']}" :
+            "hysteria://{$remote}:{$firstPort}/?protocol=udp&auth={$password}&insecure={$insecure}&peer={$server['server_name']}&upmbps={$server['down_mbps']}&downmbps={$server['up_mbps']}";
 
         if (isset($server['obfs']) && isset($server['obfs_password'])) {
             $obfs_password = rawurlencode($server['obfs_password']);

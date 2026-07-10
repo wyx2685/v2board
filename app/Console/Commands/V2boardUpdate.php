@@ -70,20 +70,30 @@ class V2boardUpdate extends Command
      */
     private function updateTlsPinningSchema(): void
     {
-        if (!Schema::hasTable('v2_server_trojan')) {
-            return;
-        }
+        $servers = [
+            ['table' => 'v2_server_trojan', 'column' => 'allow_insecure', 'after' => 'server_port'],
+            ['table' => 'v2_server_hysteria', 'column' => 'insecure', 'after' => null],
+            ['table' => 'v2_server_tuic', 'column' => 'insecure', 'after' => null],
+            ['table' => 'v2_server_anytls', 'column' => 'insecure', 'after' => null],
+        ];
 
-        if (!Schema::hasColumn('v2_server_trojan', 'allow_insecure')) {
-            DB::statement("ALTER TABLE `v2_server_trojan` ADD `allow_insecure` varchar(16) NOT NULL DEFAULT '0' AFTER `server_port`");
-        }
-        DB::statement("ALTER TABLE `v2_server_trojan` MODIFY `allow_insecure` varchar(16) NOT NULL DEFAULT '0' COMMENT 'TLS verification mode: 0, pincert, or 1'");
+        foreach ($servers as $server) {
+            if (!Schema::hasTable($server['table'])) {
+                continue;
+            }
 
-        if (!Schema::hasColumn('v2_server_trojan', 'pinned_peer_cert_sha256')) {
-            DB::statement("ALTER TABLE `v2_server_trojan` ADD `pinned_peer_cert_sha256` varchar(95) NULL AFTER `allow_insecure`");
-        }
-        if (!Schema::hasColumn('v2_server_trojan', 'certificate_public_key_sha256')) {
-            DB::statement("ALTER TABLE `v2_server_trojan` ADD `certificate_public_key_sha256` varchar(128) NULL AFTER `pinned_peer_cert_sha256`");
+            if (!Schema::hasColumn($server['table'], $server['column'])) {
+                $after = $server['after'] ? " AFTER `{$server['after']}`" : '';
+                DB::statement("ALTER TABLE `{$server['table']}` ADD `{$server['column']}` varchar(16) NOT NULL DEFAULT '0'{$after}");
+            }
+            DB::statement("ALTER TABLE `{$server['table']}` MODIFY `{$server['column']}` varchar(16) NOT NULL DEFAULT '0' COMMENT 'TLS verification mode: 0, pincert, or 1'");
+
+            if (!Schema::hasColumn($server['table'], 'pinned_peer_cert_sha256')) {
+                DB::statement("ALTER TABLE `{$server['table']}` ADD `pinned_peer_cert_sha256` varchar(95) NULL AFTER `{$server['column']}`");
+            }
+            if (!Schema::hasColumn($server['table'], 'certificate_public_key_sha256')) {
+                DB::statement("ALTER TABLE `{$server['table']}` ADD `certificate_public_key_sha256` varchar(128) NULL AFTER `pinned_peer_cert_sha256`");
+            }
         }
     }
 }

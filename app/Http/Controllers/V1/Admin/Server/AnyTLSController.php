@@ -22,7 +22,12 @@ class AnyTLSController extends Controller
             'tags' => 'nullable|array',
             'rate' => 'required|numeric',
             'server_name' => 'nullable',
-            'insecure' => 'required|in:0,1',
+            'insecure' => 'required|in:0,1,pincert',
+            'pinned_peer_cert_sha256' => [
+                'required_if:insecure,pincert',
+                'regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
+            ],
+            'certificate_public_key_sha256' => 'nullable|string|max:128',
             'padding_scheme' => 'nullable',
         ]);
 

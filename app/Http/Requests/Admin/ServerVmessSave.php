@@ -30,6 +30,12 @@ class ServerVmessSave extends FormRequest
             'networkSettings.security' => 'nullable|in:auto,aes-128-gcm,chacha20-poly1305,none',
             'ruleSettings' => 'nullable|array',
             'tlsSettings' => 'nullable|array',
+            'tlsSettings.allowInsecure' => 'nullable|in:0,1,pincert',
+            'tlsSettings.pinned_peer_cert_sha256' => [
+                'required_if:tlsSettings.allowInsecure,pincert',
+                'regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
+            ],
+            'tlsSettings.certificate_public_key_sha256' => 'nullable|string|max:128',
             'dnsSettings' => 'nullable|array'
         ];
     }
