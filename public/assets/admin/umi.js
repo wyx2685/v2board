@@ -45427,6 +45427,8 @@
                     visible: !1,
                     records: [],
                     loading: !1,
+                    serverType: "",
+                    serverId: "",
                     pagination: {
                         page: 1,
                         pageSize: 10,
@@ -45452,8 +45454,10 @@
                             switch (n.prev = n.next) {
                             case 0:
                                 return n.next = 2,
-                                Object(h["a"])("/" + window.settings.secure_path + "/stat/getStatUser", a()({
-                                    user_id: e.props.userId
+                                Object(h["a"])("/" + window.settings.secure_path + "/stat/getStatUserByServer", a()({
+                                    user_id: e.props.userId,
+                                    server_type: e.state.serverType,
+                                    server_id: e.state.serverId
                                 }, t));
                             case 2:
                                 if (r = n.sent,
@@ -45484,15 +45488,25 @@
                   , n = e.records
                   , o = e.pagination
                   , s = e.loading
+                  , c = e.serverType
+                  , f = e.serverId
                   , l = [{
                     title: "\u65e5\u671f",
                     dataIndex: "record_at",
                     key: "record_at",
                     render: e=>d()(1e3 * e).format("YYYY-MM-DD")
                 }, {
+                    title: "\u8282\u70b9",
+                    dataIndex: "server_name",
+                    key: "server_name"
+                }, {
+                    title: "\u7c7b\u578b",
+                    dataIndex: "server_type",
+                    key: "server_type"
+                }, {
                     title: "\u4e0a\u884c",
                     dataIndex: "u",
-                    key: "d",
+                    key: "u",
                     align: "right",
                     render: e=>Object(p["b"])(e)
                 }, {
@@ -45502,10 +45516,22 @@
                     align: "right",
                     render: e=>Object(p["b"])(e)
                 }, {
+                    title: "\u5408\u8ba1",
+                    dataIndex: "total",
+                    key: "total",
+                    align: "right",
+                    render: e=>Object(p["b"])(e)
+                }, {
                     title: "\u500d\u7387",
                     dataIndex: "server_rate",
                     key: "server_rate",
                     align: "right"
+                }, {
+                    title: "\u8ba1\u8d39\u5408\u8ba1",
+                    dataIndex: "total_with_rate",
+                    key: "total_with_rate",
+                    align: "right",
+                    render: e=>Object(p["b"])(e)
                 }];
                 return u.a.createElement(u.a.Fragment, null, u.a.cloneElement(this.props.children, {
                     onClick: ()=>this.show()
@@ -45524,14 +45550,72 @@
                     },
                     footer: !1,
                     visible: t,
-                    title: "\u6d41\u91cf\u8bb0\u5f55"
+                    title: "\u8282\u70b9\u6d41\u91cf\u8bb0\u5f55"
                 }, u.a.createElement(m["a"], {
                     loading: s
                 }, u.a.createElement(i["a"], {
+                    title: ()=>u.a.createElement("div", {
+                    className: "border-bottom",
+                    style: {
+                        display: "flex",
+                        gap: 8,
+                        flexWrap: "wrap",
+                        padding: "8px 0"
+                    }
+                }, u.a.createElement("select", {
+                    className: "form-control",
+                    style: {
+                        width: 160
+                    },
+                    value: c,
+                    onChange: e=>this.setState({
+                        serverType: e.target.value,
+                        pagination: a()({}, o, {
+                            current: 1,
+                            page: 1
+                        })
+                    }, ()=>this.getStatUser())
+                }, u.a.createElement("option", {
+                    value: ""
+                }, "\u5168\u90e8\u7c7b\u578b"), ["shadowsocks", "vmess", "vless", "trojan", "tuic", "hysteria", "anytls", "v2node"].map(e=>u.a.createElement("option", {
+                    key: e,
+                    value: e
+                }, e))), u.a.createElement("input", {
+                    className: "form-control",
+                    style: {
+                        width: 140
+                    },
+                    value: f,
+                    placeholder: "\u8282\u70b9ID",
+                    onChange: e=>this.setState({
+                        serverId: e.target.value
+                    })
+                }), u.a.createElement("button", {
+                    className: "btn btn-sm btn-primary",
+                    onClick: ()=>this.setState({
+                        pagination: a()({}, o, {
+                            current: 1,
+                            page: 1
+                        })
+                    }, ()=>this.getStatUser())
+                }, "\u7b5b\u9009"), u.a.createElement("button", {
+                    className: "btn btn-sm btn-secondary",
+                    onClick: ()=>this.setState({
+                        serverType: "",
+                        serverId: "",
+                        pagination: a()({}, o, {
+                            current: 1,
+                            page: 1
+                        })
+                    }, ()=>this.getStatUser())
+                }, "\u91cd\u7f6e")),
                     pagination: a()({}, o, {
                         size: "small"
                     }),
                     columns: l,
+                    scroll: {
+                        x: 960
+                    },
                     dataSource: n,
                     onChange: e=>{
                         this.setState({

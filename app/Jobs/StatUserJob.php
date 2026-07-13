@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Models\StatServer;
 use App\Models\StatUser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class StatUserJob implements ShouldQueue
 {
@@ -56,10 +56,13 @@ class StatUserJob implements ShouldQueue
         ->get()
         ->keyBy('user_id');
 
-        $insertData = [];
+        $hasUserServerStatTable = Schema::hasTable('v2_stat_user_server');
         while ($attempt < $maxAttempts) {
+            $insertData = [];
+            $insertServerData = [];
             try {
                 DB::beginTransaction();
+                $now = time();
                 foreach($this->data as $userId => $trafficData){
                     if (isset($existingData[$userId])) {
                         $userdata = StatUser::where('id', $existingData[$userId]['id'])->first();
@@ -77,10 +80,38 @@ class StatUserJob implements ShouldQueue
                             'record_at' => $recordAt
                         ];
                     }
+                    if ($hasUserServerStatTable) {
+                        $insertServerData[] = [
+                            'user_id' => $userId,
+                            'server_id' => $this->server['id'],
+                            'server_type' => $this->protocol,
+                            'server_rate' => $this->server['rate'],
+                            'u' => $trafficData[0],
+                            'd' => $trafficData[1],
+                            'record_type' => $this->recordType,
+                            'record_at' => $recordAt,
+                            'created_at' => $now,
+                            'updated_at' => $now
+                        ];
+                    }
                 }
                 if (!empty($insertData)) {
                     collect($insertData)->chunk(500)->each(function ($chunk) {
                         StatUser::upsert($chunk->toArray(), ['user_id', 'server_rate', 'record_at']);
+                    });
+                }
+                if (!empty($insertServerData)) {
+                    collect($insertServerData)->chunk(500)->each(function ($chunk) {
+                        DB::table('v2_stat_user_server')->upsert(
+                            $chunk->toArray(),
+                            ['user_id', 'server_id', 'server_type', 'record_at'],
+                            [
+                                'server_rate' => DB::raw('VALUES(`server_rate`)'),
+                                'u' => DB::raw('`u` + VALUES(`u`)'),
+                                'd' => DB::raw('`d` + VALUES(`d`)'),
+                                'updated_at' => DB::raw('VALUES(`updated_at`)')
+                            ]
+                        );
                     });
                 }
                 DB::commit();
