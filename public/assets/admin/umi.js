@@ -27717,7 +27717,8 @@
                                         }
                                     });
                                 case 2:
-                                    return Object.keys(a["a"].periodText).forEach(e=>{
+                                    return n.group_id = Array.isArray(n.group_id) ? n.group_id : null == n.group_id ? [] : [n.group_id],
+                                    Object.keys(a["a"].periodText).forEach(e=>{
                                         null !== n[e] && (n[e] = null !== n[e] ? Math.round(100 * n[e]) : null)
                                     }
                                     ),
