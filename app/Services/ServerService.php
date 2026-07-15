@@ -254,6 +254,9 @@ class ServerService
         return User::where(function ($query) use ($groupId) {
                 foreach ($groupId as $id) {
                     $query->orWhereJsonContains('group_id', $id);
+                    // Existing installations may store IDs as JSON strings (for example ["4", "5"]).
+                    // Match both representations until those records are resaved as integer arrays.
+                    $query->orWhereJsonContains('group_id', (string) $id);
                 }
             })
             ->whereRaw('u + d < transfer_enable')

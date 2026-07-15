@@ -6,6 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PlanSave extends FormRequest
 {
+    protected function prepareForValidation()
+    {
+        if ($this->has('group_id')) {
+            $this->merge([
+                'group_id' => array_values(array_unique(array_map('intval', (array) $this->input('group_id'))))
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
