@@ -24,7 +24,8 @@ class TuicController extends Controller
             'server_name' => 'nullable',
             'insecure' => 'required|in:0,1,pincert',
             'pinned_peer_cert_sha256' => [
-                'required_if:insecure,pincert',
+                'exclude_unless:insecure,pincert',
+                'required',
                 'regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
             ],
             'certificate_public_key_sha256' => 'nullable|string|max:128',

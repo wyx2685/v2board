@@ -26,7 +26,8 @@ class ServerTrojanSave extends FormRequest
             'network_settings' => 'nullable',
             'allow_insecure' => 'nullable|in:0,1,pincert',
             'pinned_peer_cert_sha256' => [
-                'required_if:allow_insecure,pincert',
+                'exclude_unless:allow_insecure,pincert',
+                'required',
                 'regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
             ],
             'certificate_public_key_sha256' => 'nullable|string|max:128',

@@ -24,7 +24,8 @@ class VlessController extends Controller
             'tls_settings' => 'nullable|array',
             'tls_settings.allow_insecure' => 'nullable|in:0,1,pincert',
             'tls_settings.pinned_peer_cert_sha256' => [
-                'required_if:tls_settings.allow_insecure,pincert',
+                'exclude_unless:tls_settings.allow_insecure,pincert',
+                'required',
                 'regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
             ],
             'tls_settings.certificate_public_key_sha256' => 'nullable|string|max:128',

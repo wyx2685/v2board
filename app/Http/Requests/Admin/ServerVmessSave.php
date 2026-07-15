@@ -32,7 +32,8 @@ class ServerVmessSave extends FormRequest
             'tlsSettings' => 'nullable|array',
             'tlsSettings.allowInsecure' => 'nullable|in:0,1,pincert',
             'tlsSettings.pinned_peer_cert_sha256' => [
-                'required_if:tlsSettings.allowInsecure,pincert',
+                'exclude_unless:tlsSettings.allowInsecure,pincert',
+                'required',
                 'regex:/^([A-Fa-f0-9]{64}|[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31})$/',
             ],
             'tlsSettings.certificate_public_key_sha256' => 'nullable|string|max:128',
