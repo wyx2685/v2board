@@ -868,9 +868,9 @@ MODIFY `group_id` text NULL;
 
 UPDATE `v2_plan`
 SET `group_id` = JSON_ARRAY(CAST(`group_id` AS UNSIGNED))
-WHERE JSON_TYPE(`group_id`) <> 'ARRAY';
+WHERE JSON_TYPE(`group_id`) != 'ARRAY';
 
 UPDATE `v2_user`
 SET `group_id` = JSON_ARRAY(CAST(`group_id` AS UNSIGNED))
 WHERE `group_id` IS NOT NULL
-  AND JSON_TYPE(`group_id`) <> 'ARRAY';
+  AND JSON_TYPE(`group_id`) != 'ARRAY';
