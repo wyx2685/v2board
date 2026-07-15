@@ -82664,6 +82664,7 @@
                 }, "\u6743\u9650\u7ec4 ", m.a.createElement(O["a"], null, m.a.createElement("a", {
                     href: "javascript:(0);"
                 }, "\u6dfb\u52a0\u6743\u9650\u7ec4"))), m.a.createElement(_["a"], {
+                    mode: "multiple",
                     placeholder: "\u8bf7\u9009\u62e9\u6743\u9650\u7ec4",
                     style: {
                         width: "100%"

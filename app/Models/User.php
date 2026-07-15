@@ -10,6 +10,7 @@ class User extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
     protected $casts = [
+        'group_id' => 'array',
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp'
     ];

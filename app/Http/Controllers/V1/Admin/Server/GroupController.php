@@ -24,7 +24,7 @@ class GroupController extends Controller
         $serverService = new ServerService();
         $servers = $serverService->getAllServers();
         foreach ($serverGroups as $k => $v) {
-            $serverGroups[$k]['user_count'] = User::where('group_id', $v['id'])->count();
+            $serverGroups[$k]['user_count'] = User::whereJsonContains('group_id', $v['id'])->count();
             $serverGroups[$k]['server_count'] = 0;
             foreach ($servers as $server) {
                 if (in_array($v['id'], $server['group_id'])) {
@@ -78,10 +78,10 @@ class GroupController extends Controller
             }
         }
 
-        if (Plan::where('group_id', $request->input('id'))->first()) {
+        if (Plan::whereJsonContains('group_id', (int) $request->input('id'))->first()) {
             abort(500, '该组已被订阅所使用，无法删除');
         }
-        if (User::where('group_id', $request->input('id'))->first()) {
+        if (User::whereJsonContains('group_id', (int) $request->input('id'))->first()) {
             abort(500, '该组已被用户所使用，无法删除');
         }
         return response([

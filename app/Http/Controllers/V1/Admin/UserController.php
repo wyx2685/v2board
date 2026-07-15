@@ -213,7 +213,7 @@ class UserController extends Controller
             $user = [
                 'email' => $request->input('email_prefix') . '@' . $request->input('email_suffix'),
                 'plan_id' => isset($plan->id) ? $plan->id : NULL,
-                'group_id' => isset($plan->group_id) ? $plan->group_id : NULL,
+                'group_id' => isset($plan->group_id) ? json_encode($plan->group_id) : NULL,
                 'transfer_enable' => isset($plan->transfer_enable) ? $plan->transfer_enable * 1073741824 : 0,
                 'device_limit' => isset($plan->device_limit) ? $plan->device_limit : NULL,
                 'expired_at' => $request->input('expired_at') ?? NULL,
@@ -249,7 +249,8 @@ class UserController extends Controller
             $user = [
                 'email' => Helper::randomChar(6) . '@' . $request->input('email_suffix'),
                 'plan_id' => isset($plan->id) ? $plan->id : NULL,
-                'group_id' => isset($plan->group_id) ? $plan->group_id : NULL,
+                // insert() bypasses model casts.
+                'group_id' => isset($plan->group_id) ? json_encode($plan->group_id) : NULL,
                 'transfer_enable' => isset($plan->transfer_enable) ? $plan->transfer_enable * 1073741824 : 0,
                 'device_limit' => isset($plan->device_limit) ? $plan->device_limit : NULL,
                 'expired_at' => $request->input('expired_at') ?? NULL,

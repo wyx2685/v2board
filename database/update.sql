@@ -859,3 +859,19 @@ CHANGE `action_value` `action_value` text NULL AFTER `action`;
 
 ALTER TABLE `v2_server_v2node`
 ADD `trusted_x_forwarded_for` varchar(255) COLLATE 'utf8mb4_general_ci' NULL COMMENT '信任的x-forwarded-for头部' AFTER `network_settings`;
+
+-- 2026-07-15: a plan and its users may belong to multiple server groups.
+ALTER TABLE `v2_plan`
+MODIFY `group_id` text NOT NULL;
+
+ALTER TABLE `v2_user`
+MODIFY `group_id` text NULL;
+
+UPDATE `v2_plan`
+SET `group_id` = JSON_ARRAY(CAST(`group_id` AS UNSIGNED))
+WHERE JSON_TYPE(`group_id`) <> 'ARRAY';
+
+UPDATE `v2_user`
+SET `group_id` = JSON_ARRAY(CAST(`group_id` AS UNSIGNED))
+WHERE `group_id` IS NOT NULL
+  AND JSON_TYPE(`group_id`) <> 'ARRAY';

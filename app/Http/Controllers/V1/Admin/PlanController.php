@@ -43,7 +43,8 @@ class PlanController extends Controller
             try {
                 if ($request->input('force_update')) {
                     User::where('plan_id', $plan->id)->update([
-                        'group_id' => $params['group_id'],
+                        // Query builder updates do not apply the User model casts.
+                        'group_id' => json_encode($params['group_id']),
                         'transfer_enable' => $params['transfer_enable'] * 1073741824,
                         'device_limit' => $params['device_limit'],
                         'speed_limit' => $params['speed_limit']

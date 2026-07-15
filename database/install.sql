@@ -198,7 +198,7 @@ CREATE TABLE `v2_payment` (
 DROP TABLE IF EXISTS `v2_plan`;
 CREATE TABLE `v2_plan` (
                            `id` int(11) NOT NULL AUTO_INCREMENT,
-                           `group_id` int(11) NOT NULL,
+                           `group_id` text NOT NULL,
                            `transfer_enable` int(11) NOT NULL,
                            `device_limit` int(11) DEFAULT NULL,
                            `name` varchar(255) NOT NULL,
@@ -569,7 +569,7 @@ CREATE TABLE `v2_user` (
                            `is_staff` tinyint(1) NOT NULL DEFAULT '0',
                            `last_login_ip` int(11) DEFAULT NULL,
                            `uuid` varchar(36) NOT NULL,
-                           `group_id` int(11) DEFAULT NULL,
+                           `group_id` text DEFAULT NULL,
                            `plan_id` int(11) DEFAULT NULL,
                            `speed_limit` int(11) DEFAULT NULL,
                            `auto_renewal` tinyint(4) DEFAULT '0',

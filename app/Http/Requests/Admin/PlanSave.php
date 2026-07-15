@@ -16,7 +16,8 @@ class PlanSave extends FormRequest
         return [
             'name' => 'required',
             'content' => '',
-            'group_id' => 'required',
+            'group_id' => 'required|array|min:1',
+            'group_id.*' => 'integer|distinct|exists:v2_server_group,id',
             'transfer_enable' => 'required',
             'device_limit' => 'nullable|integer',
             'month_price' => 'nullable|integer',
@@ -40,6 +41,8 @@ class PlanSave extends FormRequest
             'type.required' => '套餐类型不能为空',
             'type.in' => '套餐类型格式有误',
             'group_id.required' => '权限组不能为空',
+            'group_id.array' => '权限组格式不正确',
+            'group_id.min' => '权限组不能为空',
             'transfer_enable.required' => '流量不能为空',
             'device_limit.integer' => '设备数限制格式有误',
             'month_price.integer' => '月付金额格式有误',
