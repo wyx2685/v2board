@@ -27,6 +27,7 @@ class V2nodeController extends Controller
             'flow' => 'nullable|in:xtls-rprx-vision',
             'network' => 'required|in:tcp,ws,grpc,http,httpupgrade,xhttp',
             'network_settings' => 'nullable|array',
+            'trusted_x_forwarded_for' => 'nullable|array',
             'encryption' => 'nullable',
             'encryption_settings' => 'nullable|array',
             'disable_sni' => 'required|in:0,1',

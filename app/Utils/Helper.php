@@ -6,30 +6,6 @@ use Illuminate\Support\Facades\Cache;
 
 class Helper
 {
-    /** Whether to emit Xray 26.5+ pcs/vcn (pinSHA256) in share links for this request. */
-    private static $includeXrayPcs = false;
-
-    public static function setIncludeXrayPcs(bool $include): void
-    {
-        self::$includeXrayPcs = $include;
-    }
-
-    public static function shouldIncludeXrayPcs(): bool
-    {
-        return self::$includeXrayPcs;
-    }
-
-    public static function flagSupportsXrayPcs(string $flag): bool
-    {
-        $flag = strtolower($flag);
-
-        return str_contains($flag, 'v2rayng') || str_contains($flag, 'v2rayn');
-    }
-
-    /**
-     * PCS is only enabled inside V2rayN / V2rayNG protocol handlers.
-     * Do not infer from ?flag= or generic User-Agent here.
-     */
     public static function uuidToBase64($uuid, $length)
     {
         return base64_encode(substr($uuid, 0, $length));
@@ -220,195 +196,6 @@ class Helper
         return filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) ? "[$host]" : $host;
     }
 
-    /**
-     * Read normalized leaf-cert SHA-256 fingerprint from tls_settings.
-     */
-    public static function getTlsPinSha256(array $tlsSettings, array $server = []): string
-    {
-        $pcs = $tlsSettings['pinned_peer_cert_sha256']
-            ?? $tlsSettings['pinnedPeerCertSha256']
-            ?? $server['pinned_peer_cert_sha256']
-            ?? $server['pinnedPeerCertSha256']
-            ?? '';
-
-        return strtolower(preg_replace('/[^a-f0-9]/', '', (string)$pcs));
-    }
-
-    public static function getTlsVerifyName(array $tlsSettings, array $server = []): string
-    {
-        return (string)(
-            $tlsSettings['server_name']
-            ?? $tlsSettings['serverName']
-            ?? $server['server_name']
-            ?? ''
-        );
-    }
-
-    public static function getTlsAllowInsecure(array $tlsSettings, array $server = []): int
-    {
-        return (int)(
-            $tlsSettings['allow_insecure']
-            ?? $tlsSettings['allowInsecure']
-            ?? $server['allow_insecure']
-            ?? $server['insecure']
-            ?? 0
-        );
-    }
-
-    private static function applyLegacyXrayTlsInsecure(array &$params, array $tlsSettings, array $server = []): void
-    {
-        if (self::getTlsAllowInsecure($tlsSettings, $server) === 1) {
-            $params['allowInsecure'] = 1;
-        }
-    }
-
-    /**
-     * Xray 26.5+ share links: pcs/vcn replace deprecated allowInsecure/insecure.
-     * Only emitted when {@see setIncludeXrayPcs()} is true (v2rayN / v2rayNG).
-     * @see https://github.com/XTLS/Xray-core/discussions/716
-     */
-    public static function applyXrayTlsShareParams(array &$params, array $tlsSettings, array $server = []): void
-    {
-        unset($params['insecure'], $params['allowInsecure'], $params['allow_insecure'], $params['pcs'], $params['vcn']);
-
-        if (!self::shouldIncludeXrayPcs()) {
-            self::applyLegacyXrayTlsInsecure($params, $tlsSettings, $server);
-            return;
-        }
-
-        $pcs = self::getTlsPinSha256($tlsSettings, $server);
-        if ($pcs === '') {
-            return;
-        }
-
-        $params['pcs'] = $pcs;
-        $sni = self::getTlsVerifyName($tlsSettings, $server);
-        if ($sni !== '') {
-            $params['vcn'] = $sni;
-        }
-    }
-
-    public static function applyVmessTlsShareConfig(array &$config, array $tlsSettings, array $server = []): void
-    {
-        unset($config['allowInsecure'], $config['pcs'], $config['vcn']);
-
-        if (!self::shouldIncludeXrayPcs()) {
-            if (self::getTlsAllowInsecure($tlsSettings, $server) === 1) {
-                $config['allowInsecure'] = 1;
-            }
-            return;
-        }
-
-        $pcs = self::getTlsPinSha256($tlsSettings, $server);
-        if ($pcs === '') {
-            return;
-        }
-
-        $config['pcs'] = $pcs;
-        $sni = $config['sni'] ?? self::getTlsVerifyName($tlsSettings, $server);
-        if ($sni !== '') {
-            $config['vcn'] = $sni;
-        }
-    }
-
-    private static function applyHysteriaTlsQuery(array &$hyQuery, array $tlsSettings, array $server = []): void
-    {
-        unset($hyQuery['pinSHA256']);
-
-        $pcs = self::getTlsPinSha256($tlsSettings, $server);
-        if (self::shouldIncludeXrayPcs() && $pcs !== '') {
-            $hyQuery['pinSHA256'] = $pcs;
-            unset($hyQuery['insecure']);
-            return;
-        }
-
-        $hyQuery['insecure'] = self::getTlsAllowInsecure($tlsSettings, $server) === 1 ? 1 : 0;
-    }
-
-    public static function normalizeTlsSettings(array $server): array
-    {
-        $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
-        if (!is_array($tlsSettings)) {
-            $tlsSettings = [];
-        }
-        if (!isset($tlsSettings['allow_insecure']) && !isset($tlsSettings['allowInsecure'])) {
-            if (isset($server['allow_insecure'])) {
-                $tlsSettings['allow_insecure'] = $server['allow_insecure'];
-            } elseif (isset($server['insecure'])) {
-                $tlsSettings['allow_insecure'] = $server['insecure'];
-            }
-        }
-        if (!isset($tlsSettings['pinned_peer_cert_sha256']) && !empty($server['pinned_peer_cert_sha256'])) {
-            $tlsSettings['pinned_peer_cert_sha256'] = $server['pinned_peer_cert_sha256'];
-        }
-        if (empty($tlsSettings['server_name']) && !empty($server['server_name'])) {
-            $tlsSettings['server_name'] = $server['server_name'];
-        }
-        return $tlsSettings;
-    }
-
-    /**
-     * Mihomo/Clash Meta TLS pin: fingerprint = leaf cert SHA256 hex.
-     * Only emitted when {@see shouldIncludeXrayPcs()} is true (v2rayN / v2rayNG share links).
-     * @see https://wiki.metacubex.one/en/config/proxies/tls/
-     */
-    public static function applyClashTlsPin(array &$array, array $tlsSettings, array $server = []): void
-    {
-        unset($array['skip-cert-verify'], $array['fingerprint']);
-
-        $certPem = $tlsSettings['tls_certificate_pem']
-            ?? $tlsSettings['certificate_pem']
-            ?? '';
-        if ($certPem !== '') {
-            $array['certificate'] = is_array($certPem) ? implode("\n", $certPem) : $certPem;
-
-            return;
-        }
-
-        $pcs = self::getTlsPinSha256($tlsSettings, $server);
-        if (self::shouldIncludeXrayPcs() && $pcs !== '' && strlen($pcs) === 64) {
-            $array['fingerprint'] = $pcs;
-
-            return;
-        }
-
-        if (self::getTlsAllowInsecure($tlsSettings, $server) === 1) {
-            $array['skip-cert-verify'] = true;
-        }
-    }
-
-    /**
-     * sing-box outbound TLS: prefer certificate_public_key_sha256 or embedded PEM.
-     * @see https://sing-box.sagernet.org/configuration/shared/tls/
-     */
-    public static function applySingboxTlsConfig(array &$tlsConfig, array $tlsSettings, array $server = []): void
-    {
-        unset($tlsConfig['insecure']);
-
-        $pubkeyPins = $tlsSettings['certificate_public_key_sha256']
-            ?? $tlsSettings['pinned_public_key_sha256_base64']
-            ?? null;
-        if (!empty($pubkeyPins)) {
-            $tlsConfig['certificate_public_key_sha256'] = is_array($pubkeyPins)
-                ? array_values($pubkeyPins)
-                : [$pubkeyPins];
-            return;
-        }
-
-        $certPem = $tlsSettings['tls_certificate_pem']
-            ?? $tlsSettings['certificate_pem']
-            ?? '';
-        if ($certPem !== '') {
-            $tlsConfig['certificate'] = is_array($certPem) ? array_values($certPem) : [$certPem];
-            return;
-        }
-
-        $allowInsecure = self::getTlsAllowInsecure($tlsSettings, $server);
-        if ($allowInsecure === 1) {
-            $tlsConfig['insecure'] = true;
-        }
-    }
-
     public static function buildShadowsocksUri($uuid, $server)
     {
         $cipher = $server['cipher'];
@@ -453,8 +240,8 @@ class Helper
 
         if ($server['tls']) {
             $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
+            $config['allowInsecure'] = (int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0);
             $config['sni'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
-            self::applyVmessTlsShareConfig($config, $tlsSettings, $server);
         }
         
         $network = (string)$server['network'];
@@ -518,6 +305,7 @@ class Helper
             "security" => $server['tls'] != 0 ? ($server['tls'] == 2 ? "reality" : "tls") : "",
             "flow" => $server['flow'],
             "fp" => $tlsSettings['fingerprint'] ?? 'chrome',
+            "insecure" => $tlsSettings['allow_insecure'] ?? 0,
         ];
 
         if ($server['tls']) {
@@ -546,7 +334,6 @@ class Helper
         }
 
         self::configureNetworkSettings($server, $config);
-        self::applyXrayTlsShareParams($config, $tlsSettings, $server);
 
         return self::buildUriString('vless', $uuid, $server, $name, $config);
     }
@@ -555,6 +342,7 @@ class Helper
     {
         $tlsSettings = $server['tls_settings'] ?? [];
         $config = [
+            'allowInsecure' => $server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0),
             'peer' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? ''),
             'sni' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? ''),
             'type'=> $server['network'],
@@ -580,7 +368,6 @@ class Helper
                 $config['ech'] = is_array($tlsSettings['ech_config']) ? $tlsSettings['ech_config'][0] : $tlsSettings['ech_config'];
             }
         }
-        self::applyXrayTlsShareParams($config, $tlsSettings, $server);
         $query = http_build_query($config);
         return "trojan://{$password}@" . self::formatHost($server['host']) . ":{$server['port']}?{$query}#". rawurlencode($server['name']) . "\r\n";
     }
@@ -593,14 +380,9 @@ class Helper
         $parts = explode(",", $server['port']);
         $firstPort = strpos($parts[0], '-') !== false ? explode('-', $parts[0])[0] : $parts[0];
 
-        $tlsSettings = $server['tls_settings'] ?? [];
-        $hyQuery = ['sni' => $server['server_name'] ?? ''];
-        self::applyHysteriaTlsQuery($hyQuery, $tlsSettings, $server);
-        $hyQs = http_build_query($hyQuery);
-
         $uri = $server['version'] == 2 ?
-            "hysteria2://{$password}@{$remote}:{$firstPort}/?{$hyQs}" :
-            "hysteria://{$remote}:{$firstPort}/?protocol=udp&auth={$password}&{$hyQs}&peer={$server['server_name']}&upmbps={$server['down_mbps']}&downmbps={$server['up_mbps']}";
+            "hysteria2://{$password}@{$remote}:{$firstPort}/?insecure={$server['insecure']}&sni={$server['server_name']}" :
+            "hysteria://{$remote}:{$firstPort}/?protocol=udp&auth={$password}&insecure={$server['insecure']}&peer={$server['server_name']}&upmbps={$server['down_mbps']}&downmbps={$server['up_mbps']}";
 
         if (isset($server['obfs']) && isset($server['obfs_password'])) {
             $obfs_password = rawurlencode($server['obfs_password']);
@@ -622,10 +404,9 @@ class Helper
         $parts = explode(",", $server['port']);
         $firstPort = strpos($parts[0], '-') !== false ? explode('-', $parts[0])[0] : $parts[0];
         $tlsSettings = $server['tls_settings'] ?? [];
+        $insecure = $tlsSettings['allow_insecure'] ?? 0;
         $sni = $tlsSettings['server_name'] ?? '';
-        $hyQuery = ['sni' => $sni];
-        self::applyHysteriaTlsQuery($hyQuery, $tlsSettings, $server);
-        $uri = "hysteria2://{$password}@{$remote}:{$firstPort}/?" . http_build_query($hyQuery);
+        $uri = "hysteria2://{$password}@{$remote}:{$firstPort}/?insecure={$insecure}&sni={$sni}";
 
         if (isset($server['obfs']) && isset($server['obfs_password'])) {
             $obfs_password = rawurlencode($server['obfs_password']);
@@ -644,10 +425,10 @@ class Helper
             'sni' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? ''),
             'alpn'=> 'h3',
             'congestion_control' => $server['congestion_control'],
+            'allow_insecure' => $server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0),
             'disable_sni' => $server['disable_sni'],
             'udp_relay_mode' => $server['udp_relay_mode'],
         ];
-        self::applyXrayTlsShareParams($config, $tlsSettings, $server);
 
         $remote = self::formatHost($server['host']);
         $port = $server['port'];
@@ -659,21 +440,19 @@ class Helper
 
     public static function buildAnytlsUri($password, $server)
     {
-        $tlsSettings = self::normalizeTlsSettings($server);
+        $tlsSettings = $server['tls_settings'] ?? [];
         $config = [
             'type' => $server['network'] ?? 'tcp',
+            'insecure' => $server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0),
             'fp' => $tlsSettings['fingerprint'] ?? 'chrome',
         ];
         if (isset($server['server_name']) || isset($tlsSettings['server_name'])) {
             $config['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
         }
-        if (isset($server['tls']) && (int)$server['tls'] === 2) {
+        if (isset($server['tls']) && $server['tls'] == 2) {
             $config['security'] = 'reality';
             $config['pbk'] = $tlsSettings['public_key'] ?? '';
             $config['sid'] = $tlsSettings['short_id'] ?? '';
-        } elseif (!isset($server['tls']) || (int)$server['tls'] === 1) {
-            // standalone AnyTLS 或 v2node 普通 TLS
-            $config['security'] = 'tls';
         }
         $remote = self::formatHost($server['host']);
         $port = $server['port'];
@@ -681,7 +460,6 @@ class Helper
         if (isset($server['network']) && isset($server['network_settings'])) {
             self::configureNetworkSettings($server, $config);
         }
-        self::applyXrayTlsShareParams($config, $tlsSettings, $server);
         $query = http_build_query($config);
         return "anytls://{$password}@{$remote}:{$port}/?{$query}#{$name}\r\n";
     }

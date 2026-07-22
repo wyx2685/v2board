@@ -173,12 +173,12 @@ class ClashNyanpasu
 
         if (!empty($server['tls'])) {
             $array['tls'] = true;
-            $tlsSettings = Helper::normalizeTlsSettings($server);
+            $tlsSettings = $server['tlsSettings'] ?? ($server['tls_settings'] ?? null);
             if ($tlsSettings) {
+                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
+                    $array['skip-cert-verify'] = ($tlsSettings['allowInsecure'] ? true : false);
                 if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
                     $array['servername'] = $tlsSettings['serverName'];
-                elseif (isset($tlsSettings['server_name']) && !empty($tlsSettings['server_name']))
-                    $array['servername'] = $tlsSettings['server_name'];
                 if (!empty($tlsSettings['ech'])) {
                     if ($tlsSettings['ech'] === 'cloudflare') {
                         $array['ech-opts'] = [
@@ -192,7 +192,6 @@ class ClashNyanpasu
                         ];
                     }
                 }
-                Helper::applyClashTlsPin($array, $tlsSettings, $server);
             }
         }
         $network = $server['network'] ?? null;
@@ -252,7 +251,8 @@ class ClashNyanpasu
 
         if ($server['tls']) {
             $array['tls'] = true;
-            $tlsSettings = Helper::normalizeTlsSettings($server);
+            $tlsSettings = $server['tls_settings'] ?? [];
+            $array['skip-cert-verify'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
             $array['flow'] = !empty($server['flow']) ? $server['flow']: "";
             $array['client-fingerprint'] = !empty($tlsSettings['fingerprint']) ? $tlsSettings['fingerprint'] : 'chrome';
             if ($tlsSettings) {
@@ -276,7 +276,6 @@ class ClashNyanpasu
                         ];
                     }
                 }
-                Helper::applyClashTlsPin($array, $tlsSettings, $server);
             }
         }
 
@@ -365,9 +364,9 @@ class ClashNyanpasu
                 }
             }
         };
-        $tlsSettings = Helper::normalizeTlsSettings($server);
+        $tlsSettings = $server['tls_settings'] ?? [];
         $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
-        Helper::applyClashTlsPin($array, $tlsSettings, $server);
+        $array['skip-cert-verify'] = ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
         if (!empty($tlsSettings['ech'])) {
             if ($tlsSettings['ech'] === 'cloudflare') {
                 $array['ech-opts'] = [
@@ -399,9 +398,9 @@ class ClashNyanpasu
             'udp-relay-mode' => $server['udp_relay_mode'] ?? 'native',
             'congestion-controller' => $server['congestion_control'] ?? 'cubic',
         ];
-        $tlsSettings = Helper::normalizeTlsSettings($server);
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
         $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
-        Helper::applyClashTlsPin($array, $tlsSettings, $server);
 
         return $array;
     }
@@ -421,12 +420,9 @@ class ClashNyanpasu
                 'http/1.1',
             ],
         ];
-        $tlsSettings = Helper::normalizeTlsSettings($server);
-        $sni = Helper::getTlsVerifyName($tlsSettings, $server);
-        if ($sni !== '') {
-            $array['sni'] = $sni;
-        }
-        Helper::applyClashTlsPin($array, $tlsSettings, $server);
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
+        $array['skip-cert-verify'] = ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false;
         return $array;
     }
 
@@ -450,8 +446,7 @@ class ClashNyanpasu
             $array['mport'] = $server['port'];
         }
         $array['udp'] = true;
-        $tlsSettings = Helper::normalizeTlsSettings($server);
-        Helper::applyClashTlsPin($array, $tlsSettings, $server);
+        $array['skip-cert-verify'] = $server['insecure'] == 1 ? true : false;
 
         if (isset($server['server_name'])) $array['sni'] = $server['server_name'];
 
@@ -479,16 +474,16 @@ class ClashNyanpasu
 
     private function buildHysteria2($password, $server)
     {
-        $tlsSettings = Helper::normalizeTlsSettings($server);
+        $tlsSettings = $server['tls_settings'] ?? [];
         $array = [
             'name' => $server['name'],
             'type' => 'hysteria2',
             'server' => $server['host'],
             'password' => $password,
+            'skip-cert-verify' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
             'sni' => $tlsSettings['server_name'] ?? '',
             'udp' => true,
         ];
-        Helper::applyClashTlsPin($array, $tlsSettings, $server);
         $parts = explode(",", $server['port']);
         $firstPart = $parts[0];
         if (strpos($firstPart, '-') !== false) {

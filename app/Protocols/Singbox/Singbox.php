@@ -158,7 +158,8 @@ class Singbox
         if ($server['tls']) {
             $tlsConfig = [];
             $tlsConfig['enabled'] = true;
-            $tlsSettings = Helper::normalizeTlsSettings($server);
+            $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
+            $tlsConfig['insecure'] = ($tlsSettings['allow_insecure'] ?? ($tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
             $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
             if (!empty($tlsSettings['ech'])) {
                 if ($tlsSettings['ech'] === 'cloudflare') {
@@ -173,7 +174,6 @@ class Singbox
                     ];
                 }
             }
-            Helper::applySingboxTlsConfig($tlsConfig, $tlsSettings, $server);
             $array['tls'] = $tlsConfig;
         }
         if ($server['network'] === 'tcp') {
@@ -211,13 +211,15 @@ class Singbox
             "packet_encoding" => "xudp"
         ];
 
-        $tlsSettings = Helper::normalizeTlsSettings($server);
+        $tlsSettings = $server['tls_settings'] ?? [];
 
         if ($server['tls']) {
             $tlsConfig = [];
             $tlsConfig['enabled'] = true;
             $array['flow'] = !empty($server['flow']) ? $server['flow'] : "";
+            $tlsSettings = $server['tls_settings'] ?? [];
             if ($server['tls_settings']) {
+                $tlsConfig['insecure'] = ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false;
                 $tlsConfig['server_name'] = $tlsSettings['server_name'] ?? null;
                 if ($server['tls'] == 2) {
                     $tlsConfig['reality'] = [
@@ -245,7 +247,6 @@ class Singbox
                     }
                 }
             }
-            Helper::applySingboxTlsConfig($tlsConfig, $tlsSettings, $server);
             $array['tls'] = $tlsConfig;
         }
 
@@ -286,9 +287,10 @@ class Singbox
         $array['password'] = $password;
         $array['domain_resolver'] = 'local';
 
-        $tlsSettings = Helper::normalizeTlsSettings($server);
+        $tlsSettings = $server['tls_settings'] ?? [];
         $tlsConfig = [
             'enabled' => true,
+            'insecure' => ($server['allow_insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
             'server_name' => $server['server_name'] ?? ($tlsSettings['server_name'] ?? '')
         ];
         if (!empty($tlsSettings['ech'])) {
@@ -304,7 +306,6 @@ class Singbox
                 ];
             }
         }
-        Helper::applySingboxTlsConfig($tlsConfig, $tlsSettings, $server);
         $array['tls'] = $tlsConfig;
 
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
@@ -343,15 +344,14 @@ class Singbox
         $array['zero_rtt_handshake'] = $server['zero_rtt_handshake'] ? true : false;
         $array['domain_resolver'] = 'local';
 
-        $tlsSettings = Helper::normalizeTlsSettings($server);
-        $tlsConfig = [
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $array['tls'] = [
             'enabled' => true,
+            'insecure' => ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
             'alpn' => ['h3'],
             'disable_sni' => $server['disable_sni'] ? true : false,
         ];
-        $tlsConfig['server_name'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
-        Helper::applySingboxTlsConfig($tlsConfig, $tlsSettings, $server);
-        $array['tls'] = $tlsConfig;
+        $array['tls']['server_name'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
 
         return $array;
     }
@@ -366,9 +366,10 @@ class Singbox
         $array['password'] = $password;
         $array['domain_resolver'] = 'local';
 
-        $tlsSettings = Helper::normalizeTlsSettings($server);
+        $tlsSettings = $server['tls_settings'] ?? [];
         $tlsConfig = [
             'enabled' => true,
+            'insecure' => ($server['insecure'] ?? ($tlsSettings['allow_insecure'] ?? 0)) == 1 ? true : false,
             'alpn' => [
                 'h2',
                 'http/1.1',
@@ -388,7 +389,6 @@ class Singbox
                 "fingerprint" => $tlsSettings['fingerprint'] ?? 'chrome'
             ];
         }
-        Helper::applySingboxTlsConfig($tlsConfig, $tlsSettings, $server);
         $array['tls'] = $tlsConfig;
 
         if ($server['network'] === 'tcp') {
@@ -434,18 +434,15 @@ class Singbox
             }
         }
 
-        $tlsSettings = Helper::normalizeTlsSettings($server);
-        $tlsConfig = [
-            'enabled' => true,
-            'server_name' => $server['server_name']
-        ];
-        Helper::applySingboxTlsConfig($tlsConfig, $tlsSettings, $server);
-
         $array = [
             'tag' => $server['name'],
             'server' => $server['host'],
             'domain_resolver' => 'local',
-            'tls' => $tlsConfig
+            'tls' => [
+                'enabled' => true,
+                'insecure' => $server['insecure'] ? true : false,
+                'server_name' => $server['server_name']
+            ]
         ];
 
         // 设置端口配置
@@ -490,16 +487,15 @@ class Singbox
         } else {
             $firstPort = $firstPart;
         }
-        $tlsSettings = Helper::normalizeTlsSettings($server);
-        $tlsConfig = [
-            'enabled' => true,
-            'server_name' => $tlsSettings['server_name'] ?? ''
-        ];
-        Helper::applySingboxTlsConfig($tlsConfig, $tlsSettings, $server);
+        $tlsSettings = $server['tls_settings'] ?? [];
         $array = [
             'server' => $server['host'],
             'server_port' => (int)$firstPort,
-            'tls' => $tlsConfig,
+            'tls' => [
+                'enabled' => true,
+                'insecure' => ($tlsSettings['allow_insecure'] ?? 0) == 1 ? true : false,
+                'server_name' => $tlsSettings['server_name'] ?? ''
+            ],
             'domain_resolver' => 'local',
             'password' => $password,
             'tag' => $server['name'],

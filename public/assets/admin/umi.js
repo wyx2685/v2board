@@ -104819,18 +104819,7 @@
                 }, y.a.createElement("label", null, "Allow Insecure"), y.a.createElement("div", null, y.a.createElement(f["a"], {
                     checked: parseInt(n),
                     onChange: e=>this.change("allow_insecure", e ? "1" : "0")
-                }))), tls == 1 && y.a.createElement("div", {
-                    className: "form-group"
-                }, y.a.createElement("label", null, "\u8bc1\u4e66\u6307\u7eb9(SHA256) ", y.a.createElement("span", {
-                    style: {
-                        color: "#999",
-                        fontSize: "12px"
-                    }
-                }, "Xray 26.5+ pcs")), y.a.createElement(s["a"], {
-                    value: e.pinned_peer_cert_sha256 || "",
-                    onChange: e=>this.change("pinned_peer_cert_sha256", e.target.value),
-                    placeholder: "2fdd6e9c1b19578975d0ad46d2d159d66cf4c337a6d5f96c1e4b6b117c203842\uff0c\u81ea\u7b7e\u8bc1\u4e66\u5fc5\u586b\uff0cv2node \u542f\u52a8\u540e\u53ef\u81ea\u52a8\u540c\u6b65"
-                })), y.a.createElement("div", {
+                }))), y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "ECH (Encrypted Client Hello)"), y.a.createElement(N["a"], {
                     value: e.ech || "",
@@ -105876,7 +105865,7 @@
                 },
                 y.a.createElement("label", null, y.a.createElement(u["a"], {
                     placement: "top",
-                    title: "Xray 26.5+ \u5df2\u79fb\u9664 allowInsecure\uff0c\u81ea\u7b7e\u8bc1\u4e66\u8bf7\u586b\u5199\u8bc1\u4e66\u6307\u7eb9\u5e76\u5173\u95ed\u672c\u9879"
+                    title: "\u4f7f\u7528\u81ea\u7b7e\u540d\u8bc1\u4e66\u9700\u8981\u5141\u8bb8\u4e0d\u5b89\u5168\uff0c\u7528\u6237\u624d\u53ef\u4ee5\u8fde\u63a5"
                 },
                 "\u5141\u8bb8\u4e0d\u5b89\u5168 ", y.a.createElement(m["a"], {
                     type: "question-circle"
@@ -105903,19 +105892,6 @@
                     placeholder: "\u5f53\u8282\u70b9\u5730\u5740\u4e0e\u8bc1\u4e66\u4e0d\u4e00\u81f4\u65f6\u7528\u4e8e\u8bc1\u4e66\u9a8c\u8bc1",
                     value: e.server_name,
                     onChange: e=>this.formChange("server_name", e.target.value)
-                })), y.a.createElement("div", {
-                    className: "form-group"
-                },
-                y.a.createElement("label", null, y.a.createElement(u["a"], {
-                    placement: "top",
-                    title: "Xray 26.5+ \u5ba2\u6237\u7aef TLS \u8bc1\u4e66\u6307\u7eb9(pcs)\u3002v2node \u542f\u52a8/\u7eed\u7b7e\u540e\u4f1a\u81ea\u52a8\u4e0a\u62a5\u586b\u5145\uff0c\u4ea6\u53ef\u624b\u52a8\u586b\u5199"
-                },
-                "\u8bc1\u4e66\u6307\u7eb9(SHA256) ", y.a.createElement(m["a"], {
-                    type: "question-circle"
-                }))), y.a.createElement(s["a"], {
-                    placeholder: "2fdd6e9c1b19578975d0ad46d2d159d66cf4c337a6d5f96c1e4b6b117c203842",
-                    value: e.pinned_peer_cert_sha256 || "",
-                    onChange: e=>this.formChange("pinned_peer_cert_sha256", e.target.value)
                 })), y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
@@ -106404,7 +106380,17 @@
                     value: "httpupgrade"
                 }, "HTTPUpgrade"), e.protocol != "trojan" && y.a.createElement(N["a"].Option, {
                     value: "xhttp"
-                }, "XHTTP")))), e.protocol == "anytls" && y.a.createElement("div", {
+                }, "XHTTP")))), y.a.createElement("div", {
+                    className: "form-group"
+                }, e.network != null && (e.network == "xhttp" || e.network == "ws" || e.network == "grpc") && y.a.createElement("label", null, "\u4fe1\u4efb\u7684XFF\u5934\u90e8(\u83b7\u53d6\u771f\u5b9eIP)"), y.a.createElement(N["a"], {
+                    mode: "tags",
+                    value: e.trusted_x_forwarded_for || [],
+                    style: {
+                        width: "100%"
+                    },
+                    placeholder: "\u5e38\u89c1\u5934\u90e8:X-Forwarded-For CF-Connecting-IP X-Real-IP",
+                    onChange: e=>this.formChange("trusted_x_forwarded_for", e.length > 0 ? e: null)
+                })), e.protocol == "anytls" && y.a.createElement("div", {
                     className: "row"
                 }, y.a.createElement("div", {
                     className: "form-group col-md-12 col-xs-12"

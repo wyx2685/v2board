@@ -141,9 +141,10 @@ class Clash
 
         if ($server['tls']) {
             $array['tls'] = true;
-            $tlsSettings = Helper::normalizeTlsSettings($server);
+            $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
+            $array['skip-cert-verify'] = ((int)($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0)) == 1 ? true : false;
             $array['servername'] = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
-            Helper::applyClashTlsPin($array, $tlsSettings, $server);
+
         }
         if ($server['network'] === 'tcp') {
             $tcpSettings = $server['network_settings'] ?? ($server['networkSettings'] ?? []);
@@ -199,9 +200,8 @@ class Clash
                 }
             }
         };
-        $tlsSettings = Helper::normalizeTlsSettings($server);
-        $array['sni'] = $server['server_name'] ?? ($tlsSettings['server_name'] ?? '');
-        Helper::applyClashTlsPin($array, $tlsSettings, $server);
+        $array['sni'] = $server['server_name'] ?? (($server['tls_settings'] ?? [])['server_name'] ?? '');
+        $array['skip-cert-verify'] = ((int)(($server['tls_settings'] ?? [])['allow_insecure'] ?? ($server['allow_insecure'] ?? 0))) == 1 ? true : false;
         return $array;
     }
 

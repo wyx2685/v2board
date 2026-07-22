@@ -17,6 +17,7 @@ class ServerV2node extends Model
         'tags' => 'array',
         'tls_settings' => 'array',
         'network_settings' => 'array',
+        'trusted_x_forwarded_for' => 'array',
         'encryption_settings' => 'array',
         'padding_scheme' => 'array',
     ];

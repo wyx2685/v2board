@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\V1\Server;
 
 use App\Http\Controllers\Controller;
-use App\Services\CertPinService;
 use App\Services\ServerService;
 use App\Services\UserService;
 use App\Utils\CacheKey;
@@ -141,9 +140,15 @@ class UniProxyController extends Controller
             ], 400);
         }
         $updateAt = time();
-        $cacheKeys = array_map(function ($uid) {
-            return 'ALIVE_IP_USER_' . $uid;
-        }, array_keys($data));
+
+        $cacheKeys = [];
+        $keyMap = [];
+        foreach ($data as $uid => $_) {
+            if (!is_numeric($uid)) continue;
+            $key = 'ALIVE_IP_USER_' . $uid;
+            $cacheKeys[] = $key;
+            $keyMap[$uid] = $key;
+        }
 
         if (empty($cacheKeys)) {
             return response([
@@ -158,7 +163,7 @@ class UniProxyController extends Controller
             if (!is_numeric($uid) || !is_array($ips)) {
                 continue; // 跳过无效数据
             }
-            $key = 'ALIVE_IP_USER_' . $uid;
+            $key = $keyMap[$uid];
             $ips_array = $cachedData[$key] ?? [];
 
             // 更新节点数据
@@ -303,25 +308,5 @@ class UniProxyController extends Controller
         }
 
         return response($response)->header('ETag', "\"{$eTag}\"");
-    }
-
-    /**
-     * Legacy node types report leaf TLS cert SHA256 (anytls / vless / etc.).
-     */
-    public function certPin(Request $request)
-    {
-        $pin = $request->input('pinned_peer_cert_sha256', '');
-        if (!is_string($pin) || Helper::getTlsPinSha256(['pinned_peer_cert_sha256' => $pin]) === '') {
-            abort(500, 'invalid pinned_peer_cert_sha256');
-        }
-
-        $service = new CertPinService();
-        if (!$service->updateFromNodeReport($this->nodeInfo, $this->nodeType, $pin)) {
-            abort(500, 'update cert pin failed');
-        }
-
-        return response([
-            'data' => true
-        ]);
     }
 }

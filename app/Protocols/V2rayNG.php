@@ -18,7 +18,6 @@ class V2rayNG
 
     public function handle()
     {
-        Helper::setIncludeXrayPcs(true);
         $uri = '';
 
         foreach ($this->servers as $server) {
