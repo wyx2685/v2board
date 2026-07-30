@@ -629,7 +629,13 @@
         }
         mutation.addedNodes.forEach(translateTree);
       });
-      placeLanguageSwitcher();
+      if (
+        !switcherHost ||
+        !document.body.contains(switcherHost) ||
+        switcherHost.hasAttribute("data-floating")
+      ) {
+        placeLanguageSwitcher();
+      }
     });
     observer.observe(document.body, {
       attributeFilter: ATTRIBUTE_NAMES,
