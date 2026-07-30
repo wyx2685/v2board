@@ -14,7 +14,7 @@
   };
   var LOCALES = {
     "en-US": { label: "English", direction: "ltr" },
-    "fa-IR": { label: "فارسی", direction: "rtl" },
+    "fa-IR": { label: "فارسی", direction: "ltr" },
     "ja-JP": { label: "日本語", direction: "ltr" },
     "ko-KR": { label: "한국어", direction: "ltr" },
     "vi-VN": { label: "Tiếng Việt", direction: "ltr" },
@@ -26,6 +26,8 @@
   var observer = null;
   var switcherHost = null;
   var switcherShadow = null;
+  var menuHost = null;
+  var menuShadow = null;
   var textRecords = new WeakMap();
   var attributeRecords = new WeakMap();
 
@@ -206,12 +208,11 @@
   }
 
   function updateDocumentLanguage() {
-    var locale = LOCALES[currentLocale] || LOCALES[DEFAULT_LOCALE];
     document.documentElement.lang = currentLocale;
-    document.documentElement.dir = locale.direction;
+    document.documentElement.dir = "ltr";
 
     if (switcherHost) {
-      switcherHost.setAttribute("dir", locale.direction);
+      switcherHost.setAttribute("dir", "ltr");
     }
   }
 
@@ -225,9 +226,9 @@
   }
 
   function updateSwitcherSelection() {
-    if (!switcherShadow) return;
+    if (!switcherShadow || !menuShadow) return;
 
-    switcherShadow.querySelectorAll(".option").forEach(function (option) {
+    menuShadow.querySelectorAll(".option").forEach(function (option) {
       var selected = option.getAttribute("data-locale") === currentLocale;
       option.classList.toggle("selected", selected);
       option.setAttribute("aria-selected", selected ? "true" : "false");
@@ -276,6 +277,9 @@
   }
 
   function findHeader() {
+    var adminHeader = document.getElementById("page-header");
+    if (adminHeader && isInTopBar(adminHeader)) return adminHeader;
+
     var selectors = [
       "header",
       '[role="banner"]',
@@ -304,14 +308,15 @@
 
   function findThemeAction() {
     var selectors = [
-      '[title*="主题"]',
-      '[title*="theme" i]',
-      '[aria-label*="主题"]',
-      '[aria-label*="theme" i]',
-      '[class*="bg-colors" i]',
-      '[class*="theme" i]',
-      '[data-icon="bg-colors"]',
-      '[data-icon="skin"]',
+      "#page-header .fa-sun",
+      "#page-header .fa-moon",
+      '#page-header [data-icon="bg-colors"]',
+      '#page-header [data-icon="skin"]',
+      '#page-header [data-v2board-theme-toggle="true"]',
+      '#page-header [title="主题"]',
+      '#page-header [title="Theme"]',
+      '#page-header [aria-label="主题"]',
+      '#page-header [aria-label="Theme"]',
     ];
     var candidates = Array.prototype.slice.call(
       document.querySelectorAll(selectors.join(",")),
@@ -325,13 +330,15 @@
       );
     });
 
-    if (!candidates.length) return null;
-    var element = candidates[0];
-    return (
-      element.closest('button,a,[role="button"],[tabindex]') ||
-      element.parentElement ||
-      element
-    );
+    for (var index = 0; index < candidates.length; index += 1) {
+      var element = candidates[index];
+      var action =
+        element.closest('button,a,[role="button"],[tabindex]') ||
+        element.parentElement ||
+        element;
+      if (isInTopBar(action)) return action;
+    }
+    return null;
   }
 
   function findHeaderFromAction(action) {
@@ -351,6 +358,9 @@
   }
 
   function findAccountAction() {
+    var adminAccount = document.getElementById("page-header-user-dropdown");
+    if (adminAccount && isInTopBar(adminAccount)) return adminAccount;
+
     var candidates = Array.prototype.slice.call(
       document.querySelectorAll("a,button,span,div"),
     );
@@ -479,16 +489,32 @@
   }
 
   function closeLanguageMenu() {
-    if (!switcherShadow) return;
-    var menu = switcherShadow.querySelector(".menu");
+    if (!switcherShadow || !menuShadow) return;
+    var menu = menuShadow.querySelector(".menu");
     var trigger = switcherShadow.querySelector(".trigger");
     if (menu) menu.hidden = true;
     if (trigger) trigger.setAttribute("aria-expanded", "false");
   }
 
+  function positionLanguageMenu() {
+    if (!switcherShadow || !menuHost) return;
+    var trigger = switcherShadow.querySelector(".trigger");
+    if (!trigger) return;
+
+    var rect = trigger.getBoundingClientRect();
+    var menuWidth = 168;
+    var viewportWidth = root.innerWidth || document.documentElement.clientWidth;
+    var left = Math.max(
+      8,
+      Math.min(viewportWidth - menuWidth - 8, rect.right - menuWidth),
+    );
+    menuHost.style.left = left + "px";
+    menuHost.style.top = rect.bottom + 6 + "px";
+  }
+
   function toggleLanguageMenu() {
-    if (!switcherShadow) return;
-    var menu = switcherShadow.querySelector(".menu");
+    if (!switcherShadow || !menuShadow) return;
+    var menu = menuShadow.querySelector(".menu");
     var trigger = switcherShadow.querySelector(".trigger");
     if (!menu || !trigger) return;
 
@@ -496,6 +522,7 @@
     menu.hidden = !shouldOpen;
     trigger.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
     if (shouldOpen) {
+      positionLanguageMenu();
       var selected = menu.querySelector(".option.selected");
       if (selected) selected.focus();
     }
@@ -516,15 +543,21 @@
 
     switcherHost = document.createElement("div");
     switcherHost.id = "v2board-admin-language";
+    switcherHost.className = "dropdown d-inline-block";
     switcherHost.setAttribute("data-v2board-admin-i18n", "true");
-    switcherHost.setAttribute("dir", LOCALES[currentLocale].direction);
+    switcherHost.setAttribute("dir", "ltr");
     switcherShadow = switcherHost.attachShadow({ mode: "open" });
+
+    menuHost = document.createElement("div");
+    menuHost.id = "v2board-admin-language-menu";
+    menuHost.setAttribute("dir", "ltr");
+    menuShadow = menuHost.attachShadow({ mode: "open" });
 
     var style = document.createElement("style");
     style.textContent =
       ":host{--v2board-language-color:#fff;--v2board-language-height:36px;" +
       "align-items:center;align-self:stretch;display:inline-flex;position:relative;" +
-      "z-index:1000}" +
+      "z-index:2147483647}" +
       ":host([data-floating]){align-self:auto;position:fixed;right:16px;top:14px;" +
       "z-index:2147483647}" +
       ".trigger{align-items:center;background:rgba(0,0,0,.1);border:0;" +
@@ -539,12 +572,10 @@
       "box-shadow:0 6px 18px rgba(0,0,0,.16);box-sizing:border-box;color:#303133;" +
       "list-style:none;margin:0;min-width:168px;padding:5px;position:absolute;" +
       "right:4px;top:calc(100% + 6px)}" +
-      ":host([dir=rtl]) .menu{left:4px;right:auto}" +
       ".option{align-items:center;background:transparent;border:0;border-radius:4px;" +
       "color:inherit;cursor:pointer;display:flex;font:400 13px/1.2 -apple-system," +
       "BlinkMacSystemFont,\"Segoe UI\",sans-serif;gap:8px;height:34px;" +
       "justify-content:flex-start;padding:0 10px;text-align:left;width:100%}" +
-      ":host([dir=rtl]) .option{text-align:right}" +
       ".option:hover,.option:focus-visible{background:#f0f5ff;color:#1890ff;outline:0}" +
       ".option.selected{color:#1890ff;font-weight:500}" +
       ".check{font-size:14px;opacity:0;width:14px}" +
@@ -562,6 +593,23 @@
     trigger.setAttribute("aria-expanded", "false");
     trigger.appendChild(createLanguageIcon());
     trigger.addEventListener("click", toggleLanguageMenu);
+
+    var menuStyle = document.createElement("style");
+    menuStyle.textContent =
+      ":host{display:block;left:8px;position:fixed;top:54px;" +
+      "z-index:2147483647}" +
+      ".menu[hidden]{display:none!important}" +
+      ".menu{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:6px;" +
+      "box-shadow:0 6px 18px rgba(0,0,0,.16);box-sizing:border-box;color:#303133;" +
+      "list-style:none;margin:0;min-width:168px;padding:5px}" +
+      ".option{align-items:center;background:transparent;border:0;border-radius:4px;" +
+      "color:inherit;cursor:pointer;display:flex;font:400 13px/1.2 -apple-system," +
+      "BlinkMacSystemFont,\"Segoe UI\",sans-serif;gap:8px;height:34px;" +
+      "justify-content:flex-start;padding:0 10px;text-align:left;width:100%}" +
+      ".option:hover,.option:focus-visible{background:#f0f5ff;color:#1890ff;outline:0}" +
+      ".option.selected{color:#1890ff;font-weight:500}" +
+      ".check{font-size:14px;opacity:0;width:14px}" +
+      ".option.selected .check{opacity:1}";
 
     var menu = document.createElement("div");
     menu.className = "menu";
@@ -595,14 +643,17 @@
 
     switcherShadow.appendChild(style);
     switcherShadow.appendChild(trigger);
-    switcherShadow.appendChild(menu);
+    menuShadow.appendChild(menuStyle);
+    menuShadow.appendChild(menu);
     document.body.appendChild(switcherHost);
+    document.body.appendChild(menuHost);
 
     document.addEventListener("click", function (event) {
       if (
         switcherHost &&
         event.composedPath &&
-        event.composedPath().indexOf(switcherHost) === -1
+        event.composedPath().indexOf(switcherHost) === -1 &&
+        event.composedPath().indexOf(menuHost) === -1
       ) {
         closeLanguageMenu();
       }
