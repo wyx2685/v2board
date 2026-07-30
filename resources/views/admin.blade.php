@@ -28,6 +28,14 @@
 
 <body>
 <div id="root"></div>
+<script src="/assets/admin/i18n/locales/en-US.js?v={{$version}}"></script>
+<script src="/assets/admin/i18n/locales/fa-IR.js?v={{$version}}"></script>
+<script src="/assets/admin/i18n/locales/ja-JP.js?v={{$version}}"></script>
+<script src="/assets/admin/i18n/locales/ko-KR.js?v={{$version}}"></script>
+<script src="/assets/admin/i18n/locales/vi-VN.js?v={{$version}}"></script>
+<script src="/assets/admin/i18n/locales/zh-CN.js?v={{$version}}"></script>
+<script src="/assets/admin/i18n/locales/zh-TW.js?v={{$version}}"></script>
+<script src="/assets/admin/i18n/runtime.js?v={{$version}}"></script>
 <script src="/assets/admin/vendors.async.js?v={{$version}}"></script>
 <script src="/assets/admin/components.async.js?v={{$version}}"></script>
 <script src="/assets/admin/umi.js?v={{$version}}"></script>
