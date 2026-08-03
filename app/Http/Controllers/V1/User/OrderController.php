@@ -215,8 +215,11 @@ class OrderController extends Controller
         if (!$order) {
             abort(500, __('Order does not exist or has been paid'));
         }
+        if ($order->total_amount < 0) {
+            abort(500, __('Invalid order amount'));
+        }
         // free process
-        if ($order->total_amount <= 0) {
+        if ((int)$order->total_amount === 0) {
             $orderService = new OrderService($order);
             if (!$orderService->paid($order->trade_no)) abort(500, '');
             return response([
