@@ -282,5 +282,19 @@ window.settings.i18n['en-US'] = {
   '当前剩余佣金': 'Current commission remaining',
   '三级分销比例': 'Three-level Distribution Ratio',
   '累计获得佣金': 'Cumulative commission earned',
-  '您邀请的用户再次邀请用户将按照订单金额乘以分销等级的比例进行分成。': 'The users you invite to re-invite users will be divided according to the order amount multiplied by the distribution level.'
+  '您邀请的用户再次邀请用户将按照订单金额乘以分销等级的比例进行分成。': 'When a user you invited invites someone else, the commission is calculated from the order amount and the applicable distribution level.',
+  '确定要解除绑定Telegram？': 'Are you sure you want to unlink Telegram?',
+  '如果你的Telegram ID已失效可以进行此操作。重置后你需要重新进行绑定。': 'You can do this if your Telegram ID is no longer valid. After unlinking, you will need to link it again.',
+  '请输入充值金额': 'Please enter the top-up amount',
+  '解除绑定': 'Unlink',
+  'Telegram ID: ': 'Telegram ID: ',
+  '即将售罄': 'Almost sold out',
+  '充值奖励': 'Top-up bonus',
+  '实际到账': 'Amount credited',
+  '确定开启下一个流量周期？': 'Are you sure you want to start the next data cycle?',
+  '点击「确定」将会扣除当前流量周期剩余订阅时长（按月重置时扣除本周期剩余订阅时长，每月1号重置时扣除整月时间30天，年周期同理），系统将会重置您的已使用流量。': 'Click "Confirm" to deduct the remaining subscription time in the current data cycle (the remainder of the current cycle for monthly resets, 30 days for resets on the first day of each month, and likewise for annual cycles). The system will then reset your used data.',
+  '购买流量重置包': 'Buy a data reset package',
+  '提前开启流量周期': 'Start the next data cycle early',
+  '已答复': 'Answered',
+  '待处理': 'Pending'
 };

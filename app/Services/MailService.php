@@ -16,11 +16,13 @@ class MailService
         $flag = CacheKey::get('LAST_SEND_EMAIL_REMIND_TRAFFIC', $user->id);
         if (Cache::get($flag)) return;
         if (!Cache::put($flag, 1, 24 * 3600)) return;
+        $locale = $this->localeFor($user);
         SendEmailJob::dispatch([
             'email' => $user->email,
-            'subject' => __('The traffic usage in :app_name has reached 95%', [
+            'locale' => $locale,
+            'subject' => trans('The traffic usage in :app_name has reached 95%', [
                 'app_name' => config('v2board.app_name', 'V2board')
-            ]),
+            ], $locale),
             'template_name' => 'remindTraffic',
             'template_value' => [
                 'name' => config('v2board.app_name', 'V2Board'),
@@ -32,11 +34,13 @@ class MailService
     public function remindExpire(User $user)
     {
         if (!($user->expired_at !== NULL && ($user->expired_at - 86400) < time() && $user->expired_at > time())) return;
+        $locale = $this->localeFor($user);
         SendEmailJob::dispatch([
             'email' => $user->email,
-            'subject' => __('The service in :app_name is about to expire', [
+            'locale' => $locale,
+            'subject' => trans('The service in :app_name is about to expire', [
                'app_name' =>  config('v2board.app_name', 'V2board')
-            ]),
+            ], $locale),
             'template_name' => 'remindExpire',
             'template_value' => [
                 'name' => config('v2board.app_name', 'V2Board'),
@@ -54,5 +58,15 @@ class MailService
         if ($percentage < 95) return false;
         if ($percentage >= 100) return false;
         return true;
+    }
+
+    private function localeFor(User $user): string
+    {
+        $locale = Cache::get(CacheKey::get('USER_LOCALE', $user->id));
+        $supported = array_keys((array) config('app.supported_locales', []));
+
+        return is_string($locale) && in_array($locale, $supported, true)
+            ? $locale
+            : (string) config('app.default_locale', 'vi-VN');
     }
 }

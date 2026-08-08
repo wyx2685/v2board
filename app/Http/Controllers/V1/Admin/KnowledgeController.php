@@ -15,7 +15,7 @@ class KnowledgeController extends Controller
     {
         if ($request->input('id')) {
             $knowledge = Knowledge::find($request->input('id'))->toArray();
-            if (!$knowledge) abort(500, '知识不存在');
+            if (!$knowledge) abort(500, __('Knowledge article does not exist'));
             return response([
                 'data' => $knowledge
             ]);
@@ -40,13 +40,13 @@ class KnowledgeController extends Controller
 
         if (!$request->input('id')) {
             if (!Knowledge::create($params)) {
-                abort(500, '创建失败');
+                abort(500, __('Create failed'));
             }
         } else {
             try {
                 Knowledge::find($request->input('id'))->update($params);
             } catch (\Exception $e) {
-                abort(500, '保存失败');
+                abort(500, __('Save failed'));
             }
         }
 
@@ -58,15 +58,15 @@ class KnowledgeController extends Controller
     public function show(Request $request)
     {
         if (empty($request->input('id'))) {
-            abort(500, '参数有误');
+            abort(500, __('Invalid parameter'));
         }
         $knowledge = Knowledge::find($request->input('id'));
         if (!$knowledge) {
-            abort(500, '知识不存在');
+            abort(500, __('Knowledge article does not exist'));
         }
         $knowledge->show = $knowledge->show ? 0 : 1;
         if (!$knowledge->save()) {
-            abort(500, '保存失败');
+            abort(500, __('Save failed'));
         }
 
         return response([
@@ -85,7 +85,7 @@ class KnowledgeController extends Controller
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            abort(500, '保存失败');
+            abort(500, __('Save failed'));
         }
         DB::commit();
         return response([
@@ -96,14 +96,14 @@ class KnowledgeController extends Controller
     public function drop(Request $request)
     {
         if (empty($request->input('id'))) {
-            abort(500, '参数有误');
+            abort(500, __('Invalid parameter'));
         }
         $knowledge = Knowledge::find($request->input('id'));
         if (!$knowledge) {
-            abort(500, '知识不存在');
+            abort(500, __('Knowledge article does not exist'));
         }
         if (!$knowledge->delete()) {
-            abort(500, '删除失败');
+            abort(500, __('Delete failed'));
         }
 
         return response([

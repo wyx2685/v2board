@@ -3,10 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Services\MailService;
-use Illuminate\Console\Command;
 use App\Models\User;
 
-class SendRemindMail extends Command
+class SendRemindMail extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -20,7 +19,7 @@ class SendRemindMail extends Command
      *
      * @var string
      */
-    protected $description = '发送提醒邮件';
+    protected $descriptionKey = 'console.descriptions.send_remind_mail';
 
     /**
      * Create a new command instance.

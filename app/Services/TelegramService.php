@@ -3,8 +3,9 @@ namespace App\Services;
 
 use App\Jobs\SendTelegramJob;
 use App\Models\User;
+use App\Utils\CacheKey;
 use \Curl\Curl;
-use Illuminate\Mail\Markdown;
+use Illuminate\Support\Facades\Cache;
 
 class TelegramService {
     protected $api;
@@ -91,7 +92,7 @@ class TelegramService {
 
                     $commands[] = [
                         'command' => $command,
-                        'description' => $description,
+                        'description' => __($description),
                     ];
                 }
             } catch (\ReflectionException $e) {
@@ -114,17 +115,40 @@ class TelegramService {
         $curl->get($this->api . $method . '?' . http_build_query($params));
         $response = $curl->response;
         $curl->close();
-        if (!isset($response->ok)) abort(500, '请求失败');
+        if (!isset($response->ok)) abort(500, __('Request failed'));
         if (!$response->ok) {
-            abort(500, '来自TG的错误：' . $response->description);
+            abort(500, __('Telegram error: :error', ['error' => $response->description]));
         }
         return $response;
     }
 
-    public function sendMessageWithAdmin($message, $isStaff = false)
+    public function sendMessageWithAdmin($message, $isStaff = false, string $parseMode = '')
     {
         if (!config('v2board.telegram_bot_enable', 0)) return;
-        $users = User::where(function ($query) use ($isStaff) {
+        foreach ($this->notificationRecipients($isStaff) as $user) {
+            SendTelegramJob::dispatch($user->telegram_id, $message, $parseMode);
+        }
+    }
+
+    public function sendTranslatedMessageWithAdmin(
+        string $key,
+        array $replace = [],
+        bool $isStaff = false,
+        string $parseMode = ''
+    ) {
+        if (!config('v2board.telegram_bot_enable', 0)) return;
+        foreach ($this->notificationRecipients($isStaff) as $user) {
+            SendTelegramJob::dispatch(
+                $user->telegram_id,
+                trans($key, $replace, $this->localeFor($user)),
+                $parseMode
+            );
+        }
+    }
+
+    private function notificationRecipients(bool $isStaff)
+    {
+        return User::where(function ($query) use ($isStaff) {
             $query->where('is_admin', 1);
             if ($isStaff) {
                 $query->orWhere('is_staff', 1);
@@ -132,8 +156,15 @@ class TelegramService {
         })
             ->where('telegram_id', '!=', NULL)
             ->get();
-        foreach ($users as $user) {
-            SendTelegramJob::dispatch($user->telegram_id, $message);
-        }
+    }
+
+    private function localeFor(User $user): string
+    {
+        $locale = Cache::get(CacheKey::get('USER_LOCALE', $user->id));
+        $supported = array_keys((array) config('app.supported_locales', []));
+
+        return is_string($locale) && in_array($locale, $supported, true)
+            ? $locale
+            : (string) config('app.default_locale', 'vi-VN');
     }
 }

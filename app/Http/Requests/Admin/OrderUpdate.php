@@ -22,8 +22,8 @@ class OrderUpdate extends FormRequest
     public function messages()
     {
         return [
-            'status.in' => '销售状态格式不正确',
-            'commission_status.in' => '佣金状态格式不正确'
+            'status.in' => __('Sale status format is invalid'),
+            'commission_status.in' => __('Commission status format is invalid')
         ];
     }
 }

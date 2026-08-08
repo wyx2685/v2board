@@ -14,6 +14,7 @@ class SendTelegramJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $telegramId;
     protected $text;
+    protected $parseMode;
 
     public $tries = 3;
     public $timeout = 10;
@@ -23,11 +24,12 @@ class SendTelegramJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(int $telegramId, string $text)
+    public function __construct(int $telegramId, string $text, string $parseMode = '')
     {
         $this->onQueue('send_telegram');
         $this->telegramId = $telegramId;
         $this->text = $text;
+        $this->parseMode = $parseMode;
     }
 
     /**
@@ -38,6 +40,6 @@ class SendTelegramJob implements ShouldQueue
     public function handle()
     {
         $telegramService = new TelegramService();
-        $telegramService->sendMessage($this->telegramId, $this->text, 'markdown');
+        $telegramService->sendMessage($this->telegramId, $this->text, $this->parseMode);
     }
 }

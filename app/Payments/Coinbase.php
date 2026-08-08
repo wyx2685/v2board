@@ -11,7 +11,7 @@ class Coinbase {
     {
         return [
             'coinbase_url' => [
-                'label' => '接口地址',
+                'label' => __('payment.endpoint_url'),
                 'description' => '',
                 'type' => 'input',
             ],
@@ -31,8 +31,8 @@ class Coinbase {
     public function pay($order) {
 
         $params = [
-            'name' => '订阅套餐',
-            'description' => '订单号 ' . $order['trade_no'],
+            'name' => __('payment.subscription_plan'),
+            'description' => __('payment.order_number', ['trade_no' => $order['trade_no']]),
             'pricing_type' => 'fixed_price',
             'local_price' => [
                 'amount' => sprintf('%.2f', $order['total_amount'] / 100),
@@ -50,7 +50,7 @@ class Coinbase {
         $ret = @json_decode($ret_raw, true);
         
         if(empty($ret['data']['hosted_url'])) {
-            abort(500, "error!");
+            abort(500, __('payment.generic_error'));
         }
         return [
             'type' => 1,
@@ -64,23 +64,32 @@ class Coinbase {
         $json_param = json_decode($payload, true); 
 
 
-        $headerName = 'X-Cc-Webhook-Signature';
-        $headers = getallheaders();
-        $signatureHeader = isset($headers[$headerName]) ? $headers[$headerName] : '';
+        $signatureHeader = (string)request()->header('X-Cc-Webhook-Signature', '');
         $computedSignature = \hash_hmac('sha256', $payload, $this->config['coinbase_webhook_key']);
 
         if (!self::hashEqual($signatureHeader, $computedSignature)) {
-            abort(400, 'HMAC signature does not match');
+            abort(400, __('payment.signature_mismatch'));
+        }
+
+        if (($json_param['event']['type'] ?? '') !== 'charge:confirmed') {
+            return [
+                'ignored' => true,
+                'custom_result' => 'success',
+            ];
         }
         
         $out_trade_no = $json_param['event']['data']['metadata']['outTradeNo'];
         $pay_trade_no=$json_param['event']['id'];
-        return [
+        $notification = [
             'trade_no' => $out_trade_no,
             'callback_no' => $pay_trade_no
         ];
-        http_response_code(200);
-        return('success');
+        $localPrice = $json_param['event']['data']['pricing']['local'] ?? null;
+        if (is_array($localPrice) && isset($localPrice['amount'])) {
+            $notification['amount'] = (int)round(((float)$localPrice['amount']) * 100);
+            $notification['currency'] = strtoupper((string)($localPrice['currency'] ?? 'CNY'));
+        }
+        return $notification;
     }
 
 
@@ -126,4 +135,3 @@ class Coinbase {
     }
     
 }
-

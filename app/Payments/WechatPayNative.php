@@ -16,12 +16,12 @@ class WechatPayNative {
         return [
             'app_id' => [
                 'label' => 'APPID',
-                'description' => '绑定微信支付商户的APPID',
+                'description' => __('payment.wechat_app_id_help'),
                 'type' => 'input',
             ],
             'mch_id' => [
-                'label' => '商户号',
-                'description' => '微信支付商户号',
+                'label' => __('payment.merchant_number'),
+                'description' => __('payment.wechat_merchant_number_help'),
                 'type' => 'input',
             ],
             'api_key' => [
@@ -76,9 +76,14 @@ class WechatPayNative {
             return('FAIL');
         }
 
-        return [
+        $notification = [
             'trade_no' => $data['out_trade_no'],
             'callback_no' => $data['transaction_id']
         ];
+        if (isset($data['total_fee'])) {
+            $notification['amount'] = (int)$data['total_fee'];
+            $notification['currency'] = strtoupper((string)($data['fee_type'] ?? 'CNY'));
+        }
+        return $notification;
     }
 }

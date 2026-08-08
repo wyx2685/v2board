@@ -14,18 +14,18 @@ class BEasyPaymentUSDT {
     {
         return [
             'bepusdt_url' => [
-                'label' => 'API 地址',
-                'description' => '您的 BEPUSDT API 接口地址(例如: https://xxx.com)',
+                'label' => __('payment.endpoint_url'),
+                'description' => __('payment.bepusdt_api_url_help'),
                 'type' => 'input',
             ],
             'bepusdt_apitoken' => [
                 'label' => 'API Token',
-                'description' => '您的 BEPUSDT API Token',
+                'description' => __('payment.bepusdt_token_help'),
                 'type' => 'input',
             ],
             'bepusdt_trade_type' => [
-                'label' => '交易类型',
-                'description' => '您的 BEPUSDT 交易类型',
+                'label' => __('payment.transaction_type'),
+                'description' => __('payment.bepusdt_transaction_type_help'),
                 'type' => 'input',
             ]
         ];
@@ -47,14 +47,13 @@ class BEasyPaymentUSDT {
 
         $curl = new Curl();
         $curl->setUserAgent('BEPUSDT');
-        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
         $curl->setOpt(CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         $curl->post($this->config['bepusdt_url'] . '/api/v1/order/create-transaction', json_encode($params));
         $result = $curl->response;
         $curl->close();
 
         if (!isset($result->status_code) || $result->status_code != 200) {
-            abort(500, "Failed to create order. Error: {$result->message}");
+            abort(500, __('payment.create_order_error', ['error' => $result->message]));
         }
 
         $paymentURL = $result->data->payment_url;
@@ -80,10 +79,15 @@ class BEasyPaymentUSDT {
         if ($status != 2) {
             return('failed');
         }
-        return [
+        $notification = [
             'trade_no' => $params['order_id'],
             'callback_no' => $params['trade_id'],
             'custom_result' => 'ok'
         ];
+        if (isset($params['amount'])) {
+            $notification['amount'] = (int)round(((float)$params['amount']) * 100);
+            $notification['currency'] = config('v2board.currency', 'CNY');
+        }
+        return $notification;
     }
 }

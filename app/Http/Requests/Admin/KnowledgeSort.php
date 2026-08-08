@@ -21,8 +21,8 @@ class KnowledgeSort extends FormRequest
     public function messages()
     {
         return [
-            'knowledge_ids.required' => '知识ID不能为空',
-            'knowledge_ids.array' => '知识ID格式有误'
+            'knowledge_ids.required' => __('Knowledge article ID cannot be empty'),
+            'knowledge_ids.array' => __('Knowledge article ID format is invalid')
         ];
     }
 }

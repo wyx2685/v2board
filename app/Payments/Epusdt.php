@@ -17,33 +17,33 @@ class Epusdt
     {
         return [
             'epusdt_url' => [
-                'label' => 'API 地址',
-                'description' => 'Epusdt API 接口地址(例如: https://xxx.com)',
+                'label' => __('payment.endpoint_url'),
+                'description' => __('payment.epusdt_api_url_help'),
                 'type' => 'input',
             ],
             'epusdt_pid' => [
                 'label' => 'PID',
-                'description' => 'Epusdt 后台的 pid',
+                'description' => __('payment.epusdt_pid_help'),
                 'type' => 'input',
             ],
             'epusdt_token' => [
                 'label' => 'Token',
-                'description' => 'Epusdt 后台的 secret_key',
+                'description' => __('payment.epusdt_secret_help'),
                 'type' => 'input',
             ],
             'epusdt_currency' => [
-                'label' => '法币',
-                'description' => '默认 cny',
+                'label' => __('payment.fiat_currency'),
+                'description' => __('payment.default_cny_lower'),
                 'type' => 'input',
             ],
             'epusdt_asset' => [
-                'label' => '代币',
-                'description' => '默认 usdt',
+                'label' => __('payment.token_currency'),
+                'description' => __('payment.default_usdt'),
                 'type' => 'input',
             ],
             'epusdt_network' => [
-                'label' => '网络',
-                'description' => '留空时进入 GMPay 选择链路界面，填写时按该网络直接发起订单',
+                'label' => __('payment.network'),
+                'description' => __('payment.network_help'),
                 'type' => 'input',
             ],
         ];
@@ -68,7 +68,6 @@ class Epusdt
 
         $curl = new Curl();
         $curl->setUserAgent('epusdt');
-        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
         $curl->setOpt(CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         $curl->post(
             rtrim((string) $this->config['epusdt_url'], '/') . '/payments/gmpay/v1/order/create-transaction',
@@ -86,7 +85,7 @@ class Epusdt
 
         if ($network !== '') {
             if (!isset($result->data->trade_id) || $result->data->trade_id === '') {
-                abort(500, 'epusdt create order response missing trade_id');
+                abort(500, __('payment.missing_trade_id'));
             }
 
             $switchParams = [
@@ -97,7 +96,6 @@ class Epusdt
 
             $curl = new Curl();
             $curl->setUserAgent('epusdt');
-            $curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
             $curl->setOpt(CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
             $curl->post(
                 rtrim((string) $this->config['epusdt_url'], '/') . '/pay/switch-network',
@@ -115,7 +113,7 @@ class Epusdt
         }
 
         if (empty($paymentUrl)) {
-            abort(500, 'epusdt payment url missing');
+            abort(500, __('payment.missing_payment_url'));
         }
 
         return [
@@ -141,11 +139,16 @@ class Epusdt
             return 'failed';
         }
 
-        return [
+        $notification = [
             'trade_no' => $params['order_id'],
             'callback_no' => $params['trade_id'],
             'custom_result' => 'ok',
         ];
+        if (isset($params['amount'])) {
+            $notification['amount'] = (int)round(((float)$params['amount']) * 100);
+            $notification['currency'] = strtoupper((string)($params['currency'] ?? config('v2board.currency', 'CNY')));
+        }
+        return $notification;
     }
 
     private function makeSignature($params, $token)

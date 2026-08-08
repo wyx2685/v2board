@@ -4,15 +4,22 @@ namespace App\Http\Controllers\V1\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
-use App\Models\User;
+use App\Services\StaffAccessService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
+    private $access;
+
+    public function __construct(StaffAccessService $access)
+    {
+        $this->access = $access;
+    }
+
     public function fetch(Request $request)
     {
-        $counts = User::select(
+        $counts = $this->access->users($request->input('user.id'))->select(
             DB::raw("plan_id"),
             DB::raw("count(*) as count")
         )

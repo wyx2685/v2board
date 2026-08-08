@@ -7,15 +7,15 @@ use App\Plugins\Telegram\Telegram;
 
 class GetLatestUrl extends Telegram {
     public $command = '/getlatesturl';
-    public $description = '获取最新的站点地址';
+    public $description = 'telegram.command_latest_url';
 
     public function handle($message, $match = []) {
         $telegramService = $this->telegramService;
-        $text = sprintf(
-            "%s的最新网址是：%s",
-            config('v2board.app_name', 'V2Board'),
-            config('v2board.app_url')
-        );
-        $telegramService->sendMessage($message->chat_id, $text, 'markdown');
+        $user = User::where('telegram_id', $message->chat_id)->first();
+        $text = $this->translateFor('telegram.latest_url', [
+            'app_name' => config('v2board.app_name', 'V2Board'),
+            'url' => config('v2board.app_url'),
+        ], $user);
+        $telegramService->sendMessage($message->chat_id, $text);
     }
 }

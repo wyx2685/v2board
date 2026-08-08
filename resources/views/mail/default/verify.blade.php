@@ -12,14 +12,14 @@
                         </thead>
                         <tbody>
                         <tr style="padding:40px 40px 0 40px;display:table-cell">
-                            <td style="font-size:24px;line-height:1.5;color:#000;margin-top:40px">邮箱验证码</td>
+                            <td style="font-size:24px;line-height:1.5;color:#000;margin-top:40px">{{ __('mail.verify_title') }}</td>
                         </tr>
                         <tr>
                             <td style="font-size:14px;color:#333;padding:24px 40px 0 40px">
-                                尊敬的用户您好！
+                                {{ __('mail.greeting') }}
                                 <br />
                                 <br />
-                                您的验证码是：{{$code}}，请在 5 分钟内进行验证。如果该验证码不为您本人申请，请无视。
+                                {{ __('mail.verify_body', ['code' => $code]) }}
                             </td>
                         </tr>
                         <tr style="padding:40px;display:table-cell">
@@ -31,7 +31,7 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
                         <tr>
-                            <td style="padding:20px 40px;font-size:12px;color:#999;line-height:20px;background:#f7f7f7"><a href="{{$url}}" style="font-size:14px;color:#929292">返回{{$name}}</a></td>
+                            <td style="padding:20px 40px;font-size:12px;color:#999;line-height:20px;background:#f7f7f7"><a href="{{$url}}" style="font-size:14px;color:#929292">{{ __('mail.back_to', ['name' => $name]) }}</a></td>
                         </tr>
                         </tbody>
                     </table>

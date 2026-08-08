@@ -1,0 +1,71 @@
+#v2board-admin-locale-switcher {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+    display: flex;
+    gap: 8px;
+    max-width: calc(100vw - 24px);
+    padding: 7px 9px;
+    position: fixed;
+    right: 12px;
+    top: 12px;
+    z-index: 2147483000;
+}
+
+#v2board-admin-locale-switcher .v2board-admin-locale-icon {
+    color: #495057;
+    font-size: 16px;
+    line-height: 1;
+}
+
+#v2board-admin-locale-switcher select {
+    appearance: auto;
+    background: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    color: #212529;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    height: 32px;
+    line-height: 1.2;
+    max-width: 180px;
+    padding: 4px 28px 4px 9px;
+}
+
+#v2board-admin-locale-switcher select:focus {
+    border-color: #6c8cff;
+    box-shadow: 0 0 0 3px rgba(108, 140, 255, 0.24);
+    outline: 0;
+}
+
+.v2board-admin-i18n-sr-only {
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+@media (max-width: 575.98px) {
+    #v2board-admin-locale-switcher {
+        right: 8px;
+        top: 8px;
+    }
+
+    #v2board-admin-locale-switcher .v2board-admin-locale-icon {
+        display: none;
+    }
+
+    #v2board-admin-locale-switcher select {
+        max-width: 132px;
+    }
+}
+
+html[data-v2board-admin-locale="ru-RU"] #v2board-admin-locale-switcher select {
+    max-width: 205px;
+}

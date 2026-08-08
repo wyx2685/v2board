@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Services\MailService;
 use App\Services\PlanService;
 use App\Services\OrderService;
-use Illuminate\Console\Command;
 use App\Models\User;
 use App\Models\Order;
 use App\Utils\Helper;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 use Exception;
 
-class CheckRenewal extends Command
+class CheckRenewal extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -27,7 +26,7 @@ class CheckRenewal extends Command
      *
      * @var string
      */
-    protected $description = '自动续费';
+    protected $descriptionKey = 'console.descriptions.check_renewal';
 
     /**
      * Create a new command instance.
@@ -74,7 +73,7 @@ class CheckRenewal extends Command
                         throw new Exception('This subscription cannot be renewed');
                     }
                     if($user->balance < $plan[$latestPeriod]) {
-                        throw new Exception('No enough balance');
+                        throw new Exception(__('console.renewal.insufficient_balance'));
                     }
 
                     DB::beginTransaction();
@@ -93,19 +92,19 @@ class CheckRenewal extends Command
                     $user->expired_at = $this->getTime($latestPeriod, $user->expired_at);
                     if (!$user->save()) {
                         DB::rollback();
-                        throw new Exception('自动续费失败');
+                        throw new Exception(__('console.renewal.failed'));
                     }
                     $order->status = 3;
                     if (!$order->save()) {
                         DB::rollback();
-                        throw new Exception('自动续费失败');
+                        throw new Exception(__('console.renewal.failed'));
                     }
                     DB::commit();
                     //$mailService->remindAutorenewal($user);
                 } catch (\Exception $e) {
                     $user->auto_renewal = 0;
                     if(!$user->save()){
-                        info('用户自动续费失败,调整设置失败', [$e->getMessage() , $user]);
+                        info(__('console.renewal.disable_failed'), [$e->getMessage(), $user]);
                     };
                 }
             }

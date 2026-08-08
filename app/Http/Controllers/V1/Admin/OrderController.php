@@ -12,6 +12,7 @@ use App\Models\Plan;
 use App\Models\User;
 use App\Services\OrderService;
 use App\Services\UserService;
+use App\Support\AdminFilter;
 use App\Utils\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,17 +23,19 @@ class OrderController extends Controller
     {
         if ($request->input('filter')) {
             foreach ($request->input('filter') as $filter) {
-                if ($filter['key'] === 'email') {
-                    $user = User::where('email', "%{$filter['value']}%")->first();
-                    if (!$user) continue;
-                    $builder->where('user_id', $user->id);
+                $condition = AdminFilter::normalizeCondition($filter['condition']);
+                $value = AdminFilter::prepareValue($condition, $filter['value']);
+
+                if (in_array($filter['key'], ['email', 'invite_user_email'], true)) {
+                    $foreignKey = $filter['key'] === 'email' ? 'user_id' : 'invite_user_id';
+                    $builder->whereIn(
+                        $foreignKey,
+                        User::query()->select('id')->where('email', $condition, $value)
+                    );
                     continue;
                 }
-                if ($filter['condition'] === '模糊') {
-                    $filter['condition'] = 'like';
-                    $filter['value'] = "%{$filter['value']}%";
-                }
-                $builder->where($filter['key'], $filter['condition'], $filter['value']);
+
+                $builder->where($filter['key'], $condition, $value);
             }
         }
     }
@@ -40,7 +43,7 @@ class OrderController extends Controller
     public function detail(Request $request)
     {
         $order = Order::find($request->input('id'));
-        if (!$order) abort(500, '订单不存在');
+        if (!$order) abort(500, __('Order does not exist'));
         $order['commission_log'] = CommissionLog::where('trade_no', $order->trade_no)->get();
         if ($order->surplus_order_ids) {
             $order['surplus_orders'] = Order::whereIn('id', $order->surplus_order_ids)->get();
@@ -83,13 +86,13 @@ class OrderController extends Controller
         $order = Order::where('trade_no', $request->input('trade_no'))
             ->first();
         if (!$order) {
-            abort(500, '订单不存在');
+            abort(500, __('Order does not exist'));
         }
-        if ($order->status !== 0) abort(500, '只能对待支付的订单进行操作');
+        if ($order->status !== 0) abort(500, __('Only pending orders can be processed'));
 
         $orderService = new OrderService($order);
         if (!$orderService->paid('manual_operation')) {
-            abort(500, '更新失败');
+            abort(500, __('Update failed'));
         }
         return response([
             'data' => true
@@ -101,13 +104,13 @@ class OrderController extends Controller
         $order = Order::where('trade_no', $request->input('trade_no'))
             ->first();
         if (!$order) {
-            abort(500, '订单不存在');
+            abort(500, __('Order does not exist'));
         }
-        if ($order->status !== 0) abort(500, '只能对待支付的订单进行操作');
+        if ($order->status !== 0) abort(500, __('Only pending orders can be processed'));
 
         $orderService = new OrderService($order);
         if (!$orderService->cancel()) {
-            abort(500, '更新失败');
+            abort(500, __('Update failed'));
         }
         return response([
             'data' => true
@@ -123,13 +126,13 @@ class OrderController extends Controller
         $order = Order::where('trade_no', $request->input('trade_no'))
             ->first();
         if (!$order) {
-            abort(500, '订单不存在');
+            abort(500, __('Order does not exist'));
         }
 
         try {
             $order->update($params);
         } catch (\Exception $e) {
-            abort(500, '更新失败');
+            abort(500, __('Update failed'));
         }
 
         return response([
@@ -143,16 +146,16 @@ class OrderController extends Controller
         $user = User::where('email', $request->input('email'))->first();
 
         if (!$user) {
-            abort(500, '该用户不存在');
+            abort(500, __('The user does not exist'));
         }
 
         if (!$plan) {
-            abort(500, '该订阅不存在');
+            abort(500, __('Subscription plan does not exist'));
         }
 
         $userService = new UserService();
         if ($userService->isNotCompleteOrderByUserId($user->id)) {
-            abort(500, '该用户还有待支付的订单，无法分配');
+            abort(500, __('The user has a pending order and cannot be assigned a subscription'));
         }
 
         DB::beginTransaction();
@@ -178,7 +181,7 @@ class OrderController extends Controller
 
         if (!$order->save()) {
             DB::rollback();
-            abort(500, '订单创建失败');
+            abort(500, __('Failed to create order'));
         }
 
         DB::commit();

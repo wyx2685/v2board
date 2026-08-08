@@ -94,7 +94,7 @@ class TrojanTidalabController extends Controller
         $nodeId = $request->input('node_id');
         $localPort = $request->input('local_port');
         if (empty($nodeId) || empty($localPort)) {
-            abort(500, '参数错误');
+            abort(500, __('client.invalid_parameters'));
         }
         try {
             $json = $this->getTrojanConfig($nodeId, $localPort);
@@ -109,7 +109,7 @@ class TrojanTidalabController extends Controller
     {
         $server = ServerTrojan::find($nodeId);
         if (!$server) {
-            abort(500, '节点不存在');
+            abort(500, __('client.node_not_found'));
         }
 
         $json = json_decode(self::TROJAN_CONFIG);

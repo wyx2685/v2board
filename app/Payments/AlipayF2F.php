@@ -15,23 +15,23 @@ class AlipayF2F {
     {
         return [
             'app_id' => [
-                'label' => '支付宝APPID',
+                'label' => __('payment.alipay_app_id'),
                 'description' => '',
                 'type' => 'input',
             ],
             'private_key' => [
-                'label' => '支付宝私钥',
+                'label' => __('payment.alipay_private_key'),
                 'description' => '',
                 'type' => 'input',
             ],
             'public_key' => [
-                'label' => '支付宝公钥',
+                'label' => __('payment.alipay_public_key'),
                 'description' => '',
                 'type' => 'input',
             ],
             'product_name' => [
-                'label' => '自定义商品名称',
-                'description' => '将会体现在支付宝账单中',
+                'label' => __('payment.custom_product_name'),
+                'description' => __('payment.alipay_product_help'),
                 'type' => 'input'
             ]
         ];
@@ -47,7 +47,7 @@ class AlipayF2F {
             $gateway->setAlipayPublicKey($this->config['public_key']); // 可以是路径，也可以是密钥内容
             $gateway->setNotifyUrl($order['notify_url']);
             $gateway->setBizContent([
-                'subject' => $this->config['product_name'] ?? (config('v2board.app_name', 'V2Board') . ' - 订阅'),
+                'subject' => $this->config['product_name'] ?? (config('v2board.app_name', 'V2Board') . ' - ' . __('payment.subscription_product')),
                 'out_trade_no' => $order['trade_no'],
                 'total_amount' => $order['total_amount'] / 100
             ]);
@@ -73,10 +73,15 @@ class AlipayF2F {
                 /**
                  * Payment is successful
                  */
-                return [
+                $notification = [
                     'trade_no' => $params['out_trade_no'],
                     'callback_no' => $params['trade_no']
                 ];
+                if (isset($params['total_amount'])) {
+                    $notification['amount'] = (int)round(((float)$params['total_amount']) * 100);
+                    $notification['currency'] = 'CNY';
+                }
+                return $notification;
             } else {
                 /**
                  * Payment is not successful

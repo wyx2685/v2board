@@ -16,12 +16,12 @@ class ShadowsocksController extends Controller
         if ($request->input('id')) {
             $server = ServerShadowsocks::find($request->input('id'));
             if (!$server) {
-                abort(500, '服务器不存在');
+                abort(500, __('Server does not exist'));
             }
             try {
                 $server->update($params);
             } catch (\Exception $e) {
-                abort(500, '保存失败');
+                abort(500, __('Save failed'));
             }
             return response([
                 'data' => true
@@ -29,7 +29,7 @@ class ShadowsocksController extends Controller
         }
 
         if (!ServerShadowsocks::create($params)) {
-            abort(500, '创建失败');
+            abort(500, __('Create failed'));
         }
 
         return response([
@@ -42,7 +42,7 @@ class ShadowsocksController extends Controller
         if ($request->input('id')) {
             $server = ServerShadowsocks::find($request->input('id'));
             if (!$server) {
-                abort(500, '节点ID不存在');
+                abort(500, __('Node ID does not exist'));
             }
         }
         return response([
@@ -59,12 +59,12 @@ class ShadowsocksController extends Controller
         $server = ServerShadowsocks::find($request->input('id'));
 
         if (!$server) {
-            abort(500, '该服务器不存在');
+            abort(500, __('Server does not exist'));
         }
         try {
             $server->update($params);
         } catch (\Exception $e) {
-            abort(500, '保存失败');
+            abort(500, __('Save failed'));
         }
 
         return response([
@@ -77,10 +77,10 @@ class ShadowsocksController extends Controller
         $server = ServerShadowsocks::find($request->input('id'));
         $server->show = 0;
         if (!$server) {
-            abort(500, '服务器不存在');
+            abort(500, __('Server does not exist'));
         }
         if (!ServerShadowsocks::create($server->toArray())) {
-            abort(500, '复制失败');
+            abort(500, __('Copy failed'));
         }
 
         return response([

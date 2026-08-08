@@ -4,9 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Console\Command;
 
-class ClearUser extends Command
+class ClearUser extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -20,7 +19,7 @@ class ClearUser extends Command
      *
      * @var string
      */
-    protected $description = '清理用户';
+    protected $descriptionKey = 'console.descriptions.clear_user';
 
     /**
      * Create a new command instance.
@@ -45,7 +44,7 @@ class ClearUser extends Command
             ->where('last_login_at', NULL);
         $count = $builder->count();
         if ($builder->delete()) {
-            $this->info("已删除{$count}位没有任何数据的用户");
+            $this->info(__('console.clear_user.completed', ['count' => $count]));
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Scope;
 
+use App\Support\AdminFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 trait FilterScope
@@ -40,7 +41,11 @@ trait FilterScope
                     continue;
                 }
                 if ($filter['condition'] === 'like') {
-                    $builder->where($filter['key'], 'like', "%{$filter['value']}%");
+                    $builder->where(
+                        $filter['key'],
+                        'like',
+                        AdminFilter::prepareValue('like', $filter['value'])
+                    );
                     continue;
                 }
             }

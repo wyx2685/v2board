@@ -18,7 +18,7 @@ class StripeAlipay {
     {
         return [
             'currency' => [
-                'label' => '货币单位',
+                'label' => __('payment.currency_unit'),
                 'description' => '',
                 'type' => 'input',
             ],
@@ -28,7 +28,7 @@ class StripeAlipay {
                 'type' => 'input',
             ],
             'stripe_webhook_key' => [
-                'label' => 'WebHook密钥签名',
+                'label' => __('payment.webhook_signing_secret'),
                 'description' => '',
                 'type' => 'input',
             ]
@@ -103,7 +103,7 @@ class StripeAlipay {
                 }
                 break;
             default:
-                abort(500, 'event is not support');
+                abort(500, __('payment.unsupported_event'));
         }
         return('success');
     }

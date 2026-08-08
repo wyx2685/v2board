@@ -9,19 +9,23 @@ use Illuminate\Support\Facades\Cache;
 
 class Bind extends Telegram {
     public $command = '/bind';
-    public $description = '将Telegram账号绑定到网站';
+    public $description = 'telegram.command_bind';
 
     public function handle($message, $match = []) {
         if (!$message->is_private) return;
         if (!isset($message->args[0])) {
-            abort(500, '参数有误，请携带订阅地址发送');
+            abort(500, $this->translateFor('telegram.bind_usage'));
         }
-        $subscribeUrl = $message->args[0];
-        $subscribeUrl = parse_url($subscribeUrl);
-        parse_str($subscribeUrl['query'], $query);
-        $token = $query['token'];
+        $queryString = parse_url($message->args[0], PHP_URL_QUERY);
+        if (!is_string($queryString)) {
+            abort(500, $this->translateFor('telegram.invalid_subscribe_url'));
+        }
+        parse_str($queryString, $query);
+        $token = isset($query['token']) && is_string($query['token'])
+            ? $query['token']
+            : null;
         if (!$token) {
-            abort(500, '订阅地址无效');
+            abort(500, $this->translateFor('telegram.invalid_subscribe_url'));
         }
         $submethod = (int)config('v2board.show_subscribe_method', 0);
         switch ($submethod) {
@@ -29,7 +33,7 @@ class Bind extends Telegram {
                 break;
             case 1:
                 if (!Cache::has("otpn_{$token}")) {
-                    abort(403, 'token is error');
+                    abort(403, $this->translateFor('telegram.invalid_token'));
                 }
                 $usertoken = Cache::get("otpn_{$token}");
                 $token = $usertoken;
@@ -42,18 +46,19 @@ class Bind extends Telegram {
                     $counterBytes = pack('N*', 0) . pack('N*', $counter);
                     $idhash = Helper::base64DecodeUrlSafe($token);
                     $parts = explode(':', $idhash, 2);
-                    [$userid, $clienthash] = $parts;
+                    $userid = $parts[0] ?? null;
+                    $clienthash = $parts[1] ?? null;
                     if (!$userid || !$clienthash) {
-                        abort(403, 'token is error');
+                        abort(403, $this->translateFor('telegram.invalid_token'));
                     }
-                    $user = User::where('id', $userid)->select('token')->first();
-                    if (!$user) {
-                        abort(403, 'token is error');
+                    $tokenOwner = User::where('id', $userid)->select('id', 'token')->first();
+                    if (!$tokenOwner) {
+                        abort(403, $this->translateFor('telegram.invalid_token'));
                     }
-                    $usertoken = $user->token;
+                    $usertoken = $tokenOwner->token;
                     $hash = hash_hmac('sha1', $counterBytes, $usertoken, false);
                     if ($clienthash !== $hash) {
-                        abort(403, 'token is error');
+                        abort(403, $this->translateFor('telegram.invalid_token', [], $tokenOwner));
                     }
                     Cache::put("totp_{$token}", $usertoken, $timestep);
                 }
@@ -64,16 +69,19 @@ class Bind extends Telegram {
         }
         $user = User::where('token', $token)->first();
         if (!$user) {
-            abort(500, '用户不存在');
+            abort(500, $this->translateFor('telegram.user_does_not_exist'));
         }
         if ($user->telegram_id) {
-            abort(500, '该账号已经绑定了Telegram账号');
+            abort(500, $this->translateFor('telegram.already_bound', [], $user));
         }
         $user->telegram_id = $message->chat_id;
         if (!$user->save()) {
-            abort(500, '设置失败');
+            abort(500, $this->translateFor('telegram.setting_failed', [], $user));
         }
         $telegramService = $this->telegramService;
-        $telegramService->sendMessage($message->chat_id, '绑定成功');
+        $telegramService->sendMessage(
+            $message->chat_id,
+            $this->translateFor('telegram.bind_success', [], $user)
+        );
     }
 }

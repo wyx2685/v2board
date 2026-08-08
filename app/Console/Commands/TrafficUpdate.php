@@ -2,12 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 
-class TrafficUpdate extends Command
+class TrafficUpdate extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -21,7 +20,7 @@ class TrafficUpdate extends Command
      *
      * @var string
      */
-    protected $description = '流量更新任务';
+    protected $descriptionKey = 'console.descriptions.traffic_update';
 
     /**
      * Create a new command instance.
@@ -76,7 +75,7 @@ class TrafficUpdate extends Command
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            \Log::error('流量更新失败: ' . $e->getMessage());
+            \Log::error(__('console.traffic_update.failed', ['error' => $e->getMessage()]));
             return;
         }
     }

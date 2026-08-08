@@ -3,8 +3,25 @@
 use Illuminate\Support\Str;
 use Linfo\Linfo;
 
-$lInfo = new Linfo();
-$parser = $lInfo->getParser();
+$maxProcesses = (int) env('HORIZON_MAX_PROCESSES', 128);
+
+// Hardware probing is unnecessary during tests and is not supported in some
+// sandboxed/macOS environments. Fall back to the configured safe limit when
+// system information cannot be read.
+if (env('APP_ENV') !== 'testing') {
+    try {
+        $parser = (new Linfo())->getParser();
+        $totalRam = $parser->getRam()['total'] ?? null;
+        if (is_numeric($totalRam)) {
+            $maxProcesses = min(
+                (int) ceil($totalRam / 1024 / 1024 / 1024 * 6),
+                $maxProcesses
+            );
+        }
+    } catch (\Throwable $exception) {
+        // Keep the explicit HORIZON_MAX_PROCESSES fallback.
+    }
+}
 
 return [
 
@@ -182,10 +199,7 @@ return [
                 ],
                 'balance' => 'auto',
                 'minProcesses' => 1,
-                'maxProcesses' => min(
-                    (int)ceil($parser->getRam()['total'] / 1024 / 1024 / 1024 * 6),
-                    (int)env('HORIZON_MAX_PROCESSES', 128)
-                ),
+                'maxProcesses' => $maxProcesses,
                 'tries' => 1,
                 'balanceCooldown' => 3,
             ],

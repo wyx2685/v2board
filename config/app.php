@@ -1,5 +1,27 @@
 <?php
 
+$supportedLocales = [
+    'vi-VN' => 'Tiếng Việt',
+    'ru-RU' => 'Русский',
+    'en-US' => 'English',
+    'zh-CN' => '简体中文',
+];
+
+$locale = env('APP_LOCALE', 'vi-VN');
+if (!array_key_exists($locale, $supportedLocales)) {
+    $locale = 'vi-VN';
+}
+
+$fallbackLocale = env('APP_FALLBACK_LOCALE', 'en-US');
+if (!array_key_exists($fallbackLocale, $supportedLocales)) {
+    $fallbackLocale = 'en-US';
+}
+
+$fakerLocale = env('APP_FAKER_LOCALE', 'vi_VN');
+if (!in_array($fakerLocale, ['vi_VN', 'ru_RU', 'en_US', 'zh_CN'], true)) {
+    $fakerLocale = 'vi_VN';
+}
+
 return [
 
     /*
@@ -80,7 +102,11 @@ return [
     |
     */
 
-    'locale' => 'zh-CN',
+    'locale' => $locale,
+
+    // Unlike `locale`, this value is not mutated by Application::setLocale().
+    // Long-running workers use it to reset each incoming request safely.
+    'default_locale' => $locale,
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +119,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'zh-CN',
+    'fallback_locale' => $fallbackLocale,
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +132,19 @@ return [
     |
     */
 
-    'faker_locale' => 'zh-CN',
+    'faker_locale' => $fakerLocale,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Supported Locales
+    |--------------------------------------------------------------------------
+    |
+    | This registry is also used by the language middleware. Keep locale keys
+    | in sync with the directories and JSON files under resources/lang.
+    |
+    */
+
+    'supported_locales' => $supportedLocales,
 
     /*
     |--------------------------------------------------------------------------

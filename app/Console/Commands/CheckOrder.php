@@ -3,10 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Jobs\OrderHandleJob;
-use Illuminate\Console\Command;
 use App\Models\Order;
 
-class CheckOrder extends Command
+class CheckOrder extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -20,7 +19,7 @@ class CheckOrder extends Command
      *
      * @var string
      */
-    protected $description = '订单检查任务';
+    protected $descriptionKey = 'console.descriptions.check_order';
 
     /**
      * Create a new command instance.

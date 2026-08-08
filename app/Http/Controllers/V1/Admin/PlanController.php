@@ -36,7 +36,7 @@ class PlanController extends Controller
         if ($request->input('id')) {
             $plan = Plan::find($request->input('id'));
             if (!$plan) {
-                abort(500, '该订阅不存在');
+                abort(500, __('Subscription plan does not exist'));
             }
             DB::beginTransaction();
             // update user group id and transfer
@@ -52,7 +52,7 @@ class PlanController extends Controller
                 $plan->update($params);
             } catch (\Exception $e) {
                 DB::rollBack();
-                abort(500, '保存失败');
+                abort(500, __('Save failed'));
             }
             DB::commit();
             return response([
@@ -60,7 +60,7 @@ class PlanController extends Controller
             ]);
         }
         if (!Plan::create($params)) {
-            abort(500, '创建失败');
+            abort(500, __('Create failed'));
         }
         return response([
             'data' => true
@@ -70,15 +70,15 @@ class PlanController extends Controller
     public function drop(Request $request)
     {
         if (Order::where('plan_id', $request->input('id'))->first()) {
-            abort(500, '该订阅下存在订单无法删除');
+            abort(500, __('This subscription plan has orders and cannot be deleted'));
         }
         if (User::where('plan_id', $request->input('id'))->first()) {
-            abort(500, '该订阅下存在用户无法删除');
+            abort(500, __('This subscription plan has users and cannot be deleted'));
         }
         if ($request->input('id')) {
             $plan = Plan::find($request->input('id'));
             if (!$plan) {
-                abort(500, '该订阅ID不存在');
+                abort(500, __('Subscription plan ID does not exist'));
             }
         }
         return response([
@@ -95,13 +95,13 @@ class PlanController extends Controller
 
         $plan = Plan::find($request->input('id'));
         if (!$plan) {
-            abort(500, '该订阅不存在');
+            abort(500, __('Subscription plan does not exist'));
         }
 
         try {
             $plan->update($updateData);
         } catch (\Exception $e) {
-            abort(500, '保存失败');
+            abort(500, __('Save failed'));
         }
 
         return response([
@@ -115,7 +115,7 @@ class PlanController extends Controller
         foreach ($request->input('plan_ids') as $k => $v) {
             if (!Plan::find($v)->update(['sort' => $k + 1])) {
                 DB::rollBack();
-                abort(500, '保存失败');
+                abort(500, __('Save failed'));
             }
         }
         DB::commit();

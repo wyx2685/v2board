@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Ticket;
-use Illuminate\Console\Command;
 
-class CheckTicket extends Command
+class CheckTicket extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -19,7 +18,7 @@ class CheckTicket extends Command
      *
      * @var string
      */
-    protected $description = '工单检查任务';
+    protected $descriptionKey = 'console.descriptions.check_ticket';
 
     /**
      * Create a new command instance.

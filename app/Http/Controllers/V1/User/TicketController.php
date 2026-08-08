@@ -71,16 +71,16 @@ class TicketController extends Controller
                         ->exists();
 
                     if (!$hasOrder) {
-                        throw new \Exception(__('请先购买套餐'));
+                        throw new \Exception(__('Please purchase a subscription first'));
                     }
                     break;
                 case 2:
                     // 完全禁止所有工单
-                    throw new \Exception(__('当前套餐不允许发起工单'));
+                    throw new \Exception(__('Your current subscription does not allow opening tickets'));
                     break;
                 default:
                     // 处理未知状态
-                    throw new \Exception(__('未知的工单状态'));
+                    throw new \Exception(__('Unknown ticket availability status'));
             }
 
             $ticketData = $request->only(['subject', 'level']) + ['user_id' => $request->user['id']];
@@ -170,7 +170,7 @@ class TicketController extends Controller
     public function withdraw(TicketWithdraw $request)
     {
         if ((int)config('v2board.withdraw_close_enable', 0)) {
-            abort(500, 'user.ticket.withdraw.not_support_withdraw');
+            abort(500, __('Commission withdrawal is currently unavailable'));
         }
         if (
 			!in_array(
@@ -201,8 +201,8 @@ class TicketController extends Controller
         }
         $message = sprintf(
 			"%s\r\n%s",
-            __('Withdrawal method') . "：" . $request->input('withdraw_method'),
-            __('Withdrawal account') . "：" . $request->input('withdraw_account')
+            __('Withdrawal method') . ': ' . $request->input('withdraw_method'),
+            __('Withdrawal account') . ': ' . $request->input('withdraw_account')
         );
         $ticketMessage = TicketMessage::create([
             'user_id' => $request->user['id'],
@@ -240,27 +240,50 @@ class TicketController extends Controller
 					$ip_address = $_SERVER['REMOTE_ADDR'];
 				}
 
-				$api_url = "http://ip-api.com/json/{$ip_address}?fields=520191&lang=zh-CN";
+				$geoLanguage = [
+                    'ru-RU' => 'ru',
+                    'zh-CN' => 'zh-CN',
+                ][app()->getLocale()] ?? 'en';
+				$api_url = "http://ip-api.com/json/{$ip_address}?fields=520191&lang={$geoLanguage}";
 				$response = file_get_contents($api_url);
 				$user_location = json_decode($response, true);
 				if ($user_location && $user_location['status'] === 'success') {
 					$location =  $user_location['city'] . ", " . $user_location['country'];
 				} else {
-					$location =  "无法确定用户地址";
+					$location = __('telegram.unknown_location');
 				}
 
 				$plan = Plan::where('id', $user->plan_id)->first();
-				$planName = $plan ? $plan->name : '未找到套餐信息'; // Check if plan data is available
+				$planName = $plan ? $plan->name : __('telegram.unknown_plan');
 
 				$money = $user->balance / 100;
 				$affmoney = $user->commission_balance / 100;
-				$telegramService->sendMessageWithAdmin("📮工单提醒 #{$ticket->id}\n———————————————\n邮箱：\n`{$user->email}`\n用户位置：\n`{$location}`\nIP:\n{$ip_address}\n套餐与流量：\n`{$planName} of {$transfer_enable}/{$remaining_traffic}`\n上传/下载：\n`{$u}/{$d}`\n到期时间：\n`{$expired_at}`\n余额/佣金余额：\n`{$money}/{$affmoney}`\n主题：\n`{$ticket->subject}`\n内容：\n {$message} ", true);
+				$telegramService->sendTranslatedMessageWithAdmin('telegram.ticket_full', [
+                    'id' => $ticket->id,
+                    'email' => $user->email,
+                    'location' => $location,
+                    'ip' => $ip_address,
+                    'plan' => $planName,
+                    'transfer' => $transfer_enable,
+                    'remaining' => $remaining_traffic,
+                    'upload' => $u,
+                    'download' => $d,
+                    'expired_at' => $expired_at,
+                    'balance' => $money,
+                    'commission_balance' => $affmoney,
+                    'subject' => $ticket->subject,
+                    'message' => $message
+                ], true, '');
 			} else {
 				// Handle case where user data is not found
-				$telegramService->sendMessageWithAdmin("User data not found for user ID: {$userid}", true);
+				$telegramService->sendTranslatedMessageWithAdmin('telegram.user_not_found', ['id' => $userid], true, '');
 			}
 		} else {
-			$telegramService->sendMessageWithAdmin("📮工单提醒 #{$ticket->id}\n———————————————\n主题：\n`{$ticket->subject}`\n内容：\n {$message} ", true);
+			$telegramService->sendTranslatedMessageWithAdmin('telegram.ticket_simple', [
+                'id' => $ticket->id,
+                'subject' => $ticket->subject,
+                'message' => $message
+            ], true, '');
 		}
 	}
 

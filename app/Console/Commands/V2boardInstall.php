@@ -2,13 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Encryption\Encrypter;
 use App\Models\User;
 use App\Utils\Helper;
 use Illuminate\Support\Facades\DB;
 
-class V2boardInstall extends Command
+class V2boardInstall extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -22,7 +21,7 @@ class V2boardInstall extends Command
      *
      * @var string
      */
-    protected $description = 'v2board 安装';
+    protected $descriptionKey = 'console.descriptions.install';
 
     /**
      * Create a new command instance.
@@ -49,59 +48,59 @@ class V2boardInstall extends Command
             $this->info("   \_/  |_____|____/ \___/ \__,_|_|  \__,_| ");
             if (\File::exists(base_path() . '/.env')) {
                 $securePath = config('v2board.secure_path', config('v2board.frontend_admin_path', hash('crc32b', config('app.key'))));
-                $this->info("访问 http(s)://你的站点/{$securePath} 进入管理面板，你可以在用户中心修改你的密码。");
-                abort(500, '如需重新安装请删除目录下.env文件');
+                $this->info(__('console.install.panel_url', ['path' => $securePath]));
+                abort(500, __('console.install.remove_env_first'));
             }
 
             if (!copy(base_path() . '/.env.example', base_path() . '/.env')) {
-                abort(500, '复制环境文件失败，请检查目录权限');
+                abort(500, __('console.install.copy_env_failed'));
             }
             $this->saveToEnv([
                 'APP_KEY' => 'base64:' . base64_encode(Encrypter::generateKey('AES-256-CBC')),
-                'DB_HOST' => $this->ask('请输入数据库地址（默认:localhost）', 'localhost'),
-                'DB_DATABASE' => $this->ask('请输入数据库名'),
-                'DB_USERNAME' => $this->ask('请输入数据库用户名'),
-                'DB_PASSWORD' => $this->ask('请输入数据库密码')
+                'DB_HOST' => $this->ask(__('console.install.database_host_prompt'), 'localhost'),
+                'DB_DATABASE' => $this->ask(__('console.install.database_name_prompt')),
+                'DB_USERNAME' => $this->ask(__('console.install.database_username_prompt')),
+                'DB_PASSWORD' => $this->ask(__('console.install.database_password_prompt'))
             ]);
             \Artisan::call('config:clear');
             \Artisan::call('config:cache');
             try {
                 DB::connection()->getPdo();
             } catch (\Exception $e) {
-                abort(500, '数据库连接失败');
+                abort(500, __('console.database.connection_failed'));
             }
             $file = \File::get(base_path() . '/database/install.sql');
             if (!$file) {
-                abort(500, '数据库文件不存在');
+                abort(500, __('console.database.file_missing'));
             }
             $sql = str_replace("\n", "", $file);
             $sql = preg_split("/;/", $sql);
             if (!is_array($sql)) {
-                abort(500, '数据库文件格式有误');
+                abort(500, __('console.database.file_invalid'));
             }
-            $this->info('正在导入数据库请稍等...');
+            $this->info(__('console.database.importing'));
             foreach ($sql as $item) {
                 try {
                     DB::select(DB::raw($item));
                 } catch (\Exception $e) {
                 }
             }
-            $this->info('数据库导入完成');
+            $this->info(__('console.database.imported'));
             $email = '';
             while (!$email) {
-                $email = $this->ask('请输入管理员邮箱?');
+                $email = $this->ask(__('console.install.admin_email_prompt'));
             }
             $password = Helper::guid(false);
             if (!$this->registerAdmin($email, $password)) {
-                abort(500, '管理员账号注册失败，请重试');
+                abort(500, __('console.install.admin_registration_failed'));
             }
 
-            $this->info('一切就绪');
-            $this->info("管理员邮箱：{$email}");
-            $this->info("管理员密码：{$password}");
+            $this->info(__('console.install.ready'));
+            $this->info(__('console.install.admin_email', ['email' => $email]));
+            $this->info(__('console.install.admin_password', ['password' => $password]));
 
             $defaultSecurePath = hash('crc32b', config('app.key'));
-            $this->info("访问 http(s)://你的站点/{$defaultSecurePath} 进入管理面板，你可以在用户中心修改你的密码。");
+            $this->info(__('console.install.panel_url', ['path' => $defaultSecurePath]));
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
@@ -112,7 +111,7 @@ class V2boardInstall extends Command
         $user = new User();
         $user->email = $email;
         if (strlen($password) < 8) {
-            abort(500, '管理员密码长度最小为8位字符');
+            abort(500, __('console.install.admin_password_too_short'));
         }
         $user->password = password_hash($password, PASSWORD_DEFAULT);
         $user->uuid = Helper::guid(true);

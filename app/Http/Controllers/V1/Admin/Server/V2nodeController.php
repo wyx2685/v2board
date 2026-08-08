@@ -173,12 +173,12 @@ class V2nodeController extends Controller
         if ($request->input('id')) {
             $server = ServerV2node::find($request->input('id'));
             if (!$server) {
-                abort(500, '服务器不存在');
+                abort(500, __('Server does not exist'));
             }
             try {
                 $server->update($params);
             } catch (\Exception $e) {
-                abort(500, '保存失败');
+                abort(500, __('Save failed'));
             }
             return response([
                 'data' => true
@@ -186,7 +186,7 @@ class V2nodeController extends Controller
         }
 
         if (!ServerV2node::create($params)) {
-            abort(500, '创建失败');
+            abort(500, __('Create failed'));
         }
         return response([
             'data' => true
@@ -198,7 +198,7 @@ class V2nodeController extends Controller
         if ($request->input('id')) {
             $server = ServerV2node::find($request->input('id'));
             if (!$server) {
-                abort(500, '节点ID不存在');
+                abort(500, __('Node ID does not exist'));
             }
         }
         return response([
@@ -215,12 +215,12 @@ class V2nodeController extends Controller
         $server = ServerV2node::find($request->input('id'));
 
         if (!$server) {
-            abort(500, '该服务器不存在');
+            abort(500, __('Server does not exist'));
         }
         try {
             $server->update($params);
         } catch (\Exception $e) {
-            abort(500, '保存失败');
+            abort(500, __('Save failed'));
         }
         return response([
             'data' => true
@@ -232,10 +232,10 @@ class V2nodeController extends Controller
         $server = ServerV2node::find($request->input('id'));
         $server->show = 0;
         if (!$server) {
-            abort(500, '服务器不存在');
+            abort(500, __('Server does not exist'));
         }
         if (!ServerV2node::create($server->toArray())) {
-            abort(500, '复制失败');
+            abort(500, __('Copy failed'));
         }
 
         return response([

@@ -28,7 +28,7 @@ class EPay {
             ],
             'type' => [
                 'label' => 'TYPE',
-                'description' => '支付类型，如: alipay, wxpay, qqpay',
+                'description' => __('payment.payment_type_help'),
                 'type' => 'input',
             ]
         ];
@@ -77,9 +77,14 @@ class EPay {
             return('fail');
         }
 
-        return [
+        $notification = [
             'trade_no' => $params['out_trade_no'],
             'callback_no' => $params['trade_no']
         ];
+        if (isset($params['money'])) {
+            $notification['amount'] = (int)round(((float)$params['money']) * 100);
+            $notification['currency'] = config('v2board.currency', 'CNY');
+        }
+        return $notification;
     }
 }

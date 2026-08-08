@@ -3,12 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Models\CommissionLog;
-use Illuminate\Console\Command;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
+use Throwable;
 
-class CheckCommission extends Command
+class CheckCommission extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -22,7 +23,7 @@ class CheckCommission extends Command
      *
      * @var string
      */
-    protected $description = '返佣服务';
+    protected $descriptionKey = 'console.descriptions.check_commission';
 
     /**
      * Create a new command instance.
@@ -60,27 +61,44 @@ class CheckCommission extends Command
 
     public function autoPayCommission()
     {
-        $orders = Order::where('commission_status', 1)
+        $orderIds = Order::where('commission_status', 1)
             ->where('invite_user_id', '!=', NULL)
-            ->get();
-        foreach ($orders as $order) {
-            DB::beginTransaction();
-            if (!$this->payHandle($order->invite_user_id, $order)) {
-                DB::rollBack();
-                continue;
+            ->whereIn('status', [3, 4])
+            ->pluck('id');
+
+        foreach ($orderIds as $orderId) {
+            try {
+                DB::transaction(function () use ($orderId) {
+                    $order = Order::where('id', $orderId)
+                        ->lockForUpdate()
+                        ->first();
+
+                    if (
+                        !$order
+                        || (int) $order->commission_status !== 1
+                        || !in_array((int) $order->status, [3, 4], true)
+                        || !$order->invite_user_id
+                    ) {
+                        return;
+                    }
+
+                    if (!$this->payHandle($order->invite_user_id, $order)) {
+                        throw new RuntimeException('Unable to pay order commission.');
+                    }
+
+                    $order->commission_status = 2;
+                    if (!$order->save()) {
+                        throw new RuntimeException('Unable to finalize order commission.');
+                    }
+                }, 3);
+            } catch (Throwable $exception) {
+                report($exception);
             }
-            $order->commission_status = 2;
-            if (!$order->save()) {
-                DB::rollBack();
-                continue;
-            }
-            DB::commit();
         }
     }
 
     public function payHandle($inviteUserId, Order $order)
     {
-        $level = 3;
         if ((int)config('v2board.commission_distribution_enable', 0)) {
             $commissionShareLevels = [
                 0 => (int)config('v2board.commission_distribution_l1'),
@@ -92,21 +110,28 @@ class CheckCommission extends Command
                 0 => 100
             ];
         }
-        for ($l = 0; $l < $level; $l++) {
+        $visitedInviterIds = [];
+        foreach (array_slice($commissionShareLevels, 0, 3) as $commissionShare) {
+            if (!$inviteUserId || isset($visitedInviterIds[$inviteUserId])) break;
+            $visitedInviterIds[$inviteUserId] = true;
+
             $inviter = User::find($inviteUserId);
-            if (!$inviter) continue;
-            if (!isset($commissionShareLevels[$l])) continue;
-            $commissionBalance = $order->commission_balance * ($commissionShareLevels[$l] / 100);
-            if (!$commissionBalance) continue;
-            if ((int)config('v2board.withdraw_close_enable', 0)) {
-                $inviter->balance = $inviter->balance + $commissionBalance;
-            } else {
-                $inviter->commission_balance = $inviter->commission_balance + $commissionBalance;
+            if (!$inviter) break;
+
+            $nextInviteUserId = $inviter->invite_user_id;
+            $commissionBalance = (int)floor($order->commission_balance * ($commissionShare / 100));
+            if (!$commissionBalance) {
+                $inviteUserId = $nextInviteUserId;
+                continue;
             }
-            if (!$inviter->save()) {
-                DB::rollBack();
+
+            $balanceColumn = (int)config('v2board.withdraw_close_enable', 0)
+                ? 'balance'
+                : 'commission_balance';
+            if (User::whereKey($inviter->id)->increment($balanceColumn, $commissionBalance) !== 1) {
                 return false;
             }
+
             if (!CommissionLog::create([
                 'invite_user_id' => $inviteUserId,
                 'user_id' => $order->user_id,
@@ -114,12 +139,11 @@ class CheckCommission extends Command
                 'order_amount' => $order->total_amount,
                 'get_amount' => $commissionBalance
             ])) {
-                DB::rollBack();
                 return false;
             }
-            $inviteUserId = $inviter->invite_user_id;
+            $inviteUserId = $nextInviteUserId;
             // update order actual commission balance
-            $order->actual_commission_balance = $order->actual_commission_balance + $commissionBalance;
+            $order->actual_commission_balance = (int)$order->actual_commission_balance + $commissionBalance;
         }
         return true;
     }

@@ -81,7 +81,7 @@ class StatServerJob implements ShouldQueue
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            abort(500, '节点统计数据失败'. $e->getMessage());
+            abort(500, __('client.server_statistics_failed', ['error' => $e->getMessage()]));
         }
     }
 }

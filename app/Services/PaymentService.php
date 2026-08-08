@@ -11,29 +11,45 @@ class PaymentService
     protected $class;
     protected $config;
     protected $payment;
+    protected $paymentRecord;
 
     public function __construct($method, $id = NULL, $uuid = NULL)
     {
         $this->method = $method;
         $this->class = '\\App\\Payments\\' . $this->method;
-        if (!class_exists($this->class)) abort(500, 'gate is not found');
-        if ($id) $payment = Payment::find($id)->toArray();
-        if ($uuid) $payment = Payment::where('uuid', $uuid)->first()->toArray();
+        if (!class_exists($this->class)) abort(500, __('Payment gateway not found'));
+        $payment = null;
+        if ($id) $payment = Payment::find($id);
+        if ($uuid) $payment = Payment::where('uuid', $uuid)->first();
+        if (($id || $uuid) && !$payment) abort(500, __('Payment method does not exist'));
+
+        $this->paymentRecord = $payment;
         $this->config = [];
-        if (isset($payment)) {
-            $this->config = $payment['config'];
-            $this->config['enable'] = $payment['enable'];
-            $this->config['id'] = $payment['id'];
-            $this->config['uuid'] = $payment['uuid'];
-            $this->config['notify_domain'] = $payment['notify_domain'];
+        if ($payment) {
+            $this->config = $payment->config;
+            $this->config['enable'] = $payment->enable;
+            $this->config['id'] = $payment->id;
+            $this->config['uuid'] = $payment->uuid;
+            $this->config['notify_domain'] = $payment->notify_domain;
         };
         $this->payment = new $this->class($this->config);
     }
 
     public function notify($params)
     {
-        if (!$this->config['enable']) abort(500, 'gate is not enable');
+        if (
+            !$this->paymentRecord
+            || !hash_equals((string)$this->paymentRecord->payment, (string)$this->method)
+        ) {
+            abort(500, __('Payment gateway does not match the configured method'));
+        }
+        if (!$this->config['enable']) abort(500, __('Payment gateway is disabled'));
         return $this->payment->notify($params);
+    }
+
+    public function getPaymentId()
+    {
+        return $this->paymentRecord ? $this->paymentRecord->id : null;
     }
 
     public function pay($order)

@@ -12,7 +12,7 @@ class BTCPay {
     {
         return [
             'btcpay_url' => [
-                'label' => 'API接口所在网址(包含最后的斜杠)',
+                'label' => __('payment.btcpay_api_url'),
                 'description' => '',
                 'type' => 'input',
             ],
@@ -23,7 +23,7 @@ class BTCPay {
             ],
             'btcpay_api_key' => [
                 'label' => 'API KEY',
-                'description' => '个人设置中的API KEY(非商店设置中的)',
+                'description' => __('payment.btcpay_api_key_help'),
                 'type' => 'input',
             ],
             'btcpay_webhook_key' => [
@@ -52,7 +52,7 @@ class BTCPay {
         $ret = @json_decode($ret_raw, true);
         
         if(empty($ret['checkoutLink'])) {
-            abort(500, "error!");
+            abort(500, __('payment.generic_error'));
         }
         return [
             'type' => 1, // Redirect to url
@@ -63,20 +63,20 @@ class BTCPay {
     public function notify($params) {
         $payload = trim(request()->getContent() ?: json_encode($_POST));
 
-        $headers = getallheaders();
-
-        //IS Btcpay-Sig
-        //NOT BTCPay-Sig
-        //API doc is WRONG!
-        $headerName = 'Btcpay-Sig';
-        $signraturHeader = isset($headers[$headerName]) ? $headers[$headerName] : '';
+        $signatureHeader = (string)request()->header('Btcpay-Sig', '');
         $json_param = json_decode($payload, true);
 
         $computedSignature = "sha256=" . \hash_hmac('sha256', $payload, $this->config['btcpay_webhook_key']);
 
-        if (!self::hashEqual($signraturHeader, $computedSignature)) {
-            abort(400, 'HMAC signature does not match');
-            return false;
+        if (!self::hashEqual($signatureHeader, $computedSignature)) {
+            abort(400, __('payment.signature_mismatch'));
+        }
+
+        if (($json_param['type'] ?? '') !== 'InvoiceSettled') {
+            return [
+                'ignored' => true,
+                'custom_result' => 'success',
+            ];
         }
 
         //get order id store in metadata
@@ -87,18 +87,28 @@ class BTCPay {
             )
         ));
 
-        $invoiceDetail = file_get_contents($this->config['btcpay_url'] . 'api/v1/stores/' . $this->config['btcpay_storeId'] . '/invoices/' . $json_param['invoiceId'], false, $context);
-        $invoiceDetail = json_decode($invoiceDetail, true);
+        $invoiceDetailPayload = file_get_contents($this->config['btcpay_url'] . 'api/v1/stores/' . $this->config['btcpay_storeId'] . '/invoices/' . $json_param['invoiceId'], false, $context);
+        if ($invoiceDetailPayload === false) {
+            abort(500, __('payment.network_error'));
+        }
+        $invoiceDetail = json_decode($invoiceDetailPayload, true);
+
+        if (!is_array($invoiceDetail) || ($invoiceDetail['status'] ?? '') !== 'Settled') {
+            abort(500, __('payment.payment_status_invalid'));
+        }
 
     
         $out_trade_no = $invoiceDetail['metadata']["orderId"];
         $pay_trade_no=$json_param['invoiceId'];
-        return [
+        $notification = [
             'trade_no' => $out_trade_no,
             'callback_no' => $pay_trade_no
         ];
-        http_response_code(200);
-        return('success');
+        if (isset($invoiceDetail['amount'])) {
+            $notification['amount'] = (int)round(((float)$invoiceDetail['amount']) * 100);
+            $notification['currency'] = strtoupper((string)($invoiceDetail['currency'] ?? 'CNY'));
+        }
+        return $notification;
     }
 
 
@@ -145,4 +155,3 @@ class BTCPay {
     }
     
 }
-

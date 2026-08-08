@@ -18,7 +18,7 @@ class StripeCredit {
     {
         return [
             'currency' => [
-                'label' => '货币单位',
+                'label' => __('payment.currency_unit'),
                 'description' => '',
                 'type' => 'input',
             ],
@@ -33,7 +33,7 @@ class StripeCredit {
                 'type' => 'input',
             ],
             'stripe_webhook_key' => [
-                'label' => 'WebHook密钥签名',
+                'label' => __('payment.webhook_signing_secret'),
                 'description' => '',
                 'type' => 'input',
             ]
@@ -110,7 +110,7 @@ class StripeCredit {
                 }
                 break;
             default:
-                abort(500, 'event is not support');
+                abort(500, __('payment.unsupported_event'));
         }
         return('success');
     }

@@ -15,28 +15,28 @@ class StripeCheckout {
     {
         return [
             'currency' => [
-                'label' => '货币单位',
+                'label' => __('payment.currency_unit'),
                 'description' => '',
                 'type' => 'input',
             ],
             'stripe_sk_live' => [
                 'label' => 'SK_LIVE',
-                'description' => 'API 密钥',
+                'description' => __('payment.api_secret_key'),
                 'type' => 'input',
             ],
             'stripe_pk_live' => [
                 'label' => 'PK_LIVE',
-                'description' => 'API 公钥',
+                'description' => __('payment.api_public_key'),
                 'type' => 'input',
             ],
             'stripe_webhook_key' => [
-                'label' => 'WebHook 密钥签名',
+                'label' => __('payment.webhook_signing_secret'),
                 'description' => '',
                 'type' => 'input',
             ],
             'stripe_custom_field_name' => [
-                'label' => '自定义字段名称',
-                'description' => '例如可设置为“联系方式”，以便及时与客户取得联系',
+                'label' => __('payment.custom_field_name'),
+                'description' => __('payment.custom_field_help'),
                 'type' => 'input',
             ]
         ];
@@ -86,7 +86,7 @@ class StripeCheckout {
             $session = Session::create($params);
         } catch (\Exception $e) {
             info($e);
-            abort(500, "Failed to create order. Error: {$e->getMessage}");
+            abort(500, __('payment.create_order_error', ['error' => $e->getMessage()]));
         }
         return [
             'type' => 1, // 0:qrcode 1:url
@@ -125,7 +125,7 @@ class StripeCheckout {
                 ];
                 break;
             default:
-                abort(500, 'event is not support');
+                abort(500, __('payment.unsupported_event'));
         }
         return('success');
     }

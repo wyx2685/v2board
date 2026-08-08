@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Order;
 use App\Services\OrderService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -35,21 +36,24 @@ class OrderHandleJob implements ShouldQueue
      */
     public function handle()
     {
-        $order = Order::where('trade_no', $this->tradeNo)
-            ->first();
+        DB::transaction(function () {
+            $order = Order::where('trade_no', $this->tradeNo)
+                ->lockForUpdate()
+                ->first();
 
-        if (!$order) return;
+            if (!$order) return;
 
-        $orderService = new OrderService($order);
-        switch ($order->status) {
-            case 0:
-                if ($order->created_at <= (time() - 3600 * 2)) {
-                    $orderService->cancel();
-                }
-                break;
-            case 1:
-                $orderService->open();
-                break;
-        }
+            $orderService = new OrderService($order);
+            switch ((int)$order->status) {
+                case 0:
+                    if ($order->created_at <= (time() - 3600 * 2)) {
+                        $orderService->cancel();
+                    }
+                    break;
+                case 1:
+                    $orderService->open();
+                    break;
+            }
+        }, 3);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Protocols;
 
+use App\Utils\ClientProfileLocalizer;
 use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
@@ -30,7 +31,7 @@ class ClashMeta
         if (\File::exists($customConfig)) {
             $config = Yaml::parseFile($customConfig);
         } else {
-            $config = Yaml::parseFile($defaultConfig);
+            $config = ClientProfileLocalizer::localize(Yaml::parseFile($defaultConfig));
         }
         $proxy = [];
         $proxies = [];

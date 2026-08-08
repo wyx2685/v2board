@@ -3,13 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Models\Plan;
-use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Services\TelegramService;
 use Illuminate\Support\Facades\Redis;
 
-class ResetTraffic extends Command
+class ResetTraffic extends LocalizedCommand
 {
     protected $builder;
     /**
@@ -24,7 +23,7 @@ class ResetTraffic extends Command
      *
      * @var string
      */
-    protected $description = '流量清空';
+    protected $descriptionKey = 'console.descriptions.reset_traffic';
 
     /**
      * Create a new command instance.
@@ -186,11 +185,11 @@ class ResetTraffic extends Command
                 $attempts++;
                 if ($attempts >= $maxAttempts || strpos($e->getMessage(), '40001') === false && strpos(strtolower($e->getMessage()), 'deadlock') === false) {
                     $telegramService = new TelegramService();
-                    $message = sprintf(
-                        date('Y/m/d H:i:s') . "用户流量重置失败：" . $e->getMessage()
-                    );
-                    $telegramService->sendMessageWithAdmin($message);
-                    abort(500, '用户流量重置失败'. $e->getMessage());
+                    $telegramService->sendTranslatedMessageWithAdmin('console.reset_traffic.failed_notification', [
+                        'date' => date('Y/m/d H:i:s'),
+                        'error' => $e->getMessage()
+                    ], false, '');
+                    abort(500, __('console.reset_traffic.failed', ['error' => $e->getMessage()]));
                 }
                 sleep(5);
             }

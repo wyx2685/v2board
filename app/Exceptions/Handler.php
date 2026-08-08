@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 use Facade\Ignition\Exceptions\ViewException;
@@ -54,9 +55,24 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof ViewException) {
-            abort(500, "主题渲染失败。如更新主题，参数可能发生变化请重新配置主题后再试。");
+            abort(500, __('Theme rendering failed. If the theme was updated, its settings may have changed. Reconfigure the theme and try again.'));
         }
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Return a localized summary for JSON validation responses.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return response()->json([
+            'message' => __('The given data was invalid.'),
+            'errors' => $exception->errors(),
+        ], $exception->status);
     }
 
 

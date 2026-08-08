@@ -5,10 +5,9 @@ namespace App\Console\Commands;
 use App\Services\ServerService;
 use App\Services\TelegramService;
 use App\Utils\CacheKey;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
-class CheckServer extends Command
+class CheckServer extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -22,7 +21,7 @@ class CheckServer extends Command
      *
      * @var string
      */
-    protected $description = '节点检查任务';
+    protected $descriptionKey = 'console.descriptions.check_server';
 
     /**
      * Create a new command instance.
@@ -52,12 +51,10 @@ class CheckServer extends Command
             if ($server['parent_id']) continue;
             if ($server['last_check_at'] && (time() - $server['last_check_at']) > 1800) {
                 $telegramService = new TelegramService();
-                $message = sprintf(
-                    "节点掉线通知\r\n----\r\n节点名称：%s\r\n节点地址：%s\r\n",
-                    $server['name'],
-                    $server['host']
-                );
-                $telegramService->sendMessageWithAdmin($message);
+                $telegramService->sendTranslatedMessageWithAdmin('console.check_server.offline_notification', [
+                    'name' => $server['name'],
+                    'host' => $server['host']
+                ], false, '');
                 Cache::forget(CacheKey::get(sprintf("SERVER_%s_LAST_CHECK_AT", strtoupper($server['type'])), $server->id));
             }
         }

@@ -12,17 +12,17 @@ class CoinPayments {
         return [
             'coinpayments_merchant_id' => [
                 'label' => 'Merchant ID',
-                'description' => '商户 ID，填写您在 Account Settings 中得到的 ID',
+                'description' => __('payment.merchant_id_help'),
                 'type' => 'input',
             ],
             'coinpayments_ipn_secret' => [
                 'label' => 'IPN Secret',
-                'description' => '通知密钥，填写您在 Merchant Settings 中自行设置的值',
+                'description' => __('payment.ipn_secret_help'),
                 'type' => 'input',
             ],
             'coinpayments_currency' => [
-                'label' => '货币代码',
-                'description' => '填写您的货币代码（大写），建议与 Merchant Settings 中的值相同',
+                'label' => __('payment.currency_code'),
+                'description' => __('payment.currency_code_help'),
                 'type' => 'input',
             ]
         ];
@@ -62,7 +62,7 @@ class CoinPayments {
     {
 
         if (!isset($params['merchant']) || $params['merchant'] != trim($this->config['coinpayments_merchant_id'])) {
-            abort(500, 'No or incorrect Merchant ID passed');
+            abort(500, __('payment.invalid_merchant_id'));
         }
 
         $headers = getallheaders();
@@ -81,21 +81,26 @@ class CoinPayments {
         // }
 
         if (!hash_equals($hmac, $signHeader)) {
-            abort(400, 'HMAC signature does not match');
+            abort(400, __('payment.signature_mismatch'));
         }
 
         // HMAC Signature verified at this point, load some variables.
         $status = $params['status'];
         if ($status >= 100 || $status == 2) {
             // payment is complete or queued for nightly payout, success
-            return [
+            $notification = [
                 'trade_no' => $params['item_number'],
                 'callback_no' => $params['txn_id'],
                 'custom_result' => 'IPN OK'
             ];
+            if (isset($params['amount1'])) {
+                $notification['amount'] = (int)round(((float)$params['amount1']) * 100);
+                $notification['currency'] = strtoupper((string)($params['currency1'] ?? $this->config['coinpayments_currency']));
+            }
+            return $notification;
         } else if ($status < 0) {
             //payment error, this is usually final but payments will sometimes be reopened if there was no exchange rate conversion or with seller consent
-            abort(500, 'Payment Timed Out or Error');
+            abort(500, __('payment.payment_timeout_or_error'));
         } else {
             //payment is pending, you can optionally add a note to the order page
             return('IPN OK: pending');

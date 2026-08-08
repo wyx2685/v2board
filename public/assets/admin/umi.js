@@ -100667,12 +100667,10 @@
         "use strict";
         t["a"] = {
             i18nText: {
-                "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
-                "zh-TW": "\u7e41\u9ad4\u4e2d\u6587",
-                "en-US": "English",
-                "ja-JP": "\u65e5\u672c\u8a9e",
                 "vi-VN": "Ti\u1ebfng Vi\u1ec7t",
-                "ko-KR": "\ud55c\uad6d\uc5b4"
+                "ru-RU": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+                "en-US": "English",
+                "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
             },
             periodText: {
                 month_price: "\u6708\u4ed8",

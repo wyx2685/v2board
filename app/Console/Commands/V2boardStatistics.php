@@ -5,11 +5,10 @@ namespace App\Console\Commands;
 use App\Models\StatServer;
 use App\Models\StatUser;
 use App\Services\StatisticalService;
-use Illuminate\Console\Command;
 use App\Models\Stat;
 use Illuminate\Support\Facades\DB;
 
-class V2boardStatistics extends Command
+class V2boardStatistics extends LocalizedCommand
 {
     /**
      * The name and signature of the console command.
@@ -23,7 +22,7 @@ class V2boardStatistics extends Command
      *
      * @var string
      */
-    protected $description = '统计任务';
+    protected $descriptionKey = 'console.descriptions.statistics';
 
     /**
      * Create a new command instance.
@@ -47,7 +46,9 @@ class V2boardStatistics extends Command
         //$this->statUser();
         //$this->statServer();
         $this->stat();
-        info('统计任务执行完毕。耗时:' . (microtime(true) - $startAt) / 1000);
+        info(__('console.statistics.completed', [
+            'seconds' => round(microtime(true) - $startAt, 3)
+        ]));
     }
 
     private function statServer()
@@ -71,7 +72,7 @@ class V2boardStatistics extends Command
                     'record_type' => 'd',
                     'record_at' => $recordAt
                 ])) {
-                    throw new \Exception('stat server fail');
+                    throw new \Exception(__('console.statistics.server_failed'));
                 }
             }
             DB::commit();
@@ -103,7 +104,7 @@ class V2boardStatistics extends Command
                     'record_type' => 'd',
                     'record_at' => $recordAt
                 ])) {
-                    throw new \Exception('stat user fail');
+                    throw new \Exception(__('console.statistics.user_failed'));
                 }
             }
             DB::commit();

@@ -22,8 +22,8 @@ class UserSendMail extends FormRequest
     public function messages()
     {
         return [
-            'subject.required' => '主题不能为空',
-            'content.required' => '发送内容不能为空'
+            'subject.required' => __('Subject cannot be empty'),
+            'content.required' => __('Message content cannot be empty')
         ];
     }
 }

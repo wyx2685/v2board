@@ -19,7 +19,7 @@ class MGate {
     {
         return [
             'mgate_url' => [
-                'label' => 'API地址',
+                'label' => __('payment.endpoint_url'),
                 'description' => '',
                 'type' => 'input',
             ],
@@ -34,8 +34,8 @@ class MGate {
                 'type' => 'input',
             ],
             'mgate_source_currency' => [
-                'label' => '源货币',
-                'description' => '默认CNY',
+                'label' => __('payment.source_currency'),
+                'description' => __('payment.default_cny'),
                 'type' => 'input'
             ]
         ];
@@ -58,11 +58,10 @@ class MGate {
         $params['sign'] = md5($str);
         $curl = new Curl();
         $curl->setUserAgent('MGate');
-        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
         $curl->post($this->config['mgate_url'] . '/v1/gateway/fetch', http_build_query($params));
         $result = $curl->response;
         if (!$result) {
-            abort(500, '网络异常');
+            abort(500, __('payment.network_error'));
         }
         if ($curl->error) {
             if (isset($result->errors)) {
@@ -72,11 +71,11 @@ class MGate {
             if (isset($result->message)) {
                 abort(500, $result->message);
             }
-            abort(500, '未知错误');
+            abort(500, __('payment.unknown_error'));
         }
         $curl->close();
         if (!isset($result->data->trade_no)) {
-            abort(500, '接口请求失败');
+            abort(500, __('payment.api_request_failed'));
         }
         return [
             'type' => 1, // 0:qrcode 1:url
@@ -95,9 +94,14 @@ class MGate {
         if (!hash_equals($generateSignature, $sign)) {
             return false;
         }
-        return [
+        $notification = [
             'trade_no' => $params['out_trade_no'],
             'callback_no' => $params['trade_no']
         ];
+        if (isset($params['total_amount'])) {
+            $notification['amount'] = (int)$params['total_amount'];
+            $notification['currency'] = strtoupper((string)($params['source_currency'] ?? config('v2board.currency', 'CNY')));
+        }
+        return $notification;
     }
 }

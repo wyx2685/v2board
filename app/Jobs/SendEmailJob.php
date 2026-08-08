@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use App\Models\MailLog;
@@ -26,6 +27,7 @@ class SendEmailJob implements ShouldQueue
     public function __construct($params, $queue = 'send_email')
     {
         $this->onQueue($queue);
+        $params['locale'] = $params['locale'] ?? app()->getLocale();
         $this->params = $params;
     }
 
@@ -46,6 +48,12 @@ class SendEmailJob implements ShouldQueue
             Config::set('mail.from.name', config('v2board.app_name', 'V2Board'));
         }
         $params = $this->params;
+        $supportedLocales = array_keys((array) config('app.supported_locales', []));
+        $defaultLocale = (string) config('app.default_locale', 'vi-VN');
+        $locale = isset($params['locale']) && in_array($params['locale'], $supportedLocales, true)
+            ? $params['locale']
+            : $defaultLocale;
+        App::setLocale($locale);
         $email = $params['email'];
         $subject = $params['subject'];
         $params['template_name'] = 'mail.' . config('v2board.email_template', 'default') . '.' . $params['template_name'];
@@ -60,6 +68,10 @@ class SendEmailJob implements ShouldQueue
             );
         } catch (\Exception $e) {
             $error = $e->getMessage();
+        } finally {
+            // Queue workers are long-running; never leak one recipient's locale
+            // into the next email job.
+            App::setLocale($defaultLocale);
         }
 
         $log = [

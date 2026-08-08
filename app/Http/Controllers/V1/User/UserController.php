@@ -433,7 +433,7 @@ class UserController extends Controller
         $order->status = 3;
         $order->total_amount = 0;
         $order->surplus_amount = $request->input('transfer_amount');
-        $order->callback_no = '佣金划转 Commission transfer';
+        $order->callback_no = __('Commission transfer');
         if (!$order->save()||!$user->save()) {
             DB::rollback();
             abort(500, __('Transfer failed'));

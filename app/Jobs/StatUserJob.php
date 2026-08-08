@@ -94,7 +94,7 @@ class StatUserJob implements ShouldQueue
                         continue;
                     }
                 }
-                abort(500, '用户统计数据失败'. $e->getMessage());
+                abort(500, __('client.user_statistics_failed', ['error' => $e->getMessage()]));
             }
         }
     }

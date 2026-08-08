@@ -15980,8 +15980,8 @@
                     title: l.a.createElement("input", {
                         className: "form-control",
                         placeholder: Object(m["formatMessage"])({
-                            id: "\u8bf7\u8f93\u5165\u5145\u503c\u91d1\u989d" + e.props.comm.config.currency
-                        }),
+                            id: "\u8bf7\u8f93\u5165\u5145\u503c\u91d1\u989d"
+                        }) + " (" + e.props.comm.config.currency + ")",
                         onChange: function(event) {
                             e.deposit_amount = event.target.value * 100;
                         },
@@ -17247,26 +17247,10 @@
         if (l.rel = "stylesheet",
         l.href = u ? "./theme/".concat(c.color, ".css") : "/theme/default/assets/theme/".concat(c.color, ".css"),
         document.getElementsByTagName("head")[0].appendChild(l),
-        Object(i["e"])("i18n"))
+        ["vi-VN", "ru-RU", "en-US", "zh-CN"].indexOf(Object(i["e"])("i18n")) > -1)
             Object(o["setLocale"])(Object(i["e"])("i18n"));
         else
-            switch (navigator.language.split("-")[0]) {
-            case "ja":
-                Object(o["setLocale"])("ja-JP");
-                break;
-            case "zh":
-                Object(o["setLocale"])("zh-CN");
-                break;
-            case "en":
-                Object(o["setLocale"])("en-US");
-                break;
-            case "vi":
-                Object(o["setLocale"])("vi-VN");
-                break;
-            case "ko":
-                Object(o["setLocale"])("ko-KR");
-                break
-            }
+            Object(o["setLocale"])("vi-VN");
         "1" === Object(i["e"])("dark_mode") && Object(a["enable"])({
             brightness: 100,
             contrast: 90,
@@ -24502,6 +24486,7 @@
             if (void 0 !== e && !i.test(e))
                 throw new Error("setLocale lang format error");
             if (l() !== e && (window.g_lang = e,
+            "undefined" !== typeof document && document.documentElement && (document.documentElement.lang = e || "vi-VN"),
             window.localStorage.setItem("umi_locale", e || ""),
             a && !t && a.reloadAppLocale(),
             t && window.location.reload(),
@@ -28564,6 +28549,159 @@
             }]
         })
     },
+    ruLD: function(e, t, n) {
+        !function(t, n) {
+            e.exports = n()
+        }(0, function() {
+            "use strict";
+            return [{
+                locale: "ru",
+                pluralRuleFunction: function(e, t) {
+                    if (t)
+                        return "other";
+                    var n = String(e).split(".")
+                      , r = Number(n[0])
+                      , o = !n[1]
+                      , i = r % 10
+                      , a = r % 100;
+                    return o && 1 === i && 11 !== a ? "one" : o && i >= 2 && i <= 4 && (a < 12 || a > 14) ? "few" : o && (0 === i || i >= 5 || a >= 11 && a <= 14) ? "many" : "other"
+                },
+                fields: {
+                    year: {
+                        displayName: "\u0433\u043e\u0434",
+                        relative: {
+                            0: "\u0432 \u044d\u0442\u043e\u043c \u0433\u043e\u0434\u0443",
+                            1: "\u0432 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u043c \u0433\u043e\u0434\u0443",
+                            "-1": "\u0432 \u043f\u0440\u043e\u0448\u043b\u043e\u043c \u0433\u043e\u0434\u0443"
+                        },
+                        relativeTime: {
+                            future: {
+                                one: "\u0447\u0435\u0440\u0435\u0437 {0} \u0433\u043e\u0434",
+                                few: "\u0447\u0435\u0440\u0435\u0437 {0} \u0433\u043e\u0434\u0430",
+                                many: "\u0447\u0435\u0440\u0435\u0437 {0} \u043b\u0435\u0442",
+                                other: "\u0447\u0435\u0440\u0435\u0437 {0} \u0433\u043e\u0434\u0430"
+                            },
+                            past: {
+                                one: "{0} \u0433\u043e\u0434 \u043d\u0430\u0437\u0430\u0434",
+                                few: "{0} \u0433\u043e\u0434\u0430 \u043d\u0430\u0437\u0430\u0434",
+                                many: "{0} \u043b\u0435\u0442 \u043d\u0430\u0437\u0430\u0434",
+                                other: "{0} \u0433\u043e\u0434\u0430 \u043d\u0430\u0437\u0430\u0434"
+                            }
+                        }
+                    },
+                    month: {
+                        displayName: "\u043c\u0435\u0441\u044f\u0446",
+                        relative: {
+                            0: "\u0432 \u044d\u0442\u043e\u043c \u043c\u0435\u0441\u044f\u0446\u0435",
+                            1: "\u0432 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u043c \u043c\u0435\u0441\u044f\u0446\u0435",
+                            "-1": "\u0432 \u043f\u0440\u043e\u0448\u043b\u043e\u043c \u043c\u0435\u0441\u044f\u0446\u0435"
+                        },
+                        relativeTime: {
+                            future: {
+                                one: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0435\u0441\u044f\u0446",
+                                few: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0435\u0441\u044f\u0446\u0430",
+                                many: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0435\u0441\u044f\u0446\u0435\u0432",
+                                other: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0435\u0441\u044f\u0446\u0430"
+                            },
+                            past: {
+                                one: "{0} \u043c\u0435\u0441\u044f\u0446 \u043d\u0430\u0437\u0430\u0434",
+                                few: "{0} \u043c\u0435\u0441\u044f\u0446\u0430 \u043d\u0430\u0437\u0430\u0434",
+                                many: "{0} \u043c\u0435\u0441\u044f\u0446\u0435\u0432 \u043d\u0430\u0437\u0430\u0434",
+                                other: "{0} \u043c\u0435\u0441\u044f\u0446\u0430 \u043d\u0430\u0437\u0430\u0434"
+                            }
+                        }
+                    },
+                    day: {
+                        displayName: "\u0434\u0435\u043d\u044c",
+                        relative: {
+                            0: "\u0441\u0435\u0433\u043e\u0434\u043d\u044f",
+                            1: "\u0437\u0430\u0432\u0442\u0440\u0430",
+                            2: "\u043f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430",
+                            "-2": "\u043f\u043e\u0437\u0430\u0432\u0447\u0435\u0440\u0430",
+                            "-1": "\u0432\u0447\u0435\u0440\u0430"
+                        },
+                        relativeTime: {
+                            future: {
+                                one: "\u0447\u0435\u0440\u0435\u0437 {0} \u0434\u0435\u043d\u044c",
+                                few: "\u0447\u0435\u0440\u0435\u0437 {0} \u0434\u043d\u044f",
+                                many: "\u0447\u0435\u0440\u0435\u0437 {0} \u0434\u043d\u0435\u0439",
+                                other: "\u0447\u0435\u0440\u0435\u0437 {0} \u0434\u043d\u044f"
+                            },
+                            past: {
+                                one: "{0} \u0434\u0435\u043d\u044c \u043d\u0430\u0437\u0430\u0434",
+                                few: "{0} \u0434\u043d\u044f \u043d\u0430\u0437\u0430\u0434",
+                                many: "{0} \u0434\u043d\u0435\u0439 \u043d\u0430\u0437\u0430\u0434",
+                                other: "{0} \u0434\u043d\u044f \u043d\u0430\u0437\u0430\u0434"
+                            }
+                        }
+                    },
+                    hour: {
+                        displayName: "\u0447\u0430\u0441",
+                        relative: {
+                            0: "\u0432 \u044d\u0442\u043e\u0442 \u0447\u0430\u0441"
+                        },
+                        relativeTime: {
+                            future: {
+                                one: "\u0447\u0435\u0440\u0435\u0437 {0} \u0447\u0430\u0441",
+                                few: "\u0447\u0435\u0440\u0435\u0437 {0} \u0447\u0430\u0441\u0430",
+                                many: "\u0447\u0435\u0440\u0435\u0437 {0} \u0447\u0430\u0441\u043e\u0432",
+                                other: "\u0447\u0435\u0440\u0435\u0437 {0} \u0447\u0430\u0441\u0430"
+                            },
+                            past: {
+                                one: "{0} \u0447\u0430\u0441 \u043d\u0430\u0437\u0430\u0434",
+                                few: "{0} \u0447\u0430\u0441\u0430 \u043d\u0430\u0437\u0430\u0434",
+                                many: "{0} \u0447\u0430\u0441\u043e\u0432 \u043d\u0430\u0437\u0430\u0434",
+                                other: "{0} \u0447\u0430\u0441\u0430 \u043d\u0430\u0437\u0430\u0434"
+                            }
+                        }
+                    },
+                    minute: {
+                        displayName: "\u043c\u0438\u043d\u0443\u0442\u0430",
+                        relative: {
+                            0: "\u0432 \u044d\u0442\u0443 \u043c\u0438\u043d\u0443\u0442\u0443"
+                        },
+                        relativeTime: {
+                            future: {
+                                one: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0438\u043d\u0443\u0442\u0443",
+                                few: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0438\u043d\u0443\u0442\u044b",
+                                many: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0438\u043d\u0443\u0442",
+                                other: "\u0447\u0435\u0440\u0435\u0437 {0} \u043c\u0438\u043d\u0443\u0442\u044b"
+                            },
+                            past: {
+                                one: "{0} \u043c\u0438\u043d\u0443\u0442\u0443 \u043d\u0430\u0437\u0430\u0434",
+                                few: "{0} \u043c\u0438\u043d\u0443\u0442\u044b \u043d\u0430\u0437\u0430\u0434",
+                                many: "{0} \u043c\u0438\u043d\u0443\u0442 \u043d\u0430\u0437\u0430\u0434",
+                                other: "{0} \u043c\u0438\u043d\u0443\u0442\u044b \u043d\u0430\u0437\u0430\u0434"
+                            }
+                        }
+                    },
+                    second: {
+                        displayName: "\u0441\u0435\u043a\u0443\u043d\u0434\u0430",
+                        relative: {
+                            0: "\u0441\u0435\u0439\u0447\u0430\u0441"
+                        },
+                        relativeTime: {
+                            future: {
+                                one: "\u0447\u0435\u0440\u0435\u0437 {0} \u0441\u0435\u043a\u0443\u043d\u0434\u0443",
+                                few: "\u0447\u0435\u0440\u0435\u0437 {0} \u0441\u0435\u043a\u0443\u043d\u0434\u044b",
+                                many: "\u0447\u0435\u0440\u0435\u0437 {0} \u0441\u0435\u043a\u0443\u043d\u0434",
+                                other: "\u0447\u0435\u0440\u0435\u0437 {0} \u0441\u0435\u043a\u0443\u043d\u0434\u044b"
+                            },
+                            past: {
+                                one: "{0} \u0441\u0435\u043a\u0443\u043d\u0434\u0443 \u043d\u0430\u0437\u0430\u0434",
+                                few: "{0} \u0441\u0435\u043a\u0443\u043d\u0434\u044b \u043d\u0430\u0437\u0430\u0434",
+                                many: "{0} \u0441\u0435\u043a\u0443\u043d\u0434 \u043d\u0430\u0437\u0430\u0434",
+                                other: "{0} \u0441\u0435\u043a\u0443\u043d\u0434\u044b \u043d\u0430\u0437\u0430\u0434"
+                            }
+                        }
+                    }
+                }
+            }, {
+                locale: "ru-RU",
+                parentLocale: "ru"
+            }]
+        })
+    },
     PZDY: function(e, t, n) {
         "use strict";
         function r(e) {
@@ -30415,7 +30553,7 @@
                 return a.a.createElement(r["a"], {
                     trigger: "click",
                     placement: "topCenter",
-                    overlay: a.a.createElement(o["a"], null, window.settings.i18n.sort().map(e=>{
+                    overlay: a.a.createElement(o["a"], null, window.settings.i18n.map(e=>{
                         return a.a.createElement(o["a"].Item, {
                             onClick: ()=>this.set(e)
                         }, u["a"].i18nText[e])
@@ -45141,26 +45279,12 @@
                 data: n("PTt1"),
                 momentLocale: ""
             },
-            "fa-IR": {
-                messages: d()({}, (e=>e.__esModule ? e.default : e)(n("LFjv"))),
-                locale: "fa-IR",
-                antd: n("4uwy"),
-                data: n("CU4T"),
-                momentLocale: "fa"
-            },
-            "ja-JP": {
-                messages: d()({}, (e=>e.__esModule ? e.default : e)(n("FWT3"))),
-                locale: "ja-JP",
-                antd: n("FcVI"),
-                data: n("vSOm"),
-                momentLocale: "ja"
-            },
-            "ko-KR": {
+            "ru-RU": {
                 messages: d()({}, (e=>e.__esModule ? e.default : e)(n("nmn8"))),
-                locale: "ko-KR",
-                antd: n("w6vJ"),
-                data: n("KAgo"),
-                momentLocale: "ko"
+                locale: "ru-RU",
+                antd: n("bMEk"),
+                data: n("ruLD"),
+                momentLocale: ""
             },
             "vi-VN": {
                 messages: d()({}, (e=>e.__esModule ? e.default : e)(n("EPxD"))),
@@ -45175,20 +45299,13 @@
                 antd: n("FcfS"),
                 data: n("dVHv"),
                 momentLocale: "zh-cn"
-            },
-            "zh-TW": {
-                messages: d()({}, (e=>e.__esModule ? e.default : e)(n("FEz5"))),
-                locale: "zh-TW",
-                antd: n("4pv8"),
-                data: n("dVHv"),
-                momentLocale: "zh-tw"
             }
         };
         class x extends o.a.Component {
             constructor() {
                 super(...arguments),
                 this.state = {
-                    locale: "zh-CN"
+                    locale: "vi-VN"
                 },
                 this.reloadAppLocale = (()=>{
                     var e = this.getAppLocale();
@@ -45200,16 +45317,17 @@
             }
             getAppLocale() {
                 var e = {
-                    locale: "zh-CN",
+                    locale: "vi-VN",
                     messages: {},
-                    data: n("dVHv"),
-                    momentLocale: "zh-cn"
+                    data: n("kEdy"),
+                    momentLocale: "vi"
                 }
                   , t = n("PszG").mergeConfig("locale") || {}
                   , r = "function" === typeof t.default ? t.default() : t.default;
-                e = g && "undefined" !== typeof localStorage && localStorage.getItem("umi_locale") && w[localStorage.getItem("umi_locale")] ? w[localStorage.getItem("umi_locale")] : "undefined" !== typeof navigator && w[navigator.language] && v ? w[navigator.language] : w[r] ? w[r] : w["zh-CN"] || e,
+                e = g && "undefined" !== typeof localStorage && localStorage.getItem("umi_locale") && w[localStorage.getItem("umi_locale")] ? w[localStorage.getItem("umi_locale")] : "undefined" !== typeof navigator && w[navigator.language] && v ? w[navigator.language] : w[r] ? w[r] : w["vi-VN"] || e,
                 window.g_lang = e.locale,
                 window.g_langSeparator = y || "-",
+                "undefined" !== typeof document && document.documentElement && (document.documentElement.lang = e.locale),
                 e.data && Object(h["addLocaleData"])(e.data);
                 var o = typeof t.messages;
                 if ("object" === o || "function" === o) {
@@ -48919,7 +49037,7 @@
     nmn8: function(e, t, n) {
         "use strict";
         n.r(t),
-        t["default"] = window.settings.i18n["ko-KR"]
+        t["default"] = window.settings.i18n["ru-RU"]
     },
     "nwK/": function(e, t, n) {
         var r = n("V5/1").f
@@ -52800,13 +52918,10 @@
                 })
             },
             i18nText: {
-                "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
-                "zh-TW": "\u7e41\u9ad4\u4e2d\u6587",
-                "en-US": "English",
-                "ja-JP": "\u65e5\u672c\u8a9e",
                 "vi-VN": "Ti\u1ebfng Vi\u1ec7t",
-                "ko-KR": "\ud55c\uad6d\uc5b4",
-                "fa-IR": "\u0641\u0627\u0631\u0633\u06cc"
+                "ru-RU": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+                "en-US": "English",
+                "zh-CN": "\u7b80\u4f53\u4e2d\u6587"
             }
         }
     },

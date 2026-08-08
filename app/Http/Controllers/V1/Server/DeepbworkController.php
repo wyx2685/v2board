@@ -98,7 +98,7 @@ class DeepbworkController extends Controller
         $nodeId = $request->input('node_id');
         $localPort = $request->input('local_port');
         if (empty($nodeId) || empty($localPort)) {
-            abort(500, '参数错误');
+            abort(500, __('client.invalid_parameters'));
         }
         try {
             $json = $this->getV2RayConfig($nodeId, $localPort);
@@ -113,7 +113,7 @@ class DeepbworkController extends Controller
     {
         $server = ServerVmess::find($nodeId);
         if (!$server) {
-            abort(500, '节点不存在');
+            abort(500, __('client.node_not_found'));
         }
         $json = json_decode(self::V2RAY_CONFIG);
         $json->log->loglevel = (int)config('v2board.server_log_enable') ? 'debug' : 'none';

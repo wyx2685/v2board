@@ -7,11 +7,10 @@ use App\Models\Plan;
 use App\Models\StatServer;
 use App\Models\StatUser;
 use App\Utils\Helper;
-use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class ResetLog extends Command
+class ResetLog extends LocalizedCommand
 {
     protected $builder;
     /**
@@ -26,7 +25,7 @@ class ResetLog extends Command
      *
      * @var string
      */
-    protected $description = '清空日志';
+    protected $descriptionKey = 'console.descriptions.reset_log';
 
     /**
      * Create a new command instance.

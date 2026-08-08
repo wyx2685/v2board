@@ -14,6 +14,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \App\Http\Middleware\Language::class,
         \App\Http\Middleware\CORS::class,
         \App\Http\Middleware\UAfilter::class,
         \App\Http\Middleware\TrustProxies::class,
@@ -44,7 +45,6 @@ class Kernel extends HttpKernel
 //            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
 //            \Illuminate\Session\Middleware\StartSession::class,
             \App\Http\Middleware\ForceJson::class,
-            \App\Http\Middleware\Language::class,
             'bindings',
         ],
     ];

@@ -26,13 +26,17 @@ class UAfilter
             }
         }
         if (strpos($request->header('User-Agent'), 'MicroMessenger') !== false || strpos($request->header('User-Agent'), 'QQ/') !== false) {
+            $locale = htmlspecialchars(app()->getLocale(), ENT_QUOTES, 'UTF-8');
+            $title = htmlspecialchars(__('Unsupported Browser'), ENT_QUOTES, 'UTF-8');
+            $message = htmlspecialchars(__('This page is not available in the QQ or WeChat browser.'), ENT_QUOTES, 'UTF-8');
+            $instruction = htmlspecialchars(__('Open the browser menu and choose to open this page in your system browser.'), ENT_QUOTES, 'UTF-8');
             $html = <<<HTML
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{$locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unsupported Browser</title>
+    <title>{$title}</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
         h1 { color: #333; }
@@ -40,9 +44,9 @@ class UAfilter
     </style>
 </head>
 <body>
-    <h1>浏览器不支持</h1>
-    <p>很抱歉，我们的页面在QQ和微信浏览器中无法正常访问。</p>
-    <p>请点击右上方，选择在浏览器中打开。</p>
+    <h1>{$title}</h1>
+    <p>{$message}</p>
+    <p>{$instruction}</p>
 </body>
 </html>
 HTML;

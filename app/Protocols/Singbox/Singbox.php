@@ -1,6 +1,7 @@
 <?php
 namespace App\Protocols\Singbox;
 
+use App\Utils\ClientProfileLocalizer;
 use App\Utils\Helper;
 
 class Singbox
@@ -9,6 +10,7 @@ class Singbox
     private $servers;
     private $user;
     private $config;
+    private $usesDefaultConfig = false;
 
     public function __construct($user, $servers, array $options = null)
     {
@@ -37,9 +39,17 @@ class Singbox
     {
         $defaultConfig = base_path('resources/rules/default.sing-box.json');
         $customConfig = base_path('resources/rules/custom.sing-box.json');
-        $jsonData = file_exists($customConfig) ? file_get_contents($customConfig) : file_get_contents($defaultConfig);
+        if (file_exists($customConfig)) {
+            $this->usesDefaultConfig = false;
 
-        return json_decode($jsonData, true);
+            return json_decode(file_get_contents($customConfig), true);
+        }
+
+        $this->usesDefaultConfig = true;
+
+        return ClientProfileLocalizer::localize(
+            json_decode(file_get_contents($defaultConfig), true)
+        );
     }
 
     protected function buildProxies()
@@ -91,8 +101,15 @@ class Singbox
 
     protected function addProxies($proxies)
     {
+        $nodeSelection = $this->usesDefaultConfig
+            ? ClientProfileLocalizer::label('节点选择')
+            : '节点选择';
+        $autoSelect = $this->usesDefaultConfig
+            ? ClientProfileLocalizer::label('自动选择')
+            : '自动选择';
+
         foreach ($this->config['outbounds'] as &$outbound) {
-            if (($outbound['type'] === 'selector' && $outbound['tag'] === '节点选择') || ($outbound['type'] === 'urltest' && $outbound['tag'] === '自动选择') || ($outbound['type'] === 'selector' && strpos($outbound['tag'], '#') === 0 )) {
+            if (($outbound['type'] === 'selector' && $outbound['tag'] === $nodeSelection) || ($outbound['type'] === 'urltest' && $outbound['tag'] === $autoSelect) || ($outbound['type'] === 'selector' && strpos($outbound['tag'], '#') === 0 )) {
                 array_push($outbound['outbounds'], ...array_column($proxies, 'tag'));
             }
         }

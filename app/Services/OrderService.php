@@ -20,6 +20,7 @@ class OrderService
     ];
     public $order;
     public $user;
+    private $paymentTransitioned = false;
 
     public function __construct(Order $order)
     {
@@ -36,12 +37,12 @@ class OrderService
 
             if (!$this->user->save()) {
                 DB::rollBack();
-                abort(500, '充值失败');
+                abort(500, __('Top-up failed'));
             }
             $order->status = 3;
             if (!$order->save()) {
                 DB::rollBack();
-                abort(500, '充值失败');
+                abort(500, __('Top-up failed'));
             }
             DB::commit();
             return;
@@ -60,7 +61,7 @@ class OrderService
                 ]);
             } catch (\Exception $e) {
                 DB::rollback();
-                abort(500, '开通失败');
+                abort(500, __('Subscription activation failed'));
             }
         }
         switch ((string)$order->period) {
@@ -90,12 +91,12 @@ class OrderService
 
         if (!$this->user->save()) {
             DB::rollBack();
-            abort(500, '开通失败');
+            abort(500, __('Subscription activation failed'));
         }
         $order->status = 3;
         if (!$order->save()) {
             DB::rollBack();
-            abort(500, '开通失败');
+            abort(500, __('Subscription activation failed'));
         }
 
         DB::commit();
@@ -110,7 +111,7 @@ class OrderService
         } else if ($order->period === 'reset_price') {
             $order->type = 4;
         } else if ($user->plan_id !== NULL && $order->plan_id !== $user->plan_id && ($user->expired_at > time() || $user->expired_at === NULL)) {
-            if (!(int)config('v2board.plan_change_enable', 1)) abort(500, '目前不允许更改订阅，请联系客服或提交工单操作');
+            if (!(int)config('v2board.plan_change_enable', 1)) abort(500, __('Changing subscriptions is currently unavailable. Please contact support or open a ticket.'));
             $order->type = 3;
             if ((int)config('v2board.surplus_enable', 1)) $this->getSurplusValue($user, $order);
             if ($order->surplus_amount >= $order->total_amount) {
@@ -257,11 +258,30 @@ class OrderService
     public function paid(string $callbackNo)
     {
         $order = $this->order;
-        if ($order->status !== 0) return true;
+        if ((int)$order->status !== 0) {
+            return $order->callback_no
+                && hash_equals((string)$order->callback_no, $callbackNo);
+        }
+
+        $paidAt = time();
+        $updated = Order::where('id', $order->id)
+            ->where('status', 0)
+            ->update([
+                'status' => 1,
+                'paid_at' => $paidAt,
+                'callback_no' => $callbackNo,
+            ]);
+        if ($updated !== 1) {
+            $order->refresh();
+            return (int)$order->status !== 0
+                && $order->callback_no
+                && hash_equals((string)$order->callback_no, $callbackNo);
+        }
+
         $order->status = 1;
-        $order->paid_at = time();
+        $order->paid_at = $paidAt;
         $order->callback_no = $callbackNo;
-        if (!$order->save()) return false;
+        $this->paymentTransitioned = true;
         try {
             OrderHandleJob::dispatch($order->trade_no);
         } catch (\Exception $e) {
@@ -270,11 +290,19 @@ class OrderService
         return true;
     }
 
+    public function paymentTransitioned(): bool
+    {
+        return $this->paymentTransitioned;
+    }
+
     public function cancel():bool
     {
         $order = $this->order;
         DB::beginTransaction();
         $order->status = 2;
+        if (in_array((int)$order->commission_status, [0, 1], true)) {
+            $order->commission_status = 3;
+        }
         if (!$order->save()) {
             DB::rollBack();
             return false;
@@ -330,15 +358,8 @@ class OrderService
 
     private function buyByOneTime(Order $order, Plan $plan)
     {
-        $transfer_enable = $plan->transfer_enable;
-        if (!$order->surplus_order_ids) {
-            $notUsedTraffic = ($this->user->transfer_enable - ($this->user->u + $this->user->d)) / 1073741824;
-            if ($notUsedTraffic > 0 && $this->user->expired_at == NULL) {
-                $transfer_enable += $notUsedTraffic;
-            }
-        }
         $this->buyByResetTraffic();
-        $this->user->transfer_enable = $transfer_enable * 1073741824;
+        $this->user->transfer_enable = $plan->transfer_enable * 1073741824;
         $this->user->device_limit = $plan->device_limit;
         $this->user->plan_id = $plan->id;
         $this->user->group_id = $plan->group_id;

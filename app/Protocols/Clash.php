@@ -2,6 +2,7 @@
 
 namespace App\Protocols;
 
+use App\Utils\ClientProfileLocalizer;
 use phpDocumentor\Reflection\Types\Self_;
 use Symfony\Component\Yaml\Yaml;
 
@@ -31,7 +32,7 @@ class Clash
         if (\File::exists($customConfig)) {
             $config = Yaml::parseFile($customConfig);
         } else {
-            $config = Yaml::parseFile($defaultConfig);
+            $config = ClientProfileLocalizer::localize(Yaml::parseFile($defaultConfig));
         }
         $proxy = [];
         $proxies = [];

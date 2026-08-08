@@ -120,7 +120,7 @@ class ConfigSave extends FormRequest
                     if($tier == '') {
                         continue;
                     }
-                    $fail('充值奖励格式不正确，必须为充值金额:奖励金额');
+                    $fail(__('Deposit bonus format is invalid'));
                 }
             }
         };
@@ -131,15 +131,15 @@ class ConfigSave extends FormRequest
     {
         // illiteracy prompt
         return [
-            'app_url.url' => '站点URL格式不正确，必须携带http(s)://',
-            'subscribe_url.url' => '订阅URL格式不正确，必须携带http(s)://',
-            'subscribe_path.regex' => '订阅路径必须以/开头',
-            'server_token.min' => '通讯密钥长度必须大于16位',
-            'tos_url.url' => '服务条款URL格式不正确，必须携带http(s)://',
-            'telegram_discuss_link.url' => 'Telegram群组地址必须为URL格式，必须携带http(s)://',
-            'logo.url' => 'LOGO URL格式不正确，必须携带https(s)://',
-            'secure_path.min' => '后台路径长度最小为8位',
-            'secure_path.regex' => '后台路径只能为字母或数字',
+            'app_url.url' => __('Site URL must include http:// or https://'),
+            'subscribe_url.url' => __('Subscription URL must include http:// or https://'),
+            'subscribe_path.regex' => __('Subscription path must start with /'),
+            'server_token.min' => __('Communication key must contain at least 16 characters'),
+            'tos_url.url' => __('Terms of service URL must include http:// or https://'),
+            'telegram_discuss_link.url' => __('Telegram group URL must include http:// or https://'),
+            'logo.url' => __('Logo URL must include http:// or https://'),
+            'secure_path.min' => __('Admin path must contain at least 8 characters'),
+            'secure_path.regex' => __('Admin path may contain only letters, numbers, underscores, and hyphens'),
         ];
     }
 }

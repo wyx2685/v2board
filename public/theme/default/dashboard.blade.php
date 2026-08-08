@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi-VN">
 
 <head>
     <link rel="stylesheet" href="/theme/{{$theme}}/assets/components.chunk.css?v={{$version}}">
@@ -33,24 +33,18 @@
             background_url: '{{$theme_config['background_url']}}',
             description: '{{$description}}',
             i18n: [
-                'zh-CN',
-                'en-US',
-                'ja-JP',
                 'vi-VN',
-                'ko-KR',
-                'zh-TW',
-                'fa-IR'
+                'ru-RU',
+                'en-US',
+                'zh-CN'
             ],
             logo: '{{$logo}}'
         }
     </script>
-    <script src="/theme/{{$theme}}/assets/i18n/zh-CN.js?v={{$version}}"></script>
-    <script src="/theme/{{$theme}}/assets/i18n/zh-TW.js?v={{$version}}"></script>
-    <script src="/theme/{{$theme}}/assets/i18n/en-US.js?v={{$version}}"></script>
-    <script src="/theme/{{$theme}}/assets/i18n/ja-JP.js?v={{$version}}"></script>
-    <script src="/theme/{{$theme}}/assets/i18n/vi-VN.js?v={{$version}}"></script>
-    <script src="/theme/{{$theme}}/assets/i18n/ko-KR.js?v={{$version}}"></script>
-    <script src="/theme/{{$theme}}/assets/i18n/fa-IR.js?v={{$version}}"></script>
+    <script src="/theme/{{$theme}}/assets/i18n/vi-VN.js?v={{$version}}-locales-2"></script>
+    <script src="/theme/{{$theme}}/assets/i18n/ru-RU.js?v={{$version}}-locales-2"></script>
+    <script src="/theme/{{$theme}}/assets/i18n/en-US.js?v={{$version}}-locales-2"></script>
+    <script src="/theme/{{$theme}}/assets/i18n/zh-CN.js?v={{$version}}-locales-2"></script>
 </head>
 
 <body>
@@ -58,7 +52,7 @@
 {!! $theme_config['custom_html'] !!}
 <script src="/theme/{{$theme}}/assets/vendors.async.js?v={{$version}}"></script>
 <script src="/theme/{{$theme}}/assets/components.async.js?v={{$version}}"></script>
-<script src="/theme/{{$theme}}/assets/umi.js?v={{$version}}"></script>
+<script src="/theme/{{$theme}}/assets/umi.js?v={{$version}}-locales-2"></script>
 @if (file_exists(public_path("/theme/{$theme}/assets/custom.js")))
     <script src="/theme/{{$theme}}/assets/custom.js?v={{$version}}"></script>
 @endif

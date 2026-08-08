@@ -200,7 +200,7 @@ class AuthController extends Controller
             }
             $user = User::find($userId);
             if (!$user) {
-                abort(500, __('The user does not '));
+                abort(500, __('The user does not exist'));
             }
             if ($user->banned) {
                 abort(500, __('Your account has been suspended'));
@@ -216,10 +216,10 @@ class AuthController extends Controller
     public function getQuickLoginUrl(Request $request)
     {
         $authorization = $request->input('auth_data') ?? $request->header('authorization');
-        if (!$authorization) abort(403, '未登录或登陆已过期');
+        if (!$authorization) abort(403, __('Authentication required or session has expired'));
 
         $user = AuthService::decryptAuthData($authorization);
-        if (!$user) abort(403, '未登录或登陆已过期');
+        if (!$user) abort(403, __('Authentication required or session has expired'));
 
         $code = Helper::guid();
         $key = CacheKey::get('TEMP_TOKEN', $code);
