@@ -83,6 +83,68 @@ class V2nodeController extends Controller
                 }
             }
         }
+        if (isset($params['tls']) && !empty($params['tls_settings']['cert_mode']) && $params['tls_settings']['cert_mode'] === 'remote') {
+            if (!isset($params['tls_settings']['pinned_peer_cert_sha256'])) {
+                $sni = $params['tls_settings']['server_name'] ?? 'example.com';
+                $key = openssl_pkey_new([
+                    "private_key_type" => OPENSSL_KEYTYPE_EC,
+                    "curve_name" => "prime256v1"
+                ]);
+                if ($key === false) {
+                    abort(500, '创建失败');
+                }
+
+                $csr = openssl_csr_new([
+                    'commonName' => $sni
+                ], $key, [
+                    'digest_alg' => 'sha256'
+                ]);
+
+                if ($csr === false) {
+                    abort(500, '创建失败');
+                }
+
+                $cert = openssl_csr_sign(
+                    $csr,
+                    null,
+                    $key,
+                    3650,
+                    [
+                        'digest_alg' => 'sha256'
+                    ]
+                );
+
+                if ($cert === false) {
+                    abort(500, '创建失败');
+                }
+
+                if (!openssl_pkey_export($key, $tlsKey)) {
+                    abort(500, '创建失败');
+                }
+
+                if (!openssl_x509_export($cert, $tlsCert)) {
+                    abort(500, '创建失败');
+                }
+
+                $certDer = base64_decode(
+                    preg_replace(
+                        '/-----BEGIN CERTIFICATE-----|-----END CERTIFICATE-----|\s+/',
+                        '',
+                        $tlsCert
+                    ),
+                    true
+                );
+
+                if ($certDer === false) {
+                    abort(500, '创建失败');
+                }
+
+                $tlsPin = hash('sha256', $certDer);
+                $params['tls_settings']['tls_cert'] = $tlsCert;
+                $params['tls_settings']['tls_key'] = $tlsKey;
+                $params['tls_settings']['pinned_peer_cert_sha256'] = $tlsPin;
+            }
+        }
         if (isset($params['network_settings'])) {
             $ns = $params['network_settings'];
             if (isset($ns['acceptProxyProtocol'])) {
@@ -160,13 +222,13 @@ class V2nodeController extends Controller
             $params['down_mbps'] = 0;
         }
 
-        if(isset($params['obfs'])) {
-            if(!isset($params['obfs_password']))  $params['obfs_password'] = Helper::getServerKey($request->input('created_at'), 16);
+        if (isset($params['obfs'])) {
+            if (!isset($params['obfs_password']))  $params['obfs_password'] = Helper::getServerKey($request->input('created_at'), 16);
         } else {
             $params['obfs_password'] = null;
         }
 
-        if($params['protocol'] == 'shadowsocks' && !isset($params['cipher'])) {
+        if ($params['protocol'] == 'shadowsocks' && !isset($params['cipher'])) {
             $params['cipher'] = 'aes-128-gcm';
         }
 

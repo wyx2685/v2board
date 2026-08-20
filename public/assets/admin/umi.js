@@ -104695,6 +104695,8 @@
                 }, y.a.createElement(N["a"].Option, {
                     value: "self"
                 }, "\u81ea\u7b7e\u540d"), y.a.createElement(N["a"].Option, {
+                    value: "remote"
+                }, "\u81ea\u7b7e\u540d(\u9762\u677f\u4e0b\u53d1)"), y.a.createElement(N["a"].Option, {
                     value: "http"
                 }, "HTTP\u7533\u8bf7"), y.a.createElement(N["a"].Option, {
                     value: "dns"
@@ -104729,6 +104731,16 @@
                     value: e.key_file,
                     onChange: e=>this.change("key_file", e.target.value),
                     placeholder: "\u7559\u7a7a\u5728/etc/v2node/\u76ee\u5f55\u81ea\u52a8\u751f\u6210"
+                })), tls == 1 && e.cert_mode == "remote" && cert_apply && y.a.createElement("div", {
+                    className: "form-group"
+                }, y.a.createElement("label", null, "pinnedPeerCertSha256"), y.a.createElement(s["a"], {
+                    value: e.pinned_peer_cert_sha256,
+                    readOnly: true,
+                    style: {
+                        backgroundColor: "#f5f5f5a0",
+                        cursor: "text"
+                    },
+                    placeholder: "\u81ea\u52a8\u751f\u6210"
                 })), tls == 2 && y.a.createElement("div", {
                     className: "form-group"
                 }, y.a.createElement("label", null, "Server Address"), y.a.createElement(s["a"], {
