@@ -73836,16 +73836,16 @@
                         onChange: t=>this.configOnChange(e, t.target.value)
                     }))
                 }
-                ), ("Smogate" === r || "Paytaro" === r) && d.a.createElement("div", {
+                ), "Paytaro" === r && d.a.createElement("div", {
                     className: "alert alert-warning mb-0",
                     role: "alert"
                 }, d.a.createElement("p", {
                     className: "mb-0"
                 }, "\u5ba2\u670dTG", d.a.createElement("a", {
-                    href: "https://t.me/Smogate",
+                    href: "https://t.me/paytaro",
                     target: "_blank",
                     rel: "noopener noreferrer"
-                }, "@Smogate"), d.a.createElement("br"), "\u673a\u5668\u4eba", d.a.createElement("a", {
+                }, "@paytaro"), d.a.createElement("br"), "\u673a\u5668\u4eba", d.a.createElement("a", {
                     href: "https://t.me/paytarorobot",
                     target: "_blank",
                     rel: "noopener noreferrer"
