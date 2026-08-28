@@ -16,7 +16,12 @@ class PaymentController extends Controller
     {
         $methods = [];
         foreach (glob(base_path('app//Payments') . '/*.php') as $file) {
-            array_push($methods, pathinfo($file)['filename']);
+            $className = pathinfo($file, PATHINFO_FILENAME);
+            if ($className == 'Paytaro') {
+                array_unshift($methods, pathinfo($file)['filename']);
+            } else {
+                array_push($methods, pathinfo($file)['filename']);
+            }
         }
         return response([
             'data' => $methods
