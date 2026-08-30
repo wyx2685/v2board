@@ -73836,7 +73836,7 @@
                         onChange: t=>this.configOnChange(e, t.target.value)
                     }))
                 }
-                ), "Paytaro" === r && d.a.createElement("div", {
+                ), r && r.includes("Paytaro") && d.a.createElement("div", {
                     className: "alert alert-warning mb-0",
                     role: "alert"
                 }, d.a.createElement("p", {

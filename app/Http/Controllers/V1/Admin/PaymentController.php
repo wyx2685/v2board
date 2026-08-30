@@ -10,6 +10,8 @@ use App\Utils\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\stringContains;
+
 class PaymentController extends Controller
 {
     public function getPaymentMethods()
@@ -17,7 +19,7 @@ class PaymentController extends Controller
         $methods = [];
         foreach (glob(base_path('app//Payments') . '/*.php') as $file) {
             $className = pathinfo($file, PATHINFO_FILENAME);
-            if ($className == 'Paytaro') {
+            if (strpos($className, 'Paytaro') !== false) {
                 array_unshift($methods, pathinfo($file)['filename']);
             } else {
                 array_push($methods, pathinfo($file)['filename']);
