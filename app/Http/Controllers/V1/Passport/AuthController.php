@@ -11,6 +11,7 @@ use App\Models\InviteCode;
 use App\Models\Plan;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Services\RegisterPolicyService;
 use App\Utils\CacheKey;
 use App\Utils\Dict;
 use App\Utils\Helper;
@@ -54,7 +55,11 @@ class AuthController extends Controller
         if ((int)config('v2board.stop_register', 0)) {
             abort(500, __('Registration has closed'));
         }
-        if ((int)config('v2board.invite_force', 0)) {
+        /* 邀请码是否强制：按节假日 / 工作时间动态判断，见 RegisterPolicyService。
+           一次请求内只算一次，下面「码无效」那处判断要用同一个结果 ——
+           两处用不同的值会出现「不强制却因为码填错被拒」这种矛盾行为。 */
+        $inviteForce = RegisterPolicyService::inviteForce();
+        if ($inviteForce) {
             if (empty($request->input('invite_code'))) {
                 abort(500, __('You must use the invitation code to register'));
             }
@@ -86,7 +91,8 @@ class AuthController extends Controller
                 ->where('status', 0)
                 ->first();
             if (!$inviteCode) {
-                if ((int)config('v2board.invite_force', 0)) {
+                // 用上面算好的同一个值：不强制的时段填错码只是忽略，不拦人
+                if ($inviteForce) {
                     abort(500, __('Invalid invitation code'));
                 }
             } else {
