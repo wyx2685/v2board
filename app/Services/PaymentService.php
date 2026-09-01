@@ -44,10 +44,15 @@ class PaymentService
             $parseUrl = parse_url($notifyUrl);
             $notifyUrl = $this->config['notify_domain'] . $parseUrl['path'];
         }
-
+        $currentBase = $this->currentBase();
+        if ($currentBase) { 
+            $returnUrl = $currentBase . '/#/order/' . $order['trade_no'];
+        } else {
+            $returnUrl = url('/#/order/' . $order['trade_no']);
+        }
         return $this->payment->pay([
             'notify_url' => $notifyUrl,
-            'return_url' => url('/#/order/' . $order['trade_no']),
+            'return_url' => $returnUrl,
             'trade_no' => $order['trade_no'],
             'total_amount' => $order['total_amount'],
             'user_id' => $order['user_id'],
@@ -63,5 +68,30 @@ class PaymentService
             if (isset($this->config[$key])) $form[$key]['value'] = $this->config[$key];
         }
         return $form;
+    }
+
+    private function currentBase()
+    {
+        $origin = request()->header('Origin');
+
+        if ($origin && preg_match('#^https?://[A-Za-z0-9.\-:\[\]]+$#i', $origin)) {
+            return rtrim($origin, '/');
+        }
+
+        $host = request()->header('X-Forwarded-Host')
+            ?: request()->header('X-Original-Host')
+            ?: request()->header('Host');
+
+        if ($host) {
+            $host = trim(explode(',', $host)[0]);
+
+            if (preg_match('/^[A-Za-z0-9.\-:\[\]]+$/', $host)) {
+                $scheme = request()->header('X-Forwarded-Proto')
+                    ?: (request()->secure() ? 'https' : 'http');
+                return $scheme . '://' . $host;
+            }
+        }
+
+        return '';
     }
 }
