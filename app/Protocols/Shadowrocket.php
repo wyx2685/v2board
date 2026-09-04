@@ -19,6 +19,7 @@ class Shadowrocket
     public function handle()
     {
         $user = $this->user;
+        $appName = config('v2board.app_name', 'V2Board');
 
         $uri = '';
         //display remaining traffic and expire date
@@ -26,6 +27,7 @@ class Shadowrocket
         $download = round($user['d'] / (1024*1024*1024), 2);
         $totalTraffic = round($user['transfer_enable'] / (1024*1024*1024), 2);
         $expiredDate = date('Y-m-d', $user['expired_at']);
+        $uri .= "REMARKS=$appName\r\n";
         $uri .= "STATUS=🚀↑:{$upload}GB,↓:{$download}GB,TOT:{$totalTraffic}GB💡Expires:{$expiredDate}\r\n";
 
         foreach ($this->servers as $server) {
