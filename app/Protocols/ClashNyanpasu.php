@@ -262,6 +262,7 @@ class ClashNyanpasu
                    $array['reality-opts'] = [];
                    $array['reality-opts']['public-key'] = $tlsSettings['public_key'];
                    $array['reality-opts']['short-id'] = $tlsSettings['short_id'];
+                   $array['reality-opts']['support-x25519mlkem768'] = true;
                 }
                 if (!empty($tlsSettings['ech'])) {
                     if ($tlsSettings['ech'] === 'cloudflare') {
