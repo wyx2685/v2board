@@ -336,19 +336,50 @@ class UserController extends Controller
             }
         }
 
-        //统计在线设备
-        $countalive = 0;
-        $ips_array = Cache::get('ALIVE_IP_USER_' . $request->user['id']);
-        if ($ips_array) {
-            $countalive = $ips_array['alive_ip'];
-        }
-        $user['alive_ip'] = $countalive;
+        // 该用户的设备缓存键
+        $cacheKey = 'USER_DEVICES_PROCESSED_' . $request->user['id'];
+    
+        $deviceData = Cache::remember($cacheKey, 30, function() use ($request) {
+            $countalive = 0;
+            $ips = [];
+            $uniqueIPs = []; // 用于跟踪唯一 IP 的该用户设备缓存键
+        
+            $ips_array = Cache::get('ALIVE_IP_USER_' . $request->user['id']);
+        
+            if ($ips_array) {
+                $countalive = $ips_array['alive_ip'];
+            
+                foreach($ips_array as $nodetypeid => $data) {
+                    if (!is_int($data) && isset($data['aliveips'])) {
+                        foreach($data['aliveips'] as $ip_NodeId) {
+                            $parts = explode("_", $ip_NodeId);
+                            $ip = $parts[0];
+                        
+                            // 仅用于跟踪唯一 IP 的该用户设备缓存键
+                            if (!in_array($ip, $uniqueIPs)) {
+                                $uniqueIPs[] = $ip;
+                                $ips[] = $ip . '_' . $nodetypeid;
+                            }
+                        }
+                    }
+                }
+            }
+        
+            return [
+                'alive_ip' => $countalive,
+                'ips' => implode(', ', $ips)
+            ];
+        });
+    
+        $user['alive_ip'] = $deviceData['alive_ip'];
+        $user['ips'] = $deviceData['ips'];
 
         $user['subscribe_url'] = Helper::getSubscribeUrl($user['token']);
-
+    
         $userService = new UserService();
         $user['reset_day'] = $userService->getResetDay($user);
         $user['allow_new_period'] = config('v2board.allow_new_period', 0);
+    
         return response([
             'data' => $user
         ]);
