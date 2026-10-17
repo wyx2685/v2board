@@ -7,6 +7,7 @@ class StaffRoute
 {
     public function map(Registrar $router)
     {
+        /*
         $router->group([
             'prefix' => 'staff',
             'middleware' => 'staff'
@@ -28,5 +29,6 @@ class StaffRoute
             $router->post('/notice/update', 'V1\\Admin\\NoticeController@update');
             $router->post('/notice/drop', 'V1\\Admin\\NoticeController@drop');
         });
+        */
     }
 }
