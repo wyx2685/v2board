@@ -83,7 +83,7 @@ class Paytaro
 
     public function notify($params)
     {
-        if (empty($params['sign']) || strtolower($params['sign']) !== $this->sign($params)) {
+        if ($this->appSecret() === '' || empty($params['sign']) || strtolower($params['sign']) !== $this->sign($params)) {
             return false;
         }
         if (($params['trade_status'] ?? '') !== 'TRADE_SUCCESS') {
