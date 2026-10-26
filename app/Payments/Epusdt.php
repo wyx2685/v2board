@@ -126,14 +126,15 @@ class Epusdt
 
     public function notify($params)
     {
-        if (!isset($params['signature'])) {
+        $token = trim((string) ($this->config['epusdt_token'] ?? ''));
+        if ($token === '' || !isset($params['signature'])) {
             return false;
         }
 
         $signature = strtolower((string) $params['signature']);
         unset($params['signature']);
 
-        if (!hash_equals($this->makeSignature($params, trim((string) ($this->config['epusdt_token'] ?? ''))), $signature)) {
+        if (!hash_equals($this->makeSignature($params, $token), $signature)) {
             return false;
         }
 

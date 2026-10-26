@@ -18,7 +18,7 @@ class PaymentService
         $this->class = '\\App\\Payments\\' . $this->method;
         if (!class_exists($this->class)) abort(500, 'gate is not found');
         if ($id) $payment = Payment::find($id)->toArray();
-        if ($uuid) $payment = Payment::where('uuid', $uuid)->first()->toArray();
+        if ($uuid) $payment = Payment::where('uuid', $uuid)->where('payment', $method)->first()->toArray();
         $this->config = [];
         if (isset($payment)) {
             $this->config = $payment['config'];
