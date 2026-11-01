@@ -413,9 +413,7 @@ class UserController extends Controller
         if (!$user) {
             abort(500, __('The user does not exist'));
         }
-        if ($request->input('transfer_amount') > $user->commission_balance) {
-            abort(500, __('Insufficient commission balance'));
-        }
+        $transferAmount = (int)$request->input('transfer_amount');
         DB::beginTransaction();
         $order = new Order();
         $orderService = new OrderService($order);
@@ -423,18 +421,27 @@ class UserController extends Controller
         $order->plan_id = 0;
         $order->period = 'deposit';
         $order->trade_no = Helper::generateOrderNo();
-        $order->total_amount = $request->input('transfer_amount');
+        $order->total_amount = $transferAmount;
 
         $orderService->setOrderType($user);
         $orderService->setInvite($user);
 
-        $user->commission_balance = $user->commission_balance - $request->input('transfer_amount');
-        $user->balance = $user->balance + $request->input('transfer_amount');
+        $affected = User::where('id', $user->id)
+            ->where('commission_balance', '>=', $transferAmount)
+            ->update([
+                'commission_balance' => DB::raw("commission_balance - {$transferAmount}"),
+                'balance' => DB::raw("balance + {$transferAmount}")
+            ]);
+        if ($affected !== 1) {
+            DB::rollBack();
+            abort(500, __('Insufficient commission balance'));
+        }
+
         $order->status = 3;
         $order->total_amount = 0;
-        $order->surplus_amount = $request->input('transfer_amount');
+        $order->surplus_amount = $transferAmount;
         $order->callback_no = '佣金划转 Commission transfer';
-        if (!$order->save()||!$user->save()) {
+        if (!$order->save()) {
             DB::rollback();
             abort(500, __('Transfer failed'));
         }
