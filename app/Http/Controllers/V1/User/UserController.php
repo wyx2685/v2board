@@ -409,38 +409,37 @@ class UserController extends Controller
 
     public function transfer(UserTransfer $request)
     {
-        $user = User::find($request->user['id']);
-        if (!$user) {
-            abort(500, __('The user does not exist'));
+        $amount = (int)$request->input('transfer_amount');
+        if ($amount < 1) {
+            abort(500, __('The transfer amount parameter is wrong'));
         }
-        if ($request->input('transfer_amount') > $user->commission_balance) {
+        $affected = User::where('id', $request->user['id'])
+            ->where('commission_balance', '>=', $amount)
+            ->update([
+                'commission_balance' => DB::raw('commission_balance - ' . $amount),
+                'balance'            => DB::raw('balance + ' . $amount),
+            ]);
+        if ($affected < 1) {
             abort(500, __('Insufficient commission balance'));
         }
-        DB::beginTransaction();
+    
+        // 余额已划转，补记审计订单（按既有规则给上级计佣）
+        $user = User::find($request->user['id']);
         $order = new Order();
         $orderService = new OrderService($order);
-        $order->user_id = $request->user['id'];
+        $order->user_id = $user->id;
         $order->plan_id = 0;
         $order->period = 'deposit';
         $order->trade_no = Helper::generateOrderNo();
-        $order->total_amount = $request->input('transfer_amount');
-
+        $order->total_amount = $amount;
         $orderService->setOrderType($user);
         $orderService->setInvite($user);
-
-        $user->commission_balance = $user->commission_balance - $request->input('transfer_amount');
-        $user->balance = $user->balance + $request->input('transfer_amount');
         $order->status = 3;
         $order->total_amount = 0;
-        $order->surplus_amount = $request->input('transfer_amount');
+        $order->surplus_amount = $amount;
         $order->callback_no = '佣金划转 Commission transfer';
-        if (!$order->save()||!$user->save()) {
-            DB::rollback();
-            abort(500, __('Transfer failed'));
-        }
-
-        DB::commit();
-
+        $order->save();
+    
         return response([
             'data' => true
         ]);
