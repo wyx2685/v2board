@@ -264,6 +264,10 @@ class AuthController extends Controller
         if (!$user) {
             abort(500, __('This email is not registered in the system'));
         }
+        // 数据库排序规则会把 á/a 等视为相等，必须按字节确认是同一个邮箱
+        if (strtolower($user->email) !== $cacheKeyEmail) {
+            abort(500, __('Incorrect email verification code'));
+        }
         $user->password      = password_hash($password, PASSWORD_DEFAULT);
         $user->password_algo = null;
         $user->password_salt = null;
