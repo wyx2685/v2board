@@ -20997,7 +20997,7 @@
             constructor(e) {
                 super(e),
                 this.state = {
-                    nav: [{
+                    nav: [{title: "管理员权限", type: "permission"}, {
                         title: "\u4eea\u8868\u76d8",
                         type: "item",
                         href: "/dashboard",
@@ -21127,8 +21127,19 @@
                     }]
                 }
             }
-            componentDidMount() {}
+            componentDidMount() {
+                this.permissionsChanged = ()=>this.forceUpdate();
+                window.addEventListener("admin-permissions-changed", this.permissionsChanged);
+            }
+            componentWillUnmount() {
+                window.removeEventListener("admin-permissions-changed", this.permissionsChanged);
+            }
             renderMenu(e, t, n, r) {
+                if (e === "permission") {
+                    return window.AdminPermissions.isSuper() ? o.a.createElement("li", {key: "admin-permissions", className: "nav-main-item"},
+                        o.a.createElement("a", {className: "nav-main-link", href: "#", onClick: e=>{e.preventDefault(); window.AdminPermissions.open();}}, "管理员权限")) : null;
+                }
+                if (e === "item" && !window.AdminPermissions.canPage(n)) return null;
                 switch (e) {
                 case "heading":
                     return o.a.createElement("li", {
@@ -22465,6 +22476,7 @@
                     for: "example-text-input-alt"
                 }, "\u662f\u5426\u7ba1\u7406\u5458"), p.a.createElement("div", null, p.a.createElement(o["a"], {
                     checked: t.is_admin,
+                    disabled: !window.AdminPermissions.isSuper(),
                     onChange: e=>this.formChange("is_admin", e ? 1 : 0)
                 }))), p.a.createElement("div", {
                     className: "form-group"
@@ -22472,6 +22484,7 @@
                     htmlFor: "example-text-input-alt"
                 }, "\u662f\u5426\u5458\u5de5"), p.a.createElement("div", null, p.a.createElement(o["a"], {
                     checked: t.is_staff,
+                    disabled: !window.AdminPermissions.isSuper(),
                     onChange: e=>this.formChange("is_staff", e ? 1 : 0)
                 }))), p.a.createElement("div", {
                     className: "form-group"
@@ -71759,7 +71772,7 @@
                                     }
                                     return e.abrupt("return");
                                 case 11:
-                                    s.a.push("/dashboard");
+                                    s.a.push(window.AdminPermissions.landing());
                                 case 12:
                                 case "end":
                                     return e.stop()
@@ -81490,7 +81503,7 @@
                                         type: "user/getUserInfo"
                                     });
                                 case 10:
-                                    return e.abrupt("return", h.a.push(n || "dashboard"));
+                                    return e.abrupt("return", h.a.push(window.AdminPermissions.landing(n)));
                                 case 11:
                                 case "end":
                                     return e.stop()
@@ -82296,6 +82309,14 @@
           , l = n("Hg0r")
           , c = l["c"].ConnectedRouter
           , u = [{
+            path: "/admin-access",
+            exact: !0,
+            component: function () { return i.a.createElement("div", {style: {padding: "48px", textAlign: "center"}},
+                i.a.createElement("h2", null, "尚未分配管理权限"),
+                i.a.createElement("p", null, "请联系完整权限管理员，为此账号分配需要的功能。"),
+                i.a.createElement("button", {onClick: function () { window.location.href = window.location.pathname; }}, "重新检查权限"),
+                i.a.createElement("button", {style: {marginLeft: "12px"}, onClick: function () { localStorage.removeItem("authorization"); window.location.href = window.location.pathname + "#/login"; }}, "退出登录")); }
+        }, {
             path: "/config/payment",
             exact: !0,
             component: n("eIZb").default
@@ -82381,6 +82402,10 @@
             unListen() {}
             constructor(e) {
                 function t(e, t) {
+                    if (e.pathname !== "/" && e.pathname !== "/login" && !window.AdminPermissions.canPage(e.pathname)) {
+                        s["default"].replace(window.AdminPermissions.landing());
+                        return;
+                    }
                     h.applyForEach("onRouteChange", {
                         initialValue: {
                             routes: u,
@@ -98266,7 +98291,7 @@
                             switch (t.prev = t.next) {
                             case 0:
                                 return t.next = 2,
-                                e.checkQueue();
+                                window.AdminPermissions.isSuper() && e.checkQueue();
                             case 2:
                             case "end":
                                 return t.stop()
@@ -100402,7 +100427,8 @@
                                 buffer: e.t0
                             };
                         case 20:
-                            if (403 !== a.status) {
+                            if (s.data && s.data.admin_access) window.AdminPermissions.setCurrent(s.data.admin_access);
+                            if (403 !== a.status || s.permission_denied) {
                                 e.next = 24;
                                 break
                             }
@@ -109045,7 +109071,7 @@
                                     }
                                     return e.abrupt("return");
                                 case 12:
-                                    return s.a.push("/dashboard"),
+                                    return s.a.push(window.AdminPermissions.landing()),
                                     e.next = 15,
                                     i({
                                         type: "user/getUserInfo"

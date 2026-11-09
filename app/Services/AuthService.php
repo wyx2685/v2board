@@ -35,15 +35,23 @@ class AuthService
         return [
             'token' => $this->user->token,
             'is_admin' => $this->user->is_admin,
+            'admin_access' => $this->user->is_admin ? AdminPermissionService::access($this->user->toArray()) : null,
             'auth_data' => $authData
         ];
     }
 
-    public static function decryptAuthData($jwt)
+    public static function decryptAuthData($jwt, $fresh = false)
     {
         try {
             if (!is_string($jwt) || $jwt === '') {
                 return false;
+            }
+            if ($fresh) {
+                $data = (array)JWT::decode($jwt, new Key(config('app.key'), 'HS256'));
+                if (!self::checkSession($data['id'], $data['session'])) return false;
+                $user = User::select(['id', 'email', 'is_admin', 'is_staff', 'banned', 'admin_permissions'])->find($data['id']);
+                if (!$user || $user->banned) return false;
+                return $user->toArray();
             }
             if (!Cache::has($jwt)) {
                 $data = (array)JWT::decode($jwt, new Key(config('app.key'), 'HS256'));

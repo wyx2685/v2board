@@ -13,6 +13,7 @@ use App\Models\Plan;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Services\AdminPermissionService;
 use App\Services\OrderService;
 use App\Services\UserService;
 use App\Utils\CacheKey;
@@ -52,8 +53,10 @@ class UserController extends Controller
         $data = [
             'is_login' => $request->user['id'] ? true : false
         ];
-        if ($request->user['is_admin']) {
+        $user = User::select(['id', 'is_admin', 'banned', 'admin_permissions'])->find($request->user['id']);
+        if ($user && $user->is_admin && !$user->banned) {
             $data['is_admin'] = true;
+            $data['admin_access'] = AdminPermissionService::access($user->toArray());
         }
         return response([
             'data' => $data
@@ -266,6 +269,9 @@ class UserController extends Controller
     {
         $user = User::where('id', $request->user['id'])
             ->select([
+                'id',
+                'is_admin',
+                'admin_permissions',
                 'email',
                 'transfer_enable',
                 'device_limit',
@@ -288,6 +294,8 @@ class UserController extends Controller
         if (!$user) {
             abort(500, __('The user does not exist'));
         }
+        $user['admin_access'] = $user->is_admin && !$user->banned ? AdminPermissionService::access($user->toArray()) : null;
+        unset($user['id'], $user['is_admin'], $user['admin_permissions']);
         $user['avatar_url'] = 'https://cravatar.cn/avatar/' . md5($user->email) . '?s=64&d=identicon';
         return response([
             'data' => $user

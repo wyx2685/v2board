@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ConfigSave;
 use App\Jobs\SendEmailJob;
 use App\Services\TelegramService;
+use App\Services\AdminPermissionService;
 use App\Utils\Dict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -67,6 +68,12 @@ class ConfigController extends Controller
 
     public function fetch(Request $request)
     {
+        if (!AdminPermissionService::has($request->user, 'config.view')) {
+            return response(['data' => ['site' => [
+                'currency' => config('v2board.currency', 'CNY'),
+                'currency_symbol' => config('v2board.currency_symbol', '¥'),
+            ]]]);
+        }
         $key = $request->input('key');
         $data = [
             'ticket' => [

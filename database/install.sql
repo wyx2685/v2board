@@ -565,6 +565,7 @@ CREATE TABLE `v2_user` (
                            `device_limit` int(11) DEFAULT NULL,
                            `banned` tinyint(1) NOT NULL DEFAULT '0',
                            `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+                           `admin_permissions` text DEFAULT NULL COMMENT 'NULL: full admin, JSON array: restricted admin',
                            `last_login_at` int(11) DEFAULT NULL,
                            `is_staff` tinyint(1) NOT NULL DEFAULT '0',
                            `last_login_ip` int(11) DEFAULT NULL,

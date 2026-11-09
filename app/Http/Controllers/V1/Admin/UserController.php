@@ -15,6 +15,7 @@ use App\Models\Plan;
 use App\Models\TicketMessage;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Services\AdminPermissionService;
 use App\Utils\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,9 +23,27 @@ use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
+    private function userQuery(Request $request)
+    {
+        $query = User::query();
+        if (!AdminPermissionService::isSuper($request->user)) {
+            $query->where('is_admin', 0)->where('is_staff', 0);
+        }
+        return $query;
+    }
+
+    private function hideSecrets($user, Request $request)
+    {
+        if (!$user) return;
+        $user->makeHidden(['password', 'password_algo', 'password_salt']);
+        if (!AdminPermissionService::isSuper($request->user)) {
+            $user->makeHidden(['token', 'uuid', 'subscribe_url', 'admin_permissions']);
+        }
+    }
+
     public function resetSecret(Request $request)
     {
-        $user = User::find($request->input('id'));
+        $user = $this->userQuery($request)->find($request->input('id'));
         if (!$user) abort(500, '用户不存在');
         $user->token = Helper::guid();
         $user->uuid = Helper::guid(true);
@@ -35,6 +54,9 @@ class UserController extends Controller
 
     private function filter(Request $request, $builder)
     {
+        if (!AdminPermissionService::isSuper($request->user)) {
+            $builder->where('is_admin', 0)->where('is_staff', 0);
+        }
         $filters = $request->input('filter');
         if ($filters) {
             foreach ($filters as $k => $filter) {
@@ -101,6 +123,7 @@ class UserController extends Controller
             $res[$i]['alive_ip'] = $countalive;
             $res[$i]['ips'] = implode(', ', $ips);
             $res[$i]['subscribe_url'] = Helper::getSubscribeUrl($res[$i]['token']);
+            $this->hideSecrets($res[$i], $request);
         }
         return response([
             'data' => $res,
@@ -113,10 +136,13 @@ class UserController extends Controller
         if (empty($request->input('id'))) {
             abort(500, '参数错误');
         }
-        $user = User::find($request->input('id'));
+        $user = $this->userQuery($request)->find($request->input('id'));
+        if (!$user) abort(404, '用户不存在');
         if ($user->invite_user_id) {
-            $user['invite_user'] = User::find($user->invite_user_id);
+            $user['invite_user'] = $this->userQuery($request)->find($user->invite_user_id);
+            $this->hideSecrets($user['invite_user'], $request);
         }
+        $this->hideSecrets($user, $request);
         return response([
             'data' => $user
         ]);
@@ -125,10 +151,27 @@ class UserController extends Controller
     public function update(UserUpdate $request)
     {
         $params = $request->validated();
-        $user = User::find($request->input('id'));
+        $user = $this->userQuery($request)->find($request->input('id'));
         if (!$user) {
             abort(500, '用户不存在');
         }
+        if (!AdminPermissionService::isSuper($request->user)) {
+            if ((int)$params['is_admin'] !== (int)$user->is_admin || (int)$params['is_staff'] !== (int)$user->is_staff) {
+                abort(403, '不能修改管理员或员工身份');
+            }
+            foreach (['balance', 'commission_balance', 'commission_rate', 'commission_type', 'discount'] as $field) {
+                if (array_key_exists($field, $params) && (string)$params[$field] !== (string)$user->{$field}
+                    && !AdminPermissionService::has($request->user, 'user.finance')) abort(403, '没有调整余额、佣金或折扣的权限');
+            }
+            if ((int)$params['banned'] !== (int)$user->banned
+                && !AdminPermissionService::has($request->user, 'user.ban')) abort(403, '没有封禁用户的权限');
+        }
+        if (AdminPermissionService::isSuper($user->toArray()) && (!(int)$params['is_admin'] || (int)$params['banned'])) {
+            abort(422, '请先在管理员权限中将该账号设为受限管理员，再撤销管理员身份或封禁');
+        }
+        // Newly promoted administrators start with no grants. Only the permission endpoint can grant full access.
+        if (!$user->is_admin && (int)$params['is_admin']) $params['admin_permissions'] = [];
+        if (!(int)$params['is_admin']) $params['admin_permissions'] = [];
         if (User::where('email', $params['email'])->first() && $user->email !== $params['email']) {
             abort(500, '邮箱已被使用');
         }
@@ -156,7 +199,8 @@ class UserController extends Controller
             $params['invite_user_id'] = null;
         }
 
-        if (isset($params['banned']) && (int)$params['banned'] === 1) {
+        if ((isset($params['banned']) && (int)$params['banned'] === 1) || isset($params['password'])
+            || (int)$user->is_admin !== (int)$params['is_admin'] || (int)$user->is_staff !== (int)$params['is_staff']) {
             $authService = new AuthService($user);
             $authService->removeAllSession();
         }
@@ -306,7 +350,7 @@ class UserController extends Controller
     {
         $sortType = in_array($request->input('sort_type'), ['ASC', 'DESC']) ? $request->input('sort_type') : 'DESC';
         $sort = $request->input('sort') ? $request->input('sort') : 'created_at';
-        $builder = User::orderBy($sort, $sortType);
+        $builder = User::where('is_admin', 0)->where('is_staff', 0)->orderBy($sort, $sortType);
         $this->filter($request, $builder);
         try {
             $builder->each(function ($user){
@@ -329,7 +373,7 @@ class UserController extends Controller
     {
         $sortType = in_array($request->input('sort_type'), ['ASC', 'DESC']) ? $request->input('sort_type') : 'DESC';
         $sort = $request->input('sort') ? $request->input('sort') : 'created_at';
-        $builder = User::orderBy($sort, $sortType);
+        $builder = User::where('is_admin', 0)->where('is_staff', 0)->orderBy($sort, $sortType);
         $this->filter($request, $builder);
 
         DB::beginTransaction();
@@ -360,10 +404,11 @@ class UserController extends Controller
 
     public function delUser(Request $request)
     {
-        $user = User::find($request->input('id'));
+        $user = $this->userQuery($request)->find($request->input('id'));
         if (!$user) {
             abort(500, '用户不存在');
         }
+        if (AdminPermissionService::isSuper($user->toArray())) abort(422, '不能删除完整权限管理员，请先调整其权限');
         DB::beginTransaction();
         try {
             $authService = new AuthService($user);
