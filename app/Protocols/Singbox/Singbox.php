@@ -13,7 +13,7 @@ class Singbox
     public function __construct($user, $servers, array $options = null)
     {
         $this->user = $user;
-        $this->servers = Helper::withPincertFallback($servers);
+        $this->servers = $servers;
     }
 
     public function handle()

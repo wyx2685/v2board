@@ -41,7 +41,7 @@ class ServerService
                     $server[$key]['tls_settings'],
                     array_flip([
                         'private_key', 'ech_key', 'tls_cert', 'tls_key',
-                        'cert_file', 'key_file', 'provider', 'dns_env', 'cert_mode',
+                        'cert_file', 'key_file', 'provider', 'dns_env',
                     ])
                 );
             }
@@ -210,7 +210,7 @@ class ServerService
                     $v2node[$key]['tls_settings'],
                     array_flip([
                         'private_key', 'ech_key', 'tls_cert', 'tls_key',
-                        'cert_file', 'key_file', 'provider', 'dns_env', 'cert_mode',
+                        'cert_file', 'key_file', 'provider', 'dns_env',
                     ])
                 );
             }
