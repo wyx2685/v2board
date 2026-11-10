@@ -168,6 +168,26 @@ class Helper
         return strtr(rawurlencode($str), $revert);
     }
 
+    public static function withPincertFallback(array $servers): array
+    {
+        foreach ($servers as $key => $server) {
+            if (($server['tls_settings']['allow_insecure'] ?? null) === 'pincert') {
+                $servers[$key]['tls_settings']['allow_insecure'] = 1;
+                // Clash Meta's VMess builder reads the legacy spelling.
+                $servers[$key]['tls_settings']['allowInsecure'] = 1;
+            }
+            if (($server['tlsSettings']['allowInsecure'] ?? null) === 'pincert') {
+                $servers[$key]['tlsSettings']['allowInsecure'] = 1;
+            }
+            foreach (['allow_insecure', 'insecure'] as $field) {
+                if (($server[$field] ?? null) === 'pincert') {
+                    $servers[$key][$field] = 1;
+                }
+            }
+        }
+        return $servers;
+    }
+
     public static function buildUri($uuid, $server)
     {
         if ($server['type'] == 'v2node') {

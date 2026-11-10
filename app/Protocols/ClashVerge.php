@@ -14,7 +14,7 @@ class ClashVerge
     public function __construct($user, $servers)
     {
         $this->user = $user;
-        $this->servers = $servers;
+        $this->servers = Helper::withPincertFallback($servers);
     }
 
     public function handle()
