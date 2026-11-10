@@ -2,7 +2,6 @@
 
 namespace App\Protocols;
 
-use App\Utils\Helper;
 use phpDocumentor\Reflection\Types\Self_;
 use Symfony\Component\Yaml\Yaml;
 
@@ -15,7 +14,7 @@ class Clash
     public function __construct($user, $servers)
     {
         $this->user = $user;
-        $this->servers = Helper::withPincertFallback($servers);
+        $this->servers = $servers;
     }
 
     public function handle()
