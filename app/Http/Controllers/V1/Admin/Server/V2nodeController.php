@@ -90,7 +90,7 @@ class V2nodeController extends Controller
                 }
             }
         }
-        if (isset($params['tls']) && !empty($params['tls_settings']['cert_mode']) && $params['tls_settings']['cert_mode'] === 'remote') {
+        if ((int)$params['tls'] === 1 && !empty($params['tls_settings']['cert_mode']) && $params['tls_settings']['cert_mode'] === 'remote') {
             if (empty($params['tls_settings']['tls_cert']) || empty($params['tls_settings']['tls_key'])) {
                 $savedTlsSettings = $server ? $server->tls_settings : null;
                 if (!empty($savedTlsSettings['tls_cert']) && !empty($savedTlsSettings['tls_key'])) {
