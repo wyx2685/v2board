@@ -45,6 +45,13 @@ class V2nodeController extends Controller
             'show' => 'nullable|in:0,1',
             'sort' => 'nullable'
         ]);
+        $server = null;
+        if ($request->input('id')) {
+            $server = ServerV2node::find($request->input('id'));
+            if (!$server) {
+                abort(500, '服务器不存在');
+            }
+        }
         if ($params['protocol'] == 'anytls' && $params['tls'] === 0) {
             $params['tls'] = 1;
         }
@@ -84,7 +91,17 @@ class V2nodeController extends Controller
             }
         }
         if (isset($params['tls']) && !empty($params['tls_settings']['cert_mode']) && $params['tls_settings']['cert_mode'] === 'remote') {
-            if (!isset($params['tls_settings']['pinned_peer_cert_sha256'])) {
+            if (empty($params['tls_settings']['tls_cert']) || empty($params['tls_settings']['tls_key'])) {
+                $savedTlsSettings = $server ? $server->tls_settings : null;
+                if (!empty($savedTlsSettings['tls_cert']) && !empty($savedTlsSettings['tls_key'])) {
+                    $params['tls_settings']['tls_cert'] = $savedTlsSettings['tls_cert'];
+                    $params['tls_settings']['tls_key'] = $savedTlsSettings['tls_key'];
+                    if (!empty($savedTlsSettings['pinned_peer_cert_sha256'])) {
+                        $params['tls_settings']['pinned_peer_cert_sha256'] = $savedTlsSettings['pinned_peer_cert_sha256'];
+                    }
+                }
+            }
+            if (empty($params['tls_settings']['tls_cert']) || empty($params['tls_settings']['tls_key'])) {
                 $sni = $params['tls_settings']['server_name'] ?? 'example.com';
                 $key = openssl_pkey_new([
                     "private_key_type" => OPENSSL_KEYTYPE_EC,
@@ -232,11 +249,7 @@ class V2nodeController extends Controller
             $params['cipher'] = 'aes-128-gcm';
         }
 
-        if ($request->input('id')) {
-            $server = ServerV2node::find($request->input('id'));
-            if (!$server) {
-                abort(500, '服务器不存在');
-            }
+        if ($server) {
             try {
                 $server->update($params);
             } catch (\Exception $e) {
