@@ -39,7 +39,10 @@ class ServerService
             if (isset($server[$key]['tls_settings'])) {
                 $server[$key]['tls_settings'] = array_diff_key(
                     $server[$key]['tls_settings'],
-                    array_flip(['private_key', 'ech_key', 'tls_cert', 'tls_key'])
+                    array_flip([
+                        'private_key', 'ech_key', 'tls_cert', 'tls_key',
+                        'cert_file', 'key_file', 'provider', 'dns_env', 'cert_mode',
+                    ])
                 );
             }
             if (isset($server[$key]['encryption_settings'])) {
@@ -205,7 +208,10 @@ class ServerService
             if (isset($v2node[$key]['tls_settings'])) {
                 $v2node[$key]['tls_settings'] = array_diff_key(
                     $v2node[$key]['tls_settings'],
-                    array_flip(['private_key', 'ech_key', 'tls_cert', 'tls_key'])
+                    array_flip([
+                        'private_key', 'ech_key', 'tls_cert', 'tls_key',
+                        'cert_file', 'key_file', 'provider', 'dns_env', 'cert_mode',
+                    ])
                 );
             }
             if (isset($v2node[$key]['encryption_settings'])) {
@@ -213,7 +219,9 @@ class ServerService
                     $v2node[$key]['encryption_settings'] = array_diff_key($v2node[$key]['encryption_settings'], array('private_key' => ''));
                 }
             }
-            $servers[] = $v2node[$key]->toArray();
+            $server = $v2node[$key]->toArray();
+            unset($server['trusted_x_forwarded_for']);
+            $servers[] = $server;
         }
         return $servers;
     }
