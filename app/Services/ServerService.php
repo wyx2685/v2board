@@ -39,7 +39,7 @@ class ServerService
             if (isset($server[$key]['tls_settings'])) {
                 $server[$key]['tls_settings'] = array_diff_key(
                     $server[$key]['tls_settings'],
-                    array_flip(['private_key', 'ech_key', 'tls_key'])
+                    array_flip(['private_key', 'ech_key', 'tls_cert', 'tls_key'])
                 );
             }
             if (isset($server[$key]['encryption_settings'])) {
@@ -205,7 +205,7 @@ class ServerService
             if (isset($v2node[$key]['tls_settings'])) {
                 $v2node[$key]['tls_settings'] = array_diff_key(
                     $v2node[$key]['tls_settings'],
-                    array_flip(['private_key', 'ech_key', 'tls_key'])
+                    array_flip(['private_key', 'ech_key', 'tls_cert', 'tls_key'])
                 );
             }
             if (isset($v2node[$key]['encryption_settings'])) {
