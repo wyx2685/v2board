@@ -424,7 +424,7 @@ rules:
   - DOMAIN-SUFFIX,sharethis.com,SELECT
   - DOMAIN-SUFFIX,shazam.com,SELECT
   - DOMAIN-SUFFIX,skype.com,SELECT
-  - DOMAIN-SUFFIX,smartdnsSELECT.com,SELECT
+  - DOMAIN-SUFFIX,smartdns.com,SELECT
   - DOMAIN-SUFFIX,smartmailcloud.com,SELECT
   - DOMAIN-SUFFIX,sndcdn.com,SELECT
   - DOMAIN-SUFFIX,sony.com,SELECT

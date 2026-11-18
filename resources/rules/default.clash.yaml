@@ -463,7 +463,7 @@ rules:
   - DOMAIN-SUFFIX,sharethis.com,$app_name
   - DOMAIN-SUFFIX,shazam.com,$app_name
   - DOMAIN-SUFFIX,skype.com,$app_name
-  - DOMAIN-SUFFIX,smartdns$app_name.com,$app_name
+  - DOMAIN-SUFFIX,smartdns.com,$app_name
   - DOMAIN-SUFFIX,smartmailcloud.com,$app_name
   - DOMAIN-SUFFIX,sndcdn.com,$app_name
   - DOMAIN-SUFFIX,sony.com,$app_name
