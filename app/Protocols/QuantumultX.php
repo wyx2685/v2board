@@ -61,6 +61,9 @@ class QuantumultX
                         $uri .= self::buildHysteria2($uuid, $item);
                     }
                     break;
+                case 'hysteria2':
+                    $uri .= self::buildHysteria2($uuid, $item);
+                    break;
             }
         }
 
