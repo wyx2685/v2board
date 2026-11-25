@@ -42,38 +42,34 @@ class ClashVerge
             }
             switch ($item['type']) {
                 case 'shadowsocks':
-                    $proxy[] = self::buildShadowsocks($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildShadowsocks($user['uuid'], $item);
                     break;
                 case 'vmess':
-                    $proxy[] = self::buildVmess($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildVmess($user['uuid'], $item);
                     break;
                 case 'vless':
-                    $proxy[] = self::buildVless($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildVless($user['uuid'], $item);
                     break;
                 case 'trojan':
-                    $proxy[] = self::buildTrojan($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildTrojan($user['uuid'], $item);
                     break;
                 case 'tuic':
-                    $proxy[] = self::buildTuic($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildTuic($user['uuid'], $item);
                     break;
                 case 'anytls':
-                    $proxy[] = self::buildAnyTLS($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildAnyTLS($user['uuid'], $item);
                     break;
                 case 'hysteria':
-                    $proxy[] = self::buildHysteria($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildHysteria($user['uuid'], $item);
                     break;
                 case 'hysteria2':
-                    $proxy[] = $this->buildHysteria2($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = $this->buildHysteria2($user['uuid'], $item);
                     break;
+                default:
+                    continue 2;
             }
+            $proxy[] = ClashMeta::withCertificateFingerprint($proxyConfig, $item);
+            $proxies[] = $item['name'];
         }
 
         $config['proxies'] = array_merge($config['proxies'] ? $config['proxies'] : [], $proxy);
