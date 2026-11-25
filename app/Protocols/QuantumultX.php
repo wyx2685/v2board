@@ -56,6 +56,14 @@ class QuantumultX
                 case 'anytls':
                     $uri .= self::buildAnyTLS($uuid, $item);
                     break;
+                case 'hysteria':
+                    if ((int) ($item['version'] ?? 0) === 2) {
+                        $uri .= self::buildHysteria2($uuid, $item);
+                    }
+                    break;
+                case 'hysteria2':
+                    $uri .= self::buildHysteria2($uuid, $item);
+                    break;
             }
         }
 
@@ -403,6 +411,37 @@ class QuantumultX
             }
             // Tips: allowInsecure=false = tls-verification=true, the value of tls-verification needs to be explicitly specified.
             $config[] = 'tls-verification=' . ($allowInsecure ? 'false' : 'true');
+        }
+
+        $config = array_filter($config);
+        $uri = implode(',', $config);
+        $uri .= "\r\n";
+        return $uri;
+    }
+    public static function buildHysteria2($password, $server)
+    {
+        $config = [
+            "hysteria2={$server['host']}:{$server['port']}",
+            "password={$password}",
+            "udp-relay=true",
+            "tag={$server['name']}"
+        ];
+
+        $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
+        $sni = $server['server_name'] ?? $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? null;
+        $allowInsecure = $server['insecure'] ?? $server['allow_insecure'] ?? $tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? false;
+
+        if ($sni) {
+            $config[] = "tls-host={$sni}";
+        }
+        $config[] = 'tls-verification=' . ($allowInsecure ? 'false' : 'true');
+
+        if (!empty($server['up_mbps'])) {
+            $config[] = "download-bandwidth={$server['up_mbps']}";
+        }
+
+        if (($server['obfs'] ?? null) === 'salamander' && !empty($server['obfs_password'])) {
+            $config[] = "salamander-password={$server['obfs_password']}";
         }
 
         $config = array_filter($config);
