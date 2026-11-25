@@ -176,7 +176,7 @@ class Clash
             if (isset($grpcSettings['serviceName'])) $array['grpc-opts']['grpc-service-name'] = $grpcSettings['serviceName'];
         }
 
-        return $array;
+        return ClashMeta::withCertificateFingerprint($array, $server);
     }
 
     public static function buildTrojan($password, $server)
@@ -206,7 +206,7 @@ class Clash
         };
         $array['sni'] = $server['server_name'] ?? (($server['tls_settings'] ?? [])['server_name'] ?? '');
         $array['skip-cert-verify'] = ((int)(($server['tls_settings'] ?? [])['allow_insecure'] ?? ($server['allow_insecure'] ?? 0))) == 1 ? true : false;
-        return $array;
+        return ClashMeta::withCertificateFingerprint($array, $server);
     }
 
     public static function buildAnyTLS($password, $server)
@@ -237,7 +237,7 @@ class Clash
 
         $array['skip-cert-verify'] = (int) $allowInsecure === 1;
 
-        return $array;
+        return ClashMeta::withCertificateFingerprint($array, $server);
     }
 
     private function isMatch($exp, $str)

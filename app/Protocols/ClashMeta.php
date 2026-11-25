@@ -42,38 +42,34 @@ class ClashMeta
             }
             switch ($item['type']) {
                 case 'shadowsocks':
-                    $proxy[] = self::buildShadowsocks($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildShadowsocks($user['uuid'], $item);
                     break;
                 case 'vmess':
-                    $proxy[] = self::buildVmess($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildVmess($user['uuid'], $item);
                     break;
                 case 'vless':
-                    $proxy[] = self::buildVless($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildVless($user['uuid'], $item);
                     break;
                 case 'trojan':
-                    $proxy[] = self::buildTrojan($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildTrojan($user['uuid'], $item);
                     break;
                 case 'tuic':
-                    $proxy[] = self::buildTuic($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildTuic($user['uuid'], $item);
                     break;
                 case 'anytls':
-                    $proxy[] = self::buildAnyTLS($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildAnyTLS($user['uuid'], $item);
                     break;
                 case 'hysteria':
-                    $proxy[] = self::buildHysteria($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = self::buildHysteria($user['uuid'], $item);
                     break;
                 case 'hysteria2':
-                    $proxy[] = $this->buildHysteria2($user['uuid'], $item);
-                    $proxies[] = $item['name'];
+                    $proxyConfig = $this->buildHysteria2($user['uuid'], $item);
                     break;
+                default:
+                    continue 2;
             }
+            $proxy[] = self::withCertificateFingerprint($proxyConfig, $item);
+            $proxies[] = $item['name'];
         }
 
         $config['proxies'] = array_merge($config['proxies'] ? $config['proxies'] : [], $proxy);
@@ -107,6 +103,21 @@ class ClashMeta
         $yaml = Yaml::dump($config, 2, 4, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
         $yaml = str_replace('$app_name', config('v2board.app_name', 'V2Board'), $yaml);
         return $yaml;
+    }
+
+    public static function withCertificateFingerprint(array $proxy, array $server, string $option = 'fingerprint'): array
+    {
+        if ($proxy['type'] === 'ss') {
+            return $proxy;
+        }
+
+        $fingerprint = Helper::getTlsCertificateFingerprint($server);
+        if ($fingerprint !== null) {
+            $proxy[$option] = $fingerprint;
+            $proxy['skip-cert-verify'] = true;
+        }
+
+        return $proxy;
     }
 
     public static function buildShadowsocks($password, $server)

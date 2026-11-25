@@ -124,18 +124,20 @@ class Surfboard
 
         if ($server['tls']) {
             array_push($config, 'tls=true');
-            if ($server['tlsSettings']) {
-                $tlsSettings = $server['tlsSettings'];
-                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
-                    array_push($config, 'skip-cert-verify=' . ($tlsSettings['allowInsecure'] ? 'true' : 'false'));
-                if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
-                    array_push($config, "sni={$tlsSettings['serverName']}");
+            $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
+            if (!empty($tlsSettings['allow_insecure'] ?? $tlsSettings['allowInsecure'] ?? 0)) {
+                $config[] = 'skip-cert-verify=true';
             }
+            $sni = $tlsSettings['server_name'] ?? $tlsSettings['serverName'] ?? '';
+            if ($sni !== '') {
+                $config[] = "sni={$sni}";
+            }
+            Helper::appendTlsCertificateFingerprint($config, $server, 'server-cert-fingerprint-sha256');
         }
         if ($server['network'] === 'ws') {
             array_push($config, 'ws=true');
-            if ($server['networkSettings']) {
-                $wsSettings = $server['networkSettings'];
+            $wsSettings = $server['networkSettings'] ?? $server['network_settings'] ?? [];
+            if ($wsSettings) {
                 if (isset($wsSettings['path']) && !empty($wsSettings['path']))
                     array_push($config, "ws-path={$wsSettings['path']}");
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
@@ -152,18 +154,21 @@ class Surfboard
 
     public static function buildTrojan($password, $server)
     {
+        $tlsSettings = $server['tls_settings'] ?? [];
+        $sni = $server['server_name'] ?? $tlsSettings['server_name'] ?? '';
         $config = [
             "{$server['name']}=trojan",
             "{$server['host']}",
             "{$server['port']}",
             "password={$password}",
-            $server['server_name'] ? "sni={$server['server_name']}" : "",
+            $sni !== '' ? "sni={$sni}" : "",
             'tfo=true',
             'udp-relay=true'
         ];
-        if (!empty($server['allow_insecure'])) {
-            array_push($config, $server['allow_insecure'] ? 'skip-cert-verify=true' : 'skip-cert-verify=false');
+        if (!empty($server['allow_insecure'] ?? $tlsSettings['allow_insecure'] ?? 0)) {
+            $config[] = 'skip-cert-verify=true';
         }
+        Helper::appendTlsCertificateFingerprint($config, $server, 'server-cert-fingerprint-sha256');
         if(isset($server['network']) && $server['network'] === "ws") {
             array_push($config, "ws=true");
             if(isset($server['network_settings']['path'])) {
@@ -189,13 +194,14 @@ class Surfboard
             "{$server['name']}=anytls",
             "{$server['host']}",
             "{$server['port']}",
-            "password={$password}",
+            $password,
             "skip-cert-verify={$allowInsecure}",
         ];
 
         if ($sni) {
             $config[] = "sni={$sni}";
         }
+        Helper::appendTlsCertificateFingerprint($config, $server, 'server-cert-fingerprint-sha256');
         $config[] = "reuse=false";
 
         $uri = implode(', ', $config);

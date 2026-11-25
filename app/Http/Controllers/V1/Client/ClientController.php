@@ -53,19 +53,37 @@ class ClientController extends Controller
                 }
             }
 
-            if (in_array($protocol, [
+            $allowInsecureWithoutPin = in_array($protocol, [
                 Clash::class, ClashMeta::class, ClashNyanpasu::class, ClashVerge::class,
                 Singbox::class, SingboxOld::class,
-            ], true)) {
-                foreach ($servers as $key => $server) {
-                    if ($server['type'] !== 'v2node' || (int)$server['tls'] !== 1
-                        || ($server['tls_settings']['cert_mode'] ?? null) !== 'remote') {
-                        continue;
-                    }
-                    $servers[$key]['tls_settings']['allow_insecure'] = 1;
-                    if ($server['protocol'] === 'vmess') {
-                        // Clash Meta's VMess builders read the legacy spelling.
-                        $servers[$key]['tls_settings']['allowInsecure'] = 1;
+            ], true);
+            foreach ($servers as $key => $server) {
+                $type = $server['type'] === 'v2node' ? $server['protocol'] : $server['type'];
+                if ($type === 'shadowsocks' || (int)($server['tls'] ?? 1) !== 1) {
+                    continue;
+                }
+
+                $tlsSettings = $server['tls_settings'] ?? $server['tlsSettings'] ?? [];
+                $pcs = $tlsSettings['pinned_peer_cert_sha256'] ?? '';
+                $hasPin = is_string($pcs) && trim($pcs) !== '';
+                $remoteTls = $server['type'] === 'v2node' && ($tlsSettings['cert_mode'] ?? null) === 'remote';
+                if (!$hasPin && !($allowInsecureWithoutPin && $remoteTls)) {
+                    continue;
+                }
+
+                $fingerprint = Helper::getTlsCertificateFingerprint($server);
+                if ($fingerprint !== null) {
+                    $tlsSettings['pinned_peer_cert_sha256'] = $fingerprint;
+                }
+                // Keep self-signed nodes usable on clients without certificate pinning.
+                $tlsSettings['allow_insecure'] = 1;
+                if ($type === 'vmess') {
+                    $tlsSettings['allowInsecure'] = 1;
+                }
+                $servers[$key]['tls_settings'] = $tlsSettings;
+                foreach (['allow_insecure', 'insecure'] as $flagName) {
+                    if (array_key_exists($flagName, $server)) {
+                        $servers[$key][$flagName] = 1;
                     }
                 }
             }
